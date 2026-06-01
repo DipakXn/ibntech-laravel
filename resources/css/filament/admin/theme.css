@@ -1,0 +1,819 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source "../../../../app/Filament/**/*.php";
+@source "../../../../resources/views/filament/**/*.blade.php";
+
+@theme {
+    --font-sans:
+        "Satoshi",
+        "Manrope",
+        "Inter",
+        "Segoe UI",
+        ui-sans-serif,
+        sans-serif;
+}
+
+:root {
+    --ibn-primary: #4caf50;
+    --ibn-primary-strong: #37883a;
+    --ibn-secondary: #2e2e80;
+    --ibn-secondary-strong: #20205d;
+    --ibn-surface: #f4f7fb;
+    --ibn-surface-strong: #ffffff;
+    --ibn-border: rgba(46, 46, 128, 0.12);
+    --ibn-border-strong: rgba(46, 46, 128, 0.18);
+    --ibn-text: #162033;
+    --ibn-text-muted: #6a748c;
+    --ibn-shadow: 0 24px 60px rgba(24, 36, 74, 0.12);
+    --ibn-shadow-soft: 0 14px 30px rgba(24, 36, 74, 0.08);
+    --ibn-radius-xl: 1.5rem;
+    --ibn-radius-lg: 1rem;
+}
+
+.dark {
+    --ibn-surface: #0b1220;
+    --ibn-surface-strong: #111827;
+    --ibn-border: rgba(148, 163, 184, 0.14);
+    --ibn-border-strong: rgba(148, 163, 184, 0.24);
+    --ibn-text: #e5edf9;
+    --ibn-text-muted: #9fb0c7;
+    --ibn-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    --ibn-shadow-soft: 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+body.fi-body {
+    background:
+        radial-gradient(circle at top left, rgba(76, 175, 80, 0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(46, 46, 128, 0.12), transparent 26%),
+        linear-gradient(180deg, #eef3fa 0%, #f8fbff 100%);
+    color: var(--ibn-text);
+}
+
+.dark body.fi-body {
+    background:
+        radial-gradient(circle at top left, rgba(76, 175, 80, 0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(46, 46, 128, 0.18), transparent 26%),
+        linear-gradient(180deg, #08101b 0%, #0d1626 100%);
+}
+
+.fi-sidebar {
+    background:
+        linear-gradient(180deg, rgba(24, 32, 71, 0.98) 0%, rgba(19, 26, 56, 0.96) 100%);
+    border-inline-end: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark .fi-sidebar {
+    background:
+        linear-gradient(180deg, rgba(7, 12, 24, 0.98) 0%, rgba(11, 18, 32, 0.96) 100%);
+}
+
+.fi-topbar {
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.76);
+    border-bottom: 1px solid rgba(46, 46, 128, 0.08);
+}
+
+.dark .fi-topbar {
+    background: rgba(10, 16, 30, 0.72);
+    border-bottom-color: rgba(148, 163, 184, 0.12);
+}
+
+.fi-main-ctn {
+    padding: 1.25rem;
+}
+
+.fi-main {
+    gap: 1.25rem;
+}
+
+.fi-page,
+.fi-ta-ctn,
+.fi-section,
+.fi-modal-window,
+.fi-dropdown-panel,
+.fi-wi-stats-overview-stat,
+.fi-simple-page-content,
+.fi-wi-widget {
+    border: 1px solid var(--ibn-border);
+    border-radius: var(--ibn-radius-xl);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--ibn-shadow-soft);
+}
+
+.dark .fi-page,
+.dark .fi-ta-ctn,
+.dark .fi-section,
+.dark .fi-modal-window,
+.dark .fi-dropdown-panel,
+.dark .fi-wi-stats-overview-stat,
+.dark .fi-simple-page-content,
+.dark .fi-wi-widget {
+    background: rgba(15, 23, 42, 0.88);
+}
+
+.fi-page,
+.fi-simple-page-content {
+    padding: 1.5rem;
+}
+
+.fi-section {
+    padding: 0.5rem;
+}
+
+.fi-header {
+    margin-bottom: 1.25rem;
+}
+
+.fi-header-heading,
+.fi-ta-header-heading,
+.fi-section-header-heading {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ibn-text);
+}
+
+.fi-header-subheading,
+.fi-ta-header-description,
+.fi-section-description {
+    color: var(--ibn-text-muted);
+}
+
+.fi-sidebar-header,
+.fi-sidebar-nav,
+.fi-sidebar-footer {
+    padding-inline: 1rem;
+}
+
+.fi-sidebar-group-btn,
+.fi-sidebar-item-btn {
+    border-radius: 0.95rem;
+}
+
+.fi-sidebar-group-label,
+.fi-sidebar-item-label,
+.fi-topbar-item-btn,
+.fi-user-menu-trigger {
+    font-weight: 600;
+}
+
+.fi-sidebar-item-label {
+    color: rgba(227, 234, 246, 0.82);
+}
+
+.fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar-group-btn > .fi-icon {
+    color: rgba(196, 206, 229, 0.82);
+}
+
+.fi-sidebar-item-grouped-border-part,
+.fi-sidebar-item-grouped-border-part-not-first,
+.fi-sidebar-item-grouped-border-part-not-last {
+    background: rgba(196, 206, 229, 0.68);
+}
+
+.fi-sidebar-item-btn {
+    min-height: 2.75rem;
+    color: rgba(241, 245, 249, 0.88);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
+.fi-sidebar-item-btn:hover,
+.fi-sidebar-group-btn:hover,
+.fi-sidebar-item.fi-sidebar-item-has-active-child-items > .fi-sidebar-item-btn {
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.26), rgba(46, 46, 128, 0.24));
+    color: #fff;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar-item-btn:hover > .fi-icon,
+.fi-sidebar-item.fi-sidebar-item-has-active-child-items > .fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item-btn:hover .fi-sidebar-item-label,
+.fi-sidebar-item.fi-sidebar-item-has-active-child-items > .fi-sidebar-item-btn .fi-sidebar-item-label {
+    color: #fff;
+}
+
+.fi-sidebar-group-label {
+    color: rgba(255, 255, 255, 0.58);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+}
+
+.fi-btn {
+    border-radius: 0.95rem;
+    box-shadow: 0 10px 24px rgba(46, 46, 128, 0.08);
+}
+
+.fi-btn-color-primary {
+    background: linear-gradient(135deg, var(--ibn-primary), var(--ibn-primary-strong));
+}
+
+.fi-btn-color-info {
+    background: linear-gradient(135deg, var(--ibn-secondary), var(--ibn-secondary-strong));
+}
+
+.fi-input-wrp,
+.fi-select-input-ctn,
+.fi-select-input,
+.fi-textarea,
+.fi-input {
+    border-radius: 0.95rem;
+}
+
+.fi-input-wrp {
+    border: 1px solid var(--ibn-border-strong) !important;
+    background: linear-gradient(180deg, rgba(250, 252, 255, 0.98), rgba(241, 246, 255, 0.98)) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.92),
+        0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.dark .fi-input-wrp {
+    border-color: rgba(148, 163, 184, 0.22) !important;
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96)) !important;
+}
+
+.fi-input,
+.fi-select-input,
+.fi-textarea,
+.choices__input,
+.choices__inner,
+.choices[data-type*='select-one'] .choices__input {
+    background: transparent !important;
+}
+
+.fi-input-wrp:focus-within,
+.choices.is-focused .choices__inner,
+.choices.is-open .choices__inner {
+    border-color: rgba(76, 175, 80, 0.45) !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.14) !important;
+}
+
+.choices__inner {
+    min-height: 2.85rem !important;
+    border: 1px solid var(--ibn-border-strong) !important;
+    border-radius: 0.95rem !important;
+    background: linear-gradient(180deg, rgba(250, 252, 255, 0.98), rgba(241, 246, 255, 0.98)) !important;
+    padding: 0.45rem 0.85rem !important;
+}
+
+.dark .choices__inner {
+    border-color: rgba(148, 163, 184, 0.22) !important;
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96)) !important;
+}
+
+.choices__list--dropdown,
+.choices__list[aria-expanded],
+.fi-dropdown-panel,
+.tippy-box[data-theme~='light'] {
+    border: 1px solid var(--ibn-border-strong) !important;
+    background: #fff !important;
+    box-shadow: var(--ibn-shadow-soft) !important;
+}
+
+.dark .choices__list--dropdown,
+.dark .choices__list[aria-expanded],
+.dark .fi-dropdown-panel,
+.dark .tippy-box[data-theme~='light'] {
+    background: #111827 !important;
+    border-color: rgba(148, 163, 184, 0.24) !important;
+}
+
+.choices__list--dropdown .choices__item,
+.choices__list[aria-expanded] .choices__item {
+    background: transparent !important;
+}
+
+.fi-tabs {
+    border-radius: 1rem;
+}
+
+.fi-badge {
+    border-radius: 999px;
+}
+
+.fi-ta-table {
+    border-collapse: separate;
+    border-spacing: 0 0.7rem;
+}
+
+.fi-ta-table tbody tr {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--ibn-shadow-soft);
+}
+
+.dark .fi-ta-table tbody tr {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.fi-ta-cell,
+.fi-ta-header-cell {
+    border-block: 1px solid var(--ibn-border);
+    background: transparent;
+}
+
+.fi-ta-cell:first-child,
+.fi-ta-header-cell:first-child {
+    border-inline-start: 1px solid var(--ibn-border);
+    border-start-start-radius: 1rem;
+    border-end-start-radius: 1rem;
+}
+
+.fi-ta-cell:last-child,
+.fi-ta-header-cell:last-child {
+    border-inline-end: 1px solid var(--ibn-border);
+    border-start-end-radius: 1rem;
+    border-end-end-radius: 1rem;
+}
+
+.fi-pagination {
+    border-top: 1px solid var(--ibn-border);
+    padding-top: 1rem;
+}
+
+.fi-no-notification,
+.fi-modal-window {
+    border-radius: 1.25rem;
+}
+
+.ibn-brand-mark {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 2.2rem);
+    gap: 0.2rem;
+    padding: 0.28rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.18), rgba(46, 46, 128, 0.16));
+}
+
+.ibn-brand-mark span {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.ibn-brand-mark span:first-child {
+    background: linear-gradient(135deg, var(--ibn-secondary), #4949b0);
+}
+
+.ibn-brand-mark span:last-child {
+    background: linear-gradient(135deg, var(--ibn-primary), #6bc26e);
+}
+
+.ibn-brand-mark span:nth-child(2) {
+    background: linear-gradient(135deg, #3f48a8, #6c73da);
+}
+
+.ibn-brand-mark-lg {
+    grid-template-columns: repeat(3, 2.7rem);
+}
+
+.ibn-brand-mark-lg span {
+    width: 2.7rem;
+    height: 2.7rem;
+}
+
+.ibn-brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.ibn-brand-wordmark {
+    display: grid;
+    gap: 0.15rem;
+    line-height: 1;
+}
+
+.ibn-brand-wordmark strong {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0em;
+    color: inherit;
+}
+
+.ibn-brand-wordmark small {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ibn-text-muted);
+}
+
+.fi-logo .ibn-brand-wordmark small,
+.fi-topbar .ibn-brand-wordmark small {
+    color: rgba(46, 46, 128, 0.72);
+}
+
+.ibn-topbar-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--ibn-secondary);
+}
+
+.dark .ibn-topbar-chip {
+    background: rgba(15, 23, 42, 0.84);
+    color: #dbe5f4;
+}
+
+.ibn-topbar-chip__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: var(--ibn-primary);
+    box-shadow: 0 0 0 0.3rem rgba(76, 175, 80, 0.16);
+}
+
+.ibn-login-kicker,
+.ibn-widget-card__eyebrow,
+.ibn-dashboard-hero__eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+}
+
+.ibn-login-screen .fi-simple-page-content {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+.ibn-login-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+    gap: 1.5rem;
+    align-items: stretch;
+    width: min(100%, 72rem);
+    margin-inline: auto;
+}
+
+.ibn-login-panel,
+.ibn-login-aside__surface {
+    border: 1px solid var(--ibn-border);
+    border-radius: 1.75rem;
+    box-shadow: var(--ibn-shadow);
+}
+
+.ibn-login-panel {
+    background: rgba(255, 255, 255, 0.94);
+    padding: 1.8rem;
+    min-width: 0;
+}
+
+.dark .ibn-login-panel {
+    background: rgba(15, 23, 42, 0.94);
+}
+
+.ibn-login-panel__intro h1 {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    line-height: 1.03;
+    font-weight: 700;
+    letter-spacing: 0em;
+}
+
+.ibn-login-panel__intro > p:last-child {
+    margin-top: 0.7rem;
+    max-width: 36rem;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-login-panel__form {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 1.4rem;
+    background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(241, 246, 255, 0.96));
+}
+
+.dark .ibn-login-panel__form {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96));
+}
+
+.ibn-login-aside__surface {
+    height: 100%;
+    padding: 1.6rem;
+    background:
+        radial-gradient(circle at top right, rgba(76, 175, 80, 0.22), transparent 24%),
+        linear-gradient(135deg, #1b2557 0%, #2b2f79 52%, #35649f 100%);
+    color: #fff;
+    min-width: 0;
+}
+
+.ibn-login-aside__surface h2 {
+    margin-top: 0.7rem;
+    font-size: 1.6rem;
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+.ibn-login-points {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+.ibn-login-points article {
+    padding: 1rem;
+    border-radius: 1.1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ibn-login-points span {
+    display: inline-block;
+    color: #9af2a4;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.ibn-login-points p {
+    margin-top: 0.45rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.ibn-dashboard-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    padding: 1.6rem;
+    border-radius: 1.75rem;
+    background:
+        radial-gradient(circle at top right, rgba(76, 175, 80, 0.22), transparent 25%),
+        linear-gradient(135deg, #1b2557 0%, #2b2f79 52%, #35649f 100%);
+    color: #fff;
+    box-shadow: var(--ibn-shadow);
+}
+
+.ibn-dashboard-hero h1 {
+    margin-top: 0.65rem;
+    max-width: 16ch;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: 0em;
+}
+
+.ibn-dashboard-hero__description {
+    margin-top: 0.9rem;
+    max-width: 40rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.ibn-dashboard-hero__metrics {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.ibn-dashboard-hero__metrics article,
+.ibn-metric-card,
+.ibn-widget-card,
+.ibn-activity-item,
+.ibn-quick-action {
+    border: 1px solid var(--ibn-border);
+    border-radius: 1.2rem;
+}
+
+.ibn-dashboard-hero__metrics article {
+    padding: 1rem 1.1rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ibn-dashboard-hero__metrics span,
+.ibn-metric-card span {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.ibn-dashboard-hero__metrics strong,
+.ibn-metric-card strong {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.ibn-dashboard-hero__metrics p,
+.ibn-metric-card p {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.ibn-widget-card {
+    padding: 1.3rem;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: var(--ibn-shadow-soft);
+}
+
+.dark .ibn-widget-card {
+    background: rgba(15, 23, 42, 0.86);
+}
+
+.ibn-widget-card__header h3 {
+    margin-top: 0.45rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.ibn-quick-actions-grid,
+.ibn-metric-grid,
+.ibn-activity-list {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.ibn-quick-actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ibn-quick-action {
+    padding: 1rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(238, 244, 251, 0.92));
+    text-decoration: none;
+    transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.dark .ibn-quick-action {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.94), rgba(15, 23, 42, 0.96));
+}
+
+.ibn-quick-action:hover {
+    transform: translateY(-2px);
+    border-color: rgba(76, 175, 80, 0.32);
+}
+
+.ibn-quick-action strong {
+    display: block;
+    font-weight: 700;
+}
+
+.ibn-quick-action span {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--ibn-text-muted);
+    font-size: 0.9rem;
+}
+
+.ibn-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ibn-metric-card {
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.12), rgba(46, 46, 128, 0.08));
+}
+
+.ibn-metric-card span {
+    color: var(--ibn-text-muted);
+}
+
+.ibn-metric-card p {
+    color: var(--ibn-text-muted);
+}
+
+.ibn-activity-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.95rem 1rem;
+    background: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+}
+
+.dark .ibn-activity-item {
+    background: rgba(15, 23, 42, 0.84);
+}
+
+.ibn-activity-item p {
+    color: var(--ibn-text-muted);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.ibn-activity-item strong {
+    display: block;
+    margin-top: 0.25rem;
+    font-weight: 700;
+}
+
+.ibn-activity-item__meta {
+    display: grid;
+    justify-items: end;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+
+.ibn-status-pill {
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.ibn-status-pill--published {
+    background: rgba(76, 175, 80, 0.14);
+    color: var(--ibn-primary-strong);
+}
+
+.ibn-status-pill--draft {
+    background: rgba(46, 46, 128, 0.12);
+    color: var(--ibn-secondary);
+}
+
+.ibn-empty-inline {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px dashed var(--ibn-border-strong);
+    color: var(--ibn-text-muted);
+}
+
+.fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) {
+    width: var(--collapsed-sidebar-width) !important;
+}
+
+.fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-nav {
+    padding-inline: 0.6rem;
+}
+
+.fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-nav-groups {
+    gap: 0.9rem;
+}
+
+.fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-group-btn,
+.fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-item-btn {
+    justify-content: center;
+    padding-inline: 0.55rem;
+}
+
+.fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-header {
+    padding-inline: 0.35rem;
+}
+
+@media (max-width: 1024px) {
+    .ibn-login-shell,
+    .ibn-dashboard-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .ibn-login-shell {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .fi-main-ctn {
+        padding: 0.85rem;
+    }
+
+    .fi-page,
+    .fi-simple-page-content {
+        padding: 1rem;
+    }
+
+    .ibn-quick-actions-grid,
+    .ibn-metric-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ibn-login-panel {
+        padding: 1.1rem;
+    }
+
+    .ibn-login-panel__form {
+        padding: 1rem;
+    }
+
+    .ibn-activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ibn-activity-item__meta {
+        justify-items: start;
+    }
+}

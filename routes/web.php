@@ -1,0 +1,38 @@
+<?php
+
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CaseStudyController;
+use App\Http\Controllers\EbookController;
+use App\Http\Controllers\IndustryController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PressReleaseController;
+use App\Http\Controllers\WhitePaperController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', [PageController::class, 'home'])->name('home');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies.index');
+Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-studies.show');
+Route::get('/case-studies/{slug}/download', [CaseStudyController::class, 'download'])->name('case-studies.download');
+Route::get('/ebooks', [EbookController::class, 'index'])->name('ebooks.index');
+Route::get('/ebooks/{slug}', [EbookController::class, 'show'])->name('ebooks.show');
+Route::get('/ebooks/{slug}/download', [EbookController::class, 'download'])->name('ebooks.download');
+Route::get('/press-releases', [PressReleaseController::class, 'index'])->name('press-releases.index');
+Route::get('/press-releases/{slug}', [PressReleaseController::class, 'show'])->name('press-releases.show');
+Route::get('/white-papers', [WhitePaperController::class, 'index'])->name('white-papers.index');
+Route::get('/white-papers/{slug}', [WhitePaperController::class, 'show'])->name('white-papers.show');
+Route::get('/industry/{slug}', [IndustryController::class, 'show'])->name('industries.show');
+Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-pages.show');
+Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
+Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
+Route::get('/{slug}', [PageController::class, 'show'])
+    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|industry$|lp$|newsletter$|press-releases$|white-papers$|livewire$|storage$|up$).+')
+    ->name('page.show');

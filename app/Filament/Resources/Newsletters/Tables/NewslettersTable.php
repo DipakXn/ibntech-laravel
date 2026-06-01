@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Filament\Resources\Newsletters\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+
+class NewslettersTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('slug')
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('template')
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge(),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(),
+            ])
+            ->filters([
+                SelectFilter::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'published' => 'Published',
+                    ]),
+            ])
+            ->defaultSort('updated_at', 'desc')
+            ->searchPlaceholder('Search newsletters, slugs, and templates')
+            ->emptyStateIcon('heroicon-o-envelope')
+            ->emptyStateHeading('No newsletters yet')
+            ->emptyStateDescription('Create a newsletter page to publish an insight-led email archive or editorial page.')
+            ->striped()
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}

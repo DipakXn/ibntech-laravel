@@ -1,0 +1,23 @@
+@extends('layouts.app')
+
+@section('content')
+    <article class="py-16">
+        <div class="mx-auto max-w-4xl px-4">
+            <a href="{{ route('blog.index') }}" class="text-sm font-medium text-amber-700">&larr; Back to Blog</a>
+            <h1 class="mt-4 text-4xl font-bold">{{ $blog->title }}</h1>
+            <p class="mt-3 text-sm text-slate-500">
+                {{ $blog->category?->name ?? 'General' }} | {{ $blog->created_at->format('M d, Y') }}
+            </p>
+            <div class="prose prose-slate mt-8 max-w-none rounded-xl bg-white p-8">
+                <x-content-blocks :blocks="$blog->content" :model="$blog" class="article-body" />
+            </div>
+            @if($blog->tags->isNotEmpty())
+                <div class="mt-6 flex flex-wrap gap-2">
+                    @foreach($blog->tags as $tag)
+                        <span class="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-700">#{{ $tag->name }}</span>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </article>
+@endsection

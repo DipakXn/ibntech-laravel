@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="grid gap-6 lg:grid-cols-[20rem,1fr]">
+    <div class="grid gap-6 lg:grid-cols-[20rem,1fr] ibn-log-viewer">
         <aside class="ibn-widget-card">
             <div class="ibn-widget-card__header">
                 <div>

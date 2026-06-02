@@ -817,3 +817,26 @@ body.fi-body {
         justify-items: start;
     }
 }
+
+/* Scoped fixes for the log viewer page to prevent horizontal overflow */
+.ibn-log-viewer .ibn-widget-card {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.ibn-log-viewer .ibn-activity-list,
+.ibn-log-viewer .ibn-activity-list .ibn-quick-action {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.ibn-log-viewer pre {
+    white-space: pre-wrap; /* preserve line breaks but allow wrapping */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto; /* keep a scrollbar if a single token is too long */
+}

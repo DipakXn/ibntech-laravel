@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
 use Livewire\Component;
 
 class ContactForm extends Component
 {
+    use HasReCaptcha;
     public string $formName = 'contact';
     public string $pageUrl = '';
     public string $name = '';
@@ -35,6 +37,7 @@ class ContactForm extends Component
             'acceptedTerms' => ['accepted'],
             'formName' => ['required', 'string', 'max:100'],
             'pageUrl' => ['required', 'url', 'max:2048'],
+            ...$this->getReCaptchaRules(),
         ];
     }
 
@@ -43,6 +46,7 @@ class ContactForm extends Component
         $validated = $this->validate();
 
         unset($validated['acceptedTerms']);
+        unset($validated['recaptchaToken']);
 
         if (! $this->showCompany) {
             $validated['company'] = null;
@@ -58,6 +62,7 @@ class ContactForm extends Component
         $this->acceptedTerms = true;
         $this->formName = 'contact';
         $this->pageUrl = url()->current();
+        $this->resetReCaptcha();
         $this->submitted = true;
     }
 

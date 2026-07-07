@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\HasReCaptcha;
 use App\Models\Ebook;
 use App\Services\LeadService;
 use Illuminate\Support\Facades\URL;
@@ -9,6 +10,7 @@ use Livewire\Component;
 
 class EbookDownloadForm extends Component
 {
+    use HasReCaptcha;
     public string $ebookSlug = '';
     public string $ebookTitle = '';
     public string $formName = 'ebook_download';
@@ -38,6 +40,7 @@ class EbookDownloadForm extends Component
             'pageUrl' => ['required', 'url', 'max:2048'],
             'ebookSlug' => ['nullable', 'string', 'max:255'],
             'ebookTitle' => ['nullable', 'string', 'max:255'],
+            ...$this->getReCaptchaRules(),
         ];
     }
 
@@ -61,6 +64,7 @@ class EbookDownloadForm extends Component
         }
 
         unset($validated['acceptedTerms']);
+        unset($validated['recaptchaToken']);
 
         $leadService->createLead([
             'name' => $validated['name'],
@@ -84,6 +88,7 @@ class EbookDownloadForm extends Component
         $this->acceptedTerms = true;
         $this->formName = 'ebook_download';
         $this->pageUrl = url()->current();
+        $this->resetReCaptcha();
         $this->submitted = true;
     }
 

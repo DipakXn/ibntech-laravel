@@ -82,6 +82,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
     @livewireStyles
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
     @include('layouts.header')

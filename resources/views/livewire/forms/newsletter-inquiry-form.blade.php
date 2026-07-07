@@ -57,6 +57,8 @@
         </span>
     </label>
     @error('acceptedTerms') <p class="contact-form__error">{{ $message }}</p> @enderror
+ 
+    <x-forms.recaptcha errorClass="contact-form__error" />
 
     <button type="submit" class="newsletter-form__submit" wire:loading.attr="disabled" wire:target="submit">
         <span wire:loading.remove>Submit</span>

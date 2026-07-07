@@ -22,7 +22,7 @@ class NewsletterPageTest extends TestCase
             'status' => 'published',
         ]);
 
-        $response = $this->get('/newsletter/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure');
+        $response = $this->followingRedirects()->get('/newsletter/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure/');
 
         $response->assertOk();
         $response->assertSee('Cloud Misconfiguration Insights');
@@ -45,7 +45,7 @@ class NewsletterPageTest extends TestCase
             'meta_description' => 'Newsletter summary for the archive card.',
         ]);
 
-        $response = $this->get('/newsletter');
+        $response = $this->followingRedirects()->get('/newsletter/');
 
         $response->assertOk();
         $response->assertSee('Cloud Misconfiguration Insights');

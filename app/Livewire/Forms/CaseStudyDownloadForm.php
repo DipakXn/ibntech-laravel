@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\HasReCaptcha;
 use App\Models\CaseStudy;
 use App\Services\LeadService;
 use Illuminate\Support\Facades\URL;
@@ -9,6 +10,7 @@ use Livewire\Component;
 
 class CaseStudyDownloadForm extends Component
 {
+    use HasReCaptcha;
     public string $caseStudySlug = '';
     public string $caseStudyTitle = '';
     public string $formName = 'case_study_download';
@@ -38,6 +40,7 @@ class CaseStudyDownloadForm extends Component
             'pageUrl' => ['required', 'url', 'max:2048'],
             'caseStudySlug' => ['required', 'string', 'max:255'],
             'caseStudyTitle' => ['required', 'string', 'max:255'],
+            ...$this->getReCaptchaRules(),
         ];
     }
 
@@ -56,6 +59,7 @@ class CaseStudyDownloadForm extends Component
         }
 
         unset($validated['acceptedTerms']);
+        unset($validated['recaptchaToken']);
 
         $leadService->createLead([
             'name' => $validated['name'],
@@ -77,6 +81,7 @@ class CaseStudyDownloadForm extends Component
         $this->acceptedTerms = true;
         $this->formName = 'case_study_download';
         $this->pageUrl = url()->current();
+        $this->resetReCaptcha();
         $this->submitted = true;
     }
 

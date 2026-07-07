@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
 use Livewire\Component;
 
 class NewsletterInquiryForm extends Component
 {
+    use HasReCaptcha;
     public string $formName = 'newsletter_inquiry';
     public string $pageUrl = '';
     public string $name = '';
@@ -35,6 +37,7 @@ class NewsletterInquiryForm extends Component
             'acceptedTerms' => ['accepted'],
             'formName' => ['required', 'string', 'max:100'],
             'pageUrl' => ['required', 'url', 'max:2048'],
+            ...$this->getReCaptchaRules(),
         ];
     }
 
@@ -43,6 +46,7 @@ class NewsletterInquiryForm extends Component
         $validated = $this->validate();
 
         unset($validated['acceptedTerms']);
+        unset($validated['recaptchaToken']);
 
         $leadService->createLead([
             ...$validated,
@@ -54,6 +58,7 @@ class NewsletterInquiryForm extends Component
         $this->acceptedTerms = true;
         $this->formName = 'newsletter_inquiry';
         $this->pageUrl = url()->current();
+        $this->resetReCaptcha();
         $this->submitted = true;
     }
 

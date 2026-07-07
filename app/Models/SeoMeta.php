@@ -15,6 +15,8 @@ class SeoMeta extends Model implements HasMedia
     protected $table = 'seo_meta';
 
     protected $fillable = [
+        'metable_id',
+        'metable_type',
         'meta_title',
         'meta_description',
         'meta_keywords',

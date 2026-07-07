@@ -21,7 +21,7 @@ class LandingPageTest extends TestCase
             'status' => 'published',
         ]);
 
-        $response = $this->get('/lp/vapt-audit-services');
+        $response = $this->followingRedirects()->get('/lp/vapt-audit-services/');
 
         $response->assertOk();
         $response->assertSee('VAPT Audit Services');
@@ -38,6 +38,6 @@ class LandingPageTest extends TestCase
             'status' => 'draft',
         ]);
 
-        $this->get('/lp/draft-landing-page')->assertNotFound();
+        $this->get('/lp/draft-landing-page/')->assertNotFound();
     }
 }

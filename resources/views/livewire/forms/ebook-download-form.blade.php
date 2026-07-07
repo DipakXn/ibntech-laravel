@@ -31,6 +31,8 @@
     @error('acceptedTerms') <p class="contact-form__error">{{ $message }}</p> @enderror
     @error('download') <p class="contact-form__error">{{ $message }}</p> @enderror
 
+    <x-forms.recaptcha errorClass="contact-form__error" />
+
     <button type="submit" class="contact-form__submit case-study-download-form__submit" wire:loading.attr="disabled" wire:target="submit">
         {{ $ebookSlug !== '' ? 'Get The eBook' : 'Submit' }}
     </button>

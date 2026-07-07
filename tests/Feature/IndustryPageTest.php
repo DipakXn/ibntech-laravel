@@ -21,7 +21,7 @@ class IndustryPageTest extends TestCase
             'status' => 'published',
         ]);
 
-        $response = $this->get('/industry/real-estate-and-construction');
+        $response = $this->followingRedirects()->get('/industry/real-estate-and-construction/');
 
         $response->assertOk();
         $response->assertSee('Real Estate and Construction');
@@ -38,6 +38,6 @@ class IndustryPageTest extends TestCase
             'status' => 'draft',
         ]);
 
-        $this->get('/industry/draft-industry')->assertNotFound();
+        $this->get('/industry/draft-industry/')->assertNotFound();
     }
 }

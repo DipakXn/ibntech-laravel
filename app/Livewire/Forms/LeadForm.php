@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
 use Livewire\Component;
 
 class LeadForm extends Component
 {
+    use HasReCaptcha;
     public string $formName = 'lead';
     public string $pageUrl = '';
     public string $name = '';
@@ -27,12 +29,15 @@ class LeadForm extends Component
             'company' => ['nullable', 'string', 'max:120'],
             'formName' => ['required', 'string', 'max:100'],
             'pageUrl' => ['required', 'url', 'max:2048'],
+            ...$this->getReCaptchaRules(),
         ];
     }
 
     public function submit(LeadService $leadService): void
     {
         $validated = $this->validate();
+
+        unset($validated['recaptchaToken']);
 
         $leadService->createLead([
             ...$validated,
@@ -43,6 +48,7 @@ class LeadForm extends Component
         $this->reset(['name', 'email', 'company']);
         $this->formName = 'lead';
         $this->pageUrl = url()->current();
+        $this->resetReCaptcha();
         $this->submitted = true;
     }
 

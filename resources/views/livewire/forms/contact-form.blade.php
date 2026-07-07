@@ -39,6 +39,8 @@
     </label>
     @error('acceptedTerms') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
 
+    <x-forms.recaptcha />
+
     <button type="submit" class="contact-form__submit" wire:loading.attr="disabled" wire:target="submit">
         <span wire:loading.remove>Submit</span>
         <span wire:loading wire:target="submit">Sending...</span>

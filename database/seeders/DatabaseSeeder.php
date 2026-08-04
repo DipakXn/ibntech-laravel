@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        $this->call(WebsiteSettingSeeder::class);
         $this->call(CmsDemoSeeder::class);
     }
 }

@@ -1,6 +1,14 @@
 @php
     $referenceNavbarPath = base_path('../navbar-design/live-new-navbar.html');
     $referenceNavbarMarkup = null;
+    $siteName = $websiteSettings?->site_name ?: config('app.name');
+    $logoUrl = $websiteSettings?->logoUrl();
+    $contactEmail = $websiteSettings?->contact_email ?: 'sales@ibntech.com';
+    $headerPhones = $websiteSettings?->header_phones ?: [
+        ['label' => 'USA', 'number' => '+1-844-644-8440'],
+        ['label' => 'UK', 'number' => '+44-800-041-8618'],
+        ['label' => 'IND', 'number' => '020-711-79586'],
+    ];
 
     if (is_file($referenceNavbarPath)) {
         $referenceNavbarHtml = file_get_contents($referenceNavbarPath);
@@ -52,10 +60,19 @@
             <div class="site-reference-topbar__inner">
                 <div class="site-reference-topbar__badge">SINCE 1999 | ISO 9001:2015 | 20000-1:2018 | 27001:2022</div>
                 <div class="site-reference-topbar__contacts">
-                    <a href="tel:+18446448440"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> USA:+1-844-644-8440</a>
-                    <a href="tel:+448000418618"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> UK: +44-800-041-8618</a>
-                    <a href="tel:+9102071179586"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> IND:020-711-79586</a>
-                    <a href="mailto:sales@ibntech.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> sales@ibntech.com</a>
+                    @foreach ($headerPhones as $phone)
+                        @php
+                            $phoneNumber = $phone['number'] ?? '';
+                            $phoneLabel = $phone['label'] ?? null;
+                            $telHref = 'tel:' . preg_replace('/[^\d+]/', '', $phoneNumber);
+                        @endphp
+                        @if ($phoneNumber !== '')
+                            <a href="{{ $telHref }}"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> {{ $phoneLabel ? $phoneLabel . ': ' : '' }}{{ $phoneNumber }}</a>
+                        @endif
+                    @endforeach
+                    @if ($contactEmail)
+                        <a href="mailto:{{ $contactEmail }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> {{ $contactEmail }}</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -69,20 +86,33 @@
             <div class="site-shell site-topbar__inner">
                 <div class="site-topbar__badge">SINCE 1999 | ISO 9001:2015 | 20000-1:2018 | 27001:2022</div>
                 <div class="site-topbar__contacts">
-                    <a href="tel:+18446448440"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> USA: +1-844-644-8440</a>
-                    <a href="tel:+448000418618"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> UK: +44-800-041-8618</a>
-                    <a href="tel:+9102071179586"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> IND: 020-711-79586</a>
-                    <a href="mailto:sales@ibntech.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> sales@ibntech.com</a>
+                    @foreach ($headerPhones as $phone)
+                        @php
+                            $phoneNumber = $phone['number'] ?? '';
+                            $phoneLabel = $phone['label'] ?? null;
+                            $telHref = 'tel:' . preg_replace('/[^\d+]/', '', $phoneNumber);
+                        @endphp
+                        @if ($phoneNumber !== '')
+                            <a href="{{ $telHref }}"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> {{ $phoneLabel ? $phoneLabel . ': ' : '' }}{{ $phoneNumber }}</a>
+                        @endif
+                    @endforeach
+                    @if ($contactEmail)
+                        <a href="mailto:{{ $contactEmail }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> {{ $contactEmail }}</a>
+                    @endif
                 </div>
             </div>
         </div>
 
         <div class="site-navbar">
             <div class="site-shell site-navbar__inner">
-                <a href="{{ route('home') }}" class="site-logo" aria-label="{{ config('app.name') }} home">
-                    <span class="site-logo__tile site-logo__tile--navy">I</span>
-                    <span class="site-logo__tile site-logo__tile--teal">B</span>
-                    <span class="site-logo__tile site-logo__tile--green">N</span>
+                <a href="{{ route('home') }}" class="site-logo" aria-label="{{ $siteName }} home">
+                    @if ($logoUrl)
+                        <img src="{{ $logoUrl }}" alt="{{ $siteName }}" class="site-logo__image">
+                    @else
+                        <span class="site-logo__tile site-logo__tile--navy">I</span>
+                        <span class="site-logo__tile site-logo__tile--teal">B</span>
+                        <span class="site-logo__tile site-logo__tile--green">N</span>
+                    @endif
                 </a>
 
                 <nav class="site-nav" aria-label="Primary">

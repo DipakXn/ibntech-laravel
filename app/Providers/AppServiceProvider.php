@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\SeoService;
+use App\Services\WebsiteSettingService;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\QueueBusy;
 use Illuminate\Support\Facades\Event;
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(SeoService::class, fn () => new SeoService());
+        $this->app->singleton(WebsiteSettingService::class, fn () => new WebsiteSettingService());
     }
 
     /**
@@ -25,6 +27,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::composer(['layouts.app', 'layouts.header', 'layouts.footer'], function ($view): void {
+            try {
+                $websiteSettings = app(WebsiteSettingService::class)->get();
+            } catch (\Throwable) {
+                $websiteSettings = null;
+            }
+
+            $view->with('websiteSettings', $websiteSettings);
+        });
+
         View::composer('layouts.app', function ($view): void {
             $view->with('seo', app(SeoService::class)->current());
         });

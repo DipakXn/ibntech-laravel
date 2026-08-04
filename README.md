@@ -331,8 +331,8 @@ php artisan migrate
 # 6. (Optional) Seed demo content
 php artisan db:seed
 
-# 7. Create the storage symlink
-php artisan storage:link
+# 7. Ensure media uploads directory exists (no storage:link required)
+#    MEDIA_DISK=media / MEDIA_ROOT=public/uploads / MEDIA_URL=/uploads in .env
 
 # 8. Install Node dependencies
 npm install
@@ -569,12 +569,12 @@ An admin-only **Queue Monitor** page is available at `/admin/queue-monitor` disp
 ### Storage
 
 - **Default disk:** `local`
-- **Public disk:** `public` (used for all media library uploads)
-- **Symlink:** Run `php artisan storage:link` to serve `storage/app/public` from `public/storage`
-- **Media path layout:** `media/{YYYY}/{MM}/{filename}` (WordPress-style, managed by a custom Spatie path generator)
-- **Conversions:** `media/{YYYY}/{MM}/conversions/`
-- **Responsive images:** `media/{YYYY}/{MM}/responsive-images/`
-- **AWS S3** disk is pre-configured via `config/filesystems.php` for production use
+- **Media disk:** `media` (dedicated; root via `MEDIA_ROOT`, URL via `MEDIA_URL`)
+- **No symlink required for media** — files live in `public/uploads` (or the absolute path set in `MEDIA_ROOT`) and are served directly by the web server at `/uploads`
+- **Media path layout:** purpose-based folders (see `docs/media-library-architecture.md`), e.g. `logos/website/`, `blogs/featured/{YYYY}/{MM}/`
+- **Migration command:** `php artisan media:migrate-to-uploads-disk`
+- **Deployment guide:** `docs/media-uploads-deployment.md`
+- **AWS S3** disk is pre-configured; set `MEDIA_DISK=s3` to use cloud storage without code changes
 
 ### Caching
 
@@ -975,8 +975,8 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# 8. Create storage symlink
-php artisan storage:link
+# 8. Migrate legacy media into public/uploads (first deploy only, if needed)
+php artisan media:migrate-to-uploads-disk
 ```
 
 ### Queue Worker (Production)
@@ -1006,8 +1006,8 @@ REDIS_PORT=6379
 ```
 
 ### Storage Configuration
-- For **local single-server** deployment: `FILESYSTEM_DISK=local`, run `php artisan storage:link`
-- For **multi-server or CDN**: Set `FILESYSTEM_DISK=s3` and configure `AWS_*` variables
+- For **local / cPanel single-server**: set `MEDIA_DISK=media`, `MEDIA_ROOT`, and `MEDIA_URL` (see `docs/media-uploads-deployment.md`)
+- For **multi-server or CDN**: set `MEDIA_DISK=s3` and configure `AWS_*` variables
 
 ---
 
@@ -1051,11 +1051,8 @@ REDIS_PORT=6379
 
 ## 22. Troubleshooting
 
-### Storage symlink not working
-```bash
-php artisan storage:link
-```
-Ensure `APP_URL` in `.env` matches the URL you are accessing. On Windows with `php artisan serve`, the default is `http://localhost:8000`.
+### Media uploads directory missing
+Ensure `MEDIA_ROOT` exists and is writable (local default: `public/uploads`). Media does **not** require `php artisan storage:link`.
 
 ### Queue jobs not running
 Make sure the queue worker is running:
@@ -1065,10 +1062,12 @@ php artisan queue:listen
 Check `QUEUE_CONNECTION=database` in `.env`. Check the `jobs` table in your database for pending jobs.
 
 ### Media images not displaying
-1. Confirm the storage symlink exists: `public/storage` → `storage/app/public`
-2. Confirm `APP_URL` is correct in `.env`
-3. Ensure file permissions on `storage/` are writable by the web server
-4. For queued image conversions, ensure the queue worker is running
+1. Confirm `MEDIA_DISK`, `MEDIA_ROOT`, and `MEDIA_URL` in `.env`
+2. Confirm files exist under the media root and are reachable at `/uploads/...`
+3. Confirm `APP_URL` is correct in `.env`
+4. Run `php artisan media:migrate-to-uploads-disk` if media still lives on the old `public` disk
+5. Ensure the uploads directory is writable by the web server
+6. For queued image conversions, ensure the queue worker is running
 
 ### Admin panel not accessible
 1. Ensure you have run `php artisan migrate` so the `users` and `sessions` tables exist

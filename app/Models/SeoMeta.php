@@ -87,12 +87,12 @@ class SeoMeta extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('og_image')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
 
         $this
             ->addMediaCollection('twitter_image')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
     }
 

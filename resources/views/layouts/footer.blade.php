@@ -1,28 +1,67 @@
+@php
+    $organizationName = $websiteSettings?->organization_name ?: 'IBN Technologies Ltd';
+    $offices = $websiteSettings?->offices ?: [
+        [
+            'name' => 'IBN Technologies LLC.',
+            'address' => '66 West Flagler Street Suite 900 Miami, FL 33130',
+            'email' => null,
+            'phones' => [
+                ['label' => 'Cybersecurity and Cloud', 'number' => '+1-281-544-0740'],
+                ['label' => 'Finance & Accounting and Others', 'number' => '+1-844-644-8440'],
+            ],
+        ],
+        [
+            'name' => 'IBN Tech Ltd.',
+            'address' => '30 Orange Street, London UK WC2H 7HF',
+            'email' => null,
+            'phones' => [
+                ['label' => 'Cybersecurity and Cloud', 'number' => '+44-203-769-9111'],
+                ['label' => 'Finance & Accounting and Others', 'number' => '+44-800-041-8618'],
+            ],
+        ],
+        [
+            'name' => 'IBN Technologies Ltd.',
+            'address' => 'Kohinoor House, 2nd floor, 691/A/1B, Plot no. 7, Bibwewadi Road, Pune-411037, Maharashtra, India',
+            'email' => 'sales@ibntech.com',
+            'phones' => [
+                ['label' => null, 'number' => '020-711-79586'],
+            ],
+        ],
+    ];
+    $socialLinks = $websiteSettings?->socialLinks() ?: [];
+@endphp
+
 <footer class="site-footer">
     <div class="site-shell site-footer__grid">
         <section class="site-footer__column">
             <h3><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Address</h3>
 
-            <div class="site-footer__address-card">
-                <strong>IBN Technologies LLC.</strong>
-                <p class="contact-info">66 West Flagler Street Suite 900 Miami, FL 33130</p>
-                <p class="contact-info">Cybersecurity and Cloud:<br> <a href="tel:+12815440740"><i class="fa-solid fa-phone" aria-hidden="true"></i> +1-281-544-0740</a></p>
-                <p class="contact-info">Finance &amp; Accounting and Others:<br> <a href="tel:+18446448440"><i class="fa-solid fa-phone" aria-hidden="true"></i> +1-844-644-8440</a></p>
-            </div>
-
-            <div class="site-footer__address-card">
-                <strong>IBN Tech Ltd.</strong>
-                <p class="contact-info">30 Orange Street, London UK WC2H 7HF</p>
-                <p class="contact-info">Cybersecurity and Cloud:<br> <a href="tel:+442037699111"><i class="fa-solid fa-phone" aria-hidden="true"></i>+44-203-769-9111</a></p>
-                <p class="contact-info">Finance &amp; Accounting and Others:<br> <a href="tel:+448000418618"><i class="fa-solid fa-phone" aria-hidden="true"></i> +44-800-041-8618</a></p>
-            </div>
-
-            <div class="site-footer__address-card">
-                <strong>IBN Technologies Ltd.</strong>
-                <p class="contact-info">Kohinoor House, 2nd floor, 691/A/1B, Plot no. 7, Bibwewadi Road, Pune-411037, Maharashtra, India</p>
-                <p class="contact-info"><a href="tel:+9102071179586"><i class="fa-solid fa-phone" aria-hidden="true"></i> 020-711-79586</a></p>
-                <p class="contact-info"><a href="mailto:sales@ibntech.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> sales@ibntech.com</a></p>
-            </div>
+            @foreach ($offices as $office)
+                <div class="site-footer__address-card">
+                    <strong>{{ $office['name'] ?? '' }}</strong>
+                    @if (!empty($office['address']))
+                        <p class="contact-info">{{ $office['address'] }}</p>
+                    @endif
+                    @foreach (($office['phones'] ?? []) as $phone)
+                        @php
+                            $phoneNumber = $phone['number'] ?? '';
+                            $phoneLabel = $phone['label'] ?? null;
+                            $telHref = 'tel:' . preg_replace('/[^\d+]/', '', $phoneNumber);
+                        @endphp
+                        @if ($phoneNumber !== '')
+                            <p class="contact-info">
+                                @if ($phoneLabel)
+                                    {{ $phoneLabel }}:<br>
+                                @endif
+                                <a href="{{ $telHref }}"><i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $phoneNumber }}</a>
+                            </p>
+                        @endif
+                    @endforeach
+                    @if (!empty($office['email']))
+                        <p class="contact-info"><a href="mailto:{{ $office['email'] }}"><i class="fa-solid fa-envelope" aria-hidden="true"></i> {{ $office['email'] }}</a></p>
+                    @endif
+                </div>
+            @endforeach
         </section>
 
         <section class="site-footer__column site-footer__column--wide">
@@ -103,18 +142,38 @@
     <div class="site-footer__social">
         <div class="site-shell">
             <div class="site-footer__social-icons">
-                <span><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
-                <span><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
-                <span><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span>
-                <span><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
-                <span><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
+                @if (!empty($socialLinks['facebook']))
+                    <a href="{{ $socialLinks['facebook'] }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                @else
+                    <span><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
+                @endif
+                @if (!empty($socialLinks['linkedin']))
+                    <a href="{{ $socialLinks['linkedin'] }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                @else
+                    <span><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
+                @endif
+                @if (!empty($socialLinks['twitter']))
+                    <a href="{{ $socialLinks['twitter'] }}" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                @else
+                    <span><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span>
+                @endif
+                @if (!empty($socialLinks['instagram']))
+                    <a href="{{ $socialLinks['instagram'] }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                @else
+                    <span><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                @endif
+                @if (!empty($socialLinks['youtube']))
+                    <a href="{{ $socialLinks['youtube'] }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                @else
+                    <span><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
+                @endif
             </div>
         </div>
     </div>
 
     <div class="site-footer__bottom">
         <div class="site-shell site-footer__bottom-inner">
-            <p>All Rights Reserved &copy; {{ now()->year }} IBN Technologies Ltd</p>
+            <p>All Rights Reserved &copy; {{ now()->year }} {{ $organizationName }}</p>
             <div class="site-footer__legal">
                 <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>
                 <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms and Conditions</a>

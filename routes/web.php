@@ -10,7 +10,20 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PressReleaseController;
 use App\Http\Controllers\WhitePaperController;
+use App\Services\WebsiteSettingService;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/robots.txt', function (WebsiteSettingService $settings) {
+    $contents = $settings->get()->robots_txt;
+
+    if ($contents === null || trim($contents) === '') {
+        $contents = "User-agent: *\nDisallow:\n";
+    }
+
+    return response(rtrim($contents)."\n", 200, [
+        'Content-Type' => 'text/plain; charset=UTF-8',
+    ]);
+})->name('robots');
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 

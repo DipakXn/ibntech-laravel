@@ -2,71 +2,88 @@
 
 namespace App\Support\MediaLibrary;
 
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 
 class CustomPathGenerator implements PathGenerator
 {
     /**
-     * Store original media in a WordPress-style year/month directory.
+     * @var array<string, string>
+     */
+    protected static array $resolvedBases = [];
+
+    /**
+     * Store original media under a purpose-based directory.
+     * Existing legacy layouts continue to resolve correctly until reorganized.
      */
     public function getPath(Media $media): string
     {
-        return $this->buildBasePath($media).'/';
+        return $this->resolveBasePath($media).'/';
     }
 
-    /**
-     * Keep conversions grouped by the same year/month bucket in a dedicated
-     * subdirectory to avoid cluttering the original media directory.
-     */
     public function getPathForConversions(Media $media): string
     {
-        return $this->buildBasePath($media).'/conversions/';
+        return $this->resolveBasePath($media).'/conversions/';
+    }
+
+    public function getPathForResponsiveImages(Media $media): string
+    {
+        return $this->resolveBasePath($media).'/responsive-images/';
+    }
+
+    protected function resolveBasePath(Media $media): string
+    {
+        $cacheKey = implode('|', [
+            (string) $media->getKey(),
+            (string) $media->disk,
+            (string) $media->file_name,
+            (string) $media->collection_name,
+        ]);
+
+        if (isset(static::$resolvedBases[$cacheKey])) {
+            return static::$resolvedBases[$cacheKey];
+        }
+
+        $purposePath = MediaPathResolver::forMedia($media);
+
+        if (! $media->exists || blank($media->file_name) || blank($media->disk)) {
+            return static::$resolvedBases[$cacheKey] = $purposePath;
+        }
+
+        $disk = Storage::disk($media->disk);
+        $candidates = $this->legacyBaseCandidates($media, $purposePath);
+
+        foreach ($candidates as $candidate) {
+            if ($disk->exists(trim($candidate.'/'.$media->file_name, '/'))) {
+                return static::$resolvedBases[$cacheKey] = $candidate;
+            }
+        }
+
+        return static::$resolvedBases[$cacheKey] = $purposePath;
     }
 
     /**
-     * Keep responsive images in a dedicated year/month subdirectory for
-     * predictable paths and simpler housekeeping.
+     * @return array<int, string>
      */
-    public function getPathForResponsiveImages(Media $media): string
+    protected function legacyBaseCandidates(Media $media, string $purposePath): array
     {
-        return $this->buildBasePath($media).'/responsive-images/';
-    }
+        $datePath = $media->created_at?->format('Y/m');
+        $prefix = trim((string) config('media-library.prefix', ''), '/');
 
-    protected function buildBasePath(Media $media): string
-    {
-        $prefix = trim((string) config('media-library.prefix', 'media'), '/');
-        $segments = static::resolveDatePathSegments($this->resolveMediaDate($media));
-
-        if ($prefix !== '') {
-            array_unshift($segments, $prefix);
-        }
-
-        return implode('/', array_map(
-            static fn (string|int $segment): string => trim((string) $segment, '/'),
-            $segments,
-        ));
-    }
-
-    public static function resolveDatePathSegments(Carbon $date): array
-    {
-        return [
-            $date->format('Y'),
-            $date->format('m'),
+        $candidates = [
+            $purposePath,
         ];
-    }
 
-    protected function resolveMediaDate(Media $media): Carbon
-    {
-        if ($media->created_at instanceof Carbon) {
-            return $media->created_at;
+        if ($datePath) {
+            $candidates[] = $prefix !== '' ? "{$prefix}/{$datePath}" : "media/{$datePath}";
+            $candidates[] = "media/{$datePath}";
         }
 
-        if (! empty($media->created_at)) {
-            return Carbon::parse($media->created_at);
+        if ($media->getKey()) {
+            $candidates[] = (string) $media->getKey();
         }
 
-        return now();
+        return array_values(array_unique(array_filter($candidates)));
     }
 }

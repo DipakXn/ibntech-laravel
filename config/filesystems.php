@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\Filesystem\MediaRoot;
+
 return [
 
     /*
@@ -47,6 +49,20 @@ return [
             'report' => false,
         ],
 
+        /*
+         * Dedicated media disk — files live inside the web-accessible uploads
+         * directory (no storage:link symlink required). Switch MEDIA_DISK to
+         * "s3" (or another cloud disk) when moving off local storage.
+         */
+        'media' => [
+            'driver' => 'local',
+            'root' => MediaRoot::resolve(),
+            'url' => rtrim(env('MEDIA_URL', '/uploads'), '/'),
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -67,9 +83,8 @@ return [
     | Symbolic Links
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
+    | Legacy symlink mapping for non-media public files. Media uploads no
+    | longer require `php artisan storage:link`.
     |
     */
 

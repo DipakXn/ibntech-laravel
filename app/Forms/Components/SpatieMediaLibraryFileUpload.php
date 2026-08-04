@@ -2,9 +2,9 @@
 
 namespace App\Forms\Components;
 
-use App\Support\MediaLibrary\CustomPathGenerator;
+use App\Support\MediaLibrary\MediaPathResolver;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload as BaseSpatieMediaLibraryFileUpload;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -13,7 +13,7 @@ class SpatieMediaLibraryFileUpload extends BaseSpatieMediaLibraryFileUpload
 {
     /**
      * Tracks names reserved during the current request so parallel uploads into
-     * the same year/month bucket receive deterministic suffixes.
+     * the same directory receive deterministic suffixes.
      *
      * @var array<string, array<int, string>>
      */
@@ -61,11 +61,59 @@ class SpatieMediaLibraryFileUpload extends BaseSpatieMediaLibraryFileUpload
 
     protected function resolveStorageDirectory(): string
     {
-        $prefix = trim((string) config('media-library.prefix', 'media'), '/');
-        $segments = CustomPathGenerator::resolveDatePathSegments(Carbon::now());
-        $path = implode('/', $segments);
+        $model = $this->resolveUploadModel();
 
-        return $prefix !== '' ? "{$prefix}/{$path}" : $path;
+        return MediaPathResolver::forUpload(
+            modelType: $model ? $model::class : $this->resolveUploadModelType(),
+            collection: $this->getCollection(),
+            model: $model,
+        );
+    }
+
+    protected function resolveUploadModel(): ?Model
+    {
+        try {
+            $record = $this->getRecord();
+
+            if ($record instanceof Model) {
+                return $record;
+            }
+        } catch (\Throwable) {
+            // Component may be constructed outside a Livewire/Filament schema (unit tests).
+        }
+
+        try {
+            $instance = $this->getModelInstance();
+
+            if ($instance instanceof Model) {
+                return $instance;
+            }
+        } catch (\Throwable) {
+            // Ignore uninitialized Filament container during isolated unit tests.
+        }
+
+        return null;
+    }
+
+    protected function resolveUploadModelType(): ?string
+    {
+        $model = $this->resolveUploadModel();
+
+        if ($model) {
+            return $model::class;
+        }
+
+        try {
+            $modelClass = $this->getModel();
+
+            if (is_string($modelClass)) {
+                return $modelClass;
+            }
+        } catch (\Throwable) {
+            // Ignore uninitialized Filament container during isolated unit tests.
+        }
+
+        return null;
     }
 
     protected function fileExistsInTargetDirectory(string $disk, string $directory, string $fileName): bool

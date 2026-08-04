@@ -122,9 +122,51 @@ return [
 
     ],
 
+    'color_picker' => [
+        'panel_label' => 'Wybór koloru',
+    ],
+
+    'date_time_picker' => [
+
+        'month_select' => [
+            'label' => 'Miesiąc',
+        ],
+
+        'year_input' => [
+            'label' => 'Rok',
+        ],
+
+        'hour_input' => [
+            'label' => 'Godzina',
+        ],
+
+        'minute_input' => [
+            'label' => 'Minuta',
+        ],
+
+        'second_input' => [
+            'label' => 'Sekunda',
+        ],
+
+    ],
+
     'file_upload' => [
 
+        'actions' => [
+
+            'download' => [
+                'label' => 'Pobierz',
+            ],
+
+            'open' => [
+                'label' => 'Otwórz w nowej karcie',
+            ],
+
+        ],
+
         'editor' => [
+
+            'label' => 'Edytor obrazów',
 
             'actions' => [
 
@@ -268,6 +310,18 @@ return [
 
         ],
 
+        'columns' => [
+
+            'actions' => [
+                'label' => 'Akcje',
+            ],
+
+            'reorder' => [
+                'label' => 'Zmień kolejność',
+            ],
+
+        ],
+
         'fields' => [
 
             'key' => [
@@ -338,6 +392,18 @@ return [
     ],
 
     'repeater' => [
+
+        'columns' => [
+
+            'actions' => [
+                'label' => 'Akcje',
+            ],
+
+            'reorder' => [
+                'label' => 'Zmień kolejność',
+            ],
+
+        ],
 
         'actions' => [
 
@@ -548,6 +614,35 @@ return [
 
                         'color' => [
                             'label' => 'Kolor',
+
+                            'options' => [
+                                'slate' => 'Ciemnoszary',
+                                'gray' => 'Szary',
+                                'zinc' => 'Cynk',
+                                'neutral' => 'Neutralny',
+                                'stone' => 'Kamień',
+                                'mauve' => 'Fiołkowy',
+                                'olive' => 'Oliwkowy',
+                                'mist' => 'Mgiełka',
+                                'taupe' => 'Taupe',
+                                'red' => 'Czerwony',
+                                'orange' => 'Pomarańczowy',
+                                'amber' => 'Bursztynowy',
+                                'yellow' => 'Żółty',
+                                'lime' => 'Limonkowy',
+                                'green' => 'Zielony',
+                                'emerald' => 'Szmaragdowy',
+                                'teal' => 'Turkusowy',
+                                'cyan' => 'Cyjan',
+                                'sky' => 'Niebo',
+                                'blue' => 'Niebieski',
+                                'indigo' => 'Indygo',
+                                'violet' => 'Fioletowy',
+                                'purple' => 'Purpurowy',
+                                'fuchsia' => 'Fuksja',
+                                'pink' => 'Różowy',
+                                'rose' => 'Różany',
+                            ],
                         ],
 
                         'custom_color' => [
@@ -573,6 +668,10 @@ return [
             'no_search_results_message' => 'Brak wyników wyszukiwania.',
             'search_prompt' => 'Zacznij pisać aby wyszukać...',
             'searching_message' => 'Wyszukiwanie...',
+        ],
+
+        'toolbar' => [
+            'label' => 'Pasek narzędzi edytora',
         ],
 
         'tools' => [
@@ -713,6 +812,10 @@ return [
         ],
 
         'placeholder' => 'Nowy tag',
+
+        'tag_added' => 'Dodano: :tag',
+
+        'tag_removed' => 'Usunięto: :tag',
 
     ],
 

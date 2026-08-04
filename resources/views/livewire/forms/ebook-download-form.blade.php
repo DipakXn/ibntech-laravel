@@ -1,10 +1,10 @@
 <form wire:submit="submit" class="contact-form case-study-download-form">
-    <input type="hidden" wire:model.defer="formName">
-    <input type="hidden" wire:model.defer="pageUrl">
+    <input type="hidden" wire:model="formName">
+    <input type="hidden" wire:model="pageUrl">
 
     @if($ebookSlug !== '')
-        <input type="hidden" wire:model.defer="ebookSlug">
-        <input type="hidden" wire:model.defer="ebookTitle">
+        <input type="hidden" wire:model="ebookSlug">
+        <input type="hidden" wire:model="ebookTitle">
     @endif
 
     @if(! $submitted)
@@ -17,15 +17,15 @@
     @endif
 
     <label class="sr-only" for="ebook-name-{{ $this->getId() }}">Full Name</label>
-    <input id="ebook-name-{{ $this->getId() }}" type="text" wire:model.defer="name" placeholder="Full Name" autocomplete="name">
+    <input id="ebook-name-{{ $this->getId() }}" type="text" wire:model="name" placeholder="Full Name" autocomplete="name">
     @error('name') <p class="contact-form__error">{{ $message }}</p> @enderror
 
     <label class="sr-only" for="ebook-email-{{ $this->getId() }}">Business Email</label>
-    <input id="ebook-email-{{ $this->getId() }}" type="email" wire:model.defer="email" placeholder="Business Email" autocomplete="email">
+    <input id="ebook-email-{{ $this->getId() }}" type="email" wire:model="email" placeholder="Business Email" autocomplete="email">
     @error('email') <p class="contact-form__error">{{ $message }}</p> @enderror
 
     <label class="contact-form__terms case-study-download-form__terms">
-        <input type="checkbox" wire:model.defer="acceptedTerms">
+        <input type="checkbox" wire:model="acceptedTerms">
         <span>I agree to be contacted about this resource and related services.</span>
     </label>
     @error('acceptedTerms') <p class="contact-form__error">{{ $message }}</p> @enderror

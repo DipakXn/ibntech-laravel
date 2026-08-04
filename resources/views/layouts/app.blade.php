@@ -1,9 +1,14 @@
+@php
+    $siteName = $websiteSettings?->site_name ?: config('app.name');
+    $faviconUrl = $websiteSettings?->faviconUrl();
+    $appleTouchIconUrl = $websiteSettings?->appleTouchIconUrl();
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $seo['meta_title'] ?? config('app.name') }}</title>
+    <title>{{ $seo['meta_title'] ?? $siteName }}</title>
     <meta name="description" content="{{ $seo['meta_description'] ?? '' }}">
     @if(!empty($seo['meta_keywords']))
         <meta name="keywords" content="{{ $seo['meta_keywords'] }}">
@@ -13,11 +18,11 @@
         <meta name="robots" content="{{ $seo['robots'] }}">
     @endif
 
-    <meta property="og:title" content="{{ $seo['og_title'] ?? config('app.name') }}">
+    <meta property="og:title" content="{{ $seo['og_title'] ?? $siteName }}">
     <meta property="og:description" content="{{ $seo['og_description'] ?? '' }}">
     <meta property="og:url" content="{{ $seo['canonical_url'] ?? url()->current() }}">
     <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
-    <meta property="og:site_name" content="{{ $seo['og_site_name'] ?? config('app.name') }}">
+    <meta property="og:site_name" content="{{ $seo['og_site_name'] ?? $siteName }}">
     <meta property="og:locale" content="{{ $seo['og_locale'] ?? str_replace('_', '-', app()->getLocale()) }}">
     @if(!empty($seo['og_image']))
         <meta property="og:image" content="{{ $seo['og_image'] }}">
@@ -68,14 +73,32 @@
     @if(!empty($seo['custom_head_code']))
         {!! $seo['custom_head_code'] !!}
     @endif
-    {{-- Favicons (place generated files in `public/favicon_io/`) --}}
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon_io/favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon_io/favicon.svg') }}">
-    <link rel="shortcut icon" href="{{ asset('favicon_io/favicon.ico') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
-    <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+
+    @if(!empty($websiteSettings?->google_site_verification))
+        <meta name="google-site-verification" content="{{ $websiteSettings->google_site_verification }}">
+    @endif
+    @if(!empty($websiteSettings?->bing_site_verification))
+        <meta name="msvalidate.01" content="{{ $websiteSettings->bing_site_verification }}">
+    @endif
+
+    @if ($faviconUrl)
+        <link rel="icon" href="{{ $faviconUrl }}">
+        <link rel="shortcut icon" href="{{ $faviconUrl }}">
+    @else
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon_io/favicon-96x96.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('favicon_io/favicon.svg') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon_io/favicon.ico') }}">
+    @endif
+
+    @if ($appleTouchIconUrl)
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouchIconUrl }}">
+    @else
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
+    @endif
+
+    <meta name="apple-mobile-web-app-title" content="{{ $siteName }}">
     <link rel="manifest" href="{{ asset('favicon_io/site.webmanifest') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -83,13 +106,46 @@
     @endif
     @livewireStyles
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+
+    @if(!empty($websiteSettings?->google_tag_manager_id))
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ $websiteSettings->google_tag_manager_id }}');</script>
+    @endif
+
+    @if(!empty($websiteSettings?->google_analytics_id))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $websiteSettings->google_analytics_id }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ $websiteSettings->google_analytics_id }}');
+        </script>
+    @endif
+
+    @if(!empty($websiteSettings?->custom_head_code))
+        {!! $websiteSettings->custom_head_code !!}
+    @endif
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
+    @if(!empty($websiteSettings?->google_tag_manager_id))
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id={{ $websiteSettings->google_tag_manager_id }}"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+    @endif
+
     @include('layouts.header')
     <main>
         @yield('content')
     </main>
     @include('layouts.footer')
     @livewireScripts
+
+    @if(!empty($websiteSettings?->custom_body_end_code))
+        {!! $websiteSettings->custom_body_end_code !!}
+    @endif
 </body>
 </html>

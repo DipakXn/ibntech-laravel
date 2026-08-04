@@ -72,7 +72,7 @@ TextColumn::make('title')
     ->state('Hello, world!')
 ```
 
-<UtilityInjection set="tableColumns" except="$state" version="4.x">The `state()` method also accepts a function to dynamically calculate the state. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" except="$state" version="5.x">The `state()` method also accepts a function to dynamically calculate the state. You can inject various utilities into the function as parameters.</UtilityInjection>
 
 ### Setting the default state of a column
 
@@ -96,7 +96,7 @@ TextColumn::make('title')
     ->placeholder('Untitled')
 ```
 
-<AutoScreenshot name="tables/columns/placeholder" alt="Column with a placeholder for empty state" version="4.x" />
+<AutoScreenshot name="tables/columns/placeholder" alt="Column with a placeholder for empty state" version="5.x" />
 
 ### Displaying data from relationships
 
@@ -188,7 +188,7 @@ TextColumn::make('name')
     ->label('Full name')
 ```
 
-<UtilityInjection set="tableColumns" except="$state" version="4.x">As well as allowing a static value, the `label()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" except="$state" version="5.x">As well as allowing a static value, the `label()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
 Customizing the label in this way is useful if you wish to use a [translation string for localization](https://laravel.com/docs/localization#retrieving-translation-strings):
 
@@ -210,7 +210,7 @@ TextColumn::make('name')
     ->sortable()
 ```
 
-<AutoScreenshot name="tables/columns/sortable" alt="Table with sortable column" version="4.x" />
+<AutoScreenshot name="tables/columns/sortable" alt="Table with sortable column" version="5.x" />
 
 Using the name of the column, Filament will apply an `orderBy()` clause to the Eloquent query. This is useful for simple cases where the column name matches the database column name. It can also handle [relationships](#displaying-data-from-relationships).
 
@@ -241,7 +241,7 @@ TextColumn::make('full_name')
     })
 ```
 
-<UtilityInjection set="tableColumns" except="$state" version="4.x" extras="Direction;;string;;$direction;;The direction that the column is currently being sorted on, either <code>'asc'</code> or <code>'desc'</code>.||Eloquent query builder;;Illuminate\Database\Eloquent\Builder;;$query;;The query builder to modify.">The `query` parameter's function can inject various utilities as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" except="$state" version="5.x" extras="Direction;;string;;$direction;;The direction that the column is currently being sorted on, either <code>'asc'</code> or <code>'desc'</code>.||Eloquent query builder;;Illuminate\Database\Eloquent\Builder;;$query;;The query builder to modify.">The `query` parameter's function can inject various utilities as parameters.</UtilityInjection>
 
 ### Sorting by default
 
@@ -342,7 +342,7 @@ TextColumn::make('name')
     ->searchable()
 ```
 
-<AutoScreenshot name="tables/columns/searchable" alt="Table with searchable column" version="4.x" />
+<AutoScreenshot name="tables/columns/searchable" alt="Table with searchable column" version="5.x" />
 
 By default, Filament will apply a `where` clause to the Eloquent query, searching for the column name. This is useful for simple cases where the column name matches the database column name. It can also handle [relationships](#displaying-data-from-relationships).
 
@@ -373,7 +373,7 @@ TextColumn::make('full_name')
     })
 ```
 
-<UtilityInjection set="tableColumns" except="$state" version="4.x" extras="Search;;string;;$search;;The current search input value.||Eloquent query builder;;Illuminate\Database\Eloquent\Builder;;$query;;The query builder to modify.">The `query` parameter's function can inject various utilities as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" except="$state" version="5.x" extras="Search;;string;;$search;;The current search input value.||Eloquent query builder;;Illuminate\Database\Eloquent\Builder;;$query;;The query builder to modify.">The `query` parameter's function can inject various utilities as parameters.</UtilityInjection>
 
 ### Adding extra searchable columns to the table
 
@@ -460,7 +460,7 @@ TextColumn::make('name')
     ->searchable(isIndividual: true)
 ```
 
-<AutoScreenshot name="tables/columns/individually-searchable" alt="Table with individually searchable column" version="4.x" />
+<AutoScreenshot name="tables/columns/individually-searchable" alt="Table with individually searchable column" version="5.x" />
 
 If you use the `isIndividual` parameter, you may still search that column using the main "global" search input field for the entire table.
 
@@ -542,6 +542,20 @@ public function table(Table $table): Table
 }
 ```
 
+You can also use the `splitIndividualSearchTerms()` method on a column to override the table's setting for that column's [individual search](#searching-individually):
+
+```php
+use Filament\Tables\Columns\TextColumn;
+
+TextColumn::make('title')
+    ->searchable(isIndividual: true)
+    ->splitIndividualSearchTerms(false)
+```
+
+<Aside variant="info">
+    This method only affects the column's individual search. Search term splitting for the table's global search is controlled by the table's `splitSearchTerms()` method.
+</Aside>
+
 ## Clickable cell content
 
 When a cell is clicked, you may open a URL or trigger an "action".
@@ -557,7 +571,7 @@ TextColumn::make('title')
     ->url(fn (Post $record): string => route('posts.edit', ['post' => $record]))
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">The `url()` method also accepts a function to dynamically calculate the value. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">The `url()` method also accepts a function to dynamically calculate the value. You can inject various utilities into the function as parameters.</UtilityInjection>
 
 <Aside variant="tip">
     You can also pick a URL for the entire row to open, not just a singular column. Please see the [Record URLs section](../overview#record-urls-clickable-rows).
@@ -576,7 +590,7 @@ TextColumn::make('title')
 ```
 
 <Aside variant="danger">
-    If you are passing user-controlled data to the `url()` method, you should validate that the URL does not use a dangerous scheme such as `javascript:` or `data:`. Failing to do so could expose your application to XSS attacks.
+    If you are passing user-controlled data to the `url()` method, you should validate that the URL does not use a dangerous scheme such as `javascript:` or `data:`. Failing to do so could expose your application to XSS attacks. The simplest way to guard against this is to wrap the value in Filament's [`Str::sanitizeUrl()`](../../advanced/security#validating-user-input) helper, which returns `null` for any URL that does not use `http`/`https` (or a relative path).
 </Aside>
 
 ### Triggering actions
@@ -636,9 +650,9 @@ TextColumn::make('title')
     ->tooltip('Title')
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `tooltip()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `tooltip()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
-<AutoScreenshot name="tables/columns/tooltips" alt="Table with column triggering a tooltip" version="4.x" />
+<AutoScreenshot name="tables/columns/tooltips" alt="Table with column triggering a tooltip" version="5.x" />
 
 ## Adding a header tooltip to a column
 
@@ -651,9 +665,9 @@ TextColumn::make('sku')
     ->headerTooltip('Stock Keeping Unit')
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `headerTooltip()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `headerTooltip()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
-<AutoScreenshot name="tables/columns/header-tooltips" alt="Table with header tooltip on a column" version="4.x" />
+<AutoScreenshot name="tables/columns/header-tooltips" alt="Table with header tooltip on a column" version="5.x" />
 
 ## Aligning column content
 
@@ -685,9 +699,9 @@ TextColumn::make('email')
     ->alignment(Alignment::End)
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `alignment()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `alignment()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
-<AutoScreenshot name="tables/columns/alignment" alt="Table with column aligned to the end" version="4.x" />
+<AutoScreenshot name="tables/columns/alignment" alt="Table with column aligned to the end" version="5.x" />
 
 ### Vertically aligning column content
 
@@ -716,9 +730,9 @@ TextColumn::make('name')
     ->verticalAlignment(VerticalAlignment::Start)
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `verticalAlignment()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `verticalAlignment()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
-<AutoScreenshot name="tables/columns/vertical-alignment" alt="Table with column vertically aligned to the start" version="4.x" />
+<AutoScreenshot name="tables/columns/vertical-alignment" alt="Table with column vertically aligned to the start" version="5.x" />
 
 ## Allowing column headers to wrap
 
@@ -740,9 +754,9 @@ TextColumn::make('name')
     ->wrapHeader(FeatureFlag::active())
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">The `wrapHeader()` method also accepts a function to dynamically calculate the value. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">The `wrapHeader()` method also accepts a function to dynamically calculate the value. You can inject various utilities into the function as parameters.</UtilityInjection>
 
-<AutoScreenshot name="tables/columns/wrap-header" alt="Table with wrapped column headers" version="4.x" />
+<AutoScreenshot name="tables/columns/wrap-header" alt="Table with wrapped column headers" version="5.x" />
 
 ## Controlling the width of columns
 
@@ -766,9 +780,9 @@ IconColumn::make('is_paid')
     ->width('1%')
 ```
 
-<UtilityInjection set="tableColumns" except="$state" version="4.x">The `width()` method also accepts a function to dynamically calculate the value. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" except="$state" version="5.x">The `width()` method also accepts a function to dynamically calculate the value. You can inject various utilities into the function as parameters.</UtilityInjection>
 
-<AutoScreenshot name="tables/columns/width" alt="Table with column width controls" version="4.x" />
+<AutoScreenshot name="tables/columns/width" alt="Table with column width controls" version="5.x" />
 
 ## Grouping columns
 
@@ -797,7 +811,7 @@ public function table(Table $table): Table
 
 The first argument is the label of the group, and the second is an array of column objects that belong to that group.
 
-<AutoScreenshot name="tables/columns/grouping" alt="Table with grouped columns" version="4.x" />
+<AutoScreenshot name="tables/columns/grouping" alt="Table with grouped columns" version="5.x" />
 
 You can also control the group header [alignment](#horizontally-aligning-column-content) and [wrapping](#allowing-column-headers-to-wrap) on the `ColumnGroup` object. To improve the multi-line fluency of the API, you can chain the `columns()` onto the object instead of passing it as the second argument:
 
@@ -852,7 +866,7 @@ TextColumn::make('email')
     ->toggleable()
 ```
 
-<AutoScreenshot name="tables/columns/column-manager" alt="Table with column manager" version="4.x" />
+<AutoScreenshot name="tables/columns/column-manager" alt="Table with column manager" version="5.x" />
 
 ##### Making toggleable columns hidden by default
 
@@ -882,7 +896,7 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/columns/column-manager-reorderable" alt="Table with reorderable column manager" version="4.x" />
+<AutoScreenshot name="tables/columns/column-manager-reorderable" alt="Table with reorderable column manager" version="5.x" />
 
 #### Live column manager
 
@@ -920,7 +934,7 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/columns/column-manager-modal" alt="Table with column manager in a modal" version="4.x" />
+<AutoScreenshot name="tables/columns/column-manager-modal" alt="Table with column manager in a modal" version="5.x" />
 
 You may use the [trigger action API](#customizing-the-column-manager-trigger-action) to [customize the modal](../../actions/modals), including [using a `slideOver()`](../../actions/modals#using-a-slide-over-instead-of-a-modal).
 
@@ -998,7 +1012,7 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/columns/column-manager-columns" alt="Table with a 2-column column manager" version="4.x" />
+<AutoScreenshot name="tables/columns/column-manager-columns" alt="Table with a 2-column column manager" version="5.x" />
 
 ## Adding extra HTML attributes to a column content
 
@@ -1011,7 +1025,7 @@ TextColumn::make('slug')
     ->extraAttributes(['class' => 'slug-column'])
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `extraAttributes()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `extraAttributes()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
 By default, calling `extraAttributes()` multiple times will overwrite the previous attributes. If you wish to merge the attributes instead, you can pass `merge: true` to the method.
 
@@ -1026,7 +1040,7 @@ TextColumn::make('slug')
     ->extraCellAttributes(['class' => 'slug-cell'])
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `extraCellAttributes()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `extraCellAttributes()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
 By default, calling `extraCellAttributes()` multiple times will overwrite the previous attributes. If you wish to merge the attributes instead, you can pass `merge: true` to the method.
 
@@ -1041,7 +1055,7 @@ TextColumn::make('slug')
     ->extraHeaderAttributes(['class' => 'slug-header-cell'])
 ```
 
-<UtilityInjection set="tableColumns" version="4.x">As well as allowing a static value, the `extraHeaderAttributes()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
+<UtilityInjection set="tableColumns" version="5.x">As well as allowing a static value, the `extraHeaderAttributes()` method also accepts a function to dynamically calculate it. You can inject various utilities into the function as parameters.</UtilityInjection>
 
 By default, calling `extraHeaderAttributes()` multiple times will overwrite the previous attributes. If you wish to merge the attributes instead, you can pass `merge: true` to the method.
 

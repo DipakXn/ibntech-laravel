@@ -88,7 +88,6 @@ class SeoMetaSchema
                         SpatieMediaLibraryFileUpload::make('og_image')
                             ->label('Open Graph Image')
                             ->collection('og_image')
-                            ->disk('public')
                             ->image()
                             ->maxSize(4096)
                             ->helperText('Optional override. If empty, the Featured Image will be used for OG tags.'),
@@ -135,7 +134,6 @@ class SeoMetaSchema
                         SpatieMediaLibraryFileUpload::make('twitter_image')
                             ->label('Twitter Image')
                             ->collection('twitter_image')
-                            ->disk('public')
                             ->image()
                             ->maxSize(4096)
                             ->helperText('Optional override. Uses Twitter Image first, then Open Graph Image, then Featured Image.'),

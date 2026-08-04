@@ -3,11 +3,13 @@
 namespace Filament\Support;
 
 use BackedEnum;
+use Filament\Support\Contracts\LoadingIndicator;
 use Filament\Support\Contracts\ScalableIcon;
 use Filament\Support\Enums\IconSize;
 use Filament\Support\Facades\FilamentColor;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\Facades\FilamentView;
+use Filament\Support\View\ComponentAttributeBag as FilamentComponentAttributeBag;
 use Filament\Support\View\Components\Contracts\HasColor;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Connection;
@@ -173,7 +175,7 @@ if (! function_exists('Filament\Support\generate_icon_html')) {
 
         $size ??= IconSize::Medium;
 
-        $attributes = ($attributes ?? new ComponentAttributeBag)->class([
+        $attributes = ($attributes ?? new FilamentComponentAttributeBag)->class([
             'fi-icon',
             "fi-size-{$size->value}",
         ]);
@@ -187,6 +189,17 @@ if (! function_exists('Filament\Support\generate_icon_html')) {
         }
 
         if (is_string($icon) && str_contains($icon, '/')) {
+            // A custom image-path icon carries no intrinsic accessible name, so it would be announced by
+            // its filename. Default it to decorative (`alt=""`) unless the caller named it, matching the
+            // baked-in `aria-hidden` that the shipped SVG icon sets already carry.
+            if (
+                blank($attributes->get('alt')) &&
+                blank($attributes->get('aria-label')) &&
+                blank($attributes->get('aria-labelledby'))
+            ) {
+                $attributes = $attributes->merge(['alt' => ''], escape: false);
+            }
+
             $icon = e($icon);
 
             return new HtmlString(<<<HTML
@@ -209,31 +222,16 @@ if (! function_exists('Filament\Support\generate_loading_indicator_html')) {
     {
         $size ??= IconSize::Medium;
 
-        $attributes = ($attributes ?? new ComponentAttributeBag)->class([
+        $attributes = ($attributes ?? new FilamentComponentAttributeBag)->class([
             'fi-icon fi-loading-indicator',
             "fi-size-{$size->value}",
         ]);
 
-        return new HtmlString(<<<HTML
-            <svg
-                fill="none"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                {$attributes->toHtml()}
-            >
-                <path
-                    clip-rule="evenodd"
-                    d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                    fill-rule="evenodd"
-                    fill="currentColor"
-                    opacity="0.2"
-                ></path>
-                <path
-                    d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z"
-                    fill="currentColor"
-                ></path>
-            </svg>
-            HTML);
+        static $loadingIndicator = null;
+
+        $loadingIndicator ??= app(LoadingIndicator::class);
+
+        return new HtmlString($loadingIndicator->toHtml($attributes));
     }
 }
 

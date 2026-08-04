@@ -1,13 +1,16 @@
 export default function tabsSchemaComponent({
     activeTab,
     isScrollable,
+    isTabPersisted,
     isTabPersistedInQueryString,
     livewireId,
+    schemaKey,
     tab,
     tabQueryStringKey,
 }) {
     return {
         boundResizeHandler: null,
+        boundResetHandler: null,
         isScrollable,
         resizeDebounceTimer: null,
         tab,
@@ -38,12 +41,11 @@ export default function tabsSchemaComponent({
 
             this.autofocusFields(true)
 
-            this.unsubscribeLivewireHook = Livewire.hook(
-                'commit',
-                ({ component, commit, succeed, fail, respond }) => {
-                    succeed(({ snapshot, effect }) => {
+            this.unsubscribeLivewireHook = Livewire.interceptMessage(
+                ({ message, onSuccess }) => {
+                    onSuccess(() => {
                         this.$nextTick(() => {
-                            if (component.id !== livewireId) {
+                            if (message.component.id !== livewireId) {
                                 return
                             }
 
@@ -55,6 +57,26 @@ export default function tabsSchemaComponent({
                         })
                     })
                 },
+            )
+
+            this.boundResetHandler = (event) => {
+                if (
+                    event.detail.livewireId !== livewireId ||
+                    event.detail.schemaKey !== schemaKey ||
+                    isTabPersisted ||
+                    isTabPersistedInQueryString
+                ) {
+                    return
+                }
+
+                this.$nextTick(() => {
+                    this.tab = this.getTabs()[activeTab - 1] ?? this.tab
+                })
+            }
+
+            window.addEventListener(
+                'reset-schema-component-state',
+                this.boundResetHandler,
             )
 
             if (!isScrollable) {
@@ -278,6 +300,13 @@ export default function tabsSchemaComponent({
 
         destroy() {
             this.unsubscribeLivewireHook?.()
+
+            if (this.boundResetHandler) {
+                window.removeEventListener(
+                    'reset-schema-component-state',
+                    this.boundResetHandler,
+                )
+            }
 
             if (this.boundResizeHandler) {
                 window.removeEventListener('resize', this.boundResizeHandler)

@@ -289,7 +289,6 @@ class ContentBuilder
     {
         return SpatieMediaLibraryFileUpload::make($name)
             ->collection('content_blocks')
-            ->disk('public')
             ->visibility('public')
             ->image()
             ->imageEditor()

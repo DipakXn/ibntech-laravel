@@ -3,55 +3,87 @@
 ## Active setup
 
 - Laravel `12.x`
-- Filament `4.10`
-- `filament/spatie-laravel-media-library-plugin` `4.10`
+- Filament `5.x`
+- `filament/spatie-laravel-media-library-plugin` `5.x`
 - `spatie/laravel-medialibrary` `11.x`
-- Spatie media config is now published at `config/media-library.php`
+- Spatie media config: `config/media-library.php`
 
-## Storage layout
+## Storage disk (no symlink)
 
-The custom path generator now stores original media in a WordPress-style layout:
+Media uses a dedicated `media` filesystem disk:
 
-- `media/{YYYY}/{MM}/{filename}`
+| Env var | Local default | Purpose |
+|---|---|---|
+| `MEDIA_DISK` | `media` | Disk name used by Spatie |
+| `MEDIA_ROOT` | `public/uploads` | Absolute or base-path-relative storage root |
+| `MEDIA_URL` | `/uploads` | Public URL prefix |
 
-Conversions and responsive images remain grouped by the same month bucket, but
-inside dedicated subdirectories:
+Files are written directly under the web root uploads directory and served by Apache/Nginx. **`php artisan storage:link` is not required for media.**
 
-- `media/{YYYY}/{MM}/conversions/`
-- `media/{YYYY}/{MM}/responsive-images/`
+To switch to S3/R2/Spaces later, point `MEDIA_DISK` at a cloud disk (for example `s3`) and configure that disk — no application code changes are required when collections use `config('media-library.disk_name')`.
 
-## Reference integration pattern
+## Folder layout
 
-`app/Models/Blog.php` is the reference implementation:
+Purpose-based directories (configured in `config/media-library.php` → `path_map`):
 
-- enables responsive images on collections
-- generates queued WebP conversions
-- keeps Filament upload compatibility unchanged
+```
+uploads/
+├── logos/website|branding
+├── seo/og-images|social-share
+├── pages/{slug}/
+├── blogs/featured|blocks/{YYYY}/{MM}/
+├── articles/...
+├── case-studies/...
+├── ebooks/...
+├── media/downloads/...
+└── media/miscellaneous/{YYYY}/{MM}/   ← fallback
+```
 
-Apply the same pattern to other Spatie-enabled models as you expand media usage.
+- Branding/SEO/page assets: stable purpose folders
+- High-volume content: purpose folder + year/month
+- Filenames: original name, ASCII/slugified, `-01` suffix on collision
+
+Legacy layouts still resolve if files remain at:
+
+- `media/{YYYY}/{MM}/...`
+- `{id}/...`
+
+## Reference integration
+
+`app/Models/Blog.php` remains the reference for conversions + responsive images.
+
+All HasMedia models resolve the disk via:
+
+```php
+->useDisk((string) config('media-library.disk_name', 'media'))
+```
+
+Filament uploads use `App\Forms\Components\SpatieMediaLibraryFileUpload` (sanitized filenames + purpose-aware directories).
+
+## Migration
+
+```bash
+php artisan media:migrate-to-uploads-disk --dry-run
+php artisan media:migrate-to-uploads-disk
+php artisan media:migrate-to-uploads-disk --reorganize   # optional purpose folders
+```
 
 ## Queue recommendations
-
-- Set `QUEUE_CONNECTION=database` or `redis`
-- Set `MEDIA_QUEUE_CONNECTION=${QUEUE_CONNECTION}`
-- Set `MEDIA_QUEUE=media`
-- Run dedicated workers for media-heavy workloads:
 
 ```bash
 php artisan queue:work --queue=media,default --tries=1 --timeout=900
 ```
 
-## Filament notes
+## URL compatibility
 
-- Keep `SpatieMediaLibraryFileUpload` on the same collection names used in the models
-- This project uses `App\Forms\Components\SpatieMediaLibraryFileUpload` for sanitized original filenames
-- Duplicate names in the same `media/{YYYY}/{MM}` directory receive `-01`, `-02`, ... suffixes
-- Prefer `maxSize()`, image-only validation, and image editor constraints per field
-- Use smaller admin previews than public conversions to reduce panel payload
+Old public URLs used `/storage/...`. New URLs use `/uploads/...`.
 
-## Cleanup guidance
+Optional web-server rewrite during transition:
 
-- Keep filenames unique within each `media/{YYYY}/{MM}` directory
-- Use Spatie's cleanup commands only after confirming orphaned data rules
-- Do not manually rename conversion or responsive image files
-- Schedule cleanup in maintenance windows for very large libraries
+```apache
+RewriteRule ^storage/(.*)$ /uploads/$1 [L,R=301]
+```
+
+```nginx
+rewrite ^/storage/(.*)$ /uploads/$1 permanent;
+```

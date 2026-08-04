@@ -48,13 +48,13 @@ class Blog extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('featured_image')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->withResponsiveImages()
             ->singleFile();
 
         $this
             ->addMediaCollection('content_blocks')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->withResponsiveImages();
     }
 
@@ -98,27 +98,36 @@ class Blog extends Model implements HasMedia
             return $this->featured_image;
         }
 
-        return Storage::disk('public')->url(ltrim($this->featured_image, '/'));
+        return Storage::disk((string) config('media-library.disk_name', 'media'))->url(ltrim($this->featured_image, '/'));
     }
 
     protected function resolveMediaUrl(Media $media, ?string $conversion = null): ?string
     {
-        if ($conversion) {
-            $conversionPath = "media/{$media->created_at?->format('Y/m')}/conversions/{$media->getPathRelativeToRoot($conversion)}";
+        $diskName = $conversion
+            ? ($media->conversions_disk ?: $media->disk)
+            : $media->disk;
+        $disk = Storage::disk($diskName);
 
-            if (Storage::disk($media->conversions_disk ?: $media->disk)->exists($conversionPath)) {
+        if ($conversion) {
+            if ($media->hasGeneratedConversion($conversion) && $disk->exists($media->getPathRelativeToRoot($conversion))) {
                 return $media->getUrl($conversion);
             }
-        }
-
-        if (Storage::disk($media->disk)->exists("media/{$media->created_at?->format('Y/m')}/{$media->file_name}")) {
+        } elseif ($disk->exists($media->getPathRelativeToRoot())) {
             return $media->getUrl();
         }
 
-        $legacyRelativePath = $this->resolveLegacyMediaRelativePath($media, $conversion);
+        // Legacy layouts: media/{YYYY}/{MM}/... and Spatie default {id}/...
+        $legacyCandidates = array_filter([
+            $conversion
+                ? "media/{$media->created_at?->format('Y/m')}/conversions/{$media->file_nameWithoutExtension}-{$conversion}.{$media->extension}"
+                : "media/{$media->created_at?->format('Y/m')}/{$media->file_name}",
+            $this->resolveLegacyMediaRelativePath($media, $conversion),
+        ]);
 
-        if ($legacyRelativePath && Storage::disk($conversion ? ($media->conversions_disk ?: $media->disk) : $media->disk)->exists($legacyRelativePath)) {
-            return Storage::disk($conversion ? ($media->conversions_disk ?: $media->disk) : $media->disk)->url($legacyRelativePath);
+        foreach ($legacyCandidates as $legacyRelativePath) {
+            if ($disk->exists($legacyRelativePath)) {
+                return $disk->url($legacyRelativePath);
+            }
         }
 
         return null;

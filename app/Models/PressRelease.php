@@ -51,12 +51,12 @@ class PressRelease extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('featured_image')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
 
         $this
             ->addMediaCollection('content_blocks')
-            ->useDisk('public');
+            ->useDisk((string) config('media-library.disk_name', 'media'));
     }
 
     public function featuredImageUrl(): ?string
@@ -75,6 +75,6 @@ class PressRelease extends Model implements HasMedia
             return $this->featured_image;
         }
 
-        return Storage::disk('public')->url(ltrim($this->featured_image, '/'));
+        return Storage::disk((string) config('media-library.disk_name', 'media'))->url(ltrim($this->featured_image, '/'));
     }
 }

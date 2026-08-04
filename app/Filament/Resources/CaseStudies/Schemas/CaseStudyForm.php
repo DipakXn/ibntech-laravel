@@ -70,7 +70,6 @@ class CaseStudyForm
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')
-                            ->disk('public')
                             ->visibility('public')
                             ->image()
                             ->imageEditor()
@@ -79,7 +78,6 @@ class CaseStudyForm
                         SpatieMediaLibraryFileUpload::make('download_pdf')
                             ->label('Case Study PDF')
                             ->collection('download_pdf')
-                            ->disk('public')
                             ->visibility('public')
                             ->acceptedFileTypes(['application/pdf'])
                             ->maxSize(10240),

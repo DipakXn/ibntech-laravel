@@ -59,27 +59,27 @@ class WebsiteSetting extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('site_logo')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
 
         $this
             ->addMediaCollection('site_logo_dark')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
 
         $this
             ->addMediaCollection('favicon')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
 
         $this
             ->addMediaCollection('apple_touch_icon')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
 
         $this
             ->addMediaCollection('default_og_image')
-            ->useDisk('public')
+            ->useDisk((string) config('media-library.disk_name', 'media'))
             ->singleFile();
     }
 

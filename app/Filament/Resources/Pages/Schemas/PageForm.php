@@ -57,7 +57,6 @@ class PageForm
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')
-                            ->disk('public')
                             ->visibility('public')
                             ->image()
                             ->imageEditor()

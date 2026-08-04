@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Mockery;
@@ -14,10 +15,11 @@ class SpatieMediaLibraryFileUploadTest extends TestCase
     {
         parent::setUp();
 
-        config()->set('filesystems.disks.public', [
+        config()->set('media-library.disk_name', 'media');
+        config()->set('filesystems.disks.media', [
             'driver' => 'local',
-            'root' => storage_path('framework/testing/disks/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('framework/testing/disks/media'),
+            'url' => '/uploads',
             'visibility' => 'public',
         ]);
 
@@ -26,7 +28,7 @@ class SpatieMediaLibraryFileUploadTest extends TestCase
         $property->setAccessible(true);
         $property->setValue([]);
 
-        Storage::fake('public');
+        Storage::fake('media');
     }
 
     protected function tearDown(): void
@@ -47,7 +49,17 @@ class SpatieMediaLibraryFileUploadTest extends TestCase
 
             public function getDiskName(): string
             {
-                return 'public';
+                return 'media';
+            }
+
+            public function getCollection(): ?string
+            {
+                return 'featured_image';
+            }
+
+            protected function resolveUploadModelType(): ?string
+            {
+                return Blog::class;
             }
         };
 
@@ -58,9 +70,10 @@ class SpatieMediaLibraryFileUploadTest extends TestCase
         $this->assertSame('my-banner-image.jpg', $component->publicResolveStoredFileName($file));
     }
 
-    public function test_it_appends_a_suffix_when_the_target_month_directory_already_has_the_same_file_name(): void
+    public function test_it_appends_a_suffix_when_the_target_directory_already_has_the_same_file_name(): void
     {
-        Storage::disk('public')->put('media/'.now()->format('Y/m').'/banner.jpg', 'existing');
+        $directory = 'blogs/featured/'.now()->format('Y/m');
+        Storage::disk('media')->put("{$directory}/banner.jpg", 'existing');
 
         $component = new class ('featured_image') extends SpatieMediaLibraryFileUpload
         {
@@ -71,7 +84,17 @@ class SpatieMediaLibraryFileUploadTest extends TestCase
 
             public function getDiskName(): string
             {
-                return 'public';
+                return 'media';
+            }
+
+            public function getCollection(): ?string
+            {
+                return 'featured_image';
+            }
+
+            protected function resolveUploadModelType(): ?string
+            {
+                return Blog::class;
             }
         };
 

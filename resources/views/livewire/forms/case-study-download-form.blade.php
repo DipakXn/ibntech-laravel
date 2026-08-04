@@ -1,8 +1,8 @@
 <form wire:submit="submit" class="contact-form case-study-download-form">
-    <input type="hidden" wire:model.defer="formName">
-    <input type="hidden" wire:model.defer="pageUrl">
-    <input type="hidden" wire:model.defer="caseStudySlug">
-    <input type="hidden" wire:model.defer="caseStudyTitle">
+    <input type="hidden" wire:model="formName">
+    <input type="hidden" wire:model="pageUrl">
+    <input type="hidden" wire:model="caseStudySlug">
+    <input type="hidden" wire:model="caseStudyTitle">
 
     @if(! $compact)
         <div class="case-study-download-form__intro">
@@ -13,17 +13,17 @@
 
     <div>
         <label class="sr-only" for="case-study-name-{{ $this->getId() }}">Full Name</label>
-        <input id="case-study-name-{{ $this->getId() }}" type="text" wire:model.defer="name" placeholder="Full Name" autocomplete="name">
+        <input id="case-study-name-{{ $this->getId() }}" type="text" wire:model="name" placeholder="Full Name" autocomplete="name">
         @error('name') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
     </div>
     <div>
         <label class="sr-only" for="case-study-email-{{ $this->getId() }}">Business Email</label>
-        <input id="case-study-email-{{ $this->getId() }}" type="email" wire:model.defer="email" placeholder="Business Email" autocomplete="email">
+        <input id="case-study-email-{{ $this->getId() }}" type="email" wire:model="email" placeholder="Business Email" autocomplete="email">
         @error('email') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
     </div>
 
     <label class="contact-form__terms case-study-download-form__terms">
-        <input type="checkbox" wire:model.defer="acceptedTerms">
+        <input type="checkbox" wire:model="acceptedTerms">
         <span>
             By using our services, you agree to our
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms &amp; Conditions</a>

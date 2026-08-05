@@ -15,7 +15,11 @@ trait HasReCaptcha
      */
     protected function getReCaptchaRules(): array
     {
-        if (app()->runningUnitTests()) {
+        if (app()->runningUnitTests() || app()->environment('testing')) {
+            return [];
+        }
+
+        if (! config('services.recaptcha.secret_key') || ! config('services.recaptcha.site_key')) {
             return [];
         }
 

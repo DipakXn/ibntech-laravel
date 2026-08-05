@@ -1,12 +1,14 @@
 import './bootstrap';
 import intlTelInput from 'intl-tel-input';
 
-const initReferenceNavbar = () => {
-    const navbarRoot = document.querySelector('.site-reference-navbar');
+const initSiteNavbar = () => {
+    const navbarRoot = document.querySelector('.site-ibn-navbar');
 
-    if (!navbarRoot) {
+    if (!navbarRoot || navbarRoot.dataset.navbarReady === 'true') {
         return;
     }
+
+    navbarRoot.dataset.navbarReady = 'true';
 
     const navbarToggler = navbarRoot.querySelector('#navbarToggler');
     const navbarNav = navbarRoot.querySelector('#navbarNav');
@@ -409,8 +411,118 @@ const initArticleToc = (root = document) => {
     window.addEventListener('resize', () => activateCurrentHeading(headings), { passive: true });
 };
 
+const FOCUSABLE_SELECTOR = [
+    'a[href]',
+    'button:not([disabled])',
+    'textarea:not([disabled])',
+    'input:not([disabled]):not([type="hidden"])',
+    'select:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
+const openContactModal = () => {
+    window.dispatchEvent(new CustomEvent('open-contact-modal'));
+
+    if (window.Livewire?.dispatch) {
+        window.Livewire.dispatch('open-contact-modal');
+    }
+};
+
+window.openContactModal = openContactModal;
+
+document.addEventListener('alpine:init', () => {
+    window.Alpine.data('contactModal', () => ({
+        previouslyFocused: null,
+
+        init() {
+            this.$watch('$wire.isOpen', (open) => {
+                document.documentElement.classList.toggle('contact-modal-open', Boolean(open));
+
+                if (!open) {
+                    this.$nextTick(() => {
+                        this.previouslyFocused?.focus?.();
+                        this.previouslyFocused = null;
+                    });
+                    return;
+                }
+
+                this.previouslyFocused = document.activeElement;
+
+                this.$nextTick(() => {
+                    const dialog = this.$refs.dialog;
+                    const focusTarget =
+                        dialog?.querySelector(
+                            'input:not([type="hidden"]), textarea, button.contact-modal__close',
+                        ) || dialog;
+
+                    focusTarget?.focus?.();
+                    initPhoneInputs(dialog || document);
+                });
+            });
+        },
+
+        open() {
+            this.$wire.open();
+        },
+
+        close() {
+            this.$wire.close();
+        },
+
+        trapFocus(event) {
+            const dialog = this.$refs.dialog;
+
+            if (!dialog || !this.$wire.isOpen) {
+                return;
+            }
+
+            const focusable = Array.from(dialog.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
+                (element) => !element.hasAttribute('disabled') && element.offsetParent !== null,
+            );
+
+            if (!focusable.length) {
+                event.preventDefault();
+                dialog.focus();
+                return;
+            }
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            const active = document.activeElement;
+
+            if (event.shiftKey && active === first) {
+                event.preventDefault();
+                last.focus();
+                return;
+            }
+
+            if (!event.shiftKey && active === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        },
+    }));
+});
+
+const initContactModalTriggers = () => {
+    document.querySelectorAll('[data-contact-modal-trigger]').forEach((trigger) => {
+        if (trigger.dataset.contactModalBound === 'true') {
+            return;
+        }
+
+        trigger.dataset.contactModalBound = 'true';
+        trigger.setAttribute('aria-haspopup', 'dialog');
+
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            openContactModal();
+        });
+    });
+};
+
 const initApp = () => {
-    initReferenceNavbar();
+    initSiteNavbar();
+    initContactModalTriggers();
     initPhoneInputs();
     initArticleToc();
 };
@@ -425,10 +537,13 @@ document.addEventListener('livewire:init', () => {
     window.Livewire?.hook('morph.updated', ({ el }) => {
         initPhoneInputs(el);
         initArticleToc(el);
+        initContactModalTriggers();
     });
 });
 
 document.addEventListener('livewire:navigated', () => {
+    initSiteNavbar();
+    initContactModalTriggers();
     initPhoneInputs();
     initArticleToc();
 });

@@ -1,0 +1,661 @@
+/* IBNTech site navbar — adapted from production nav.html */
+
+.site-ibn-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+}
+
+.site-ibn-topbar {
+    background: #2d306d;
+    color: #fff;
+    font-size: 0.84rem;
+}
+
+.site-ibn-topbar__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    width: min(1200px, calc(100% - 2rem));
+    margin: 0 auto;
+    gap: 1.25rem;
+    padding: 0.55rem 0;
+}
+
+.site-ibn-topbar__badge {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.site-ibn-topbar__phones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.site-ibn-topbar__phones a,
+.site-ibn-topbar__email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-ibn-topbar__email {
+    justify-self: end;
+}
+
+@media (max-width: 1199.98px) and (min-width: 992px) {
+    .site-ibn-topbar__inner {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 0.45rem;
+    }
+
+    .site-ibn-topbar__email {
+        justify-self: center;
+    }
+}
+
+.site-ibn-navbar {
+    --navbar-accent: #4caf50;
+    --navbar-accent-dark: #2e2e80;
+    --navbar-text: #333;
+    --navbar-muted: #666;
+    --navbar-surface: #fff;
+    --navbar-shell: 1200px;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.site-ibn-navbar *,
+.site-ibn-navbar *::before,
+.site-ibn-navbar *::after {
+    box-sizing: border-box;
+}
+
+.site-ibn-navbar .navbar {
+    padding: 0.3rem 1rem;
+}
+
+.site-ibn-navbar .navbar-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--navbar-shell);
+    margin: 0 auto;
+    gap: 0rem;
+}
+
+.site-ibn-navbar .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-ibn-navbar .navbar-brand img {
+    height: 55px;
+    width: auto;
+}
+
+.site-ibn-navbar .navbar-toggler {
+    display: none;
+    border: 0;
+    border-radius: 6px;
+    background: #f3f3f3;
+    color: var(--navbar-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.45rem 0.9rem;
+}
+
+.site-ibn-navbar .navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-ibn-navbar .nav-item {
+    position: relative;
+}
+
+.site-ibn-navbar .nav-link {
+    display: block;
+    padding: 0.5rem 1rem 0.7rem;
+    color: var(--navbar-text) !important;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-ibn-navbar .nav-link:hover {
+    color: var(--navbar-accent) !important;
+}
+
+.site-ibn-navbar .dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.site-ibn-navbar .dd-arow {
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+}
+
+.site-ibn-navbar .dropdown-toggle.active .dd-arow,
+.site-ibn-navbar .nav-item:hover .dropdown-toggle .dd-arow,
+.site-ibn-navbar .nav-item.active > .dropdown-toggle .dd-arow {
+    transform: rotate(180deg);
+}
+
+.site-ibn-navbar .dropdown-menu {
+    display: none;
+    background: var(--navbar-surface);
+}
+
+.site-ibn-navbar .nav-item.active > .dropdown-menu {
+    display: block;
+}
+
+.site-ibn-navbar .megamenu {
+    padding: 0.5rem;
+}
+
+.site-ibn-navbar .menu-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.site-ibn-navbar .menu-categories,
+.site-ibn-navbar .menu-content {
+    width: 100%;
+}
+
+.site-ibn-navbar .menulinks .menu-category-heading {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: var(--navbar-text) !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.site-ibn-navbar .menulinks .menu-category-heading::after {
+    content: '\f078';
+    position: absolute;
+    right: 1rem;
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 700;
+    transition: transform 0.3s ease;
+}
+
+.site-ibn-navbar .menulinks .menu-category-heading.active::after {
+    transform: rotate(180deg);
+}
+
+.site-ibn-navbar .menulinks .menu-category-heading.active,
+.site-ibn-navbar .menulinks .menu-category-heading:hover {
+    background: #f5f5f5 !important;
+    color: var(--navbar-accent) !important;
+}
+
+.site-ibn-navbar .icoms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 13px;
+    flex-shrink: 0;
+}
+
+.site-ibn-navbar .icoms i {
+    color: var(--navbar-accent) !important;
+    font-size: 20px;
+}
+
+.site-ibn-navbar .icoms svg {
+    width: 100%;
+    height: 100%;
+}
+
+.site-ibn-navbar .sutile {
+    display: block;
+    color: var(--navbar-muted) !important;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.site-ibn-navbar .submenu {
+    display: none;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    padding-left: 0;
+}
+
+.site-ibn-navbar .submenu.active {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.site-ibn-navbar .submenu li,
+.site-ibn-navbar .submenu-column > div {
+    width: 100%;
+    margin-bottom: 1rem;
+    list-style: none;
+}
+
+.site-ibn-navbar .submenu a {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem;
+    border-radius: 6px;
+    color: var(--navbar-text) !important;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500 !important;
+    line-height: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.site-ibn-navbar .submenu a:hover {
+    background: #f5f5f5 !important;
+    color: var(--navbar-accent) !important;
+}
+
+.site-ibn-navbar .submenu .icoms i {
+    font-size: 24px;
+}
+
+.site-ibn-navbar .sub-dc {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--navbar-muted);
+    font-size: 12px;
+}
+
+.site-ibn-navbar .single-panel .megamenu {
+    padding: 0 1rem;
+}
+
+.site-ibn-navbar .single-panel .submenu li {
+    width: 100%;
+}
+
+.site-ibn-navbar .single-panel .submenu a {
+    padding: 0.8rem 0.5rem;
+}
+
+.site-ibn-navbar .calls-sec {
+    display: flex;
+    align-items: center;
+}
+
+.site-ibn-navbar .Bookmeeting,
+.site-ibn-navbar .Bookmeeting1 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background: var(--navbar-accent) !important;
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.site-ibn-navbar .Bookmeeting:hover,
+.site-ibn-navbar .Bookmeeting1:hover {
+    background: var(--navbar-accent-dark) !important;
+}
+
+.site-ibn-navbar .d-none {
+    display: none !important;
+}
+
+@media (max-width: 991.98px) {
+    .site-ibn-header {
+        position: relative;
+    }
+
+    .site-ibn-topbar {
+        display: none;
+    }
+
+    .site-ibn-navbar .navbar-brand {
+        order: 1;
+        margin-inline: 0;
+    }
+
+    .site-ibn-navbar .navbar-toggler {
+        display: block;
+        order: 2;
+        margin-inline-start: auto;
+    }
+
+    .site-ibn-navbar .d-block.d-sm-none {
+        display: none !important;
+    }
+
+    .site-ibn-navbar .d-none.d-sm-block {
+        display: none !important;
+    }
+
+    .site-ibn-navbar .navbar-nav {
+        display: block;
+        flex-direction: column;
+        order: 4;
+        flex-basis: 100%;
+        width: 100%;
+        max-height: 0;
+        margin-top: 0.5rem;
+        overflow: hidden;
+        opacity: 0;
+        background: #fff;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    }
+
+    .site-ibn-navbar .navbar-nav.active {
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        opacity: 1;
+        padding-top: 20px !important;
+        padding-left: 0 !important;
+    }
+
+    .site-ibn-navbar .nav-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .site-ibn-navbar .nav-link,
+    .site-ibn-navbar .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .site-ibn-navbar .dd-arow {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .site-ibn-navbar .dropdown-menu {
+        position: static;
+        width: 100%;
+        margin-top: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: #f8f8f8;
+    }
+
+    .site-ibn-navbar .megamenu {
+        padding: 0.5rem 0;
+    }
+
+    .site-ibn-navbar .menu-row {
+        flex-direction: column;
+    }
+
+    .site-ibn-navbar .menulinks .menu-category-heading {
+        padding: 5px 5px 5px 20px !important;
+        font-size: 13px;
+    }
+
+    .site-ibn-navbar .sutile {
+        font-size: 12px !important;
+    }
+
+    .site-ibn-navbar .submenu {
+        padding-left: 15px !important;
+        padding-right: 1rem;
+    }
+
+    .site-ibn-navbar .submenu li,
+    .site-ibn-navbar .submenu-column > div {
+        margin-bottom: 0 !important;
+    }
+
+    .site-ibn-navbar .submenu a {
+        align-items: center !important;
+        padding: 5px 5px 5px 10px !important;
+        font-size: 13px;
+    }
+
+    .site-ibn-navbar .sub-dc {
+        font-size: 12px !important;
+    }
+
+    .site-ibn-navbar .submenu.active {
+        background: #fff;
+    }
+
+    .site-ibn-navbar .icoms i {
+        font-size: 15px !important;
+    }
+
+    .site-ibn-navbar .single-panel .megamenu {
+        padding: 0 !important;
+    }
+
+    .site-ibn-navbar .vapt-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .site-ibn-topbar {
+        display: block;
+    }
+
+    .site-ibn-navbar .d-block.d-sm-none,
+    .site-ibn-navbar .d-sm-none {
+        display: none !important;
+    }
+
+    .site-ibn-navbar .d-none.d-sm-block {
+        display: block !important;
+    }
+
+    .site-ibn-navbar .navbar-container {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .site-ibn-navbar .navbar-brand,
+    .site-ibn-navbar .d-none.d-sm-block {
+        flex-shrink: 0;
+    }
+
+    .site-ibn-navbar .navbar-brand {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .site-ibn-navbar .navbar-nav {
+        grid-column: 2;
+        display: flex;
+        flex: 1 1 auto;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+    }
+
+    .site-ibn-navbar .d-none.d-sm-block {
+        grid-column: 3;
+        justify-self: end;
+    }
+
+    .site-ibn-navbar .nav-item {
+        margin-bottom: -10px;
+        padding-bottom: 10px;
+    }
+
+    .site-ibn-navbar .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        z-index: 1000;
+        display: block;
+        width: auto;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%);
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .site-ibn-navbar .dropdown-menu.special-view {
+        width: 75vw !important;
+        left: auto;
+        transform: translateX(-15%);
+    }
+
+    .site-ibn-navbar .nav-item:hover > .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .site-ibn-navbar .megamenu {
+        padding: 10px;
+    }
+
+    .site-ibn-navbar .menu-row {
+        flex-direction: row;
+    }
+
+    .site-ibn-navbar .menu-categories {
+        width: 30%;
+        padding-right: 1.5rem;
+        border-right: 1px solid #eee;
+    }
+
+    .site-ibn-navbar .menulinks .menu-category-heading::after {
+        display: none;
+    }
+
+    .site-ibn-navbar .menu-content {
+        width: 70%;
+        padding-left: 1.5rem;
+    }
+
+    .site-ibn-navbar .menu-content > .submenu {
+        display: none;
+    }
+
+    .site-ibn-navbar .menu-content > .submenu.active {
+        display: flex;
+    }
+
+    .site-ibn-navbar .special-view .menu-content > .submenu.active {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .site-ibn-navbar .submenu-column {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .site-ibn-navbar .submenu-header {
+        position: relative;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        color: var(--navbar-text);
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .site-ibn-navbar .submenu-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 2%;
+        width: 40%;
+        height: 2px;
+        background: linear-gradient(to right, #2e2e80, rgba(129, 199, 132, 0.47));
+    }
+
+    .site-ibn-navbar .submenu-header-sub {
+        padding-left: 15px;
+    }
+
+    .site-ibn-navbar .ss-service {
+        font-size: 14px;
+        font-weight: 400 !important;
+    }
+
+    .site-ibn-navbar .special-view .submenu-column > div {
+        margin-bottom: 5px;
+    }
+
+    .site-ibn-navbar .dropdown-menu:not(.special-view) .submenu.active {
+        display: flex;
+    }
+
+    .site-ibn-navbar .dropdown-menu.single-panel {
+        left: 50%;
+        width: 45vw;
+        max-width: 650px;
+        transform: translateX(-50%);
+    }
+
+    .site-ibn-navbar .single-panel .megamenu {
+        padding: 1rem 1rem 0;
+    }
+
+    .site-ibn-navbar .single-panel .submenu {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .site-ibn-navbar .single-panel .submenu li {
+        width: 50%;
+        margin-bottom: 5px;
+    }
+
+    .site-ibn-navbar .single-panel .submenu li a {
+        padding: 0.4rem;
+    }
+
+    .site-ibn-navbar .dropdown-menu.vertical-panel {
+        width: 300px;
+    }
+
+    .site-ibn-navbar .vertical-panel .submenu {
+        flex-direction: column;
+    }
+
+    .site-ibn-navbar .vertical-panel .submenu li {
+        width: 100%;
+    }
+
+    .site-ibn-navbar .vapt-icon {
+        width: 35px !important;
+        height: 35px !important;
+    }
+}

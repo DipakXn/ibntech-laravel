@@ -142,6 +142,7 @@
         @yield('content')
     </main>
     @include('layouts.footer')
+    <livewire:contact-modal />
     @livewireScripts
 
     @if(!empty($websiteSettings?->custom_body_end_code))

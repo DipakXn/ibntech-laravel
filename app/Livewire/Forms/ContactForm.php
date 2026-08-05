@@ -4,25 +4,46 @@ namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Throwable;
 
 class ContactForm extends Component
 {
     use HasReCaptcha;
+
     public string $formName = 'contact';
+
     public string $pageUrl = '';
+
+    public string $idPrefix = 'contact';
+
     public string $name = '';
+
     public string $email = '';
+
     public ?string $phone = null;
+
     public ?string $company = null;
+
     public string $message = '';
+
     public bool $acceptedTerms = true;
+
     public bool $submitted = false;
+
     public bool $showCompany = true;
 
-    public function mount(bool $showCompany = true): void
-    {
+    public ?string $submitError = null;
+
+    public function mount(
+        bool $showCompany = true,
+        string $formName = 'contact',
+        string $idPrefix = 'contact',
+    ): void {
         $this->showCompany = $showCompany;
+        $this->formName = $formName;
+        $this->idPrefix = $idPrefix;
         $this->pageUrl = url()->current();
     }
 
@@ -43,27 +64,36 @@ class ContactForm extends Component
 
     public function submit(LeadService $leadService): void
     {
-        $validated = $this->validate();
+        $this->submitted = false;
+        $this->submitError = null;
 
-        unset($validated['acceptedTerms']);
-        unset($validated['recaptchaToken']);
+        try {
+            $validated = $this->validate();
 
-        if (! $this->showCompany) {
-            $validated['company'] = null;
+            unset($validated['acceptedTerms'], $validated['recaptchaToken']);
+
+            if (! $this->showCompany) {
+                $validated['company'] = null;
+            }
+
+            $leadService->createLead([
+                ...$validated,
+                'form_name' => $validated['formName'],
+                'page_url' => $validated['pageUrl'],
+            ], 'contact');
+
+            $this->reset(['name', 'email', 'phone', 'company', 'message']);
+            $this->acceptedTerms = true;
+            $this->pageUrl = url()->current();
+            $this->resetReCaptcha();
+            $this->submitted = true;
+            $this->dispatch('contact-form-submitted');
+        } catch (ValidationException $exception) {
+            throw $exception;
+        } catch (Throwable $exception) {
+            report($exception);
+            $this->submitError = 'Something went wrong while sending your message. Please try again.';
         }
-
-        $leadService->createLead([
-            ...$validated,
-            'form_name' => $validated['formName'],
-            'page_url' => $validated['pageUrl'],
-        ], 'contact');
-
-        $this->reset(['name', 'email', 'phone', 'company', 'message']);
-        $this->acceptedTerms = true;
-        $this->formName = 'contact';
-        $this->pageUrl = url()->current();
-        $this->resetReCaptcha();
-        $this->submitted = true;
     }
 
     public function render()

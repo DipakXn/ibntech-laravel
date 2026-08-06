@@ -4,6 +4,17 @@
     <input type="hidden" wire:model="caseStudySlug">
     <input type="hidden" wire:model="caseStudyTitle">
 
+    @if($submitted)
+        <x-forms.success-alert title="Request submitted">
+            @if($downloadUrl)
+                <x-slot:actions>
+                    <a href="{{ $downloadUrl }}" class="form-success__button button-dark" target="_blank" rel="noopener">Download PDF</a>
+                </x-slot:actions>
+            @endif
+            Your request has been submitted.
+        </x-forms.success-alert>
+    @endif
+
     @if(! $compact)
         <div class="case-study-download-form__intro">
             <h3>Download This Case Study</h3>
@@ -40,13 +51,4 @@
         <span wire:loading.remove>Unlock PDF Download</span>
         <span wire:loading wire:target="submit">Submitting...</span>
     </button>
-
-    @if($submitted)
-        <div class="contact-form__success case-study-download-form__success">
-            <p>Your request has been submitted.</p>
-            @if($downloadUrl)
-                <a href="{{ $downloadUrl }}" class="button-dark" target="_blank" rel="noopener">Download PDF</a>
-            @endif
-        </div>
-    @endif
 </form>

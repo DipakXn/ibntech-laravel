@@ -57,6 +57,7 @@
                         wire:key="header-contact-modal-form"
                         form-name="header-contact-modal"
                         id-prefix="modal-contact"
+                        layout="modal"
                     />
                 </div>
             </div>

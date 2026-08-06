@@ -430,6 +430,52 @@ const openContactModal = () => {
 
 window.openContactModal = openContactModal;
 
+const getScrollableParent = (element) => {
+    let parent = element?.parentElement;
+
+    while (parent && parent !== document.body) {
+        const style = window.getComputedStyle(parent);
+        const overflowY = style.overflowY;
+        const canScroll =
+            (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay') &&
+            parent.scrollHeight > parent.clientHeight + 1;
+
+        if (canScroll || parent.matches('.contact-modal__body, [data-form-scroll-container]')) {
+            return parent;
+        }
+
+        parent = parent.parentElement;
+    }
+
+    return null;
+};
+
+window.revealFormSuccess = (element) => {
+    if (!(element instanceof HTMLElement)) {
+        return;
+    }
+
+    const reveal = () => {
+        const container = getScrollableParent(element);
+
+        if (container) {
+            container.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+
+        try {
+            element.focus({ preventScroll: true });
+        } catch {
+            element.focus?.();
+        }
+    };
+
+    window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(reveal);
+    });
+};
+
 document.addEventListener('alpine:init', () => {
     window.Alpine.data('contactModal', () => ({
         previouslyFocused: null,
@@ -520,11 +566,255 @@ const initContactModalTriggers = () => {
     });
 };
 
+const initHomeHero = () => {
+    const root = document.querySelector('[data-home-hero]');
+
+    if (!root || root.dataset.homeHeroReady === 'true') {
+        return;
+    }
+
+    const viewport = root.querySelector('.home-hero__viewport') || root;
+    const slides = Array.from(root.querySelectorAll('[data-home-hero-slide]'));
+    const dots = Array.from(root.querySelectorAll('[data-home-hero-dot]'));
+    const prev = root.querySelector('[data-home-hero-prev]');
+    const next = root.querySelector('[data-home-hero-next]');
+
+    if (slides.length < 2) {
+        return;
+    }
+
+    root.dataset.homeHeroReady = 'true';
+
+    let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
+    index = index < 0 ? 0 : index;
+    let timer = null;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const swipeThreshold = 48;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+    let lockedAxis = null;
+    let suppressClick = false;
+
+    const show = (nextIndex) => {
+        index = (nextIndex + slides.length) % slides.length;
+
+        slides.forEach((slide, slideIndex) => {
+            const active = slideIndex === index;
+            slide.classList.toggle('is-active', active);
+            slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+
+        dots.forEach((dot, dotIndex) => {
+            const active = dotIndex === index;
+            dot.classList.toggle('is-active', active);
+            if (active) {
+                dot.setAttribute('aria-current', 'true');
+            } else {
+                dot.removeAttribute('aria-current');
+            }
+        });
+    };
+
+    const stop = () => {
+        if (timer) {
+            window.clearInterval(timer);
+            timer = null;
+        }
+    };
+
+    const start = () => {
+        if (reduceMotion) {
+            return;
+        }
+
+        stop();
+        timer = window.setInterval(() => show(index + 1), 7000);
+    };
+
+    const endDrag = () => {
+        dragging = false;
+        pointerId = null;
+        lockedAxis = null;
+        viewport.classList.remove('is-dragging');
+    };
+
+    prev?.addEventListener('click', () => {
+        show(index - 1);
+        start();
+    });
+
+    next?.addEventListener('click', () => {
+        show(index + 1);
+        start();
+    });
+
+    dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => {
+            show(dotIndex);
+            start();
+        });
+    });
+
+    viewport.addEventListener('pointerdown', (event) => {
+        if (event.button !== 0 && event.pointerType === 'mouse') {
+            return;
+        }
+
+        if (event.target.closest('a, button, input, textarea, select, label')) {
+            return;
+        }
+
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        dragging = true;
+        lockedAxis = null;
+        suppressClick = false;
+        stop();
+        viewport.classList.add('is-dragging');
+        viewport.setPointerCapture?.(event.pointerId);
+    });
+
+    viewport.addEventListener(
+        'pointermove',
+        (event) => {
+            if (!dragging || event.pointerId !== pointerId) {
+                return;
+            }
+
+            const dx = event.clientX - startX;
+            const dy = event.clientY - startY;
+
+            if (!lockedAxis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+                lockedAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+            }
+
+            if (lockedAxis === 'x') {
+                event.preventDefault();
+            }
+        },
+        { passive: false },
+    );
+
+    viewport.addEventListener('pointerup', (event) => {
+        if (!dragging || event.pointerId !== pointerId) {
+            return;
+        }
+
+        const dx = event.clientX - startX;
+
+        if (lockedAxis === 'x' && Math.abs(dx) >= swipeThreshold) {
+            show(dx < 0 ? index + 1 : index - 1);
+            suppressClick = true;
+        }
+
+        endDrag();
+        start();
+    });
+
+    viewport.addEventListener('pointercancel', () => {
+        endDrag();
+        start();
+    });
+
+    viewport.addEventListener(
+        'click',
+        (event) => {
+            if (!suppressClick) {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+            suppressClick = false;
+        },
+        true,
+    );
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', (event) => {
+        if (!root.contains(event.relatedTarget)) {
+            start();
+        }
+    });
+
+    show(index);
+    start();
+};
+
+const initHomeTestimonials = () => {
+    const root = document.querySelector('[data-home-testimonials]');
+
+    if (!root || root.dataset.homeTestimonialsReady === 'true') {
+        return;
+    }
+
+    const viewport = root.querySelector('[data-home-testimonials-viewport]');
+    const track = root.querySelector('[data-home-testimonials-track]');
+    const slides = track ? Array.from(track.querySelectorAll('[data-home-testimonials-slide]')) : [];
+    const prev = root.querySelector('[data-home-testimonials-prev]');
+    const next = root.querySelector('[data-home-testimonials-next]');
+    const dots = Array.from(root.querySelectorAll('[data-home-testimonials-dot]'));
+
+    if (!viewport || !track || slides.length < 1) {
+        return;
+    }
+
+    root.dataset.homeTestimonialsReady = 'true';
+
+    let page = 0;
+
+    const maxPage = () => Math.max(0, slides.length - 1);
+
+    const render = () => {
+        page = Math.min(page, maxPage());
+        const width = viewport.clientWidth;
+
+        slides.forEach((slide, index) => {
+            slide.style.flex = `0 0 ${width}px`;
+            slide.style.width = `${width}px`;
+            slide.setAttribute('aria-hidden', index === page ? 'false' : 'true');
+        });
+
+        track.style.transform = `translateX(-${page * width}px)`;
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('is-active', index === page);
+        });
+    };
+
+    prev?.addEventListener('click', () => {
+        page = page <= 0 ? maxPage() : page - 1;
+        render();
+    });
+
+    next?.addEventListener('click', () => {
+        page = page >= maxPage() ? 0 : page + 1;
+        render();
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            page = Math.min(index, maxPage());
+            render();
+        });
+    });
+
+    window.addEventListener('resize', render);
+    render();
+};
+
 const initApp = () => {
     initSiteNavbar();
     initContactModalTriggers();
     initPhoneInputs();
     initArticleToc();
+    initHomeHero();
+    initHomeTestimonials();
 };
 
 if (document.readyState === 'loading') {
@@ -539,6 +829,18 @@ document.addEventListener('livewire:init', () => {
         initArticleToc(el);
         initContactModalTriggers();
     });
+
+    window.Livewire?.on('form-success-revealed', () => {
+        window.requestAnimationFrame(() => {
+            const modalSuccess = document.querySelector('.contact-modal__body [data-form-success]');
+            const pageSuccess = document.querySelector('[data-form-success]');
+            const success = modalSuccess || pageSuccess;
+
+            if (success) {
+                window.revealFormSuccess(success);
+            }
+        });
+    });
 });
 
 document.addEventListener('livewire:navigated', () => {
@@ -546,4 +848,6 @@ document.addEventListener('livewire:navigated', () => {
     initContactModalTriggers();
     initPhoneInputs();
     initArticleToc();
+    initHomeHero();
+    initHomeTestimonials();
 });

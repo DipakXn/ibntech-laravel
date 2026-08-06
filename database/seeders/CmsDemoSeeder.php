@@ -24,7 +24,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'home',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Home | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Home | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Landing page for the Laravel CMS demo with services, lead forms, and reusable Blade components.',
                 ],
             ],
@@ -34,7 +34,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'about',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'About Us | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'About Us | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Company overview page seeded for testing the page templates and SEO editor.',
                 ],
             ],
@@ -44,7 +44,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'services',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Services | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Services | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Service listing page for migration, CMS engineering, and support offerings.',
                 ],
             ],
@@ -54,7 +54,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'contact',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Contact | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Contact | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Contact page with inquiry forms for testing lead capture and SEO fields.',
                 ],
             ],
@@ -64,7 +64,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'our-vision',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Our Vision | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Our Vision | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Sample vision page to validate custom page templates in the CMS.',
                 ],
             ],

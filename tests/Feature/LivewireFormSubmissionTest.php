@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Jobs\SendLeadSubmissionNotification;
 use App\Livewire\Forms\ContactForm;
+use App\Models\Lead;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
@@ -52,5 +53,34 @@ class LivewireFormSubmissionTest extends TestCase
         ]);
 
         Queue::assertPushed(SendLeadSubmissionNotification::class, 1);
+    }
+
+    public function test_homepage_contact_form_stores_service_in_payload(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ContactForm::class, ['showService' => true, 'formName' => 'homepage-contact'])
+            ->set('name', 'Dipak Patil')
+            ->set('email', 'patildipak@gmail.com')
+            ->set('phone', '+918983300222')
+            ->set('company', 'VOLie')
+            ->set('service', 'Cybersecurity')
+            ->set('message', 'This is a test message.')
+            ->set('acceptedTerms', true)
+            ->set('pageUrl', 'http://localhost:8000')
+            ->call('submit')
+            ->assertSet('submitError', null)
+            ->assertSet('submitted', true)
+            ->assertHasNoErrors();
+
+        $this->assertDatabaseHas('form_submissions', [
+            'email' => 'patildipak@gmail.com',
+            'form_name' => 'homepage-contact',
+        ]);
+
+        $this->assertSame('Cybersecurity', data_get(
+            Lead::query()->where('email', 'patildipak@gmail.com')->first()?->payload,
+            'service'
+        ));
     }
 }

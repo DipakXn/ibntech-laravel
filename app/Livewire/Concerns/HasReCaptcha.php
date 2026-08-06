@@ -15,7 +15,12 @@ trait HasReCaptcha
      */
     protected function getReCaptchaRules(): array
     {
-        if (app()->runningUnitTests() || app()->environment('testing')) {
+        if (
+            app()->runningUnitTests()
+            || app()->environment('testing')
+            || defined('PHPUNIT_COMPOSER_INSTALL')
+            || defined('PHPUNIT_PARATEST')
+        ) {
             return [];
         }
 

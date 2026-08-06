@@ -7,7 +7,16 @@
         <input type="hidden" wire:model="ebookTitle">
     @endif
 
-    @if(! $submitted)
+    @if($submitted)
+        <x-forms.success-alert title="Request submitted">
+            @if($downloadUrl)
+                <x-slot:actions>
+                    <a href="{{ $downloadUrl }}" class="form-success__button button-dark" target="_blank" rel="noopener">Open the PDF</a>
+                </x-slot:actions>
+            @endif
+            {{ $downloadUrl ? 'Your download is ready.' : 'Your request is submitted. Check your inbox shortly.' }}
+        </x-forms.success-alert>
+    @else
         <div class="case-study-download-form__intro">
             <h3>{{ $ebookSlug !== '' ? 'Download This eBook' : 'Get This eBook' }}</h3>
             <p>
@@ -36,14 +45,4 @@
     <button type="submit" class="contact-form__submit case-study-download-form__submit" wire:loading.attr="disabled" wire:target="submit">
         {{ $ebookSlug !== '' ? 'Get The eBook' : 'Submit' }}
     </button>
-
-    @if($submitted)
-        <div class="contact-form__success case-study-download-form__success">
-            @if($downloadUrl)
-                <p>Your download is ready. <a href="{{ $downloadUrl }}" target="_blank" rel="noopener">Open the PDF</a>.</p>
-            @else
-                <p>Your request is submitted. Check your inbox shortly.</p>
-            @endif
-        </div>
-    @endif
 </form>

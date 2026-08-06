@@ -50,6 +50,7 @@ class LeadForm extends Component
         $this->pageUrl = url()->current();
         $this->resetReCaptcha();
         $this->submitted = true;
+        $this->dispatch('form-success-revealed');
     }
 
     public function render()

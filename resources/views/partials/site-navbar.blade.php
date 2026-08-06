@@ -5,7 +5,7 @@
     </button>
 
     <a class="navbar-brand" href="{{ route('home') }}">
-      <img alt="IBNTech Logo" class="ibn-logo" src="{{ asset('uploads/web-img/ibn-logo.webp') }}">
+      <img alt="IBN Technologies Logo" class="ibn-logo" src="{{ asset('uploads/web-img/ibn-logo.webp') }}">
     </a>
 
     <div class="d-block d-sm-none">

@@ -2,6 +2,12 @@
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
 
+    @if($submitted)
+        <x-forms.success-alert title="Inquiry submitted">
+            Thank you. Your inquiry has been submitted.
+        </x-forms.success-alert>
+    @endif
+
     <div>
         <label class="sr-only" for="newsletter-name">Full Name</label>
         <input id="newsletter-name" type="text" wire:model="name" placeholder="Full Name" autocomplete="name">
@@ -64,8 +70,4 @@
         <span wire:loading.remove>Submit</span>
         <span wire:loading wire:target="submit">Sending...</span>
     </button>
-
-    @if($submitted)
-        <p class="contact-form__success newsletter-form__success">Thank you. Your inquiry has been submitted.</p>
-    @endif
 </form>

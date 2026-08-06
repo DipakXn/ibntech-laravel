@@ -1,6 +1,13 @@
 <form wire:submit="submit" class="space-y-3">
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
+
+    @if($submitted)
+        <x-forms.success-alert title="Request received">
+            Thanks. We will contact you shortly.
+        </x-forms.success-alert>
+    @endif
+
     <div>
         <label class="mb-1 block text-sm font-medium">Name</label>
         <input type="text" wire:model="name" class="w-full rounded-md border-slate-300">
@@ -20,7 +27,4 @@
     <x-forms.recaptcha />
 
     <button type="submit" class="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white" wire:loading.attr="disabled" wire:target="submit">Get Proposal</button>
-    @if($submitted)
-        <p class="text-sm text-green-700">Thanks. We will contact you shortly.</p>
-    @endif
 </form>

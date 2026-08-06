@@ -11,6 +11,7 @@ class Lead extends Model
 
     public const FORM_OPTIONS = [
         'contact' => 'Contact Form',
+        'homepage-contact' => 'Homepage Contact',
         'lead' => 'Lead Form',
         'newsletter_inquiry' => 'Newsletter Inquiry Form',
         'ebook_download' => 'Ebook Download Form',
@@ -56,5 +57,10 @@ class Lead extends Model
     public function getAssetTitleAttribute(): ?string
     {
         return data_get($this->payload, 'asset_title');
+    }
+
+    public function getServiceAttribute(): ?string
+    {
+        return data_get($this->payload, 'service');
     }
 }

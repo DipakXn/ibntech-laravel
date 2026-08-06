@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Jobs\SendLeadSubmissionNotification;
+use App\Mail\LeadReceivedMail;
 use App\Models\Lead;
 use App\Services\LeadService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,7 +34,8 @@ class FormSubmissionTest extends TestCase
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'company' => 'Acme Inc',
-            'form_name' => 'contact',
+            'service' => 'Cybersecurity',
+            'form_name' => 'homepage-contact',
             'page_url' => 'https://example.com/contact',
             'message' => 'Need help with bookkeeping services.',
         ]);
@@ -43,13 +45,16 @@ class FormSubmissionTest extends TestCase
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'company' => 'Acme Inc',
-            'form_name' => 'contact',
+            'form_name' => 'homepage-contact',
             'page_url' => 'https://example.com/contact',
             'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
             'ip_address' => '36.255.4.132',
         ]);
 
-        $this->assertSame('Contact Form', $submission->fresh()->form_label);
+        $fresh = $submission->fresh();
+        $this->assertSame('Homepage Contact', $fresh->form_label);
+        $this->assertSame('Cybersecurity', $fresh->service);
+        $this->assertSame('Cybersecurity', data_get($fresh->payload, 'service'));
         Queue::assertPushed(SendLeadSubmissionNotification::class, fn (SendLeadSubmissionNotification $job): bool => $job->submissionId === $submission->id);
         Mail::assertNothingSent();
     }
@@ -57,5 +62,32 @@ class FormSubmissionTest extends TestCase
     public function test_lead_model_uses_form_submissions_table(): void
     {
         $this->assertSame('form_submissions', (new Lead())->getTable());
+    }
+
+    public function test_admin_notification_email_includes_service(): void
+    {
+        $lead = Lead::query()->create([
+            'name' => 'Dipak Patil',
+            'email' => 'patildipak@gmail.com',
+            'phone' => '+918983300222',
+            'company' => 'VOLie',
+            'form_name' => 'homepage-contact',
+            'message' => 'This is a test message.',
+            'page_url' => 'http://localhost:8000',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'PHPUnit',
+            'payload' => [
+                'service' => 'Cybersecurity',
+            ],
+        ]);
+
+        $html = (new LeadReceivedMail($lead))->render();
+
+        $this->assertStringContainsString('Admin Notification', $html);
+        $this->assertStringContainsString('New Submission Received', $html);
+        $this->assertStringContainsString('Service', $html);
+        $this->assertStringContainsString('Cybersecurity', $html);
+        $this->assertStringContainsString('Lead ID', $html);
+        $this->assertStringContainsString('#'.$lead->id, $html);
     }
 }

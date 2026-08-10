@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Jobs\SendLeadSubmissionNotification;
+use App\Livewire\ContactModal;
 use App\Livewire\Forms\ContactForm;
 use App\Models\Lead;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -82,5 +83,46 @@ class LivewireFormSubmissionTest extends TestCase
             Lead::query()->where('email', 'patildipak@gmail.com')->first()?->payload,
             'service'
         ));
+    }
+
+    public function test_contact_modal_opens_vapt_quote_variant_with_selected_plan(): void
+    {
+        Livewire::test(ContactModal::class)
+            ->dispatch('open-contact-modal', service: 'Gold', variant: 'vapt-quote')
+            ->assertSet('isOpen', true)
+            ->assertSet('variant', 'vapt-quote')
+            ->assertSet('service', 'Gold');
+    }
+
+    public function test_vapt_pricing_quote_form_stores_selected_plan_in_payload(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ContactForm::class, [
+            'showCompany' => false,
+            'showService' => true,
+            'formName' => 'vapt-pricing-quote',
+            'serviceOptions' => ['Silver', 'Gold', 'Platinum'],
+            'initialService' => 'Gold',
+            'layout' => 'modal',
+        ])
+            ->assertSet('service', 'Gold')
+            ->set('name', 'Quote Seeker')
+            ->set('email', 'quote@example.com')
+            ->set('phone', '+14155550199')
+            ->set('message', 'Looking for a Gold package VAPT assessment.')
+            ->set('acceptedTerms', true)
+            ->set('pageUrl', 'https://example.com/vapt-services')
+            ->call('submit')
+            ->assertSet('submitted', true)
+            ->assertHasNoErrors();
+
+        $lead = Lead::query()->where('email', 'quote@example.com')->first();
+
+        $this->assertNotNull($lead);
+        $this->assertSame('vapt-pricing-quote', $lead->form_name);
+        $this->assertSame('VAPT Pricing Quote', $lead->form_label);
+        $this->assertSame('Gold', $lead->service);
+        $this->assertSame('Gold', data_get($lead->payload, 'service'));
     }
 }

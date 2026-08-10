@@ -38,10 +38,16 @@ class ContactForm extends Component
 
     public bool $showService = false;
 
-    /** @var 'default'|'home'|'modal' */
+    /** @var 'default'|'home'|'modal'|'vapt' */
     public string $layout = 'default';
 
     public ?string $submitError = null;
+
+    public string $submitLabel = 'Submit';
+
+    public string $servicePlaceholder = 'Select Service';
+
+    public string $messagePlaceholder = 'Tell us how we can help';
 
     /**
      * @var list<string>
@@ -55,18 +61,38 @@ class ContactForm extends Component
         'Other',
     ];
 
+    /**
+     * @param  list<string>|null  $serviceOptions
+     */
     public function mount(
         bool $showCompany = true,
         bool $showService = false,
         string $layout = 'default',
         string $formName = 'contact',
         string $idPrefix = 'contact',
+        ?array $serviceOptions = null,
+        string $submitLabel = 'Submit',
+        string $servicePlaceholder = 'Select Service',
+        string $messagePlaceholder = 'Tell us how we can help',
+        ?string $initialService = null,
     ): void {
         $this->showCompany = $showCompany;
         $this->showService = $showService;
-        $this->layout = in_array($layout, ['default', 'home', 'modal'], true) ? $layout : 'default';
+        $this->layout = in_array($layout, ['default', 'home', 'modal', 'vapt'], true) ? $layout : 'default';
         $this->formName = $formName;
         $this->idPrefix = $idPrefix;
+        $this->submitLabel = $submitLabel !== '' ? $submitLabel : 'Submit';
+        $this->servicePlaceholder = $servicePlaceholder !== '' ? $servicePlaceholder : 'Select Service';
+        $this->messagePlaceholder = $messagePlaceholder !== '' ? $messagePlaceholder : 'Tell us how we can help';
+        if (is_array($serviceOptions) && $serviceOptions !== []) {
+            $this->serviceOptions = array_values(array_filter(
+                $serviceOptions,
+                static fn (mixed $option): bool => is_string($option) && $option !== ''
+            ));
+        }
+        if (is_string($initialService) && $initialService !== '') {
+            $this->service = $initialService;
+        }
         $this->pageUrl = url()->current();
     }
 

@@ -1,5 +1,11 @@
+@props([
+    'items' => null,
+    'title' => 'What Our Clients Say',
+    'subtitle' => 'Trusted by industry leaders',
+])
+
 @php
-    $testimonials = [
+    $defaultTestimonials = [
         [
             'name' => 'Vishal Tompe',
             'role' => 'Senior IT Associate, Digitalzone',
@@ -97,14 +103,14 @@
         ],
     ];
 
-    $slides = array_chunk($testimonials, 2);
+    $resolvedItems = is_array($items) && $items !== [] ? $items : $defaultTestimonials;
 @endphp
 
 <section class="home-testimonials" aria-labelledby="home-testimonials-title" data-home-testimonials>
     <div class="home-testimonials__banner">
         <div class="home-shell">
-            <h2 id="home-testimonials-title">What Our Clients Say</h2>
-            <p>Trusted by industry leaders</p>
+            <h2 id="home-testimonials-title">{{ $title }}</h2>
+            <p>{{ $subtitle }}</p>
 
             <div class="home-testimonials__carousel">
                 <button type="button" class="home-testimonials__arrow" data-home-testimonials-prev aria-label="Previous testimonials">
@@ -113,25 +119,22 @@
 
                 <div class="home-testimonials__viewport" data-home-testimonials-viewport>
                     <div class="home-testimonials__track" data-home-testimonials-track>
-                        @foreach ($slides as $slideIndex => $slide)
-                            <div class="home-testimonials__slide" data-home-testimonials-slide @if($slideIndex !== 0) aria-hidden="true" @endif>
-                                @foreach ($slide as $testimonial)
-                                    <article class="home-testimonial">
-                                        <div class="home-testimonial__card">
-                                            <div class="home-testimonial__head">
-                                                <div class="home-testimonial__avatar" aria-hidden="true">
-                                                    <i class="fa-solid fa-user"></i>
-                                                </div>
-                                                <div class="home-testimonial__meta">
-                                                    <strong>{{ $testimonial['name'] }} <span class="home-testimonial__stars" aria-label="5 star rating">★★★★★</span></strong>
-                                                    <span>&#64;{{ $testimonial['role'] }}</span>
-                                                </div>
-                                            </div>
-                                            <blockquote class="home-testimonial__quote">“{{ $testimonial['quote'] }}”</blockquote>
+                        @foreach ($resolvedItems as $testimonial)
+                            <article class="home-testimonial" data-home-testimonial-card>
+                                <div class="home-testimonial__card">
+                                    <div class="home-testimonial__head">
+                                        <div class="home-testimonial__avatar" aria-hidden="true">
+                                            <i class="fa-solid fa-user"></i>
                                         </div>
-                                    </article>
-                                @endforeach
-                            </div>
+                                        <div class="home-testimonial__meta">
+                                            <strong>{{ $testimonial['name'] }}</strong>
+                                            <span class="home-testimonial__stars" aria-label="5 star rating">★★★★★</span>
+                                            <span>&#64;{{ $testimonial['role'] }}</span>
+                                        </div>
+                                    </div>
+                                    <blockquote class="home-testimonial__quote">“{{ $testimonial['quote'] }}”</blockquote>
+                                </div>
+                            </article>
                         @endforeach
                     </div>
                 </div>
@@ -141,16 +144,7 @@
                 </button>
             </div>
 
-            <div class="home-testimonials__dots" role="tablist" aria-label="Testimonial pages">
-                @foreach ($slides as $i => $slide)
-                    <button
-                        type="button"
-                        class="{{ $i === 0 ? 'is-active' : '' }}"
-                        data-home-testimonials-dot
-                        aria-label="Show testimonials page {{ $i + 1 }}"
-                    ></button>
-                @endforeach
-            </div>
+            <div class="home-testimonials__dots" role="tablist" aria-label="Testimonial pages" data-home-testimonials-dots></div>
         </div>
     </div>
 </section>

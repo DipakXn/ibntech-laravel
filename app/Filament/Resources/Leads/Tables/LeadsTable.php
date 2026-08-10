@@ -27,6 +27,9 @@ class LeadsTable
                     ->toggleable(),
                 TextColumn::make('company')
                     ->toggleable(),
+                TextColumn::make('service')
+                    ->label('Service / Plan')
+                    ->toggleable(),
                 TextColumn::make('asset_title')
                     ->label('Asset')
                     ->toggleable(),

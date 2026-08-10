@@ -104,6 +104,7 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
+    @stack('styles')
     @livewireStyles
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 

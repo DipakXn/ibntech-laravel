@@ -68,6 +68,16 @@ class CmsDemoSeeder extends Seeder
                     'meta_description' => 'Sample vision page to validate custom page templates in the CMS.',
                 ],
             ],
+            [
+                'title' => 'VAPT Services',
+                'slug' => 'vapt-services',
+                'template' => 'vapt-services',
+                'status' => 'published',
+                'seo' => [
+                    'meta_title' => 'VAPT Services and Penetration Testing | India & Global',
+                    'meta_description' => 'Leading manual and automated full-stack VAPT services helping SMBs and mid-market enterprises identify vulnerabilities and strengthen cyber resilience.',
+                ],
+            ],
         ];
 
         foreach ($pages as $pageData) {

@@ -109,7 +109,7 @@
                 <div id="cybersecurity-services" class="submenu active">
                   <div class="submenu-column">
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'vapt-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120"
                             height="120">

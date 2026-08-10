@@ -1,0 +1,374 @@
+/* Shared form styles */
+
+.newsletter-form {
+    gap: 0.45rem;
+}
+
+.newsletter-form select,
+.newsletter-form input:not([type='checkbox']):not([type='hidden']),
+.newsletter-form textarea {
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 0.4rem;
+    background: #fff;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.95rem;
+}
+
+.newsletter-form select {
+    color: #111827;
+}
+
+.newsletter-form textarea {
+    min-height: 4.9rem;
+}
+
+.newsletter-form .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 0.4rem;
+    background: #fff;
+    padding: 0.7rem 0.85rem 0.7rem 3.25rem;
+}
+
+.newsletter-form__terms {
+    color: #172033;
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.newsletter-form__terms a {
+    color: var(--site-navy);
+}
+
+.newsletter-form__submit {
+    border-radius: 0.45rem;
+    background: #2f2f85;
+    color: #fff;
+    padding: 0.9rem 1rem;
+}
+
+.newsletter-form .form-success,
+.newsletter-form .contact-form__success {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.14) 0%, rgba(47, 47, 133, 0.06) 100%);
+    color: #166534;
+}
+
+.contact-form__error {
+    margin-top: 0.25rem;
+    color: #dc2626;
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.filter-control label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--site-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.filter-control select {
+    min-width: 13rem;
+    border: 1px solid rgba(61, 86, 166, 0.18);
+    border-radius: 0.8rem;
+    background: #fff;
+    padding: 0.8rem 0.9rem;
+    color: var(--site-ink);
+}
+
+.form-card {
+    border: 1px solid rgba(61, 86, 166, 0.12);
+    border-radius: 1.3rem;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 1.6rem;
+    box-shadow: 0 18px 38px rgba(20, 31, 78, 0.08);
+}
+
+.contact-form {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.contact-form__field {
+    position: relative;
+    isolation: isolate;
+}
+
+.contact-form__field:has(.phone-input-field) {
+    z-index: 20;
+    isolation: auto;
+}
+
+.contact-form__field:has(.phone-input-field) .iti__dropdown-content,
+.contact-form__field:has(.phone-input-field) .iti__country-list {
+    z-index: 40;
+}
+
+.contact-form__field--message {
+    overflow: hidden;
+    border-radius: 0.35rem;
+    background: #f3f6fb;
+    contain: paint;
+}
+
+.contact-form select,
+.contact-form input:not([type='checkbox']):not([type='hidden']),
+.contact-form textarea {
+    width: 100%;
+    border: 0;
+    border-radius: 0.35rem;
+    background: #f3f6fb;
+    padding: 0.9rem 1.05rem;
+    color: #1f2937;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.contact-form textarea {
+    position: relative;
+    z-index: 1;
+    min-height: 6.6rem;
+    resize: vertical;
+    background: transparent;
+    transform: translateZ(0);
+}
+
+.contact-form__field--message textarea:focus {
+    background: #f3f6fb;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #4b5563;
+}
+
+.contact-form select:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline-color: rgba(255, 255, 255, 0.78);
+}
+
+.phone-input-field,
+.phone-input-field .iti {
+    width: 100%;
+}
+
+.phone-input-field .iti__tel-input.is-invalid {
+    outline-color: #f87171;
+}
+
+.phone-input-field .iti__dropdown-content {
+    color: #172033;
+}
+
+.phone-input-field .iti__search-input {
+    border-radius: 0;
+    outline: 0;
+}
+
+@media (min-width: 721px) {
+    .phone-input-field .iti--inline-dropdown .iti__dropdown-content {
+                    overflow: hidden;
+                    background: #fff;
+                }
+
+    .contact-form .phone-input-field .iti__search-input {
+                    padding: 0.85rem 2.75rem 0.85rem 2.85rem !important;
+                }
+
+    .phone-input-field .iti__search-input-wrapper {
+                    background: #f3f6fb;
+                }
+
+    .phone-input-field .iti__country-list {
+                    max-height: 10.75rem;
+                    overflow-y: auto;
+                    background: #fff;
+                }
+
+    .phone-input-field .iti__country {
+                    min-height: 2.45rem;
+                }
+}
+
+.contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+@media (max-width: 720px) {
+    .contact-form__row {
+                    grid-template-columns: 1fr;
+                }
+}
+
+.contact-form__terms {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: start;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+.contact-form__terms input {
+    margin-top: 0.35rem;
+    accent-color: #2388ff;
+}
+
+.contact-form__terms a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.contact-form__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 0.45rem;
+    background: #fff;
+    padding: 0.95rem 1.2rem;
+    color: #070b18;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form__submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(3, 7, 18, 0.16);
+}
+
+.contact-form__submit:disabled {
+    cursor: wait;
+    opacity: 0.72;
+}
+
+.form-success,
+.contact-form__success {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    margin: 0 0 0.35rem;
+    border: 1px solid rgba(76, 175, 80, 0.35);
+    border-radius: 0.75rem;
+    background:
+        linear-gradient(135deg, rgba(76, 175, 80, 0.16) 0%, rgba(46, 46, 128, 0.06) 100%);
+    box-shadow: 0 8px 20px rgba(22, 101, 52, 0.08);
+    padding: 0.95rem 1.05rem;
+    color: #166534;
+}
+
+.form-success__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: rgba(76, 175, 80, 0.18);
+    color: #2e7d32;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.form-success__body {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.form-success__title {
+    margin: 0;
+    color: #14532d;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.form-success__message {
+    color: #166534;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.form-success__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.55rem;
+}
+
+.form-success__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.case-study-download-form {
+    gap: 0.75rem;
+}
+
+.case-study-download-form__intro h3 {
+    color: #fff;
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+.case-study-download-form__intro p {
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.case-study-download-form__terms {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.case-study-download-form__submit {
+    border: 0;
+}
+
+.case-study-download-form .form-success,
+.case-study-download-form .contact-form__success {
+    border-color: rgba(165, 214, 167, 0.45);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    color: #e8f5e9;
+}
+
+.case-study-download-form .form-success__icon {
+    background: rgba(255, 255, 255, 0.14);
+    color: #c8e6c9;
+}
+
+.case-study-download-form .form-success__title,
+.case-study-download-form .form-success__message {
+    color: #f1f8e9;
+}
+
+.case-study-download-form .form-success__button {
+    background: #fff;
+    color: #1b5e20;
+}
+
+@media (max-width: 720px) {
+    .form-card {
+                    padding: 1.4rem;
+                }
+}

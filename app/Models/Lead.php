@@ -12,6 +12,9 @@ class Lead extends Model
     public const FORM_OPTIONS = [
         'contact' => 'Contact Form',
         'homepage-contact' => 'Homepage Contact',
+        'header-contact-modal' => 'Header Contact Modal',
+        'vapt-services-quote' => 'VAPT Services Quote',
+        'vapt-pricing-quote' => 'VAPT Pricing Quote',
         'lead' => 'Lead Form',
         'newsletter_inquiry' => 'Newsletter Inquiry Form',
         'ebook_download' => 'Ebook Download Form',

@@ -14,7 +14,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-Dta9vKZx.css",
+    "file": "assets/app-86G0u2fu.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -31,8 +31,55 @@
       "theme.css"
     ]
   },
+  "resources/css/pages/about.css": {
+    "file": "assets/about-tn0RQdqM.css",
+    "src": "resources/css/pages/about.css",
+    "isEntry": true,
+    "name": "services",
+    "names": [
+      "about.css",
+      "services.css"
+    ]
+  },
+  "resources/css/pages/contact.css": {
+    "file": "assets/contact-BD72AWWx.css",
+    "src": "resources/css/pages/contact.css",
+    "isEntry": true,
+    "name": "contact",
+    "names": [
+      "contact.css"
+    ]
+  },
+  "resources/css/pages/home.css": {
+    "file": "assets/home-DYEia3FO.css",
+    "src": "resources/css/pages/home.css",
+    "isEntry": true,
+    "name": "home",
+    "names": [
+      "home.css"
+    ]
+  },
+  "resources/css/pages/services.css": {
+    "file": "assets/about-tn0RQdqM.css",
+    "src": "resources/css/pages/about.css",
+    "isEntry": true,
+    "name": "services",
+    "names": [
+      "about.css",
+      "services.css"
+    ]
+  },
+  "resources/css/pages/vapt-services.css": {
+    "file": "assets/vapt-services-D1xNxTAM.css",
+    "src": "resources/css/pages/vapt-services.css",
+    "isEntry": true,
+    "name": "vapt-services",
+    "names": [
+      "vapt-services.css"
+    ]
+  },
   "resources/js/app.js": {
-    "file": "assets/app-DA5X3sr2.js",
+    "file": "assets/app-60EIWEdq.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

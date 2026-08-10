@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    @vite(['resources/css/pages/home.css'])
+@endpush
+
 @section('content')
     <div class="home-page">
         <x-home.hero-slider />

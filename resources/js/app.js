@@ -420,11 +420,16 @@ const FOCUSABLE_SELECTOR = [
     '[tabindex]:not([tabindex="-1"])',
 ].join(',');
 
-const openContactModal = () => {
-    window.dispatchEvent(new CustomEvent('open-contact-modal'));
+const openContactModal = (options = {}) => {
+    const detail = {
+        service: typeof options.service === 'string' && options.service !== '' ? options.service : null,
+        variant: typeof options.variant === 'string' && options.variant !== '' ? options.variant : null,
+    };
+
+    window.dispatchEvent(new CustomEvent('open-contact-modal', { detail }));
 
     if (window.Livewire?.dispatch) {
-        window.Livewire.dispatch('open-contact-modal');
+        window.Livewire.dispatch('open-contact-modal', detail);
     }
 };
 
@@ -561,7 +566,10 @@ const initContactModalTriggers = () => {
 
         trigger.addEventListener('click', (event) => {
             event.preventDefault();
-            openContactModal();
+            openContactModal({
+                service: trigger.dataset.contactService || null,
+                variant: trigger.dataset.contactVariant || null,
+            });
         });
     });
 };
@@ -747,65 +755,153 @@ const initHomeHero = () => {
 };
 
 const initHomeTestimonials = () => {
-    const root = document.querySelector('[data-home-testimonials]');
+    document.querySelectorAll('[data-home-testimonials]').forEach((root) => {
+        if (root.dataset.homeTestimonialsReady === 'true') {
+            return;
+        }
 
-    if (!root || root.dataset.homeTestimonialsReady === 'true') {
-        return;
-    }
+        const viewport = root.querySelector('[data-home-testimonials-viewport]');
+        const track = root.querySelector('[data-home-testimonials-track]');
+        const cards = track ? Array.from(track.querySelectorAll('[data-home-testimonial-card]')) : [];
+        const prev = root.querySelector('[data-home-testimonials-prev]');
+        const next = root.querySelector('[data-home-testimonials-next]');
+        const dotsHost = root.querySelector('[data-home-testimonials-dots]');
 
-    const viewport = root.querySelector('[data-home-testimonials-viewport]');
-    const track = root.querySelector('[data-home-testimonials-track]');
-    const slides = track ? Array.from(track.querySelectorAll('[data-home-testimonials-slide]')) : [];
-    const prev = root.querySelector('[data-home-testimonials-prev]');
-    const next = root.querySelector('[data-home-testimonials-next]');
-    const dots = Array.from(root.querySelectorAll('[data-home-testimonials-dot]'));
+        if (!viewport || !track || cards.length < 1) {
+            return;
+        }
 
-    if (!viewport || !track || slides.length < 1) {
-        return;
-    }
+        root.dataset.homeTestimonialsReady = 'true';
 
-    root.dataset.homeTestimonialsReady = 'true';
+        let page = 0;
+        let perPage = 2;
+        let pageCount = 1;
+        let gap = 16;
+        let touchStartX = null;
 
-    let page = 0;
+        const getPerPage = () => (window.matchMedia('(max-width: 720px)').matches ? 1 : 2);
 
-    const maxPage = () => Math.max(0, slides.length - 1);
+        const getGap = () => {
+            const styles = window.getComputedStyle(track);
+            const raw = Number.parseFloat(styles.columnGap || styles.gap || '16');
 
-    const render = () => {
-        page = Math.min(page, maxPage());
-        const width = viewport.clientWidth;
+            return Number.isFinite(raw) ? raw : 16;
+        };
 
-        slides.forEach((slide, index) => {
-            slide.style.flex = `0 0 ${width}px`;
-            slide.style.width = `${width}px`;
-            slide.setAttribute('aria-hidden', index === page ? 'false' : 'true');
-        });
+        const maxPage = () => Math.max(0, pageCount - 1);
 
-        track.style.transform = `translateX(-${page * width}px)`;
+        const syncDots = () => {
+            if (!dotsHost) {
+                return;
+            }
 
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('is-active', index === page);
-        });
-    };
+            const existing = Array.from(dotsHost.querySelectorAll('[data-home-testimonials-dot]'));
 
-    prev?.addEventListener('click', () => {
-        page = page <= 0 ? maxPage() : page - 1;
-        render();
-    });
+            if (existing.length !== pageCount) {
+                dotsHost.replaceChildren(
+                    ...Array.from({ length: pageCount }, (_, index) => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.setAttribute('data-home-testimonials-dot', '');
+                        button.setAttribute('aria-label', `Show testimonials page ${index + 1}`);
+                        button.addEventListener('click', () => {
+                            page = Math.min(index, maxPage());
+                            render();
+                        });
+                        return button;
+                    }),
+                );
+            }
 
-    next?.addEventListener('click', () => {
-        page = page >= maxPage() ? 0 : page + 1;
-        render();
-    });
+            Array.from(dotsHost.querySelectorAll('[data-home-testimonials-dot]')).forEach((dot, index) => {
+                dot.classList.toggle('is-active', index === page);
+                dot.setAttribute('aria-selected', index === page ? 'true' : 'false');
+            });
+        };
 
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            page = Math.min(index, maxPage());
+        const render = () => {
+            const nextPerPage = getPerPage();
+            const viewportWidth = viewport.clientWidth;
+
+            if (nextPerPage !== perPage) {
+                const firstVisible = page * perPage;
+                perPage = nextPerPage;
+                page = Math.floor(firstVisible / perPage);
+            }
+
+            gap = getGap();
+            pageCount = Math.max(1, Math.ceil(cards.length / perPage));
+            page = Math.min(page, maxPage());
+
+            const cardWidth =
+                perPage === 1 ? viewportWidth : Math.max(0, (viewportWidth - gap * (perPage - 1)) / perPage);
+
+            cards.forEach((card, index) => {
+                card.style.flex = `0 0 ${cardWidth}px`;
+                card.style.width = `${cardWidth}px`;
+                card.style.maxWidth = `${cardWidth}px`;
+
+                const pageIndex = Math.floor(index / perPage);
+                card.setAttribute('aria-hidden', pageIndex === page ? 'false' : 'true');
+            });
+
+            // Include the trailing gap between page groups so pages stay aligned.
+            track.style.transform = `translateX(-${page * (viewportWidth + gap)}px)`;
+            syncDots();
+        };
+
+        prev?.addEventListener('click', () => {
+            page = page <= 0 ? maxPage() : page - 1;
             render();
         });
-    });
 
-    window.addEventListener('resize', render);
-    render();
+        next?.addEventListener('click', () => {
+            page = page >= maxPage() ? 0 : page + 1;
+            render();
+        });
+
+        viewport.addEventListener(
+            'touchstart',
+            (event) => {
+                touchStartX = event.changedTouches?.[0]?.clientX ?? null;
+            },
+            { passive: true },
+        );
+
+        viewport.addEventListener(
+            'touchend',
+            (event) => {
+                if (touchStartX === null) {
+                    return;
+                }
+
+                const touchEndX = event.changedTouches?.[0]?.clientX ?? touchStartX;
+                const delta = touchEndX - touchStartX;
+                touchStartX = null;
+
+                if (Math.abs(delta) < 40) {
+                    return;
+                }
+
+                if (delta < 0) {
+                    page = page >= maxPage() ? 0 : page + 1;
+                } else {
+                    page = page <= 0 ? maxPage() : page - 1;
+                }
+
+                render();
+            },
+            { passive: true },
+        );
+
+        let resizeFrame = 0;
+        window.addEventListener('resize', () => {
+            window.cancelAnimationFrame(resizeFrame);
+            resizeFrame = window.requestAnimationFrame(render);
+        });
+
+        render();
+    });
 };
 
 const initApp = () => {

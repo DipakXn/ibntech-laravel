@@ -33,7 +33,7 @@ class LeadForm
                         TextInput::make('company')
                             ->maxLength(255),
                         Placeholder::make('service_display')
-                            ->label('Service')
+                            ->label('Service / Plan')
                             ->content(fn (?Lead $record): string => $record?->service ?: '—'),
                         Placeholder::make('job_title_display')
                             ->label('Job Title')

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    @vite(['resources/css/pages/about.css'])
+@endpush
+
 @section('content')
     <section class="inner-hero">
         <div class="site-shell inner-hero__inner">

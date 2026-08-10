@@ -7,6 +7,7 @@
             'icon' => 'fa-bug-slash',
             'tone' => 'violet',
             'cta' => 'Explore VAPT',
+            'href' => route('page.show', ['slug' => 'vapt-services']),
         ],
         [
             'title' => 'SOC & SIEM',
@@ -74,7 +75,11 @@
                             <li>{{ $point }}</li>
                         @endforeach
                     </ul>
-                    <a href="#" class="home-btn home-btn--grad" data-contact-modal-trigger>
+                    <a
+                        href="{{ $service['href'] ?? '#' }}"
+                        class="home-btn home-btn--grad"
+                        @if(empty($service['href'])) data-contact-modal-trigger @endif
+                    >
                         {{ $service['cta'] }} <span aria-hidden="true">→</span>
                     </a>
                 </article>

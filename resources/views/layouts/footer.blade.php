@@ -146,7 +146,10 @@
                 <div class="site-footer__service-group">
                     <h4>Cybersecurity Services</h4>
                     <ul class="site-footer__service-list">
-                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>VAPT Services</span></li>
+                        <li>
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            <a href="{{ route('page.show', ['slug' => 'vapt-services']) }}">VAPT Services</a>
+                        </li>
                         <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>SOC &amp; SIEM</span></li>
                         <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>MDR Services</span></li>
                         <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>vCISO Services</span></li>

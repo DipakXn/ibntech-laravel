@@ -68,22 +68,6 @@
     text-transform: uppercase;
 }
 
-.tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 1.25rem;
-}
-
-.tag-pill {
-    border-radius: 999px;
-    background: rgba(45, 48, 109, 0.08);
-    padding: 0.45rem 0.85rem;
-    color: var(--site-navy);
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-
 @media (max-width: 720px) {
     .case-study-card__image {
                         aspect-ratio: 16 / 11;

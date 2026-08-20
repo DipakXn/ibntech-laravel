@@ -9,7 +9,6 @@ use App\Models\Ebook;
 use App\Models\Page;
 use App\Models\PressRelease;
 use App\Models\SeoMeta;
-use App\Models\Tag;
 use App\Models\WhitePaper;
 use Illuminate\Database\Seeder;
 
@@ -107,22 +106,6 @@ class CmsDemoSeeder extends Seeder
             return [$category['slug'] => $model];
         });
 
-        $tags = collect([
-            ['slug' => 'seo', 'name' => 'SEO'],
-            ['slug' => 'laravel', 'name' => 'Laravel'],
-            ['slug' => 'migration', 'name' => 'Migration'],
-            ['slug' => 'blade', 'name' => 'Blade'],
-            ['slug' => 'filament', 'name' => 'Filament'],
-            ['slug' => 'performance', 'name' => 'Performance'],
-        ])->mapWithKeys(function (array $tag): array {
-            $model = Tag::query()->updateOrCreate(
-                ['slug' => $tag['slug']],
-                ['name' => $tag['name']]
-            );
-
-            return [$tag['slug'] => $model];
-        });
-
         $blogs = [
             [
                 'title' => 'WordPress to Laravel Migration Checklist',
@@ -132,7 +115,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'migration',
                 'status' => 'published',
-                'tag_slugs' => ['seo', 'laravel', 'migration'],
                 'seo' => [
                     'meta_title' => 'WordPress to Laravel Migration Checklist',
                     'meta_description' => 'A seeded blog article for testing blog templates, taxonomy filters, and metadata editing.',
@@ -146,7 +128,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'cms',
                 'status' => 'published',
-                'tag_slugs' => ['laravel', 'blade', 'filament'],
                 'seo' => [
                     'meta_title' => 'Blade Template Patterns for Corporate Sites',
                     'meta_description' => 'Sample Blade architecture article included for dummy blog data.',
@@ -160,7 +141,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'seo',
                 'status' => 'published',
-                'tag_slugs' => ['seo', 'migration'],
                 'seo' => [
                     'meta_title' => 'Technical SEO Checks Before a CMS Relaunch',
                     'meta_description' => 'Dummy SEO-focused article for testing search snippets and article rendering.',
@@ -174,7 +154,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'engineering',
                 'status' => 'draft',
-                'tag_slugs' => ['filament', 'laravel', 'performance'],
                 'seo' => [
                     'meta_title' => 'Improving Filament Admin Workflows for Content Teams',
                     'meta_description' => 'Draft article to test admin filtering and unpublished content handling.',
@@ -188,7 +167,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'cms',
                 'status' => 'published',
-                'tag_slugs' => ['blade', 'filament'],
                 'seo' => [
                     'meta_title' => 'Scaling Content Operations with Structured Templates',
                     'meta_description' => 'Seeded article for testing larger blog lists and pagination.',
@@ -207,12 +185,6 @@ class CmsDemoSeeder extends Seeder
                     'category_id' => $categories[$blogData['category_slug']]->id,
                     'status' => $blogData['status'],
                 ]
-            );
-
-            $blog->tags()->sync(
-                collect($blogData['tag_slugs'])
-                    ->map(fn (string $slug) => $tags[$slug]->id)
-                    ->all()
             );
 
             $this->syncSeoMeta($blog, $blogData['seo']);

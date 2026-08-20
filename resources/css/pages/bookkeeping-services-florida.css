@@ -1,0 +1,933 @@
+/* Bookkeeping Services Florida — matched to WordPress screenshot */
+
+.bkfl-page {
+    --bkfl-navy: #2e2e80;
+    --bkfl-navy-deep: #1f1f5c;
+    --bkfl-green: #4caf50;
+    --bkfl-green-soft: #61bd75;
+    --bkfl-green-dark: #3d9140;
+    --bkfl-ink: #1f1d1d;
+    --bkfl-muted: #7a7a7a;
+    --bkfl-soft: #f7f9fb;
+    --bkfl-mint: #edf5f4;
+    --bkfl-cream: #fffad3;
+    --bkfl-line: rgba(46, 46, 128, 0.14);
+    color: var(--bkfl-ink);
+    background: #fff;
+}
+
+.bkfl-page [hidden] {
+    display: none !important;
+}
+
+.bkfl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.35rem;
+    border-radius: 0.375rem;
+    border: 2px solid transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.bkfl-btn:hover {
+    transform: translateY(-1px);
+}
+
+.bkfl-btn--green {
+    background: var(--bkfl-green);
+    border-color: var(--bkfl-green-soft);
+    color: #fff;
+}
+
+.bkfl-btn--green:hover {
+    background: var(--bkfl-navy);
+    border-color: var(--bkfl-green);
+    color: #fff;
+}
+
+.bkfl-btn--navy {
+    background: var(--bkfl-navy);
+    border-color: var(--bkfl-navy);
+    border-width: 1px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0.65rem 1.75rem;
+}
+
+.bkfl-btn--navy:hover {
+    background: var(--bkfl-green);
+    border-color: var(--bkfl-navy);
+    color: #fff;
+}
+
+.bkfl-btn--navy-lg {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 0.85rem 1.5rem;
+    text-transform: uppercase;
+}
+
+.bkfl-accent {
+    color: var(--bkfl-green);
+}
+
+.bkfl-section {
+    padding: 3.5rem 0;
+}
+
+.bkfl-section--soft {
+    background: var(--bkfl-soft);
+}
+
+.bkfl-heading {
+    margin-bottom: 2rem;
+}
+
+.bkfl-heading--center {
+    text-align: center;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bkfl-heading h2 {
+    margin: 0;
+    color: #111;
+    font-size: clamp(1.45rem, 2.6vw, 1.7rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+
+.bkfl-heading h2 .bkfl-accent {
+    color: var(--bkfl-green);
+}
+
+.bkfl-heading p {
+    margin: 0.85rem 0 0;
+    color: var(--bkfl-ink);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+}
+
+.bkfl-section__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Hero */
+.bkfl-hero {
+    position: relative;
+    overflow: visible;
+    background-image: linear-gradient(230deg, var(--bkfl-green-soft) 6%, var(--bkfl-navy) 72%);
+    color: #fff;
+    padding-bottom: 4.5rem;
+}
+
+.bkfl-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 3.5rem 0 1.5rem;
+}
+
+.bkfl-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.45rem, 3vw, 3.7rem);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+.bkfl-hero__lede {
+    max-width: 34rem;
+    margin: 0.85rem 0 0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: 0.03em;
+}
+
+.bkfl-hero__form {
+    position: relative;
+    z-index: 2;
+    scroll-margin-top: 6rem;
+    border-radius: 1.35rem;
+    background: #fff;
+    padding: 1.15rem 1.1rem 1.25rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
+    color: var(--bkfl-ink);
+}
+
+.bkfl-hero__form h2 {
+    margin: 0;
+    color: var(--bkfl-navy);
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.bkfl-hero__form-sub {
+    margin: 0.4rem 0 1rem;
+    color: var(--bkfl-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.bkfl-hero__form .contact-form {
+    gap: 0.65rem;
+}
+
+.bkfl-hero__form .contact-form__field input,
+.bkfl-hero__form .contact-form__field select,
+.bkfl-hero__form .contact-form__field textarea,
+.bkfl-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid var(--bkfl-navy) !important;
+    border-radius: 0.45rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+}
+
+.bkfl-hero__form .contact-form__terms,
+.bkfl-hero__form .contact-form__terms span {
+    color: var(--bkfl-muted) !important;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.bkfl-hero__form .contact-form__terms a {
+    color: var(--bkfl-navy) !important;
+    font-weight: 700;
+}
+
+.bkfl-hero__form .contact-form__submit {
+    margin-top: 0.15rem;
+    border-radius: 0;
+    background: var(--bkfl-green);
+    color: #fff;
+    text-transform: capitalize;
+    letter-spacing: 0.02em;
+    padding: 0.9rem 2.5rem;
+}
+
+.bkfl-hero__form .contact-form__submit:hover {
+    background: var(--bkfl-navy);
+}
+
+/* Intro overlapping card */
+.bkfl-intro {
+    position: relative;
+    z-index: 3;
+    margin-top: -3.5rem;
+    padding: 0 0 1.25rem;
+    background: rgba(231, 215, 215, 0.14);
+}
+
+.bkfl-intro__card {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 1.75rem 2rem 2rem;
+    border-radius: 2rem;
+    border: 1px solid #fff;
+    background: #fffefe;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.bkfl-intro__card h2 {
+    margin: 0;
+    color: var(--bkfl-navy);
+    font-size: clamp(1.25rem, 2.2vw, 1.4rem);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+}
+
+.bkfl-intro__card p {
+    margin: 0.85rem 0 0;
+    color: var(--bkfl-ink);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+}
+
+.bkfl-intro__card strong {
+    font-weight: 700;
+}
+
+/* Service tabs */
+.bkfl-tabs {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.28fr) minmax(0, 0.72fr);
+    gap: 1.25rem;
+    align-items: stretch;
+    padding-top: 0.5rem;
+}
+
+.bkfl-tabs__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    justify-content: center;
+}
+
+.bkfl-tabs__tab {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--bkfl-green);
+    border-radius: 0.375rem;
+    background: #fff;
+    color: var(--bkfl-navy);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.bkfl-tabs__tab:hover {
+    background: var(--bkfl-navy);
+    border-color: #fff;
+    color: #fff;
+}
+
+.bkfl-tabs__tab.is-active {
+    background: var(--bkfl-green);
+    border-color: #fff;
+    color: #fff;
+}
+
+.bkfl-tabs__panels {
+    min-width: 0;
+}
+
+.bkfl-tabs__panel {
+    display: none;
+}
+
+.bkfl-tabs__panel.is-active {
+    display: block;
+}
+
+.bkfl-tabs__media {
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #f3f4f6;
+}
+
+.bkfl-tabs__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.bkfl-tabs__cta {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    width: calc(100% - 2.5rem);
+    max-width: 28rem;
+    box-shadow: 0 10px 24px rgba(20, 30, 70, 0.28);
+}
+
+.bkfl-tabs__cta:hover {
+    transform: translateX(-50%) translateY(-1px);
+}
+
+/* Navy band */
+.bkfl-band {
+    background: var(--bkfl-navy);
+    color: #fff;
+    padding: 2.5rem 0;
+}
+
+.bkfl-band__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.bkfl-band__copy {
+    max-width: 48rem;
+}
+
+.bkfl-band__copy p {
+    margin: 0;
+    color: #fff;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+}
+
+.bkfl-band__copy p + p {
+    margin-top: 0.65rem;
+}
+
+.bkfl-band__copy strong {
+    font-weight: 700;
+}
+
+/* Software */
+.bkfl-software {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bkfl-mint);
+    background-image:
+        radial-gradient(circle at 12% 20%, rgba(76, 175, 80, 0.08), transparent 28%),
+        radial-gradient(circle at 88% 70%, rgba(46, 46, 128, 0.08), transparent 32%);
+    padding: 3.5rem 0;
+}
+
+.bkfl-software::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/images/bookkeeping-services-florida/hero-shape-1.svg");
+    background-repeat: no-repeat;
+    background-position: 72% -4rem;
+    background-size: min(42vw, 28rem);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.bkfl-software__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.bkfl-software__copy h2 {
+    margin: 0;
+    color: var(--bkfl-navy);
+    font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.bkfl-software__copy h2 span,
+.bkfl-software__copy h2 .bkfl-accent {
+    color: var(--bkfl-green);
+    display: inline-block;
+    border-bottom: 0.2rem solid var(--bkfl-green);
+    line-height: 1.15;
+    padding-bottom: 0.1rem;
+}
+
+.bkfl-software__copy p {
+    margin: 0.9rem 0 0;
+    color: var(--bkfl-ink);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+}
+
+.bkfl-software__media {
+    display: flex;
+    justify-content: center;
+}
+
+.bkfl-software__media img {
+    width: 81%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--bkfl-navy);
+    border-radius: 1rem;
+    background: #fff;
+}
+
+/* Best benefits */
+.bkfl-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.bkfl-benefit {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 0.85rem;
+    align-items: start;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    padding: 0.85rem 1rem 1.15rem 0;
+    height: 100%;
+}
+
+.bkfl-benefit__num {
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    margin: 0;
+    border-radius: 0.35rem;
+    background: var(--bkfl-num-bg, var(--bkfl-navy));
+    color: #fff;
+    font-size: 1.65rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
+.bkfl-benefit h3 {
+    margin: 0.15rem 0 0;
+    padding: 0;
+    color: var(--bkfl-ink);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.bkfl-benefit p {
+    margin: 0.4rem 0 0;
+    padding: 0;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+}
+
+/* What you get */
+.bkfl-what {
+    background: var(--bkfl-navy);
+    color: #fff;
+    padding: 3.25rem 0;
+}
+
+.bkfl-what__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.bkfl-what__copy h2 {
+    margin: 0 0 1.5rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.6vw, 1.7rem);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.bkfl-what__copy h2 .bkfl-accent {
+    color: var(--bkfl-green);
+}
+
+.bkfl-what__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 2rem;
+}
+
+.bkfl-what__lists ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.bkfl-what__lists li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    color: #fff;
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+.bkfl-what__check {
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    display: grid;
+    place-items: center;
+    margin-top: 0.1rem;
+    color: var(--bkfl-green);
+}
+
+.bkfl-what__check svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    fill: currentColor;
+}
+
+.bkfl-what__media {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bkfl-what__media img {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+    display: block;
+    border-radius: 0.5rem;
+}
+
+/* Stats */
+.bkfl-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.bkfl-stat {
+    text-align: center;
+    padding: 1.35rem 1rem;
+    border: 1px solid var(--bkfl-line);
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.bkfl-stat__value {
+    margin: 0;
+    color: var(--bkfl-navy);
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.bkfl-stat__label {
+    margin: 0.45rem 0 0;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Industries */
+.bkfl-industries {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+}
+
+.bkfl-industry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.15rem 0.75rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--bkfl-navy);
+    border-radius: 0.5rem;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.bkfl-industry img {
+    width: 4.7rem;
+    height: 4.7rem;
+    object-fit: contain;
+    display: block;
+}
+
+.bkfl-industry h3 {
+    margin: 0;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.bkfl-industry--link:hover {
+    border-color: var(--bkfl-green);
+    box-shadow: 0 8px 18px rgba(46, 46, 128, 0.1);
+    transform: translateY(-2px);
+}
+
+.bkfl-industry--link:hover h3 {
+    color: var(--bkfl-navy);
+}
+
+/* Save banner */
+.bkfl-save {
+    background: var(--bkfl-green);
+    padding: 2.75rem 0;
+}
+
+.bkfl-save__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.bkfl-save__copy {
+    max-width: 42rem;
+}
+
+.bkfl-save__inner h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.55rem, 2.8vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.bkfl-save__inner p {
+    margin: 0.65rem 0 0;
+    color: #fff;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Testimonials */
+.bkfl-testimonials {
+    background: var(--bkfl-cream);
+    padding: 3.25rem 0 3.75rem;
+}
+
+.bkfl-testimonials__eyebrow {
+    margin: 0 0 0.45rem !important;
+    color: var(--bkfl-green) !important;
+    font-size: 1.15rem !important;
+    font-weight: 600;
+}
+
+.bkfl-testimonials .bkfl-heading h2 {
+    color: var(--bkfl-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 700;
+}
+
+.bkfl-testimonials__carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    max-width: 52rem;
+    margin: 0 auto;
+}
+
+.bkfl-testimonials__viewport {
+    display: grid;
+    align-items: stretch;
+    min-height: 10rem;
+    background: var(--bkfl-cream);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.bkfl-testimonial {
+    grid-area: 1 / 1;
+    margin: 0;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 0;
+}
+
+.bkfl-testimonial.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.bkfl-testimonial p {
+    margin: 0;
+    color: #000;
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.65;
+}
+
+.bkfl-testimonial cite {
+    display: block;
+    margin-top: 1.25rem;
+    color: var(--bkfl-green);
+    font-style: normal;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.bkfl-testimonials__nav {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    background: transparent;
+    color: var(--bkfl-navy);
+    cursor: pointer;
+    font-size: 1.75rem;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.bkfl-testimonials__nav:hover {
+    opacity: 0.75;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .bkfl-hero__inner,
+    .bkfl-software__inner,
+    .bkfl-what__inner,
+    .bkfl-tabs {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .bkfl-tabs__nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .bkfl-tabs__tab {
+        flex: 1 1 calc(50% - 0.5rem);
+        justify-content: center;
+        text-align: center;
+    }
+
+    .bkfl-band__inner,
+    .bkfl-save__inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bkfl-benefits {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bkfl-industries {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bkfl-what__media {
+        justify-content: center;
+    }
+
+    .bkfl-software__media img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 720px) {
+    .bkfl-section,
+    .bkfl-software,
+    .bkfl-what,
+    .bkfl-band,
+    .bkfl-save,
+    .bkfl-testimonials {
+        padding: 2.25rem 0;
+    }
+
+    .bkfl-hero {
+        padding-bottom: 3.5rem;
+    }
+
+    .bkfl-hero__inner {
+        padding: 2.5rem 0 1.25rem;
+    }
+
+    .bkfl-intro {
+        margin-top: -2.5rem;
+    }
+
+    .bkfl-intro__card {
+        padding: 1.35rem 1.15rem 1.5rem;
+        border-radius: 1.25rem;
+    }
+
+    .bkfl-tabs__tab {
+        flex-basis: 100%;
+    }
+
+    .bkfl-tabs__cta {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        margin-top: 0.85rem;
+    }
+
+    .bkfl-tabs__cta:hover {
+        transform: translateY(-1px);
+    }
+
+    .bkfl-tabs__media {
+        padding-bottom: 0.85rem;
+        background: #fff;
+    }
+
+    .bkfl-benefits,
+    .bkfl-stats,
+    .bkfl-what__lists,
+    .bkfl-industries {
+        grid-template-columns: 1fr;
+    }
+
+    .bkfl-industries {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bkfl-btn {
+        width: 100%;
+    }
+
+    .bkfl-band__inner,
+    .bkfl-save__inner,
+    .bkfl-section__cta {
+        width: 100%;
+    }
+
+    .bkfl-save__inner .bkfl-btn {
+        width: 100%;
+    }
+
+    .bkfl-testimonials__carousel {
+        grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+        gap: 0.5rem;
+    }
+
+    .bkfl-hero__form .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}

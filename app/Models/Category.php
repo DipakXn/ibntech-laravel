@@ -60,6 +60,11 @@ class Category extends Model
         return $query->where('module', $module);
     }
 
+    public function scopeRoots(Builder $query): Builder
+    {
+        return $query->whereNull('parent_id');
+    }
+
     public function selfAndDescendantIds(): array
     {
         $this->loadMissing('childrenRecursive');

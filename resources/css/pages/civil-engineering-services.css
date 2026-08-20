@@ -1,0 +1,840 @@
+/* Civil Engineering Services — matched to WordPress XML content + PNG layout */
+
+.ces-page {
+    --ces-navy: #2e2e80;
+    --ces-navy-deep: #233166;
+    --ces-green: #4caf50;
+    --ces-green-soft: #61bd75;
+    --ces-green-dark: #3d9140;
+    --ces-sky: #2ca5d4;
+    --ces-orange: #f97316;
+    --ces-ink: #1f1d1d;
+    --ces-muted: #5f6470;
+    --ces-soft: #f7f9fb;
+    --ces-cream: #f6f0de;
+    --ces-line: rgba(46, 46, 128, 0.14);
+    color: var(--ces-ink);
+    background: #fff;
+}
+
+.ces-page [hidden] {
+    display: none !important;
+}
+
+.ces-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.9rem 1.45rem;
+    border-radius: 0.4rem;
+    border: 2px solid transparent;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.ces-btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: 0 0 auto;
+}
+
+.ces-btn:hover {
+    transform: translateY(-1px);
+}
+
+.ces-btn--green {
+    background: var(--ces-green);
+    border-color: var(--ces-green);
+    color: #fff;
+}
+
+.ces-btn--green:hover {
+    background: var(--ces-navy);
+    border-color: var(--ces-navy);
+    color: #fff;
+}
+
+.ces-btn--outline {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.ces-btn--outline:hover {
+    background: #fff;
+    color: var(--ces-navy);
+}
+
+.ces-btn--lg {
+    font-size: 0.98rem;
+    padding: 0.95rem 1.85rem;
+}
+
+.ces-section {
+    padding: 4.25rem 0;
+}
+
+.ces-section--soft {
+    background: var(--ces-soft);
+}
+
+.ces-heading {
+    margin-bottom: 2.35rem;
+}
+
+.ces-heading--center {
+    text-align: center;
+    max-width: 46rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ces-eyebrow {
+    margin: 0 0 0.55rem;
+    color: var(--ces-green);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.ces-eyebrow--light {
+    color: #b8f0bc;
+}
+
+.ces-heading h2 {
+    margin: 0;
+    color: var(--ces-navy);
+    font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.ces-heading--light h2 {
+    color: #fff;
+}
+
+.ces-heading p {
+    margin: 0.85rem 0 0;
+    color: var(--ces-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.ces-heading--light p {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* Hero */
+.ces-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background-color: var(--ces-navy-deep);
+    background-image:
+        linear-gradient(125deg, rgba(35, 49, 102, 0.94) 0%, rgba(46, 46, 128, 0.82) 46%, rgba(76, 175, 80, 0.78) 100%),
+        url('/images/civil-engineering-services/hero.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ces-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.82fr);
+    gap: 2.75rem;
+    align-items: center;
+    padding: 4rem 0 3.5rem;
+}
+
+.ces-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+}
+
+.ces-hero__lede {
+    max-width: 36rem;
+    margin: 1rem 0 0;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.75;
+}
+
+.ces-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 1.6rem 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 38rem;
+}
+
+.ces-hero__stats li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 0.7rem 0.75rem;
+    border: 1px solid rgba(46, 46, 128, 0.45);
+    border-radius: 0.35rem;
+    background: var(--ces-cream);
+    color: var(--ces-navy-deep);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.ces-hero__stats strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.ces-hero__stat-icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 1.55rem;
+    height: 1.55rem;
+    margin-top: 0.1rem;
+    color: var(--ces-navy);
+    font-size: 0.85rem;
+}
+
+.ces-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
+}
+
+.ces-hero__form {
+    position: relative;
+    z-index: 2;
+    scroll-margin-top: 6rem;
+    border-radius: 1rem;
+    background: #fff;
+    padding: 1.35rem 1.2rem 1.4rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
+    color: var(--ces-ink);
+}
+
+.ces-hero__form h2 {
+    margin: 0 0 1rem;
+    color: var(--ces-navy);
+    font-size: clamp(1.2rem, 2vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.ces-hero__form .contact-form {
+    gap: 0.7rem;
+}
+
+.ces-hero__form .contact-form__row {
+    grid-template-columns: 1fr;
+}
+
+.ces-hero__form .contact-form__field input,
+.ces-hero__form .contact-form__field select,
+.ces-hero__form .contact-form__field textarea,
+.ces-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #d0d5dd !important;
+    border-radius: 0.4rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+}
+
+.ces-hero__form .contact-form textarea {
+    min-height: 5.25rem;
+}
+
+.ces-hero__form .contact-form__terms,
+.ces-hero__form .contact-form__terms span {
+    color: var(--ces-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.ces-hero__form .contact-form__terms a {
+    color: var(--ces-navy) !important;
+    font-weight: 700;
+}
+
+.ces-hero__form .contact-form__submit {
+    margin-top: 0.15rem;
+    width: 100%;
+    border-radius: 0.35rem;
+    background: var(--ces-navy);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    padding: 0.95rem 1.5rem;
+}
+
+.ces-hero__form .contact-form__submit:hover {
+    background: var(--ces-green);
+}
+
+/* Challenge cards — 3 + 2 */
+.ces-challenge {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.ces-challenge__card {
+    flex: 1 1 17.5rem;
+    max-width: 22.5rem;
+    padding: 1.75rem 1.35rem 1.6rem;
+    border: 1px solid var(--ces-line);
+    border-radius: 0.75rem;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(20, 30, 70, 0.05);
+    text-align: center;
+}
+
+.ces-challenge__icon {
+    display: grid;
+    place-items: center;
+    width: 3.1rem;
+    height: 3.1rem;
+    margin: 0 auto 1rem;
+    color: var(--ces-green);
+    font-size: 1.55rem;
+}
+
+.ces-challenge__card h3 {
+    margin: 0;
+    color: var(--ces-navy);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ces-challenge__card p {
+    margin: 0.7rem 0 0;
+    color: var(--ces-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Dark navy solution section */
+.ces-solve {
+    padding: 4.25rem 0;
+    background: var(--ces-navy-deep);
+    color: #fff;
+}
+
+.ces-solve__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem 2.25rem;
+}
+
+.ces-solve__card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.ces-solve__icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    color: #fff;
+    font-size: 1.35rem;
+}
+
+.ces-solve__card h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ces-solve__card p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Roles on gradient */
+.ces-roles {
+    scroll-margin-top: 5.5rem;
+    padding: 4.25rem 0;
+    background: linear-gradient(125deg, #2e2e80 0%, #3d8b6e 52%, #4caf50 100%);
+    color: #fff;
+}
+
+.ces-roles__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem;
+}
+
+.ces-role {
+    padding: 1.65rem 1.5rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 0.85rem;
+    background: rgba(12, 18, 48, 0.42);
+    backdrop-filter: blur(6px);
+}
+
+.ces-role__icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-bottom: 0.85rem;
+    color: var(--ces-green-soft);
+    font-size: 1.4rem;
+}
+
+.ces-role h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.ces-role > p {
+    margin: 0.65rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.ces-role ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ces-role li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    color: #fff;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.ces-role li svg {
+    flex: 0 0 auto;
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-top: 0.28rem;
+    color: var(--ces-green-soft);
+}
+
+/* Comparison columns */
+.ces-compare {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--ces-line);
+    border-radius: 0.75rem;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(20, 30, 70, 0.06);
+}
+
+.ces-compare__col {
+    padding: 1.05rem 1.15rem;
+    color: #fff;
+    text-align: center;
+}
+
+.ces-compare__col h3 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ces-compare__col--navy {
+    background: var(--ces-navy-deep);
+}
+
+.ces-compare__col--sky {
+    background: #5b8def;
+}
+
+.ces-compare__col--green {
+    background: var(--ces-green);
+}
+
+.ces-compare__cell {
+    padding: 1.05rem 1.15rem;
+    border-top: 1px solid var(--ces-line);
+    color: var(--ces-ink);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.ces-compare__cell--no {
+    color: #b42318;
+    font-weight: 500;
+    background: #fff8f7;
+}
+
+.ces-compare__cell--yes {
+    color: #157347;
+    background: #f3faf4;
+}
+
+.ces-compare__cell span {
+    margin-right: 0.25rem;
+    font-weight: 700;
+}
+
+/* Onboarding */
+.ces-onboard-section {
+    padding-top: 3.75rem;
+}
+
+.ces-onboard__timeline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1.75rem;
+    margin: 0 0 2.35rem;
+    padding: 0;
+    list-style: none;
+    color: var(--ces-muted);
+    font-size: 0.95rem;
+}
+
+.ces-onboard__timeline strong {
+    color: var(--ces-navy);
+    margin-right: 0.35rem;
+}
+
+.ces-onboard {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+}
+
+.ces-onboard__step {
+    text-align: center;
+    padding: 0 0.2rem;
+}
+
+.ces-onboard__icon {
+    display: grid;
+    place-items: center;
+    width: 3.4rem;
+    height: 3.4rem;
+    margin: 0 auto 0.85rem;
+    border-radius: 50%;
+    background: var(--ces-step);
+    color: #fff;
+    font-size: 1.15rem;
+    box-shadow: 0 8px 18px rgba(46, 46, 128, 0.22);
+}
+
+.ces-onboard__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    margin: 0 0 1rem;
+    padding: 0.55rem 1.6rem 0.55rem 1.35rem;
+    background: var(--ces-step);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 16px 50%);
+}
+
+.ces-onboard__chevron--last {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 16px 50%);
+}
+
+.ces-onboard__step h3 {
+    margin: 0;
+    color: var(--ces-step);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ces-onboard__step > p {
+    margin: 0.55rem 0 0;
+    color: var(--ces-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.ces-onboard__badge {
+    display: inline-block;
+    margin-top: 0.75rem !important;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(46, 46, 128, 0.08);
+    color: var(--ces-step) !important;
+    font-size: 0.78rem !important;
+    font-weight: 700;
+}
+
+/* Why IBN */
+.ces-why {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.ces-why__card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1.35rem 1.2rem;
+    border: 1px solid rgba(46, 46, 128, 0.08);
+    border-radius: 0.75rem;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(20, 30, 70, 0.05);
+}
+
+.ces-why__icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 50%;
+    background: var(--ces-green);
+    color: #fff;
+    font-size: 0.75rem;
+}
+
+.ces-why__card h3 {
+    margin: 0;
+    color: var(--ces-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ces-why__card p {
+    margin: 0.4rem 0 0;
+    color: var(--ces-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+/* CTA banner */
+.ces-cta {
+    padding: 3.5rem 0;
+    background: linear-gradient(90deg, var(--ces-green) 0%, #3d8b6e 42%, var(--ces-navy) 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.ces-cta__inner {
+    max-width: 44rem;
+}
+
+.ces-cta h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.ces-cta p:not(.ces-eyebrow) {
+    margin: 0.75rem 0 1.5rem;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.ces-cta .ces-btn--green {
+    background: var(--ces-green);
+    border-color: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.ces-cta .ces-btn--green:hover {
+    background: #fff;
+    border-color: #fff;
+    color: var(--ces-navy);
+}
+
+/* Software logos */
+.ces-software {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem 2.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ces-software li {
+    flex: 0 1 calc(25% - 2.25rem);
+    display: grid;
+    place-items: center;
+    min-height: 5.25rem;
+    max-width: 14rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(46, 46, 128, 0.08);
+    border-radius: 0.65rem;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(20, 30, 70, 0.04);
+}
+
+.ces-software img {
+    display: block;
+    width: auto;
+    max-width: 8.75rem;
+    height: auto;
+    max-height: 2.85rem;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.78;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .ces-hero__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3.25rem 0 2.75rem;
+    }
+
+    .ces-hero__stats {
+        max-width: none;
+    }
+
+    .ces-hero__form {
+        max-width: 32rem;
+        margin-inline: auto;
+        width: 100%;
+    }
+
+    .ces-solve__grid,
+    .ces-roles__grid,
+    .ces-why {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ces-onboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem 1.5rem;
+    }
+
+    .ces-software li {
+        flex-basis: calc(33.333% - 2rem);
+    }
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+    .ces-section,
+    .ces-solve,
+    .ces-roles,
+    .ces-cta {
+        padding: 2.75rem 0;
+    }
+
+    .ces-hero__inner {
+        padding: 2.5rem 0 2rem;
+    }
+
+    .ces-hero__stats,
+    .ces-solve__grid,
+    .ces-roles__grid,
+    .ces-why,
+    .ces-onboard {
+        grid-template-columns: 1fr;
+    }
+
+    .ces-compare {
+        font-size: 0.82rem;
+    }
+
+    .ces-compare__col,
+    .ces-compare__cell {
+        padding: 0.8rem 0.55rem;
+    }
+
+    .ces-compare__col h3 {
+        font-size: 0.78rem;
+    }
+
+    .ces-hero__stats {
+        display: grid;
+    }
+
+    .ces-hero__actions,
+    .ces-btn {
+        width: 100%;
+    }
+
+    .ces-compare {
+        border-radius: 0.65rem;
+    }
+
+    .ces-compare__col,
+    .ces-compare__cell {
+        text-align: left;
+    }
+
+    .ces-software li {
+        flex-basis: calc(50% - 1rem);
+        max-width: none;
+    }
+
+    .ces-hero__form .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ces-btn {
+        transition: none;
+    }
+
+    .ces-btn:hover {
+        transform: none;
+    }
+}

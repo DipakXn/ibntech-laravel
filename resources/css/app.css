@@ -900,10 +900,36 @@ p {
     letter-spacing: 0.02em;
 }
 
+.blog-breadcrumb__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.blog-breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.blog-breadcrumb__item:not(:last-child)::after {
+    content: '\00bb';
+    color: #090b18;
+    font-weight: 500;
+}
+
 .blog-breadcrumb a {
     color: var(--site-navy);
     text-decoration: none;
     font-weight: 700;
+}
+
+.blog-breadcrumb a:hover {
+    text-decoration: underline;
 }
 
 .blog-layout {
@@ -963,11 +989,17 @@ p {
 }
 
 .blog-category-card__image img,
-.blog-post-card__image img,
-.blog-detail__hero-image img {
+.blog-post-card__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.blog-detail__hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .blog-category-card__image > img,
@@ -1115,7 +1147,7 @@ p {
 }
 
 .blog-post-card h2 {
-    font-size: 1.16rem;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1.28;
 }
@@ -1154,6 +1186,66 @@ p {
     margin-top: 2rem;
 }
 
+.blog-pagination__nav {
+    display: flex;
+    justify-content: center;
+}
+
+.blog-pagination__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.blog-pagination__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.7rem;
+    border: 1px solid rgba(9, 11, 24, 0.12);
+    border-radius: 0.45rem;
+    color: var(--site-navy);
+    background: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.blog-pagination__item.is-active .blog-pagination__link {
+    border-color: var(--site-navy);
+    background: var(--site-navy);
+    color: #fff;
+}
+
+.blog-pagination__item.is-disabled .blog-pagination__link {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.blog-pagination__item:not(.is-disabled):not(.is-active) .blog-pagination__link:hover {
+    border-color: var(--site-navy);
+    background: rgba(45, 48, 109, 0.06);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .blog-image-placeholder {
     display: grid;
     place-items: center;
@@ -1186,12 +1278,11 @@ p {
 }
 
 .blog-detail__main h1 {
-    max-width: 32ch;
     color: var(--site-navy);
     font-size: clamp(1.7rem, 2.7vw, 2.35rem);
     font-weight: 600;
     letter-spacing: 0.03em;
-    line-height: 1.45;
+    line-height: 1.2;
 }
 
 .blog-detail__meta {
@@ -1214,9 +1305,7 @@ p {
 }
 
 .blog-detail__hero-image {
-    overflow: hidden;
     width: 100%;
-    aspect-ratio: 16 / 7.8;
     margin-top: 1.25rem;
     background: #eef6f5;
 }
@@ -1288,13 +1377,9 @@ p {
     display: grid;
     gap: 1.25rem;
     position: sticky;
-    /* top: 1rem; */
     top: 7.5rem;
     align-self: start;
-    /* max-height: calc(100vh - 2rem); */
-    max-height: calc(100vh - rem);
-    overflow-y: auto;
-    padding-right: 0.15rem;
+    min-width: 0;
 }
 
 .blog-inquiry {
@@ -1328,7 +1413,7 @@ p {
 }
 
 .blog-inquiry .contact-form textarea {
-    min-height: 5rem;
+    min-height: 0;
 }
 
 .blog-inquiry .contact-form__terms {
@@ -1398,6 +1483,7 @@ p {
     border-radius: 8px;
     background: #f3f4fb;
     padding: 1.35rem;
+    min-width: 0;
 }
 
 .blog-company-card h2 {
@@ -1428,6 +1514,7 @@ p {
     font-size: 0.84rem;
     font-weight: 700;
     text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .blog-company-card a {
@@ -1442,6 +1529,8 @@ p {
     color: #fff;
     text-decoration: none;
     font-weight: 700;
+    max-width: 100%;
+    box-sizing: border-box;
 }@media (max-width: 1100px) {
     .blog-layout,
                         .blog-detail__layout,
@@ -1492,9 +1581,5 @@ p {
                         .blog-share {
                             justify-content: flex-start;
                             flex-wrap: wrap;
-                        }
-
-                        .blog-detail__hero-image {
-                            aspect-ratio: 16 / 10;
                         }
 }

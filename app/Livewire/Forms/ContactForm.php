@@ -49,6 +49,8 @@ class ContactForm extends Component
 
     public string $messagePlaceholder = 'Tell us how we can help';
 
+    public ?int $messageRows = null;
+
     /**
      * @var list<string>
      */
@@ -75,6 +77,7 @@ class ContactForm extends Component
         string $servicePlaceholder = 'Select Service',
         string $messagePlaceholder = 'Tell us how we can help',
         ?string $initialService = null,
+        ?int $messageRows = null,
     ): void {
         $this->showCompany = $showCompany;
         $this->showService = $showService;
@@ -84,6 +87,7 @@ class ContactForm extends Component
         $this->submitLabel = $submitLabel !== '' ? $submitLabel : 'Submit';
         $this->servicePlaceholder = $servicePlaceholder !== '' ? $servicePlaceholder : 'Select Service';
         $this->messagePlaceholder = $messagePlaceholder !== '' ? $messagePlaceholder : 'Tell us how we can help';
+        $this->messageRows = $messageRows !== null && $messageRows > 0 ? $messageRows : null;
         if (is_array($serviceOptions) && $serviceOptions !== []) {
             $this->serviceOptions = array_values(array_filter(
                 $serviceOptions,

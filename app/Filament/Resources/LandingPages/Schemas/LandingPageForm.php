@@ -5,6 +5,7 @@ namespace App\Filament\Resources\LandingPages\Schemas;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Schemas\SeoMetaSchema;
 use App\Helpers\TemplateHelper;
+use App\Models\LandingPage;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -32,6 +33,19 @@ class LandingPageForm
                         Select::make('template')
                             ->options(TemplateHelper::landingPageTemplateOptions())
                             ->required(),
+                        Select::make('thank_you_slug')
+                            ->label('Thank You Page')
+                            ->placeholder('No redirect (on-page success)')
+                            ->helperText('Successful form submissions redirect to this landing page. Leave empty when the campaign has no thank you page.')
+                            ->options(fn (): array => LandingPage::query()
+                                ->orderBy('title')
+                                ->get()
+                                ->mapWithKeys(fn (LandingPage $page): array => [
+                                    $page->slug => $page->title.' (/lp/'.$page->slug.'/)',
+                                ])
+                                ->all())
+                            ->searchable()
+                            ->columnSpanFull(),
                     ])
                     ->columns(2)
                     ->columnSpan([

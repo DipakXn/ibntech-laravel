@@ -91,7 +91,7 @@ class WebsiteSettingService
                     'address' => 'Kohinoor House, 2nd floor, 691/A/1B, Plot no. 7, Bibwewadi Road, Pune-411037, Maharashtra, India',
                     'email' => 'sales@ibntech.com',
                     'phones' => [
-                        ['label' => null, 'number' => '020-711-79586'],
+                        ['label' => null, 'number' => '020-6768-0404'],
                     ],
                 ],
             ],

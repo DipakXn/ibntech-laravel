@@ -43,7 +43,7 @@ class LeadForm
                             ->content(fn (?Lead $record): string => $record?->asset_title ?: '—'),
                         Select::make('form_name')
                             ->label('Form')
-                            ->options(Lead::FORM_OPTIONS)
+                            ->options(Lead::formOptions())
                             ->required(),
                         Textarea::make('message')
                             ->rows(4)

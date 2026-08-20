@@ -27,7 +27,7 @@
             'flag' => 'in',
             'email' => 'sales@ibntech.com',
             'phones' => [
-                ['label' => null, 'number' => '020-711-79586'],
+                ['label' => null, 'number' => '020-6768-0404'],
             ],
         ],
     ];
@@ -76,10 +76,10 @@
 <footer class="site-footer" role="contentinfo">
     <div class="site-shell site-footer__grid">
         <section class="site-footer__column" aria-labelledby="footer-address-heading">
-            <h3 id="footer-address-heading" class="site-footer__heading">
+            <p id="footer-address-heading" class="site-footer__heading">
                 <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                 Address
-            </h3>
+            </p>
 
             @foreach ($offices as $office)
                 <div class="site-footer__address-card">
@@ -137,86 +137,86 @@
         </section>
 
         <section class="site-footer__column site-footer__column--wide" aria-labelledby="footer-services-heading">
-            <h3 id="footer-services-heading" class="site-footer__heading">
+            <p id="footer-services-heading" class="site-footer__heading">
                 <i class="fa-solid fa-gears" aria-hidden="true"></i>
                 Services
-            </h3>
+            </p>
 
             <div class="site-footer__service-grid">
                 <div class="site-footer__service-group">
-                    <h4>Cybersecurity Services</h4>
+                    <p class="site-footer__group-heading">Cybersecurity Services</p>
                     <ul class="site-footer__service-list">
                         <li>
                             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                             <a href="{{ route('page.show', ['slug' => 'vapt-services']) }}">VAPT Services</a>
                         </li>
-                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>SOC &amp; SIEM</span></li>
-                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>MDR Services</span></li>
-                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>vCISO Services</span></li>
-                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>Microsoft Security</span></li>
+                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'managed-siem-soc-services']) }}">SOC &amp; SIEM</a></li>
+                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'managed-detection-response-services']) }}">MDR Services</a></li>
+                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'vciso-services']) }}">vCISO Services</a></li>
+                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'microsoft-security-services']) }}">Microsoft Security</a></li>
                     </ul>
                 </div>
 
                 <div class="site-footer__service-group">
-                    <h4>Finance &amp; Accounting</h4>
+                    <p class="site-footer__group-heading">Finance &amp; Accounting</p>
                     <ul class="site-footer__service-list">
-                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><span>Bookkeeping Services</span></li>
-                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><span>Tax Return Preparation Services</span></li>
-                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><span>Payroll Services</span></li>
-                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><span>AP/AR Services</span></li>
+                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'bookkeeping-services']) }}">Bookkeeping Services</a></li>
+                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'us-uk-tax-preparation-services']) }}">Tax Return Preparation Services</a></li>
+                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'payroll-processing']) }}">Payroll Services</a></li>
+                        <li><i class="fa-solid fa-calculator" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'accounts-payable-and-accounts-receivable-services']) }}">AP/AR Services</a></li>
                     </ul>
                 </div>
 
                 <div class="site-footer__service-group">
-                    <h4>Cloud Services</h4>
+                    <p class="site-footer__group-heading">Cloud Services</p>
                     <ul class="site-footer__service-list">
-                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><span>Multi Cloud Consulting and Migration Services</span></li>
-                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><span>Managed Cloud and Security Services</span></li>
-                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><span>Business Continuity and Disaster Recovery</span></li>
-                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><span>DevSecOps Implementation Services</span></li>
+                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'cloud-consulting-and-migration-services']) }}">Multi Cloud Consulting and Migration Services</a></li>
+                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'cloud-managed-services']) }}">Managed Cloud and Security Services</a></li>
+                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'business-continuity-disaster-recovery-services']) }}">Business Continuity and Disaster Recovery</a></li>
+                        <li><i class="fa-solid fa-cloud" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'devsecops-services']) }}">DevSecOps Implementation Services</a></li>
                     </ul>
                 </div>
 
                 <div class="site-footer__service-group">
-                    <h4>Automation</h4>
+                    <p class="site-footer__group-heading">Automation</p>
                     <ul class="site-footer__service-list">
-                        <li><i class="fa-solid fa-robot" aria-hidden="true"></i><span>AP/AR Automation</span></li>
-                        <li><i class="fa-solid fa-robot" aria-hidden="true"></i><span>RPA Implementation</span></li>
+                        <li><i class="fa-solid fa-robot" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'ap-ar-automation']) }}">AP/AR Automation</a></li>
+                        <li><i class="fa-solid fa-robot" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'robotics-process-automation']) }}">RPA Implementation</a></li>
                     </ul>
 
-                    <h4 class="site-footer__subheading">BPO Services</h4>
+                    <p class="site-footer__subheading">BPO Services</p>
                     <ul class="site-footer__service-list">
-                        <li><i class="fa-solid fa-building" aria-hidden="true"></i><span>Construction Documentation Services</span></li>
-                        <li><i class="fa-solid fa-building" aria-hidden="true"></i><span>Construction Takeoff and Estimation Services</span></li>
-                        <li><i class="fa-solid fa-building" aria-hidden="true"></i><span>Fund Middle and Back Office Services</span></li>
+                        <li><i class="fa-solid fa-building" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'construction-documentation-services']) }}">Construction Documentation Services</a></li>
+                        <li><i class="fa-solid fa-building" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'construction-takeoff-estimation-services']) }}">Construction Takeoff and Estimation Services</a></li>
+                        <li><i class="fa-solid fa-building" aria-hidden="true"></i><a href="{{ route('page.show', ['slug' => 'back-and-middle-office-services']) }}">Fund Middle and Back Office Services</a></li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section class="site-footer__column" aria-labelledby="footer-company-heading">
-            <h3 id="footer-company-heading" class="site-footer__heading">
+            <p id="footer-company-heading" class="site-footer__heading">
                 <i class="fa-solid fa-building" aria-hidden="true"></i>
                 Company
-            </h3>
+            </p>
 
             <nav aria-label="Company">
                 <ul class="site-footer__links">
-                    <li><a href="{{ route('page.show', ['slug' => 'about']) }}"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>About Us</span></a></li>
+                    <li><a href="{{ route('page.show', ['slug' => 'about-ibn']) }}"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>About Us</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'our-vision']) }}"><i class="fa-regular fa-eye" aria-hidden="true"></i><span>Vision and Mission</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'services']) }}"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Thought Leadership</span></a></li>
                     <li><a href="{{ route('case-studies.index') }}"><i class="fa-solid fa-trophy" aria-hidden="true"></i><span>Awards and Recognition</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'about']) }}"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>History</span></a></li>
-                    <li><a href="{{ route('page.show', ['slug' => 'contact']) }}"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Career</span></a></li>
+                    <li><a href="{{ route('page.show', ['slug' => 'current-job-opening']) }}"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Career</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'contact']) }}"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Contact Us</span></a></li>
                 </ul>
             </nav>
 
             <div class="site-footer__stack">
-                <h3 id="footer-insights-heading" class="site-footer__heading">
+                <p id="footer-insights-heading" class="site-footer__heading">
                     <i class="fa-solid fa-book-open-reader" aria-hidden="true"></i>
                     Insights &amp; Resources
-                </h3>
+                </p>
 
                 <nav aria-label="Insights and resources">
                     <ul class="site-footer__links">
@@ -226,7 +226,7 @@
                         <li><a href="{{ route('ebooks.index') }}"><i class="fa-solid fa-book" aria-hidden="true"></i><span>eBooks</span></a></li>
                         <li><a href="{{ route('white-papers.index') }}"><i class="fa-regular fa-folder-open" aria-hidden="true"></i><span>White Papers &amp; Reports</span></a></li>
                         <li><a href="{{ route('blog.index') }}"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i><span>Articles</span></a></li>
-                        <li><a href="{{ route('page.show', ['slug' => 'contact']) }}"><i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>FAQ's</span></a></li>
+                        <li><a href="{{ route('page.show', ['slug' => 'faq']) }}"><i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>FAQ's</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -253,9 +253,9 @@
         <div class="site-shell site-footer__bottom-inner">
             <p>All Rights Reserved &copy; {{ now()->year }} {{ $organizationName }}</p>
             <nav class="site-footer__legal" aria-label="Legal">
-                <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>
-                <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms and Conditions</a>
-                <a href="{{ route('page.show', ['slug' => 'contact']) }}">Cookies Policy</a>
+                <a href="{{ route('page.show', ['slug' => 'privacy-policy']) }}">Privacy Policy</a>
+                <a href="{{ route('page.show', ['slug' => 'terms-of-use']) }}">Terms and Conditions</a>
+                <a href="{{ route('page.show', ['slug' => 'cookies-policy']) }}">Cookies Policy</a>
             </nav>
         </div>
     </div>

@@ -9,9 +9,13 @@
 
     <section class="blog-page blog-page--category">
         <div class="site-shell">
-            <nav class="blog-breadcrumb" aria-label="Breadcrumb">
-                <a href="{{ route('home') }}">Home</a> <span>&raquo;</span> <span>{{ $category->name }}</span>
-            </nav>
+            @include('blog.partials.breadcrumb', [
+                'items' => [
+                    ['label' => 'Home', 'url' => route('home')],
+                    ['label' => 'Blog', 'url' => route('blog.index')],
+                    ['label' => $category->name, 'url' => route('blog.category', $category->slug)],
+                ],
+            ])
 
             <div class="blog-post-grid">
                 @forelse($blogs as $blog)
@@ -21,7 +25,9 @@
                 @endforelse
             </div>
 
-            <div class="blog-pagination">{{ $blogs->links() }}</div>
+            <div class="blog-pagination">
+                {{ $blogs->onEachSide(1)->links('blog.partials.pagination') }}
+            </div>
         </div>
     </section>
 @endsection

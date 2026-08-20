@@ -12,7 +12,7 @@ class BlogRepository
     {
         return Blog::query()
             ->published()
-            ->with(['category', 'tags', 'seoMeta', 'media'])
+            ->with(['category', 'seoMeta', 'media'])
             ->when($categorySlug, function ($query) use ($categorySlug) {
                 $query->whereHas('category', fn ($categoryQuery) => $categoryQuery->where('slug', $categorySlug));
             })
@@ -28,11 +28,11 @@ class BlogRepository
             ->withQueryString();
     }
 
-    public function paginatePublishedForCategoryIds(array $categoryIds, int $perPage = 9): LengthAwarePaginator
+    public function paginatePublishedForCategoryIds(array $categoryIds, int $perPage = 15): LengthAwarePaginator
     {
         return Blog::query()
             ->published()
-            ->with(['category', 'tags', 'seoMeta', 'media'])
+            ->with(['category', 'seoMeta', 'media'])
             ->whereIn('category_id', $categoryIds)
             ->latest()
             ->paginate($perPage)
@@ -43,7 +43,7 @@ class BlogRepository
     {
         return Blog::query()
             ->published()
-            ->with(['category', 'tags', 'seoMeta', 'media'])
+            ->with(['category', 'seoMeta', 'media'])
             ->where('slug', $slug)
             ->first();
     }

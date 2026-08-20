@@ -60,6 +60,7 @@
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>
             and
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms &amp; Conditions</a>.
+            <x-forms.messaging-consent-tooltip />
         </span>
     </label>
     @error('acceptedTerms') <p class="contact-form__error">{{ $message }}</p> @enderror

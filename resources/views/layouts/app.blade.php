@@ -52,6 +52,12 @@
     @endif
 
     <link rel="canonical" href="{{ $seo['canonical_url'] ?? url()->current() }}">
+    @if(!empty($seo['link_prev']))
+        <link rel="prev" href="{{ $seo['link_prev'] }}">
+    @endif
+    @if(!empty($seo['link_next']))
+        <link rel="next" href="{{ $seo['link_next'] }}">
+    @endif
 
     {{-- Article metadata --}}
     @if(!empty($seo['article_author']))

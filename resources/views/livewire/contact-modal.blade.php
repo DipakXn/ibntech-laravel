@@ -7,7 +7,7 @@
 <div
     x-data="contactModal()"
     x-on:open-contact-modal.window="$wire.open($event.detail?.service ?? null, $event.detail?.variant ?? null)"
-    x-on:keydown.escape.window="if ($wire.isOpen) close()"
+    x-on:keydown.escape.window="if ($wire.isOpen && !document.querySelector('[data-consent-tooltip].is-open')) close()"
     x-cloak
 >
     @if ($isOpen)

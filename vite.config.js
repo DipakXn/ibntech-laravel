@@ -8,6 +8,14 @@ const pageCssEntries = readdirSync(join('resources', 'css', 'pages'))
     .filter((file) => file.endsWith('.css'))
     .map((file) => `resources/css/pages/${file}`);
 
+const industryCssEntries = readdirSync(join('resources', 'css', 'industries'))
+    .filter((file) => file.endsWith('.css'))
+    .map((file) => `resources/css/industries/${file}`);
+
+const landingPageCssEntries = readdirSync(join('resources', 'css', 'landing-pages'))
+    .filter((file) => file.endsWith('.css'))
+    .map((file) => `resources/css/landing-pages/${file}`);
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -16,6 +24,8 @@ export default defineConfig({
                 'resources/css/filament/admin/theme.css',
                 'resources/js/app.js',
                 ...pageCssEntries,
+                ...industryCssEntries,
+                ...landingPageCssEntries,
             ],
             refresh: true,
         }),

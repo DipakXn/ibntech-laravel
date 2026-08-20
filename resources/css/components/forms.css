@@ -225,6 +225,89 @@
     text-decoration: none;
 }
 
+/* Messaging consent tooltip — matches live IBN Technologies forms */
+.consent-tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.2rem;
+    color: #0073e6;
+    font-size: 16px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.consent-tooltip__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.consent-tooltip__trigger:focus-visible {
+    outline: 2px solid #0073e6;
+    outline-offset: 2px;
+    border-radius: 999px;
+}
+
+.consent-tooltip__trigger svg {
+    display: block;
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.consent-tooltip__content {
+    visibility: hidden;
+    position: absolute;
+    z-index: 999;
+    bottom: 125%;
+    left: 50%;
+    box-sizing: border-box;
+    width: 430px;
+    max-width: 90vw;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background-color: #4caf50;
+    padding: 10px;
+    color: #fff !important;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.consent-tooltip:hover .consent-tooltip__content,
+.consent-tooltip:focus-within .consent-tooltip__content,
+.consent-tooltip.is-open .consent-tooltip__content {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+    .consent-tooltip__content {
+        bottom: 140%;
+        left: -150% !important;
+        width: max-content;
+        max-width: min(90vw, 18rem);
+        transform: none;
+        padding: 8px;
+        font-size: 11px;
+        line-height: 15px;
+    }
+}
+
 .contact-form__submit {
     display: inline-flex;
     align-items: center;
@@ -371,4 +454,28 @@
     .form-card {
                     padding: 1.4rem;
                 }
+}
+
+.honeypot-field {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.landing-inquiry-form {
+    position: relative;
+}
+
+.landing-inquiry-form .contact-form__field--message {
+    background: #fff;
+}
+
+.landing-inquiry-form .newsletter-form__terms {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: start;
 }

@@ -1,0 +1,626 @@
+/* Finance and Accounting Services — matched to WordPress screenshot */
+
+html {
+    scroll-behavior: smooth;
+}
+
+.fas-page {
+    --fas-navy: #282c74;
+    --fas-navy-deep: #1f1f5c;
+    --fas-green: #4caf50;
+    --fas-green-dark: #3d9140;
+    --fas-ink: #1f1d1d;
+    --fas-muted: #5b5b5b;
+    --fas-soft: #f8f9fa;
+    --fas-line: rgba(40, 44, 116, 0.16);
+    --fas-star: #f5b400;
+    color: var(--fas-ink);
+    background: #fff;
+}
+
+.fas-page a:focus-visible,
+.fas-page button:focus-visible {
+    outline: 2px solid var(--fas-navy);
+    outline-offset: 3px;
+}
+
+.fas-intro {
+    max-width: 46rem;
+    margin: 0 auto 2.75rem;
+    text-align: center;
+}
+
+.fas-intro h2 {
+    margin: 0;
+    color: var(--fas-navy);
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.fas-intro p {
+    margin: 0.85rem 0 0;
+    color: var(--fas-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.fas-intro--light h2,
+.fas-intro--light p {
+    color: #fff;
+}
+
+.fas-intro--light p {
+    opacity: 0.94;
+}
+
+.fas-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.05rem;
+    padding: 0.85rem 1.55rem;
+    border-radius: 0.45rem;
+    border: 1px solid transparent;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.fas-btn:hover {
+    transform: translateY(-1px);
+}
+
+.fas-btn--light {
+    background: #fff;
+    border-color: #fff;
+    color: var(--fas-navy);
+    box-shadow: 0 10px 24px rgba(8, 10, 40, 0.18);
+}
+
+.fas-btn--light:hover {
+    background: #f3f5ff;
+    color: var(--fas-navy-deep);
+}
+
+.fas-btn--ghost {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.88);
+    color: #fff;
+}
+
+.fas-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.fas-btn--navy {
+    background: var(--fas-navy);
+    border-color: var(--fas-navy);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(40, 44, 116, 0.22);
+}
+
+.fas-btn--navy:hover {
+    background: var(--fas-navy-deep);
+    border-color: var(--fas-navy-deep);
+    color: #fff;
+}
+
+/* Hero */
+.fas-hero {
+    background: var(--fas-navy);
+    color: #fff;
+}
+
+.fas-hero__inner {
+    max-width: 52rem;
+    padding: 4.75rem 0 4.5rem;
+    text-align: center;
+}
+
+.fas-hero h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2rem, 4.2vw, 3.15rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.fas-hero p {
+    margin: 1.25rem 0 0;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.fas-hero p strong {
+    font-weight: 700;
+}
+
+.fas-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.fas-hero__actions .fas-btn {
+    min-width: 14.5rem;
+    text-transform: uppercase;
+}
+
+/* Benefits */
+.fas-benefits,
+.fas-services,
+.fas-consult {
+    scroll-margin-top: 5.5rem;
+}
+
+.fas-benefits {
+    padding: 4.5rem 0 4.25rem;
+    background: var(--fas-soft);
+}
+
+.fas-benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+}
+
+.fas-benefit {
+    min-height: 100%;
+    padding: 1.65rem 1.45rem 1.55rem;
+    border: 1px solid rgba(40, 44, 116, 0.08);
+    border-radius: 0.7rem;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(20, 24, 70, 0.06);
+}
+
+.fas-benefit__icon {
+    display: inline-flex;
+    color: var(--fas-navy);
+}
+
+.fas-benefit__icon svg {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.fas-benefit h3 {
+    margin: 0.9rem 0 0;
+    color: var(--fas-ink);
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.fas-benefit p {
+    margin: 0.7rem 0 0;
+    color: var(--fas-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Services */
+.fas-services {
+    padding: 4.5rem 0 4.35rem;
+    background: #fff;
+}
+
+.fas-services__list {
+    display: grid;
+    gap: 1.75rem;
+}
+
+.fas-service {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.25rem;
+    align-items: center;
+    padding: 1.15rem;
+    border: 1px solid var(--fas-navy);
+    background: #fff;
+}
+
+.fas-service--reverse {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+}
+
+.fas-service--reverse .fas-service__media {
+    order: 2;
+}
+
+.fas-service--reverse .fas-service__copy {
+    order: 1;
+}
+
+.fas-service__media {
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    border: 2px solid var(--fas-navy);
+    background: #eef0f7;
+}
+
+.fas-service__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fas-service__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1rem 0.5rem 0.25rem;
+}
+
+.fas-service__copy h3 {
+    margin: 0;
+    color: var(--fas-navy);
+    font-size: clamp(1.35rem, 2.3vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.fas-service__copy p {
+    margin: 0.9rem 0 1.35rem;
+    color: var(--fas-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Stats */
+.fas-stats {
+    padding: 4.35rem 0 4.15rem;
+    background: var(--fas-navy);
+    color: #fff;
+}
+
+.fas-stats .fas-intro {
+    margin-bottom: 2.4rem;
+}
+
+.fas-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.fas-stat__value {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.6rem, 5vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.fas-stat h3 {
+    margin: 0.7rem 0 0;
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+/* Testimonials */
+.fas-testimonials {
+    padding: 4.5rem 0 4.25rem;
+    background: var(--fas-soft);
+}
+
+.fas-testimonials__carousel {
+    display: grid;
+    gap: 1.35rem;
+}
+
+.fas-testimonials__viewport {
+    overflow: hidden;
+}
+
+.fas-testimonials__track {
+    display: flex;
+    transition: transform 0.45s ease;
+}
+
+.fas-testimonials__page {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+.fas-quote {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 1.55rem 1.4rem 1.4rem;
+    border: 1px solid rgba(40, 44, 116, 0.1);
+    border-radius: 0.7rem;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(20, 24, 70, 0.05);
+}
+
+.fas-quote__head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.fas-quote__head img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: contain;
+    background: #f4f6fb;
+    border: 1px solid rgba(40, 44, 116, 0.1);
+}
+
+.fas-quote__head h3 {
+    margin: 0;
+    color: var(--fas-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.fas-quote__head p {
+    margin: 0.2rem 0 0;
+    color: var(--fas-muted);
+    font-size: 0.86rem;
+    line-height: 1.45;
+}
+
+.fas-quote__stars {
+    display: flex;
+    gap: 0.2rem;
+    margin: 0.85rem 0 0;
+    color: var(--fas-star);
+    font-size: 0.82rem;
+}
+
+.fas-quote blockquote {
+    margin: 0.75rem 0 0;
+}
+
+.fas-quote blockquote p {
+    margin: 0;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.7;
+}
+
+.fas-testimonials__dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    justify-content: center;
+}
+
+.fas-testimonials__dot {
+    width: 0.62rem;
+    height: 0.62rem;
+    border: 0;
+    border-radius: 50%;
+    background: #c5c7d6;
+    cursor: pointer;
+    padding: 0;
+}
+
+.fas-testimonials__dot.is-active {
+    background: var(--fas-navy);
+}
+
+/* Consultation form */
+.fas-consult {
+    padding: 4.5rem 0 4.75rem;
+    background: var(--fas-navy);
+}
+
+.fas-consult .fas-intro {
+    max-width: 48rem;
+    margin-bottom: 2.15rem;
+}
+
+.fas-consult__card {
+    width: min(52rem, 100%);
+    margin: 0 auto;
+    padding: 2rem 1.85rem 1.7rem;
+    border-radius: 0.85rem;
+    background: #fff;
+    box-shadow: 0 22px 48px rgba(8, 10, 40, 0.22);
+    overflow: visible;
+}
+
+.fas-consult__card > h3 {
+    margin: 0 0 1.25rem;
+    color: var(--fas-ink);
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.fas-consult__card .contact-form {
+    gap: 0.9rem;
+}
+
+.fas-consult__card .contact-form__field:has(.phone-input-field),
+.fas-consult__card .contact-form__row:has(.phone-input-field) {
+    overflow: visible;
+    z-index: 30;
+}
+
+.fas-consult__card .phone-input-field,
+.fas-consult__card .phone-input-field .iti {
+    width: 100%;
+}
+
+.fas-consult__card .phone-input-field .iti__dropdown-content,
+.fas-consult__card .phone-input-field .iti__country-list {
+    z-index: 40;
+}
+
+.fas-consult__card .contact-form select,
+.fas-consult__card .contact-form input:not([type='checkbox']):not([type='hidden']),
+.fas-consult__card .contact-form textarea,
+.fas-consult__card .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(40, 44, 116, 0.18);
+    background: #fff;
+    color: var(--fas-ink);
+}
+
+.fas-consult__card .contact-form__field--message {
+    border: 1px solid rgba(40, 44, 116, 0.18);
+    background: #fff;
+}
+
+.fas-consult__card .contact-form__field--message textarea {
+    background: #fff;
+}
+
+.fas-consult__card .contact-form select:focus,
+.fas-consult__card .contact-form input:focus,
+.fas-consult__card .contact-form textarea:focus,
+.fas-consult__card .phone-input-field .iti__tel-input:focus {
+    outline-color: rgba(40, 44, 116, 0.35);
+    border-color: rgba(40, 44, 116, 0.45);
+}
+
+.fas-consult__card .contact-form__terms,
+.fas-consult__card .contact-form__terms span {
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.fas-consult__card .contact-form__terms a {
+    color: var(--fas-navy);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.fas-consult__card .contact-form__terms {
+    position: relative;
+}
+
+.fas-consult__card .consent-tooltip {
+    position: static;
+}
+
+.fas-consult__card .consent-tooltip__content {
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+}
+
+.fas-consult__card .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: var(--fas-navy);
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.fas-consult__card .contact-form__submit:hover {
+    background: var(--fas-navy-deep);
+    color: #fff;
+}
+
+@media (max-width: 1024px) {
+    .fas-hero__inner,
+    .fas-benefits,
+    .fas-services,
+    .fas-stats,
+    .fas-testimonials,
+    .fas-consult {
+        padding-top: 3.25rem;
+        padding-bottom: 3.15rem;
+    }
+
+    .fas-benefits__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fas-service,
+    .fas-service--reverse {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .fas-service--reverse .fas-service__media,
+    .fas-service--reverse .fas-service__copy {
+        order: initial;
+    }
+
+    .fas-service__copy {
+        align-items: stretch;
+        padding: 0.15rem 0.35rem 0.5rem;
+        text-align: left;
+    }
+
+    .fas-service__media {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+@media (max-width: 720px) {
+    .fas-hero__inner {
+        padding: 3rem 0 2.85rem;
+    }
+
+    .fas-hero__actions,
+    .fas-hero__actions .fas-btn,
+    .fas-service__copy .fas-btn {
+        width: 100%;
+    }
+
+    .fas-hero__actions .fas-btn {
+        min-width: 0;
+    }
+
+    .fas-benefits__grid,
+    .fas-stats__grid,
+    .fas-testimonials__page {
+        grid-template-columns: 1fr;
+    }
+
+    .fas-consult__card {
+        padding: 1.45rem 1.1rem 1.25rem;
+    }
+
+    .fas-consult__card .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fas-btn,
+    .fas-testimonials__track {
+        transition: none;
+    }
+
+    .fas-btn:hover {
+        transform: none;
+    }
+}

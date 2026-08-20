@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['layouts.app', 'layouts.header', 'layouts.footer'], function ($view): void {
+        View::composer(['layouts.app', 'layouts.landing', 'layouts.header', 'layouts.footer'], function ($view): void {
             try {
                 $websiteSettings = app(WebsiteSettingService::class)->get();
             } catch (\Throwable) {
@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('websiteSettings', $websiteSettings);
         });
 
-        View::composer('layouts.app', function ($view): void {
+        View::composer(['layouts.app', 'layouts.landing'], function ($view): void {
             $view->with('seo', app(SeoService::class)->current());
         });
 

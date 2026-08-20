@@ -8,13 +8,13 @@
     @endif
 
     @if($submitted)
-        <x-forms.success-alert title="Request submitted">
+        <x-forms.success-alert :title="$downloadUrl ? 'eBook unlocked' : 'Request submitted'">
             @if($downloadUrl)
                 <x-slot:actions>
                     <a href="{{ $downloadUrl }}" class="form-success__button button-dark" target="_blank" rel="noopener">Open the PDF</a>
                 </x-slot:actions>
             @endif
-            {{ $downloadUrl ? 'Your download is ready.' : 'Your request is submitted. Check your inbox shortly.' }}
+            {{ $downloadUrl ? 'Download the full eBook PDF below.' : 'Your request is submitted. Check your inbox shortly.' }}
         </x-forms.success-alert>
     @else
         <div class="case-study-download-form__intro">
@@ -35,7 +35,10 @@
 
     <label class="contact-form__terms case-study-download-form__terms">
         <input type="checkbox" wire:model="acceptedTerms">
-        <span>I agree to be contacted about this resource and related services.</span>
+        <span>
+            I agree to be contacted about this resource and related services.
+            <x-forms.messaging-consent-tooltip />
+        </span>
     </label>
     @error('acceptedTerms') <p class="contact-form__error">{{ $message }}</p> @enderror
     @error('download') <p class="contact-form__error">{{ $message }}</p> @enderror

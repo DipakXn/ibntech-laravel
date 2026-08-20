@@ -1,0 +1,270 @@
+/* Project Management — matched to WordPress screenshot */
+
+.pm-page {
+    --pm-navy: #2e2e80;
+    --pm-navy-deep: #141b4d;
+    --pm-heading: #5b5fc7;
+    --pm-ink: #1f1d1d;
+    --pm-muted: #4a4a4a;
+    --pm-cream: #fff4c2;
+    --pm-cream-hover: #ffe99a;
+    --pm-line: #e4e4e4;
+    --pm-bar: #f3f3f3;
+    color: var(--pm-ink);
+    background: #fff;
+}
+
+/* Hero */
+.pm-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background-color: var(--pm-navy-deep);
+}
+
+.pm-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.pm-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(16, 22, 70, 0.22) 0%,
+        rgba(16, 22, 70, 0.08) 42%,
+        rgba(16, 22, 70, 0) 68%
+    );
+    pointer-events: none;
+}
+
+.pm-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    min-height: clamp(18.5rem, 38vw, 25rem);
+    padding: 3.75rem 0 3.5rem;
+}
+
+.pm-hero__copy {
+    max-width: 38rem;
+}
+
+.pm-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.2rem, 4.1vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-shadow: 0 2px 18px rgba(8, 12, 40, 0.28);
+}
+
+.pm-hero__actions {
+    margin-top: 1.5rem;
+}
+
+.pm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pm-btn--cream {
+    background: var(--pm-cream);
+    color: var(--pm-navy-deep);
+}
+
+.pm-btn--cream:hover,
+.pm-btn--cream:focus-visible {
+    background: var(--pm-cream-hover);
+    color: var(--pm-navy-deep);
+}
+
+.pm-btn--cream:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* Content */
+.pm-section {
+    padding: 4.25rem 0 4.75rem;
+    background: #fff;
+}
+
+.pm-heading {
+    margin: 0 0 1.6rem;
+    color: var(--pm-heading);
+    font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+}
+
+/* Accordion — Elementor nested accordion look */
+.pm-acc {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.pm-acc details {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--pm-line);
+    background: #fff;
+}
+
+.pm-acc summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 0.9rem 1.05rem;
+    background: var(--pm-bar);
+    color: var(--pm-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.pm-acc summary::-webkit-details-marker {
+    display: none;
+}
+
+.pm-acc summary::marker {
+    content: '';
+}
+
+.pm-acc__icon {
+    flex: 0 0 auto;
+    display: block;
+    width: 1.05rem;
+    height: 1.05rem;
+    color: #2b2b2b;
+}
+
+.pm-acc__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.pm-acc details[open] .pm-acc__icon-plus,
+.pm-acc details:not([open]) .pm-acc__icon-minus {
+    display: none;
+}
+
+.pm-acc__title {
+    min-width: 0;
+}
+
+.pm-acc summary:hover,
+.pm-acc summary:focus-visible {
+    background: #ececec;
+}
+
+.pm-acc summary:focus-visible {
+    outline: 2px solid var(--pm-navy);
+    outline-offset: 2px;
+}
+
+.pm-acc__body {
+    padding: 0.95rem 1.1rem 1.1rem;
+    border-top: 1px solid var(--pm-line);
+    background: #fff;
+}
+
+.pm-acc__body p {
+    margin: 0;
+    color: var(--pm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.pm-acc__body ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.15rem;
+    color: var(--pm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.pm-acc__body li + li {
+    margin-top: 0.45rem;
+}
+
+@media (max-width: 900px) {
+    .pm-hero__bg {
+        object-position: 72% center;
+    }
+
+    .pm-hero::after {
+        background: linear-gradient(
+            180deg,
+            rgba(16, 22, 70, 0.72) 0%,
+            rgba(16, 22, 70, 0.55) 55%,
+            rgba(16, 22, 70, 0.4) 100%
+        );
+    }
+
+    .pm-hero__inner {
+        min-height: 16.5rem;
+        padding: 3rem 0 2.75rem;
+    }
+
+    .pm-hero__copy {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .pm-hero__actions {
+        margin-top: 1.25rem;
+    }
+
+    .pm-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.9rem 1.15rem;
+        font-size: 0.86rem;
+    }
+
+    .pm-section {
+        padding: 2.75rem 0 3rem;
+    }
+
+    .pm-heading {
+        margin-bottom: 1.2rem;
+        font-size: clamp(1.35rem, 6vw, 1.65rem);
+    }
+
+    .pm-acc summary {
+        padding: 0.8rem 0.85rem;
+        font-size: 0.95rem;
+    }
+
+    .pm-acc__body {
+        padding: 0.85rem 0.9rem 1rem;
+    }
+}

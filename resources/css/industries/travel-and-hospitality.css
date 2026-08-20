@@ -1,0 +1,736 @@
+/* Industry: Travel and Hospitality — matched to WordPress screenshot */
+
+.tah-page {
+    --tah-navy: #2e2e80;
+    --tah-navy-deep: #1a2558;
+    --tah-navy-mid: #24356f;
+    --tah-green: #4caf50;
+    --tah-green-bright: #42b549;
+    --tah-green-dark: #3d9140;
+    --tah-sky: #3d9be8;
+    --tah-blue: #3b6fd4;
+    --tah-gold: #d4a017;
+    --tah-ink: #172033;
+    --tah-muted: #5b6475;
+    --tah-line: rgba(46, 46, 128, 0.12);
+    --tah-soft: #f4f6f8;
+    --tah-mist: #eef3f8;
+    --tah-cream: #fbf6e8;
+    color: var(--tah-ink);
+    background: #fff;
+}
+
+.tah-page h1,
+.tah-page h2,
+.tah-page h3,
+.tah-page h4 {
+    color: var(--tah-navy);
+}
+
+.tah-page ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tah-section {
+    padding: 5.5rem 0;
+}
+
+.tah-section--soft {
+    background: var(--tah-soft);
+}
+
+.tah-hero + .tah-section--soft {
+    position: relative;
+    z-index: 0;
+    padding-top: 7.5rem;
+}
+
+.tah-section--cream {
+    background: var(--tah-cream);
+}
+
+.tah-results-panel {
+    border-radius: 1.1rem;
+    background: var(--tah-cream);
+    border: 1px solid rgba(46, 46, 128, 0.1);
+    padding: 3rem 2rem 2.5rem;
+}
+
+.tah-heading {
+    max-width: 52rem;
+    margin: 0 auto 2.75rem;
+    text-align: center;
+}
+
+.tah-heading h2 {
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.tah-heading h2 span {
+    color: var(--tah-green);
+}
+
+.tah-heading p {
+    margin-top: 0.85rem;
+    color: var(--tah-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.tah-heading--results h2 span {
+    position: relative;
+    display: inline-block;
+    color: var(--tah-navy);
+}
+
+.tah-heading--results h2 span::after {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: -0.35rem;
+    height: 0.38rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #e85d4c 0%, var(--tah-green) 100%);
+    opacity: 0.85;
+}
+
+.tah-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 0.45rem;
+    padding: 0.9rem 1.55rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tah-btn:hover {
+    transform: translateY(-1px);
+}
+
+.tah-btn:focus-visible {
+    outline: 2px solid var(--tah-green);
+    outline-offset: 3px;
+}
+
+.tah-btn--green {
+    background: var(--tah-green);
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(76, 175, 80, 0.32);
+}
+
+.tah-btn--green:hover,
+.tah-btn--green:focus-visible {
+    background: var(--tah-green-dark);
+    color: #fff;
+}
+
+.tah-btn--white {
+    background: #fff;
+    color: var(--tah-navy);
+    box-shadow: 0 12px 28px rgba(16, 21, 69, 0.18);
+}
+
+.tah-btn--white:hover,
+.tah-btn--white:focus-visible {
+    background: #f3f6fb;
+    color: var(--tah-navy);
+}
+
+/* Hero */
+.tah-hero {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: visible;
+    color: #fff;
+    padding: 2.75rem 0 0;
+    background: linear-gradient(100deg, #1d3d5d 0%, #2a5d55 48%, #3dae55 100%);
+}
+
+.tah-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--tah-hero-pattern);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: invert(1);
+    opacity: 0.04;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+.tah-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding-bottom: 0.5rem;
+}
+
+.tah-hero__copy h1 {
+    color: #fff;
+    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.tah-hero__lede {
+    max-width: 36rem;
+    margin: 1.15rem 0 1.65rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.tah-hero .tah-btn--green {
+    border-radius: 999px;
+}
+
+.tah-hero__media {
+    overflow: hidden;
+    background: #fff;
+    border-radius: 1.75rem;
+    box-shadow: 0 18px 40px rgba(8, 18, 48, 0.16);
+}
+
+.tah-hero__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.tah-stats {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0;
+    transform: translateY(50%);
+}
+
+.tah-stats li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 4.35rem;
+    padding: 0.85rem 1.05rem;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 16px 34px rgba(20, 31, 78, 0.12);
+    color: var(--tah-ink);
+    font-size: 0.86rem;
+    line-height: 1.35;
+}
+
+.tah-stats strong {
+    display: block;
+    color: var(--tah-navy);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.tah-stats__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 2.35rem;
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.14);
+    color: var(--tah-green);
+    font-size: 0.95rem;
+}
+
+/* Certifications */
+.tah-certs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+}
+
+.tah-cert {
+    text-align: center;
+    background: #fff;
+    border-radius: 0.9rem;
+    padding: 2rem 1.4rem 1.7rem;
+    box-shadow: 0 14px 32px rgba(20, 31, 78, 0.08);
+    border-top: 4px solid var(--tah-green);
+}
+
+.tah-cert__icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.12);
+    color: var(--tah-green);
+    font-size: 1.7rem;
+}
+
+.tah-cert__check {
+    position: absolute;
+    right: -0.15rem;
+    bottom: -0.1rem;
+    display: grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    background: #3b6fd4;
+    color: #fff;
+    font-size: 0.62rem;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.tah-cert h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.tah-cert p {
+    margin-top: 0.35rem;
+    color: var(--tah-muted);
+    font-size: 0.95rem;
+}
+
+/* Services */
+.tah-services {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.tah-service {
+    --tah-accent: var(--tah-blue);
+    display: flex;
+    flex-direction: column;
+    background: #f4f1fb;
+    border: 1px solid var(--tah-line);
+    border-radius: 1rem;
+    padding: 1.7rem 1.55rem 1.5rem;
+    box-shadow: 0 16px 36px rgba(20, 31, 78, 0.07);
+}
+
+.tah-service--blue { --tah-accent: #6b5ce7; background: #f3f0fb; }
+.tah-service--sky { --tah-accent: #3d9be8; background: #eef7fc; }
+.tah-service--green { --tah-accent: var(--tah-green); background: #eef8ef; }
+.tah-service--gold { --tah-accent: var(--tah-gold); background: #fbf6e8; }
+.tah-service--mid { --tah-accent: #4a7bd4; background: #eef3fb; }
+.tah-service--navy { --tah-accent: var(--tah-navy); background: #eef0f7; }
+
+.tah-service__head {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+}
+
+.tah-service__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(107, 92, 231, 0.14);
+    color: var(--tah-accent);
+    font-size: 1.2rem;
+}
+
+.tah-service--sky .tah-service__icon { background: rgba(61, 155, 232, 0.14); }
+.tah-service--green .tah-service__icon { background: rgba(76, 175, 80, 0.14); }
+.tah-service--gold .tah-service__icon { background: rgba(212, 160, 23, 0.16); }
+.tah-service--mid .tah-service__icon { background: rgba(74, 123, 212, 0.14); }
+.tah-service--navy .tah-service__icon { background: rgba(46, 46, 128, 0.12); }
+
+.tah-service h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tah-service__intro {
+    margin-bottom: 1.1rem;
+    color: var(--tah-muted);
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+.tah-service h4 {
+    margin: 0.35rem 0 0.7rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+}
+
+.tah-checks {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0 0 1.15rem;
+}
+
+.tah-checks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: var(--tah-ink);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.tah-checks i {
+    margin-top: 0.12rem;
+    color: var(--tah-accent);
+    font-size: 0.95rem;
+}
+
+.tah-service__impact {
+    margin: auto 0 1.15rem;
+    border-radius: 0.7rem;
+    background: #fff;
+    border: 1px solid rgba(46, 46, 128, 0.1);
+    padding: 0.95rem 1rem;
+    color: var(--tah-ink);
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.tah-service__impact strong {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--tah-navy);
+    font-size: 0.88rem;
+}
+
+.tah-service__impact ul {
+    display: grid;
+    gap: 0.28rem;
+    padding-left: 1.05rem;
+    list-style: disc;
+}
+
+.tah-service__impact li {
+    padding-left: 0.1rem;
+}
+
+.tah-btn--card {
+    width: 100%;
+    background: var(--tah-accent);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.18);
+}
+
+.tah-btn--card:hover,
+.tah-btn--card:focus-visible {
+    filter: brightness(0.92);
+    color: #fff;
+}
+
+/* Mid CTA */
+.tah-cta {
+    background: linear-gradient(90deg, var(--tah-navy-deep) 0%, #245a8a 48%, var(--tah-green) 100%);
+    padding: 4.25rem 0;
+    color: #fff;
+    text-align: center;
+}
+
+.tah-cta__inner {
+    max-width: 46rem;
+    margin-inline: auto;
+}
+
+.tah-cta h2 {
+    color: #fff;
+    font-size: clamp(1.65rem, 3vw, 2.25rem);
+    font-weight: 700;
+}
+
+.tah-cta p {
+    margin: 0.9rem 0 1.55rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Value bars */
+.tah-values {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tah-values li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 4.1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 0.75rem;
+    background: #eef8ef;
+    border: 1px solid rgba(76, 175, 80, 0.16);
+    color: var(--tah-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.tah-values i {
+    flex: 0 0 1.35rem;
+    color: var(--tah-green);
+    font-size: 1.2rem;
+}
+
+/* Results */
+.tah-results {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.tah-result strong {
+    display: block;
+    color: var(--tah-navy);
+    font-size: clamp(1.85rem, 3vw, 2.45rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.tah-result h3 {
+    margin-top: 0.55rem;
+    font-size: 1.12rem;
+    font-weight: 700;
+}
+
+.tah-result p {
+    margin-top: 0.35rem;
+    color: var(--tah-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Assessment */
+#tah-assessment {
+    scroll-margin-top: 6rem;
+}
+
+.tah-assess {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+    gap: 2.4rem;
+    align-items: start;
+}
+
+.tah-assess__copy h2 {
+    font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.tah-assess__list {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+.tah-assess__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.tah-assess__list i {
+    margin-top: 0.15rem;
+    color: var(--tah-green);
+    font-size: 1.1rem;
+}
+
+.tah-assess__card {
+    border-radius: 1.05rem;
+    background: #fff;
+    padding: 1.7rem 1.5rem 1.55rem;
+    box-shadow: 0 20px 44px rgba(20, 31, 78, 0.12);
+}
+
+.tah-assess__card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.tah-assess__card > p {
+    margin: 0.55rem 0 1.2rem;
+    color: var(--tah-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.tah-assess__card .contact-form {
+    gap: 0.65rem;
+}
+
+.tah-assess__card .contact-form__field input:not([type='checkbox']),
+.tah-assess__card .contact-form__field select,
+.tah-assess__card .phone-input-field .iti__tel-input {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+    min-height: 0;
+    max-height: 2.75rem;
+    height: 2.75rem;
+}
+
+.tah-assess__card .phone-input-field .iti__tel-input {
+    padding-left: 3.25rem;
+}
+
+.tah-assess__card .contact-form__field--message textarea {
+    min-height: 5rem;
+    height: 5.25rem;
+    resize: vertical;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+}
+
+.tah-assess__card .contact-form__terms,
+.tah-assess__card .contact-form__terms span {
+    color: #334155 !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.tah-assess__card .contact-form__terms a {
+    color: var(--tah-navy) !important;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.tah-assess__card .contact-form__submit {
+    width: 100%;
+    border-radius: 0.55rem;
+    background: var(--tah-navy);
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.85rem 1rem;
+    box-shadow: 0 12px 24px rgba(46, 46, 128, 0.28);
+}
+
+.tah-assess__card .contact-form__submit:hover,
+.tah-assess__card .contact-form__submit:focus-visible {
+    background: var(--tah-navy-deep);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .tah-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        transform: translateY(28%);
+    }
+
+    .tah-hero + .tah-section--soft {
+        padding-top: 6.5rem;
+    }
+
+    .tah-results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.75rem 1rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .tah-hero__inner,
+    .tah-services,
+    .tah-assess,
+    .tah-certs,
+    .tah-values {
+        grid-template-columns: 1fr;
+    }
+
+    .tah-hero__inner {
+        padding-bottom: 3.5rem;
+        text-align: center;
+    }
+
+    .tah-hero__lede {
+        margin-inline: auto;
+    }
+
+    .tah-hero__media {
+        max-width: 26rem;
+        margin-inline: auto;
+        border-radius: 1.5rem;
+    }
+
+    .tah-service {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .tah-section,
+    .tah-cta {
+        padding: 3.4rem 0;
+    }
+
+    .tah-hero {
+        overflow: hidden;
+        padding-top: 3.4rem;
+    }
+
+    .tah-hero__inner {
+        padding-bottom: 2.5rem;
+        gap: 1.5rem;
+    }
+
+    .tah-stats {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+        transform: none;
+        padding-bottom: 1.5rem;
+    }
+
+    .tah-hero + .tah-section--soft {
+        padding-top: 3.4rem;
+    }
+
+    .tah-results {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    .tah-results-panel {
+        padding: 2.1rem 1.15rem 1.8rem;
+    }
+
+    .tah-assess__card {
+        padding: 1.45rem 1.15rem 1.35rem;
+    }
+
+    .tah-btn {
+        width: 100%;
+    }
+}

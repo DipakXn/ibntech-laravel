@@ -1,0 +1,616 @@
+/* Landing page: cloud-consulting-services */
+
+.lccs-page {
+    --lccs-navy: #2e2e80;
+    --lccs-navy-deep: #141b4d;
+    --lccs-green: #54b451;
+    --lccs-green-dark: #3d9140;
+    --lccs-ink: #172033;
+    --lccs-muted: #5b6475;
+    --lccs-gold: #f5c518;
+    --lccs-check: #2e6bdb;
+    --lccs-shell: 1180px;
+    background: #fff;
+    color: var(--lccs-ink);
+}
+
+html:has(.lccs-page) {
+    scroll-behavior: smooth;
+}
+
+.lccs-shell {
+    width: min(var(--lccs-shell), calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.lccs-page h1,
+.lccs-page h2,
+.lccs-page h3 {
+    color: var(--lccs-navy);
+    font-weight: 700;
+}
+
+.lccs-callbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--lccs-green);
+    color: #fff;
+    border-bottom-left-radius: 0.85rem;
+    border-bottom-right-radius: 0.85rem;
+    box-shadow: 0 6px 18px rgba(20, 31, 78, 0.12);
+}
+
+.lccs-callbar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem 1.25rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 0;
+}
+
+.lccs-callbar p {
+    margin: 0;
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.lccs-callbar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--lccs-navy);
+    padding: 0.38rem 0.95rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.lccs-callbar a:hover,
+.lccs-callbar a:focus-visible {
+    background: #f3f6fb;
+    color: var(--lccs-navy);
+}
+
+.lccs-hero {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--lccs-navy-deep);
+    color: #fff;
+    padding-bottom: 1.5rem;
+}
+
+.lccs-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.lccs-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(8, 16, 42, 0.78) 0%, rgba(12, 24, 58, 0.62) 55%, rgba(8, 16, 42, 0.72) 100%);
+    pointer-events: none;
+}
+
+.lccs-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(18.5rem, 0.9fr);
+    gap: 1.4rem 1.6rem;
+    align-items: start;
+    padding: 2.5rem 0 1.35rem;
+}
+
+.lccs-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.85rem, 3.4vw, 2.55rem);
+    line-height: 1.18;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+
+.lccs-hero__copy > p {
+    margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.lccs-hero__items {
+    display: grid;
+    gap: 0.72rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lccs-hero__items li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: start;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.lccs-hero__check {
+    display: grid;
+    place-items: center;
+    width: 1.15rem;
+    color: var(--lccs-gold);
+    font-size: 1.05rem;
+    line-height: 1;
+    margin-top: 0.12rem;
+}
+
+.lccs-hero__form {
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+    width: 100%;
+    border: 3px solid var(--lccs-green);
+    border-radius: 0.35rem;
+    background: rgba(8, 14, 36, 0.82);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    padding: 1.05rem 1rem 1.15rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.35);
+    color: #fff;
+    scroll-margin-top: 4.75rem;
+}
+
+.lccs-hero__form h2 {
+    margin: 0 0 0.85rem;
+    color: var(--lccs-gold);
+    font-size: 1.22rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.lccs-hero__form .contact-form,
+.lccs-hero__form .landing-inquiry-form {
+    overflow: visible;
+    gap: 0.45rem;
+}
+
+.lccs-hero__form .contact-form__field:has(.phone-input-field) {
+    z-index: 40;
+}
+
+.lccs-hero__form .phone-input-field .iti__dropdown-content,
+.lccs-hero__form .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+.lccs-hero__form .contact-form__field input,
+.lccs-hero__form .contact-form__field textarea,
+.lccs-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(15, 23, 42, 0.14) !important;
+    border-radius: 0.28rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+    font-size: 0.86rem !important;
+    min-height: 0;
+    line-height: 1.35;
+}
+
+.lccs-hero__form .phone-input-field .iti__tel-input {
+    padding-left: 5.35rem !important;
+}
+
+.lccs-hero__form .iti__selected-country {
+    color: #000 !important;
+}
+
+.lccs-hero__form .contact-form textarea {
+    min-height: 4.1rem !important;
+}
+
+.lccs-hero__form .contact-form__field--message {
+    background: #fff;
+}
+
+.lccs-hero__form .newsletter-form__terms,
+.lccs-hero__form .newsletter-form__terms span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.72rem;
+}
+
+.lccs-hero__form .newsletter-form__terms a {
+    color: #8be28a;
+    font-weight: 600;
+}
+
+.lccs-hero__form .newsletter-form__submit {
+    margin-top: 0.1rem;
+    border: 0;
+    border-radius: 0.28rem;
+    background: var(--lccs-green);
+    color: #fff;
+    padding: 0.62rem 0.85rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.lccs-hero__form .newsletter-form__submit:hover,
+.lccs-hero__form .newsletter-form__submit:focus-visible {
+    background: var(--lccs-green-dark);
+}
+
+.lccs-hero__logos {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.65rem;
+    padding: 0.35rem 0 1.15rem;
+}
+
+.lccs-hero__logos figure {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    min-height: 5.1rem;
+    border-radius: 0.2rem;
+    background: #fff;
+    padding: 0.5rem 0.55rem;
+}
+
+.lccs-hero__logos img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: 3.25rem;
+    object-fit: contain;
+}
+
+.lccs-keys {
+    padding: 3.4rem 0 3.6rem;
+}
+
+.lccs-keys h2 {
+    margin: 0;
+    font-size: clamp(1.55rem, 2.6vw, 2rem);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.lccs-keys__lead {
+    max-width: 48rem;
+    margin: 0.85rem auto 2.15rem;
+    color: var(--lccs-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.lccs-keys__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+    gap: 1.5rem 2.4rem;
+    align-items: center;
+}
+
+.lccs-keys__list {
+    display: grid;
+    gap: 1.05rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lccs-keys__list li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: start;
+    color: #3a4254;
+    font-size: 0.96rem;
+    line-height: 1.55;
+}
+
+.lccs-keys__icon {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--lccs-green);
+    color: #fff;
+    font-size: 0.78rem;
+    margin-top: 0.05rem;
+}
+
+.lccs-keys__media {
+    display: grid;
+    place-items: center;
+}
+
+.lccs-keys__media img {
+    display: block;
+    width: min(100%, 26rem);
+    height: auto;
+}
+
+.lccs-platforms {
+    background: var(--lccs-green);
+    padding: 3.15rem 0 3.4rem;
+}
+
+.lccs-platforms h2 {
+    margin: 0 0 2rem;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.lccs-platforms__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+    align-items: stretch;
+}
+
+.lccs-platforms article {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.85rem;
+    background: #fff;
+    padding: 1.35rem 1.2rem 1.45rem;
+    box-shadow: 0 14px 32px rgba(16, 42, 18, 0.16);
+}
+
+.lccs-platforms h3 {
+    margin: 0 0 0.95rem;
+    color: var(--lccs-navy);
+    font-size: 1.08rem;
+    line-height: 1.35;
+}
+
+.lccs-platforms ul {
+    display: grid;
+    gap: 0.72rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lccs-platforms li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: start;
+    color: #3a4254;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.lccs-platforms li i {
+    color: var(--lccs-check);
+    font-size: 0.95rem;
+    margin-top: 0.12rem;
+}
+
+.lccs-works {
+    padding: 3.35rem 0 3.5rem;
+}
+
+.lccs-works h2 {
+    margin: 0 0 2.15rem;
+    font-size: clamp(1.55rem, 2.6vw, 2rem);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.lccs-works__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem 1.75rem;
+}
+
+.lccs-works article {
+    text-align: center;
+}
+
+.lccs-works img {
+    display: block;
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+    margin: 0 auto 1.05rem;
+}
+
+.lccs-works h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.12rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.lccs-works p {
+    margin: 0;
+    color: var(--lccs-muted);
+    font-size: 0.94rem;
+    line-height: 1.65;
+}
+
+.lccs-why {
+    background: var(--lccs-green);
+    padding: 3.15rem 0 3.4rem;
+}
+
+.lccs-why h2 {
+    margin: 0 0 2.15rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.lccs-why__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.lccs-why article {
+    display: grid;
+    justify-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    padding: 1.45rem 0.95rem 1.35rem;
+    text-align: center;
+}
+
+.lccs-why img {
+    display: block;
+    width: 4.6rem;
+    height: 4.6rem;
+    object-fit: contain;
+    margin-bottom: 0.85rem;
+}
+
+.lccs-why h3 {
+    margin: 0 0 0.55rem;
+    color: #fff;
+    font-size: 1.02rem;
+    line-height: 1.3;
+}
+
+.lccs-why p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.86rem;
+    line-height: 1.55;
+}
+
+.lccs-office {
+    padding: 2.15rem 0 2.35rem;
+    text-align: center;
+}
+
+.lccs-office h2 {
+    margin: 0 0 0.35rem;
+    color: var(--lccs-navy);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.lccs-office__name {
+    margin: 0 0 0.35rem;
+    color: var(--lccs-navy);
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.lccs-office p {
+    margin: 0;
+    color: var(--lccs-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+@media (max-width: 1100px) {
+    .lccs-hero__inner {
+        grid-template-columns: minmax(0, 1.35fr) minmax(17.5rem, 0.95fr);
+    }
+
+    .lccs-hero__logos {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .lccs-why__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .lccs-hero__inner,
+    .lccs-keys__inner,
+    .lccs-platforms__grid,
+    .lccs-works__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lccs-hero__form {
+        width: min(100%, 26rem);
+        justify-self: center;
+    }
+
+    .lccs-hero__copy h1,
+    .lccs-keys h2,
+    .lccs-platforms h2,
+    .lccs-works h2,
+    .lccs-why h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .lccs-shell {
+        width: min(var(--lccs-shell), calc(100% - 1.25rem));
+    }
+
+    .lccs-callbar__inner {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .lccs-hero__inner,
+    .lccs-keys,
+    .lccs-platforms,
+    .lccs-works,
+    .lccs-why {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .lccs-hero__copy h1 {
+        font-size: 1.55rem;
+    }
+
+    .lccs-hero__copy > p {
+        text-align: center;
+    }
+
+    .lccs-hero__items li {
+        text-align: left;
+    }
+
+    .lccs-hero__logos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lccs-why__grid {
+        grid-template-columns: 1fr;
+    }
+}

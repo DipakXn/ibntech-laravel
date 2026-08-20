@@ -5,13 +5,13 @@
     <input type="hidden" wire:model="caseStudyTitle">
 
     @if($submitted)
-        <x-forms.success-alert title="Request submitted">
+        <x-forms.success-alert title="Case study unlocked">
             @if($downloadUrl)
                 <x-slot:actions>
                     <a href="{{ $downloadUrl }}" class="form-success__button button-dark" target="_blank" rel="noopener">Download PDF</a>
                 </x-slot:actions>
             @endif
-            Your request has been submitted.
+            Download the full Case study PDF below.
         </x-forms.success-alert>
     @endif
 
@@ -40,6 +40,7 @@
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms &amp; Conditions</a>
             and
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>.
+            <x-forms.messaging-consent-tooltip />
         </span>
     </label>
     @error('acceptedTerms') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror

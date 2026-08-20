@@ -134,6 +134,8 @@ class SeoService
             'twitter_creator' => null,
 
             'canonical_url' => url()->current(),
+            'link_prev' => null,
+            'link_next' => null,
             'robots' => 'index, follow',
 
             'article_author' => null,

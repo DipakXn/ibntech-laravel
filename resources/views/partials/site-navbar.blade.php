@@ -126,7 +126,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'managed-siem-soc-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -144,7 +144,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'vciso-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -162,7 +162,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'managed-detection-response-services']) }}">
 
                         <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" width="45"
                           height="45">
@@ -180,7 +180,7 @@
                   </div>
                   <div class="submenu-column">
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'microsoft-security-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 452" width="452"
@@ -198,7 +198,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'cybersecurity-maturity-assessment-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -216,7 +216,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'cybersecurity-audit-compliance-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -234,7 +234,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'soc-2-compliance']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="86" height="86" id="soc2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFYAAABWCAYAAABVVmH3AAAAAXNSR0IB2cksfwAAG6tJREFUeJztnAdUVFe3x/3STDSJ+awgvRcriooo0oeOYAMsoIIYQQSN3SgW7Iq9Y40Fe4zBBmqMHWk2LNiwYa9In/m/fc6dGWZgMFl5BuU97lp7Tbv33Ht/Z5/dzrlTQyKRRJCgWj6s1KgGWw22Skk12GqwVUuqwVaDrVpSDbYabNWSarDVYKuWVIOtBlu15O+ALSF5SHL//7H8K2AZVAOSuv+P5V8By3qsbo1K3n4cOrWma5dBdezc+td19h74g1vXiFprNv72eWVfB9uqJFi/vmNrtuzQU9+wpY+3jrn7SB1zj5UaxqI9miaik5omLhe1TF2ztEzdMhsbic5qGLskaZq6/qJt5h6j19Sjt3mbri0dvcO+/7euTbZVGbDe3SO/Mm3la6Fl5vazponbUXUjl9z6uo6or+uABvTayMAZGuae0GrhA+2WXaDdogs0m3WGuokbGuo50T4OqK9jT+8dxY2NXc9TGwsNm3d2b+8Y9MOHvE7Z9smDbWcf+L1eM88A0sQDDfUdixgc0kS0sw/CgIgYjFsYD685CfBbl4yg3dcQciAbIYn3EXzwHvrtvYWeW87Dd+kRuEzcjH6R02HrNgA61AH1dQi0Nm/rCmlztLllF9MJU5b850NcM9s+WbBtbHvXoqEbpGEkSmPa1lDPAaRdmDhtOf44nop3efkoEUsQm1mIIcn5iDhXgCGp9D5FJgWITCn9HHGuEHvvF6OkpAQXLmdhWdwOdPYbCjIZUk12eKlp7BLbwsrP9P8sWKOW3h3IZibW17FDI31H+PgPxbZdh/A2953SedKfl3CATCIYPAZWCjdSKjKwg0mGphXiZaFYqY3klEsYPnYejC18uElRM3B6oWPmNtbKvs//yg5/UmAtbQO+0TZ1HUXa866+th3s3UKwY3ciioqKVZ4nO1fMYfVLyEbAL6mIIM31XXoUvgsTEXH2nRxoz01pCD36FGHJBfj1bpHKtq7fyEbUqLnQNffgGqxu6HzarHWXNlUerImFrzp58D31tG3p5twxY+5avH6TW+E59ieexIbNv2PcoRuwjlhMtjSDa6hLzA54x+5H3z03uBaHHHkC28EL4DJpK/odykFg/HmkXrtXYbtnz12Ee7ch3AbTaHlj2Nyrf9eAYZ9VSbDmbbrp0BC8UI+0tFnbrjh19rzKds9fvEbA1+Dq9TuYNmc14tbtxu6kcxCNWAm/tWcRlVYE15jt8FlwEH12XePa2nnZHxBN3Ar3Gb/ix+Q8tO4zBVPiT8jbFIvF5c7D7Pe4SYs53Aa6dhKDph5TqhxYTRNnc4J6j2mqV7cI5Dx6Wq69nXuScI1gLl+9DbezH2DR8i04deY8FizdjLj1u7Fw21ECtxvB++6ge9xJ+C45gvCzeVxju68+Bffpu8hUpCCMHJzrxHgyE3l4lCfmUCdNW4b1m35TeR879xxGY0Nnih5soWUiWpGw/9jf1tyPCtZG1N+U7On9elq2CAr9Gbm5eUrt5L7Lx/2HTzB7wXpcvnITr16/4e9HRy/kUK7fuMu1622RBKPTBSfGnFdkmehAJoMJaOihh4gkwJvuFGHT9gNc+xcsi0dxcQl3kGU1+HTyBZDdR32tTtAzd1v5yYM1s+yqTzYsi2lqcNhE5OcXKLXx5m0utu44iJS0yzxEmjo7jn9/PSsbjx4/K3fOBAqlGNAoBWGfeXQgh12AKPocxUOxAgyfvQljaMinpl9BzKw4HPnjLJas3Fau7fTzVzncegRX19x14icLtr1D0A80xI6xIeYfNAp5pHWyY5nmPMx5SjZuIV69eoMJUxZzTb5x6y7/raJzFpRIMP68CrCpimBLAbO4Ny6rkJ87JT0TK9fuwqjxC3Dv/iOutTdvKTs4prnqBpTpaXeSmFp09v3kwIYMiv6MsqhYNvw7OgfhxcvXyoAKi9C15zBMnr4CfQeOx4OcJ3j85Dn/LfNlxWCZHMkp5hpaEVhFwMyxDSa4t9+KeYc9ffYSp8lpnr90HdPnrSOTs6Fc+9t/TeT2tpGe/dtWHfx0Pymwuk3cvRro2BWbW/riyrXb8mOYlixYugmbtiZwjY1d/Au3qwUFhfz3exSzRhGI++/Ke3G5tlMmNuVioZJJKAdVIYlgsvR6oYL5eYeN8fsQOWIWnlBnFlInJx09q3QOptVCWu10Zt+hMxU6s0oF26JDzwYUeF9tqGePdZv2KNtUilnnLFyPNBqWLD59JNVSmay4XoQhBHbVDdUBvkxOPRGyscjUApVmYUgZuExrr71WHglbdx7irxkXrnLId7Ifyn/Lzy9EO/s+EOJtt0GfBFhtc7do1tu9Q8YpZVOJR04j+24OOZFMTCITsOPXJKX2rr8WY5g092chVNabirVWTDL9krRWUIG2Kn5mYOdkFvHjFNvZd/AEhXK7VMa57DqFdNvhlZP3oP9+VLBN2nY3oNDqiV4Td+5lZfsyx3Tl6i2yp9HYVQaoTOZdKdU8pmVzrpQHoSgZL0qoA2RgCyoEyySCa20hLpax3++kDvXpsxcUKcQjdtFGpd8HREzmpUgtM5eZHxWstpnHFKatkSNnKe17hlJIz+5DsCfhKGVW13lopfg7L7ScK5AXVSKlINJfvN+RxV4plDsyxXBLFuvKJEI6CqaRlrNqmWIbd+/lYMzEhTSKVvKsT/G3BxRfqxk4o6Guw1tHrx/rfBSwLa0D1BobiR40MHTHjkOXyu3/7PlLSk9VD7sZl4p4zKkIlmltDIEoFld8Dcx8lDUHik6LwVSEG06ddfZZ+c5iDnSnipEklojhERKMBqQsxi07j/ooYPWbeQWyYfO9xVCoB1/GkUsVF1cU5SQ5IiU7qQCXwTj19P1au+x6kXKCUIFESMOv6AuFKCrTWao6u7CkAHMzxsJnvUhaCXO6XelgBw+fRXGr63Y2PfK1/VrU8M1APf8UJKa9fO9JmDZOvqicOSkCZlo3lhIClhhU1AYL0eTaXhHYFGW4h3JUlyhlUiIuweh94QhMdEbvRBG0rex5RtasrW+LSgXb0rqndmMjl5f1TbrhM+9TqOGTji98U7HtxHNsPf2qwjaSckqUwqWyIgv0jz1+v9auu1mkZBIq0lqZeRieVoj8CjrrWf5j3H5zFdFnB6EPA3vIGVZRjhR6dYJeE7dplQrWqEXn7mxapU6rnwhqBmp0Todp2GUcyHiNuXufqDyeaeHYjNIUtGwsqgh2VHohcosrvpZn+RSqKUYGKcq2VtHmstArnF5/f6Baa5kJWH8tFofv/cbBMvHZ4AxW7qR090KlgtUycZ3VQNcetToulIMNXpKN2ISnSL+dp/L4nbfyELDjCnptz8SgE68IRFEZMEUIT85D6LHnGEzvD+Wo1lpWB7iWdQfL0p8hMq1I2ZGllDED1E4YObC+Bx8i7NgzvC1SHSuvuT4bj97dR58kJwEuaa2amR2FXvYl3XuN+rZSwI6LWfa5hpHoQAOyr1857+BmgMmyA0/x87ZHKC4z5FhKGT5sGrRMXViBmV0sGuo7wsw1HGH773Bt6r7uHP/c0MCJB+nqpu6wDhiDrBvZ8nbYNIt/v9GUdjqjAY0WJoY2QeiyOImgFpUb/uGkqR2jlkKzhS/ta8/PbeUQiN8S/ih3b8cf7yfbfQsRx3sgMMmZ21ojZ3t+rU3bdGlfKWCt7APrkePKqm/UGZ95HePa+nW3dOw68xLjNj8od1yfAeMpfLEDdQZ6B49DSPhkNG/XnWJFOxw8cgbTjt5GYzMP+mwPEwsfeHQbAuMWXvz3Zu268XJifkEhLDr25NDVCL6tawiFQz78GCZdlh8TJh2lGhueXIAOEYv5eZm0aO8Hoxbe/H0j6pATp9OVrpFB/fPhQcxIG4XAwwT2sAhtBznz6MC4ueegSgHbtF0PPU1Tt8J65j0pGkgjsGlQ75uBg2RfY7Y/VDqG1V/V9J14XMjmnWTfs4SBBeclJWKMjl7Esx179xC8fSvM2LKZW+pADnLlmh3Ysv0A34dp63WpFrNar3ePSK5VFt1HK5iCAm5XtS268d9YEUgsFipsvv5DeZs+fpFl7H8+1lxdgE3Xlgtgk1zgGOPCwWqbOC+qFLDNrHq0akiw6jYPJbDpHKzpoAvYe+4l1h1WLlazLKehniNfP8BycVXtBoZO4NBiZq5S+j6YNJvd2PgpSzBr/nq+j4tPmNI+cxZs4PCa+/yEoenK9laLTAA796XMG/L95y3exMFaO/Ypdx0LLk5FEjmwoCQRB+u5xIXvq2nsuLdSwLbq2MuBgf2h5RCyraSx3mloN+wyNv7xFHvOvFA65n5uCXQs/ThY89a+lJv/gtdv3irtw8wDg8MmFBW/D42IQX1dBnYxZsSu4/t4UZqsuA8rAbJJyp9PPlGCyiKM/vuyEXPkpjylZfvKRoFf+NRy9zfv/FQkPz6GIIpjAxNd4B3HEgVbigzsjlUKWMNmXm5ME+pYREnBpsJ25BXEJT7CwTRlsCuzaPitOkk21J3l3xyOYXMvTJ0Vx4cm7SIHO33uaqVjBw6Zyr+fQBpbEViZnKFsbUjZ0E0aak2+UIANV96ga59Rgo02FiEo4S5y8pQjhHkZ05H+9IygsQTXZx05WwLb2ND+TKWANWnp49aINLYOpbI8IiCNFcA+xqH00szr5psSPlXCHEnfhGz0j5jGV8AwQMxDdyb7mJdXgF4crINqsGQKomOWYOZfgGVVsdmZgo1VnBdj5/fblAGDDoHcGWpQB/v/ksojhiXXCpXaiM2YivRnp9H3sADWd50rv04tE+fKAWvRsZc9WwUoNwVeabCMysRGihN3ny0Fu+BqEQYnC2A33hIK2deysglYDAfJQLHaqF/fMSrBhhJYZmOZxv4VWCaXXwkVM8XEw2ViPF+Z2IjCrabugxFC5kHm3NgKmltvS2Pl2SmTcTInEX2PuHAb23mVKz+nhrHz4cqysa0a6TuT8xogOC/SWIPQC9hz7hVWJwkzBOdflAgZT7JwA/seKAf7/n1H84sWBY6HRddRPGQqZ2MZWAIeHbOUwK5VCfb3A8fJEfXF3IXCXNaSa9ICDcFzid7MnRcbJU5jN0iXJxVIF9MJ1zbzcqEC2BjsvROPfocFsB6LBLA6ZqLtlRQV+Olomrjl1jP1I7CpPI5tEHgBCemvMWnnY74vu2CmrQOOPkenocuxLPWxUltDR8/hw7yl/3i0DojmYIePjVXax7fncH5js+evw8JlW/j+ljYBPHSS7TNkxCy+j5uvEC2wdV9MUwf++UJq16kz5ibwJGSwVFMjpLO5so7PJE1/VUgRzeUVWHF5JvryqEAEuwki3rZBU/dZlQK2o6hfHQ1j10v1Db3xuccRDvaLrhnY8udTjFmWirNPS6QrBQtgP2YDjwh0W3fDwuXxOHYilV63QK+JBw/WRZO3wzl6izDkjJwwn2LOpD/OYuK0FTwRYN8fP5WGi5ezOFh2zDDqlCPHkrGc4lveDu0zZ8F6+XWuIIfpvzmDn5fNw3UaugyiSVvhTGaBiWhSPF9ZI4M7iZxbalYqktKSMCE5TO68LIIEf2DS0rNnpYDdvOPgf7RMXHfxlNYxnoOt4Z2Ombse46dlaYhOy5MPuX4Jd6Bn1Ut6kywNdRTsK0Fq4hmF0D9JU67lkXb+JHVqDnz4CvvZIyx6Oa6+FuP8SzF6j1km36eBrD367Eqx7ctXpSHcQ/L2AZvShPhZugZXFpHIMjX9tv7cDrPOZ7WEqITFePw6B6FHvHi4FUThlqG9Iz9Pm04BTSutCKNt6jaB3WDtDnOkYNPgM/0m5q/5FT3WnVEq5/144hU8aTh2CJsPy14TYT1wLrzn7UfY6VxeK32SL0FObjF+3vwnHEfGwZbye2YfA3dmIjJNeT6r58ZU2I1YBav+02EzeBE6z9uHqRlvseF2MQ48LEYWRSIsbl17PQ+iCZvhMGo1HEYKYi8VBzqH76JE+bRO+Ll82PUfhuuvMtHviCvX2D4HXCgsc2TF7vyR4xZ8UZllQ2cGtk7zMLnGavS/iKRTV+A4YoXqBRVp5eulYy4UYdLFotK5K9nEIO0blVbBwgyFMmHZOi4rvozMKMKMTGkWllYo7xz5zEKZYk1IYg5iZq/GxuvLKdRy5fbVa5UT13RNY+fjlVo2tOgQ0FDDyOUet7PuSTyttei2DdcSE9CXwileFpR65yFlgESmKGihIjxVswoqpnDK1lzLlgsVk4SoMh2kXAEr4CPGfsxa3L5zD3v2O5K2uqI3mYHW/Z24PTdo5hFZqWAzzt+ooW3mvorZMfVO0zAzIBBv+tWFJNYTiYdPwn3mr/zCS2dQC+R2tyJoiqsKBQjS4+QwCpTbLCtlOotDTVUNNkIaIQw68w5dg8dDkp0AyYaGuLNFB5P2WkOjmQMHa2XbU6dSwbLNuKWPJxsu3haWKO5fG+Lg2pAMqgfJpUR0GTCB21B5ZV821CvUygKltQKy7yqccim3bynUqLT3aKoMKretBXCdugunzmRAvLcTJL+okTTCkYlGYLUQTRPXlBpltkoBa2nT89vGhs7nNPTtkOijDknIt5AMIJlqh2N/nqVQaqugYUpglbWyrMi0jEOWrX+lzuixLhk2QxbDh5xORJn9lTRUEWpaKdQILgVyrWdQQynW9Q+dAMm9A5BsouvfpMZfPeyseURh2trX/6OA5dGBicsgFjr5W1pAPEAKNvQ7SM7GY0DUNAQlZEsL0KXDWjVIBZuoaA4Iqu+So1AzFPEwSYh945XBKjq7NGXtLee0FGYXbMLm4dbNm5DsaSOA3ayOczMNOFR1Q+eHPXqN+PKjgW1h7VdP3VCUqaFvj70+WlKwJMN08fTGFTgNiCFbli8spFBwNorDvtSzFyhBlU1dG9kG85v1FrXhjxaxJxVDknLkc2YqHWEFJkTWZpe4U1i6ahskqRMJaGNItjTmcB2srXmcbGzhM7As1EoFyzbdph4h7IZFLazwLuR7ASwDvCIISUdOw2ncen4zESrs6/sWE7Nj3Gbs4cmCtrEtcjbWhru9JYfbkczC+0yKaqiCWemX9Ahd+/+M4kfJBFNDMAEE99exZjyJaGzodLdLz2HltLXSwVo7BH6jaeyaxHp6moMxga3N4YoHkEk4uAiLV8TDY+4+lWDfN8M6PCUPeu16cW1dNEQXkp2fIXlOXXkGN2jfTQzls7RFZUZDqRaXRhNCrWDA8Vew6f4TXj25A8n2JlK72ggv1zSGcRNHfq4mbbqIVEGtdLBsM27p1Yo9P6VtYIej3dQErWW2diBpcMpuTJ+zGt4LDikPXQU7yB45mne1GEmPSnAnV8wXV8yavwGs7qtpZI83m76EZOvnkGz8HCEezXnVKzB0PF9Z8yhfKHTH3SzG6PNFFQ7/0BOv0aH7CDy4e5uiABupXVWDmKS7qB3vLB0zt/iKoH4UsNwkmHuGs5zcyLAj7gRSTDvwOwHwoP9CkpHACyWiydsEs5AqzPnPvFLMF63llVmc8ez5KxixWVg9QYsSJjTkUCXrPkf2rG+hZeTAbeEfx1OUjmMF75tvxFhzo4g/3Sg4rSIE0/C38x+Jh/cI6n4X6fAn2aKOmcEteFvksB60d+j9bUX399HA2oj6f6ll4rqmgY4DrJpY4XnIfwW4TAb9AMmJDdixOwmdBs9H7IVc3HtX8bmGj5vHb9bS0hrqBk6wbN0e+atrQrKKNHfplxjf1ZTbWnv3ASguVr3CJbdIgn0PihG47jSFVRPx5mk2xAm2AtDNjQiqGraNNOHzahRt5Ddt28X8fVA/Gli2tbLp9b2GscthVvl3at4WL0N+EMD+KAW8eSiyrmahd/Bo/tCFqvPcuHmXP2LPwB6c3AjhXdnQd8KKAdqQLCaw879A7tSaMDW15c5my/b9KtthD5gMGzMHq9btQsljclQ7zeRAJfHqSBhvyGcW6uvYSQybeXr/FdSPCpZtdq4h36oZOCczuHbN2+Fp8A+lZoE5tZ9boeROBl8vEDFiJgoKleee2JJ7BszXgWLjDZ/j6ZJa0Dd1gJaJIx7FkGOcRXBjvsTy7vocvmkrH/6sg2IbbMonbNh03M++TTZ+LAHV4E6Kg41Xw9ZRJmS/OVT2jFe/vwP1o4Nlm0Fzz281jF3Pshu3MOuAq73qy6MFCUUL4lByausjkPtEeeXMydMZwr9mENiUGEqP476AZOXXmOhvRmmmM0Z6kyePIZMQ/RVKxtSETQtrYZZBodAt2OiXkNzeQZ6/qdTzq8kd1fTgptI5NwcJOau+fxfqJwGWbRYd/L/SNnXbw25Ck6KFjZ66BFQa41L6K57hDEmu8nS5R9cIPoH4o3czsqdfQbKMZME36GzThq/3amTgiIzBBJygSkbUREIPTQ6JLV9iD8kpXW/mUkFTNwtQn8dpcO/P/yBC1z7fxKLz3xr+nxxYtiWnXf+PjrnHRPLsJUwLA9q0Qk5gHYLWD5LCfKX2t+1OFOb99e1weyZp9FKCuqgmfgvXks4oCDMLvu1bQ/wTgY38GpKwb9DN0pLDjRw5u/w139sP8VZ97BxlTObETrZMKbtJG99/9I8bnwxY2daktW9H8u73GRwtA3tMm7VS6X8L2GNMbe368KmQqT0NIVlC4BbUhHhOTVhbdoAGHWNs0gm6FNMyuPt7UAwaXotsdy1c9KsPdX1hyoc9P6t4zSfItNg4+ksfpXcAjaC1dq4Dav2Te/gkwbLNo1tkbf2mnvNJe4tY4cagmSfGT1nKnwWLXbyRl+oMyNM/n03A5hHY2TXxKroWskd8h5Lx5LBGkQz9Cm9Ca+FeEHOIzKyQ3Q6pjQjrZlyjfQKG8ZWJv+07BgfPgXxuTXieQHTDvLVvp3967Z80WNnWvF03PXIa29T0nUqEiUFHqJONZIlAXH9KXWPJBMwisNNIJpNMoCE/luQnkohvKCYmGVi7tCZBYJ/1/h76hva8c7TN3OV/G6Vu4HzHxMKnT1Do+A/yB2ifNFjZZmHtp0laO1fNUJTHoLa16ICCmQRvJsGkOFUyiUwBQb0aWR9bA/Qwz8sYcV76OB2gjnyWLofULpX+tTHX0QwN9NmiZCcKzVxPmbT0dXHpHPlB/1GuSoBlm3ePyIYEtpgVVn4Pb0xQCexUkklfY2eQNpo3pSRAXyQA46+CaBs6YLytOV4Hfy/EyCHfobjf92hjZsP/6IxMzpAPeZ2yrSqB1aJkQsKWAYnat4erlRVc27VHp1YdSPOcoWbo8kC/mXds07Y9fLTNPa2MLbo4koxqbORyji1zamLuCNfWHeDS0ppLExNbDlaniceYD3mdsq3KgGWbflOvRY30nSSyhRrslT12adDCZ6Fbt6iaFR3X3MrPhpzSM/5XfDIh26pm6HyzeXs/jQ99nWyrUmDZ5uI7uE5rm4AGHl0j6w4bu+i7v3tcQlLy1+MmLa9r7dS/gWe3SANKpw0HD535xV8f+c+2fwtstVSD/XSkGmw12Kol1WCrwVYtqQb7L4LVIXGrlg8r/wMwuqk6+KaYKwAAAABJRU5ErkJggg=="/></defs><use href="#soc2" x="-9" y="-14"/></svg>
                         </span>
@@ -248,7 +248,7 @@
                 <div id="cloud-services" class="submenu">
                   <div class="submenu-column">
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'cloud-consulting-and-migration-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -266,7 +266,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'cloud-managed-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100"
@@ -284,7 +284,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'business-continuity-disaster-recovery-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -302,7 +302,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'devsecops-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100"
@@ -323,7 +323,7 @@
                   <div class="submenu-column">
 
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'microsoft-office-365-migration-support-services']) }}">
                         <span class="icoms">
                           <svg width="30" height="30" viewBox="0 0 24 24">
                             <rect x="2" y="2" width="8" height="8" fill="#2196f3">
@@ -342,7 +342,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'aws-cloud-services']) }}">
                         <span class="icoms">
                           <svg width="30" height="30" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                             fill="none">
@@ -368,7 +368,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'aws-partner']) }}">
                         <span class="icoms">
                           <!-- Replace this SVG with your AWS Partner icon -->
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="90" height="90">
@@ -389,7 +389,7 @@
                                 <div id="automation" class="submenu">
                   <div class="submenu-column">
                     <div>
-                      <a href="#"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'ai-consulting-services']) }}"><span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 59" width="64" height="59"><defs><image width="63" height="53" id="aiconsulting" href="data:image/png;base64,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"/></defs><use href="#aiconsulting" x="1" y="5"/></svg>
                         </span>
                         <div>AI Consulting Services<span class="sub-dc">AI strategy & roadmap</span>
@@ -397,7 +397,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'agentic-ai-services']) }}"><span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="62" height="60" id="aiagent" href="data:image/png;base64,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"/></defs><use href="#aiagent" x="1" y="2"/></svg>
                         </span>
                         <div>Agentic AI Services<span class="sub-dc">Autonomous AI agent solutions</span>
@@ -405,7 +405,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'ai-development-services']) }}"><span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="58" height="50" id="aidevelopement" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAAyCAMAAAA6Njh3AAAAAXNSR0IB2cksfwAAAv1QTFRFAAAASUmSP0ejPEehK1WqPUejPUejPkijPEaiSVKobXW6PUelPEijZ2+34ufz3+XzosLynb/zz9zzp8XzTpHyeqvy3eTz4ebz4efza6LzUJLy0Nzz1+bvuuPknNv1zOP2w9XyWJbyYp3yn8Dysszzd6nzZJ7yqMXzscvzearz3+byjd7Vm9v1y+P2xtfzV5byo8LynODayuXrm77zXpryZZ7ySnnYRWrIUnHIipLIeZDCdJPBx83m3Ob02OX00d3zUZPyhrHyx9fzvsTiUVqtmNr0mdr6caXyrsnyqrDY4OXytuPjpOLg2uX0WZfySVOpSFGokN3Vkd/Wkd/VpuHehLHzYJvzSlOp0tTqnqPRiLPyk7ryiY/HoabSXWWyVpbyrMjyparURU+nlZvNzePrzuXsv+H2w+H3TlirvsHgfoTCvcDgpd/dpdz1r975Zp/ymb3zjpTKdHu9ZGy1j5XK2+PzcKXyqa3WQkymnKHQ0t7zUJPya3K5Y2u1xeToW5nyld/XwuTosrjcRE6mjNrroNv4XZryf63ykbjzirLwT2vCQVaySVuzXmezUWauWmmypavVxuL2s8zzT5LygK/yjt7W2ubxT5HyjbbzfazyhrLyVZXy3uXz1ebv1+X0wNPzy9rz2uLzYZzyvNHz2OLzweToh9f5v+H3m73zaaHy1uDzdajyd6jzuc/yRIyuRqGyU6u5dsXITNe7S9i9p+zfpuzekufXjebVnurbT9m+r+7icODL2Pfx0vXubd/Jse7jU9rAn+rczPTsu/Dmv/Hox/PqnurcT9m/s+7jfePPxvPqzfTtgOPQr+7hUdm/S9e9huXSfOPPpezef+PQjObVTNe8TcyzS9i9menaS9m9VePGR9W4Ste+S9e+Q8OrQ8KrRMWsS9LDQb2lQb2lQb2lPEulPUejPEajPkiiO0mkOkWlPEejPUekAAD/TNm9S9q8RMetRMarRcetTtjEPEejPkijSti/PUejPUejT9y5Sdm9Sdu2PkSiPUikRkai2JB6NAAAAP90Uk5TAAc9RAbM/8s3//82QP//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////PMDI4ED/////////////////////////////////////Ov//////OQrc/9sJElpmwsWvEfj/xBFTZmM4MOiiARtEys+uDcJONOx6HUkOKUML16ojpQAAAqVJREFUeJzNlU1oE0EUx9+/zZdRU61VCUZalHqqSA9SRfSggmh7KYpQFKEFjZAgmopWIVKhlwptlFq/EUFEDzZCRQVBtCiliKKI9BK1fqWWSg22Qkxsus5Oku1u9sNkL/YdZt+beb+ZeW/e7IAAUOEiCAIspkgipOCYKja1asqKOUm7KTRhmxmomG9MmkKtzECiUNSBODnxh8iGCWb95p0uaV4gpoeWQpRYVv056zvTPBjPOpfgkw5agWjOnjwfiJbj3b83XJmZsyLqydSXmDDgjYJYhddqtBpvWbsSL2j1U5nvhucKtAYDGrGufUlVjn6mrHskd978TGasB/rUqGNNP5VHSEK3PiDadp+oVnZ0wEONWKsXPaaNfXEJrUeYaHtPzqpaaap7kiTacpckdCdwKz+0/h4z68LT6C7gOkf3qCscuJmLlg1LaBM7lssc3TeiQt24JkMbb7Cu3Vcl1MdQoSuvDXt7XUPUdEFCD4UogI68UCI/LtK80Sx65BSRPXG0XXk4VHVaCxVLwnfnIxmVhHM/OjRQ721202oHRgQ63CYjg2fjMsvpR7sadY/xrgC/elxNl/8JRYjzA0E12oaTOZloPU7OIFo0s6SM1e23dDZ/6+bZaACOLWwOEIW+dGadG2oO6qF0BgeoC8yfQj4619oianS+J+u8A15dlMslP1H3Xu1N6m44LVdi7MfUaArNV/4fGjb/NPcagMCUAWyAFrOHu0h8SApGbUjLhIlVXZwcM7FqWWbV3KdoGn31VW/apfzWDekNL8Og3lvGpJIiumMr2MQRzXOVdSKlMS5Yy/Ui/SxDPdouMx6NivEDiwtHR7GEf4exwAj9AUWGLXPZ51dpxo7NNkLfDyrMTU7WxEsy1rjDCE0ou2FlzaQ9bSRRlFb+AsOqDJBo9bR0AAAAAElFTkSuQmCC"/></defs><use href="#aidevelopement" x="3" y="7"/></svg>
                         </span>
                         <div>AI Development Services<span class="sub-dc">Custom AI solution development</span>
@@ -417,7 +417,7 @@
                       
                   </div>
                   <div class="submenu-column">
-                    <div><a href="#"><span class="icoms">
+                    <div><a href="{{ route('page.show', ['slug' => 'ap-ar-automation']) }}"><span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -433,7 +433,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'robotics-process-automation']) }}"><span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
@@ -454,7 +454,7 @@
                 <div id="sap-services" class="submenu">
                   <div class="submenu-column">
                     <div>
-                      <a href="#"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'sap-services']) }}"><span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 56" width="64" height="56"><defs><image width="64" height="49" id="saphana" href="data:image/png;base64,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"/></defs><use href="#saphana" y="4"/></svg>
                         </span>
@@ -469,7 +469,7 @@
                 <div id="finance-accounting" class="submenu">
                   <div class="submenu-column">
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'bookkeeping-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -487,7 +487,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'cfo-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -505,7 +505,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'payroll-processing']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -522,7 +522,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'accounts-payable-and-accounts-receivable-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -559,7 +559,7 @@
                   </div>
                   <div class="submenu-column">
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'treasury-management']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -638,7 +638,7 @@
                   <div class="submenu-column">
                     <div class="submenu-header">Construction Engineering Services</div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'civil-engineering-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
 	<defs>
@@ -653,7 +653,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'construction-documentation-services']) }}">
                         <span class="icoms">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -671,7 +671,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'construction-takeoff-estimation-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -693,7 +693,7 @@
                   <div class="submenu-column">
                     <div class="submenu-header">Fund Middle and Back Office Services</div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'hedge-fund-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -710,7 +710,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'family-office-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -727,7 +727,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'back-and-middle-office-services']) }}">
                         <span class="icoms">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -763,7 +763,7 @@
           <div class="megamenu">
             <ul class="submenu active">
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'information-and-communication-technology']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -776,7 +776,7 @@
                   <div>Information & Communication Technology</div>
                 </a></li>
                 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'real-estate-and-construction']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -790,7 +790,7 @@
                 </a>
               </li>
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'travel-and-hospitality']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -803,7 +803,7 @@
                   <div>Travel and Hospitality</div>
                 </a></li>
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'ecommerce-and-retail']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -816,7 +816,7 @@
                   <div>E-commerce and Retail</div>
                 </a></li>
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'legal-firm']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -829,7 +829,7 @@
                   <div>Legal Firm</div>
                 </a></li>
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'manufacturing']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -842,7 +842,7 @@
                   <div>Manufacturing</div>
                 </a></li>
 
-                <li><a href="#"><span class="icoms">
+                <li><a href="{{ route('industries.show', ['slug' => 'chemical-and-energy']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -857,7 +857,7 @@
 
               
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'healthcare-and-pharma']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -870,7 +870,7 @@
                   <div>Healthcare & Pharma</div>
                 </a></li>
 
-                <li><a href="#"><span class="icoms">
+                <li><a href="{{ route('industries.show', ['slug' => 'bfsi']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -883,7 +883,7 @@
                   <div>BFSI</div>
                 </a></li>
 
-              <li><a href="#"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'logistics-and-transportation']) }}"><span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -913,7 +913,7 @@
         <div class="dropdown-menu single-panel vertical-panel">
           <div class="megamenu">
             <ul class="submenu active">
-              <li><a href="#">
+              <li><a href="{{ route('case-studies.index') }}">
                   <span class="icoms">
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -926,7 +926,7 @@
                   <div>Case Studies</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('blog.index') }}">
                   <span class="icoms">
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -939,7 +939,7 @@
                   <div>Blog</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('ebooks.index') }}">
                   <span class="icoms">
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
@@ -952,7 +952,7 @@
                   <div>eBooks</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('white-papers.index') }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -966,7 +966,7 @@
                   <div>Whitepapers &amp; Reports</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('press-releases.index') }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -981,7 +981,7 @@
                   <div>Press Releases</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('articles.index') }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1010,7 +1010,7 @@
         <div class="dropdown-menu single-panel vertical-panel">
           <div class="megamenu">
             <ul class="submenu active">
-              <li><a href="#">
+              <li><a href="{{ route('page.show', ['slug' => 'about-ibn']) }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1024,7 +1024,7 @@
                   <div>About IBN</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('page.show', ['slug' => 'our-vision']) }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1080,7 +1080,7 @@
                   <div>Awards and Recognition</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('page.show', ['slug' => 'testimonials']) }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">

@@ -215,6 +215,34 @@ const syncPhoneInput = (input, instance) => {
     input.classList.toggle('is-invalid', !isValid);
 };
 
+const clearPhoneInputs = (root = document) => {
+    const inputs = root.matches?.('[data-phone-input]')
+        ? [root]
+        : Array.from(root.querySelectorAll('[data-phone-input]'));
+
+    inputs.forEach((input) => {
+        const instance = intlTelInput.getInstance(input);
+
+        if (instance) {
+            instance.setNumber('');
+            syncPhoneInput(input, instance);
+            return;
+        }
+
+        input.value = '';
+
+        const hiddenInput = document.querySelector(input.dataset.phoneHidden);
+
+        if (!hiddenInput) {
+            return;
+        }
+
+        hiddenInput.value = '';
+        hiddenInput.dispatchEvent(new Event('input', { bubbles: true }));
+        hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+};
+
 const initPhoneInputs = (root = document) => {
     const inputs = root.matches?.('[data-phone-input]')
         ? [root]
@@ -228,7 +256,7 @@ const initPhoneInputs = (root = document) => {
         input.dataset.phoneReady = 'true';
 
         const instance = intlTelInput(input, {
-            initialCountry: 'us',
+            initialCountry: input.dataset.initialCountry || 'us',
             countryOrder: ['us', 'in', 'gb'],
             countrySearch: true,
             separateDialCode: true,
@@ -508,6 +536,7 @@ document.addEventListener('alpine:init', () => {
 
                     focusTarget?.focus?.();
                     initPhoneInputs(dialog || document);
+                    initConsentTooltips(dialog || document);
                 });
             });
         },
@@ -572,6 +601,99 @@ const initContactModalTriggers = () => {
             });
         });
     });
+};
+
+const setConsentTooltipOpen = (tooltip, open) => {
+    const trigger = tooltip.querySelector('.consent-tooltip__trigger');
+    const content = tooltip.querySelector('.consent-tooltip__content');
+
+    tooltip.classList.toggle('is-open', open);
+    trigger?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    content?.setAttribute('aria-hidden', open ? 'false' : 'true');
+};
+
+const closeAllConsentTooltips = (except = null) => {
+    document.querySelectorAll('[data-consent-tooltip].is-open').forEach((tooltip) => {
+        if (tooltip !== except) {
+            setConsentTooltipOpen(tooltip, false);
+        }
+    });
+};
+
+const initConsentTooltips = (root = document) => {
+    const tooltips = root.matches?.('[data-consent-tooltip]')
+        ? [root]
+        : Array.from(root.querySelectorAll('[data-consent-tooltip]'));
+
+    tooltips.forEach((tooltip) => {
+        if (tooltip.dataset.consentTooltipReady === 'true') {
+            return;
+        }
+
+        tooltip.dataset.consentTooltipReady = 'true';
+
+        const trigger = tooltip.querySelector('.consent-tooltip__trigger');
+
+        if (!trigger) {
+            return;
+        }
+
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const willOpen = !tooltip.classList.contains('is-open');
+            closeAllConsentTooltips(tooltip);
+            setConsentTooltipOpen(tooltip, willOpen);
+        });
+
+        trigger.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') {
+                return;
+            }
+
+            setConsentTooltipOpen(tooltip, false);
+        });
+
+        tooltip.addEventListener('focusout', (event) => {
+            if (!tooltip.contains(event.relatedTarget)) {
+                setConsentTooltipOpen(tooltip, false);
+            }
+        });
+    });
+
+    if (document.documentElement.dataset.consentTooltipGlobalBound === 'true') {
+        return;
+    }
+
+    document.documentElement.dataset.consentTooltipGlobalBound = 'true';
+
+    document.addEventListener('click', (event) => {
+        if (event.target.closest('[data-consent-tooltip]')) {
+            return;
+        }
+
+        closeAllConsentTooltips();
+    });
+
+    document.addEventListener(
+        'keydown',
+        (event) => {
+            if (event.key !== 'Escape') {
+                return;
+            }
+
+            const openTooltip = document.querySelector('[data-consent-tooltip].is-open');
+
+            if (!openTooltip) {
+                return;
+            }
+
+            event.stopPropagation();
+            closeAllConsentTooltips();
+        },
+        true,
+    );
 };
 
 const initHomeHero = () => {
@@ -907,6 +1029,7 @@ const initHomeTestimonials = () => {
 const initApp = () => {
     initSiteNavbar();
     initContactModalTriggers();
+    initConsentTooltips();
     initPhoneInputs();
     initArticleToc();
     initHomeHero();
@@ -924,6 +1047,7 @@ document.addEventListener('livewire:init', () => {
         initPhoneInputs(el);
         initArticleToc(el);
         initContactModalTriggers();
+        initConsentTooltips(el);
     });
 
     window.Livewire?.on('form-success-revealed', () => {
@@ -931,6 +1055,9 @@ document.addEventListener('livewire:init', () => {
             const modalSuccess = document.querySelector('.contact-modal__body [data-form-success]');
             const pageSuccess = document.querySelector('[data-form-success]');
             const success = modalSuccess || pageSuccess;
+            const scope = success?.closest('form') || success?.closest('[wire\\:id]') || document;
+
+            clearPhoneInputs(scope);
 
             if (success) {
                 window.revealFormSuccess(success);
@@ -942,6 +1069,7 @@ document.addEventListener('livewire:init', () => {
 document.addEventListener('livewire:navigated', () => {
     initSiteNavbar();
     initContactModalTriggers();
+    initConsentTooltips();
     initPhoneInputs();
     initArticleToc();
     initHomeHero();

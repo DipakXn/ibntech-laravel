@@ -14,9 +14,9 @@
 }
 
 .site-ibn-topbar__inner {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     width: min(1200px, calc(100% - 2rem));
     margin: 0 auto;
     gap: 1.25rem;
@@ -29,10 +29,19 @@
     white-space: nowrap;
 }
 
+.site-ibn-topbar__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.25rem;
+}
+
 .site-ibn-topbar__phones {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
     gap: 1.25rem;
 }
 
@@ -46,20 +55,17 @@
     white-space: nowrap;
 }
 
-.site-ibn-topbar__email {
-    justify-self: end;
-}
-
 @media (max-width: 1199.98px) and (min-width: 992px) {
     .site-ibn-topbar__inner {
-        grid-template-columns: 1fr;
-        justify-items: center;
+        flex-direction: column;
+        justify-content: center;
         text-align: center;
         gap: 0.45rem;
     }
 
-    .site-ibn-topbar__email {
-        justify-self: center;
+    .site-ibn-topbar__contacts,
+    .site-ibn-topbar__phones {
+        justify-content: center;
     }
 }
 

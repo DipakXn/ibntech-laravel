@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Jobs\SendCaseStudyThankYouMail;
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Models\CaseStudy;
 use App\Services\LeadService;
@@ -61,7 +62,7 @@ class CaseStudyDownloadForm extends Component
         unset($validated['acceptedTerms']);
         unset($validated['recaptchaToken']);
 
-        $leadService->createLead([
+        $lead = $leadService->createLead([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'form_name' => $validated['formName'],
@@ -70,6 +71,10 @@ class CaseStudyDownloadForm extends Component
             'asset_slug' => $validated['caseStudySlug'],
             'asset_title' => $validated['caseStudyTitle'],
         ], 'case_study_download');
+
+        if ($lead->email) {
+            SendCaseStudyThankYouMail::dispatch($lead->getKey())->afterCommit();
+        }
 
         $this->downloadUrl = URL::temporarySignedRoute(
             'case-studies.download',

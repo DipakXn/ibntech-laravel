@@ -175,7 +175,7 @@
 }
 
 .site-footer__subheading,
-.site-footer__service-group > h4 {
+.site-footer__group-heading {
     margin: 0;
     color: var(--footer-ink);
     font-size: 0.98rem;

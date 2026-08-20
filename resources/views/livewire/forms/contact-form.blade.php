@@ -121,7 +121,7 @@
         <textarea
             id="{{ $fieldId('message') }}"
             wire:model="message"
-            rows="{{ $isCompact ? 2 : ($isVaptLayout ? 4 : 5) }}"
+            rows="{{ $messageRows ?: ($isCompact ? 2 : ($isVaptLayout ? 4 : 5)) }}"
             placeholder="{{ $messagePlaceholder }}"
             data-gramm="false"
             data-gramm_editor="false"
@@ -136,6 +136,7 @@
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms &amp; Conditions</a>
             and
             <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>.
+            <x-forms.messaging-consent-tooltip />
         </span>
     </label>
     @error('acceptedTerms') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror

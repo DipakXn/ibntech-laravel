@@ -41,14 +41,14 @@ class WebsiteSettingService
     public function defaultAttributes(): array
     {
         return [
-            'site_name' => config('app.name', 'IBNTECH'),
+            'site_name' => config('app.name', 'IBN Technologies'),
             'organization_name' => 'IBN Technologies Ltd',
             'tagline' => null,
             'default_meta_title' => null,
             'default_meta_description' => null,
             'default_meta_keywords' => null,
             'default_locale' => config('app.locale', 'en'),
-            'og_site_name' => config('app.name', 'IBNTECH'),
+            'og_site_name' => config('app.name', 'IBN Technologies'),
             'og_type' => 'website',
             'og_locale' => config('app.locale', 'en'),
             'og_image_alt' => null,
@@ -91,7 +91,7 @@ class WebsiteSettingService
                     'address' => 'Kohinoor House, 2nd floor, 691/A/1B, Plot no. 7, Bibwewadi Road, Pune-411037, Maharashtra, India',
                     'email' => 'sales@ibntech.com',
                     'phones' => [
-                        ['label' => null, 'number' => '020-711-79586'],
+                        ['label' => null, 'number' => '020-6768-0404'],
                     ],
                 ],
             ],

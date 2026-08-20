@@ -1,0 +1,692 @@
+/* Industry: Legal Firm — matched to WordPress screenshot */
+
+.lf-page {
+    --lf-navy: #2e2e80;
+    --lf-navy-deep: #1a2558;
+    --lf-navy-mid: #24356f;
+    --lf-green: #4caf50;
+    --lf-green-dark: #3d9140;
+    --lf-sky: #3d9be8;
+    --lf-blue: #3b6fd4;
+    --lf-purple: #5b4b8a;
+    --lf-gold: #d4a017;
+    --lf-ink: #172033;
+    --lf-muted: #5b6475;
+    --lf-line: rgba(46, 46, 128, 0.12);
+    --lf-soft: #f4f6f8;
+    --lf-mist: #eef3f8;
+    color: var(--lf-ink);
+    background: #fff;
+}
+
+.lf-page h1,
+.lf-page h2,
+.lf-page h3,
+.lf-page h4 {
+    color: var(--lf-navy);
+}
+
+.lf-page ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lf-section {
+    padding: 5.5rem 0;
+}
+
+.lf-section--soft {
+    background: var(--lf-soft);
+}
+
+.lf-hero + .lf-section--soft {
+    position: relative;
+    z-index: 0;
+    padding-top: 7.5rem;
+}
+
+.lf-section--mist {
+    background: var(--lf-mist);
+}
+
+.lf-heading {
+    max-width: 46rem;
+    margin: 0 auto 2.75rem;
+    text-align: center;
+}
+
+.lf-heading h2 {
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.lf-heading h2 span {
+    color: var(--lf-green);
+}
+
+.lf-heading p {
+    margin-top: 0.85rem;
+    color: var(--lf-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.lf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 0.45rem;
+    padding: 0.9rem 1.55rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lf-btn:hover {
+    transform: translateY(-1px);
+}
+
+.lf-btn:focus-visible {
+    outline: 2px solid var(--lf-green);
+    outline-offset: 3px;
+}
+
+.lf-btn--green {
+    background: var(--lf-green);
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(76, 175, 80, 0.32);
+}
+
+.lf-btn--green:hover,
+.lf-btn--green:focus-visible {
+    background: var(--lf-green-dark);
+    color: #fff;
+}
+
+.lf-btn--white {
+    background: #fff;
+    color: var(--lf-navy);
+    box-shadow: 0 12px 28px rgba(16, 21, 69, 0.18);
+}
+
+.lf-btn--white:hover,
+.lf-btn--white:focus-visible {
+    background: #f3f6fb;
+    color: var(--lf-navy);
+}
+
+/* Hero */
+.lf-hero {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: visible;
+    color: #fff;
+    padding: 2.75rem 0 0;
+    background: linear-gradient(100deg, #1f2155 0%, #1d4d5d 48%, #3dae55 100%);
+}
+
+.lf-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.22'%3E%3Cpath d='M40 48v44M28 92h24M40 48c12 10 24 10 36 0'/%3E%3Ccircle cx='40' cy='36' r='6'/%3E%3Cpath d='M132 36h40v52h-40zM140 48h24M140 60h24M140 72h16'/%3E%3Cpath d='M48 150h36l-8 28H56zM66 150v-16'/%3E%3Cpath d='M160 148c18 0 28 14 28 28s-10 28-28 28-28-14-28-28 10-28 28-28zM160 164v24M148 176h24'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 220px 220px;
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.lf-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding-bottom: 0.5rem;
+}
+
+.lf-hero__copy h1 {
+    color: #fff;
+    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.lf-hero__lede {
+    max-width: 36rem;
+    margin: 1.15rem 0 1.65rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.lf-hero .lf-btn--green {
+    border-radius: 999px;
+}
+
+.lf-hero__media {
+    overflow: hidden;
+    background: #fff;
+    border-radius: 1.75rem;
+    box-shadow: 0 18px 40px rgba(8, 18, 48, 0.16);
+}
+
+.lf-hero__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.lf-stats {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0;
+    transform: translateY(50%);
+}
+
+.lf-stats li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 4.35rem;
+    padding: 0.85rem 1.05rem;
+    border-radius: 0.9rem;
+    background: #fff;
+    box-shadow: 0 16px 34px rgba(20, 31, 78, 0.12);
+    color: var(--lf-ink);
+    font-size: 0.86rem;
+    line-height: 1.35;
+}
+
+.lf-stats strong {
+    display: block;
+    color: var(--lf-navy);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.lf-stats__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 2.35rem;
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.14);
+    color: var(--lf-green);
+    font-size: 0.95rem;
+}
+
+/* Certifications */
+.lf-certs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+}
+
+.lf-cert {
+    text-align: center;
+    background: #fff;
+    border-radius: 0.9rem;
+    padding: 2rem 1.4rem 1.7rem;
+    box-shadow: 0 14px 32px rgba(20, 31, 78, 0.08);
+    border-top: 4px solid var(--lf-green);
+}
+
+.lf-cert__icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.12);
+    color: var(--lf-green);
+    font-size: 1.7rem;
+}
+
+.lf-cert:first-child .lf-cert__icon,
+.lf-cert:last-child .lf-cert__icon {
+    background: rgba(59, 111, 212, 0.12);
+    color: var(--lf-blue);
+}
+
+.lf-cert__check {
+    position: absolute;
+    right: -0.15rem;
+    bottom: -0.1rem;
+    display: grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    background: #3b6fd4;
+    color: #fff;
+    font-size: 0.62rem;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.lf-cert h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.lf-cert p {
+    margin-top: 0.35rem;
+    color: var(--lf-muted);
+    font-size: 0.95rem;
+}
+
+/* Services */
+.lf-services {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.lf-service {
+    --lf-accent: var(--lf-purple);
+    --lf-tint: #f4eefb;
+    display: flex;
+    flex-direction: column;
+    background: var(--lf-tint);
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    padding: 1.7rem 1.55rem 1.5rem;
+    box-shadow: 0 16px 36px rgba(20, 31, 78, 0.07);
+}
+
+.lf-service--purple {
+    --lf-accent: var(--lf-navy);
+    --lf-tint: #f3eef8;
+}
+
+.lf-service--sky {
+    --lf-accent: var(--lf-sky);
+    --lf-tint: #eaf5fc;
+}
+
+.lf-service--green {
+    --lf-accent: var(--lf-green);
+    --lf-tint: #eef8ef;
+}
+
+.lf-service--gold {
+    --lf-accent: var(--lf-gold);
+    --lf-tint: #fbf6e8;
+}
+
+.lf-service__head {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1.05rem;
+}
+
+.lf-service__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: #fff;
+    color: var(--lf-accent);
+    font-size: 1.2rem;
+    box-shadow: 0 8px 18px rgba(20, 31, 78, 0.08);
+}
+
+.lf-service h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.lf-service h4 {
+    margin: 0.35rem 0 0.7rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+}
+
+.lf-checks {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0 0 1.15rem;
+}
+
+.lf-checks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: var(--lf-ink);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.lf-checks i {
+    margin-top: 0.12rem;
+    color: var(--lf-accent);
+    font-size: 0.95rem;
+}
+
+.lf-btn--card {
+    width: 100%;
+    margin-top: auto;
+    background: var(--lf-accent);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.18);
+}
+
+.lf-btn--card:hover,
+.lf-btn--card:focus-visible {
+    filter: brightness(0.92);
+    color: #fff;
+}
+
+/* Mid CTA */
+.lf-cta {
+    background: linear-gradient(90deg, #1e7a48 0%, #1a4d6e 55%, #1a2558 100%);
+    padding: 4.25rem 0;
+    color: #fff;
+    text-align: center;
+}
+
+.lf-cta__inner {
+    max-width: 46rem;
+}
+
+.lf-cta h2 {
+    color: #fff;
+    font-size: clamp(1.65rem, 3vw, 2.25rem);
+    font-weight: 700;
+}
+
+.lf-cta p {
+    margin: 0.9rem 0 1.55rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Why Choose */
+.lf-reasons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.lf-reason {
+    --lf-accent: var(--lf-purple);
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #fff;
+    padding: 1.55rem 1.4rem 1.45rem;
+    box-shadow: 0 16px 36px rgba(20, 31, 78, 0.08);
+}
+
+.lf-reason::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lf-accent) 0%, var(--lf-green) 100%);
+}
+
+.lf-reason--purple { --lf-accent: var(--lf-purple); }
+.lf-reason--blue { --lf-accent: var(--lf-blue); }
+.lf-reason--navy { --lf-accent: var(--lf-navy); }
+.lf-reason--deep { --lf-accent: var(--lf-navy-deep); }
+
+.lf-reason__head {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.lf-reason__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 2.6rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.65rem;
+    background: rgba(46, 46, 128, 0.1);
+    color: var(--lf-accent);
+    font-size: 1.05rem;
+}
+
+.lf-reason h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.lf-reason p {
+    color: var(--lf-muted);
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+/* Assessment */
+#lf-assessment {
+    scroll-margin-top: 6rem;
+}
+
+.lf-assess {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+    gap: 2.4rem;
+    align-items: start;
+}
+
+.lf-assess__copy h2 {
+    font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.lf-assess__copy > p {
+    margin-top: 0.85rem;
+    color: var(--lf-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.lf-assess__list {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+.lf-assess__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.lf-assess__list i {
+    margin-top: 0.15rem;
+    color: var(--lf-green);
+    font-size: 1.1rem;
+}
+
+.lf-assess__card {
+    border-radius: 1.05rem;
+    background: #fff;
+    padding: 1.7rem 1.5rem 1.55rem;
+    box-shadow: 0 20px 44px rgba(20, 31, 78, 0.12);
+}
+
+.lf-assess__card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.lf-assess__card > p {
+    margin: 0.55rem 0 1.2rem;
+    color: var(--lf-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.lf-assess__card .contact-form {
+    gap: 0.65rem;
+}
+
+.lf-assess__card .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+}
+
+.lf-assess__card .contact-form__field input:not([type='checkbox']),
+.lf-assess__card .contact-form__field select,
+.lf-assess__card .phone-input-field .iti__tel-input {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+    min-height: 0;
+    max-height: 2.75rem;
+    height: 2.75rem;
+}
+
+.lf-assess__card .phone-input-field .iti__tel-input {
+    padding-left: 3.25rem;
+}
+
+.lf-assess__card .contact-form__field--message textarea {
+    min-height: 5rem;
+    height: 5.25rem;
+    resize: vertical;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+}
+
+.lf-assess__card .contact-form__terms,
+.lf-assess__card .contact-form__terms span {
+    color: #334155 !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.lf-assess__card .contact-form__terms a {
+    color: var(--lf-navy) !important;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.lf-assess__card .contact-form__submit {
+    width: 100%;
+    border-radius: 0.55rem;
+    background: var(--lf-navy);
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.85rem 1rem;
+    box-shadow: 0 12px 24px rgba(46, 46, 128, 0.28);
+}
+
+.lf-assess__card .contact-form__submit:hover,
+.lf-assess__card .contact-form__submit:focus-visible {
+    background: var(--lf-navy-deep);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .lf-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        transform: translateY(28%);
+    }
+
+    .lf-hero + .lf-section--soft {
+        padding-top: 6.5rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .lf-hero__inner,
+    .lf-services,
+    .lf-reasons,
+    .lf-assess,
+    .lf-certs {
+        grid-template-columns: 1fr;
+    }
+
+    .lf-hero__inner {
+        padding-bottom: 3.5rem;
+        text-align: center;
+    }
+
+    .lf-hero__lede {
+        margin-inline: auto;
+    }
+
+    .lf-hero__media {
+        max-width: 26rem;
+        margin-inline: auto;
+        border-radius: 1.5rem;
+    }
+
+    .lf-service {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .lf-section,
+    .lf-cta {
+        padding: 3.4rem 0;
+    }
+
+    .lf-hero {
+        overflow: hidden;
+        padding-top: 3.4rem;
+    }
+
+    .lf-hero__inner {
+        padding-bottom: 2.5rem;
+        gap: 1.5rem;
+    }
+
+    .lf-stats {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+        transform: none;
+        padding-bottom: 1.5rem;
+    }
+
+    .lf-hero + .lf-section--soft {
+        padding-top: 3.4rem;
+    }
+
+    .lf-assess__card {
+        padding: 1.45rem 1.15rem 1.35rem;
+    }
+
+    .lf-btn {
+        width: 100%;
+    }
+}

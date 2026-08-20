@@ -13,7 +13,7 @@ MEDIA_URL=/uploads
 | Environment | `MEDIA_ROOT` example | `MEDIA_URL` |
 |---|---|---|
 | Local | `public/uploads` | `/uploads` |
-| cPanel Staging | `/home/USER/public_html/stg/uploads` | `/uploads` |
+| cPanel Staging | `/home/USER/public_html/dev/uploads` | `/uploads` |
 | cPanel Production | `/home/USER/public_html/uploads` | `/uploads` |
 
 `MEDIA_ROOT` may be:
@@ -62,23 +62,23 @@ Typical layout:
 ```
 /home/USER/
   laravel-stg/          ← application code (outside or beside web root)
-  public_html/stg/      ← document root
+  public_html/dev/      ← document root (dev.ibntech.com)
     index.php
     uploads/            ← MEDIA_ROOT target
     ...
 ```
 
 1. Deploy application files (FTP/File Manager/Git — no SSH required for media setup).
-2. Point the staging document root at the Laravel public entry (or copy/sync `public/` contents into `public_html/stg`).
+2. Point the staging document root at the Laravel public entry (or copy/sync `public/` contents into `public_html/dev`).
 3. Set staging `.env`:
 
 ```env
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/stg/uploads
+MEDIA_ROOT=/home/USER/public_html/dev/uploads
 MEDIA_URL=/uploads
 ```
 
-4. Ensure `public_html/stg/uploads` exists and is writable by PHP (`0755` or `0775` as appropriate).
+4. Ensure `public_html/dev/uploads` exists and is writable by PHP (`0755` or `0775` as appropriate).
 5. Run (once, via cPanel Terminal / cron / locally against staging DB if available):
 
 ```bash

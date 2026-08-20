@@ -28,7 +28,8 @@ class LeadReceivedMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.leads.received'
+            html: 'emails.leads.received',
+            text: 'emails.leads.received-text',
         );
     }
 

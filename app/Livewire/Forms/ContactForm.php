@@ -4,26 +4,105 @@ namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Throwable;
 
 class ContactForm extends Component
 {
     use HasReCaptcha;
+
     public string $formName = 'contact';
+
     public string $pageUrl = '';
+
+    public string $idPrefix = 'contact';
+
     public string $name = '';
+
     public string $email = '';
+
     public ?string $phone = null;
+
     public ?string $company = null;
+
+    public ?string $service = null;
+
     public string $message = '';
+
     public bool $acceptedTerms = true;
+
     public bool $submitted = false;
+
     public bool $showCompany = true;
 
-    public function mount(bool $showCompany = true): void
-    {
+    public bool $showService = false;
+
+    /** @var 'default'|'home'|'modal'|'vapt' */
+    public string $layout = 'default';
+
+    public ?string $submitError = null;
+
+    public string $submitLabel = 'Submit';
+
+    public string $servicePlaceholder = 'Select Service';
+
+    public string $messagePlaceholder = 'Tell us how we can help';
+
+    public ?int $messageRows = null;
+
+    /**
+     * @var list<string>
+     */
+    public array $serviceOptions = [
+        'Cybersecurity',
+        'Cloud',
+        'Finance & Accounting',
+        'Automation',
+        'BPO',
+        'Other',
+    ];
+
+    /**
+     * @param  list<string>|null  $serviceOptions
+     */
+    public function mount(
+        bool $showCompany = true,
+        bool $showService = false,
+        string $layout = 'default',
+        string $formName = 'contact',
+        string $idPrefix = 'contact',
+        ?array $serviceOptions = null,
+        string $submitLabel = 'Submit',
+        string $servicePlaceholder = 'Select Service',
+        string $messagePlaceholder = 'Tell us how we can help',
+        ?string $initialService = null,
+        ?int $messageRows = null,
+    ): void {
         $this->showCompany = $showCompany;
+        $this->showService = $showService;
+        $this->layout = in_array($layout, ['default', 'home', 'modal', 'vapt'], true) ? $layout : 'default';
+        $this->formName = $formName;
+        $this->idPrefix = $idPrefix;
+        $this->submitLabel = $submitLabel !== '' ? $submitLabel : 'Submit';
+        $this->servicePlaceholder = $servicePlaceholder !== '' ? $servicePlaceholder : 'Select Service';
+        $this->messagePlaceholder = $messagePlaceholder !== '' ? $messagePlaceholder : 'Tell us how we can help';
+        $this->messageRows = $messageRows !== null && $messageRows > 0 ? $messageRows : null;
+        if (is_array($serviceOptions) && $serviceOptions !== []) {
+            $this->serviceOptions = array_values(array_filter(
+                $serviceOptions,
+                static fn (mixed $option): bool => is_string($option) && $option !== ''
+            ));
+        }
+        if (is_string($initialService) && $initialService !== '') {
+            $this->service = $initialService;
+        }
         $this->pageUrl = url()->current();
+    }
+
+    public function isCompactLayout(): bool
+    {
+        return in_array($this->layout, ['home', 'modal'], true);
     }
 
     protected function rules(): array
@@ -33,6 +112,7 @@ class ContactForm extends Component
             'email' => ['required', 'email', 'max:180'],
             'phone' => ['nullable', 'string', 'max:20', 'regex:/^\+[1-9]\d{6,14}$/'],
             'company' => ['nullable', 'string', 'max:120'],
+            'service' => [$this->showService ? 'required' : 'nullable', 'string', 'max:120'],
             'message' => ['required', 'string', 'min:10'],
             'acceptedTerms' => ['accepted'],
             'formName' => ['required', 'string', 'max:100'],
@@ -43,27 +123,41 @@ class ContactForm extends Component
 
     public function submit(LeadService $leadService): void
     {
-        $validated = $this->validate();
+        $this->submitted = false;
+        $this->submitError = null;
 
-        unset($validated['acceptedTerms']);
-        unset($validated['recaptchaToken']);
+        try {
+            $validated = $this->validate();
 
-        if (! $this->showCompany) {
-            $validated['company'] = null;
+            unset($validated['acceptedTerms'], $validated['recaptchaToken']);
+
+            if (! $this->showCompany) {
+                $validated['company'] = null;
+            }
+
+            if (! $this->showService) {
+                $validated['service'] = null;
+            }
+
+            $leadService->createLead([
+                ...$validated,
+                'form_name' => $validated['formName'],
+                'page_url' => $validated['pageUrl'],
+            ], 'contact');
+
+            $this->reset(['name', 'email', 'phone', 'company', 'service', 'message']);
+            $this->acceptedTerms = true;
+            $this->pageUrl = url()->current();
+            $this->resetReCaptcha();
+            $this->submitted = true;
+            $this->dispatch('contact-form-submitted');
+            $this->dispatch('form-success-revealed');
+        } catch (ValidationException $exception) {
+            throw $exception;
+        } catch (Throwable $exception) {
+            report($exception);
+            $this->submitError = 'Something went wrong while sending your message. Please try again.';
         }
-
-        $leadService->createLead([
-            ...$validated,
-            'form_name' => $validated['formName'],
-            'page_url' => $validated['pageUrl'],
-        ], 'contact');
-
-        $this->reset(['name', 'email', 'phone', 'company', 'message']);
-        $this->acceptedTerms = true;
-        $this->formName = 'contact';
-        $this->pageUrl = url()->current();
-        $this->resetReCaptcha();
-        $this->submitted = true;
     }
 
     public function render()

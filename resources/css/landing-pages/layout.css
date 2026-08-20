@@ -1,0 +1,266 @@
+/* Shared landing-page header, footer, and thank-you chrome */
+
+.lp-site {
+    --lp-navy: #283583;
+    --lp-green: #54b451;
+    --lp-legal: #1c2229;
+    --lp-ink: #111;
+    --lp-shell: 1180px;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #fff;
+    color: var(--lp-ink);
+}
+
+.lp-site main {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+
+.lp-header,
+.lp-footer {
+    flex-shrink: 0;
+}
+
+.lp-header {
+    background: #fff;
+    border-bottom: 0;
+}
+
+.lp-header__inner,
+.lp-footer__social-inner,
+.lp-footer__legal-inner {
+    width: min(var(--lp-shell), calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.lp-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    min-height: 4.75rem;
+    padding: 0.7rem 0;
+}
+
+.lp-header__logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.lp-header__logo img {
+    display: block;
+    height: 52px;
+    width: auto;
+}
+
+.lp-header__badge {
+    margin: 0;
+    color: #111;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-align: right;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.lp-thank-you-hero {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 9.5rem;
+    background: var(--lp-navy);
+    color: #fff;
+}
+
+.lp-thank-you-hero__inner {
+    width: min(var(--lp-shell), calc(100% - 2rem));
+    margin-inline: auto;
+    padding: 2.4rem 0;
+    text-align: center;
+}
+
+.lp-thank-you-hero h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2rem, 4.2vw, 3.15rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.lp-thank-you-banner {
+    background: #fff;
+}
+
+.lp-thank-you-banner__inner {
+    width: min(var(--lp-shell), calc(100% - 2rem));
+    margin-inline: auto;
+    padding: 1.75rem 0 2.15rem;
+}
+
+.lp-thank-you-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.lp-footer {
+    margin-top: 0;
+}
+
+.lp-footer__social {
+    background: var(--lp-green);
+}
+
+.lp-footer__social-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem 2.35rem;
+    padding: 1.05rem 0;
+}
+
+.lp-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #fff;
+    font-size: 0.98rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.lp-footer__social-link i {
+    font-size: 1.05rem;
+}
+
+.lp-footer__social-link:hover,
+.lp-footer__social-link:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.lp-footer__legal {
+    background: var(--lp-legal);
+    color: #fff;
+}
+
+.lp-footer__legal-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.85rem 1.5rem;
+    min-height: 3.15rem;
+    padding: 0.7rem 0;
+}
+
+.lp-footer__copyright {
+    margin: 0;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.lp-footer__policies {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+    color: #fff;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.lp-footer__policies a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.lp-footer__policies a:hover,
+.lp-footer__policies a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+}
+
+.lp-footer__divider {
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .lp-header__badge {
+        white-space: normal;
+        max-width: 22rem;
+    }
+
+    .lp-footer__social-inner {
+        gap: 1.1rem 1.6rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .lp-header__inner,
+    .lp-footer__social-inner,
+    .lp-footer__legal-inner {
+        width: min(var(--lp-shell), calc(100% - 1.25rem));
+    }
+
+    .lp-header__inner {
+        flex-direction: column;
+        align-items: center;
+        min-height: 0;
+        padding: 0.85rem 0;
+        text-align: center;
+    }
+
+    .lp-header__badge {
+        max-width: none;
+        font-size: 0.7rem;
+        text-align: center;
+    }
+
+    .lp-thank-you-hero {
+        min-height: 7.5rem;
+    }
+
+    .lp-thank-you-banner {
+        display: flex;
+        flex: 1 1 auto;
+        align-items: center;
+    }
+
+    .lp-thank-you-banner__inner {
+        width: min(var(--lp-shell), calc(100% - 1.25rem));
+        padding: 1.15rem 0 1.5rem;
+    }
+
+    .lp-footer__social-inner {
+        gap: 0.85rem 1.15rem;
+        padding: 0.95rem 0;
+    }
+
+    .lp-footer__social-link {
+        font-size: 0.9rem;
+    }
+
+    .lp-footer__legal-inner {
+        flex-direction: column;
+        justify-content: center;
+        min-height: 0;
+        padding: 0.9rem 0;
+        text-align: center;
+    }
+}

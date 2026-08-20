@@ -1,0 +1,595 @@
+/* Family Office Services — matched to WordPress screenshot */
+
+.fos-page {
+    --fos-navy: #2e2e80;
+    --fos-navy-deep: #1f1f5c;
+    --fos-green: #4caf50;
+    --fos-green-bright: #54b948;
+    --fos-green-dark: #3d9140;
+    --fos-mint: #edf5f4;
+    --fos-cream: #fef6dd;
+    --fos-cream-hover: #fff4c2;
+    --fos-ink: #1f1d1d;
+    --fos-muted: #4a4a4a;
+    --fos-line: rgba(46, 46, 128, 0.14);
+    color: var(--fos-ink);
+    background: #fff;
+}
+
+.fos-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 0.35rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.fos-btn:hover {
+    transform: translateY(-1px);
+}
+
+.fos-btn:focus-visible {
+    outline: 2px solid var(--fos-green);
+    outline-offset: 3px;
+}
+
+.fos-btn--navy {
+    background: var(--fos-navy);
+    border-color: var(--fos-navy);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.22);
+}
+
+.fos-btn--navy:hover,
+.fos-btn--navy:focus-visible {
+    background: var(--fos-navy-deep);
+    border-color: var(--fos-navy-deep);
+    color: #fff;
+}
+
+.fos-btn--white {
+    background: #fff;
+    border-color: #fff;
+    color: var(--fos-navy);
+    box-shadow: 0 10px 22px rgba(20, 30, 70, 0.16);
+}
+
+.fos-btn--white:hover,
+.fos-btn--white:focus-visible {
+    background: var(--fos-cream);
+    border-color: var(--fos-cream);
+    color: var(--fos-navy);
+}
+
+.fos-btn--cream {
+    background: var(--fos-cream);
+    border-color: var(--fos-cream);
+    color: var(--fos-ink);
+    box-shadow: 0 10px 22px rgba(20, 30, 70, 0.12);
+}
+
+.fos-btn--cream:hover,
+.fos-btn--cream:focus-visible {
+    background: var(--fos-cream-hover);
+    border-color: var(--fos-cream-hover);
+    color: var(--fos-navy);
+}
+
+.fos-btn--on-green {
+    background: #fff;
+    border-color: #fff;
+    color: var(--fos-green-dark);
+    box-shadow: 0 10px 22px rgba(20, 30, 70, 0.16);
+}
+
+.fos-btn--on-green:hover,
+.fos-btn--on-green:focus-visible {
+    background: var(--fos-cream);
+    border-color: var(--fos-cream);
+    color: var(--fos-green-dark);
+}
+
+/* Hero */
+.fos-hero {
+    background: var(--fos-mint);
+    overflow: hidden;
+}
+
+.fos-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 3.75rem 0 3.5rem;
+}
+
+.fos-hero__copy {
+    max-width: 34rem;
+}
+
+.fos-hero__copy h1 {
+    margin: 0;
+    color: var(--fos-navy);
+    font-size: clamp(2.15rem, 4vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+}
+
+.fos-hero__lede {
+    margin: 1.15rem 0 0;
+    color: var(--fos-ink);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.7;
+    max-width: 32rem;
+}
+
+.fos-hero__actions {
+    margin-top: 1.75rem;
+}
+
+.fos-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fos-hero__media img {
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+    display: block;
+}
+
+/* Sections */
+.fos-section {
+    padding: 3.5rem 0;
+}
+
+.fos-section--tight {
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
+}
+
+/* Intro */
+.fos-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 3rem;
+    align-items: center;
+}
+
+.fos-intro__media img {
+    display: block;
+    width: 100%;
+    max-width: 36rem;
+    height: auto;
+    border-radius: 0.35rem;
+    object-fit: cover;
+}
+
+.fos-intro__copy h2 {
+    margin: 0 0 1.15rem;
+    color: var(--fos-navy);
+    font-size: clamp(1.65rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.fos-intro__copy p {
+    margin: 0 0 1rem;
+    color: var(--fos-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.fos-intro__copy p:last-child {
+    margin-bottom: 0;
+}
+
+.fos-intro__copy a {
+    color: var(--fos-navy);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.fos-intro__copy a:hover,
+.fos-intro__copy a:focus-visible {
+    text-decoration: underline;
+}
+
+/* Colored content block + illustration */
+.fos-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: center;
+    gap: 1.75rem 1.25rem;
+}
+
+.fos-panel__copy {
+    min-width: 0;
+    background: var(--fos-navy);
+    border-radius: 1.15rem;
+    padding: 2.6rem 2.4rem 2.5rem;
+    color: #fff;
+}
+
+.fos-panel__copy--green {
+    background: var(--fos-green-bright);
+}
+
+.fos-panel__copy h2 {
+    margin: 0 0 1.25rem;
+    color: #fff;
+    font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.fos-panel__copy .fos-btn {
+    margin-top: 1.6rem;
+}
+
+.fos-panel__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fos-panel__media img {
+    display: block;
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+}
+
+.fos-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.fos-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.fos-list__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.12rem;
+    border-radius: 50%;
+    background: var(--fos-green);
+    color: #fff;
+    font-size: 0.62rem;
+}
+
+.fos-list__icon--on-green {
+    background: #fff;
+    color: var(--fos-green-dark);
+}
+
+.fos-list--dark li {
+    color: var(--fos-ink);
+}
+
+/* Investor Accounting */
+.fos-investor {
+    background: var(--fos-mint);
+    padding: 2.85rem 0;
+}
+
+.fos-investor__inner {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.55fr) minmax(0, 1.45fr);
+    gap: 1.75rem 2rem;
+    align-items: center;
+}
+
+.fos-investor__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fos-investor__media img {
+    display: block;
+    width: 100%;
+    max-width: 16rem;
+    height: auto;
+}
+
+.fos-investor__copy {
+    min-width: 0;
+    background: #fff;
+    border-radius: 1.15rem;
+    padding: 2.2rem 2.15rem 2.1rem;
+    box-shadow: 0 12px 28px rgba(20, 30, 70, 0.06);
+}
+
+.fos-investor__copy h2 {
+    margin: 0 0 1.15rem;
+    color: var(--fos-navy);
+    font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.fos-investor__copy .fos-btn {
+    margin-top: 1.45rem;
+}
+
+/* Contact */
+.fos-consult {
+    padding-top: 1.25rem;
+    padding-bottom: 3.75rem;
+    scroll-margin-top: 6rem;
+}
+
+.fos-consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+.fos-consult__card {
+    border-radius: 0.75rem;
+    overflow: visible;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+    border: 1px solid var(--fos-line);
+}
+
+.fos-consult__header {
+    background: var(--fos-navy);
+    color: #fff;
+    text-align: center;
+    padding: 1.25rem 1.25rem 1.1rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.fos-consult__header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.fos-consult__header p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.fos-consult__body {
+    position: relative;
+    padding: 1.15rem 1.25rem 1.35rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: #f7f8fb;
+    overflow: visible;
+}
+
+.fos-consult__body .contact-form {
+    gap: 0.7rem;
+}
+
+.fos-consult__body .contact-form__row {
+    gap: 0.7rem;
+}
+
+.fos-consult__body .contact-form select,
+.fos-consult__body .contact-form input:not([type='checkbox']):not([type='hidden']),
+.fos-consult__body .contact-form textarea,
+.fos-consult__body .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.fos-consult__body .contact-form__field--message {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.fos-consult__body .contact-form select:focus,
+.fos-consult__body .contact-form input:focus,
+.fos-consult__body .contact-form textarea:focus,
+.fos-consult__body .phone-input-field .iti__tel-input:focus {
+    outline-color: rgba(46, 46, 128, 0.35);
+    border-color: rgba(46, 46, 128, 0.45);
+}
+
+.fos-consult__body .contact-form__terms,
+.fos-consult__body .contact-form__terms span {
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.fos-consult__body .contact-form__terms a {
+    color: var(--fos-navy);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.fos-consult__body .contact-form__terms {
+    position: relative;
+}
+
+.fos-consult__body .consent-tooltip {
+    position: static;
+}
+
+.fos-consult__body .consent-tooltip__content {
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+}
+
+.fos-consult__body .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: var(--fos-navy);
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.fos-consult__body .contact-form__submit:hover {
+    background: var(--fos-navy-deep);
+}
+
+.fos-consult__body .contact-form__field:has(.phone-input-field),
+.fos-consult__body .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+    overflow: visible;
+}
+
+.fos-consult__body .phone-input-field,
+.fos-consult__body .phone-input-field .iti {
+    position: relative;
+    z-index: 40;
+    width: 100%;
+}
+
+.fos-consult__body .phone-input-field .iti__dropdown-content,
+.fos-consult__body .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+.fos-consult__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fos-consult__media img {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fos-btn,
+    .fos-consult__body .contact-form__submit {
+        transition: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .fos-hero__inner,
+    .fos-intro,
+    .fos-panel,
+    .fos-investor__inner,
+    .fos-consult__inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .fos-hero__inner {
+        padding: 3rem 0 2.75rem;
+        text-align: center;
+    }
+
+    .fos-hero__copy {
+        max-width: none;
+    }
+
+    .fos-hero__lede {
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fos-hero__media img {
+        max-width: 22rem;
+    }
+
+    .fos-panel__copy,
+    .fos-investor__copy {
+        padding: 2rem 1.5rem 1.75rem;
+    }
+
+    .fos-panel__media img,
+    .fos-investor__media img {
+        max-width: 20rem;
+    }
+
+    .fos-consult__media {
+        order: -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .fos-section,
+    .fos-investor {
+        padding: 2.35rem 0;
+    }
+
+    .fos-section--tight {
+        padding-top: 0.5rem;
+        padding-bottom: 2.35rem;
+    }
+
+    .fos-intro {
+        gap: 1.5rem;
+    }
+
+    .fos-panel__copy,
+    .fos-investor__copy {
+        padding: 1.65rem 1.2rem 1.5rem;
+        border-radius: 0.85rem;
+    }
+
+    .fos-btn {
+        width: 100%;
+        text-align: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .fos-hero__actions {
+        width: 100%;
+    }
+
+    .fos-consult__body .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+
+    .fos-consult {
+        padding-bottom: 3rem;
+    }
+}

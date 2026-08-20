@@ -322,7 +322,7 @@
 
                         <div class="error-404__art" aria-hidden="true">
                             <img
-                                src="{{ asset('storage/web-img/404-ibn-vector.webp') }}"
+                                src="{{ asset('/images/404-ibn-vector.webp') }}"
                                 alt="Illustration for page not found"
                                 loading="eager"
                                 decoding="async"

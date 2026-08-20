@@ -4,15 +4,16 @@
     <article class="blog-detail">
         <div class="site-shell blog-detail__layout">
             <div class="blog-detail__main">
-                <nav class="blog-breadcrumb" aria-label="Breadcrumb">
-                    <a href="{{ route('home') }}">Home</a>
-                    <span>&raquo;</span>
-                    @if($blog->category)
-                        <a href="{{ route('blog.category', $blog->category->slug) }}">{{ $blog->category->name }}</a>
-                        <span>&raquo;</span>
-                    @endif
-                    <span>{{ $blog->title }}</span>
-                </nav>
+                @include('blog.partials.breadcrumb', [
+                    'items' => array_values(array_filter([
+                        ['label' => 'Home', 'url' => route('home')],
+                        ['label' => 'Blog', 'url' => route('blog.index')],
+                        $blog->category
+                            ? ['label' => $blog->category->name, 'url' => route('blog.category', $blog->category->slug)]
+                            : null,
+                        ['label' => $blog->title, 'url' => route('blog.show', $blog->slug)],
+                    ])),
+                ])
 
                 <h1>{{ $blog->title }}</h1>
 
@@ -36,20 +37,15 @@
                 </div>
 
                 <x-content-blocks :blocks="$blog->content" :model="$blog" class="blog-detail__content" />
-
-                @if($blog->tags->isNotEmpty())
-                    <div class="tag-row">
-                        @foreach($blog->tags as $tag)
-                            <span class="tag-pill">#{{ $tag->name }}</span>
-                        @endforeach
-                    </div>
-                @endif
             </div>
 
             <aside class="blog-detail-sidebar">
                 <section class="blog-inquiry">
-                    <h2>Trusted By 1500+ Clients: Smart Outsourcing Choice!</h2>
-                    <livewire:forms.contact-form :show-company="false" />
+                    <h2>26+ Years of Expertise. 2500+ Happy Clients. Get Your Strategy Call!</h2>
+                    <livewire:forms.contact-form
+                        :show-company="false"
+                        :message-rows="2"
+                    />
                 </section>
 
                 <section class="blog-sidebar-panel blog-sidebar-panel--compact">

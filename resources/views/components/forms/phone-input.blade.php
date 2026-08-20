@@ -4,13 +4,14 @@
     'name' => 'phone',
     'value' => '',
     'placeholder' => 'Contact Number',
+    'initialCountry' => null,
 ])
 
 @php
     $hiddenId = $id.'-value';
 @endphp
 
-<div class="phone-input-field">
+<div class="phone-input-field" wire:ignore>
     <input
         id="{{ $id }}"
         type="tel"
@@ -20,6 +21,7 @@
         autocomplete="tel"
         data-phone-input
         data-phone-hidden="#{{ $hiddenId }}"
+        @if($initialCountry) data-initial-country="{{ $initialCountry }}" @endif
     >
     <input
         id="{{ $hiddenId }}"

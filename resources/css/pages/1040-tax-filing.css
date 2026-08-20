@@ -1,0 +1,540 @@
+/* 1040 Tax Filing — page-specific styles aligned to WordPress screenshot */
+
+.tax1040-page {
+    --tax1040-navy: var(--site-navy);
+    --tax1040-navy-deep: var(--site-navy-deep);
+    --tax1040-green: var(--site-green);
+    --tax1040-green-dark: var(--site-green-dark);
+    --tax1040-muted: var(--site-muted);
+    --tax1040-ink: var(--site-ink);
+    --tax1040-line: rgba(46, 46, 128, 0.12);
+    --tax1040-cream: #fbf8f1;
+}
+
+.tax1040-accent {
+    color: var(--tax1040-green);
+}
+
+.tax1040-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    border-radius: 0.45rem;
+    padding: 0.95rem 1.55rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tax1040-btn--green {
+    background: var(--tax1040-green);
+    color: #fff;
+    box-shadow: 0 14px 28px rgba(76, 175, 80, 0.28);
+}
+
+.tax1040-btn--green:hover {
+    background: var(--tax1040-green-dark);
+    color: #fff;
+}
+
+.tax1040-btn--light {
+    background: #fff;
+    color: var(--tax1040-navy);
+    box-shadow: 0 12px 28px rgba(4, 10, 30, 0.18);
+}
+
+.tax1040-btn--light:hover {
+    background: #f3f6ff;
+    color: var(--tax1040-navy-deep);
+}
+
+/* Hero */
+.tax1040-hero {
+    position: relative;
+    overflow: visible;
+    background:
+        radial-gradient(circle at 82% 18%, rgba(76, 175, 80, 0.18), transparent 40%),
+        linear-gradient(120deg, #1b1f6f 0%, #2a2f8a 48%, #353a9a 100%);
+    color: #fff;
+    padding-bottom: 4.5rem;
+}
+
+.tax1040-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 3.5rem 0 1.25rem;
+}
+
+.tax1040-hero__copy h1 {
+    max-width: 36rem;
+    color: #fff;
+    font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.tax1040-hero__lead {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: var(--tax1040-green);
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.tax1040-hero__lede {
+    max-width: 32rem;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.tax1040-hero__actions {
+    margin-top: 1.55rem;
+}
+
+.tax1040-hero__actions .tax1040-btn i {
+    font-size: 0.85rem;
+}
+
+.tax1040-hero__media {
+    display: grid;
+    place-items: center;
+}
+
+.tax1040-hero__media img {
+    display: block;
+    width: min(100%, 28rem);
+    height: auto;
+    filter: drop-shadow(0 22px 36px rgba(4, 10, 30, 0.3));
+}
+
+.tax1040-hero__stats-wrap {
+    position: relative;
+    z-index: 2;
+    margin-top: 0.5rem;
+    margin-bottom: -6.5rem;
+}
+
+.tax1040-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tax1040-hero__stat {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border-radius: 0.85rem;
+    background: #fff;
+    padding: 1.1rem 1.15rem;
+    box-shadow: 0 18px 36px rgba(20, 31, 78, 0.14);
+    color: var(--tax1040-ink);
+}
+
+.tax1040-hero__stat-icon {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.16);
+    color: var(--tax1040-green-dark);
+    font-size: 1.2rem;
+    line-height: 1;
+    text-align: center;
+}
+
+/* Font Awesome renders via ::before — pin it to the circle center. */
+.tax1040-hero__stat-icon::before {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+.tax1040-hero__stat strong {
+    display: block;
+    color: var(--tax1040-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.tax1040-hero__stat span {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--tax1040-muted);
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Sections */
+.tax1040-section {
+    padding: 3.5rem 0;
+}
+
+.tax1040-section--soft {
+    background: linear-gradient(180deg, #f5f7fb 0%, #fff 100%);
+}
+
+.tax1040-section--cream {
+    background: var(--tax1040-cream);
+}
+
+.tax1040-page > .tax1040-section:first-of-type {
+    padding-top: 7.5rem;
+}
+
+.tax1040-heading {
+    max-width: 48rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.tax1040-heading--left {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+    text-align: left;
+}
+
+.tax1040-heading h2 {
+    color: var(--tax1040-navy);
+    font-size: clamp(1.65rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.tax1040-heading p {
+    margin-top: 0.75rem;
+    color: var(--tax1040-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+/* Cards */
+.tax1040-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.tax1040-card {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    min-height: 100%;
+    border: 1px solid var(--tax1040-line);
+    border-radius: 1rem;
+    background: #fff;
+    padding: 1.6rem 1.4rem 1.5rem;
+    box-shadow: 0 14px 30px rgba(20, 31, 78, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tax1040-card--centered {
+    justify-items: center;
+    text-align: center;
+}
+
+.tax1040-card--link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tax1040-card--link:hover,
+.tax1040-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(20, 31, 78, 0.12);
+}
+
+.tax1040-card__icon {
+    display: grid;
+    place-items: center;
+    width: 3.1rem;
+    height: 3.1rem;
+    border-radius: 0.85rem;
+    font-size: 1.2rem;
+}
+
+.tax1040-card__icon--green {
+    background: rgba(76, 175, 80, 0.14);
+    color: var(--tax1040-green-dark);
+}
+
+.tax1040-card__icon--violet {
+    background: rgba(110, 101, 242, 0.14);
+    color: var(--site-violet);
+}
+
+.tax1040-card__icon--sky {
+    background: rgba(79, 170, 245, 0.16);
+    color: #2f8fd6;
+}
+
+.tax1040-card__icon--navy {
+    background: rgba(46, 46, 128, 0.12);
+    color: var(--tax1040-navy);
+}
+
+.tax1040-card__icon--orange {
+    background: rgba(245, 158, 11, 0.16);
+    color: #d97706;
+}
+
+.tax1040-card h3 {
+    color: var(--tax1040-navy);
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.tax1040-card p {
+    color: var(--tax1040-muted);
+    font-size: 0.96rem;
+    line-height: 1.7;
+}
+
+/* Process */
+.tax1040-process {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: transparent;
+}
+
+.tax1040-process img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Mid CTA */
+.tax1040-mid-cta {
+    background: linear-gradient(135deg, #1b1f6f 0%, #2a2f8a 55%, #2e2e80 100%);
+    color: #fff;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.tax1040-mid-cta__inner {
+    max-width: 44rem;
+    margin: 0 auto;
+}
+
+.tax1040-mid-cta h2 {
+    font-size: clamp(1.55rem, 2.6vw, 2rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tax1040-mid-cta p {
+    margin: 0.85rem auto 1.4rem;
+    max-width: 40rem;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.7;
+}
+
+#tax1040-consult {
+    scroll-margin-top: 6.5rem;
+}
+
+/* FAQ + form split */
+.tax1040-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.tax1040-faq details[open] summary {
+    color: var(--tax1040-green-dark);
+}
+
+.tax1040-faq summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tax1040-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.tax1040-faq summary::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--tax1040-navy);
+    font-size: 0.78rem;
+    transition: transform 0.2s ease;
+}
+
+.tax1040-faq details[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.tax1040-faq details > div {
+    color: var(--tax1040-muted);
+    line-height: 1.75;
+}
+
+.tax1040-faq details > div ul {
+    margin: 0.65rem 0 0.85rem 1.15rem;
+    padding: 0;
+    list-style: disc;
+}
+
+.tax1040-faq details > div li {
+    margin: 0.3rem 0;
+}
+
+.tax1040-faq details > div p {
+    margin: 0.4rem 0 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.tax1040-consult-card {
+    border: 1px solid var(--tax1040-line);
+    border-radius: 1rem;
+    background: #fff;
+    padding: 1.5rem 1.35rem 1.45rem;
+    box-shadow: 0 18px 40px rgba(20, 31, 78, 0.1);
+}
+
+.tax1040-consult-card h3 {
+    color: var(--tax1040-navy);
+    font-size: clamp(1.25rem, 2vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tax1040-consult-card > p {
+    margin: 0.55rem 0 1.15rem;
+    color: var(--tax1040-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.tax1040-consult-card .contact-form {
+    gap: 0.75rem;
+}
+
+.tax1040-consult-card .contact-form__terms,
+.tax1040-consult-card .contact-form__terms span {
+    color: #334155 !important;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.tax1040-consult-card .contact-form__terms a {
+    color: var(--tax1040-navy) !important;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.tax1040-consult-card .contact-form__submit {
+    border-radius: 0.45rem;
+    background: var(--tax1040-navy);
+    color: #fff;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 24px rgba(46, 46, 128, 0.22);
+}
+
+.tax1040-consult-card .contact-form__submit:hover {
+    background: var(--tax1040-navy-deep);
+}
+
+.tax1040-consult-card .contact-form__field:has(.phone-input-field),
+.tax1040-consult-card .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+}
+
+.tax1040-consult-card .phone-input-field .iti__dropdown-content,
+.tax1040-consult-card .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .tax1040-hero__inner,
+    .tax1040-split,
+    .tax1040-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tax1040-hero__media {
+        order: -1;
+    }
+
+    .tax1040-hero__media img {
+        width: min(100%, 22rem);
+    }
+
+    .tax1040-hero__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .tax1040-hero__stats-wrap {
+        margin-bottom: -3.5rem;
+    }
+
+    .tax1040-page > .tax1040-section:first-of-type {
+        padding-top: 5rem;
+    }
+
+    .tax1040-heading--left {
+        text-align: center;
+    }
+
+    .tax1040-heading--left h2::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 720px) {
+    .tax1040-hero {
+        padding-bottom: 3.5rem;
+    }
+
+    .tax1040-hero__inner {
+        padding: 2.5rem 0 1rem;
+        gap: 1.5rem;
+    }
+
+    .tax1040-section {
+        padding: 2.75rem 0;
+    }
+
+    .tax1040-mid-cta {
+        padding: 2.5rem 0;
+    }
+
+    .tax1040-btn {
+        width: 100%;
+    }
+
+    .tax1040-consult-card {
+        padding: 1.25rem 1rem 1.3rem;
+    }
+}

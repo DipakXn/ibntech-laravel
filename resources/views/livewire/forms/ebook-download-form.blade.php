@@ -7,7 +7,16 @@
         <input type="hidden" wire:model="ebookTitle">
     @endif
 
-    @if(! $submitted)
+    @if($submitted)
+        <x-forms.success-alert :title="$downloadUrl ? 'eBook unlocked' : 'Request submitted'">
+            @if($downloadUrl)
+                <x-slot:actions>
+                    <a href="{{ $downloadUrl }}" class="form-success__button button-dark" target="_blank" rel="noopener">Open the PDF</a>
+                </x-slot:actions>
+            @endif
+            {{ $downloadUrl ? 'Download the full eBook PDF below.' : 'Your request is submitted. Check your inbox shortly.' }}
+        </x-forms.success-alert>
+    @else
         <div class="case-study-download-form__intro">
             <h3>{{ $ebookSlug !== '' ? 'Download This eBook' : 'Get This eBook' }}</h3>
             <p>
@@ -26,7 +35,10 @@
 
     <label class="contact-form__terms case-study-download-form__terms">
         <input type="checkbox" wire:model="acceptedTerms">
-        <span>I agree to be contacted about this resource and related services.</span>
+        <span>
+            I agree to be contacted about this resource and related services.
+            <x-forms.messaging-consent-tooltip />
+        </span>
     </label>
     @error('acceptedTerms') <p class="contact-form__error">{{ $message }}</p> @enderror
     @error('download') <p class="contact-form__error">{{ $message }}</p> @enderror
@@ -36,14 +48,4 @@
     <button type="submit" class="contact-form__submit case-study-download-form__submit" wire:loading.attr="disabled" wire:target="submit">
         {{ $ebookSlug !== '' ? 'Get The eBook' : 'Submit' }}
     </button>
-
-    @if($submitted)
-        <div class="contact-form__success case-study-download-form__success">
-            @if($downloadUrl)
-                <p>Your download is ready. <a href="{{ $downloadUrl }}" target="_blank" rel="noopener">Open the PDF</a>.</p>
-            @else
-                <p>Your request is submitted. Check your inbox shortly.</p>
-            @endif
-        </div>
-    @endif
 </form>

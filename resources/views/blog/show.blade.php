@@ -11,13 +11,6 @@
             <div class="prose prose-slate mt-8 max-w-none rounded-xl bg-white p-8">
                 <x-content-blocks :blocks="$blog->content" :model="$blog" class="article-body" />
             </div>
-            @if($blog->tags->isNotEmpty())
-                <div class="mt-6 flex flex-wrap gap-2">
-                    @foreach($blog->tags as $tag)
-                        <span class="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-700">#{{ $tag->name }}</span>
-                    @endforeach
-                </div>
-            @endif
         </div>
     </article>
 @endsection

@@ -27,6 +27,9 @@ class LeadsTable
                     ->toggleable(),
                 TextColumn::make('company')
                     ->toggleable(),
+                TextColumn::make('service')
+                    ->label('Service / Plan')
+                    ->toggleable(),
                 TextColumn::make('asset_title')
                     ->label('Asset')
                     ->toggleable(),
@@ -52,7 +55,7 @@ class LeadsTable
             ->filters([
                 SelectFilter::make('form_name')
                     ->label('Form')
-                    ->options(Lead::FORM_OPTIONS),
+                    ->options(Lead::formOptions()),
             ])
             ->defaultSort('created_at', 'desc')
             ->searchPlaceholder('Search submissions by name, email, company, or form')

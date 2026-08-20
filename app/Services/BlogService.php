@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Repositories\BlogRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,9 +21,36 @@ class BlogService
         return $this->blogs->paginatePublished($categorySlug, $search);
     }
 
-    public function paginatePublishedForCategoryIds(array $categoryIds): LengthAwarePaginator
+    public function paginatePublishedForCategoryIds(array $categoryIds, int $perPage = 15): LengthAwarePaginator
     {
-        return $this->blogs->paginatePublishedForCategoryIds($categoryIds);
+        return $this->blogs->paginatePublishedForCategoryIds($categoryIds, $perPage);
+    }
+
+    public function parentCategoriesForIndex(): Collection
+    {
+        $categories = Category::query()
+            ->forModule(Category::MODULE_BLOG)
+            ->roots()
+            ->with('childrenRecursive')
+            ->latest()
+            ->get();
+
+        foreach ($categories as $category) {
+            $categoryIds = $category->selfAndDescendantIds();
+
+            $publishedBlogsQuery = Blog::query()
+                ->published()
+                ->whereIn('category_id', $categoryIds)
+                ->latest();
+
+            $category->setAttribute('blogs_count', (clone $publishedBlogsQuery)->count());
+            $category->setRelation(
+                'blogs',
+                (clone $publishedBlogsQuery)->with(['category', 'media'])->limit(1)->get()
+            );
+        }
+
+        return $categories;
     }
 
     public function getPublishedBySlug(string $slug): ?Blog

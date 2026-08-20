@@ -32,6 +32,9 @@ class LeadForm
                             ->maxLength(50),
                         TextInput::make('company')
                             ->maxLength(255),
+                        Placeholder::make('service_display')
+                            ->label('Service / Plan')
+                            ->content(fn (?Lead $record): string => $record?->service ?: '—'),
                         Placeholder::make('job_title_display')
                             ->label('Job Title')
                             ->content(fn (?Lead $record): string => $record?->job_title ?: '—'),
@@ -40,7 +43,7 @@ class LeadForm
                             ->content(fn (?Lead $record): string => $record?->asset_title ?: '—'),
                         Select::make('form_name')
                             ->label('Form')
-                            ->options(Lead::FORM_OPTIONS)
+                            ->options(Lead::formOptions())
                             ->required(),
                         Textarea::make('message')
                             ->rows(4)

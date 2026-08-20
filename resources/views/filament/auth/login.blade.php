@@ -26,7 +26,7 @@
     <aside class="ibn-login-aside">
         <div class="ibn-login-aside__surface">
             <p class="ibn-login-kicker">Why this workspace</p>
-            <h2>Built for IBNTECH website operations.</h2>
+            <h2>Built for IBN Technologies website operations.</h2>
 
             <div class="ibn-login-points">
                 <article>

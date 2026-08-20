@@ -9,7 +9,6 @@ use App\Models\Ebook;
 use App\Models\Page;
 use App\Models\PressRelease;
 use App\Models\SeoMeta;
-use App\Models\Tag;
 use App\Models\WhitePaper;
 use Illuminate\Database\Seeder;
 
@@ -24,7 +23,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'home',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Home | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Home | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Landing page for the Laravel CMS demo with services, lead forms, and reusable Blade components.',
                 ],
             ],
@@ -34,7 +33,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'about',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'About Us | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'About Us | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Company overview page seeded for testing the page templates and SEO editor.',
                 ],
             ],
@@ -44,7 +43,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'services',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Services | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Services | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Service listing page for migration, CMS engineering, and support offerings.',
                 ],
             ],
@@ -54,7 +53,7 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'contact',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Contact | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Contact | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Contact page with inquiry forms for testing lead capture and SEO fields.',
                 ],
             ],
@@ -64,8 +63,18 @@ class CmsDemoSeeder extends Seeder
                 'template' => 'our-vision',
                 'status' => 'published',
                 'seo' => [
-                    'meta_title' => 'Our Vision | IbnTech Laravel CMS Demo',
+                    'meta_title' => 'Our Vision | IBN Technologies Laravel CMS Demo',
                     'meta_description' => 'Sample vision page to validate custom page templates in the CMS.',
+                ],
+            ],
+            [
+                'title' => 'VAPT Services',
+                'slug' => 'vapt-services',
+                'template' => 'vapt-services',
+                'status' => 'published',
+                'seo' => [
+                    'meta_title' => 'VAPT Services and Penetration Testing | India & Global',
+                    'meta_description' => 'Leading manual and automated full-stack VAPT services helping SMBs and mid-market enterprises identify vulnerabilities and strengthen cyber resilience.',
                 ],
             ],
         ];
@@ -97,22 +106,6 @@ class CmsDemoSeeder extends Seeder
             return [$category['slug'] => $model];
         });
 
-        $tags = collect([
-            ['slug' => 'seo', 'name' => 'SEO'],
-            ['slug' => 'laravel', 'name' => 'Laravel'],
-            ['slug' => 'migration', 'name' => 'Migration'],
-            ['slug' => 'blade', 'name' => 'Blade'],
-            ['slug' => 'filament', 'name' => 'Filament'],
-            ['slug' => 'performance', 'name' => 'Performance'],
-        ])->mapWithKeys(function (array $tag): array {
-            $model = Tag::query()->updateOrCreate(
-                ['slug' => $tag['slug']],
-                ['name' => $tag['name']]
-            );
-
-            return [$tag['slug'] => $model];
-        });
-
         $blogs = [
             [
                 'title' => 'WordPress to Laravel Migration Checklist',
@@ -122,7 +115,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'migration',
                 'status' => 'published',
-                'tag_slugs' => ['seo', 'laravel', 'migration'],
                 'seo' => [
                     'meta_title' => 'WordPress to Laravel Migration Checklist',
                     'meta_description' => 'A seeded blog article for testing blog templates, taxonomy filters, and metadata editing.',
@@ -136,7 +128,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'cms',
                 'status' => 'published',
-                'tag_slugs' => ['laravel', 'blade', 'filament'],
                 'seo' => [
                     'meta_title' => 'Blade Template Patterns for Corporate Sites',
                     'meta_description' => 'Sample Blade architecture article included for dummy blog data.',
@@ -150,7 +141,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'seo',
                 'status' => 'published',
-                'tag_slugs' => ['seo', 'migration'],
                 'seo' => [
                     'meta_title' => 'Technical SEO Checks Before a CMS Relaunch',
                     'meta_description' => 'Dummy SEO-focused article for testing search snippets and article rendering.',
@@ -164,7 +154,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'engineering',
                 'status' => 'draft',
-                'tag_slugs' => ['filament', 'laravel', 'performance'],
                 'seo' => [
                     'meta_title' => 'Improving Filament Admin Workflows for Content Teams',
                     'meta_description' => 'Draft article to test admin filtering and unpublished content handling.',
@@ -178,7 +167,6 @@ class CmsDemoSeeder extends Seeder
                 'featured_image' => null,
                 'category_slug' => 'cms',
                 'status' => 'published',
-                'tag_slugs' => ['blade', 'filament'],
                 'seo' => [
                     'meta_title' => 'Scaling Content Operations with Structured Templates',
                     'meta_description' => 'Seeded article for testing larger blog lists and pagination.',
@@ -197,12 +185,6 @@ class CmsDemoSeeder extends Seeder
                     'category_id' => $categories[$blogData['category_slug']]->id,
                     'status' => $blogData['status'],
                 ]
-            );
-
-            $blog->tags()->sync(
-                collect($blogData['tag_slugs'])
-                    ->map(fn (string $slug) => $tags[$slug]->id)
-                    ->all()
             );
 
             $this->syncSeoMeta($blog, $blogData['seo']);

@@ -176,11 +176,11 @@ class WebsiteSettingsSchema
                         ->default('summary_large_image'),
                     TextInput::make('twitter_site')
                         ->label('Twitter Site')
-                        ->placeholder('@ibntech')
+                        ->placeholder('@IBN Technologies')
                         ->maxLength(100),
                     TextInput::make('twitter_creator')
                         ->label('Twitter Creator')
-                        ->placeholder('@ibntech')
+                        ->placeholder('@IBN Technologies')
                         ->maxLength(100),
                 ])
                 ->columns(2),

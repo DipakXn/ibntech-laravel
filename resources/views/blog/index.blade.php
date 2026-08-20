@@ -9,9 +9,12 @@
 
     <section class="blog-page">
         <div class="site-shell">
-            <nav class="blog-breadcrumb" aria-label="Breadcrumb">
-                <a href="{{ route('home') }}">Home</a> <span>&raquo;</span> <span>Blog</span>
-            </nav>
+            @include('blog.partials.breadcrumb', [
+                'items' => [
+                    ['label' => 'Home', 'url' => route('home')],
+                    ['label' => 'Blog', 'url' => route('blog.index')],
+                ],
+            ])
 
             <div class="blog-layout">
                 <div class="blog-main">

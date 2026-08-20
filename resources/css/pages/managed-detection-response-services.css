@@ -1,0 +1,872 @@
+/* Managed Detection Response Services — matched to WordPress screenshot */
+
+.mdr-page {
+    --mdr-navy: #2e2e80;
+    --mdr-navy-deep: #141b4d;
+    --mdr-navy-mid: #1a237e;
+    --mdr-green: #4caf50;
+    --mdr-green-dark: #3d9140;
+    --mdr-ink: #172033;
+    --mdr-muted: #667085;
+    --mdr-line: rgba(46, 46, 128, 0.12);
+    --mdr-soft: #eef2f7;
+    --mdr-cream: #fff8e1;
+    --mdr-faq-bg: #f6f4fb;
+    color: var(--mdr-ink);
+    background: #fff;
+}
+
+.mdr-accent {
+    color: var(--mdr-green);
+}
+
+.mdr-section {
+    padding: 5rem 0;
+}
+
+.mdr-section--soft {
+    background: var(--mdr-soft);
+}
+
+.mdr-section--cream {
+    background: var(--mdr-cream);
+}
+
+.mdr-section--faq {
+    background: var(--mdr-faq-bg);
+}
+
+.mdr-heading {
+    max-width: 52rem;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+
+.mdr-heading h2 {
+    color: var(--mdr-navy);
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.mdr-heading p {
+    margin-top: 0.85rem;
+    color: var(--mdr-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.mdr-heading--light h2 {
+    color: #fff;
+}
+
+.mdr-heading--light p {
+    color: rgba(126, 217, 87, 0.95);
+}
+
+/* Hero */
+.mdr-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #eef3f8 0%, #f7f9fc 100%);
+    padding: 4.5rem 0 3.5rem;
+}
+
+.mdr-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 2.75rem;
+    align-items: center;
+}
+
+.mdr-hero__badge {
+    display: inline-flex;
+    margin-bottom: 0.85rem;
+    color: var(--mdr-green);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.mdr-hero h1 {
+    color: var(--mdr-ink);
+    font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.mdr-hero__subtitle {
+    margin-top: 1rem;
+    color: var(--mdr-navy);
+    font-size: clamp(1.02rem, 1.8vw, 1.18rem);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.mdr-hero__lede {
+    max-width: 40rem;
+    margin-top: 0.85rem;
+    color: var(--mdr-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.mdr-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mdr-hero__stats li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.65rem;
+    align-items: center;
+    border: 1px solid rgba(46, 46, 128, 0.1);
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 0.75rem 0.85rem;
+    box-shadow: 0 10px 22px rgba(20, 31, 78, 0.06);
+}
+
+.mdr-hero__stat-icon {
+    display: grid;
+    place-items: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 0.55rem;
+    background: rgba(76, 175, 80, 0.12);
+    color: var(--mdr-green);
+    font-size: 0.95rem;
+}
+
+.mdr-hero__stats span:last-child {
+    color: var(--mdr-navy);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.mdr-hero__cta {
+    margin-top: 1.55rem;
+    border-radius: 0.5rem;
+    color: #fff;
+}
+
+.mdr-hero__media {
+    margin: 0;
+    display: grid;
+    place-items: center;
+}
+
+.mdr-hero__media img {
+    display: block;
+    width: min(100%, 30rem);
+    height: auto;
+    border-radius: 1.15rem;
+    box-shadow: 0 24px 48px rgba(20, 31, 78, 0.16);
+}
+
+/* Certifications */
+.mdr-certs-section {
+    position: relative;
+    z-index: 2;
+    padding: 0.75rem 0 0.5rem;
+}
+
+.mdr-certs-panel {
+    border: 1px solid rgba(61, 86, 166, 0.1);
+    border-radius: 1.15rem;
+    background: #fff;
+    padding: 1.75rem 1.5rem 1.5rem;
+    box-shadow: 0 22px 48px rgba(20, 31, 78, 0.12);
+}
+
+.mdr-certs-panel h2 {
+    max-width: 46rem;
+    margin: 0 auto;
+    color: var(--mdr-navy);
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.mdr-certs-panel p {
+    max-width: 40rem;
+    margin: 0.7rem auto 1.35rem;
+    color: var(--mdr-muted);
+    text-align: center;
+    line-height: 1.65;
+}
+
+.mdr-certs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 1.75rem;
+}
+
+.mdr-certs img {
+    width: auto;
+    height: 4.1rem;
+    max-width: 8.25rem;
+    object-fit: contain;
+}
+
+.mdr-page .home-clients {
+    padding-top: 2rem;
+    padding-bottom: 0.35rem;
+}
+
+/* CTAs */
+.mdr-cta {
+    padding: 3.6rem 0;
+    text-align: center;
+}
+
+.mdr-cta--navy {
+    background: linear-gradient(135deg, #101646 0%, #1a237e 55%, #243f86 100%);
+    color: #fff;
+}
+
+.mdr-cta--cream {
+    background: var(--mdr-cream);
+}
+
+.mdr-cta__inner {
+    max-width: 46rem;
+}
+
+.mdr-cta h2 {
+    font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.mdr-cta--navy h2 {
+    color: #fff;
+}
+
+.mdr-cta--cream h2 {
+    color: var(--mdr-navy);
+}
+
+.mdr-cta p {
+    margin: 0.85rem auto 1.5rem;
+    line-height: 1.7;
+}
+
+.mdr-cta--navy p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mdr-cta--cream p {
+    color: var(--mdr-muted);
+}
+
+.mdr-cta .button-primary {
+    border-radius: 0.45rem;
+    color: #fff;
+}
+
+/* Why choose */
+.mdr-why-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.15rem;
+}
+
+.mdr-why-card {
+    grid-column: span 2;
+    border: 1px solid var(--mdr-line);
+    border-radius: 0.9rem;
+    background: #fff;
+    padding: 1.45rem 1.3rem 1.3rem;
+    box-shadow: 0 12px 28px rgba(20, 31, 78, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mdr-why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px rgba(20, 31, 78, 0.12);
+}
+
+.mdr-why-card:nth-child(4) {
+    grid-column: 2 / 4;
+}
+
+.mdr-why-card:nth-child(5) {
+    grid-column: 4 / 6;
+}
+
+.mdr-why-card__icon {
+    display: grid;
+    place-items: center;
+    width: 2.55rem;
+    height: 2.55rem;
+    margin-bottom: 0.95rem;
+    border-radius: 0.65rem;
+    background: rgba(26, 35, 126, 0.1);
+    color: var(--mdr-navy);
+    font-size: 1.05rem;
+}
+
+.mdr-why-card h3 {
+    color: var(--mdr-navy);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mdr-why-card p {
+    margin-top: 0.45rem;
+    color: var(--mdr-muted);
+    font-size: 0.94rem;
+    line-height: 1.65;
+}
+
+/* Tools */
+.mdr-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+.mdr-tools-card {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    min-height: 7.25rem;
+    border: 1px solid rgba(61, 86, 166, 0.1);
+    border-radius: 0.9rem;
+    background: #fff;
+    padding: 0.85rem 1rem;
+    box-shadow: 0 10px 24px rgba(20, 31, 78, 0.08);
+}
+
+.mdr-tools-card img {
+    width: 100%;
+    max-height: 5.25rem;
+    object-fit: contain;
+}
+
+/* Solutions */
+.mdr-solutions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.mdr-solution {
+    overflow: hidden;
+    border-radius: 0.95rem;
+    background: #fff;
+    box-shadow: 0 14px 32px rgba(20, 31, 78, 0.08);
+}
+
+.mdr-solution--wide {
+    grid-column: 1 / -1;
+}
+
+.mdr-solution__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.05rem 1.3rem;
+    color: #fff;
+}
+
+.mdr-solution--navy .mdr-solution__head {
+    background: var(--mdr-navy);
+}
+
+.mdr-solution--green .mdr-solution__head {
+    background: var(--mdr-green);
+}
+
+.mdr-solution__icon {
+    display: grid;
+    place-items: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.16);
+    font-size: 0.95rem;
+}
+
+.mdr-solution__head h3 {
+    color: #fff;
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.mdr-solution__body {
+    display: grid;
+    gap: 1rem;
+    padding: 1.2rem 1.3rem 1.35rem;
+}
+
+.mdr-solution--wide .mdr-solution__body {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem 1.5rem;
+}
+
+.mdr-solution__label {
+    margin: 0 0 0.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.mdr-solution--navy .mdr-solution__label {
+    color: var(--mdr-navy);
+}
+
+.mdr-solution--green .mdr-solution__label {
+    color: var(--mdr-green);
+}
+
+.mdr-solution__body p:not(.mdr-solution__label) {
+    margin: 0;
+    color: var(--mdr-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+/* Core features */
+.mdr-features {
+    background: linear-gradient(160deg, #101646 0%, #1a237e 48%, #243f86 100%);
+    padding: 5rem 0;
+}
+
+.mdr-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+.mdr-feature {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.45rem 1.25rem 1.3rem;
+}
+
+.mdr-feature__icon {
+    display: grid;
+    place-items: center;
+    width: 2.55rem;
+    height: 2.55rem;
+    margin-bottom: 0.95rem;
+    border-radius: 0.65rem;
+    background: rgba(76, 175, 80, 0.16);
+    color: var(--mdr-green);
+    font-size: 1.05rem;
+}
+
+.mdr-feature h3 {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mdr-feature p {
+    margin-top: 0.45rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+/* Deliverables */
+.mdr-deliver-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.mdr-deliver-card {
+    text-align: center;
+    padding: 0.5rem 0.4rem;
+}
+
+.mdr-deliver-card__icon {
+    display: grid;
+    place-items: center;
+    width: 3.15rem;
+    height: 3.15rem;
+    margin: 0 auto 1rem;
+    border-radius: 0.85rem;
+    color: #fff;
+    font-size: 1.15rem;
+}
+
+.mdr-deliver-card__icon--red {
+    background: #e53935;
+}
+
+.mdr-deliver-card__icon--navy {
+    background: var(--mdr-navy);
+}
+
+.mdr-deliver-card__icon--green {
+    background: var(--mdr-green);
+}
+
+.mdr-deliver-card__icon--orange {
+    background: #fb8c00;
+}
+
+.mdr-deliver-card h3 {
+    color: var(--mdr-navy);
+    font-size: 1.12rem;
+    font-weight: 700;
+}
+
+.mdr-deliver-card p {
+    margin-top: 0.45rem;
+    color: var(--mdr-muted);
+    font-size: 0.94rem;
+    line-height: 1.65;
+}
+
+/* FAQ + form */
+.mdr-faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 2.25rem;
+    align-items: start;
+}
+
+.mdr-faq-layout > div > h2 {
+    margin-bottom: 1.25rem;
+    color: var(--mdr-navy);
+    font-size: clamp(1.55rem, 2.6vw, 2rem);
+    font-weight: 700;
+}
+
+.mdr-faq {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.mdr-faq__item {
+    border: 1px solid rgba(46, 46, 128, 0.1);
+    border-radius: 0.65rem;
+    background: #fff;
+    overflow: hidden;
+}
+
+.mdr-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 1.05rem 1.15rem;
+    color: var(--mdr-navy);
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.mdr-faq__item summary::-webkit-details-marker {
+    display: none;
+}
+
+.mdr-faq__toggle {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--mdr-navy);
+    font-size: 0.85rem;
+}
+
+.mdr-faq__toggle .fa-minus {
+    display: none;
+}
+
+.mdr-faq__item[open] .fa-plus {
+    display: none;
+}
+
+.mdr-faq__item[open] .fa-minus {
+    display: block;
+}
+
+.mdr-faq__body {
+    padding: 0 1.15rem 1.1rem;
+}
+
+.mdr-faq__body p {
+    color: var(--mdr-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.mdr-form {
+    position: relative;
+    z-index: 4;
+    overflow: visible;
+    scroll-margin-top: 6rem;
+    border-top: 8px solid var(--mdr-navy);
+    border-radius: 0.95rem;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 31, 78, 0.12);
+}
+
+.mdr-form__head {
+    padding: 1.45rem 1.4rem 0.35rem;
+}
+
+.mdr-form__head h2 {
+    color: var(--mdr-navy);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mdr-form__head p {
+    margin-top: 0.55rem;
+    color: var(--mdr-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.mdr-form__body {
+    padding: 1rem 1.4rem 1.45rem;
+}
+
+.mdr-form .contact-form {
+    gap: 0.75rem;
+}
+
+.mdr-form .contact-form__row {
+    grid-template-columns: 1fr;
+}
+
+.mdr-form .contact-form__field:has(.phone-input-field),
+.mdr-form .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+    overflow: visible;
+}
+
+.mdr-form .phone-input-field,
+.mdr-form .phone-input-field .iti {
+    position: relative;
+    z-index: 40;
+    width: 100%;
+}
+
+.mdr-form .phone-input-field .iti__dropdown-content,
+.mdr-form .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+.mdr-form .contact-form__field input:not([type='checkbox']),
+.mdr-form .contact-form__field select {
+    min-height: 0;
+    max-height: 2.85rem;
+    height: 2.85rem;
+    border: 1px solid rgba(26, 35, 126, 0.18) !important;
+    border-radius: 0.45rem !important;
+    background: #fff !important;
+    padding: 0.65rem 0.85rem;
+    color: var(--mdr-ink) !important;
+    font-size: 0.92rem;
+}
+
+.mdr-form .phone-input-field .iti__tel-input {
+    min-height: 0;
+    max-height: 2.85rem;
+    height: 2.85rem;
+    border: 1px solid rgba(26, 35, 126, 0.18) !important;
+    border-radius: 0.45rem !important;
+    background: #fff !important;
+    padding-top: 0.65rem;
+    padding-right: 0.85rem;
+    padding-bottom: 0.65rem;
+    color: var(--mdr-ink) !important;
+    font-size: 0.92rem;
+}
+
+.mdr-form .contact-form__field--message {
+    overflow: visible;
+    background: transparent;
+}
+
+.mdr-form .contact-form__field--message textarea {
+    min-height: 4.5rem;
+    height: 4.5rem;
+    resize: vertical;
+    border: 1px solid rgba(26, 35, 126, 0.18) !important;
+    border-radius: 0.45rem !important;
+    background: #fff !important;
+    padding: 0.75rem 0.85rem;
+    color: var(--mdr-ink) !important;
+    font-size: 0.92rem;
+}
+
+.mdr-form .contact-form select:focus,
+.mdr-form .contact-form input:not([type='checkbox']):focus,
+.mdr-form .phone-input-field .iti__tel-input:focus,
+.mdr-form .contact-form__field--message textarea:focus {
+    border-color: var(--mdr-navy) !important;
+    outline: 2px solid rgba(46, 46, 128, 0.16);
+    outline-offset: 0;
+}
+
+.mdr-form .contact-form__terms,
+.mdr-form .contact-form__terms span {
+    color: #334155 !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.mdr-form .contact-form__terms a {
+    color: var(--mdr-navy) !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.mdr-form .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    border-radius: 0.45rem;
+    background: var(--mdr-navy);
+    padding: 0.9rem 1rem;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: none;
+}
+
+.mdr-form .contact-form__submit:hover {
+    background: var(--mdr-navy-deep);
+    color: #fff;
+}
+
+.mdr-hero__cta:focus-visible,
+.mdr-cta .button-primary:focus-visible,
+.mdr-faq__item summary:focus-visible,
+.mdr-form .contact-form__submit:focus-visible {
+    outline: 2px solid var(--mdr-green);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mdr-hero__cta,
+    .mdr-cta .button-primary,
+    .mdr-why-card,
+    .home-marquee__track {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 1100px) {
+    .mdr-hero__inner,
+    .mdr-faq-layout,
+    .mdr-solutions {
+        grid-template-columns: 1fr;
+    }
+
+    .mdr-why-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mdr-why-card,
+    .mdr-why-card:nth-child(4),
+    .mdr-why-card:nth-child(5) {
+        grid-column: auto;
+    }
+
+    .mdr-why-card:last-child {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 0.575rem);
+        width: 100%;
+        justify-self: center;
+    }
+
+    .mdr-tools-grid,
+    .mdr-features-grid,
+    .mdr-deliver-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mdr-solution--wide {
+        grid-column: auto;
+    }
+
+    .mdr-solution--wide .mdr-solution__body {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .mdr-hero {
+        padding: 3.25rem 0 2.5rem;
+    }
+
+    .mdr-section,
+    .mdr-features {
+        padding: 3.25rem 0;
+    }
+
+    .mdr-cta {
+        padding: 2.85rem 0;
+    }
+
+    .mdr-hero__inner,
+    .mdr-hero__stats,
+    .mdr-why-grid,
+    .mdr-tools-grid,
+    .mdr-features-grid,
+    .mdr-deliver-grid,
+    .mdr-faq-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .mdr-why-card:last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+
+    .mdr-certs-section {
+        padding-top: 0.25rem;
+    }
+
+    .mdr-certs-panel,
+    .mdr-form__head,
+    .mdr-form__body {
+        padding-left: 1.15rem;
+        padding-right: 1.15rem;
+    }
+
+    .mdr-certs img {
+        height: 3.25rem;
+        max-width: 6.5rem;
+    }
+
+    .mdr-hero__cta,
+    .mdr-cta .button-primary {
+        width: 100%;
+    }
+
+    .mdr-page .home-clients {
+        padding-top: 2.25rem;
+    }
+}

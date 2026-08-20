@@ -20,13 +20,13 @@ return match (true) {
         dirname(__DIR__),
 
     // Staging
-    $host === 'stg.ledgergenie.ai' =>
-        '/home/ledgergenie/ledgergenie-staging',
+    $host === 'dev.ibntech.com' =>
+        '/home/ibntech/ibntech-staging',
 
     // Production
-    $host === 'ledgergenie.ai' ||
-    $host === 'www.ledgergenie.ai' =>
-        '/home/ledgergenie/ledgergenie',
+    $host === 'ibntech.com' ||
+    $host === 'www.ibntech.com' =>
+        '/home/ibntech/ibntech',
 
     // Fallback
     default =>

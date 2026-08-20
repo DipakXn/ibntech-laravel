@@ -1,0 +1,598 @@
+/* USA & UK Tax Preparation Services — matched to WordPress screenshot */
+
+.usuktax-page {
+    --usuktax-navy: #2e2e80;
+    --usuktax-navy-deep: #1e266d;
+    --usuktax-green: #4caf50;
+    --usuktax-green-dark: #3d9140;
+    --usuktax-mint: #f0f5f7;
+    --usuktax-box: #eef6f9;
+    --usuktax-cream: #f3e8b0;
+    --usuktax-cream-hover: #fef6dd;
+    --usuktax-ink: #1f1d1d;
+    --usuktax-muted: #4a4a4a;
+    --usuktax-line: rgba(46, 46, 128, 0.14);
+    color: var(--usuktax-ink);
+    background: #fff;
+}
+
+.usuktax-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 0.35rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.usuktax-btn:hover {
+    transform: translateY(-1px);
+}
+
+.usuktax-btn:focus-visible {
+    outline: 2px solid var(--usuktax-green);
+    outline-offset: 3px;
+}
+
+.usuktax-btn--navy {
+    background: var(--usuktax-navy-deep);
+    border-color: var(--usuktax-navy-deep);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(30, 38, 109, 0.22);
+}
+
+.usuktax-btn--navy:hover,
+.usuktax-btn--navy:focus-visible {
+    background: var(--usuktax-navy);
+    border-color: var(--usuktax-navy);
+    color: #fff;
+}
+
+.usuktax-btn--cream {
+    background: var(--usuktax-cream);
+    border-color: var(--usuktax-cream);
+    color: var(--usuktax-navy-deep);
+    box-shadow: 0 10px 22px rgba(20, 30, 70, 0.12);
+}
+
+.usuktax-btn--cream:hover,
+.usuktax-btn--cream:focus-visible {
+    background: var(--usuktax-cream-hover);
+    border-color: var(--usuktax-cream-hover);
+    color: var(--usuktax-navy);
+}
+
+/* Hero */
+.usuktax-hero {
+    background: var(--usuktax-mint);
+    overflow: hidden;
+}
+
+.usuktax-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 3.75rem 0 3.5rem;
+}
+
+.usuktax-hero__copy {
+    max-width: 34rem;
+}
+
+.usuktax-hero__copy h1 {
+    margin: 0;
+    color: var(--usuktax-navy-deep);
+    font-size: clamp(2.05rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+}
+
+.usuktax-hero__lede {
+    margin: 1.15rem 0 0;
+    color: var(--usuktax-ink);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.7;
+    max-width: 32rem;
+}
+
+.usuktax-hero__actions {
+    margin-top: 1.75rem;
+}
+
+.usuktax-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usuktax-hero__media img {
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+    display: block;
+}
+
+/* Sections */
+.usuktax-section {
+    padding: 3.5rem 0;
+}
+
+.usuktax-section--tight {
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
+}
+
+/* Intro / expertise */
+.usuktax-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 3rem;
+    align-items: center;
+}
+
+.usuktax-intro__media img {
+    display: block;
+    width: 100%;
+    max-width: 36rem;
+    height: auto;
+    border-radius: 0.35rem;
+    object-fit: cover;
+}
+
+.usuktax-intro__copy h2 {
+    margin: 0 0 1.15rem;
+    color: var(--usuktax-navy-deep);
+    font-size: clamp(1.65rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.usuktax-intro__copy p {
+    margin: 0 0 1rem;
+    color: var(--usuktax-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.usuktax-intro__copy a:not(.usuktax-btn) {
+    color: var(--usuktax-ink);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.usuktax-intro__copy a:not(.usuktax-btn):hover,
+.usuktax-intro__copy a:not(.usuktax-btn):focus-visible {
+    color: var(--usuktax-navy);
+    text-decoration: underline;
+}
+
+.usuktax-intro__copy .usuktax-btn {
+    margin-top: 0.65rem;
+}
+
+/* Navy panel + illustration */
+.usuktax-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: center;
+    gap: 1.75rem 1.25rem;
+}
+
+.usuktax-panel__copy {
+    min-width: 0;
+    background: var(--usuktax-navy-deep);
+    border-radius: 1.15rem;
+    padding: 2.6rem 2.4rem 2.5rem;
+    color: #fff;
+}
+
+.usuktax-panel__copy h2 {
+    margin: 0 0 1.25rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.usuktax-panel__copy .usuktax-btn {
+    margin-top: 1.6rem;
+}
+
+.usuktax-panel__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usuktax-panel__media img {
+    display: block;
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+}
+
+.usuktax-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.usuktax-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.usuktax-list__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.12rem;
+    border-radius: 50%;
+    background: var(--usuktax-green);
+    color: #fff;
+    font-size: 0.62rem;
+}
+
+.usuktax-list--dark li {
+    color: var(--usuktax-ink);
+}
+
+/* Entities */
+.usuktax-entities {
+    background: #fff;
+    padding: 1.5rem 0 3.5rem;
+}
+
+.usuktax-entities__inner {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1.25fr);
+    gap: 1.75rem 2rem;
+    align-items: center;
+}
+
+.usuktax-entities__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usuktax-entities__media img {
+    display: block;
+    width: 100%;
+    max-width: 24rem;
+    height: auto;
+}
+
+.usuktax-entities__copy {
+    min-width: 0;
+    background: var(--usuktax-box);
+    border-radius: 1.15rem;
+    padding: 2.2rem 2.15rem 2.1rem;
+}
+
+.usuktax-entities__copy h2 {
+    margin: 0 0 1.15rem;
+    color: var(--usuktax-navy-deep);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.usuktax-entities__copy .usuktax-btn {
+    margin-top: 1.45rem;
+}
+
+.usuktax-software {
+    padding-top: 0.35rem;
+    padding-bottom: 2.5rem;
+}
+
+.usuktax-software__copy {
+    background: var(--usuktax-box);
+    border-radius: 1.15rem;
+    padding: 2.2rem 2.15rem 2.1rem;
+}
+
+.usuktax-software__copy h2 {
+    margin: 0 0 1rem;
+    color: var(--usuktax-navy-deep);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.usuktax-software__copy p {
+    margin: 0;
+    color: var(--usuktax-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.usuktax-software__copy .usuktax-btn {
+    margin-top: 1.45rem;
+}
+
+/* Contact */
+.usuktax-consult {
+    padding-top: 1.25rem;
+    padding-bottom: 3.75rem;
+    scroll-margin-top: 6rem;
+}
+
+.usuktax-consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+.usuktax-consult__card {
+    border-radius: 0.75rem;
+    overflow: visible;
+    background: var(--usuktax-navy-deep);
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.16);
+}
+
+.usuktax-consult__header {
+    background: var(--usuktax-navy-deep);
+    color: #fff;
+    text-align: center;
+    padding: 1.35rem 1.35rem 0.35rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.usuktax-consult__header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.usuktax-consult__header p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.usuktax-consult__body {
+    position: relative;
+    padding: 1.15rem 1.35rem 1.45rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: var(--usuktax-navy-deep);
+    overflow: visible;
+}
+
+.usuktax-consult__body .contact-form {
+    gap: 0.7rem;
+}
+
+.usuktax-consult__body .contact-form__row {
+    gap: 0.7rem;
+}
+
+.usuktax-consult__body .contact-form select,
+.usuktax-consult__body .contact-form input:not([type='checkbox']):not([type='hidden']),
+.usuktax-consult__body .contact-form textarea,
+.usuktax-consult__body .phone-input-field .iti__tel-input {
+    border: 0 !important;
+    background: #f4f5f7 !important;
+    color: var(--usuktax-ink) !important;
+}
+
+.usuktax-consult__body .contact-form__field--message {
+    border: 0;
+    background: #f4f5f7;
+}
+
+.usuktax-consult__body .contact-form select:focus,
+.usuktax-consult__body .contact-form input:focus,
+.usuktax-consult__body .contact-form textarea:focus,
+.usuktax-consult__body .phone-input-field .iti__tel-input:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.55);
+    outline-offset: 1px;
+}
+
+.usuktax-consult__body .contact-form__terms,
+.usuktax-consult__body .contact-form__terms span {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.usuktax-consult__body .contact-form__terms a {
+    color: #fff !important;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.usuktax-consult__body .contact-form__terms {
+    position: relative;
+}
+
+.usuktax-consult__body .consent-tooltip {
+    position: static;
+}
+
+.usuktax-consult__body .consent-tooltip__content {
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+}
+
+.usuktax-consult__body .form-success,
+.usuktax-consult__body .contact-form__success,
+.usuktax-consult__body .contact-form__banner {
+    color: #fff;
+}
+
+.usuktax-consult__body .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: #4caf50;
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    box-shadow: none;
+}
+
+.usuktax-consult__body .contact-form__submit:hover {
+    background:#fff;
+    color: #000;
+}
+
+.usuktax-consult__body .contact-form__field:has(.phone-input-field),
+.usuktax-consult__body .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+    overflow: visible;
+}
+
+.usuktax-consult__body .phone-input-field,
+.usuktax-consult__body .phone-input-field .iti {
+    position: relative;
+    z-index: 40;
+    width: 100%;
+}
+
+.usuktax-consult__body .phone-input-field .iti__dropdown-content,
+.usuktax-consult__body .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+.usuktax-consult__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.usuktax-consult__media img {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+.usuktax-btn:focus-visible,
+.usuktax-consult__body .contact-form__submit:focus-visible {
+    outline: 2px solid var(--usuktax-green);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .usuktax-btn,
+    .usuktax-consult__body .contact-form__submit {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .usuktax-hero__inner,
+    .usuktax-intro,
+    .usuktax-panel,
+    .usuktax-entities__inner,
+    .usuktax-consult__inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .usuktax-hero__inner {
+        padding: 3rem 0 2.75rem;
+        text-align: center;
+    }
+
+    .usuktax-hero__copy {
+        max-width: none;
+    }
+
+    .usuktax-hero__lede {
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .usuktax-hero__media img {
+        max-width: 22rem;
+    }
+
+    .usuktax-intro__media,
+    .usuktax-panel__media,
+    .usuktax-entities__media {
+        display: flex;
+        justify-content: center;
+    }
+
+    .usuktax-intro__media img,
+    .usuktax-panel__media img {
+        max-width: 22rem;
+    }
+
+    .usuktax-panel__copy,
+    .usuktax-entities__copy {
+        padding: 2rem 1.5rem 1.75rem;
+    }
+
+    .usuktax-consult__media {
+        order: -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .usuktax-section,
+    .usuktax-entities {
+        padding: 2.35rem 0;
+    }
+
+    .usuktax-section--tight {
+        padding-top: 0.5rem;
+        padding-bottom: 2.35rem;
+    }
+
+    .usuktax-intro {
+        gap: 1.5rem;
+    }
+
+    .usuktax-panel__copy,
+    .usuktax-entities__copy,
+    .usuktax-software__copy {
+        padding: 1.65rem 1.2rem 1.5rem;
+    }
+
+    .usuktax-consult__header,
+    .usuktax-consult__body {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+    }
+
+    .usuktax-btn {
+        width: 100%;
+    }
+}

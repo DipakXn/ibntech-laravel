@@ -1,0 +1,525 @@
+/* Landing page: cybersecurity-services */
+
+.lcys-page {
+    --lcys-navy: #2e2e80;
+    --lcys-green: #54b451;
+    --lcys-green-dark: #3d9140;
+    --lcys-check: #3d5afe;
+    --lcys-ink: #172033;
+    --lcys-muted: #5b6475;
+    --lcys-line: rgba(46, 46, 128, 0.12);
+    --lcys-shell: 1180px;
+    --lcys-soft: #f4f6fb;
+    background: #fff;
+    color: var(--lcys-ink);
+}
+
+html:has(.lcys-page) {
+    scroll-behavior: smooth;
+}
+
+.lcys-shell {
+    width: min(var(--lcys-shell), calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.lcys-page h1,
+.lcys-page h2,
+.lcys-page h3 {
+    color: var(--lcys-navy);
+    font-weight: 700;
+}
+
+.lcys-hero {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+}
+
+.lcys-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left bottom;
+    pointer-events: none;
+    user-select: none;
+}
+
+.lcys-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem 2.5rem;
+    align-items: center;
+    padding: 3.4rem 0 6.5rem;
+}
+
+.lcys-hero__copy h1 {
+    margin: 0;
+    font-size: clamp(1.85rem, 3.6vw, 2.7rem);
+    line-height: 1.18;
+}
+
+.lcys-hero__copy > p {
+    margin: 1.05rem 0 0;
+    max-width: 36rem;
+    color: var(--lcys-ink);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.lcys-hero__copy > p.lcys-hero__emphasis {
+    margin: 1.15rem 0 0;
+    color: var(--lcys-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.lcys-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.25rem;
+    border-radius: 999px;
+    background: var(--lcys-green);
+    color: #fff;
+    padding: 0.78rem 1.65rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.lcys-hero__cta:hover,
+.lcys-hero__cta:focus-visible {
+    background: var(--lcys-green-dark);
+    color: #fff;
+}
+
+.lcys-hero__media {
+    min-width: 0;
+}
+
+.lcys-hero__media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 28rem;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.lcys-why {
+    padding: 3.15rem 0 2.75rem;
+    text-align: center;
+}
+
+.lcys-why h2,
+.lcys-services h2,
+.lcys-choose h2,
+.lcys-article h2,
+.lcys-partners h2 {
+    margin: 0 auto;
+    max-width: 38rem;
+    font-size: clamp(1.5rem, 2.7vw, 2.05rem);
+    line-height: 1.3;
+    text-align: center;
+}
+
+.lcys-why p {
+    margin: 0.9rem auto 0;
+    max-width: 52rem;
+    color: var(--lcys-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.lcys-why__diagram {
+    display: block;
+    width: min(100%, 34rem);
+    height: auto;
+    margin: 1.85rem auto 0;
+}
+
+.lcys-services {
+    padding: 1.5rem 0 3.25rem;
+}
+
+.lcys-services h2::after {
+    content: "";
+    display: block;
+    width: 4.25rem;
+    height: 2px;
+    margin: 0.7rem auto 0;
+    background: var(--lcys-navy);
+}
+
+.lcys-services__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.lcys-services__grid article {
+    border: 1px solid var(--lcys-line);
+    border-radius: 0.55rem;
+    background: #fff;
+    padding: 1.55rem 1.35rem 1.4rem;
+    box-shadow: 0 10px 24px rgba(20, 31, 78, 0.06);
+    text-align: center;
+}
+
+.lcys-services__icon {
+    display: grid;
+    place-items: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    margin: 0 auto 0.95rem;
+}
+
+.lcys-services__grid img {
+    display: block;
+    width: 4.25rem;
+    height: 4.25rem;
+    object-fit: contain;
+}
+
+.lcys-services__grid h3 {
+    margin: 0;
+    color: var(--lcys-navy);
+    font-size: 1.02rem;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+
+.lcys-services__grid p {
+    margin: 0.7rem 0 0;
+    color: var(--lcys-muted);
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.lcys-choose {
+    background: var(--lcys-soft);
+    padding: 3.15rem 0 3.35rem;
+}
+
+.lcys-choose__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.85rem;
+}
+
+.lcys-choose article {
+    overflow: hidden;
+    border-radius: 0.55rem;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(20, 31, 78, 0.08);
+}
+
+.lcys-choose img {
+    display: block;
+    width: 100%;
+    height: 15.5rem;
+    object-fit: cover;
+    object-position: center;
+    background: #08122a;
+}
+
+.lcys-choose ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 1.35rem 1.4rem 1.5rem;
+    list-style: none;
+}
+
+.lcys-choose li {
+    position: relative;
+    padding-left: 2.15rem;
+    color: var(--lcys-ink);
+    font-size: 0.96rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.lcys-choose li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 0.05rem;
+    display: grid;
+    place-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 999px;
+    background: var(--lcys-check);
+    color: #fff;
+    font-size: 0.62rem;
+}
+
+.lcys-article {
+    padding: 3.15rem 0 2.5rem;
+}
+
+.lcys-article p {
+    max-width: 58rem;
+    margin: 1rem auto 0;
+    color: var(--lcys-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.lcys-partners {
+    padding: 1.5rem 0 3.25rem;
+    text-align: center;
+}
+
+.lcys-partners img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 1.5rem;
+}
+
+.lcys-contact {
+    background: var(--lcys-green);
+    padding: 3rem 0 3.25rem;
+    scroll-margin-top: 1rem;
+}
+
+.lcys-contact h2 {
+    margin: 0 auto 1.5rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    text-align: center;
+}
+
+.lcys-contact__panel {
+    overflow: visible;
+    width: 100%;
+    max-width: 44rem;
+    margin-inline: auto;
+    border-radius: 0.55rem;
+    background: #fff;
+    padding: 1.35rem 1.4rem 1.5rem;
+    box-shadow: 0 18px 40px rgba(20, 31, 78, 0.12);
+}
+
+.lcys-contact .landing-inquiry-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem 0.9rem;
+}
+
+.lcys-contact .honeypot-field,
+.lcys-contact .contact-form__banner,
+.lcys-contact .form-success,
+.lcys-contact .contact-form__success,
+.lcys-contact .contact-form__field--message,
+.lcys-contact .newsletter-form__terms,
+.lcys-contact .newsletter-form__submit,
+.lcys-contact > p,
+.lcys-contact .landing-inquiry-form > p {
+    grid-column: 1 / -1;
+}
+
+.lcys-contact .contact-form__field:has(.phone-input-field) {
+    z-index: 40;
+}
+
+.lcys-contact .phone-input-field .iti__dropdown-content,
+.lcys-contact .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+.lcys-contact .contact-form__field input,
+.lcys-contact .contact-form__field textarea,
+.lcys-contact .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(15, 23, 42, 0.14) !important;
+    border-radius: 0.35rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+    font-size: 0.9rem !important;
+}
+
+.lcys-contact .phone-input-field .iti__tel-input {
+    padding-left: 5.35rem !important;
+}
+
+.lcys-contact .iti__selected-country {
+    color: #000 !important;
+}
+
+.lcys-contact .contact-form textarea {
+    min-height: 5.25rem !important;
+}
+
+.lcys-contact .contact-form__field--message {
+    background: #fff;
+}
+
+.lcys-contact .newsletter-form__terms,
+.lcys-contact .newsletter-form__terms span {
+    color: #334155;
+    font-size: 0.74rem;
+}
+
+.lcys-contact .newsletter-form__submit {
+    border: 0;
+    border-radius: 0.35rem;
+    background: var(--lcys-navy);
+    color: #fff;
+    padding: 0.78rem 0.85rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.lcys-contact .newsletter-form__submit:hover,
+.lcys-contact .newsletter-form__submit:focus-visible {
+    background: #23235f;
+}
+
+.lcys-offices {
+    background: var(--lcys-navy);
+    padding: 2.75rem 0 3rem;
+}
+
+.lcys-offices__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem 2.5rem;
+}
+
+.lcys-offices article {
+    min-width: 0;
+}
+
+.lcys-offices h2 {
+    margin: 0 0 0.85rem;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.lcys-offices p {
+    margin: 0;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.lcys-offices ul {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lcys-offices a {
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-decoration: none;
+}
+
+.lcys-offices a:hover,
+.lcys-offices a:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+}
+
+@media (max-width: 900px) {
+    .lcys-hero__inner,
+    .lcys-choose__grid,
+    .lcys-offices__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lcys-hero__inner {
+        padding: 2.4rem 0 2.5rem;
+        text-align: center;
+    }
+
+    .lcys-hero__copy > p,
+    .lcys-hero__emphasis {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .lcys-hero__media {
+        order: 1;
+        max-width: 28rem;
+        margin-inline: auto;
+    }
+
+    .lcys-choose img {
+        height: 13.5rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .lcys-shell {
+        width: min(var(--lcys-shell), calc(100% - 1.25rem));
+    }
+
+    .lcys-services__grid,
+    .lcys-contact .landing-inquiry-form {
+        grid-template-columns: 1fr;
+    }
+
+    .lcys-hero,
+    .lcys-why,
+    .lcys-services,
+    .lcys-choose,
+    .lcys-article,
+    .lcys-partners,
+    .lcys-contact,
+    .lcys-offices {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .lcys-hero__inner {
+        padding-bottom: 5.5rem;
+    }
+
+    .lcys-hero__copy h1 {
+        font-size: 1.55rem;
+    }
+
+    .lcys-article p {
+        text-align: left;
+    }
+
+    .lcys-contact__panel {
+        padding: 1rem 0.9rem 1.15rem;
+    }
+
+    .lcys-choose ul {
+        padding: 1.1rem 1rem 1.2rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:has(.lcys-page) {
+        scroll-behavior: auto;
+    }
+}

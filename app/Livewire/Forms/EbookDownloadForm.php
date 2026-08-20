@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Jobs\SendEbookThankYouMail;
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Models\Ebook;
 use App\Services\LeadService;
@@ -66,7 +67,7 @@ class EbookDownloadForm extends Component
         unset($validated['acceptedTerms']);
         unset($validated['recaptchaToken']);
 
-        $leadService->createLead([
+        $lead = $leadService->createLead([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'form_name' => $validated['formName'],
@@ -82,6 +83,10 @@ class EbookDownloadForm extends Component
                 now()->addMinutes(30),
                 ['slug' => $ebook->slug],
             );
+
+            if ($lead->email) {
+                SendEbookThankYouMail::dispatch($lead->getKey())->afterCommit();
+            }
         }
 
         $this->reset(['name', 'email']);
@@ -90,6 +95,7 @@ class EbookDownloadForm extends Component
         $this->pageUrl = url()->current();
         $this->resetReCaptcha();
         $this->submitted = true;
+        $this->dispatch('form-success-revealed');
     }
 
     public function render()

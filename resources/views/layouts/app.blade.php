@@ -52,6 +52,12 @@
     @endif
 
     <link rel="canonical" href="{{ $seo['canonical_url'] ?? url()->current() }}">
+    @if(!empty($seo['link_prev']))
+        <link rel="prev" href="{{ $seo['link_prev'] }}">
+    @endif
+    @if(!empty($seo['link_next']))
+        <link rel="next" href="{{ $seo['link_next'] }}">
+    @endif
 
     {{-- Article metadata --}}
     @if(!empty($seo['article_author']))
@@ -104,6 +110,7 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
+    @stack('styles')
     @livewireStyles
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 
@@ -142,6 +149,7 @@
         @yield('content')
     </main>
     @include('layouts.footer')
+    <livewire:contact-modal />
     @livewireScripts
 
     @if(!empty($websiteSettings?->custom_body_end_code))

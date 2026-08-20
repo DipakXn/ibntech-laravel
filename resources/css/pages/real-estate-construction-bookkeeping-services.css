@@ -1,0 +1,715 @@
+/* Bookkeeping for Real Estate and Construction Businesses — matched to WordPress screenshot */
+
+.recbk-page {
+    --recbk-navy: #2e2e80;
+    --recbk-navy-deep: #1f1f5c;
+    --recbk-green: #4caf50;
+    --recbk-green-soft: #61bd75;
+    --recbk-green-dark: #3d9140;
+    --recbk-ink: #1f1d1d;
+    --recbk-muted: #4a4a4a;
+    --recbk-cream: #fff9e5;
+    --recbk-cream-soft: #fffbe8;
+    --recbk-line: rgba(46, 46, 128, 0.14);
+    color: var(--recbk-ink);
+    background: #fff;
+}
+
+.recbk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.6rem;
+    border-radius: 0.3rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.recbk-btn:hover {
+    transform: translateY(-1px);
+}
+
+.recbk-btn--green {
+    background: var(--recbk-green);
+    border-color: var(--recbk-green);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.28);
+}
+
+.recbk-btn--green:hover {
+    background: var(--recbk-green-dark);
+    border-color: var(--recbk-green-dark);
+    color: #fff;
+}
+
+.recbk-section {
+    padding: 3.25rem 0;
+}
+
+.recbk-heading {
+    margin-bottom: 2rem;
+}
+
+.recbk-heading--center {
+    text-align: center;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recbk-heading h2 {
+    margin: 0;
+    color: var(--recbk-ink);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* Hero */
+.recbk-hero {
+    position: relative;
+    overflow: visible;
+    background-image: linear-gradient(105deg, var(--recbk-navy) 0%, #353a9a 42%, var(--recbk-green-soft) 100%);
+    color: #fff;
+    padding-bottom: 4.5rem;
+}
+
+.recbk-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 2.75rem 0 1.5rem;
+}
+
+.recbk-hero__copy h1 {
+    margin: 0;
+    /* max-width: 18ch; */
+    color: #fff;
+    font-size: clamp(1.7rem, 3.8vw, 2.65rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+}
+
+.recbk-hero__lede {
+    max-width: 34rem;
+    margin: 1.15rem 0 0;
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.recbk-hero__form {
+    position: relative;
+    z-index: 2;
+    scroll-margin-top: 6rem;
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 1.5rem 1.35rem 1.45rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
+    color: var(--recbk-ink);
+}
+
+.recbk-hero__form h2 {
+    margin: 0;
+    color: var(--recbk-navy);
+    font-size: clamp(1.15rem, 2vw, 1.375rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+.recbk-hero__form-sub {
+    margin: 0.45rem 0 1rem;
+    color: var(--recbk-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.recbk-hero__form .contact-form {
+    gap: 0.7rem;
+}
+
+.recbk-hero__form .contact-form__field input,
+.recbk-hero__form .contact-form__field select,
+.recbk-hero__form .contact-form__field textarea,
+.recbk-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #e4e4e7 !important;
+    border-radius: 0.4rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+}
+
+.recbk-hero__form .contact-form__terms,
+.recbk-hero__form .contact-form__terms span {
+    color: var(--recbk-muted) !important;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.recbk-hero__form .contact-form__terms a {
+    color: var(--recbk-navy) !important;
+    font-weight: 700;
+}
+
+.recbk-hero__form .contact-form__submit {
+    margin-top: 0.15rem;
+    border-radius: 0.4rem;
+    background: var(--recbk-green);
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 12px 24px rgba(76, 175, 80, 0.28);
+}
+
+.recbk-hero__form .contact-form__submit:hover {
+    background: var(--recbk-green-dark);
+}
+
+/* Intro overlapping card */
+.recbk-intro {
+    position: relative;
+    z-index: 3;
+    margin-top: -3.5rem;
+    padding: 0 0 1.5rem;
+}
+
+.recbk-intro__card {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 2.25rem 2.5rem 2.4rem;
+    border-radius: 0.85rem;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+    text-align: center;
+}
+
+.recbk-intro__card h2 {
+    margin: 0;
+    color: #111;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.recbk-intro__card p {
+    margin: 1rem 0 0;
+    color: var(--recbk-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+/* Platforms */
+.recbk-platforms {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.recbk-platforms__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem;
+    border-radius: 0.35rem;
+    background: #fff8dc;
+}
+
+.recbk-platforms__media img {
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+    display: block;
+}
+
+.recbk-platforms__copy h2 {
+    margin: 0;
+    color: #111;
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.recbk-platforms__copy p {
+    margin: 0.85rem 0 0;
+    color: var(--recbk-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.recbk-platforms__copy .recbk-btn {
+    margin-top: 1.5rem;
+}
+
+/* CTA banner */
+.recbk-cta-banner {
+    background: var(--recbk-navy);
+    padding: 2.75rem 0;
+}
+
+.recbk-cta-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.recbk-cta-banner h2 {
+    margin: 0;
+    max-width: 42rem;
+    color: #fff;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+/* Challenges */
+.recbk-challenges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.35rem;
+}
+
+.recbk-challenge {
+    flex: 1 1 calc(25% - 1.35rem);
+    min-width: 14.5rem;
+    max-width: 17.5rem;
+    padding: 1.5rem 1.35rem 1.6rem;
+    border-radius: 0.25rem;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(20, 30, 70, 0.1);
+    text-align: left;
+}
+
+.recbk-challenge img {
+    display: block;
+    width: auto;
+    max-width: 6.5rem;
+    height: 4.25rem;
+    object-fit: contain;
+    margin: 0 0 1rem;
+}
+
+.recbk-challenge h3 {
+    margin: 0;
+    color: var(--recbk-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.recbk-challenge p {
+    margin: 0.65rem 0 0;
+    color: var(--recbk-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+/* Software */
+.recbk-software__title span {
+    color: var(--recbk-green);
+    position: relative;
+    display: inline-block;
+}
+
+.recbk-software__title span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2rem;
+    height: 0.35rem;
+    background: linear-gradient(90deg, transparent 0%, var(--recbk-green) 18%, var(--recbk-green) 82%, transparent 100%);
+    border-radius: 999px;
+    opacity: 0.85;
+    clip-path: ellipse(52% 70% at 50% 50%);
+}
+
+.recbk-software__carousel {
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.recbk-software__viewport {
+    overflow: hidden;
+}
+
+.recbk-software__track {
+    display: flex;
+    transition: transform 0.35s ease;
+    will-change: transform;
+}
+
+.recbk-software__item {
+    flex: 0 0 calc(100% / 6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+}
+
+.recbk-software__item img {
+    width: 100%;
+    max-width: 9.5rem;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.recbk-software__dots {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.35rem;
+}
+
+.recbk-software__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--recbk-navy);
+    opacity: 0.75;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.recbk-software__dot.is-active {
+    background: var(--recbk-green);
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+/* Why choose */
+.recbk-why {
+    background: var(--recbk-cream-soft);
+}
+
+.recbk-why__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.recbk-why__card {
+    padding: 1.65rem 1.45rem;
+    background: #fff;
+    border-radius: 0.15rem;
+    box-shadow: 0 2px 10px rgba(20, 30, 70, 0.04);
+    height: 100%;
+}
+
+.recbk-why__card h3 {
+    margin: 0;
+    color: #111;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.recbk-why__card p {
+    margin: 0.7rem 0 0;
+    color: var(--recbk-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Benefits */
+.recbk-benefits {
+    background: var(--recbk-navy);
+    color: #fff;
+    padding: 3.5rem 0 3.25rem;
+}
+
+.recbk-benefits__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.recbk-benefits__copy h2 {
+    margin: 0 0 1.5rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.recbk-benefits__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 2rem;
+}
+
+.recbk-benefits__lists ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.95rem;
+}
+
+.recbk-benefits__lists li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #fff;
+    font-size: 0.98rem;
+    line-height: 1.5;
+}
+
+.recbk-benefits__check {
+    flex: 0 0 auto;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.12rem;
+    background: rgba(255, 255, 255, 0.18);
+    margin-top: 0.15rem;
+}
+
+.recbk-benefits__check svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    fill: #fff;
+}
+
+.recbk-benefits__media {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.recbk-benefits__media img {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+    display: block;
+    border-radius: 0.15rem;
+}
+
+.recbk-pricing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.recbk-pricing__copy {
+    max-width: 40rem;
+}
+
+.recbk-pricing h3 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.recbk-pricing p {
+    margin: 0.75rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+/* Testimonials */
+.recbk-testimonials {
+    background: var(--recbk-cream);
+    padding: 3.25rem 0 3.75rem;
+}
+
+.recbk-testimonials__eyebrow {
+    margin: 0 0 0.45rem !important;
+    color: var(--recbk-green) !important;
+    font-size: 1.15rem !important;
+    font-weight: 600;
+}
+
+.recbk-testimonials .recbk-heading h2 {
+    color: var(--recbk-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+}
+
+.recbk-testimonials__carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    max-width: 52rem;
+    margin: 0 auto;
+}
+
+.recbk-testimonials__viewport {
+    display: grid;
+    align-items: stretch;
+    min-height: 10rem;
+}
+
+.recbk-testimonial {
+    grid-area: 1 / 1;
+    margin: 0;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 0;
+}
+
+.recbk-testimonial.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.recbk-testimonial p {
+    margin: 0;
+    color: var(--recbk-ink);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.recbk-testimonial cite {
+    display: block;
+    margin-top: 1.25rem;
+    color: var(--recbk-green);
+    font-style: normal;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.recbk-testimonials__nav {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    background: transparent;
+    color: #4b5563;
+    cursor: pointer;
+    font-size: 1.35rem;
+    transition: color 0.2s ease;
+}
+
+.recbk-testimonials__nav:hover {
+    color: var(--recbk-navy);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .recbk-hero__inner,
+    .recbk-platforms,
+    .recbk-benefits__top {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .recbk-hero__inner {
+        padding: 2.5rem 0 1.25rem;
+    }
+
+    .recbk-hero__copy h1 {
+        max-width: none;
+    }
+
+    .recbk-cta-banner__inner,
+    .recbk-pricing {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .recbk-why__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .recbk-benefits__media {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .recbk-section,
+    .recbk-cta-banner,
+    .recbk-benefits,
+    .recbk-testimonials {
+        padding: 2.25rem 0;
+    }
+
+    .recbk-hero {
+        padding-bottom: 3.5rem;
+    }
+
+    .recbk-intro {
+        margin-top: -2.5rem;
+    }
+
+    .recbk-intro__card {
+        padding: 1.5rem 1.25rem 1.65rem;
+    }
+
+    .recbk-platforms__media {
+        padding: 1rem;
+    }
+
+    .recbk-challenge {
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    .recbk-why__grid,
+    .recbk-benefits__lists {
+        grid-template-columns: 1fr;
+    }
+
+    .recbk-btn {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .recbk-cta-banner__inner,
+    .recbk-platforms__copy,
+    .recbk-pricing {
+        width: 100%;
+    }
+
+    .recbk-testimonials__carousel {
+        grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+        gap: 0.5rem;
+    }
+
+    .recbk-hero__form .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}

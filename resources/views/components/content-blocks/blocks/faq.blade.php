@@ -10,7 +10,7 @@
             @foreach ($items as $item)
                 <details>
                     <summary>{{ $item['question'] }}</summary>
-                    <div>{!! str($item['answer'])->sanitizeHtml() !!}</div>
+                    <div>{!! \App\Support\Html\SafeHtml::sanitizeForRender($item['answer'] ?? '') !!}</div>
                 </details>
             @endforeach
         </div>

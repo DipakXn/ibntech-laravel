@@ -1,10 +1,16 @@
-@php($image = $model?->contentBlockMedia($data['block_id'] ?? '')->first())
+@php
+    $image = $model?->contentBlockMedia($data['block_id'] ?? '')->first();
+    $src = $image?->getUrl()
+        ?: (filled($data['url'] ?? null) && \App\Support\Html\HtmlToBlocks::isSafeContentUrl((string) $data['url'])
+            ? $data['url']
+            : null);
+@endphp
 
-@if ($image)
+@if ($src)
     <figure class="content-block content-block--image">
         <img
-            src="{{ $image->getUrl() }}"
-            alt="{{ $data['alt'] ?? $image->getAttribute('name') }}"
+            src="{{ $src }}"
+            alt="{{ $data['alt'] ?? $image?->getAttribute('name') }}"
             loading="lazy"
         >
 
@@ -13,4 +19,3 @@
         @endif
     </figure>
 @endif
-

@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <x-content-additional-assets :model="$blog" />
     <article class="blog-detail">
         <div class="site-shell blog-detail__layout">
             <div class="blog-detail__main">
+                @php($displayCategory = $blog->category?->root())
                 @include('blog.partials.breadcrumb', [
                     'items' => array_values(array_filter([
                         ['label' => 'Home', 'url' => route('home')],
                         ['label' => 'Blog', 'url' => route('blog.index')],
-                        $blog->category
-                            ? ['label' => $blog->category->name, 'url' => route('blog.category', $blog->category->slug)]
+                        $displayCategory
+                            ? ['label' => $displayCategory->name, 'url' => route('blog.category', $displayCategory->slug)]
                             : null,
                         ['label' => $blog->title, 'url' => route('blog.show', $blog->slug)],
                     ])),
@@ -18,9 +20,9 @@
                 <h1>{{ $blog->title }}</h1>
 
                 <div class="blog-detail__meta">
-                    <span><i class="fa-solid fa-tag" aria-hidden="true"></i> {{ $blog->category?->name ?? 'General' }}</span>
+                    <span><i class="fa-solid fa-tag" aria-hidden="true"></i> {{ $displayCategory?->name ?? 'General' }}</span>
                     <span><i class="fa-regular fa-user" aria-hidden="true"></i> By IBN Technologies</span>
-                    <span><i class="fa-solid fa-calendar" aria-hidden="true"></i> {{ $blog->created_at->format('F d, Y') }}</span>
+                    <span><i class="fa-solid fa-calendar" aria-hidden="true"></i> {{ $blog->publishedAt()?->format('F d, Y') }}</span>
                     <span><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ $blog->estimatedReadTime() }} min read</span>
                 </div>
 

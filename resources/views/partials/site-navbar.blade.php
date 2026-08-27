@@ -966,7 +966,7 @@
                   <div>Whitepapers &amp; Reports</div>
                 </a></li>
 
-              <li><a href="{{ route('press-releases.index') }}">
+              <li><a href="{{ route('pressrelease.index') }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">

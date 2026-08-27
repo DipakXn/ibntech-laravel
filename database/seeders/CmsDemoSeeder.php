@@ -99,7 +99,7 @@ class CmsDemoSeeder extends Seeder
             ['slug' => 'engineering', 'name' => 'Engineering'],
         ])->mapWithKeys(function (array $category): array {
             $model = Category::query()->updateOrCreate(
-                ['slug' => $category['slug'], 'module' => \App\Models\Category::MODULE_BLOG],
+                ['slug' => $category['slug'], 'module' => Category::MODULE_BLOG],
                 ['name' => $category['name']]
             );
 
@@ -187,6 +187,12 @@ class CmsDemoSeeder extends Seeder
                 ]
             );
 
+            if ($blog->published_at === null) {
+                $blog->forceFill([
+                    'published_at' => $blog->created_at ?? now(),
+                ])->save();
+            }
+
             $this->syncSeoMeta($blog, $blogData['seo']);
         }
 
@@ -222,7 +228,7 @@ class CmsDemoSeeder extends Seeder
                 'slug' => 'multi-brand-cms-consolidation',
                 'template' => 'default',
                 'excerpt' => 'A draft record for testing moderation and status filters in Filament.',
-                'content' => "This draft entry exists mainly to validate admin filters, counts, and SEO data persistence for unpublished case studies.",
+                'content' => 'This draft entry exists mainly to validate admin filters, counts, and SEO data persistence for unpublished case studies.',
                 'featured_image' => null,
                 'status' => 'draft',
                 'seo' => [
@@ -280,7 +286,7 @@ class CmsDemoSeeder extends Seeder
                 'slug' => 'editorial-workflow-blueprint',
                 'template' => 'default',
                 'excerpt' => 'A draft ebook used to validate unpublished content behavior in the admin.',
-                'content' => "This draft ebook lets you test status filters, dashboard counts, and SEO saving in the ebook admin area.",
+                'content' => 'This draft ebook lets you test status filters, dashboard counts, and SEO saving in the ebook admin area.',
                 'featured_image' => null,
                 'status' => 'draft',
                 'seo' => [
@@ -338,7 +344,7 @@ class CmsDemoSeeder extends Seeder
                 'slug' => 'quarterly-operations-update',
                 'template' => 'default',
                 'excerpt' => 'A draft press release retained for testing unpublished content behavior in Filament.',
-                'content' => "This draft record validates status filters, dashboard counts, and SEO persistence for press releases before publication.",
+                'content' => 'This draft record validates status filters, dashboard counts, and SEO persistence for press releases before publication.',
                 'featured_image' => null,
                 'status' => 'draft',
                 'seo' => [
@@ -396,7 +402,7 @@ class CmsDemoSeeder extends Seeder
                 'slug' => 'operational-resilience-assessment-workbook',
                 'template' => 'default',
                 'excerpt' => 'A draft white paper retained for testing unpublished content behavior in Filament.',
-                'content' => "This draft record validates status filters, dashboard counts, and SEO persistence for white papers before publication.",
+                'content' => 'This draft record validates status filters, dashboard counts, and SEO persistence for white papers before publication.',
                 'featured_image' => null,
                 'status' => 'draft',
                 'seo' => [

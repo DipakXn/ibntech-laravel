@@ -36,12 +36,16 @@
         <label class="sr-only" for="newsletter-industry">Select Industry</label>
         <select id="newsletter-industry" wire:model="industry">
             <option value="">Select Industry</option>
-            <option value="Cybersecurity">Cybersecurity</option>
-            <option value="Cloud Services">Cloud Services</option>
-            <option value="Finance and Accounting">Finance and Accounting</option>
-            <option value="Construction and Real Estate">Construction and Real Estate</option>
-            <option value="Healthcare">Healthcare</option>
+            <option value="Real Estate and Construction">Real Estate and Construction</option>
+            <option value="Travel and Hospitality">Travel and Hospitality</option>
+            <option value="E-commerce and Retail">E-commerce and Retail</option>
+            <option value="Legal">Legal</option>
             <option value="Manufacturing">Manufacturing</option>
+            <option value="Chemical & Energy">Chemical &amp; Energy</option>
+            <option value="Healthcare & Pharma">Healthcare &amp; Pharma</option>
+            <option value="BFSI">BFSI</option>
+            <option value="Logistics and Transportation">Logistics and Transportation</option>
+            <option value="Information & Communication Technology">Information &amp; Communication Technology</option>
             <option value="Other">Other</option>
         </select>
         @error('industry') <p class="contact-form__error">{{ $message }}</p> @enderror

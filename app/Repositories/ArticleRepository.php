@@ -3,18 +3,25 @@
 namespace App\Repositories;
 
 use App\Models\Article;
+use App\Pagination\PathPagePaginator;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 
 class ArticleRepository
 {
-    public function paginatePublished(int $perPage = 9): LengthAwarePaginator
+    public function paginatePublished(int $perPage = 9, int $page = 1, ?string $path = null): LengthAwarePaginator
     {
-        return Article::query()
+        $results = Article::query()
             ->published()
             ->with(['category', 'seoMeta'])
             ->latest()
-            ->paginate($perPage);
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        if ($path === null) {
+            return $results;
+        }
+
+        return PathPagePaginator::wrap($results, $path);
     }
 
     public function findPublishedBySlug(string $slug): ?Article

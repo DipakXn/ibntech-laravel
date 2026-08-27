@@ -37,11 +37,34 @@ class BlockContentTest extends TestCase
                     ],
                 ],
             ],
+            [
+                'type' => 'cta',
+                'data' => [
+                    'heading' => 'Talk to an expert',
+                    'description' => 'Book a strategy call.',
+                    'button_label' => 'Get started',
+                ],
+            ],
         ]);
 
         $this->assertStringContainsString('Launch plan', $plainText);
         $this->assertStringContainsString('Keep the migration structured.', $plainText);
         $this->assertStringContainsString('How long?', $plainText);
         $this->assertStringContainsString('Usually 6 weeks.', $plainText);
+        $this->assertStringContainsString('Talk to an expert', $plainText);
+        $this->assertStringContainsString('Get started', $plainText);
+    }
+
+    public function test_it_does_not_rewrite_existing_native_blocks_on_read(): void
+    {
+        $blocks = [
+            [
+                'type' => 'paragraph',
+                'data' => ['content' => '<p>Already saved.</p>'],
+            ],
+        ];
+
+        $this->assertSame($blocks, BlockContent::normalize($blocks));
+        $this->assertSame($blocks, json_decode((string) BlockContent::encode($blocks), true));
     }
 }

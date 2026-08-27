@@ -7,6 +7,7 @@ use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Helpers\TemplateHelper;
 use App\Models\Category;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -15,6 +16,7 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class EbookForm
 {
@@ -67,6 +69,10 @@ class EbookForm
                             ])
                             ->default('draft')
                             ->required(),
+                        DateTimePicker::make('published_at')
+                            ->label('Published Date')
+                            ->seconds(false)
+                            ->helperText('Public display and listing date. Leave empty for drafts. Laravel created_at is not changed.'),
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')
@@ -100,7 +106,7 @@ class EbookForm
                 ->required()
                 ->maxLength(255)
                 ->rules([
-                    fn () => \Illuminate\Validation\Rule::unique(Category::class, 'slug')
+                    fn () => Rule::unique(Category::class, 'slug')
                         ->where('module', Category::MODULE_EBOOK),
                 ]),
             Select::make('parent_id')

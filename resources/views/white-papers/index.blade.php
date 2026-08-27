@@ -30,8 +30,8 @@
                 @endforelse
             </div>
 
-            <div style="margin-top: 2rem;">
-                {{ $whitePapers->links() }}
+            <div class="blog-pagination">
+                {{ $whitePapers->onEachSide(1)->links('blog.partials.pagination', ['label' => 'White papers pagination']) }}
             </div>
         </div>
     </section>

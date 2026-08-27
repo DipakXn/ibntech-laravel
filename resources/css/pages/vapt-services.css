@@ -18,11 +18,38 @@
 
 .vapt-page .section-block--soft{background:#f4f6fb}
 
-.vapt-accent{color:var(--site-green)}.vapt-hero{position:relative;overflow:visible;background-color:#141b4d;background-image:linear-gradient(105deg,#101646eb,#142460b8 42%,#18346e59 68%,#18346e2e),url(/images/vapt-hero-img.webp);background-position:center center,right center;background-repeat:no-repeat,no-repeat;background-size:cover,cover;color:#fff;padding-bottom:3.5rem}
+.vapt-accent{color:var(--site-green)}
 
-.vapt-hero::before{content:none}
+.vapt-hero{
+    position:relative;
+    overflow:visible;
+    background-color:#141b4d;
+    color:#fff;
+    padding-bottom:3.5rem;
+}
 
-.vapt-hero__inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:2.25rem;align-items:start;padding:3.75rem 0 2.25rem}
+.vapt-hero__bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:right center;
+    pointer-events:none;
+    user-select:none;
+}
+
+.vapt-hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:rgba(30,38,110,.84);
+    pointer-events:none;
+}
+
+.vapt-hero__inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:2.25rem;align-items:start;padding:3.75rem 0 2.25rem}
 
 .vapt-hero__copy h1{font-size:clamp(2rem,3.6vw,2.85rem);line-height:1.15;font-weight:700;}
 
@@ -53,6 +80,12 @@
 .vapt-hero__form .contact-form{gap:.7rem}
 
 .vapt-hero__form .contact-form__field input,.vapt-hero__form .contact-form__field select,.vapt-hero__form .contact-form__field textarea,.vapt-hero__form .phone-input-field .iti__tel-input{border:1px solid rgba(226,232,240,.85)!important;border-radius:.45rem!important;background:#fff!important;color:#172033!important}
+
+.vapt-hero__form .contact-form__field input,.vapt-hero__form .contact-form__field select,.vapt-hero__form .phone-input-field .iti__tel-input{min-height:2.6rem;height:2.6rem;padding-top:.35rem!important;padding-bottom:.35rem!important}
+
+.vapt-hero__form .contact-form__field textarea{min-height:4.3rem;height:4.3rem;padding-top:.4rem!important;padding-bottom:.4rem!important}
+
+.vapt-hero__form .phone-input-field .iti,.vapt-hero__form .phone-input-field .iti__selected-country{height:2.6rem}
 
 .vapt-hero__form .phone-input-field .iti__selected-dial-code,.vapt-hero__form .phone-input-field .iti__selected-country-primary,.vapt-hero__form .phone-input-field .iti__selected-country{color:#172033!important}
 
@@ -318,9 +351,15 @@
 
 .vapt-hero__stat,.vapt-hero__stat:not(:last-child){border-right:0;margin-right:0;padding-right:0}
 
-.vapt-hero__copy h1{max-width:none}}
+.vapt-hero__copy h1{max-width:none}
+
+.vapt-hero__bg{object-position:center center}}
 
 @media (max-width: 720px){.vapt-hero{padding-bottom:3.5rem}
+
+.vapt-hero__bg{object-position:70% center}
+
+.vapt-hero::after{background:rgba(30,38,110,.84)}
 
 .vapt-hero__inner{padding:2.75rem 0 1.5rem}
 

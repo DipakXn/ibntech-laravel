@@ -23,17 +23,17 @@
                         @endif
                         <p class="meta-chip">Article</p>
                         <h3><a href="{{ route('articles.show', $article->slug) }}">{{ $article->title }}</a></h3>
-                        <p style="margin-top: 0.8rem;">
+                        <!-- <p style="margin-top: 0.8rem;">
                             {{ $article->excerpt ?: \App\Support\BlockContent::summary($article->content) }}
-                        </p>
+                        </p> -->
                     </article>
                 @empty
                     <p class="card-panel" style="grid-column: 1 / -1;">No published articles found.</p>
                 @endforelse
             </div>
 
-            <div style="margin-top: 2rem;">
-                {{ $articles->links() }}
+            <div class="blog-pagination">
+                {{ $articles->onEachSide(1)->links('blog.partials.pagination', ['label' => 'Articles pagination']) }}
             </div>
         </div>
     </section>

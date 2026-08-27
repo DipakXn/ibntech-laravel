@@ -16,6 +16,10 @@ const landingPageCssEntries = readdirSync(join('resources', 'css', 'landing-page
     .filter((file) => file.endsWith('.css'))
     .map((file) => `resources/css/landing-pages/${file}`);
 
+const newsletterCssEntries = readdirSync(join('resources', 'css', 'newsletters'))
+    .filter((file) => file.endsWith('.css') && file !== 'footer.css')
+    .map((file) => `resources/css/newsletters/${file}`);
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -26,6 +30,7 @@ export default defineConfig({
                 ...pageCssEntries,
                 ...industryCssEntries,
                 ...landingPageCssEntries,
+                ...newsletterCssEntries,
             ],
             refresh: true,
         }),

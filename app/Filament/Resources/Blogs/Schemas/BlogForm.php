@@ -2,11 +2,12 @@
 
 namespace App\Filament\Resources\Blogs\Schemas;
 
-use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Schemas\ContentBuilder;
 use App\Filament\Schemas\SeoMetaSchema;
+use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Helpers\TemplateHelper;
 use App\Models\Category;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -14,6 +15,7 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class BlogForm
 {
@@ -63,6 +65,11 @@ class BlogForm
                             ])
                             ->default('published')
                             ->required(),
+                        DateTimePicker::make('published_at')
+                            ->label('Publish date')
+                            ->seconds(false)
+                            ->default(now())
+                            ->helperText('Public display and listing date. WordPress imports store the original publish date here. Laravel created_at is not changed.'),
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')
@@ -91,7 +98,7 @@ class BlogForm
                 ->required()
                 ->maxLength(255)
                 ->rules([
-                    fn () => \Illuminate\Validation\Rule::unique(Category::class, 'slug')
+                    fn () => Rule::unique(Category::class, 'slug')
                         ->where('module', Category::MODULE_BLOG),
                 ]),
             Select::make('parent_id')

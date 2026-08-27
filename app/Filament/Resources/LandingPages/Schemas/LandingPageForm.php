@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\LandingPages\Schemas;
 
-use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Schemas\SeoMetaSchema;
+use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Helpers\TemplateHelper;
 use App\Models\LandingPage;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -61,6 +62,10 @@ class LandingPageForm
                             ])
                             ->default('draft')
                             ->required(),
+                        DateTimePicker::make('published_at')
+                            ->label('Published Date')
+                            ->seconds(false)
+                            ->helperText('Public display and listing date. Leave empty for drafts. Laravel created_at is not changed.'),
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')

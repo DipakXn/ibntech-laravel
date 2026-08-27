@@ -10,11 +10,14 @@
     <section class="blog-page blog-page--category">
         <div class="site-shell">
             @include('blog.partials.breadcrumb', [
-                'items' => [
+                'items' => array_values(array_filter([
                     ['label' => 'Home', 'url' => route('home')],
                     ['label' => 'Blog', 'url' => route('blog.index')],
                     ['label' => $category->name, 'url' => route('blog.category', $category->slug)],
-                ],
+                    $blogs->currentPage() > 1
+                        ? ['label' => 'Page '.$blogs->currentPage(), 'url' => $blogs->url($blogs->currentPage())]
+                        : null,
+                ])),
             ])
 
             <div class="blog-post-grid">
@@ -26,7 +29,7 @@
             </div>
 
             <div class="blog-pagination">
-                {{ $blogs->onEachSide(1)->links('blog.partials.pagination') }}
+                {{ $blogs->onEachSide(1)->links('blog.partials.pagination', ['label' => 'Blog category pagination']) }}
             </div>
         </div>
     </section>

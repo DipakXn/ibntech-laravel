@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasAdditionalAssets;
 use App\Models\Concerns\HasBlockContent;
+use App\Models\Concerns\HasPublishedAt;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +15,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Ebook extends Model implements HasMedia
 {
-    use HasBlockContent;
+    use HasAdditionalAssets;
+    use HasBlockContent {
+        HasBlockContent::casts as blockContentCasts;
+    }
+    use HasPublishedAt;
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -22,10 +28,20 @@ class Ebook extends Model implements HasMedia
         'template',
         'excerpt',
         'content',
+        'additional_css',
+        'additional_js',
         'featured_image',
         'category_id',
         'status',
+        'published_at',
     ];
+
+    protected function casts(): array
+    {
+        return array_merge($this->blockContentCasts(), [
+            'published_at' => 'datetime',
+        ]);
+    }
 
     public function category(): BelongsTo
     {
@@ -40,11 +56,6 @@ class Ebook extends Model implements HasMedia
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('status', 'published');
-    }
-
-    public function scopeLatest(Builder $query): Builder
-    {
-        return $query->latest('created_at');
     }
 
     public function registerMediaCollections(): void

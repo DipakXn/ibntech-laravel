@@ -29,23 +29,43 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/category/{slug}/page/{page}', [BlogController::class, 'categoryPage'])
+    ->where('page', '[1-9][0-9]*')
+    ->name('blog.category.page');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/page/{page}', [ArticleController::class, 'page'])
+    ->where('page', '[1-9][0-9]*')
+    ->name('articles.page');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies.index');
+Route::get('/case-studies/page/{page}', [CaseStudyController::class, 'page'])
+    ->where('page', '[1-9][0-9]*')
+    ->name('case-studies.page');
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-studies.show');
 Route::get('/case-studies/{slug}/download', [CaseStudyController::class, 'download'])->name('case-studies.download');
 Route::get('/ebooks', [EbookController::class, 'index'])->name('ebooks.index');
+Route::get('/ebooks/page/{page}', [EbookController::class, 'page'])
+    ->where('page', '[1-9][0-9]*')
+    ->name('ebooks.page');
 Route::get('/ebooks/{slug}', [EbookController::class, 'show'])->name('ebooks.show');
 Route::get('/ebooks/{slug}/download', [EbookController::class, 'download'])->name('ebooks.download');
-Route::get('/press-releases', [PressReleaseController::class, 'index'])->name('press-releases.index');
-Route::get('/press-releases/{slug}', [PressReleaseController::class, 'show'])->name('press-releases.show');
+Route::get('/pressrelease', [PressReleaseController::class, 'index'])->name('pressrelease.index');
+Route::get('/pressrelease/page/{page}', [PressReleaseController::class, 'page'])
+    ->where('page', '[1-9][0-9]*')
+    ->name('pressrelease.page');
+Route::get('/pressrelease/{slug}', [PressReleaseController::class, 'show'])
+    ->where('slug', '^(?!page$).+')
+    ->name('pressrelease.show');
 Route::get('/white-papers', [WhitePaperController::class, 'index'])->name('white-papers.index');
+Route::get('/white-papers/page/{page}', [WhitePaperController::class, 'page'])
+    ->where('page', '[1-9][0-9]*')
+    ->name('white-papers.page');
 Route::get('/white-papers/{slug}', [WhitePaperController::class, 'show'])->name('white-papers.show');
 Route::get('/industry/{slug}', [IndustryController::class, 'show'])->name('industries.show');
 Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-pages.show');
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
 Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|industry$|lp$|newsletter$|press-releases$|white-papers$|livewire$|storage$|up$).+')
+    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|industry$|lp$|newsletter$|pressrelease$|press-releases$|white-papers$|livewire$|storage$|up$).+')
     ->name('page.show');

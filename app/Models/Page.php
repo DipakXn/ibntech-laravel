@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasPublishedAt;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -10,6 +11,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Page extends Model implements HasMedia
 {
+    use HasPublishedAt;
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -17,7 +19,15 @@ class Page extends Model implements HasMedia
         'slug',
         'template',
         'status',
+        'published_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+        ];
+    }
 
     public function seoMeta(): MorphOne
     {
@@ -27,11 +37,6 @@ class Page extends Model implements HasMedia
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('status', 'published');
-    }
-
-    public function scopeLatest(Builder $query): Builder
-    {
-        return $query->latest('created_at');
     }
 
     public function registerMediaCollections(): void

@@ -10,10 +10,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     public const MODULE_BLOG = 'blog';
+
     public const MODULE_CASE_STUDY = 'case_study';
+
     public const MODULE_EBOOK = 'ebook';
+
     public const MODULE_PRESS_RELEASE = 'press_release';
+
     public const MODULE_WHITE_PAPER = 'white_paper';
+
     public const MODULE_ARTICLE = 'article';
 
     protected $fillable = [
@@ -63,6 +68,28 @@ class Category extends Model
     public function scopeRoots(Builder $query): Builder
     {
         return $query->whereNull('parent_id');
+    }
+
+    /**
+     * Walk up to the top-level (parent) category. Roots return themselves.
+     */
+    public function root(): self
+    {
+        $category = $this;
+        $guard = 0;
+
+        while ($category->parent_id && $guard < 10) {
+            $category->loadMissing('parent');
+
+            if (! $category->parent instanceof self) {
+                break;
+            }
+
+            $category = $category->parent;
+            $guard++;
+        }
+
+        return $category;
     }
 
     public function selfAndDescendantIds(): array

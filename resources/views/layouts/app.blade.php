@@ -23,12 +23,27 @@
     <meta property="og:url" content="{{ $seo['canonical_url'] ?? url()->current() }}">
     <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
     <meta property="og:site_name" content="{{ $seo['og_site_name'] ?? $siteName }}">
-    <meta property="og:locale" content="{{ $seo['og_locale'] ?? str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:locale" content="{{ $seo['og_locale'] ?? 'en_US' }}">
     @if(!empty($seo['og_image']))
         <meta property="og:image" content="{{ $seo['og_image'] }}">
+        @if(!empty($seo['og_image_secure_url']))
+            <meta property="og:image:secure_url" content="{{ $seo['og_image_secure_url'] }}">
+        @endif
+        @if(!empty($seo['og_image_width']))
+            <meta property="og:image:width" content="{{ $seo['og_image_width'] }}">
+        @endif
+        @if(!empty($seo['og_image_height']))
+            <meta property="og:image:height" content="{{ $seo['og_image_height'] }}">
+        @endif
+        @if(!empty($seo['og_image_type']))
+            <meta property="og:image:type" content="{{ $seo['og_image_type'] }}">
+        @endif
     @endif
     @if(!empty($seo['og_image_alt']))
         <meta property="og:image:alt" content="{{ $seo['og_image_alt'] }}">
+    @endif
+    @if(!empty($seo['og_updated_time']))
+        <meta property="og:updated_time" content="{{ $seo['og_updated_time'] }}">
     @endif
 
     {{-- Twitter cards --}}
@@ -43,12 +58,19 @@
     @endif
     @if(!empty($seo['twitter_image']))
         <meta name="twitter:image" content="{{ $seo['twitter_image'] }}">
+        @if(!empty($seo['twitter_image_alt']))
+            <meta name="twitter:image:alt" content="{{ $seo['twitter_image_alt'] }}">
+        @endif
     @endif
     @if(!empty($seo['twitter_creator']))
         <meta name="twitter:creator" content="{{ $seo['twitter_creator'] }}">
     @endif
     @if(!empty($seo['twitter_site']))
         <meta name="twitter:site" content="{{ $seo['twitter_site'] }}">
+    @endif
+    @if(!empty($seo['twitter_label1']) && !empty($seo['twitter_data1']))
+        <meta name="twitter:label1" content="{{ $seo['twitter_label1'] }}">
+        <meta name="twitter:data1" content="{{ $seo['twitter_data1'] }}">
     @endif
 
     <link rel="canonical" href="{{ $seo['canonical_url'] ?? url()->current() }}">
@@ -60,6 +82,9 @@
     @endif
 
     {{-- Article metadata --}}
+    @if(!empty($seo['article_publisher']))
+        <meta property="article:publisher" content="{{ $seo['article_publisher'] }}">
+    @endif
     @if(!empty($seo['article_author']))
         <meta property="article:author" content="{{ $seo['article_author'] }}">
     @endif
@@ -69,6 +94,12 @@
     @if(!empty($seo['modified_at']))
         <meta property="article:modified_time" content="{{ $seo['modified_at'] }}">
     @endif
+    @if(!empty($seo['article_section']))
+        <meta property="article:section" content="{{ $seo['article_section'] }}">
+    @endif
+    @foreach(($seo['article_tags'] ?? []) as $articleTag)
+        <meta property="article:tag" content="{{ $articleTag }}">
+    @endforeach
 
     {{-- JSON-LD / Schema --}}
     @if(!empty($seo['json_ld']))
@@ -148,9 +179,14 @@
     <main>
         @yield('content')
     </main>
-    @include('layouts.footer')
+    @hasSection('footer')
+        @yield('footer')
+    @else
+        @include('layouts.footer')
+    @endif
     <livewire:contact-modal />
     @livewireScripts
+    @stack('scripts')
 
     @if(!empty($websiteSettings?->custom_body_end_code))
         {!! $websiteSettings->custom_body_end_code !!}

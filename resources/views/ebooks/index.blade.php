@@ -30,8 +30,8 @@
                 @endforelse
             </div>
 
-            <div style="margin-top: 2rem;">
-                {{ $ebooks->links() }}
+            <div class="blog-pagination">
+                {{ $ebooks->onEachSide(1)->links('blog.partials.pagination', ['label' => 'eBooks pagination']) }}
             </div>
         </div>
     </section>

@@ -1485,6 +1485,11 @@ class WordPressPagesSeeder extends Seeder
                 'meta_description' => 'IBN Tech offers specialized Business Process Outsourcing Services customized to streamline your operations. Maximize efficiency and profitability today!',
                 'canonical_url' => 'https://www.ibntech.com/bpo-services/',
             ],
+            'sales-order-processing' => [
+                'meta_title' => 'Efficient Sales Order Process Solutions | IBN technologies',
+                'meta_description' => 'Enhance your sales order process with our automation solutions. Improve accuracy, speed up order fulfillment, and drive customer satisfaction effortlessly.',
+                'canonical_url' => 'https://www.ibntech.com/sales-order-processing/',
+            ],
             'kpo-services' => [
                 'meta_title' => 'Improve Efficiency with IBN\'s Outsourced KPO Solutions',
                 'meta_description' => 'Outsourced KPO solutions to IBN Technologies and boost efficiency with expert support in bookkeeping, analytics, and process optimization. Contact us today!',
@@ -1614,6 +1619,11 @@ class WordPressPagesSeeder extends Seeder
                 'meta_title' => 'Outsource Treasury Management Services - IBN Technologies',
                 'meta_description' => 'IBN\'s outsourced treasury services can help you with payments, liquidity management, receivables, tax management, fee reconciliation, and more.',
                 'canonical_url' => 'https://www.ibntech.com/treasury-management-services-outsourcing/',
+            ],
+            'travel-bpo-outsourcing-services' => [
+                'meta_title' => 'Travel BPO services | IBN Technologies',
+                'meta_description' => 'Maximize productivity with Ibn Technologies\' Travel Business Process Outsourcing Services. Benefit from our experts and innovative solutions.',
+                'canonical_url' => 'https://www.ibntech.com/travel-bpo-outsourcing-services/',
             ],
             'faq' => [
                 'meta_title' => 'Outsourcing FAQs Answered | IBN Technologies',
@@ -1796,6 +1806,11 @@ class WordPressPagesSeeder extends Seeder
                 'meta_description' => 'IBN is a leading Project Management Service providing firm that helps Businesses to Manage Basic Resources, Capacity Management.',
                 'canonical_url' => 'https://www.ibntech.com/project-management/',
             ],
+            'sales-marketing-and-service-management' => [
+                'meta_title' => 'Sales & Marketing, Service Management at IBN Technologies',
+                'meta_description' => 'IBN Tech provides Customer centric Sales & Marketing and Service Management Solutions. Also Analyses the present stand of every situation in the Market.',
+                'canonical_url' => 'https://www.ibntech.com/sales-marketing-and-service-management/',
+            ],
             'human-resources-management-hrm' => [
                 'meta_title' => 'Human Resources Management -Organize Employee Information | IBN',
                 'meta_description' => 'We at IBN Tech provides Human Resources Management Services to Efficiently Manage your Company’s Man power. I',
@@ -1840,6 +1855,16 @@ class WordPressPagesSeeder extends Seeder
                 'meta_title' => 'Empowering Business Processes with AI, ML, and RPA-Driven Cloud Automation',
                 'meta_description' => 'Discover outsourcing accounting and bookkeeping services with IBN. We streamline your finances and provide accurate, timely insights to grow your business.',
                 'canonical_url' => 'https://www.ibntech.com/empowering-business-processes-with-ai-ml-and-rpa-driven-cloud-automation/',
+            ],
+            'salesforce' => [
+                'meta_title' => 'Salesforce Consulting Services | IBN Tech',
+                'meta_description' => 'Unlock your business potential with expert Salesforce Consulting Services. Visit IBN Tech for tailored solutions. Maximize efficiency and growth.',
+                'canonical_url' => 'https://www.ibntech.com/salesforce/',
+            ],
+            'security-testing' => [
+                'meta_title' => 'Security Testing Services | IBN Technologies',
+                'meta_description' => 'Enhance your cybersecurity with top-notch security testing services. Trust our experts to safeguard your systems. Contact us now!',
+                'canonical_url' => 'https://www.ibntech.com/security-testing/',
             ],
             'thank-you-brochures-download' => [
                 'meta_title' => 'Thank You Brochures Download - IBN Technologies',
@@ -1945,6 +1970,41 @@ class WordPressPagesSeeder extends Seeder
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
+            ],
+            'sharepoint' => [
+                'meta_title' => 'SharePoint Consulting Services - IBNTECH',
+                'meta_description' => 'Unlock the full potential of your SharePoint environment with IBNTECH’s expert consulting services. For more information, Contact us today!',
+                'canonical_url' => 'https://www.ibntech.com/sharepoint/',
+            ],
+            'supply-chain-management-manufacturing' => [
+                'meta_title' => 'Supply Chain Management Manufacturing Services | IBN',
+                'meta_description' => 'IBN offers supply chain management manufacturing services—covering sales, tax, inventory, warehouse, payables, and capacity planning. Boost efficiency today.',
+                'canonical_url' => 'https://www.ibntech.com/supply-chain-management-manufacturing/',
+            ],
+            'tech-support-services' => [
+                'meta_title' => 'Top Outsourced Technical Support Services | IBN Technologies',
+                'meta_description' => 'Discover top-notch outsourced technical support services by IBN Technologies, ensuring efficiency and reliability for your business needs.',
+                'canonical_url' => 'https://www.ibntech.com/tech-support-services/',
+            ],
+            'technology-solutions' => [
+                'meta_title' => 'Technology Solutions | Business Intelligence Services',
+                'meta_description' => 'IBN offers technology solutions including business intelligence and data warehousing services, business rule management system to run the business smoothly',
+                'canonical_url' => 'https://www.ibntech.com/technology-solutions/',
+            ],
+            'test-automation' => [
+                'meta_title' => 'Test Automation Services Streamline Testing Processes with Precision | IBN',
+                'meta_description' => 'Streamline testing processes and enhance efficiency with our test automation services. Experience faster releases and higher quality. Get in touch today!',
+                'canonical_url' => 'https://www.ibntech.com/test-automation/',
+            ],
+            'transport-and-logistics' => [
+                'meta_title' => 'Transport & Logistics Services | IBN Tech',
+                'meta_description' => 'Partner with IBNTech for unparalleled Transport and Logistics Services. Experience seamless operations and optimized supply chains now.',
+                'canonical_url' => 'https://www.ibntech.com/transport-and-logistics/',
+            ],
+            'virtual-dba-services' => [
+                'meta_title' => 'Virtual DBA Services | IBN Technologies',
+                'meta_description' => 'Discover reliable Virtual DBA Services by IBN Technologies, ensuring expert database management, security, and performance optimization for your business.',
+                'canonical_url' => 'https://www.ibntech.com/virtual-dba-services/',
             ],
         ];
 

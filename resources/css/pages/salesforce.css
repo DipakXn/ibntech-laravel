@@ -1,3 +1,443 @@
 /* Salesforce page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
+ * Scoped under .sf-page
  */
+
+.sf-page {
+    font-family: inherit;
+    color: #1f2438;
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Section 1: Hero
+   ========================================================================== */
+.sf-hero {
+    background: linear-gradient(135deg, #1c2069 0%, #242978 100%);
+    padding: 64px 0 72px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.sf-hero__inner {
+    display: grid;
+    grid-template-columns: 1.35fr 0.85fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.sf-hero__content {
+    max-width: 680px;
+}
+
+.sf-hero__title {
+    font-size: clamp(1.9rem, 2.9vw, 2.65rem);
+    font-weight: 700;
+    line-height: 1.22;
+    color: #ffffff;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+}
+
+.sf-highlight {
+    color: #00b050;
+    font-weight: 700;
+}
+
+.sf-hero__subtitle {
+    font-size: clamp(1.3rem, 1.9vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+    color: #ffffff;
+    margin: 0 0 14px;
+}
+
+.sf-hero__tagline {
+    font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: #e4e7f8;
+    margin: 0 0 32px;
+}
+
+.sf-hero__cta {
+    display: flex;
+    align-items: center;
+}
+
+.sf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+    border: none;
+}
+
+.sf-btn--hero {
+    background: #28a745;
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 13px 32px;
+    box-shadow: 0 4px 14px rgba(40, 167, 69, 0.35);
+}
+
+.sf-btn--hero:hover {
+    background: #218838;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(40, 167, 69, 0.45);
+}
+
+.sf-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sf-hero__img {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+/* ==========================================================================
+   Section 2: Intro & Primary Services
+   ========================================================================== */
+.sf-intro {
+    padding: 60px 0 36px;
+}
+
+.sf-intro__text-wrap {
+    max-width: 1060px;
+    margin: 0 auto 36px;
+    text-align: center;
+}
+
+.sf-intro__lead {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #2b3346;
+    margin: 0;
+}
+
+.sf-badge-wrap {
+    text-align: center;
+    margin: 28px 0;
+}
+
+.sf-badge {
+    display: inline-block;
+    background: linear-gradient(180deg, #4eb851 0%, #2e9434 100%);
+    color: #ffffff;
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+    padding: 10px 48px;
+    border-radius: 6px;
+    box-shadow: 0 3px 12px rgba(46, 148, 52, 0.22);
+    margin: 0;
+    letter-spacing: 0.4px;
+}
+
+.sf-badge--scope {
+    text-transform: uppercase;
+}
+
+.sf-process-graphic {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.sf-process-graphic__img {
+    max-width: 1100px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* ==========================================================================
+   Section 3: Service Scope
+   ========================================================================== */
+.sf-scope {
+    padding: 24px 0 54px;
+}
+
+.sf-scope__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1080px;
+    margin: 32px auto 0;
+}
+
+.sf-scope__card {
+    background: #ffffff;
+    border: 1.5px solid #28a745;
+    border-radius: 6px;
+    padding: 16px 20px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+}
+
+.sf-scope__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.15);
+    border-color: #218838;
+}
+
+.sf-scope__card-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a2238;
+    line-height: 1.35;
+}
+
+/* ==========================================================================
+   Section 4: Detailed Offerings
+   ========================================================================== */
+.sf-offerings {
+    padding: 44px 0 52px;
+}
+
+.sf-offerings__block {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
+}
+
+.sf-offerings__block:last-child {
+    margin-bottom: 0;
+}
+
+.sf-offerings__block--media-right {
+    grid-template-columns: 1.25fr 1fr;
+}
+
+.sf-offerings__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sf-offerings__img {
+    max-width: 480px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    object-fit: cover;
+}
+
+.sf-offerings__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sf-offerings__item {
+    margin-bottom: 16px;
+}
+
+.sf-offerings__item:last-child {
+    margin-bottom: 0;
+}
+
+.sf-offerings__item-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #374151;
+    margin: 0;
+}
+
+.sf-offerings__item-text strong {
+    color: #111827;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   Section 5: Distinctive Approach & Benefits
+   ========================================================================== */
+.sf-benefits {
+    padding: 44px 0 52px;
+}
+
+.sf-benefits__block {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
+}
+
+.sf-benefits__block:last-child {
+    margin-bottom: 0;
+}
+
+.sf-benefits__block--media-right {
+    grid-template-columns: 1.35fr 1fr;
+}
+
+.sf-benefits__graphic-box {
+    background-color: #38a548;
+    border-radius: 8px;
+    padding: 36px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(56, 165, 72, 0.18);
+    min-height: 280px;
+}
+
+.sf-benefits__graphic-img {
+    max-width: 360px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.sf-benefits__heading {
+    color: #28a745;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 20px;
+}
+
+.sf-benefits__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sf-benefits__item {
+    margin-bottom: 14px;
+}
+
+.sf-benefits__item:last-child {
+    margin-bottom: 0;
+}
+
+.sf-benefits__item-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #374151;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Section 6: Closing Highlight
+   ========================================================================== */
+.sf-highlight-section {
+    background-color: #fef8d8;
+    padding: 48px 0;
+    margin-top: 48px;
+}
+
+.sf-highlight-box {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 16px;
+}
+
+.sf-highlight-box__text {
+    font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+    font-weight: 700;
+    line-height: 1.8;
+    color: #111827;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 992px) {
+    .sf-hero__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .sf-hero__content {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .sf-hero__cta {
+        justify-content: center;
+    }
+
+    .sf-scope__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sf-offerings__block,
+    .sf-offerings__block--media-right,
+    .sf-benefits__block,
+    .sf-benefits__block--media-right {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .sf-offerings__block--media-right .sf-offerings__media {
+        order: -1;
+    }
+
+    .sf-benefits__block--media-right .sf-benefits__graphic-box {
+        order: -1;
+    }
+
+    .sf-benefits__heading {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .sf-hero {
+        padding: 44px 0 52px;
+    }
+
+    .sf-intro {
+        padding: 40px 0 24px;
+    }
+
+    .sf-scope {
+        padding: 16px 0 40px;
+    }
+
+    .sf-scope__grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .sf-offerings,
+    .sf-benefits {
+        padding: 32px 0;
+    }
+
+    .sf-offerings__block,
+    .sf-benefits__block {
+        margin-bottom: 40px;
+    }
+
+    .sf-highlight-section {
+        padding: 36px 0;
+        margin-top: 32px;
+    }
+}

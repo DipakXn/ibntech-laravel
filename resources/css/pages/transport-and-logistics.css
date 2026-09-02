@@ -1,3 +1,793 @@
 /* Transport and Logistics Services page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
+ * Matches original design system and WordPress reference
  */
+
+.tls-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.tls-page {
+    --tls-navy: #2e2e80;
+    --tls-navy-deep: #1e266d;
+    --tls-green: #4caf50;
+    --tls-green-dark: #3d9140;
+    --tls-ink: #1f1d1d;
+    --tls-muted: #4a5568;
+    --tls-soft: #f4f6f8;
+    --tls-cream: #fffad3;
+    --tls-line: rgba(46, 46, 128, 0.12);
+    color: var(--tls-ink);
+    background: #fff;
+    font-family: inherit;
+}
+
+/* Buttons */
+.tls-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 0.35rem;
+    border: 1px solid transparent;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tls-btn:hover {
+    transform: translateY(-1px);
+}
+
+.tls-btn:focus-visible {
+    outline: 2px solid var(--tls-green);
+    outline-offset: 3px;
+}
+
+.tls-btn--navy {
+    background: var(--tls-navy-deep);
+    border-color: var(--tls-navy-deep);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(30, 38, 109, 0.18);
+}
+
+.tls-btn--navy:hover,
+.tls-btn--navy:focus-visible {
+    background: var(--tls-navy);
+    border-color: var(--tls-navy);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(30, 38, 109, 0.25);
+}
+
+.tls-btn--green {
+    background: var(--tls-green);
+    border-color: var(--tls-green);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.22);
+}
+
+.tls-btn--green:hover,
+.tls-btn--green:focus-visible {
+    background: var(--tls-green-dark);
+    border-color: var(--tls-green-dark);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(76, 175, 80, 0.3);
+}
+
+/* Sections General */
+.tls-section {
+    padding: 4.5rem 0;
+}
+
+.tls-section--intro {
+    padding: 4rem 0 3.5rem;
+}
+
+.tls-section--services {
+    padding: 2rem 0 4.5rem;
+}
+
+.tls-section--soft {
+    background: var(--tls-soft);
+}
+
+.tls-heading {
+    max-width: 52rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.tls-heading h2 {
+    margin: 0;
+    color: var(--tls-navy-deep);
+    font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tls-heading__sub {
+    margin: 0.5rem 0 0;
+    color: var(--tls-navy);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+/* Section 1: Hero */
+.tls-hero {
+    position: relative;
+    overflow: hidden;
+    background: #eef5f8;
+}
+
+.tls-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(79, 170, 245, 0.12), transparent 28%),
+        radial-gradient(circle at 85% 80%, rgba(76, 175, 80, 0.08), transparent 26%),
+        linear-gradient(rgba(46, 46, 128, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46, 46, 128, 0.035) 1px, transparent 1px);
+    background-size: auto, auto, 56px 56px, 56px 56px;
+    pointer-events: none;
+}
+
+.tls-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 3rem;
+    align-items: center;
+    padding: 4.5rem 0 4rem;
+}
+
+.tls-hero__copy {
+    max-width: 38rem;
+}
+
+.tls-hero__eyebrow {
+    margin: 0 0 0.85rem;
+    color: var(--tls-navy);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+}
+
+.tls-hero__copy h1 {
+    margin: 0;
+    color: var(--tls-navy-deep);
+    font-size: clamp(2rem, 3.8vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.tls-hero__lede {
+    margin: 1.15rem 0 0;
+    color: var(--tls-muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.7;
+    max-width: 35rem;
+}
+
+.tls-hero__actions {
+    margin-top: 2rem;
+}
+
+.tls-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tls-hero__media img {
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    display: block;
+}
+
+/* Section 2: Intro / Dynamic World */
+.tls-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 3.5rem;
+    align-items: center;
+    max-width: 68rem;
+    margin: 0 auto;
+}
+
+.tls-intro-grid__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tls-intro-grid__media img {
+    max-width: 17.5rem;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tls-intro-grid__copy p {
+    margin: 0;
+    color: var(--tls-muted);
+    font-size: 1.02rem;
+    line-height: 1.85;
+}
+
+/* Section 3: Services */
+.tls-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.tls-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.tls-split--flip .tls-split__copy {
+    order: 2;
+}
+
+.tls-split--flip .tls-split__media {
+    order: 1;
+}
+
+.tls-split__copy h3 {
+    margin: 0 0 1.25rem;
+    color: var(--tls-navy-deep);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tls-split__points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.75rem;
+}
+
+.tls-split__points p {
+    margin: 0;
+    color: var(--tls-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.tls-split__points strong {
+    color: var(--tls-ink);
+    font-weight: 700;
+}
+
+.tls-split__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tls-split__media img {
+    width: 100%;
+    max-width: 25rem;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(20, 30, 70, 0.08);
+    display: block;
+}
+
+/* Section 4: Stats */
+.tls-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.tls-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.75rem 1.25rem;
+    border-radius: 0.65rem;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(20, 30, 70, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tls-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(20, 30, 70, 0.1);
+}
+
+.tls-stat--light {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid var(--tls-green);
+}
+
+.tls-stat--light h3 {
+    color: var(--tls-navy-deep);
+}
+
+.tls-stat--light p {
+    color: var(--tls-muted);
+}
+
+.tls-stat--navy {
+    background: var(--tls-navy-deep);
+    border: 1px solid var(--tls-navy-deep);
+    color: #fff;
+}
+
+.tls-stat--navy h3 {
+    color: #fff;
+}
+
+.tls-stat--navy p {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.tls-stat h3 {
+    margin: 0 0 0.4rem;
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.tls-stat p {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Section 5: Mid CTA Banner */
+.tls-banner {
+    background: linear-gradient(135deg, #1e266d 0%, #2e2e80 100%);
+    padding: 3.5rem 0;
+    text-align: center;
+    color: #fff;
+}
+
+.tls-banner__inner {
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.tls-banner__inner h2 {
+    margin: 0 0 0.85rem;
+    color: #fff;
+    font-size: clamp(1.85rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.tls-banner__inner p {
+    margin: 0 0 1.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.tls-banner__action {
+    display: flex;
+    justify-content: center;
+}
+
+/* Section 6: Consultation / Form */
+.tls-consult {
+    background: #fff;
+    padding: 4.5rem 0;
+}
+
+.tls-consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+}
+
+.tls-consult__card {
+    background: var(--tls-navy-deep);
+    border: 3px solid #dfcf99;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(20, 30, 70, 0.15);
+}
+
+.tls-consult__header {
+    padding: 1.75rem 2rem 1.25rem;
+    text-align: center;
+    color: #fff;
+}
+
+.tls-consult__header h2 {
+    margin: 0 0 0.4rem;
+    color: #fff;
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tls-consult__header p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.tls-consult__body {
+    padding: 0 2rem 2rem;
+}
+
+.tls-consult__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tls-consult__media img {
+    width: 100%;
+    max-width: 32rem;
+    height: auto;
+    border-radius: 0.5rem;
+    display: block;
+}
+
+/* Livewire form customization inside tls-consult__body */
+.tls-consult__body form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.tls-consult__body input,
+.tls-consult__body select,
+.tls-consult__body textarea {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.35rem;
+    border: 1px solid #cbd5e1;
+    font-size: 0.88rem;
+    color: #1e293b;
+    background: #fff;
+}
+
+.tls-consult__body button[type="submit"] {
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--tls-green);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.tls-consult__body button[type="submit"]:hover {
+    background: var(--tls-green);
+}
+
+/* Section 7: Testimonials */
+.tls-testimonials {
+    background: var(--tls-cream);
+    padding: 4.5rem 0;
+}
+
+.tls-testimonials .tls-heading {
+    margin-bottom: 2.5rem;
+}
+
+.tls-testimonials__eyebrow {
+    margin: 0 0 0.35rem;
+    color: var(--tls-green-dark);
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.tls-testimonials .tls-heading h2 {
+    color: var(--tls-navy-deep);
+    font-size: clamp(1.85rem, 3vw, 2.4rem);
+    font-weight: 700;
+}
+
+.tls-testimonials__carousel {
+    position: relative;
+    max-width: 52rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.tls-testimonials__nav {
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--tls-navy-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.tls-testimonials__nav:hover {
+    transform: scale(1.15);
+}
+
+.tls-testimonials__nav svg {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--tls-navy-deep);
+}
+
+.tls-testimonials__viewport {
+    flex: 1;
+    min-height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tls-testimonial {
+    display: none;
+    margin: 0;
+    text-align: center;
+}
+
+.tls-testimonial.is-active {
+    display: block;
+    animation: tlsFadeIn 0.3s ease-in-out;
+}
+
+@keyframes tlsFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tls-testimonial p {
+    margin: 0 0 1rem;
+    color: #2d3748;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    font-style: normal;
+}
+
+.tls-testimonial cite {
+    display: block;
+    color: var(--tls-green-dark);
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Section 8: FAQ */
+.tls-faq-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.tls-faq-wrap__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tls-faq-wrap__media img {
+    width: 100%;
+    max-width: 24rem;
+    height: auto;
+    display: block;
+}
+
+.tls-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.tls-faq details {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tls-faq details[open] {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 14px rgba(20, 30, 70, 0.05);
+}
+
+.tls-faq summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.35rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--tls-navy-deep);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.tls-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.tls-faq summary:hover {
+    color: var(--tls-green-dark);
+}
+
+.tls-faq__icon {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tls-faq__icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: currentColor;
+}
+
+.tls-faq details .tls-faq__icon-open {
+    display: none;
+}
+
+.tls-faq details .tls-faq__icon-closed {
+    display: block;
+}
+
+.tls-faq details[open] .tls-faq__icon-open {
+    display: block;
+}
+
+.tls-faq details[open] .tls-faq__icon-closed {
+    display: none;
+}
+
+.tls-faq__content {
+    padding: 0 1.35rem 1.25rem;
+}
+
+.tls-faq__content p {
+    margin: 0;
+    color: var(--tls-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+    .tls-hero__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+
+    .tls-hero__copy {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .tls-hero__lede {
+        max-width: 100%;
+        margin: 1.15rem auto 0;
+    }
+
+    .tls-intro-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .tls-split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .tls-split--flip .tls-split__copy {
+        order: 1;
+    }
+
+    .tls-split--flip .tls-split__media {
+        order: 2;
+    }
+
+    .tls-split__media img {
+        max-width: 22rem;
+    }
+
+    .tls-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tls-consult__inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .tls-faq-wrap {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .tls-section {
+        padding: 3rem 0;
+    }
+
+    .tls-hero__inner {
+        padding: 3rem 0 2.5rem;
+    }
+
+    .tls-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .tls-heading {
+        margin-bottom: 2rem;
+    }
+
+    .tls-consult__card {
+        margin: 0 -0.5rem;
+    }
+
+    .tls-consult__header {
+        padding: 1.5rem 1.25rem 1rem;
+    }
+
+    .tls-consult__body {
+        padding: 0 1.25rem 1.5rem;
+    }
+}

@@ -1,3 +1,314 @@
-/* Supply Chain Management Manufacturing page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Supply Chain Management Manufacturing — matched to WordPress screenshot */
+
+.scmm-page {
+    --scmm-navy: #2e2e80;
+    --scmm-navy-deep: #141b4d;
+    --scmm-heading: #5b5fc7;
+    --scmm-ink: #1f1d1d;
+    --scmm-muted: #4a4a4a;
+    --scmm-cream: #fff4c2;
+    --scmm-cream-hover: #ffe99a;
+    --scmm-line: #e4e4e4;
+    --scmm-bar: #f3f3f3;
+    color: var(--scmm-ink);
+    background: #fff;
+}
+
+/* Hero Section */
+.scmm-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background-color: var(--scmm-navy-deep);
+}
+
+.scmm-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.scmm-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(16, 22, 70, 0.28) 0%,
+        rgba(16, 22, 70, 0.12) 42%,
+        rgba(16, 22, 70, 0) 68%
+    );
+    pointer-events: none;
+}
+
+.scmm-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    min-height: clamp(18.5rem, 38vw, 25rem);
+    padding: 3.75rem 0 3.5rem;
+}
+
+.scmm-hero__copy {
+    max-width: 38rem;
+}
+
+.scmm-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.2rem, 4.1vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-shadow: 0 2px 18px rgba(8, 12, 40, 0.28);
+}
+
+.scmm-hero__actions {
+    margin-top: 1.5rem;
+}
+
+.scmm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.scmm-btn--cream {
+    background: var(--scmm-cream);
+    color: var(--scmm-navy-deep);
+}
+
+.scmm-btn--cream:hover,
+.scmm-btn--cream:focus-visible {
+    background: var(--scmm-cream-hover);
+    color: var(--scmm-navy-deep);
+}
+
+.scmm-btn--cream:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* Content Sections */
+.scmm-content {
+    background: #fff;
+}
+
+.scmm-section {
+    padding: 3.25rem 0 1.25rem;
+    background: #fff;
+}
+
+.scmm-section--last {
+    padding-bottom: 4.5rem;
+}
+
+.scmm-heading {
+    margin: 0 0 1.6rem;
+    color: var(--scmm-heading);
+    font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+}
+
+/* Accordion — Elementor nested accordion look */
+.scmm-acc {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.scmm-acc details {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--scmm-line);
+    background: #fff;
+}
+
+.scmm-acc summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 0.9rem 1.05rem;
+    background: var(--scmm-bar);
+    color: var(--scmm-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.scmm-acc summary::-webkit-details-marker {
+    display: none;
+}
+
+.scmm-acc summary::marker {
+    content: '';
+}
+
+.scmm-acc__icon {
+    flex: 0 0 auto;
+    display: block;
+    width: 1.05rem;
+    height: 1.05rem;
+    color: #2b2b2b;
+}
+
+.scmm-acc__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.scmm-acc details[open] .scmm-acc__icon-plus,
+.scmm-acc details:not([open]) .scmm-acc__icon-minus {
+    display: none;
+}
+
+.scmm-acc__title {
+    min-width: 0;
+}
+
+.scmm-acc summary:hover,
+.scmm-acc summary:focus-visible {
+    background: #ececec;
+}
+
+.scmm-acc summary:focus-visible {
+    outline: 2px solid var(--scmm-navy);
+    outline-offset: 2px;
+}
+
+.scmm-acc__body {
+    padding: 0.95rem 1.1rem 1.1rem;
+    border-top: 1px solid var(--scmm-line);
+    background: #fff;
+}
+
+.scmm-acc__body p {
+    margin: 0;
+    color: var(--scmm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+/* Static Content Blocks (Warehouse, Manufacturing, Supply Planning) */
+.scmm-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.scmm-block {
+    margin: 0;
+}
+
+.scmm-block__title {
+    margin: 0 0 0.45rem;
+    color: var(--scmm-ink);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.scmm-block__body {
+    margin: 0;
+    color: var(--scmm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.scmm-block__list {
+    margin: 0.65rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--scmm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    list-style-type: disc;
+}
+
+.scmm-block__list li + li {
+    margin-top: 0.35rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .scmm-hero__bg {
+        object-position: 72% center;
+    }
+
+    .scmm-hero::after {
+        background: linear-gradient(
+            180deg,
+            rgba(16, 22, 70, 0.72) 0%,
+            rgba(16, 22, 70, 0.55) 55%,
+            rgba(16, 22, 70, 0.4) 100%
+        );
+    }
+
+    .scmm-hero__inner {
+        min-height: 16.5rem;
+        padding: 3rem 0 2.75rem;
+    }
+
+    .scmm-hero__copy {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .scmm-hero__actions {
+        margin-top: 1.25rem;
+    }
+
+    .scmm-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.9rem 1.15rem;
+        font-size: 0.86rem;
+    }
+
+    .scmm-section {
+        padding: 2.25rem 0 1rem;
+    }
+
+    .scmm-section--last {
+        padding-bottom: 3rem;
+    }
+
+    .scmm-heading {
+        margin-bottom: 1.2rem;
+        font-size: clamp(1.35rem, 6vw, 1.65rem);
+    }
+
+    .scmm-acc summary {
+        padding: 0.8rem 0.85rem;
+        font-size: 0.95rem;
+    }
+
+    .scmm-acc__body {
+        padding: 0.85rem 0.9rem 1rem;
+    }
+
+    .scmm-block__title {
+        font-size: 1.05rem;
+    }
+}

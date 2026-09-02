@@ -1,3 +1,283 @@
-/* Sales Marketing And Service Management page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Sales Marketing And Service Management — matched to WordPress screenshot */
+
+.smsm-page {
+    --smsm-navy: #2e2e80;
+    --smsm-navy-deep: #141b4d;
+    --smsm-heading: #5b5fc7;
+    --smsm-ink: #1f1d1d;
+    --smsm-muted: #4a4a4a;
+    --smsm-cream: #fff4c2;
+    --smsm-cream-hover: #ffe99a;
+    --smsm-line: #e4e4e4;
+    --smsm-bar: #f3f3f3;
+    color: var(--smsm-ink);
+    background: #fff;
+}
+
+/* Hero */
+.smsm-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background-color: var(--smsm-navy-deep);
+}
+
+.smsm-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.smsm-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(16, 22, 70, 0.22) 0%,
+        rgba(16, 22, 70, 0.08) 42%,
+        rgba(16, 22, 70, 0) 68%
+    );
+    pointer-events: none;
+}
+
+.smsm-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    min-height: clamp(18.5rem, 38vw, 25rem);
+    padding: 3.75rem 0 3.5rem;
+}
+
+.smsm-hero__copy {
+    max-width: 38rem;
+}
+
+.smsm-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.2rem, 4.1vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-shadow: 0 2px 18px rgba(8, 12, 40, 0.28);
+}
+
+.smsm-hero__actions {
+    margin-top: 1.5rem;
+}
+
+.smsm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.smsm-btn--cream {
+    background: var(--smsm-cream);
+    color: var(--smsm-navy-deep);
+}
+
+.smsm-btn--cream:hover,
+.smsm-btn--cream:focus-visible {
+    background: var(--smsm-cream-hover);
+    color: var(--smsm-navy-deep);
+}
+
+.smsm-btn--cream:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* Content */
+.smsm-section {
+    padding: 3.5rem 0 1.5rem;
+    background: #fff;
+}
+
+.smsm-section--last {
+    padding-bottom: 4.75rem;
+}
+
+.smsm-heading {
+    margin: 0 0 1.6rem;
+    color: var(--smsm-heading);
+    font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+}
+
+/* Accordion — Elementor nested accordion look */
+.smsm-acc {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.smsm-acc details {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--smsm-line);
+    background: #fff;
+}
+
+.smsm-acc summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 0.9rem 1.05rem;
+    background: var(--smsm-bar);
+    color: var(--smsm-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.smsm-acc summary::-webkit-details-marker {
+    display: none;
+}
+
+.smsm-acc summary::marker {
+    content: '';
+}
+
+.smsm-acc__icon {
+    flex: 0 0 auto;
+    display: block;
+    width: 1.05rem;
+    height: 1.05rem;
+    color: #2b2b2b;
+}
+
+.smsm-acc__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.smsm-acc details[open] .smsm-acc__icon-plus,
+.smsm-acc details:not([open]) .smsm-acc__icon-minus {
+    display: none;
+}
+
+.smsm-acc__title {
+    min-width: 0;
+}
+
+.smsm-acc summary:hover,
+.smsm-acc summary:focus-visible {
+    background: #ececec;
+}
+
+.smsm-acc summary:focus-visible {
+    outline: 2px solid var(--smsm-navy);
+    outline-offset: 2px;
+}
+
+.smsm-acc__body {
+    padding: 0.95rem 1.1rem 1.1rem;
+    border-top: 1px solid var(--smsm-line);
+    background: #fff;
+}
+
+.smsm-acc__body p {
+    margin: 0;
+    color: var(--smsm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.smsm-acc__body p + p {
+    margin-top: 0.75rem;
+}
+
+.smsm-acc__body ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.15rem;
+    color: var(--smsm-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    list-style-type: disc;
+}
+
+.smsm-acc__body li + li {
+    margin-top: 0.45rem;
+}
+
+@media (max-width: 900px) {
+    .smsm-hero__bg {
+        object-position: 72% center;
+    }
+
+    .smsm-hero::after {
+        background: linear-gradient(
+            180deg,
+            rgba(16, 22, 70, 0.72) 0%,
+            rgba(16, 22, 70, 0.55) 55%,
+            rgba(16, 22, 70, 0.4) 100%
+        );
+    }
+
+    .smsm-hero__inner {
+        min-height: 16.5rem;
+        padding: 3rem 0 2.75rem;
+    }
+
+    .smsm-hero__copy {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .smsm-hero__actions {
+        margin-top: 1.25rem;
+    }
+
+    .smsm-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.9rem 1.15rem;
+        font-size: 0.86rem;
+    }
+
+    .smsm-section {
+        padding: 2.5rem 0 1.25rem;
+    }
+
+    .smsm-section--last {
+        padding-bottom: 3rem;
+    }
+
+    .smsm-heading {
+        margin-bottom: 1.2rem;
+        font-size: clamp(1.35rem, 6vw, 1.65rem);
+    }
+
+    .smsm-acc summary {
+        padding: 0.8rem 0.85rem;
+        font-size: 0.95rem;
+    }
+
+    .smsm-acc__body {
+        padding: 0.85rem 0.9rem 1rem;
+    }
+}

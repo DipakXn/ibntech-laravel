@@ -1,3 +1,64 @@
-/* Thanks You For Tax Preparation page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Thanks You For Tax Preparation */
+
+.tytax-page {
+    --tytax-navy: #2e2e80;
+    --tytax-ink: #172033;
+    --tytax-muted: #4b5563;
+    --tytax-cream: #fbf6ea;
+    background: #fff;
+    color: var(--tytax-ink);
+}
+
+.tytax-hero {
+    background: var(--tytax-cream);
+    padding: 4rem 0 4.5rem;
+}
+
+.tytax-card {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.6rem 2.1rem 2.4rem;
+    border-radius: 1.15rem;
+    background: #fff;
+    border: 1px solid rgba(46, 46, 128, 0.1);
+    box-shadow: 0 22px 48px rgba(70, 50, 20, 0.1);
+    text-align: center;
+}
+
+.tytax-icon {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1.2rem;
+    border-radius: 0.85rem;
+    background: #fff;
+    color: var(--tytax-navy);
+    font-size: 1.5rem;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.12);
+}
+
+.tytax-card h1 {
+    margin: 0 0 1rem;
+    color: var(--tytax-navy);
+    font-size: clamp(1.85rem, 3.6vw, 2.45rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.tytax-card p {
+    margin: 0;
+    color: var(--tytax-muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+@media (max-width: 640px) {
+    .tytax-hero {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .tytax-card {
+        padding: 1.85rem 1.2rem 1.7rem;
+    }
+}

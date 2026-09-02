@@ -17,12 +17,12 @@
                 @forelse($pressReleases as $pressRelease)
                     <article class="card-panel case-study-card">
                         @if($pressRelease->featuredImageUrl())
-                            <a href="{{ route('press-releases.show', $pressRelease->slug) }}" class="case-study-card__image">
+                            <a href="{{ route('pressrelease.show', $pressRelease->slug) }}" class="case-study-card__image">
                                 <img src="{{ $pressRelease->featuredImageUrl() }}" alt="{{ $pressRelease->title }}">
                             </a>
                         @endif
                         <p class="meta-chip">Press Release</p>
-                        <h3><a href="{{ route('press-releases.show', $pressRelease->slug) }}">{{ $pressRelease->title }}</a></h3>
+                        <h3><a href="{{ route('pressrelease.show', $pressRelease->slug) }}">{{ $pressRelease->title }}</a></h3>
                         <p style="margin-top: 0.8rem;">{{ $pressRelease->excerpt ?: \App\Support\BlockContent::summary($pressRelease->content) }}</p>
                     </article>
                 @empty
@@ -30,8 +30,8 @@
                 @endforelse
             </div>
 
-            <div style="margin-top: 2rem;">
-                {{ $pressReleases->links() }}
+            <div class="blog-pagination">
+                {{ $pressReleases->onEachSide(1)->links('blog.partials.pagination', ['label' => 'Press releases pagination']) }}
             </div>
         </div>
     </section>

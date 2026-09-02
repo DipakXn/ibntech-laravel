@@ -1,3 +1,87 @@
-/* Thanks You  For Free Trail page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Thanks You For Free Trail */
+
+.tytrail-page {
+    --tytrail-navy: #2e2e80;
+    --tytrail-green: #4caf50;
+    --tytrail-ink: #172033;
+    --tytrail-muted: #4b5563;
+    background: #fff;
+    color: var(--tytrail-ink);
+}
+
+.tytrail-hero {
+    background: linear-gradient(180deg, #eef8ef 0%, #ffffff 72%);
+    padding: 4rem 0 4.5rem;
+}
+
+.tytrail-card {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.6rem 2.1rem 2.4rem;
+    border-radius: 1.15rem;
+    background: #fff;
+    border: 1px solid rgba(76, 175, 80, 0.18);
+    box-shadow: 0 22px 48px rgba(20, 70, 30, 0.08);
+    text-align: center;
+}
+
+.tytrail-icon {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1.2rem;
+    border-radius: 0.85rem;
+    background: var(--tytrail-green);
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.tytrail-card h1 {
+    margin: 0 0 1.25rem;
+    color: var(--tytrail-navy);
+    font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.tytrail-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+    text-align: left;
+}
+
+.tytrail-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    color: var(--tytrail-muted);
+    font-size: 1.04rem;
+    line-height: 1.65;
+}
+
+.tytrail-check {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.55rem;
+    height: 1.55rem;
+    margin-top: 0.1rem;
+    border-radius: 999px;
+    background: rgba(76, 175, 80, 0.16);
+    color: var(--tytrail-green);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .tytrail-hero {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .tytrail-card {
+        padding: 1.85rem 1.2rem 1.7rem;
+    }
+}

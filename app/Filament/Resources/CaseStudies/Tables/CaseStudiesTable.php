@@ -25,6 +25,11 @@ class CaseStudiesTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
+                TextColumn::make('published_at')
+                    ->label('Published')
+                    ->dateTime()
+                    ->sortable()
+                    ->placeholder('—'),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -37,7 +42,7 @@ class CaseStudiesTable
                         'published' => 'Published',
                     ]),
             ])
-            ->defaultSort('updated_at', 'desc')
+            ->defaultSort(fn ($query) => $query->latest())
             ->searchPlaceholder('Search case studies and status')
             ->emptyStateIcon('heroicon-o-presentation-chart-bar')
             ->emptyStateHeading('No case studies yet')

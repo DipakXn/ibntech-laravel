@@ -25,6 +25,11 @@ class PressReleasesTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
+                TextColumn::make('published_at')
+                    ->label('Published')
+                    ->dateTime()
+                    ->sortable()
+                    ->placeholder('—'),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -37,7 +42,7 @@ class PressReleasesTable
                         'published' => 'Published',
                     ]),
             ])
-            ->defaultSort('updated_at', 'desc')
+            ->defaultSort(fn ($query) => $query->latest())
             ->searchPlaceholder('Search press releases and status')
             ->emptyStateIcon('heroicon-o-newspaper')
             ->emptyStateHeading('No press releases yet')

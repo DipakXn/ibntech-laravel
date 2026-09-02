@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.newsletter')
 
 @section('content')
     <section class="inner-hero">
@@ -17,13 +17,13 @@
                 @forelse($newsletters as $newsletter)
                     <article class="card-panel case-study-card">
                         @if($newsletter->featuredImageUrl())
-                            <a href="{{ route('newsletters.show', $newsletter->slug) }}" class="case-study-card__image">
+                            <a href="{{ $newsletter->publicUrl() }}" class="case-study-card__image">
                                 <img src="{{ $newsletter->featuredImageUrl() }}" alt="{{ $newsletter->title }}">
                             </a>
                         @endif
                         <p class="meta-chip">Newsletter</p>
                         <h3>
-                            <a href="{{ route('newsletters.show', $newsletter->slug) }}">{{ $newsletter->title }}</a>
+                            <a href="{{ $newsletter->publicUrl() }}">{{ $newsletter->title }}</a>
                         </h3>
                         <p style="margin-top: 0.8rem;">
                             {{ $newsletter->seoMeta?->meta_description ?: 'Placeholder summary copy for this newsletter card. Update the SEO description to control this listing snippet.' }}

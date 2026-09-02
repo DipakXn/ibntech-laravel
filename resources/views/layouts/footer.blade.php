@@ -222,7 +222,7 @@
                     <ul class="site-footer__links">
                         <li><a href="{{ route('case-studies.index') }}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i><span>Case Studies</span></a></li>
                         <li><a href="{{ route('blog.index') }}"><i class="fa-solid fa-blog" aria-hidden="true"></i><span>Blogs</span></a></li>
-                        <li><a href="{{ route('press-releases.index') }}"><i class="fa-regular fa-newspaper" aria-hidden="true"></i><span>Press Releases</span></a></li>
+                        <li><a href="{{ route('pressrelease.index') }}"><i class="fa-regular fa-newspaper" aria-hidden="true"></i><span>Press Releases</span></a></li>
                         <li><a href="{{ route('ebooks.index') }}"><i class="fa-solid fa-book" aria-hidden="true"></i><span>eBooks</span></a></li>
                         <li><a href="{{ route('white-papers.index') }}"><i class="fa-regular fa-folder-open" aria-hidden="true"></i><span>White Papers &amp; Reports</span></a></li>
                         <li><a href="{{ route('blog.index') }}"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i><span>Articles</span></a></li>

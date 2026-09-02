@@ -1,3 +1,497 @@
-/* Functional Testing page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Functional Testing — matched to WordPress screenshot */
+
+.ftest-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.ftest-page {
+    --ftest-navy: #2e2e80;
+    --ftest-navy-deep: #1f1f5c;
+    --ftest-green: #4caf50;
+    --ftest-green-dark: #3d9140;
+    --ftest-ink: #1f1d1d;
+    --ftest-muted: #5a5a5a;
+    --ftest-soft: #f4f6fa;
+    --ftest-mint: #eef4f8;
+    color: var(--ftest-ink);
+    background: #fff;
+}
+
+.ftest-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.75rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.ftest-btn:hover {
+    transform: translateY(-1px);
+}
+
+.ftest-btn--green {
+    background: var(--ftest-green);
+    border-color: var(--ftest-green);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.28);
+}
+
+.ftest-btn--green:hover {
+    background: var(--ftest-green-dark);
+    border-color: var(--ftest-green-dark);
+    color: #fff;
+}
+
+.ftest-btn--navy {
+    background: var(--ftest-navy);
+    border-color: var(--ftest-navy);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.22);
+}
+
+.ftest-btn--navy:hover {
+    background: var(--ftest-green);
+    border-color: var(--ftest-green);
+    color: #fff;
+}
+
+.ftest-btn:focus-visible {
+    outline: 2px solid var(--ftest-green);
+    outline-offset: 3px;
+}
+
+/* Hero */
+.ftest-hero {
+    color: #fff;
+    background-image: linear-gradient(230deg, #4caf50 6%, #1a237e 72%);
+    overflow: hidden;
+}
+
+.ftest-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 3.5rem 0 3.75rem;
+}
+
+.ftest-hero__copy {
+    max-width: 36rem;
+}
+
+.ftest-hero__eyebrow {
+    margin: 0 0 0.85rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.ftest-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.1rem, 4vw, 2.55rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+.ftest-hero__lede {
+    margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.65;
+    max-width: 34rem;
+}
+
+.ftest-hero__actions {
+    margin-top: 1.5rem;
+}
+
+.ftest-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ftest-hero__media img {
+    width: min(100%, 31.25rem);
+    height: auto;
+}
+
+/* Sections */
+.ftest-section {
+    padding: 4rem 0;
+}
+
+.ftest-section--soft {
+    background: var(--ftest-soft);
+}
+
+.ftest-section--mint {
+    background: var(--ftest-mint);
+}
+
+/* Split layouts */
+.ftest-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.ftest-split__media {
+    display: flex;
+    justify-content: center;
+}
+
+.ftest-split__media img {
+    width: 100%;
+    max-width: 25rem;
+    height: auto;
+}
+
+.ftest-split__media--photo img {
+    max-width: 100%;
+    border-radius: 0.35rem;
+}
+
+.ftest-split__copy p {
+    margin: 0;
+    color: var(--ftest-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.ftest-split__copy h2 {
+    margin: 0 0 1rem;
+    color: var(--ftest-navy);
+    font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.ftest-split__copy h3 {
+    margin: 0 0 1rem;
+    color: var(--ftest-ink);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.ftest-split__copy .ftest-btn {
+    margin-top: 1.35rem;
+}
+
+.ftest-scope {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 0.85rem;
+}
+
+.ftest-scope p {
+    margin: 0;
+    color: var(--ftest-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.ftest-scope strong,
+.ftest-list strong {
+    color: var(--ftest-ink);
+    font-weight: 700;
+}
+
+.ftest-scope a {
+    color: var(--ftest-navy);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.ftest-scope a:hover {
+    color: var(--ftest-green);
+}
+
+.ftest-list {
+    margin: 0.35rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.ftest-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--ftest-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.ftest-list li::before {
+    content: '';
+    position: absolute;
+    top: 0.65rem;
+    left: 0;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--ftest-ink);
+}
+
+/* Closing */
+.ftest-closing {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.ftest-closing__inner {
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ftest-closing__inner p {
+    margin: 0 0 1.35rem;
+    color: var(--ftest-ink);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.8;
+}
+
+/* Contact */
+.ftest-consult {
+    scroll-margin-top: 6rem;
+    padding-top: 3.25rem;
+    padding-bottom: 3.5rem;
+}
+
+.ftest-consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+.ftest-consult__card {
+    border-radius: 0.75rem;
+    overflow: visible;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+.ftest-consult__header {
+    background: var(--ftest-navy);
+    color: #fff;
+    text-align: center;
+    padding: 1.25rem 1.25rem 1.1rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.ftest-consult__header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.ftest-consult__header p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.ftest-consult__body {
+    position: relative;
+    padding: 1.15rem 1.25rem 1.35rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: #fff;
+    overflow: visible;
+}
+
+.ftest-consult__body .contact-form {
+    gap: 0.7rem;
+}
+
+.ftest-consult__body .contact-form__row {
+    gap: 0.7rem;
+}
+
+.ftest-consult__body .contact-form select,
+.ftest-consult__body .contact-form input:not([type='checkbox']):not([type='hidden']),
+.ftest-consult__body .contact-form textarea,
+.ftest-consult__body .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.ftest-consult__body .contact-form__field--message {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.ftest-consult__body .contact-form select:focus,
+.ftest-consult__body .contact-form input:focus,
+.ftest-consult__body .contact-form textarea:focus,
+.ftest-consult__body .phone-input-field .iti__tel-input:focus {
+    outline-color: rgba(46, 46, 128, 0.35);
+    border-color: rgba(46, 46, 128, 0.45);
+}
+
+.ftest-consult__body .contact-form__terms,
+.ftest-consult__body .contact-form__terms span {
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.ftest-consult__body .contact-form__terms a {
+    color: var(--ftest-navy);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.ftest-consult__body .contact-form__terms {
+    position: relative;
+}
+
+.ftest-consult__body .consent-tooltip {
+    position: static;
+}
+
+.ftest-consult__body .consent-tooltip__content {
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+}
+
+.ftest-consult__body .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: var(--ftest-navy);
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.ftest-consult__body .contact-form__submit:hover {
+    background: var(--ftest-navy-deep);
+}
+
+.ftest-consult__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ftest-consult__media img {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ftest-btn {
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .ftest-hero__inner,
+    .ftest-split,
+    .ftest-consult__inner {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .ftest-hero__inner {
+        padding: 3.25rem 0 3.5rem;
+        text-align: center;
+    }
+
+    .ftest-hero__copy {
+        max-width: none;
+    }
+
+    .ftest-hero__lede {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ftest-split__media img {
+        max-width: 22rem;
+    }
+
+    .ftest-split__media--photo img {
+        max-width: 100%;
+    }
+
+    .ftest-consult__media {
+        order: -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .ftest-section,
+    .ftest-consult {
+        padding: 2.25rem 0;
+    }
+
+    .ftest-closing {
+        padding: 1.5rem 0 2.5rem;
+    }
+
+    .ftest-consult__body .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+
+    .ftest-btn {
+        width: 100%;
+        text-align: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .ftest-hero__actions,
+    .ftest-split__copy .ftest-btn,
+    .ftest-closing__inner .ftest-btn {
+        width: 100%;
+    }
+
+    .ftest-consult {
+        padding-bottom: 3.25rem;
+    }
+}

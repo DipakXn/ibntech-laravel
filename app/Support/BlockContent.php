@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Support\Html\HtmlToBlocks;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -13,7 +14,7 @@ class BlockContent
         $fallbackIndex = 1;
         $prepared = [];
 
-        foreach (self::normalize($content) as $block) {
+        foreach (HtmlToBlocks::expandHtmlCodeWorkspaces(self::normalize($content)) as $block) {
             $type = $block['type'] ?? null;
             $data = $block['data'] ?? [];
 
@@ -124,14 +125,17 @@ class BlockContent
             return $content;
         }
 
-        return json_encode(array_values($content), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return json_encode(
+            array_values(HtmlToBlocks::expandHtmlCodeWorkspaces($content)),
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+        );
     }
 
     public static function toPlainText(mixed $content): string
     {
         $segments = [];
 
-        foreach (self::normalize($content) as $block) {
+        foreach (HtmlToBlocks::expandHtmlCodeWorkspaces(self::normalize($content)) as $block) {
             $type = $block['type'] ?? null;
             $data = $block['data'] ?? [];
 
@@ -180,6 +184,11 @@ class BlockContent
                 'callout' => trim(implode(' ', array_filter([
                     $data['title'] ?? null,
                     strip_tags((string) ($data['content'] ?? '')),
+                ]))),
+                'cta' => trim(implode(' ', array_filter([
+                    $data['heading'] ?? null,
+                    $data['description'] ?? null,
+                    $data['button_label'] ?? null,
                 ]))),
                 default => strip_tags((string) ($data['content'] ?? '')),
             };

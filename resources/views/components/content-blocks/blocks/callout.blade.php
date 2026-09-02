@@ -7,7 +7,7 @@
         @endif
 
         @if (filled($data['content'] ?? null))
-            <div>{!! str($data['content'])->sanitizeHtml() !!}</div>
+            <div>{!! \App\Support\Html\SafeHtml::sanitizeForRender($data['content'] ?? '') !!}</div>
         @endif
     </section>
 @endif

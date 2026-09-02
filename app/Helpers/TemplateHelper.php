@@ -24,7 +24,9 @@ class TemplateHelper
 
     public static function newsletterTemplateOptions(): array
     {
-        return self::templateOptionsForDirectory('newsletters');
+        return collect(self::templateOptionsForDirectory('newsletters'))
+            ->except(['index'])
+            ->all();
     }
 
     public static function blogTemplateOptions(): array

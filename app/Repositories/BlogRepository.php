@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Blog;
+use App\Pagination\PathPagePaginator;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -28,22 +29,31 @@ class BlogRepository
             ->withQueryString();
     }
 
-    public function paginatePublishedForCategoryIds(array $categoryIds, int $perPage = 15): LengthAwarePaginator
-    {
-        return Blog::query()
+    public function paginatePublishedForCategoryIds(
+        array $categoryIds,
+        int $perPage = 15,
+        int $page = 1,
+        ?string $path = null
+    ): LengthAwarePaginator {
+        $results = Blog::query()
             ->published()
             ->with(['category', 'seoMeta', 'media'])
             ->whereIn('category_id', $categoryIds)
             ->latest()
-            ->paginate($perPage)
-            ->withQueryString();
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        if ($path === null) {
+            return $results;
+        }
+
+        return PathPagePaginator::wrap($results, $path);
     }
 
     public function findPublishedBySlug(string $slug): ?Blog
     {
         return Blog::query()
             ->published()
-            ->with(['category', 'seoMeta', 'media'])
+            ->with(['category.parent', 'seoMeta', 'media'])
             ->where('slug', $slug)
             ->first();
     }

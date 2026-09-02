@@ -35,6 +35,11 @@ class BlogsTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
+                TextColumn::make('published_at')
+                    ->label('Published')
+                    ->dateTime()
+                    ->sortable()
+                    ->placeholder('—'),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -47,7 +52,7 @@ class BlogsTable
                         'published' => 'Published',
                     ]),
             ])
-            ->defaultSort('updated_at', 'desc')
+            ->defaultSort('published_at', 'desc')
             ->searchPlaceholder('Search blog titles, slugs, and categories')
             ->emptyStateIcon('heroicon-o-newspaper')
             ->emptyStateHeading('No blogs yet')

@@ -4,6 +4,8 @@
     $isHomeLayout = $layout === 'home';
     $isModalLayout = $layout === 'modal';
     $isVaptLayout = $layout === 'vapt';
+    $isTrialLayout = $layout === 'trial';
+    $pairPhoneWithCompany = $isVaptLayout || $isTrialLayout || ($isModalLayout && $showCompany);
 @endphp
 
 <form
@@ -14,6 +16,9 @@
 >
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
+    @if($formName === 'pricing-enquire')
+        <input type="hidden" wire:model="service" name="package_selected" aria-hidden="true">
+    @endif
 
     @if($submitError)
         <p class="contact-form__error contact-form__banner" role="alert">{{ $submitError }}</p>
@@ -56,16 +61,16 @@
                 @error('service') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
             </div>
         </div>
-    @elseif($isVaptLayout || ($isModalLayout && $showCompany))
+    @elseif($pairPhoneWithCompany)
         <div class="contact-form__row">
             <div class="contact-form__field">
                 <label class="sr-only" for="{{ $fieldId('phone') }}">Contact Number</label>
-                <x-forms.phone-input :id="$fieldId('phone')" model="phone" name="phone" placeholder="Contact Number" />
+                <x-forms.phone-input :id="$fieldId('phone')" model="phone" name="phone" placeholder="{{ $isTrialLayout ? 'Contact No' : 'Contact Number' }}" />
                 @error('phone') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
             </div>
             <div class="contact-form__field">
                 <label class="sr-only" for="{{ $fieldId('company') }}">Company</label>
-                <input id="{{ $fieldId('company') }}" type="text" wire:model="company" placeholder="Company Name" autocomplete="organization">
+                <input id="{{ $fieldId('company') }}" type="text" wire:model="company" placeholder="{{ $companyPlaceholder !== 'Company' ? $companyPlaceholder : 'Company Name' }}" autocomplete="organization">
                 @error('company') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
             </div>
         </div>
@@ -108,10 +113,10 @@
         @endif
     @endif
 
-    @if($showCompany && ! $isModalLayout && ! $isVaptLayout)
+    @if($showCompany && ! $isModalLayout && ! $isVaptLayout && ! $isTrialLayout)
         <div class="contact-form__field">
             <label class="sr-only" for="{{ $fieldId('company') }}">Company</label>
-            <input id="{{ $fieldId('company') }}" type="text" wire:model="company" placeholder="Company" autocomplete="organization">
+            <input id="{{ $fieldId('company') }}" type="text" wire:model="company" placeholder="{{ $companyPlaceholder }}" autocomplete="organization">
             @error('company') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
         </div>
     @endif
@@ -133,9 +138,9 @@
         <input type="checkbox" wire:model="acceptedTerms">
         <span>
             By using our services, you agree to our
-            <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms &amp; Conditions</a>
+            <a href="{{ route('page.show', ['slug' => 'terms-of-use']) }}">Terms &amp; Conditions</a>
             and
-            <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>.
+            <a href="{{ route('page.show', ['slug' => 'privacy-policy']) }}">Privacy Policy</a>.
             <x-forms.messaging-consent-tooltip />
         </span>
     </label>

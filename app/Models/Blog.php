@@ -2,20 +2,27 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasAdditionalAssets;
 use App\Models\Concerns\HasBlockContent;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Blog extends Model implements HasMedia
 {
-    use HasBlockContent;
+    use HasAdditionalAssets;
+    use HasBlockContent {
+        HasBlockContent::casts as blockContentCasts;
+    }
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -23,10 +30,20 @@ class Blog extends Model implements HasMedia
         'slug',
         'template',
         'content',
+        'additional_css',
+        'additional_js',
         'featured_image',
         'category_id',
         'status',
+        'published_at',
     ];
+
+    protected function casts(): array
+    {
+        return array_merge($this->blockContentCasts(), [
+            'published_at' => 'datetime',
+        ]);
+    }
 
     public function category(): BelongsTo
     {
@@ -36,6 +53,25 @@ class Blog extends Model implements HasMedia
     public function seoMeta(): MorphOne
     {
         return $this->morphOne(SeoMeta::class, 'metable');
+    }
+
+    public function wordpressImport(): HasOne
+    {
+        return $this->hasOne(BlogImport::class);
+    }
+
+    public function publishedAt(): ?CarbonInterface
+    {
+        return $this->published_at ?? $this->created_at;
+    }
+
+    public function isImportedFromWordPress(): bool
+    {
+        if ($this->relationLoaded('wordpressImport')) {
+            return $this->wordpressImport !== null;
+        }
+
+        return $this->wordpressImport()->exists();
     }
 
     public function registerMediaCollections(): void
@@ -143,6 +179,6 @@ class Blog extends Model implements HasMedia
 
     public function scopeLatest(Builder $query): Builder
     {
-        return $query->latest('created_at');
+        return $query->orderByDesc(DB::raw('COALESCE(published_at, created_at)'));
     }
 }

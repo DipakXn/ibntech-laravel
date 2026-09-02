@@ -1,3 +1,432 @@
-/* Electronic Funds Transfer page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Electronic Funds Transfer — matched to WordPress screenshot */
+
+.eft-page {
+    --eft-navy: #2e2e80;
+    --eft-navy-deep: #152040;
+    --eft-hero-start: #16315a;
+    --eft-hero-end: #1a5c48;
+    --eft-green: #4caf50;
+    --eft-green-dark: #3d9140;
+    --eft-ink: #1f1d1d;
+    --eft-muted: #4a4a4a;
+    --eft-line: rgba(21, 32, 64, 0.12);
+    color: var(--eft-ink);
+    background: #fff;
+}
+
+.eft-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.85rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    background: var(--eft-green);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.28);
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.eft-btn:hover,
+.eft-btn:focus-visible {
+    background: var(--eft-green-dark);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Hero */
+.eft-hero {
+    background: linear-gradient(90deg, var(--eft-hero-start) 0%, #184a52 48%, var(--eft-hero-end) 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.eft-hero__inner {
+    max-width: 52rem;
+    padding: 5.25rem 0 5rem;
+}
+
+.eft-hero h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.75rem, 4vw, 2.55rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.eft-hero__lede {
+    margin: 1.1rem auto 0;
+    max-width: 40rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.65;
+}
+
+.eft-hero .eft-btn {
+    margin-top: 1.85rem;
+}
+
+/* Shared sections */
+.eft-section {
+    padding: 4.5rem 0;
+    background: #fff;
+}
+
+.eft-section--tight {
+    padding-top: 2.75rem;
+}
+
+.eft-heading {
+    max-width: 46rem;
+    margin: 0 auto 2.35rem;
+    text-align: center;
+}
+
+.eft-heading--wide {
+    max-width: 52rem;
+}
+
+.eft-heading h2,
+.eft-split__copy h2,
+.eft-benefits__intro h2,
+.eft-timely h2,
+.eft-cta-band h2 {
+    margin: 0;
+    color: var(--eft-navy);
+    font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.eft-heading p,
+.eft-split__copy p,
+.eft-timely p {
+    margin: 1rem 0 0;
+    color: var(--eft-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.eft-split__copy p + p {
+    margin-top: 0.85rem;
+}
+
+/* Image / text splits */
+.eft-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3.25rem;
+    align-items: center;
+}
+
+.eft-split__media img,
+.eft-cycle__media img,
+.eft-benefits__intro img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.eft-split__media img,
+.eft-cycle__media img {
+    max-width: 32rem;
+    margin-inline: auto;
+}
+
+/* Mid CTA */
+.eft-cta-band {
+    background: linear-gradient(90deg, #122a4a 0%, #16315a 42%, #1a4d4a 100%);
+    color: #fff;
+    text-align: center;
+    padding: 3.75rem 0;
+}
+
+.eft-cta-band__inner {
+    max-width: 42rem;
+}
+
+.eft-cta-band h2 {
+    color: #fff;
+}
+
+.eft-cta-band p {
+    margin: 0.75rem 0 1.6rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Payment option cards */
+.eft-pay-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.eft-pay-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.35rem 1.4rem;
+    background: #fff;
+    border: 1px solid var(--eft-line);
+    border-radius: 0.55rem;
+    box-shadow: 0 10px 24px rgba(20, 30, 70, 0.06);
+}
+
+.eft-pay-card img {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.eft-pay-card h3 {
+    margin: 0;
+    color: var(--eft-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* Benefits */
+.eft-benefits {
+    background: linear-gradient(180deg, #122448 0%, var(--eft-navy-deep) 100%);
+    padding: 4.5rem 0;
+    color: #fff;
+}
+
+.eft-benefits__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 2.75rem;
+    align-items: center;
+}
+
+.eft-benefits__intro h2 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.eft-benefits__intro img {
+    max-width: 28rem;
+}
+
+.eft-benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.eft-benefit-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.95rem 1.05rem;
+    background: #fff;
+    border-radius: 0.7rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.eft-benefit-card img {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.eft-benefit-card h3 {
+    margin: 0;
+    color: var(--eft-navy);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* Timely payments */
+.eft-timely {
+    text-align: center;
+}
+
+.eft-timely__inner {
+    max-width: 44rem;
+    margin: 0 auto;
+}
+
+.eft-timely .eft-btn {
+    margin-top: 1.6rem;
+}
+
+/* AP cycle */
+.eft-cycle__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) auto;
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.eft-cycle__media img {
+    max-width: 36rem;
+}
+
+/* Case studies */
+.eft-cases {
+    background: #f6f7fa;
+}
+
+.eft-case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.eft-case-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 0.7rem;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(20, 24, 60, 0.1);
+}
+
+.eft-case-card__media {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    background: var(--eft-navy-deep);
+}
+
+.eft-case-card__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(18, 36, 72, 0.25) 0%, rgba(18, 36, 72, 0.72) 100%);
+}
+
+.eft-case-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.eft-case-card__body {
+    padding: 1.2rem 1.25rem 1.35rem;
+}
+
+.eft-case-card__body h3 {
+    margin: 0;
+    color: var(--eft-navy);
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.eft-case-card__link {
+    display: inline-flex;
+    margin-top: 0.85rem;
+    color: var(--eft-green);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.eft-case-card__link:hover,
+.eft-case-card__link:focus-visible {
+    color: var(--eft-green-dark);
+}
+
+.eft-cases__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.25rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .eft-split,
+    .eft-benefits__inner,
+    .eft-cycle__row {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .eft-split--media-first .eft-split__media {
+        order: -1;
+    }
+
+    .eft-hero__inner {
+        padding: 3.75rem 0 3.5rem;
+    }
+
+    .eft-split__media img,
+    .eft-cycle__media img,
+    .eft-benefits__intro img {
+        max-width: 24rem;
+    }
+
+    .eft-cycle__row {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .eft-benefits__intro {
+        text-align: center;
+    }
+
+    .eft-benefits__intro img {
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .eft-section,
+    .eft-benefits {
+        padding: 3.25rem 0;
+    }
+
+    .eft-cta-band {
+        padding: 2.75rem 0;
+    }
+
+    .eft-pay-grid,
+    .eft-case-grid,
+    .eft-benefits__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eft-btn {
+        width: 100%;
+        max-width: 22rem;
+    }
+
+    .eft-hero .eft-btn,
+    .eft-timely .eft-btn,
+    .eft-cta-band .eft-btn,
+    .eft-cases__cta .eft-btn {
+        width: min(100%, 22rem);
+    }
+}
+
+@media (max-width: 520px) {
+    .eft-hero h1 {
+        font-size: 1.55rem;
+    }
+
+    .eft-pay-card,
+    .eft-benefit-card {
+        padding: 1rem;
+    }
+}

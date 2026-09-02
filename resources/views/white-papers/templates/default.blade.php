@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <x-content-additional-assets :model="$whitePaper" />
     <article class="article-shell">
         <div class="site-shell">
             <div class="article-frame white-paper-detail">

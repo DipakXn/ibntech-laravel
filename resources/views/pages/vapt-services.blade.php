@@ -177,7 +177,7 @@
         ['title' => 'United Kingdom', 'text' => 'Penetration testing aligned with regulatory and compliance requirements.'],
         ['title' => 'UAE', 'text' => 'Cybersecurity assessments for financial, technology, and enterprise sectors.'],
         ['title' => 'Australia', 'text' => 'Security testing for applications, infrastructure, and cloud environments.'],
-        ['title' => 'Singapore', 'text' => 'VAPT services for regulated businesses and technology companies.'],
+        ['title' => 'Singapore', 'text' => 'VAPT audit services for regulated businesses and technology companies.'],
     ];
 
     $deliverables = [
@@ -236,7 +236,7 @@
         ['q' => 'Is VAPT a recurring process or a one-time activity?', 'a' => 'VAPT is expected to be a recurring process, where you have the testing conducted recurrently to handle threats and risks as well as maintaining security continuously.'],
         ['q' => 'How frequent is VAPT recommended for businesses?', 'a' => 'VAPT is advisable to conduct at intervals depending on the changes that occur in your infrastructure or applications, and in case of security breaches.'],
         ['q' => 'How long does a VAPT exercise with IBN Technologies take?', 'a' => 'The time it takes for a VAPT exercise with IBN Technologies to be completed varies based on the number of tests to be done.'],
-        ['q' => 'In what ways will VAPT support compliance management?', 'a' => 'VAPT helps in ensuring that your infrastructure meets the standards of GDPR, HIPAA, PCI DSS, and others while avoiding fines because of compliance failures.'],
+        ['q' => 'In what ways will VAPT support compliance management?', 'a' => 'Our VAPT audit services help ensure that your infrastructure meets the standards of GDPR, HIPAA, PCI DSS, and others while avoiding fines because of compliance failures.'],
         ['q' => 'Can IBN Technologies VAPT help protect against cyberattacks?', 'a' => 'Yes. IBN Technologies VAPT services identify and fix security vulnerabilities before attackers can exploit them, helping reduce the risk of cyberattacks, data breaches, and business disruptions.'],
         ['q' => 'How is VAPT conducted using IBN Technologies?', 'a' => 'IBN Technologies conducts VAPT using automated scanning methods combined with testing processes to find weaknesses and mimic possible attacks.'],
         ['q' => 'How does IBN Technologies prioritize the vulnerabilities discovered during VAPT?', 'a' => 'IBN Technologies prioritizes the most threatening vulnerabilities found using VAPT to mitigate serious risks first.'],
@@ -269,6 +269,16 @@
     <div class="vapt-page">
         {{-- Hero --}}
         <section class="vapt-hero" aria-labelledby="vapt-hero-title">
+            <img
+                class="vapt-hero__bg"
+                src="{{ asset('images/vapt-hero-img.webp') }}"
+                alt=""
+                aria-hidden="true"
+                width="1536"
+                height="1024"
+                fetchpriority="high"
+                decoding="async"
+            >
             <div class="site-shell vapt-hero__inner">
                 <div class="vapt-hero__copy">
                     <h1 id="vapt-hero-title">
@@ -279,7 +289,7 @@
                     <p class="vapt-hero__lede">
                         Leading manual and automated full-stack
                         <span class="vapt-accent">VAPT services in India</span>
-                        and global markets, including the USA, UK, UAE, Australia, and Singapore, helping SMBs and mid-market enterprises identify vulnerabilities, strengthen cyber resilience.
+                        and global markets, including the USA, UK, UAE, Australia, and Singapore, helping SMBs and mid-market enterprises identify vulnerabilities, pass VAPT audit & strengthen cyber resilience.
                     </p>
                     <div class="vapt-hero__actions">
                         <a href="#vapt-process" class="button-primary">View Our Process</a>
@@ -347,9 +357,8 @@
                 <div class="vapt-what-card">
                     <div class="vapt-what-card__copy">
                         <h2 id="vapt-what-title">What is VAPT? Security Insights for Indian &amp; Global Businesses</h2>
-                        <p>
-                            Vulnerability Assessment and Penetration Testing (VAPT) is a structured cybersecurity approach that combines automated vulnerability identification with real-world attack simulation to assess and validate security risks. It helps organizations strengthen their security posture, address exploitable weaknesses, and ensure audit compliance with CERT-In, RBI, SEBI, IRDAI, UIDAI, ISO 27001, SOC 2, PCI DSS, HIPAA, and India’s DPDP Act requirements.
-                        </p>
+                       <p>Vulnerability Assessment and Penetration Testing (VAPT) is a structured cybersecurity approach that combines automated vulnerability identification with real-world attack simulation to assess and validate security risks.  </p>
+                       <p>By utilizing comprehensive VAPT audit services, organizations can strengthen their security posture, remediate exploitable weaknesses, and achieve seamless compliance with CERT-In, RBI, SEBI, IRDAI, UIDAI, ISO 27001, SOC 2, PCI DSS, HIPAA, and DPDP Act standards. </p>
                         <div class="vapt-keywords" aria-label="VAPT strengths">
                             <span>Visibility</span>
                             <span>Precision</span>
@@ -469,7 +478,7 @@
                 <div class="section-heading">
                     <h2 id="vapt-why-title">Why Choose IBN Technologies for Penetration Testing and VAPT Services?</h2>
                     <p>
-                        IBN Technologies is a trusted VAPT services provider, backed by CEH and OSCP-certified experts. We go beyond basic vulnerability assessment services by conducting deep manual exploitation and delivering robust risk mitigation strategies.
+                    Partner with IBN Technologies, a trusted VAPT service provider powered by CEH and OSCP-certified experts who keep your infrastructure secure. We go beyond basic vulnerability assessment services by conducting deep manual exploitation and delivering robust risk mitigation strategies.  
                     </p>
                 </div>
                 <div class="vapt-why-grid">

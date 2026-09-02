@@ -25,6 +25,11 @@ class WhitePapersTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
+                TextColumn::make('published_at')
+                    ->label('Published')
+                    ->dateTime()
+                    ->sortable()
+                    ->placeholder('—'),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -37,7 +42,7 @@ class WhitePapersTable
                         'published' => 'Published',
                     ]),
             ])
-            ->defaultSort('updated_at', 'desc')
+            ->defaultSort(fn ($query) => $query->latest())
             ->searchPlaceholder('Search white papers and status')
             ->emptyStateIcon('heroicon-o-document-text')
             ->emptyStateHeading('No white papers yet')

@@ -11,12 +11,11 @@ class EbookService
     public function __construct(
         protected EbookRepository $ebooks,
         protected SeoService $seoService,
-    ) {
-    }
+    ) {}
 
-    public function paginatePublished(): LengthAwarePaginator
+    public function paginatePublished(int $page = 1, ?string $path = null, int $perPage = 9): LengthAwarePaginator
     {
-        return $this->ebooks->paginatePublished();
+        return $this->ebooks->paginatePublished($perPage, $page, $path);
     }
 
     public function getPublishedBySlug(string $slug): ?Ebook

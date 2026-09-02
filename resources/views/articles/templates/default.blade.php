@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <x-content-additional-assets :model="$article" />
     @php($tocItems = \App\Support\BlockContent::tableOfContents($article->content, ['h2', 'h3']))
     <article class="article-shell">
         <div class="site-shell">

@@ -35,12 +35,34 @@ class LeadForm
                         Placeholder::make('service_display')
                             ->label('Service / Plan')
                             ->content(fn (?Lead $record): string => $record?->service ?: '—'),
+                        Placeholder::make('package_selected_display')
+                            ->label('Selected Plan')
+                            ->content(fn (?Lead $record): string => $record?->package_selected ?: '—')
+                            ->visible(fn (?Lead $record): bool => $record?->form_name === 'pricing-enquire' && filled($record?->package_selected)),
+                        Placeholder::make('looking_for_display')
+                            ->label('What are you looking for?')
+                            ->content(fn (?Lead $record): string => $record?->looking_for ?: '—')
+                            ->visible(fn (?Lead $record): bool => filled($record?->looking_for) && $record?->looking_for !== $record?->service),
+                        Placeholder::make('needed_service_display')
+                            ->label('Which service do you need?')
+                            ->content(fn (?Lead $record): string => $record?->needed_service ?: '—')
+                            ->visible(fn (?Lead $record): bool => filled($record?->needed_service)),
+                        Placeholder::make('resource_type_display')
+                            ->label('Resource Type')
+                            ->content(fn (?Lead $record): string => $record?->resource_type ?: '—')
+                            ->visible(fn (?Lead $record): bool => filled($record?->resource_type)),
+                        Placeholder::make('hire_when_display')
+                            ->label('When do you want to hire?')
+                            ->content(fn (?Lead $record): string => $record?->hire_when ?: '—')
+                            ->visible(fn (?Lead $record): bool => filled($record?->hire_when)),
                         Placeholder::make('job_title_display')
                             ->label('Job Title')
-                            ->content(fn (?Lead $record): string => $record?->job_title ?: '—'),
+                            ->content(fn (?Lead $record): string => $record?->job_title ?: '—')
+                            ->visible(fn (?Lead $record): bool => filled($record?->job_title)),
                         Placeholder::make('asset_title_display')
                             ->label('Asset')
-                            ->content(fn (?Lead $record): string => $record?->asset_title ?: '—'),
+                            ->content(fn (?Lead $record): string => $record?->asset_title ?: '—')
+                            ->visible(fn (?Lead $record): bool => filled($record?->asset_title)),
                         Select::make('form_name')
                             ->label('Form')
                             ->options(Lead::formOptions())

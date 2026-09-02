@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CmsDemoSeeder::class);
         $this->call(IndustrySeeder::class);
         $this->call(LandingPageSeeder::class);
+        $this->call(NewsletterSeeder::class);
         $this->call(WordPressPagesSeeder::class);
     }
 }

@@ -11,6 +11,11 @@ class NewsletterTemplateHelperTest extends TestCase
     {
         $options = TemplateHelper::newsletterTemplateOptions();
 
+        $this->assertArrayHasKey('vciso-as-a-service', $options);
+        $this->assertArrayHasKey('securing-enterprise-ai-data-protection-prompt-integrity-and-governance-at-scale', $options);
         $this->assertArrayHasKey('cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure', $options);
+        $this->assertArrayNotHasKey('index', $options);
+        $this->assertArrayNotHasKey('stage-1', $options);
+        $this->assertArrayNotHasKey('sidebar', $options);
     }
 }

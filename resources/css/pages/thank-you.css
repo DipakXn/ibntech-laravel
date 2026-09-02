@@ -1,3 +1,86 @@
-/* Thanks You page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Thanks You */
+
+.ty-page {
+    --ty-navy: #2e2e80;
+    --ty-navy-deep: #1f1f5c;
+    --ty-cream: #fff8e8;
+    background: #fff;
+}
+
+.ty-hero {
+    background: linear-gradient(110deg, var(--ty-navy) 0%, #3a3a96 48%, #4caf50 120%);
+    padding: 4rem 0 4.5rem;
+    color: #fff;
+}
+
+.ty-card {
+    max-width: 46rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ty-icon {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1.2rem;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.ty-card h1 {
+    margin: 0 0 0.85rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.ty-lead {
+    margin: 0 0 0.85rem !important;
+    color: var(--ty-cream) !important;
+    font-size: 1.18rem !important;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.ty-card p {
+    margin: 0 0 1.5rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.ty-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 0.45rem;
+    background: var(--ty-cream);
+    color: var(--ty-navy);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 12px 24px rgba(10, 16, 40, 0.18);
+}
+
+.ty-cta:hover {
+    background: #fff;
+    color: var(--ty-navy-deep);
+}
+
+@media (max-width: 640px) {
+    .ty-hero {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .ty-card h1 {
+        font-size: 1.85rem;
+    }
+}

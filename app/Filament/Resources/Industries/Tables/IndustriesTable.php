@@ -25,6 +25,11 @@ class IndustriesTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
+                TextColumn::make('published_at')
+                    ->label('Published')
+                    ->dateTime()
+                    ->sortable()
+                    ->placeholder('—'),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -37,7 +42,7 @@ class IndustriesTable
                         'published' => 'Published',
                     ]),
             ])
-            ->defaultSort('updated_at', 'desc')
+            ->defaultSort(fn ($query) => $query->latest())
             ->searchPlaceholder('Search industries, slugs, and templates')
             ->emptyStateIcon('heroicon-o-building-office-2')
             ->emptyStateHeading('No industries yet')

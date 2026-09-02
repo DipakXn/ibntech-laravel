@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav class="blog-pagination__nav" aria-label="Blog category pagination">
+    <nav class="blog-pagination__nav" aria-label="{{ $label ?? 'Pagination' }}">
         <ul class="blog-pagination__list">
             @if ($paginator->onFirstPage())
                 <li class="blog-pagination__item is-disabled" aria-disabled="true">

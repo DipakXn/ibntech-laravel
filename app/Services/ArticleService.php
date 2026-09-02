@@ -11,12 +11,11 @@ class ArticleService
     public function __construct(
         protected ArticleRepository $articles,
         protected SeoService $seoService,
-    ) {
-    }
+    ) {}
 
-    public function paginatePublished(): LengthAwarePaginator
+    public function paginatePublished(int $page = 1, ?string $path = null, int $perPage = 9): LengthAwarePaginator
     {
-        return $this->articles->paginatePublished();
+        return $this->articles->paginatePublished($perPage, $page, $path);
     }
 
     public function getPublishedBySlug(string $slug): ?Article

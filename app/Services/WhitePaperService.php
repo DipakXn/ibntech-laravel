@@ -11,12 +11,11 @@ class WhitePaperService
     public function __construct(
         protected WhitePaperRepository $whitePapers,
         protected SeoService $seoService,
-    ) {
-    }
+    ) {}
 
-    public function paginatePublished(): LengthAwarePaginator
+    public function paginatePublished(int $page = 1, ?string $path = null, int $perPage = 9): LengthAwarePaginator
     {
-        return $this->whitePapers->paginatePublished();
+        return $this->whitePapers->paginatePublished($perPage, $page, $path);
     }
 
     public function getPublishedBySlug(string $slug): ?WhitePaper

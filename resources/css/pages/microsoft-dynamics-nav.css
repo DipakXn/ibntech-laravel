@@ -1,3 +1,267 @@
-/* Microsoft Dynamics Nav page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Microsoft Dynamics Nav — matched to WordPress screenshot */
+
+.mdn-page {
+    --mdn-navy: #322b6e;
+    --mdn-navy-hover: #271f58;
+    --mdn-heading: #333;
+    --mdn-gold: #c4a035;
+    --mdn-ink: #1f1d1d;
+    --mdn-muted: #4a4a4a;
+    color: var(--mdn-ink);
+    background: #fff;
+}
+
+.mdn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.55rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    background: var(--mdn-navy);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.mdn-btn:visited {
+    color: #fff;
+}
+
+.mdn-btn:hover,
+.mdn-btn:focus-visible {
+    background: var(--mdn-navy-hover);
+    border-color: var(--mdn-navy-hover);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.mdn-btn:focus-visible {
+    outline: 2px solid var(--mdn-navy);
+    outline-offset: 3px;
+}
+
+/* Hero */
+.mdn-hero {
+    position: relative;
+    overflow: hidden;
+    background: #f0f7fa;
+}
+
+.mdn-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    gap: 2.5rem 3rem;
+    align-items: center;
+    padding: 5.5rem 0 5rem;
+}
+
+.mdn-hero__copy {
+    max-width: 34rem;
+}
+
+.mdn-hero__eyebrow {
+    margin: 0 0 0.7rem;
+    color: var(--mdn-gold);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.mdn-hero__copy h1 {
+    margin: 0 0 1.6rem;
+    color: var(--mdn-heading);
+    font-size: clamp(2.05rem, 4vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.mdn-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: end;
+}
+
+.mdn-hero__media img,
+.mdn-split__media img {
+    display: block;
+    width: 100%;
+    max-width: 35rem;
+    height: auto;
+}
+
+/* Split content */
+.mdn-split {
+    padding: 5.5rem 0;
+    background: #fff;
+}
+
+.mdn-split--last {
+    padding-bottom: 6.25rem;
+}
+
+.mdn-split__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.5rem 3.5rem;
+    align-items: center;
+}
+
+.mdn-split--reverse .mdn-split__inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+}
+
+.mdn-split--last .mdn-split__inner {
+    align-items: start;
+}
+
+.mdn-split__media {
+    display: flex;
+    justify-content: center;
+}
+
+.mdn-split__media--tall img {
+    max-width: 28rem;
+}
+
+.mdn-split__copy h2 {
+    margin: 0 0 1.05rem;
+    color: var(--mdn-heading);
+    font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.mdn-split__copy p {
+    margin: 0 0 1rem;
+    color: var(--mdn-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.mdn-split__copy p:last-of-type {
+    margin-bottom: 0;
+}
+
+.mdn-split__copy .mdn-btn {
+    margin-top: 1.5rem;
+}
+
+.mdn-split__copy a:not(.mdn-btn) {
+    color: var(--mdn-navy);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.mdn-split__copy a:not(.mdn-btn):hover {
+    color: var(--mdn-navy-hover);
+}
+
+.mdn-capabilities {
+    display: grid;
+    gap: 1.05rem;
+    margin: 0.35rem 0 0.25rem;
+}
+
+.mdn-capability h3 {
+    margin: 0 0 0.2rem;
+    color: var(--mdn-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mdn-capability p {
+    margin: 0;
+    color: var(--mdn-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mdn-btn,
+    .mdn-btn:hover,
+    .mdn-btn:focus-visible {
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 960px) {
+    .mdn-hero__inner,
+    .mdn-split__inner,
+    .mdn-split--reverse .mdn-split__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .mdn-hero__inner {
+        padding: 3rem 0 2.5rem;
+        text-align: center;
+    }
+
+    .mdn-hero__copy {
+        max-width: none;
+    }
+
+    .mdn-hero__media {
+        justify-self: center;
+        width: min(100%, 22rem);
+    }
+
+    .mdn-split {
+        padding: 2.75rem 0;
+    }
+
+    .mdn-split--last {
+        padding-bottom: 3.5rem;
+    }
+
+    .mdn-split__copy .mdn-btn {
+        margin-top: 1.25rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .mdn-hero__inner {
+        padding: 2.35rem 0 2rem;
+    }
+
+    .mdn-hero__eyebrow {
+        font-size: 0.95rem;
+    }
+
+    .mdn-hero__copy h1 {
+        font-size: clamp(1.7rem, 7.5vw, 2.15rem);
+        margin-bottom: 1.35rem;
+    }
+
+    .mdn-btn {
+        width: 100%;
+        max-width: 24rem;
+    }
+
+    .mdn-hero__copy .mdn-btn {
+        margin-inline: auto;
+    }
+
+    .mdn-split {
+        padding: 2.15rem 0;
+    }
+
+    .mdn-split--last {
+        padding-bottom: 3rem;
+    }
+
+    .mdn-split__copy p,
+    .mdn-capability p {
+        font-size: 0.95rem;
+    }
+}

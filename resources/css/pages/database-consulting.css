@@ -1,3 +1,569 @@
-/* Database Consulting page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Database Consulting — matched to WordPress screenshot */
+
+.dbc-page {
+    --dbc-navy: #2e2e80;
+    --dbc-navy-deep: #1f1f5c;
+    --dbc-green: #4caf50;
+    --dbc-green-dark: #3d9140;
+    --dbc-ink: #1f1d1d;
+    --dbc-muted: #5a5a5a;
+    --dbc-soft: #f5f7f8;
+    --dbc-cream: #fff9c4;
+    --dbc-line: rgba(46, 46, 128, 0.12);
+    --dbc-check: #4faaf5;
+    color: var(--dbc-ink);
+    background: #fff;
+}
+
+.dbc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.75rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.dbc-btn:hover {
+    transform: translateY(-1px);
+}
+
+.dbc-btn:focus-visible {
+    outline: 2px solid var(--dbc-green);
+    outline-offset: 3px;
+}
+
+.dbc-btn--green {
+    background: var(--dbc-green);
+    border-color: var(--dbc-green);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.28);
+}
+
+.dbc-btn--green:hover,
+.dbc-btn--green:focus-visible {
+    background: var(--dbc-green-dark);
+    border-color: var(--dbc-green-dark);
+    color: #fff;
+}
+
+.dbc-btn--navy {
+    background: var(--dbc-navy);
+    border-color: var(--dbc-navy);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.22);
+}
+
+.dbc-btn--navy:hover,
+.dbc-btn--navy:focus-visible {
+    background: var(--dbc-green);
+    border-color: var(--dbc-green);
+    color: #fff;
+}
+
+/* Hero */
+.dbc-hero {
+    color: #fff;
+    background-image: linear-gradient(230deg, #4caf50 6%, #1a237e 72%);
+    overflow: hidden;
+}
+
+.dbc-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 3.5rem 0 3.75rem;
+}
+
+.dbc-hero__copy {
+    max-width: 34rem;
+}
+
+.dbc-hero__eyebrow {
+    margin: 0 0 0.85rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+}
+
+.dbc-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.1rem, 4vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+}
+
+.dbc-hero__lede {
+    margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+    max-width: 32rem;
+}
+
+.dbc-hero__actions {
+    margin-top: 1.5rem;
+}
+
+.dbc-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dbc-hero__media img {
+    width: 85%;
+    max-width: 28rem;
+    height: auto;
+    mix-blend-mode: lighten;
+}
+
+/* Sections */
+.dbc-section {
+    padding: 4.25rem 0;
+}
+
+.dbc-section--soft {
+    background: var(--dbc-soft);
+}
+
+.dbc-section__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.75rem;
+}
+
+.dbc-heading {
+    text-align: center;
+    max-width: 46rem;
+    margin: 0 auto 1.75rem;
+}
+
+.dbc-heading h2 {
+    margin: 0;
+    color: var(--dbc-navy);
+    font-size: clamp(1.7rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.dbc-heading p {
+    margin: 0.85rem 0 0;
+    color: var(--dbc-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Split layouts */
+.dbc-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.dbc-split__media {
+    display: flex;
+    justify-content: center;
+}
+
+.dbc-split__media img {
+    width: 100%;
+    max-width: 26rem;
+    height: auto;
+}
+
+.dbc-split__media--photo img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.35rem;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.14);
+}
+
+.dbc-split__copy p {
+    margin: 0;
+    color: var(--dbc-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.dbc-split__copy h2 {
+    margin: 0 0 1rem;
+    color: var(--dbc-navy);
+    font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.dbc-split__copy .dbc-btn {
+    margin-top: 1.35rem;
+}
+
+.dbc-split__copy a:not(.dbc-btn) {
+    color: var(--dbc-navy);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.dbc-split__copy a:not(.dbc-btn):hover {
+    color: var(--dbc-green);
+}
+
+.dbc-scope {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.dbc-scope p {
+    margin: 0;
+}
+
+.dbc-scope p + p {
+    margin: 0;
+}
+
+.dbc-split__copy .dbc-scope + .dbc-btn,
+.dbc-split__copy p + .dbc-list,
+.dbc-split__copy p + .dbc-scope {
+    margin-top: 1rem;
+}
+
+.dbc-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.dbc-list li {
+    position: relative;
+    padding-left: 1.55rem;
+    color: var(--dbc-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.dbc-list li::before {
+    content: '';
+    position: absolute;
+    top: 0.35rem;
+    left: 0;
+    width: 0.85rem;
+    height: 0.85rem;
+    background-color: var(--dbc-check);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9.55 18.2 3.4 12.05l1.4-1.4 4.75 4.75L19.2 5.75l1.4 1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9.55 18.2 3.4 12.05l1.4-1.4 4.75 4.75L19.2 5.75l1.4 1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Highlight cards */
+.dbc-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.dbc-highlight {
+    background: var(--dbc-cream);
+    border-radius: 0.75rem;
+    padding: 1.75rem 1.5rem 1.6rem;
+    height: 100%;
+}
+
+.dbc-highlight img {
+    display: block;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    margin: 0 0 0.85rem;
+}
+
+.dbc-highlight h3 {
+    margin: 0 0 0.65rem;
+    color: var(--dbc-navy);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.dbc-highlight p {
+    margin: 0;
+    color: var(--dbc-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Closing */
+.dbc-closing {
+    padding-top: 1.5rem;
+}
+
+.dbc-closing__inner {
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dbc-closing__inner h2 {
+    margin: 0 0 1rem;
+    color: var(--dbc-navy);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.dbc-closing__inner p {
+    margin: 0 0 1.15rem;
+    color: var(--dbc-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+/* Contact */
+.dbc-consult {
+    padding-top: 1rem;
+    padding-bottom: 3.25rem;
+    scroll-margin-top: 6rem;
+}
+
+.dbc-consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+.dbc-consult__card {
+    border-radius: 0.75rem;
+    overflow: visible;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+.dbc-consult__header {
+    background: var(--dbc-navy);
+    color: #fff;
+    text-align: center;
+    padding: 1.25rem 1.25rem 1.1rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.dbc-consult__header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.dbc-consult__header p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.dbc-consult__body {
+    position: relative;
+    padding: 1.15rem 1.25rem 1.35rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: #fff;
+    overflow: visible;
+}
+
+.dbc-consult__body .contact-form {
+    gap: 0.7rem;
+}
+
+.dbc-consult__body .contact-form__row {
+    gap: 0.7rem;
+}
+
+.dbc-consult__body .contact-form select,
+.dbc-consult__body .contact-form input:not([type='checkbox']):not([type='hidden']),
+.dbc-consult__body .contact-form textarea,
+.dbc-consult__body .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.dbc-consult__body .contact-form__field--message {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.dbc-consult__body .contact-form select:focus,
+.dbc-consult__body .contact-form input:focus,
+.dbc-consult__body .contact-form textarea:focus,
+.dbc-consult__body .phone-input-field .iti__tel-input:focus {
+    outline-color: rgba(46, 46, 128, 0.35);
+    border-color: rgba(46, 46, 128, 0.45);
+}
+
+.dbc-consult__body .contact-form__terms,
+.dbc-consult__body .contact-form__terms span {
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.dbc-consult__body .contact-form__terms a {
+    color: var(--dbc-navy);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.dbc-consult__body .contact-form__terms {
+    position: relative;
+}
+
+.dbc-consult__body .consent-tooltip {
+    position: static;
+}
+
+.dbc-consult__body .consent-tooltip__content {
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+}
+
+.dbc-consult__body .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: var(--dbc-navy);
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.dbc-consult__body .contact-form__submit:hover {
+    background: var(--dbc-navy-deep);
+}
+
+.dbc-consult__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dbc-consult__media img {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+.dbc-btn:focus-visible,
+.dbc-consult__body .contact-form__submit:focus-visible {
+    outline: 2px solid var(--dbc-green);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dbc-btn,
+    .dbc-consult__body .contact-form__submit {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .dbc-hero__inner,
+    .dbc-split,
+    .dbc-consult__inner {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .dbc-hero__inner {
+        padding: 3.25rem 0 3.5rem;
+        text-align: center;
+    }
+
+    .dbc-hero__copy {
+        max-width: none;
+    }
+
+    .dbc-hero__lede {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .dbc-hero__media img {
+        width: 70%;
+    }
+
+    .dbc-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dbc-consult__media {
+        order: -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .dbc-section {
+        padding: 2rem 0;
+    }
+
+    .dbc-consult__body .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+
+    .dbc-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .dbc-highlight {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .dbc-btn {
+        width: 100%;
+        text-align: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .dbc-hero__actions,
+    .dbc-section__cta,
+    .dbc-split__copy .dbc-btn,
+    .dbc-closing__inner .dbc-btn {
+        width: 100%;
+    }
+
+    .dbc-consult {
+        padding-bottom: 3.25rem;
+    }
+}

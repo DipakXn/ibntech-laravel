@@ -1,3 +1,626 @@
-/* Outsource Construction Engineering Services page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Outsource Construction Engineering Services — WordPress XML content + PNG layout */
+
+.rces-page {
+    --rces-navy: #2e2e80;
+    --rces-navy-deep: #1a237e;
+    --rces-green: #4caf50;
+    --rces-green-soft: #61bd75;
+    --rces-green-dark: #3d9140;
+    --rces-ink: #1f1d1d;
+    --rces-muted: #5f6470;
+    --rces-cream: #f6f0de;
+    --rces-line: rgba(46, 46, 128, 0.12);
+    color: var(--rces-ink);
+    background: #fff;
+}
+
+.rces-page [x-cloak] {
+    display: none !important;
+}
+
+.rces-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.85rem 1.45rem;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.rces-btn:hover {
+    transform: translateY(-1px);
+}
+
+.rces-btn--navy {
+    background: var(--rces-navy);
+    border-color: var(--rces-navy);
+    color: #fff;
+}
+
+.rces-btn--navy:hover {
+    background: var(--rces-green);
+    border-color: var(--rces-green);
+    color: #fff;
+}
+
+.rces-heading {
+    max-width: 46rem;
+    margin: 0 auto 2.15rem;
+    text-align: center;
+}
+
+.rces-heading h2 {
+    margin: 0;
+    color: var(--rces-navy);
+    font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.rces-heading p {
+    margin: 0.85rem 0 0;
+    color: var(--rces-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+/* Hero */
+.rces-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(125deg, #1a237e 0%, #283583 42%, #3d9140 78%, #4caf50 100%);
+}
+
+.rces-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.78fr);
+    gap: 2.4rem 2.75rem;
+    align-items: center;
+    padding: 4.25rem 0 3.75rem;
+}
+
+.rces-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.rces-hero__copy > p {
+    max-width: 36rem;
+    margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.rces-hero__items {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.45rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.rces-hero__items li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.rces-hero__check {
+    display: grid;
+    place-items: center;
+    width: 1.45rem;
+    height: 1.45rem;
+    color: #fff;
+    flex: 0 0 auto;
+}
+
+.rces-hero__check svg {
+    width: 1.45rem;
+    height: 1.45rem;
+}
+
+.rces-hero__form {
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+    scroll-margin-top: 6rem;
+    border-radius: 0.65rem;
+    background: #fff;
+    padding: 1.4rem 1.25rem 1.3rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.26);
+    color: var(--rces-ink);
+}
+
+.rces-hero__form h2 {
+    margin: 0;
+    color: var(--rces-navy);
+    font-size: clamp(1.12rem, 1.8vw, 1.32rem);
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.rces-hero__form > p {
+    margin: 0.45rem 0 1rem;
+    color: var(--rces-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.rces-hero__form .contact-form {
+    overflow: visible;
+    gap: 0.65rem;
+}
+
+.rces-hero__form .contact-form__row {
+    grid-template-columns: 1fr;
+}
+
+.rces-hero__form .contact-form__field:has(.phone-input-field) {
+    z-index: 40;
+}
+
+.rces-hero__form .phone-input-field .iti__dropdown-content,
+.rces-hero__form .phone-input-field .iti__country-list {
+    z-index: 60 !important;
+}
+
+.rces-hero__form .contact-form__field input,
+.rces-hero__form .contact-form__field select,
+.rces-hero__form .contact-form__field textarea,
+.rces-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #d0d5dd !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    color: #172033 !important;
+    font-size: 0.9rem !important;
+}
+
+.rces-hero__form .contact-form textarea {
+    min-height: 4.4rem;
+}
+
+.rces-hero__form .contact-form__field--message {
+    background: #fff;
+}
+
+.rces-hero__form .contact-form__terms,
+.rces-hero__form .contact-form__terms span {
+    color: var(--rces-muted);
+    font-size: 0.76rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.rces-hero__form .contact-form__terms a {
+    color: var(--rces-navy) !important;
+    font-weight: 700;
+}
+
+.rces-hero__form .contact-form__submit {
+    margin-top: 0.1rem;
+    width: 100%;
+    border: 0;
+    border-radius: 4px;
+    background: var(--rces-navy);
+    color: #fff;
+    padding: 0.9rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: none;
+}
+
+.rces-hero__form .contact-form__submit:hover {
+    background: var(--rces-green);
+}
+
+/* Intro */
+.rces-intro {
+    background: var(--rces-cream);
+    padding: 4.1rem 0;
+}
+
+.rces-intro__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem 3rem;
+    align-items: center;
+}
+
+.rces-intro__copy h2 {
+    margin: 0;
+    color: var(--rces-navy);
+    font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.28;
+}
+
+.rces-intro__copy p {
+    margin: 1.05rem 0 0;
+    color: var(--rces-ink);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.rces-intro__copy .rces-btn {
+    margin-top: 1.45rem;
+}
+
+.rces-intro__media {
+    display: grid;
+    place-items: center;
+}
+
+.rces-intro__media img {
+    display: block;
+    width: min(100%, 32rem);
+    height: auto;
+}
+
+/* Services tabs */
+.rces-services {
+    padding: 4.25rem 0 4.1rem;
+    background: #fff;
+}
+
+.rces-tabs {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.78fr) minmax(0, 1.22fr);
+    gap: 1.35rem 1.6rem;
+    align-items: stretch;
+}
+
+.rces-tabs__nav {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+}
+
+.rces-tabs__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 3.4rem;
+    padding: 0.85rem 1.05rem;
+    border: 1px solid var(--rces-green);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--rces-navy);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: left;
+    cursor: pointer;
+}
+
+.rces-tabs__btn.is-active {
+    background: var(--rces-green);
+    border-color: var(--rces-green);
+    color: #fff;
+}
+
+.rces-tabs__chevron {
+    width: 0.7rem;
+    height: 0.7rem;
+    flex: 0 0 auto;
+    transform: rotate(-90deg);
+}
+
+.rces-tabs__btn.is-active .rces-tabs__chevron {
+    transform: rotate(-90deg);
+}
+
+.rces-tabs__panel {
+    min-height: 100%;
+    border-radius: 0.65rem;
+    background: var(--rces-green);
+    color: #fff;
+    padding: 1.7rem 1.65rem 1.55rem;
+}
+
+.rces-tabs__panel p {
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.rces-tabs__panel ul {
+    display: grid;
+    gap: 0.7rem;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.rces-tabs__panel li {
+    position: relative;
+    padding-left: 1.15rem;
+    color: #fff;
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+.rces-tabs__panel li::before {
+    content: "";
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: #fff;
+}
+
+.rces-tabs__panel .rces-btn {
+    margin-top: 1.35rem;
+}
+
+/* Software */
+.rces-software {
+    padding: 3.4rem 0;
+    background-color: #f3f4f6;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 12px,
+        rgba(46, 46, 128, 0.035) 12px,
+        rgba(46, 46, 128, 0.035) 13px
+    );
+}
+
+.rces-software__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1.75rem 2.5rem;
+    align-items: center;
+}
+
+.rces-software__inner h2 {
+    margin: 0;
+    color: var(--rces-navy);
+    font-size: clamp(1.25rem, 2.3vw, 1.7rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.rces-software__carousel {
+    min-width: 0;
+}
+
+.rces-software__viewport {
+    overflow: hidden;
+}
+
+.rces-software__track {
+    display: flex;
+    width: 200%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: transform 0.35s ease;
+}
+
+.rces-software__track li {
+    display: grid;
+    place-items: center;
+    flex: 0 0 12.5%;
+    min-height: 4.5rem;
+    padding: 0.35rem 0.7rem;
+}
+
+.rces-software__track img {
+    display: block;
+    width: auto;
+    max-width: 8.5rem;
+    height: auto;
+    max-height: 3rem;
+    object-fit: contain;
+}
+
+.rces-software__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-top: 0.85rem;
+}
+
+.rces-software__dots button {
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: #c5c9d4;
+    cursor: pointer;
+}
+
+.rces-software__dots button.is-active {
+    background: var(--rces-navy);
+}
+
+/* What sets us apart */
+.rces-apart {
+    padding: 4.25rem 0 4rem;
+    background: #fff;
+}
+
+.rces-apart__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 1.15rem 1.35rem;
+}
+
+.rces-apart__card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    border: 1px solid var(--rces-line);
+    border-radius: 0.55rem;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(20, 31, 78, 0.05);
+    padding: 1.15rem 1.2rem;
+}
+
+.rces-apart__num {
+    display: grid;
+    place-items: center;
+    width: 3.1rem;
+    height: 3.1rem;
+    border-radius: 999px;
+    background: var(--rces-num);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.rces-apart__card h3 {
+    margin: 0;
+    color: var(--rces-navy);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.rces-apart__card p {
+    margin: 0.35rem 0 0;
+    color: var(--rces-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Onboard */
+.rces-onboard {
+    padding: 1.5rem 0 4.25rem;
+    background: #fff;
+}
+
+.rces-onboard__graphic {
+    display: block;
+    width: 100%;
+    max-width: 68rem;
+    height: auto;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .rces-hero__inner,
+    .rces-intro__inner,
+    .rces-tabs,
+    .rces-software__inner {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+
+    .rces-hero__form {
+        max-width: 32rem;
+        justify-self: center;
+        width: 100%;
+    }
+
+    .rces-tabs__chevron {
+        transform: none;
+    }
+
+    .rces-apart__grid {
+        grid-auto-flow: row;
+        grid-template-rows: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .rces-hero__inner,
+    .rces-intro,
+    .rces-services,
+    .rces-software,
+    .rces-apart,
+    .rces-onboard {
+        padding-top: 2.35rem;
+        padding-bottom: 2.35rem;
+    }
+
+    .rces-hero__copy,
+    .rces-intro__copy,
+    .rces-heading {
+        text-align: center;
+    }
+
+    .rces-hero__copy > p,
+    .rces-hero__items {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .rces-hero__items li {
+        text-align: left;
+    }
+
+    .rces-apart__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rces-software__track {
+        width: 100% !important;
+        flex-wrap: wrap;
+        transform: none !important;
+    }
+
+    .rces-software__track li {
+        flex: 0 0 50%;
+    }
+
+    .rces-software__dots {
+        display: none;
+    }
+
+    .rces-hero__form iframe {
+        transform: scale(0.86);
+        transform-origin: left top;
+    }
+
+    .rces-hero__form .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rces-btn,
+    .rces-software__track {
+        transition: none;
+    }
+
+    .rces-btn:hover {
+        transform: none;
+    }
+}

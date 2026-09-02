@@ -1,3 +1,775 @@
-/* Hospitality page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Hospitality — matched to WordPress screenshot */
+
+.hosp-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.hosp-page {
+    --hosp-navy: #2e2e80;
+    --hosp-navy-deep: #1e266d;
+    --hosp-green: #4caf50;
+    --hosp-green-dark: #3d9140;
+    --hosp-ink: #1f1d1d;
+    --hosp-muted: #5b6170;
+    --hosp-soft: #f4f6f8;
+    --hosp-cream: #fffad3;
+    --hosp-line: rgba(46, 46, 128, 0.12);
+    color: var(--hosp-ink);
+    background: #fff;
+}
+
+.hosp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.65rem;
+    border-radius: 0.35rem;
+    border: 1px solid transparent;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hosp-btn:hover {
+    transform: translateY(-1px);
+}
+
+.hosp-btn:focus-visible {
+    outline: 2px solid var(--hosp-green);
+    outline-offset: 3px;
+}
+
+.hosp-btn--navy {
+    background: var(--hosp-navy-deep);
+    border-color: var(--hosp-navy-deep);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(30, 38, 109, 0.2);
+}
+
+.hosp-btn--navy:hover,
+.hosp-btn--navy:focus-visible {
+    background: var(--hosp-navy);
+    border-color: var(--hosp-navy);
+    color: #fff;
+}
+
+.hosp-btn--green {
+    background: var(--hosp-green);
+    border-color: var(--hosp-green);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.22);
+}
+
+.hosp-btn--green:hover,
+.hosp-btn--green:focus-visible {
+    background: var(--hosp-navy);
+    border-color: var(--hosp-navy);
+    color: #fff;
+}
+
+.hosp-section {
+    padding: 4rem 0;
+}
+
+.hosp-section--tight {
+    padding-top: 1.25rem;
+}
+
+.hosp-section--soft {
+    background: var(--hosp-soft);
+}
+
+.hosp-heading {
+    max-width: 46rem;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+
+.hosp-heading h2 {
+    margin: 0;
+    color: var(--hosp-navy-deep);
+    font-size: clamp(1.7rem, 2.8vw, 2.15rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.hosp-heading__sub {
+    margin: 0.45rem 0 0;
+    color: var(--hosp-navy);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+/* Hero */
+.hosp-hero {
+    position: relative;
+    overflow: hidden;
+    background: #f4f6f8;
+}
+
+.hosp-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 12% 20%, rgba(79, 170, 245, 0.1), transparent 28%),
+        radial-gradient(circle at 88% 80%, rgba(76, 175, 80, 0.06), transparent 26%),
+        linear-gradient(rgba(46, 46, 128, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46, 46, 128, 0.035) 1px, transparent 1px);
+    background-size: auto, auto, 56px 56px, 56px 56px;
+    pointer-events: none;
+}
+
+.hosp-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 4rem 0 3.5rem;
+}
+
+.hosp-hero__copy {
+    max-width: 36rem;
+}
+
+.hosp-hero__eyebrow {
+    margin: 0 0 0.85rem;
+    color: var(--hosp-navy-deep);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.hosp-hero__copy h1 {
+    margin: 0;
+    color: var(--hosp-navy-deep);
+    font-size: clamp(2.05rem, 4vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.hosp-hero__lede {
+    margin: 1.1rem 0 0;
+    color: var(--hosp-muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.7;
+    max-width: 34rem;
+}
+
+.hosp-hero__actions {
+    margin-top: 1.75rem;
+}
+
+.hosp-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hosp-hero__media img {
+    width: 100%;
+    max-width: 28.5rem;
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply;
+}
+
+/* Split layouts */
+.hosp-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.75rem;
+    align-items: center;
+}
+
+.hosp-split + .hosp-split {
+    margin-top: 3.5rem;
+}
+
+.hosp-split--flip .hosp-split__copy {
+    order: 2;
+}
+
+.hosp-split--flip .hosp-split__media {
+    order: 1;
+}
+
+.hosp-split__media {
+    display: flex;
+    justify-content: center;
+}
+
+.hosp-split__media img {
+    display: block;
+    width: 100%;
+    max-width: 32rem;
+    height: auto;
+    border-radius: 0.45rem;
+    object-fit: cover;
+}
+
+.hosp-split__copy h3 {
+    margin: 0 0 1rem;
+    color: var(--hosp-navy-deep);
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.hosp-split__copy p {
+    margin: 0 0 1rem;
+    color: var(--hosp-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.hosp-split__copy p:last-of-type {
+    margin-bottom: 0;
+}
+
+.hosp-split__copy strong {
+    color: var(--hosp-ink);
+    font-weight: 700;
+}
+
+.hosp-split__copy .hosp-btn {
+    margin-top: 1.35rem;
+}
+
+/* Stats */
+.hosp-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.hosp-stat {
+    display: grid;
+    place-content: center;
+    min-height: 7.5rem;
+    padding: 1.1rem 0.85rem;
+    border: 2px solid var(--hosp-green);
+    border-radius: 0 40px 1px 40px;
+    text-align: center;
+}
+
+.hosp-stat--light {
+    background: #fff;
+}
+
+.hosp-stat--navy {
+    background: var(--hosp-navy);
+    border-color: var(--hosp-navy);
+}
+
+.hosp-stat h3 {
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.03em;
+}
+
+.hosp-stat p {
+    margin: 0.25rem 0 0;
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.hosp-stat--light h3 {
+    color: #000;
+}
+
+.hosp-stat--light p {
+    color: var(--hosp-muted);
+}
+
+.hosp-stat--navy h3,
+.hosp-stat--navy p {
+    color: #fff;
+}
+
+/* Mid banner */
+.hosp-banner {
+    background: var(--hosp-navy-deep);
+    padding: 3.75rem 0;
+}
+
+.hosp-banner__inner {
+    max-width: 46rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hosp-banner h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.55rem, 3vw, 2.05rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+}
+
+.hosp-banner p {
+    margin: 0.85rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.hosp-banner .hosp-btn {
+    margin-top: 1.55rem;
+}
+
+/* Testimonials */
+.hosp-testimonials {
+    background: var(--hosp-cream);
+    padding: 3.25rem 0 3.75rem;
+}
+
+.hosp-testimonials__eyebrow {
+    margin: 0 0 0.45rem !important;
+    color: var(--hosp-green) !important;
+    font-size: 1.15rem !important;
+    font-weight: 600;
+}
+
+.hosp-testimonials .hosp-heading h2 {
+    color: var(--hosp-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+}
+
+.hosp-testimonials__carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    max-width: 52rem;
+    margin: 0 auto;
+}
+
+.hosp-testimonials__viewport {
+    display: grid;
+    align-items: stretch;
+    min-height: 10rem;
+    padding: 1.75rem 1.5rem 1.5rem;
+    background: #fff;
+    border-radius: 0.45rem;
+    box-shadow: 0 8px 22px rgba(20, 30, 70, 0.06);
+}
+
+.hosp-testimonial {
+    grid-area: 1 / 1;
+    margin: 0;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 0;
+}
+
+.hosp-testimonial.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.hosp-testimonial p {
+    margin: 0;
+    color: var(--hosp-ink);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.hosp-testimonial cite {
+    display: block;
+    margin-top: 1.25rem;
+    color: var(--hosp-green);
+    font-style: normal;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hosp-testimonials__nav {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--hosp-green);
+    cursor: pointer;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.hosp-testimonials__nav svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: currentColor;
+}
+
+.hosp-testimonials__nav:hover {
+    color: var(--hosp-navy);
+}
+
+/* FAQ */
+.hosp-faq {
+    max-width: 52rem;
+    margin: 0 auto;
+}
+
+.hosp-faq details {
+    margin: 0 0 0.75rem;
+    border: 1px solid rgba(46, 46, 128, 0.16);
+    border-radius: 0.35rem;
+    background: #fff;
+}
+
+.hosp-faq details:last-child {
+    margin-bottom: 0;
+}
+
+.hosp-faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.15rem;
+    color: var(--hosp-navy-deep);
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.hosp-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.hosp-faq summary::after {
+    content: '+';
+    flex: 0 0 auto;
+    width: 1.55rem;
+    height: 1.55rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.2rem;
+    background: var(--hosp-navy);
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.hosp-faq details[open] summary::after {
+    content: '–';
+    background: #111;
+}
+
+.hosp-faq details > div {
+    padding: 0 1.15rem 1.05rem;
+    color: var(--hosp-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    border-top: 1px solid rgba(46, 46, 128, 0.08);
+}
+
+/* Consult */
+.hosp-consult {
+    padding-top: 3.25rem;
+    padding-bottom: 4.25rem;
+    scroll-margin-top: 6rem;
+}
+
+.hosp-consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+.hosp-consult__card {
+    border-radius: 0.75rem;
+    overflow: visible;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+    border: 1px solid var(--hosp-line);
+}
+
+.hosp-consult__header {
+    background: var(--hosp-navy);
+    color: #fff;
+    text-align: center;
+    padding: 1.25rem 1.25rem 1.1rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.hosp-consult__header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.hosp-consult__header p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.hosp-consult__body {
+    position: relative;
+    padding: 1.15rem 1.25rem 1.35rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: #fff;
+    overflow: visible;
+}
+
+.hosp-consult__body .contact-form {
+    gap: 0.65rem;
+}
+
+.hosp-consult__body .contact-form__row {
+    gap: 0.65rem;
+}
+
+.hosp-consult__body .contact-form select,
+.hosp-consult__body .contact-form input:not([type='checkbox']):not([type='hidden']),
+.hosp-consult__body .contact-form textarea,
+.hosp-consult__body .phone-input-field .iti__tel-input {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+    padding: 0.55rem 0.85rem;
+    min-height: 2.45rem;
+    font-size: 0.92rem;
+    line-height: 1.3;
+}
+
+.hosp-consult__body .contact-form textarea {
+    min-height: 3.5rem;
+    max-height: 5.5rem;
+    resize: vertical;
+}
+
+.hosp-consult__body .contact-form__field--message {
+    border: 1px solid rgba(46, 46, 128, 0.2);
+    background: #fff;
+}
+
+.hosp-consult__body .contact-form select:focus,
+.hosp-consult__body .contact-form input:focus,
+.hosp-consult__body .contact-form textarea:focus,
+.hosp-consult__body .phone-input-field .iti__tel-input:focus {
+    outline-color: rgba(46, 46, 128, 0.35);
+    border-color: rgba(46, 46, 128, 0.45);
+}
+
+.hosp-consult__body .contact-form__terms,
+.hosp-consult__body .contact-form__terms span {
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.hosp-consult__body .contact-form__terms a {
+    color: var(--hosp-navy);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.hosp-consult__body .contact-form__terms {
+    position: relative;
+}
+
+.hosp-consult__body .consent-tooltip {
+    position: static;
+}
+
+.hosp-consult__body .consent-tooltip__content {
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+}
+
+.hosp-consult__body .contact-form__submit {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: var(--hosp-navy);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hosp-consult__body .contact-form__submit:hover {
+    background: var(--hosp-navy-deep);
+}
+
+.hosp-consult__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hosp-consult__media img {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+}
+
+.hosp-btn:focus-visible,
+.hosp-consult__body .contact-form__submit:focus-visible {
+    outline: 2px solid var(--hosp-green);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hosp-btn,
+    .hosp-testimonial,
+    .hosp-consult__body .contact-form__submit {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hosp-hero__inner,
+    .hosp-split,
+    .hosp-consult__inner {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .hosp-hero__inner {
+        padding: 3rem 0 2.5rem;
+    }
+
+    .hosp-hero__copy {
+        max-width: none;
+        text-align: center;
+    }
+
+    .hosp-hero__lede {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hosp-hero__actions {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hosp-hero__media img {
+        max-width: 22rem;
+    }
+
+    .hosp-split--flip .hosp-split__copy,
+    .hosp-split--flip .hosp-split__media {
+        order: unset;
+    }
+
+    .hosp-split__media {
+        order: -1;
+    }
+
+    .hosp-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hosp-consult__media {
+        order: -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .hosp-section,
+    .hosp-banner,
+    .hosp-testimonials,
+    .hosp-consult {
+        padding: 2.5rem 0;
+    }
+
+    .hosp-hero__inner {
+        padding: 2.25rem 0 2rem;
+    }
+
+    .hosp-split + .hosp-split {
+        margin-top: 2.5rem;
+    }
+
+    .hosp-btn {
+        width: 100%;
+    }
+
+    .hosp-hero__actions,
+    .hosp-split__copy .hosp-btn,
+    .hosp-banner .hosp-btn {
+        width: 100%;
+    }
+
+    .hosp-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hosp-testimonials__carousel {
+        grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+        gap: 0.5rem;
+    }
+
+    .hosp-consult__header,
+    .hosp-consult__body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .hosp-consult__body .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+
+    .hosp-faq summary {
+        font-size: 0.95rem;
+        padding: 0.9rem 0.95rem;
+    }
+}

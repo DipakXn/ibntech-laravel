@@ -1,0 +1,30 @@
+---
+description: Prohibit destructive database resets unless the user explicitly approves them
+alwaysApply: true
+---
+
+# Database safety
+
+Do not run destructive database commands unless the user explicitly approves that exact action in the current conversation.
+
+Never run, generate, or suggest:
+
+- `php artisan migrate:fresh`
+- `php artisan migrate:refresh`
+- `php artisan migrate:reset`
+- `php artisan db:wipe`
+- `php artisan schema:drop-*` or dropping/recreating the database
+- Truncating tables to “reset” data
+- Deleting all rows, dropping tables, or rewriting migrations to destroy existing data
+
+Additive `php artisan migrate` is allowed. Prefer new migrations over editing old ones that already ran.
+
+```php
+// ❌ BAD — destroys existing CMS, blog, and media data
+php artisan migrate:fresh --seed
+
+// ✅ GOOD — additive schema only
+php artisan migrate
+```
+
+If a reset seems necessary, stop and ask for explicit approval first.

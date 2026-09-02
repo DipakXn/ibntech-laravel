@@ -1,3 +1,255 @@
-/* Fund Accounting Services page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Fund Accounting Services — matched to WordPress screenshot */
+
+.facs-page {
+    --facs-navy: #2e2e80;
+    --facs-navy-deep: #1f1f5c;
+    --facs-panel: #1a2744;
+    --facs-cream: #f6e7a0;
+    --facs-cream-dark: #edd98a;
+    --facs-ink: #1f1d1d;
+    --facs-muted: #5a5a5a;
+    color: var(--facs-ink);
+    background: #fff;
+}
+
+.facs-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.55rem;
+    border-radius: 0.35rem;
+    border: 1px solid transparent;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.facs-btn:hover,
+.facs-btn:focus-visible {
+    transform: translateY(-1px);
+}
+
+.facs-btn:focus-visible {
+    outline: 2px solid var(--facs-navy);
+    outline-offset: 3px;
+}
+
+.facs-btn--navy {
+    background: var(--facs-navy);
+    border-color: var(--facs-navy);
+    color: #fff;
+}
+
+.facs-btn--navy:hover,
+.facs-btn--navy:focus-visible {
+    background: var(--facs-navy-deep);
+    border-color: var(--facs-navy-deep);
+    color: #fff;
+}
+
+.facs-btn--cream {
+    background: var(--facs-cream);
+    border-color: var(--facs-cream);
+    color: var(--facs-navy-deep);
+}
+
+.facs-btn--cream:hover,
+.facs-btn--cream:focus-visible {
+    background: var(--facs-cream-dark);
+    border-color: var(--facs-cream-dark);
+    color: var(--facs-navy-deep);
+    outline-color: #fff;
+}
+
+/* Hero */
+.facs-hero {
+    background: #fff;
+}
+
+.facs-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.5rem 3rem;
+    align-items: center;
+    padding: 4.25rem 0 3.5rem;
+}
+
+.facs-hero__copy h1 {
+    margin: 0 0 1.65rem;
+    color: var(--facs-navy);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.facs-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.facs-hero__media img {
+    width: 100%;
+    max-width: 35rem;
+    height: auto;
+}
+
+/* Intro */
+.facs-intro {
+    background: #fff;
+    padding: 2.5rem 0 3.75rem;
+}
+
+.facs-intro__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.75rem 3.25rem;
+    align-items: center;
+}
+
+.facs-intro__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.facs-intro__copy h2 {
+    margin: 0 0 1.1rem;
+    color: var(--facs-navy);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.facs-intro__copy p {
+    margin: 0 0 1rem;
+    color: var(--facs-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.facs-intro__copy p:last-of-type {
+    margin-bottom: 1.6rem;
+}
+
+/* Solutions panel */
+.facs-panel {
+    background: #fff;
+    padding: 1.25rem 0 4.5rem;
+}
+
+.facs-panel__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.25rem 2.5rem;
+    align-items: center;
+}
+
+.facs-panel__copy {
+    background: var(--facs-panel);
+    color: #fff;
+    padding: 2.5rem 2.25rem 2.25rem;
+}
+
+.facs-panel__copy ul {
+    margin: 0 0 1.75rem;
+    padding: 0 0 0 1.35rem;
+    display: grid;
+    gap: 1.15rem;
+    list-style: disc;
+}
+
+.facs-panel__copy li {
+    color: #fff;
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.facs-panel__copy li::marker {
+    color: #fff;
+}
+
+.facs-panel__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.facs-panel__media img {
+    width: 100%;
+    max-width: 36rem;
+    height: auto;
+}
+
+@media (max-width: 960px) {
+    .facs-hero__inner,
+    .facs-intro__inner,
+    .facs-panel__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .facs-hero__inner {
+        padding: 3rem 0 2.5rem;
+        text-align: center;
+    }
+
+    .facs-hero__copy h1 {
+        margin-bottom: 1.35rem;
+    }
+
+    .facs-hero__media img,
+    .facs-panel__media img {
+        max-width: 26rem;
+        margin-inline: auto;
+    }
+
+    .facs-intro {
+        padding: 1.5rem 0 2.75rem;
+    }
+
+    .facs-intro__copy {
+        text-align: left;
+    }
+
+    .facs-panel {
+        padding-bottom: 3.25rem;
+    }
+
+    .facs-panel__copy {
+        padding: 2rem 1.5rem 1.75rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .facs-hero__copy h1 {
+        font-size: 1.75rem;
+    }
+
+    .facs-btn {
+        width: 100%;
+        max-width: 22rem;
+        padding: 0.9rem 1.25rem;
+    }
+
+    .facs-hero__inner {
+        padding: 2.25rem 0 1.75rem;
+    }
+
+    .facs-intro__copy h2 {
+        font-size: 1.35rem;
+    }
+
+    .facs-panel__copy {
+        padding: 1.65rem 1.2rem 1.5rem;
+    }
+
+    .facs-panel__copy li {
+        font-size: 0.95rem;
+    }
+}

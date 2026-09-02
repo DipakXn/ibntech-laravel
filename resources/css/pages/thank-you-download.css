@@ -1,3 +1,75 @@
-/* Thank You Download page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Thank You Download — centered confirmation, no on-page form */
+
+.tydl-page {
+    --tydl-navy: #2e2e80;
+    --tydl-green: #4caf50;
+    --tydl-ink: #172033;
+    --tydl-muted: #4b5563;
+    background: #fff;
+    color: var(--tydl-ink);
+}
+
+.tydl-hero {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(76, 175, 80, 0.14), transparent 46%),
+        linear-gradient(180deg, #f3f7f4 0%, #ffffff 70%);
+    padding: 4rem 0 4.5rem;
+}
+
+.tydl-card {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2.6rem 2.1rem 2.4rem;
+    border-radius: 1.15rem;
+    background: #fff;
+    border: 1px solid rgba(46, 46, 128, 0.1);
+    box-shadow: 0 22px 48px rgba(20, 30, 70, 0.1);
+    text-align: center;
+}
+
+.tydl-icon {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1.2rem;
+    border-radius: 999px;
+    background: rgba(76, 175, 80, 0.14);
+    color: var(--tydl-green);
+    font-size: 1.65rem;
+}
+
+.tydl-card h1 {
+    margin: 0 0 1rem;
+    color: var(--tydl-navy);
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.tydl-card p {
+    margin: 0 0 0.9rem;
+    color: var(--tydl-muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.tydl-closing {
+    margin-bottom: 0 !important;
+    color: var(--tydl-navy) !important;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .tydl-hero {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .tydl-card {
+        padding: 1.85rem 1.2rem 1.7rem;
+    }
+
+    .tydl-card h1 {
+        font-size: 1.85rem;
+    }
+}

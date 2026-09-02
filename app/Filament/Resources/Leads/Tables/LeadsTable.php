@@ -30,6 +30,18 @@ class LeadsTable
                 TextColumn::make('service')
                     ->label('Service / Plan')
                     ->toggleable(),
+                TextColumn::make('package_selected')
+                    ->label('Selected Plan')
+                    ->toggleable(),
+                TextColumn::make('needed_service')
+                    ->label('Needed Service')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('resource_type')
+                    ->label('Resource Type')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('hire_when')
+                    ->label('When to hire')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('asset_title')
                     ->label('Asset')
                     ->toggleable(),

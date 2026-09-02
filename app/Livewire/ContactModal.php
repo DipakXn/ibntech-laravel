@@ -25,7 +25,7 @@ class ContactModal extends Component
     #[On('open-contact-modal')]
     public function open(?string $service = null, ?string $variant = null): void
     {
-        $this->variant = in_array($variant, ['default', 'vapt-quote'], true) ? $variant : 'default';
+        $this->variant = in_array($variant, ['default', 'vapt-quote', 'pricing-enquire'], true) ? $variant : 'default';
         $this->service = is_string($service) && $service !== '' ? $service : null;
 
         if ($this->variant === 'vapt-quote' && $this->service !== null && ! in_array($this->service, $this->planOptions, true)) {
@@ -50,6 +50,11 @@ class ContactModal extends Component
     public function isQuoteVariant(): bool
     {
         return $this->variant === 'vapt-quote';
+    }
+
+    public function isPricingEnquire(): bool
+    {
+        return $this->variant === 'pricing-enquire';
     }
 
     public function render()

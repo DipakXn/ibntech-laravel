@@ -1,3 +1,267 @@
-/* Free Consultation For AP AR Management page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Free Consultation For AP AR Management — matched to WordPress screenshot */
+
+.fcapar-page {
+    --fcapar-navy: #2e2e80;
+    --fcapar-navy-deep: #1f1f5c;
+    --fcapar-green: #4caf50;
+    --fcapar-ink: #172033;
+    --fcapar-muted: #4b5563;
+    --fcapar-cream: #f7f3ea;
+    --fcapar-card: #ffffff;
+    --home-navy: #2e2e80;
+    --home-navy-deep: #23235f;
+    --home-green: #4caf50;
+    --home-green-dark: #3d9140;
+    --home-ink: #1a2440;
+    --home-muted: #6b7280;
+    --home-line: rgba(46, 46, 128, 0.12);
+    --home-shell: 1180px;
+    --home-grad: linear-gradient(90deg, var(--home-navy) 0%, var(--home-green) 100%);
+    background: #fff;
+    color: var(--fcapar-ink);
+}
+
+.fcapar-page [hidden] {
+    display: none !important;
+}
+
+.fcapar-hero {
+    background: var(--fcapar-cream);
+    padding: 3.25rem 0 3.5rem;
+}
+
+.fcapar-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 420px);
+    gap: 2.5rem 3.25rem;
+    align-items: start;
+}
+
+.fcapar-hero__copy h1 {
+    margin: 0;
+    color: var(--fcapar-navy);
+    font-size: clamp(2.1rem, 4.6vw, 3.15rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+.fcapar-hero__lede {
+    max-width: 36rem;
+    margin: 1.05rem 0 1.65rem;
+    color: var(--fcapar-muted);
+    font-size: clamp(1rem, 1.7vw, 1.08rem);
+    line-height: 1.7;
+}
+
+.fcapar-hero__copy h2 {
+    margin: 0 0 0.95rem;
+    color: var(--fcapar-navy);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.fcapar-hero__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.8rem;
+}
+
+.fcapar-hero__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: var(--fcapar-ink);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.fcapar-check {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.08rem;
+    border-radius: 50%;
+    background: var(--fcapar-green);
+    color: #fff;
+    font-size: 0.68rem;
+}
+
+.fcapar-hero__form {
+    position: relative;
+    z-index: 3;
+    scroll-margin-top: 6rem;
+    overflow: visible;
+    border-radius: 0.55rem;
+    background: var(--fcapar-card);
+    padding: 1.2rem 1.2rem 1.15rem;
+    box-shadow: 0 16px 40px rgba(23, 32, 51, 0.1);
+}
+
+.fcapar-hero__form h2 {
+    margin: 0 0 0.9rem;
+    color: var(--fcapar-navy);
+    font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.fcapar-hero__form .contact-form {
+    gap: 0.5rem;
+}
+
+.fcapar-hero__form .contact-form__row {
+    grid-template-columns: 1fr;
+}
+
+.fcapar-hero__form .contact-form__field:has(.phone-input-field),
+.fcapar-hero__form .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+    isolation: auto;
+    overflow: visible;
+}
+
+.fcapar-hero__form .contact-form__field--message {
+    overflow: visible;
+    background: #fff;
+    contain: none;
+}
+
+.fcapar-hero__form .contact-form__field input,
+.fcapar-hero__form .contact-form__field select,
+.fcapar-hero__form .contact-form__field textarea,
+.fcapar-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #d5dbe6 !important;
+    border-radius: 0.35rem !important;
+    background: #fff !important;
+    color: var(--fcapar-ink) !important;
+    min-height: 2.15rem;
+    height: 2.15rem;
+    padding-top: 0.4rem !important;
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.4rem !important;
+    font-size: 0.88rem;
+    line-height: 1.3;
+    box-sizing: border-box;
+}
+
+.fcapar-hero__form .contact-form__field input:not(.iti__tel-input),
+.fcapar-hero__form .contact-form__field select,
+.fcapar-hero__form .contact-form__field textarea {
+    padding-left: 0.75rem !important;
+}
+
+.fcapar-hero__form .phone-input-field .iti__tel-input {
+    height: 2.15rem;
+}
+
+.fcapar-hero__form .contact-form__field--message textarea {
+    min-height: 3.25rem !important;
+    height: auto;
+    padding: 0.45rem 0.75rem !important;
+    resize: vertical;
+    background: #fff !important;
+}
+
+.fcapar-hero__form .contact-form__field input:focus,
+.fcapar-hero__form .contact-form__field select:focus,
+.fcapar-hero__form .contact-form__field textarea:focus,
+.fcapar-hero__form .phone-input-field .iti__tel-input:focus {
+    border-color: var(--fcapar-navy) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(46, 46, 128, 0.12);
+}
+
+.fcapar-hero__form .contact-form__terms,
+.fcapar-hero__form .contact-form__terms span {
+    color: #3b6ea5;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.fcapar-hero__form .contact-form__terms a {
+    color: #2a5f9e;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.fcapar-hero__form .contact-form__submit {
+    width: 100%;
+    margin-top: 0.1rem;
+    border: none;
+    border-radius: 0.35rem;
+    background: var(--fcapar-navy);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.7rem 1.1rem;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.fcapar-hero__form .contact-form__submit:hover,
+.fcapar-hero__form .contact-form__submit:focus-visible {
+    background: var(--fcapar-navy-deep);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.fcapar-hero__form .contact-form__submit:focus-visible {
+    outline: 2px solid var(--fcapar-green);
+    outline-offset: 3px;
+}
+
+.fcapar-page .home-testimonials {
+    margin: 0.75rem 0 0.25rem;
+}
+
+.fcapar-page .home-testimonials__banner {
+    background: var(--home-grad);
+}
+
+@media (max-width: 1100px) {
+    .fcapar-hero {
+        padding: 2.4rem 0 2.75rem;
+    }
+
+    .fcapar-hero__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .fcapar-hero__form {
+        max-width: 28rem;
+        width: 100%;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 720px) {
+    .fcapar-hero {
+        padding: 1.75rem 0 2.15rem;
+    }
+
+    .fcapar-hero__copy h1 {
+        font-size: clamp(1.7rem, 7vw, 2.15rem);
+    }
+
+    .fcapar-hero__form {
+        padding: 1.05rem 0.95rem 1rem;
+    }
+
+    .fcapar-hero__form .g-recaptcha,
+    .fcapar-hero__form iframe {
+        transform: scale(0.92);
+        transform-origin: left top;
+    }
+}

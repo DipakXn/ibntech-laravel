@@ -1,3 +1,424 @@
-/* IT Staff Sourcing page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* IT Staff Sourcing — matched to WordPress screenshot */
+
+.iss-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.iss-page {
+    --iss-navy: #2e2e80;
+    --iss-navy-deep: #1f1f5c;
+    --iss-green: #4caf50;
+    --iss-green-dark: #3d9140;
+    --iss-ink: #1f1d1d;
+    --iss-muted: #4a4a4a;
+    --iss-cream: #fef6dd;
+    --iss-hero: #eef3f8;
+    --iss-check: #4faaf5;
+    color: var(--iss-ink);
+    background: #fff;
+}
+
+.iss-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.75rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.iss-btn:hover {
+    transform: translateY(-1px);
+}
+
+.iss-btn:focus-visible {
+    outline: 2px solid var(--iss-navy);
+    outline-offset: 3px;
+}
+
+.iss-btn--navy {
+    background: var(--iss-navy);
+    border-color: var(--iss-navy);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(46, 46, 128, 0.22);
+}
+
+.iss-btn--navy:hover {
+    background: var(--iss-green);
+    border-color: var(--iss-green);
+    color: #fff;
+}
+
+.iss-btn--green {
+    background: var(--iss-green);
+    border-color: var(--iss-green);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.28);
+}
+
+.iss-btn--green:hover {
+    background: var(--iss-green-dark);
+    border-color: var(--iss-green-dark);
+    color: #fff;
+}
+
+.iss-btn--green:focus-visible {
+    outline-color: #fff;
+}
+
+/* Hero */
+.iss-hero {
+    background: var(--iss-hero);
+}
+
+.iss-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 4.25rem 0 3.75rem;
+}
+
+.iss-hero__copy {
+    max-width: 38rem;
+}
+
+.iss-hero__eyebrow {
+    margin: 0 0 0.85rem;
+    color: var(--iss-navy);
+    font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.iss-hero__copy h1 {
+    margin: 0;
+    color: var(--iss-navy);
+    font-size: clamp(1.95rem, 3.8vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: 0.01em;
+}
+
+.iss-hero__lede {
+    margin: 1.05rem 0 1.75rem;
+    color: var(--iss-muted);
+    font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.iss-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iss-hero__media img {
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+}
+
+/* Sections */
+.iss-section {
+    padding: 4.25rem 0;
+}
+
+.iss-section__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.iss-heading {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto 2.5rem;
+}
+
+.iss-heading h2 {
+    margin: 0;
+    color: var(--iss-ink);
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Intro */
+.iss-intro {
+    padding-top: 3.75rem;
+    padding-bottom: 1.5rem;
+}
+
+.iss-intro__inner {
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.iss-intro__inner p {
+    margin: 0;
+    color: var(--iss-ink);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.iss-intro__inner strong {
+    font-weight: 700;
+}
+
+/* Service snapshot */
+.iss-snapshot {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.iss-snapshot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 3rem;
+}
+
+.iss-snapshot-card img {
+    display: block;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    margin: 0 0 1rem;
+    border-radius: 0.35rem;
+}
+
+.iss-snapshot-card h3 {
+    margin: 0 0 0.7rem;
+    color: var(--iss-ink);
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.iss-snapshot-card p {
+    margin: 0;
+    color: var(--iss-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+/* Service areas */
+.iss-areas {
+    padding-top: 2.5rem;
+}
+
+.iss-areas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem;
+}
+
+.iss-area-card {
+    background: var(--iss-cream);
+    border-radius: 0.35rem;
+    padding: 1.65rem 1.6rem 1.55rem;
+    height: 100%;
+}
+
+.iss-area-card img {
+    display: block;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    margin: 0 0 0.95rem;
+    border-radius: 0.35rem;
+}
+
+.iss-area-card h3 {
+    margin: 0 0 0.65rem;
+    color: var(--iss-ink);
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.iss-area-card p {
+    margin: 0;
+    color: var(--iss-muted);
+    font-size: 0.96rem;
+    line-height: 1.7;
+}
+
+/* Split layouts */
+.iss-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+}
+
+.iss-split__media {
+    display: flex;
+    justify-content: center;
+}
+
+.iss-split__media img {
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    border-radius: 0.35rem;
+}
+
+.iss-split__copy h2 {
+    margin: 0 0 1.25rem;
+    color: var(--iss-ink);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.iss-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.iss-list li {
+    position: relative;
+    padding-left: 1.55rem;
+    color: var(--iss-muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+}
+
+.iss-list li::before {
+    content: '';
+    position: absolute;
+    top: 0.38rem;
+    left: 0;
+    width: 0.85rem;
+    height: 0.85rem;
+    background-color: var(--iss-check);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9.55 18.2 3.4 12.05l1.4-1.4 4.75 4.75L19.2 5.75l1.4 1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9.55 18.2 3.4 12.05l1.4-1.4 4.75 4.75L19.2 5.75l1.4 1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.iss-approach {
+    padding-top: 3.5rem;
+}
+
+.iss-process {
+    padding-top: 2.5rem;
+    padding-bottom: 4.25rem;
+}
+
+/* Closing CTA */
+.iss-cta {
+    background: var(--iss-navy-deep);
+    color: #fff;
+    padding: 4.25rem 0;
+}
+
+.iss-cta__inner {
+    max-width: 54rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.iss-cta p {
+    margin: 0 0 1.75rem;
+    color: #fff;
+    font-size: clamp(1.05rem, 2vw, 1.22rem);
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .iss-hero__inner,
+    .iss-split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .iss-hero__inner {
+        padding: 3.25rem 0 3rem;
+        text-align: center;
+    }
+
+    .iss-hero__copy {
+        max-width: none;
+    }
+
+    .iss-hero__media img,
+    .iss-split__media img {
+        max-width: 22rem;
+    }
+
+    .iss-process .iss-split__media {
+        order: -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .iss-section,
+    .iss-cta {
+        padding: 2.75rem 0;
+    }
+
+    .iss-hero__inner {
+        padding: 2.5rem 0 2.25rem;
+    }
+
+    .iss-intro {
+        padding-top: 2.5rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .iss-snapshot,
+    .iss-areas {
+        padding-top: 1.75rem;
+    }
+
+    .iss-snapshot-grid,
+    .iss-areas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .iss-area-card {
+        padding: 1.4rem 1.2rem;
+    }
+
+    .iss-btn,
+    .iss-section__cta,
+    .iss-cta .iss-btn {
+        width: 100%;
+    }
+
+    .iss-section__cta .iss-btn {
+        width: 100%;
+    }
+
+    .iss-approach {
+        padding-top: 2rem;
+    }
+
+    .iss-process {
+        padding-bottom: 2.75rem;
+    }
+}

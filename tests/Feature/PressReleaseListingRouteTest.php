@@ -48,7 +48,7 @@ class PressReleaseListingRouteTest extends TestCase
         $listing->assertSee('Pilot One');
         $listing->assertSee('Pilot Two');
         $listing->assertSee('Manual Four');
-        $listing->assertSee('href="http://localhost/pressrelease/pilot-one', false);
+        $listing->assertSee('href="http://localhost/pressrelease/pilot-one/"', false);
         $listing->assertDontSee('href="http://localhost/press-releases/', false);
 
         $this->get('/pressrelease/pilot-two')->assertOk()->assertSee('Pilot Two');

@@ -1,3 +1,327 @@
-/* Infrastructure page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Infrastructure — matched to WordPress screenshot */
+
+.infra-page {
+    --infra-navy: #1e266d;
+    --infra-navy-hover: #161c52;
+    --infra-ink: #1a1a1a;
+    --infra-muted: #4a4a4a;
+    --infra-soft: #f5f5f5;
+    --infra-cream: #fff8dc;
+    --infra-tint: #eef1f6;
+    color: var(--infra-ink);
+    background: #fff;
+}
+
+.infra-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.55rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.infra-btn:hover {
+    transform: translateY(-1px);
+}
+
+.infra-btn:focus-visible {
+    outline: 2px solid var(--infra-navy);
+    outline-offset: 3px;
+}
+
+.infra-btn--navy {
+    background: var(--infra-navy);
+    border-color: var(--infra-navy);
+    color: #fff;
+}
+
+.infra-btn--navy:hover,
+.infra-btn--navy:focus-visible {
+    background: var(--infra-navy-hover);
+    border-color: var(--infra-navy-hover);
+    color: #fff;
+}
+
+.infra-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.infra-list li {
+    display: grid;
+    grid-template-columns: 1.35rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    color: var(--infra-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.infra-list li + li {
+    margin-top: 0.85rem;
+}
+
+.infra-list li::before {
+    content: '';
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.2rem;
+    background-color: var(--infra-navy);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Hero */
+.infra-hero {
+    overflow: hidden;
+    background: #fff;
+}
+
+.infra-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 2.5rem 3rem;
+    align-items: center;
+    padding: 4.5rem 0 3rem;
+}
+
+.infra-hero__copy h1 {
+    margin: 0 0 1.75rem;
+    color: var(--infra-ink);
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+}
+
+.infra-hero__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infra-hero__visual img {
+    display: block;
+    width: min(100%, 500px);
+    height: auto;
+}
+
+/* Facility */
+.infra-facility {
+    padding: 2.25rem 0 3.75rem;
+    background: #fff;
+}
+
+.infra-facility__heading {
+    margin: 0 auto 2.5rem;
+    color: var(--infra-ink);
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.infra-facility__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 2.5rem 3.25rem;
+    align-items: center;
+}
+
+.infra-facility__media {
+    display: flex;
+    justify-content: center;
+}
+
+.infra-facility__media img {
+    display: block;
+    width: min(100%, 526px);
+    height: auto;
+}
+
+.infra-facility__eyebrow {
+    margin: 0 0 1.15rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* Feature cards */
+.infra-features {
+    padding: 3.5rem 0;
+    background: var(--infra-soft);
+}
+
+.infra-features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+}
+
+.infra-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 2rem 2.25rem;
+    background: var(--infra-cream);
+    text-align: center;
+}
+
+.infra-card img {
+    display: block;
+    width: 65px;
+    height: 65px;
+    margin-bottom: 1rem;
+    object-fit: contain;
+}
+
+.infra-card h3 {
+    margin: 0 0 0.85rem;
+    color: var(--infra-ink);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.infra-card p {
+    margin: 0;
+    max-width: 34rem;
+    color: var(--infra-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.infra-features__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.25rem;
+}
+
+/* Server and network */
+.infra-network {
+    padding: 4rem 0;
+    background: var(--infra-tint);
+}
+
+.infra-network__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 2.5rem 3.25rem;
+    align-items: center;
+}
+
+.infra-network__copy h2 {
+    margin: 0 0 1.15rem;
+    color: var(--infra-ink);
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.infra-network__copy p {
+    margin: 0 0 1.25rem;
+    color: var(--infra-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.infra-network__media {
+    display: flex;
+    justify-content: center;
+}
+
+.infra-network__media img {
+    display: block;
+    width: min(100%, 560px);
+    height: auto;
+}
+
+@media (max-width: 960px) {
+    .infra-hero__inner,
+    .infra-facility__grid,
+    .infra-features__grid,
+    .infra-network__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .infra-hero__inner {
+        padding: 3.25rem 0 2.75rem;
+        text-align: center;
+    }
+
+    .infra-hero__copy h1 {
+        margin-bottom: 1.35rem;
+    }
+
+    .infra-facility {
+        padding: 1rem 0 2.75rem;
+    }
+
+    .infra-facility__heading {
+        margin-bottom: 1.75rem;
+    }
+
+    .infra-features,
+    .infra-network {
+        padding: 2.75rem 0;
+    }
+
+    .infra-network__copy {
+        order: 1;
+    }
+
+    .infra-network__media {
+        order: 2;
+    }
+}
+
+@media (max-width: 560px) {
+    .infra-hero__inner {
+        padding: 2.5rem 0 2rem;
+    }
+
+    .infra-hero__copy h1 {
+        font-size: clamp(1.85rem, 8vw, 2.35rem);
+    }
+
+    .infra-btn {
+        width: 100%;
+        max-width: 22rem;
+    }
+
+    .infra-hero__copy .infra-btn,
+    .infra-features__cta .infra-btn {
+        margin-inline: auto;
+    }
+
+    .infra-card {
+        padding: 2rem 1.35rem 1.85rem;
+    }
+
+    .infra-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .infra-card p,
+    .infra-list li,
+    .infra-network__copy p {
+        font-size: 0.95rem;
+    }
+
+    .infra-features,
+    .infra-network {
+        padding: 2.25rem 0;
+    }
+}

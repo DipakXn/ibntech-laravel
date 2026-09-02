@@ -33,4 +33,32 @@ class PathPageUrl
 
         return $url.'/'.$query.$fragment;
     }
+
+    /**
+     * Public content URLs use a trailing slash. Admin, Livewire, assets, and
+     * signed download endpoints do not.
+     */
+    public static function shouldAppendTrailingSlash(string $path): bool
+    {
+        $path = '/'.trim(explode('?', $path, 2)[0], '/');
+
+        if ($path === '/') {
+            return false;
+        }
+
+        $segments = explode('/', trim($path, '/'));
+        $first = strtolower($segments[0] ?? '');
+
+        if (in_array($first, ['admin', 'ibn-tech-cms-login', 'livewire', 'telescope', 'horizon', 'vendor'], true)) {
+            return false;
+        }
+
+        $last = $segments[array_key_last($segments)] ?? '';
+
+        if ($last !== '' && preg_match('/\.[A-Za-z0-9]{1,10}$/', $last)) {
+            return false;
+        }
+
+        return strcasecmp($last, 'download') !== 0;
+    }
 }

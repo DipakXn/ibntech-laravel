@@ -1,0 +1,279 @@
+/* Shared cream hero + compact lead form for consultation/trial landing pages */
+
+.fclead-page {
+    --fclead-navy: #2e2e80;
+    --fclead-navy-deep: #1f1f5c;
+    --fclead-green: #4caf50;
+    --fclead-ink: #172033;
+    --fclead-muted: #4b5563;
+    --fclead-cream: #f7f3ea;
+    --fclead-card: #ffffff;
+    --home-navy: #2e2e80;
+    --home-navy-deep: #23235f;
+    --home-green: #4caf50;
+    --home-green-dark: #3d9140;
+    --home-ink: #1a2440;
+    --home-muted: #6b7280;
+    --home-line: rgba(46, 46, 128, 0.12);
+    --home-shell: 1180px;
+    --home-grad: linear-gradient(90deg, var(--home-navy) 0%, var(--home-green) 100%);
+    background: #fff;
+    color: var(--fclead-ink);
+}
+
+.fclead-page [hidden] {
+    display: none !important;
+}
+
+.fclead-hero {
+    background: var(--fclead-cream);
+    padding: 3.25rem 0 3.5rem;
+}
+
+.fclead-page--tax .fclead-hero {
+    background: #fff;
+}
+
+.fclead-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 420px);
+    gap: 2.5rem 3.25rem;
+    align-items: start;
+}
+
+.fclead-hero__copy h1 {
+    margin: 0;
+    color: var(--fclead-navy);
+    font-size: clamp(2.1rem, 4.6vw, 3.15rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+.fclead-hero__lede {
+    max-width: 36rem;
+    margin: 1.05rem 0 1.65rem;
+    color: var(--fclead-muted);
+    font-size: clamp(1rem, 1.7vw, 1.08rem);
+    line-height: 1.7;
+}
+
+.fclead-hero__copy h2 {
+    margin: 0 0 0.95rem;
+    color: var(--fclead-navy);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.fclead-hero__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.8rem;
+}
+
+.fclead-hero__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: var(--fclead-ink);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.fclead-check {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.08rem;
+    border-radius: 50%;
+    background: var(--fclead-green);
+    color: #fff;
+    font-size: 0.68rem;
+}
+
+.fclead-hero__form {
+    position: relative;
+    z-index: 3;
+    scroll-margin-top: 6rem;
+    overflow: visible;
+    border-radius: 0.55rem;
+    background: var(--fclead-card);
+    padding: 1.2rem 1.2rem 1.15rem;
+    box-shadow: 0 16px 40px rgba(23, 32, 51, 0.1);
+}
+
+.fclead-hero__form h2 {
+    margin: 0 0 0.9rem;
+    color: var(--fclead-navy);
+    font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.fclead-hero__form .contact-form {
+    gap: 0.5rem;
+}
+
+.fclead-page:not(.fclead-page--trial) .fclead-hero__form .contact-form__row {
+    grid-template-columns: 1fr;
+}
+
+.fclead-page--trial .fclead-hero__form .contact-form__row {
+    grid-template-columns: 1fr 1fr;
+}
+
+.fclead-hero__form .contact-form__field:has(.phone-input-field),
+.fclead-hero__form .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+    isolation: auto;
+    overflow: visible;
+}
+
+.fclead-hero__form .contact-form__field--message {
+    overflow: visible;
+    background: #fff;
+    contain: none;
+}
+
+.fclead-hero__form .contact-form__field input,
+.fclead-hero__form .contact-form__field select,
+.fclead-hero__form .contact-form__field textarea,
+.fclead-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #d5dbe6 !important;
+    border-radius: 0.35rem !important;
+    background: #fff !important;
+    color: var(--fclead-ink) !important;
+    min-height: 2.15rem;
+    height: 2.15rem;
+    padding-top: 0.4rem !important;
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.4rem !important;
+    font-size: 0.88rem;
+    line-height: 1.3;
+    box-sizing: border-box;
+}
+
+.fclead-hero__form .contact-form__field input:not(.iti__tel-input),
+.fclead-hero__form .contact-form__field select,
+.fclead-hero__form .contact-form__field textarea {
+    padding-left: 0.75rem !important;
+}
+
+.fclead-hero__form .phone-input-field .iti__tel-input {
+    height: 2.15rem;
+}
+
+.fclead-hero__form .contact-form__field--message textarea {
+    min-height: 3.25rem !important;
+    height: auto;
+    padding: 0.45rem 0.75rem !important;
+    resize: vertical;
+    background: #fff !important;
+}
+
+.fclead-hero__form .contact-form__field input:focus,
+.fclead-hero__form .contact-form__field select:focus,
+.fclead-hero__form .contact-form__field textarea:focus,
+.fclead-hero__form .phone-input-field .iti__tel-input:focus {
+    border-color: var(--fclead-navy) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(46, 46, 128, 0.12);
+}
+
+.fclead-hero__form .contact-form__terms,
+.fclead-hero__form .contact-form__terms span {
+    color: #3b6ea5;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.fclead-hero__form .contact-form__terms a {
+    color: #2a5f9e;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.fclead-hero__form .contact-form__submit {
+    width: 100%;
+    margin-top: 0.1rem;
+    border: none;
+    border-radius: 0.35rem;
+    background: var(--fclead-navy);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.7rem 1.1rem;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.fclead-hero__form .contact-form__submit:hover,
+.fclead-hero__form .contact-form__submit:focus-visible {
+    background: var(--fclead-navy-deep);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.fclead-hero__form .contact-form__submit:focus-visible {
+    outline: 2px solid var(--fclead-green);
+    outline-offset: 3px;
+}
+
+.fclead-page .home-testimonials {
+    margin: 0.75rem 0 0.25rem;
+}
+
+.fclead-page .home-testimonials__banner {
+    background: var(--home-grad);
+}
+
+@media (max-width: 1100px) {
+    .fclead-hero {
+        padding: 2.4rem 0 2.75rem;
+    }
+
+    .fclead-hero__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .fclead-hero__form {
+        max-width: 28rem;
+        width: 100%;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 720px) {
+    .fclead-hero {
+        padding: 1.75rem 0 2.15rem;
+    }
+
+    .fclead-hero__copy h1 {
+        font-size: clamp(1.7rem, 7vw, 2.15rem);
+    }
+
+    .fclead-hero__form {
+        padding: 1.05rem 0.95rem 1rem;
+    }
+
+    .fclead-page--trial .fclead-hero__form .contact-form__row {
+        grid-template-columns: 1fr;
+    }
+
+    .fclead-hero__form .g-recaptcha,
+    .fclead-hero__form iframe {
+        transform: scale(0.92);
+        transform-origin: left top;
+    }
+}

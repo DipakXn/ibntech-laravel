@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\PathPageUrl;
 use Closure;
 use Illuminate\Http\Request;
+use Livewire\Mechanisms\HandleRequests\EndpointResolver;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureTrailingSlash
@@ -16,11 +18,15 @@ class EnsureTrailingSlash
 
         $path = $request->getPathInfo();
 
-        if ($path === '/' || $this->isAssetRequest($path)) {
+        if ($path === '/' || $this->isAssetRequest($path) || $this->isLivewireEndpoint($path)) {
             return $next($request);
         }
 
         if (! str_ends_with($path, '/')) {
+            if (! PathPageUrl::shouldAppendTrailingSlash($path)) {
+                return $next($request);
+            }
+
             $queryString = $request->getQueryString();
             $target = rtrim($request->getUriForPath($path), '/').'/';
 
@@ -39,6 +45,17 @@ class EnsureTrailingSlash
         $lastSegment = basename($path);
 
         return (bool) preg_match('/\.[A-Za-z0-9]{1,10}$/', $lastSegment);
+    }
+
+    /**
+     * Livewire 4 endpoints live under /livewire-{hash}/..., not /livewire/.
+     * Skip both the 301 add-slash and the internal slash strip.
+     */
+    protected function isLivewireEndpoint(string $path): bool
+    {
+        $prefix = EndpointResolver::prefix();
+
+        return $path === $prefix || str_starts_with($path, $prefix.'/');
     }
 
     protected function normalizeRequestPath(Request $request, string $path): Request

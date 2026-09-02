@@ -1,6 +1,9 @@
 @php
     $isQuoteVariant = $this->isQuoteVariant();
-    $formName = $isQuoteVariant ? 'vapt-pricing-quote' : 'header-contact-modal';
+    $isPricingEnquire = $this->isPricingEnquire();
+    $formName = $isQuoteVariant
+        ? 'vapt-pricing-quote'
+        : ($isPricingEnquire ? 'pricing-enquire' : 'header-contact-modal');
     $formKey = $formName.'-'.($service ?: 'none');
 @endphp
 
@@ -50,13 +53,19 @@
                         <h2 id="contact-modal-title" class="contact-modal__title">
                             @if($isQuoteVariant)
                                 Please provide the following details to request a quote.
+                            @elseif($isPricingEnquire)
+                                Overwhelmed By Your Books ?
                             @else
                                 Get In Touch
                             @endif
                         </h2>
                         @unless($isQuoteVariant)
                             <p id="contact-modal-description" class="contact-modal__subtitle">
-                                Tell us about your goals and our team will respond shortly.
+                                @if($isPricingEnquire)
+                                    Catch up Now at the Lowest Rates Guaranteed !
+                                @else
+                                    Tell us about your goals and our team will respond shortly.
+                                @endif
                             </p>
                         @endunless
                     </div>
@@ -83,6 +92,18 @@
                             service-placeholder="Select Plan"
                             message-placeholder="Describe your security testing requirements:"
                             submit-label="Submit Request"
+                            :initial-service="$service"
+                        />
+                    @elseif($isPricingEnquire)
+                        <livewire:forms.contact-form
+                            wire:key="{{ $formKey }}"
+                            form-name="pricing-enquire"
+                            id-prefix="modal-pricing-enquire"
+                            layout="modal"
+                            :show-company="false"
+                            :show-service="false"
+                            message-placeholder="What kind of accounting solution are you looking for?"
+                            submit-label="Get A Quote"
                             :initial-service="$service"
                         />
                     @else

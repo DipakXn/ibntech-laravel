@@ -7,6 +7,7 @@ use Tests\Support\DatabaseSafetyGuard;
 $projectRoot = dirname(__DIR__);
 
 $isolatedConfigCache = $projectRoot.DIRECTORY_SEPARATOR.'bootstrap'.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'phpunit-config-cache-disabled.php';
+$isolatedRoutesCache = $projectRoot.DIRECTORY_SEPARATOR.'bootstrap'.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'phpunit-routes-cache-disabled.php';
 $applicationConfigCache = $projectRoot.DIRECTORY_SEPARATOR.'bootstrap'.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'config.php';
 
 $forceEnv = static function (string $key, string $value): void {
@@ -20,6 +21,7 @@ $forceEnv('DB_CONNECTION', 'sqlite');
 $forceEnv('DB_DATABASE', ':memory:');
 $forceEnv('DB_URL', '');
 $forceEnv('APP_CONFIG_CACHE', $isolatedConfigCache);
+$forceEnv('APP_ROUTES_CACHE', $isolatedRoutesCache);
 
 $fail = static function (string $message): never {
     fwrite(STDERR, $message.PHP_EOL);

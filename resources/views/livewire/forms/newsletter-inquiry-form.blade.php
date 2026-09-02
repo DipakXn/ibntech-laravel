@@ -61,9 +61,9 @@
         <input type="checkbox" wire:model="acceptedTerms">
         <span>
             By using our services, you agree to our
-            <a href="{{ route('page.show', ['slug' => 'contact']) }}">Privacy Policy</a>
+            <a href="{{ route('page.show', ['slug' => 'privacy-policy']) }}">Privacy Policy</a>
             and
-            <a href="{{ route('page.show', ['slug' => 'contact']) }}">Terms &amp; Conditions</a>.
+            <a href="{{ route('page.show', ['slug' => 'terms-of-use']) }}">Terms &amp; Conditions</a>.
             <x-forms.messaging-consent-tooltip />
         </span>
     </label>

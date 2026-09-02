@@ -8,6 +8,9 @@ Email: {{ $lead->email }}
 Phone: {{ $lead->phone ?: 'N/A' }}
 Company: {{ $lead->company ?: 'N/A' }}
 Service: {{ $lead->service ?: 'N/A' }}
+@foreach ($lead->extraAnswers() as $extraRow)
+{{ $extraRow['label'] }}: {{ $extraRow['value'] }}
+@endforeach
 Page URL: {{ $lead->page_url ?: 'N/A' }}
 
 Message:

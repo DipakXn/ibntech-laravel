@@ -67,5 +67,5 @@ Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
 Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|industry$|lp$|newsletter$|pressrelease$|press-releases$|white-papers$|livewire$|storage$|up$).+')
+    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|white-papers$|livewire$|storage$|up$).+')
     ->name('page.show');

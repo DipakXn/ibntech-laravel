@@ -13,10 +13,8 @@
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    # Trailing slashes are enforced by Laravel EnsureTrailingSlash.
+    # Do not strip them here; that fights Laravel and causes redirect loops.
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

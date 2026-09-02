@@ -38,7 +38,7 @@ class ContactForm extends Component
 
     public bool $showService = false;
 
-    /** @var 'default'|'home'|'modal'|'vapt' */
+    /** @var 'default'|'home'|'modal'|'vapt'|'trial' */
     public string $layout = 'default';
 
     public ?string $submitError = null;
@@ -48,6 +48,8 @@ class ContactForm extends Component
     public string $servicePlaceholder = 'Select Service';
 
     public string $messagePlaceholder = 'Tell us how we can help';
+
+    public string $companyPlaceholder = 'Company';
 
     public ?int $messageRows = null;
 
@@ -76,17 +78,19 @@ class ContactForm extends Component
         string $submitLabel = 'Submit',
         string $servicePlaceholder = 'Select Service',
         string $messagePlaceholder = 'Tell us how we can help',
+        string $companyPlaceholder = 'Company',
         ?string $initialService = null,
         ?int $messageRows = null,
     ): void {
         $this->showCompany = $showCompany;
         $this->showService = $showService;
-        $this->layout = in_array($layout, ['default', 'home', 'modal', 'vapt'], true) ? $layout : 'default';
+        $this->layout = in_array($layout, ['default', 'home', 'modal', 'vapt', 'trial'], true) ? $layout : 'default';
         $this->formName = $formName;
         $this->idPrefix = $idPrefix;
         $this->submitLabel = $submitLabel !== '' ? $submitLabel : 'Submit';
         $this->servicePlaceholder = $servicePlaceholder !== '' ? $servicePlaceholder : 'Select Service';
         $this->messagePlaceholder = $messagePlaceholder !== '' ? $messagePlaceholder : 'Tell us how we can help';
+        $this->companyPlaceholder = $companyPlaceholder !== '' ? $companyPlaceholder : 'Company';
         $this->messageRows = $messageRows !== null && $messageRows > 0 ? $messageRows : null;
         if (is_array($serviceOptions) && $serviceOptions !== []) {
             $this->serviceOptions = array_values(array_filter(
@@ -136,14 +140,22 @@ class ContactForm extends Component
             }
 
             if (! $this->showService) {
-                $validated['service'] = null;
+                $validated['service'] = is_string($this->service) && $this->service !== ''
+                    ? $this->service
+                    : null;
             }
 
-            $leadService->createLead([
+            $leadPayload = [
                 ...$validated,
                 'form_name' => $validated['formName'],
                 'page_url' => $validated['pageUrl'],
-            ], 'contact');
+            ];
+
+            if ($this->formName === 'pricing-enquire' && filled($leadPayload['service'] ?? null)) {
+                $leadPayload['package_selected'] = $leadPayload['service'];
+            }
+
+            $leadService->createLead($leadPayload, 'contact');
 
             $this->reset(['name', 'email', 'phone', 'company', 'service', 'message']);
             $this->acceptedTerms = true;

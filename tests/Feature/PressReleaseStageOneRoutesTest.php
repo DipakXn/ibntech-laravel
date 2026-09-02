@@ -20,19 +20,19 @@ class PressReleaseStageOneRoutesTest extends TestCase
         $this->assertTrue(Route::has('page.show'));
 
         $this->assertSame(
-            'http://localhost/pressrelease',
+            'http://localhost/pressrelease/',
             route('pressrelease.index'),
         );
         $this->assertSame(
-            'http://localhost/pressrelease/page/2',
+            'http://localhost/pressrelease/page/2/',
             route('pressrelease.page', ['page' => 2]),
         );
         $this->assertSame(
-            'http://localhost/pressrelease/ap-ar-automation-key-to-payment-fraud-reduction',
+            'http://localhost/pressrelease/ap-ar-automation-key-to-payment-fraud-reduction/',
             route('pressrelease.show', ['slug' => 'ap-ar-automation-key-to-payment-fraud-reduction']),
         );
         $this->assertSame(
-            'http://localhost/testimonials',
+            'http://localhost/testimonials/',
             route('page.show', ['slug' => 'testimonials']),
         );
     }

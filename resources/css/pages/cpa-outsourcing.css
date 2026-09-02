@@ -1,3 +1,657 @@
-/* CPA Outsourcing page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* CPA Outsourcing — matched to WordPress screenshot */
+
+.cpao-page {
+    --cpao-navy: #2e2e80;
+    --cpao-navy-deep: #1f1f5c;
+    --cpao-green: #4caf50;
+    --cpao-green-soft: #61bd75;
+    --cpao-ink: #1f1d1d;
+    --cpao-muted: #7a7a7a;
+    --cpao-soft: #f7f9fb;
+    --cpao-line: rgba(46, 46, 128, 0.14);
+    color: var(--cpao-ink);
+    background: #fff;
+}
+
+.cpao-page [hidden] {
+    display: none !important;
+}
+
+.cpao-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.5rem;
+    border-radius: 0.35rem;
+    border: 2px solid transparent;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cpao-btn:hover {
+    transform: translateY(-1px);
+}
+
+.cpao-btn--green {
+    background: var(--cpao-green);
+    border-color: var(--cpao-green-soft);
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.cpao-btn--green:hover {
+    background: var(--cpao-navy);
+    border-color: var(--cpao-green);
+    color: #fff;
+}
+
+.cpao-btn--navy {
+    background: var(--cpao-navy);
+    border-color: var(--cpao-navy);
+    border-width: 1px;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 1.6rem;
+}
+
+.cpao-btn--navy:hover {
+    background: var(--cpao-green);
+    border-color: var(--cpao-navy);
+    color: #fff;
+}
+
+.cpao-section {
+    padding: 3.75rem 0;
+}
+
+.cpao-section--soft {
+    background: var(--cpao-soft);
+}
+
+.cpao-heading {
+    margin-bottom: 2rem;
+}
+
+.cpao-heading--center {
+    text-align: center;
+    max-width: 52rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cpao-heading h2 {
+    margin: 0;
+    color: var(--cpao-navy);
+    font-size: clamp(1.45rem, 2.6vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+}
+
+.cpao-heading--green {
+    color: var(--cpao-green) !important;
+}
+
+.cpao-heading p {
+    margin: 0.85rem 0 0;
+    color: var(--cpao-ink);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+}
+
+/* Hero */
+.cpao-hero {
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(90deg, var(--cpao-navy) 0%, #2e3a8c 42%, var(--cpao-green-soft) 100%);
+    color: #fff;
+    padding-bottom: 4.5rem;
+}
+
+.cpao-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 70% 80% at 70% 20%, #000 20%, transparent 75%);
+    pointer-events: none;
+}
+
+.cpao-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 3.5rem 0 1.5rem;
+}
+
+.cpao-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.55rem, 3.1vw, 2.65rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+.cpao-hero__lede {
+    max-width: 36rem;
+    margin: 0.9rem 0 0;
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+}
+
+.cpao-hero__form {
+    position: relative;
+    z-index: 2;
+    scroll-margin-top: 6rem;
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 1.25rem 1.15rem 1.3rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
+    color: var(--cpao-ink);
+}
+
+.cpao-hero__form h2 {
+    margin: 0;
+    color: var(--cpao-navy);
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.cpao-hero__form-sub {
+    margin: 0.4rem 0 1rem;
+    color: var(--cpao-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.cpao-hero__form .contact-form {
+    gap: 0.65rem;
+}
+
+.cpao-hero__form .contact-form__field input,
+.cpao-hero__form .contact-form__field select,
+.cpao-hero__form .contact-form__field textarea,
+.cpao-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #d0d5dd !important;
+    border-radius: 0.4rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+}
+
+.cpao-hero__form .contact-form__terms,
+.cpao-hero__form .contact-form__terms span {
+    color: var(--cpao-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.cpao-hero__form .contact-form__terms a {
+    color: var(--cpao-navy) !important;
+    font-weight: 700;
+}
+
+.cpao-hero__form .contact-form__submit {
+    margin-top: 0.15rem;
+    width: 100%;
+    border-radius: 0.35rem;
+    background: var(--cpao-navy);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+}
+
+.cpao-hero__form .contact-form__submit:hover {
+    background: var(--cpao-green);
+}
+
+/* Intro overlapping card */
+.cpao-intro {
+    position: relative;
+    z-index: 3;
+    margin-top: -3.5rem;
+    padding: 0 0 1.25rem;
+    background: transparent;
+}
+
+.cpao-intro__card {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 1.75rem 2rem 2rem;
+    border-radius: 1.15rem;
+    border: 1px solid #fff;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+    text-align: center;
+}
+
+.cpao-intro__card h2 {
+    display: inline-block;
+    margin: 0;
+    color: var(--cpao-navy);
+    font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.4;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    box-shadow: inset 0 -0.55em 0 rgba(46, 107, 220, 0.16);
+}
+
+.cpao-intro__card p {
+    margin: 0.85rem 0 0;
+    color: var(--cpao-ink);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+/* Tax tabs */
+.cpao-tax-tabs {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.3fr) minmax(0, 0.7fr);
+    gap: 1.15rem;
+    align-items: stretch;
+}
+
+.cpao-tax-tabs__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.cpao-tax-tabs__tab {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3.1rem;
+    padding: 0.75rem 0.95rem;
+    border: 1px solid var(--cpao-green);
+    border-radius: 0.3rem;
+    background: var(--cpao-green);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cpao-tax-tabs__tab:hover,
+.cpao-tax-tabs__tab.is-active {
+    background: var(--cpao-navy);
+    border-color: var(--cpao-navy);
+    color: #fff;
+}
+
+.cpao-tax-tabs__panel {
+    display: none;
+    height: 100%;
+}
+
+.cpao-tax-tabs__panel.is-active {
+    display: block;
+}
+
+.cpao-tax-tabs__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 22rem;
+    padding: 1.75rem 1.75rem 1.5rem;
+    border-radius: 0.65rem;
+    background: var(--cpao-green);
+    color: #fff;
+    box-shadow: 0 10px 28px rgba(20, 30, 70, 0.12);
+}
+
+.cpao-tax-tabs__content h3 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.cpao-tax-tabs__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+    margin-top: 1.25rem;
+}
+
+.cpao-tax-tabs__lists ul,
+.cpao-tax-tabs__group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.7rem;
+}
+
+.cpao-tax-tabs__lists li,
+.cpao-tax-tabs__group li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    color: #fff;
+    font-size: 0.92rem;
+    line-height: 1.4;
+}
+
+.cpao-check {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.1rem;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--cpao-green);
+}
+
+.cpao-check i {
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+.cpao-tax-tabs__groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+    margin-top: 1.25rem;
+}
+
+.cpao-tax-tabs__group h4 {
+    margin: 0 0 0.65rem;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.cpao-tax-tabs__cta {
+    align-self: center;
+    margin-top: auto;
+    padding-top: 0.85rem;
+}
+
+/* E-book band */
+.cpao-ebook {
+    background-image: linear-gradient(90deg, #2e6bdc 0%, var(--cpao-green) 100%);
+    color: #fff;
+    padding: 1.75rem 0;
+}
+
+.cpao-ebook__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) auto auto;
+    gap: 1.5rem 2rem;
+    align-items: center;
+}
+
+.cpao-ebook h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.cpao-ebook__btn {
+    white-space: nowrap;
+    box-shadow: 0 8px 18px rgba(10, 30, 70, 0.18);
+}
+
+.cpao-ebook img {
+    width: 7.5rem;
+    height: auto;
+    display: block;
+}
+
+/* Offer tabs */
+.cpao-offer-tabs__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    justify-content: center;
+}
+
+.cpao-offer-tabs__tab {
+    padding: 0.7rem 1rem;
+    border: 1px solid #d8dde6;
+    border-radius: 0.25rem;
+    background: #f3f4f6;
+    color: var(--cpao-navy);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.3;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cpao-offer-tabs__tab:hover {
+    border-color: var(--cpao-navy);
+}
+
+.cpao-offer-tabs__tab.is-active {
+    background: var(--cpao-navy);
+    border-color: var(--cpao-navy);
+    color: #fff;
+}
+
+.cpao-offer-tabs__panel {
+    display: none;
+    margin-top: 0.85rem;
+    padding: 1.35rem 1.5rem 1.45rem;
+    background: #f3f4f6;
+    border-radius: 0.25rem;
+}
+
+.cpao-offer-tabs__panel.is-active {
+    display: block;
+}
+
+.cpao-offer-tabs__panel ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem 2rem;
+    margin: 0;
+    padding-left: 1.15rem;
+}
+
+.cpao-offer-tabs__panel li {
+    color: var(--cpao-ink);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+/* Software expertise */
+.cpao-software {
+    background: var(--cpao-navy-deep);
+    color: #fff;
+    padding: 3.75rem 0;
+}
+
+.cpao-software__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.cpao-software__media img {
+    width: 100%;
+    max-width: 36rem;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.cpao-software__copy h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cpao-software__copy h2 span {
+    color: var(--cpao-green);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.cpao-software__copy p {
+    margin: 1rem 0 0;
+    color: #fff;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Platforms */
+.cpao-platforms img {
+    width: 100%;
+    max-width: 72rem;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Why outsource */
+.cpao-why {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem 1.75rem;
+}
+
+.cpao-why__card {
+    text-align: center;
+    padding: 1.35rem 1rem 1.15rem;
+    background: #fff;
+    border-radius: 0.35rem;
+}
+
+.cpao-why__card img {
+    width: 4.05rem;
+    height: 4.05rem;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.85rem;
+}
+
+.cpao-why__card h3 {
+    margin: 0;
+    color: var(--cpao-navy);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.cpao-why__card p {
+    margin: 0.55rem 0 0;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .cpao-hero__inner,
+    .cpao-tax-tabs,
+    .cpao-software__inner,
+    .cpao-ebook__inner {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .cpao-ebook__inner {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .cpao-tax-tabs__nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .cpao-tax-tabs__tab {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+
+    .cpao-why {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .cpao-section,
+    .cpao-software {
+        padding: 2.25rem 0;
+    }
+
+    .cpao-hero {
+        padding-bottom: 3.5rem;
+    }
+
+    .cpao-hero__inner {
+        padding: 2.5rem 0 1.25rem;
+    }
+
+    .cpao-intro {
+        margin-top: -2.5rem;
+    }
+
+    .cpao-intro__card {
+        padding: 1.35rem 1.15rem 1.5rem;
+        border-radius: 1rem;
+    }
+
+    .cpao-tax-tabs__tab {
+        flex-basis: 100%;
+    }
+
+    .cpao-tax-tabs__lists,
+    .cpao-tax-tabs__groups,
+    .cpao-offer-tabs__panel ul,
+    .cpao-why {
+        grid-template-columns: 1fr;
+    }
+
+    .cpao-btn {
+        width: 100%;
+    }
+
+    .cpao-ebook img {
+        width: 6.25rem;
+    }
+
+    .cpao-hero__form .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}

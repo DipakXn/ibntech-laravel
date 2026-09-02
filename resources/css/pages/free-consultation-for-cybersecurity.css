@@ -1,3 +1,320 @@
-/* Free Consultation For Cybersecurity page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Free Consultation For Cybersecurity — matched to WordPress screenshot */
+
+.fccyber-page {
+    --fccyber-navy: #2e2e80;
+    --fccyber-navy-deep: #1b237e;
+    --fccyber-green: #4caf50;
+    --fccyber-ink: #172033;
+    --fccyber-muted: #5b6475;
+    --fccyber-yellow: #fff8dc;
+    background: #fff;
+    color: var(--fccyber-ink);
+}
+
+.fccyber-page [hidden] {
+    display: none !important;
+}
+
+.fccyber-hero {
+    background: #fff;
+    padding: 2.85rem 0 3rem;
+}
+
+.fccyber-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 400px);
+    gap: 2.25rem 2.75rem;
+    align-items: start;
+}
+
+.fccyber-hero__copy h1 {
+    margin: 0;
+    color: var(--fccyber-navy);
+    font-size: clamp(1.75rem, 3.6vw, 2.45rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.fccyber-hero__tagline {
+    margin: 0.7rem 0 1rem;
+    color: var(--fccyber-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+.fccyber-hero__highlight {
+    max-width: 40rem;
+    margin: 0 0 1.5rem;
+    border-left: 4px solid var(--fccyber-navy);
+    border-radius: 0 0.4rem 0.4rem 0;
+    background: var(--fccyber-yellow);
+    padding: 0.95rem 1.05rem;
+    color: var(--fccyber-ink);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.fccyber-hero__copy h2 {
+    margin: 0 0 0.95rem;
+    color: var(--fccyber-navy);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.fccyber-services {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 1rem;
+}
+
+.fccyber-services article {
+    border-radius: 0.5rem;
+    background: #f8f9fb;
+}
+
+.fccyber-services article a {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    height: 100%;
+    padding: 0.85rem 0.8rem;
+    border-radius: inherit;
+    color: inherit;
+    text-decoration: none;
+}
+
+.fccyber-services article a:hover,
+.fccyber-services article a:focus-visible {
+    background: #eef1f6;
+}
+
+.fccyber-services article a:hover h3,
+.fccyber-services article a:focus-visible h3 {
+    color: var(--fccyber-green);
+}
+
+.fccyber-services__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.4rem;
+    background: rgba(46, 46, 128, 0.08);
+    color: var(--fccyber-navy);
+    font-size: 0.9rem;
+}
+
+.fccyber-services h3 {
+    margin: 0 0 0.2rem;
+    color: var(--fccyber-navy);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.fccyber-services p {
+    margin: 0;
+    color: var(--fccyber-muted);
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.fccyber-hero__form {
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+    border-radius: 0.7rem;
+    background:
+        radial-gradient(circle at 120% 0%, rgba(255, 255, 255, 0.12), transparent 42%),
+        var(--fccyber-navy-deep);
+    padding: 1.25rem 1.2rem 1.2rem;
+    box-shadow: 0 18px 40px rgba(10, 16, 48, 0.28);
+    color: #fff;
+}
+
+.fccyber-hero__form h2 {
+    margin: 0 0 0.4rem;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.fccyber-hero__form > p {
+    margin: 0 0 0.95rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.86rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.fccyber-hero__form .contact-form {
+    gap: 0.5rem;
+}
+
+.fccyber-hero__form .contact-form__row {
+    grid-template-columns: 1fr;
+}
+
+.fccyber-hero__form .contact-form__field:has(.phone-input-field),
+.fccyber-hero__form .contact-form__row:has(.phone-input-field) {
+    position: relative;
+    z-index: 40;
+    isolation: auto;
+    overflow: visible;
+}
+
+.fccyber-hero__form .contact-form__field--message {
+    overflow: visible;
+    background: transparent;
+    contain: none;
+}
+
+.fccyber-hero__form .contact-form__field input,
+.fccyber-hero__form .contact-form__field select,
+.fccyber-hero__form .contact-form__field textarea,
+.fccyber-hero__form .phone-input-field .iti__tel-input {
+    border: 0 !important;
+    border-radius: 0.35rem !important;
+    background: #fff !important;
+    color: var(--fccyber-ink) !important;
+    min-height: 2.15rem;
+    height: 2.15rem;
+    padding-top: 0.4rem !important;
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.4rem !important;
+    font-size: 0.88rem;
+    line-height: 1.3;
+    box-sizing: border-box;
+}
+
+.fccyber-hero__form .contact-form__field input:not(.iti__tel-input),
+.fccyber-hero__form .contact-form__field select,
+.fccyber-hero__form .contact-form__field textarea {
+    padding-left: 0.75rem !important;
+}
+
+.fccyber-hero__form .phone-input-field .iti__tel-input {
+    height: 2.15rem;
+}
+
+.fccyber-hero__form .contact-form__field--message textarea {
+    min-height: 3.25rem !important;
+    height: auto;
+    padding: 0.45rem 0.75rem !important;
+    resize: vertical;
+}
+
+.fccyber-hero__form .phone-input-field .iti__selected-dial-code,
+.fccyber-hero__form .phone-input-field .iti__selected-country {
+    color: var(--fccyber-ink) !important;
+}
+
+.fccyber-hero__form .contact-form__terms,
+.fccyber-hero__form .contact-form__terms span {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.fccyber-hero__form .contact-form__terms a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.fccyber-hero__form .contact-form__submit {
+    width: 100%;
+    border: none;
+    border-radius: 0.4rem;
+    background: var(--fccyber-green);
+    color: #fff;
+    font-size: 0.98rem;
+    font-weight: 700;
+    padding: 0.75rem 1.1rem;
+    text-transform: none;
+}
+
+.fccyber-hero__form .contact-form__submit:hover,
+.fccyber-hero__form .contact-form__submit:focus-visible {
+    background: #3d9140;
+    color: #fff;
+}
+
+.fccyber-why {
+    background: #f4f6f8;
+    padding: 2.75rem 0 3rem;
+}
+
+.fccyber-why h2 {
+    margin: 0 0 1.5rem;
+    color: var(--fccyber-navy);
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+}
+
+.fccyber-why__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.fccyber-why__grid article {
+    border-radius: 0.65rem;
+    background: #fff;
+    padding: 1.45rem 1.2rem 1.35rem;
+    box-shadow: 0 10px 24px rgba(23, 32, 51, 0.06);
+    text-align: center;
+}
+
+.fccyber-why__icon {
+    display: grid;
+    place-items: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    margin: 0 auto 0.8rem;
+    border-radius: 999px;
+    background: rgba(76, 175, 80, 0.12);
+    color: var(--fccyber-green);
+    font-size: 1.1rem;
+}
+
+.fccyber-why h3 {
+    margin: 0;
+    color: var(--fccyber-navy);
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+@media (max-width: 1100px) {
+    .fccyber-hero__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .fccyber-hero__form {
+        max-width: 28rem;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 720px) {
+    .fccyber-services,
+    .fccyber-why__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fccyber-hero__copy h1 {
+        font-size: 1.65rem;
+    }
+
+    .fccyber-hero__form .g-recaptcha,
+    .fccyber-hero__form iframe {
+        transform: scale(0.92);
+        transform-origin: left top;
+    }
+}

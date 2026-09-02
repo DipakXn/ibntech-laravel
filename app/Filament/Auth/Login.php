@@ -8,6 +8,8 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class Login extends BaseLogin
 {
+    public const ROUTE_PATH = 'ibn-tech-cms-login';
+
     protected string $view = 'filament.auth.login';
 
     protected Width|string|null $maxWidth = Width::ScreenLarge;
@@ -16,12 +18,12 @@ class Login extends BaseLogin
         'class' => 'ibn-login-screen',
     ];
 
-    public function getHeading(): string | Htmlable | null
+    public function getHeading(): string|Htmlable|null
     {
         return 'Control Center';
     }
 
-    public function getSubheading(): string | Htmlable | null
+    public function getSubheading(): string|Htmlable|null
     {
         return 'Manage website content, lead submissions, resources, and publishing workflows from one centralized dashboard.';
     }

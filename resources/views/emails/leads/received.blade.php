@@ -7,8 +7,13 @@
         ['label' => 'Phone', 'value' => $lead->phone],
         ['label' => 'Company', 'value' => $lead->company],
         ['label' => 'Service', 'value' => $lead->service],
-        ['label' => 'Page URL', 'value' => $lead->page_url, 'href' => $lead->page_url],
     ];
+
+    foreach ($lead->extraAnswers() as $extraRow) {
+        $rows[] = ['label' => $extraRow['label'], 'value' => $extraRow['value']];
+    }
+
+    $rows[] = ['label' => 'Page URL', 'value' => $lead->page_url, 'href' => $lead->page_url];
 @endphp
 
 <x-emails.layout

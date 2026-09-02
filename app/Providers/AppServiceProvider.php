@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Routing\UrlGenerator;
 use App\Services\SeoService;
 use App\Services\WebsiteSettingService;
 use Illuminate\Queue\Events\JobFailed;
@@ -18,6 +19,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton('url', function ($app) {
+            $routes = $app['router']->getRoutes();
+            $app->instance('routes', $routes);
+
+            return new UrlGenerator(
+                $routes,
+                $app->rebinding('request', function ($app, $request) {
+                    $app['url']->setRequest($request);
+                }),
+                $app['config']['app.asset_url']
+            );
+        });
+
         $this->app->singleton(SeoService::class, fn () => new SeoService);
         $this->app->singleton(WebsiteSettingService::class, fn () => new WebsiteSettingService);
     }

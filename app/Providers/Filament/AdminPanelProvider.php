@@ -4,11 +4,11 @@ namespace App\Providers\Filament;
 
 use App\Filament\Auth\Login;
 use App\Filament\Pages\AdminDashboard;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Enums\ThemeMode;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -19,12 +19,21 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
+    public function boot(): void
+    {
+        $this->app->booted(function (): void {
+            self::relocateLoginRoute();
+        });
+    }
+
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -32,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+            ->loginRouteSlug(Login::ROUTE_PATH)
             ->profile()
             ->brandName('IBNTECH Control')
             ->brandLogo(new HtmlString('
@@ -94,5 +104,43 @@ class AdminPanelProvider extends PanelProvider
                 PanelsRenderHook::TOPBAR_START,
                 fn (): string => view('filament.hooks.topbar-start')->render(),
             );
+    }
+
+    /**
+     * Filament's loginRouteSlug() only changes the segment under the panel
+     * prefix, which would yield /admin/ibn-tech-cms-login. Remount the named
+     * auth.login route at the site root so guests land on /ibn-tech-cms-login
+     * while /admin stays the dashboard.
+     */
+    public static function relocateLoginRoute(): void
+    {
+        $routes = Route::getRoutes();
+        $loginRoute = null;
+
+        foreach ($routes->getRoutes() as $route) {
+            if ($route->getName() === 'filament.admin.auth.login') {
+                $loginRoute = $route;
+                break;
+            }
+        }
+
+        if (! $loginRoute instanceof LaravelRoute) {
+            return;
+        }
+
+        if ($loginRoute->uri() === Login::ROUTE_PATH) {
+            return;
+        }
+
+        $loginRoute->setUri(Login::ROUTE_PATH);
+        $loginRoute->compiled = null;
+
+        $action = $loginRoute->getAction();
+        unset($action['prefix']);
+        $loginRoute->setAction($action);
+
+        if (method_exists($routes, 'refreshNameLookups')) {
+            $routes->refreshNameLookups();
+        }
     }
 }

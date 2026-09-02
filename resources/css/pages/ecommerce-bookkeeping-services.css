@@ -1,3 +1,768 @@
-/* Ecommerce Bookkeeping Services page styles
- * Page-specific styles. Shared layout/component styles live in app.css imports.
- */
+/* Ecommerce Bookkeeping Services — matched to WordPress screenshot */
+
+.ecbk-page {
+    --ecbk-navy: #2e2e80;
+    --ecbk-navy-deep: #1f1f5c;
+    --ecbk-green: #4caf50;
+    --ecbk-green-soft: #61bd75;
+    --ecbk-green-dark: #3d9140;
+    --ecbk-ink: #1f1d1d;
+    --ecbk-muted: #4a4a4a;
+    --ecbk-cream: #fff9e5;
+    --ecbk-cream-soft: #fffbe8;
+    --ecbk-gray: #f4f5f7;
+    --ecbk-line: rgba(46, 46, 128, 0.14);
+    color: var(--ecbk-ink);
+    background: #fff;
+}
+
+.ecbk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.6rem;
+    border-radius: 0.3rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.ecbk-btn:hover {
+    transform: translateY(-1px);
+}
+
+.ecbk-btn--green {
+    background: var(--ecbk-green);
+    border-color: var(--ecbk-green);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.28);
+}
+
+.ecbk-btn--green:hover {
+    background: var(--ecbk-green-dark);
+    border-color: var(--ecbk-green-dark);
+    color: #fff;
+}
+
+.ecbk-section {
+    padding: 3.25rem 0;
+}
+
+.ecbk-heading {
+    margin-bottom: 2rem;
+}
+
+.ecbk-heading--center {
+    text-align: center;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ecbk-heading h2 {
+    margin: 0;
+    color: var(--ecbk-ink);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-check {
+    flex: 0 0 auto;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: grid;
+    place-items: center;
+    margin-top: 0.15rem;
+}
+
+.ecbk-check svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: var(--ecbk-green);
+}
+
+/* Hero */
+.ecbk-hero {
+    position: relative;
+    overflow: visible;
+    background-image: linear-gradient(105deg, var(--ecbk-navy) 0%, #353a9a 42%, var(--ecbk-green-soft) 100%);
+    color: #fff;
+    padding-bottom: 4.5rem;
+}
+
+.ecbk-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 2.75rem 0 1.5rem;
+}
+
+.ecbk-hero__copy h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.7rem, 3.8vw, 2.65rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+}
+
+.ecbk-hero__lede {
+    max-width: 34rem;
+    margin: 1.15rem 0 0;
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.ecbk-hero__copy .ecbk-btn {
+    margin-top: 1.5rem;
+}
+
+.ecbk-hero__form {
+    position: relative;
+    z-index: 2;
+    scroll-margin-top: 6rem;
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 1.5rem 1.35rem 1.45rem;
+    box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
+    color: var(--ecbk-ink);
+}
+
+.ecbk-hero__form h2 {
+    margin: 0;
+    color: var(--ecbk-navy);
+    font-size: clamp(1.15rem, 2vw, 1.375rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+.ecbk-hero__form-sub {
+    margin: 0.45rem 0 1rem;
+    color: var(--ecbk-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.ecbk-hero__form .contact-form {
+    gap: 0.7rem;
+}
+
+.ecbk-hero__form .contact-form__field input,
+.ecbk-hero__form .contact-form__field select,
+.ecbk-hero__form .contact-form__field textarea,
+.ecbk-hero__form .phone-input-field .iti__tel-input {
+    border: 1px solid #e4e4e7 !important;
+    border-radius: 0.4rem !important;
+    background: #fff !important;
+    color: #172033 !important;
+}
+
+.ecbk-hero__form .contact-form__terms,
+.ecbk-hero__form .contact-form__terms span {
+    color: var(--ecbk-muted) !important;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.ecbk-hero__form .contact-form__terms a {
+    color: var(--ecbk-navy) !important;
+    font-weight: 700;
+}
+
+.ecbk-hero__form .contact-form__submit {
+    margin-top: 0.15rem;
+    border-radius: 0.4rem;
+    background: var(--ecbk-green);
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 12px 24px rgba(76, 175, 80, 0.28);
+}
+
+.ecbk-hero__form .contact-form__submit:hover {
+    background: var(--ecbk-green-dark);
+}
+
+/* Intro overlapping card */
+.ecbk-intro {
+    position: relative;
+    z-index: 3;
+    margin-top: -3.5rem;
+    padding: 0 0 1.5rem;
+}
+
+.ecbk-intro__card {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 2.25rem 2.5rem 2.4rem;
+    border: 1px solid #e6e6ee;
+    border-radius: 0.85rem;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(20, 30, 70, 0.12);
+    text-align: center;
+}
+
+.ecbk-intro__card h2 {
+    margin: 0;
+    color: #111;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-intro__card p {
+    margin: 1rem 0 0;
+    color: var(--ecbk-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+/* Comprehensive services */
+.ecbk-services {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.ecbk-services__copy h2 {
+    margin: 0 0 1.5rem;
+    color: #111;
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-services__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1.75rem;
+}
+
+.ecbk-services__lists ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.95rem;
+}
+
+.ecbk-services__lists li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: var(--ecbk-ink);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.ecbk-services__media {
+    display: flex;
+    justify-content: center;
+}
+
+.ecbk-services__media img {
+    width: 100%;
+    max-width: 26rem;
+    height: auto;
+    display: block;
+}
+
+/* Platforms */
+.ecbk-platforms-wrap {
+    background: var(--ecbk-cream);
+}
+
+.ecbk-platforms {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.ecbk-platforms__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ecbk-platforms__media img {
+    width: 100%;
+    max-width: 32rem;
+    height: auto;
+    display: block;
+}
+
+.ecbk-platforms__copy h2 {
+    margin: 0;
+    color: #111;
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.ecbk-platforms__copy p {
+    margin: 0.85rem 0 0;
+    color: var(--ecbk-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.ecbk-platforms__copy .ecbk-btn {
+    margin-top: 1.5rem;
+}
+
+/* CTA banner */
+.ecbk-cta-banner {
+    background: var(--ecbk-navy);
+    padding: 2.75rem 0;
+}
+
+.ecbk-cta-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.ecbk-cta-banner h2 {
+    margin: 0;
+    max-width: 42rem;
+    color: #fff;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+/* Challenges */
+.ecbk-challenges-wrap {
+    background: var(--ecbk-gray);
+}
+
+.ecbk-challenges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.35rem;
+}
+
+.ecbk-challenge {
+    flex: 1 1 calc(33.333% - 1.35rem);
+    min-width: 15rem;
+    max-width: 21rem;
+    padding: 1.5rem 1.35rem 1.6rem;
+    border-radius: 0.25rem;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(20, 30, 70, 0.1);
+    text-align: left;
+}
+
+.ecbk-challenge img {
+    display: block;
+    width: auto;
+    max-width: 5.5rem;
+    height: 4.25rem;
+    object-fit: contain;
+    margin: 0 0 1rem;
+}
+
+.ecbk-challenge h3 {
+    margin: 0;
+    color: var(--ecbk-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-challenge p {
+    margin: 0.65rem 0 0;
+    color: var(--ecbk-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+/* Software */
+.ecbk-software__title {
+    margin: 0 0 1.25rem;
+    text-align: center;
+    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ecbk-navy);
+}
+
+.ecbk-software__title span + span {
+    margin-left: 0.35rem;
+}
+
+.ecbk-software__accent {
+    color: var(--ecbk-green);
+    position: relative;
+    display: inline-block;
+}
+
+.ecbk-software__accent::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2rem;
+    height: 0.35rem;
+    background: linear-gradient(90deg, transparent 0%, var(--ecbk-green) 18%, var(--ecbk-green) 82%, transparent 100%);
+    border-radius: 999px;
+    opacity: 0.85;
+    clip-path: ellipse(52% 70% at 50% 50%);
+}
+
+.ecbk-software__media {
+    display: flex;
+    justify-content: center;
+}
+
+.ecbk-software__media img {
+    width: 100%;
+    max-width: 58rem;
+    height: auto;
+    display: block;
+}
+
+/* Why choose */
+.ecbk-why {
+    background: var(--ecbk-cream-soft);
+}
+
+.ecbk-why__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.ecbk-why__card {
+    flex: 1 1 calc(33.333% - 1.25rem);
+    min-width: 16rem;
+    max-width: 22.5rem;
+    padding: 1.65rem 1.45rem;
+    background: #fff;
+    border-radius: 0.15rem;
+    box-shadow: 0 2px 10px rgba(20, 30, 70, 0.06);
+}
+
+.ecbk-why__card img {
+    display: block;
+    width: auto;
+    max-width: 5.5rem;
+    height: 4.25rem;
+    object-fit: contain;
+    margin: 0 0 1rem;
+}
+
+.ecbk-why__card h3 {
+    margin: 0;
+    color: #111;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-why__card p {
+    margin: 0.7rem 0 0;
+    color: var(--ecbk-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Benefits */
+.ecbk-benefits {
+    background: var(--ecbk-navy);
+    color: #fff;
+    padding: 3.5rem 0 3.25rem;
+}
+
+.ecbk-benefits__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.ecbk-benefits__copy h2 {
+    margin: 0 0 1.5rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-benefits__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 2rem;
+}
+
+.ecbk-benefits__lists ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.95rem;
+}
+
+.ecbk-benefits__lists li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #fff;
+    font-size: 0.98rem;
+    line-height: 1.5;
+}
+
+.ecbk-benefits__check {
+    flex: 0 0 auto;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.12rem;
+    background: rgba(255, 255, 255, 0.18);
+    margin-top: 0.15rem;
+}
+
+.ecbk-benefits__check svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    fill: #fff;
+}
+
+.ecbk-benefits__media {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ecbk-benefits__media img {
+    width: 100%;
+    max-width: 24rem;
+    height: auto;
+    display: block;
+}
+
+.ecbk-pricing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.ecbk-pricing__copy {
+    max-width: 40rem;
+}
+
+.ecbk-pricing h3 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ecbk-pricing p {
+    margin: 0.75rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+/* Testimonials */
+.ecbk-testimonials {
+    background: var(--ecbk-cream);
+    padding: 3.25rem 0 3.75rem;
+}
+
+.ecbk-testimonials__eyebrow {
+    margin: 0 0 0.45rem !important;
+    color: var(--ecbk-green) !important;
+    font-size: 1.15rem !important;
+    font-weight: 600;
+}
+
+.ecbk-testimonials .ecbk-heading h2 {
+    color: var(--ecbk-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+}
+
+.ecbk-testimonials__carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    max-width: 52rem;
+    margin: 0 auto;
+}
+
+.ecbk-testimonials__viewport {
+    display: grid;
+    align-items: stretch;
+    min-height: 10rem;
+}
+
+.ecbk-testimonial {
+    grid-area: 1 / 1;
+    margin: 0;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 0;
+}
+
+.ecbk-testimonial.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.ecbk-testimonial p {
+    margin: 0;
+    color: var(--ecbk-ink);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.ecbk-testimonial cite {
+    display: block;
+    margin-top: 1.25rem;
+    color: var(--ecbk-green);
+    font-style: normal;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.ecbk-testimonials__nav {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    background: transparent;
+    color: #4b5563;
+    cursor: pointer;
+    font-size: 1.35rem;
+    transition: color 0.2s ease;
+}
+
+.ecbk-testimonials__nav:hover {
+    color: var(--ecbk-navy);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .ecbk-hero__inner,
+    .ecbk-services,
+    .ecbk-platforms,
+    .ecbk-benefits__top {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .ecbk-hero__inner {
+        padding: 2.5rem 0 1.25rem;
+    }
+
+    .ecbk-cta-banner__inner,
+    .ecbk-pricing {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ecbk-benefits__media,
+    .ecbk-services__media {
+        justify-content: center;
+    }
+
+    .ecbk-challenge,
+    .ecbk-why__card {
+        flex-basis: calc(50% - 1.25rem);
+        max-width: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .ecbk-section,
+    .ecbk-cta-banner,
+    .ecbk-benefits,
+    .ecbk-testimonials {
+        padding: 2.25rem 0;
+    }
+
+    .ecbk-hero {
+        padding-bottom: 3.5rem;
+    }
+
+    .ecbk-intro {
+        margin-top: -2.5rem;
+    }
+
+    .ecbk-intro__card {
+        padding: 1.5rem 1.25rem 1.65rem;
+    }
+
+    .ecbk-services__lists,
+    .ecbk-benefits__lists {
+        grid-template-columns: 1fr;
+    }
+
+    .ecbk-challenge,
+    .ecbk-why__card {
+        flex-basis: 100%;
+    }
+
+    .ecbk-btn {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .ecbk-cta-banner__inner,
+    .ecbk-platforms__copy,
+    .ecbk-pricing,
+    .ecbk-hero__copy {
+        width: 100%;
+    }
+
+    .ecbk-testimonials__carousel {
+        grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+        gap: 0.5rem;
+    }
+
+    .ecbk-hero__form .consent-tooltip__content {
+        left: 0 !important;
+        right: 0;
+        width: auto;
+        max-width: none;
+        transform: none;
+    }
+}

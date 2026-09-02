@@ -12,9 +12,15 @@ class Lead extends Model
     public const FORM_OPTIONS = [
         'contact' => 'Contact Form',
         'homepage-contact' => 'Homepage Contact',
+        'free-consultation-for-construction' => 'Free Consultation For Construction',
+        'free-consultation-for-ipa' => 'Free Consultation For IPA',
+        'free-consultation-for-payroll-service' => 'Free Consultation For Payroll Service',
+        'free-consultation-for-tax-return' => 'Free Consultation For Tax Return Preparation',
+        'free-trial' => 'Free Trial',
         'header-contact-modal' => 'Header Contact Modal',
         'vapt-services-quote' => 'VAPT Services Quote',
         'vapt-pricing-quote' => 'VAPT Pricing Quote',
+        'pricing-enquire' => 'Pricing Enquire',
         'lead' => 'Lead Form',
         'newsletter_inquiry' => 'Newsletter Inquiry Form',
         'ebook_download' => 'Ebook Download Form',
@@ -94,5 +100,81 @@ class Lead extends Model
     public function getServiceAttribute(): ?string
     {
         return data_get($this->payload, 'service');
+    }
+
+    public function getPackageSelectedAttribute(): ?string
+    {
+        return $this->payloadString('package_selected') ?: $this->service;
+    }
+
+    public function getLookingForAttribute(): ?string
+    {
+        return $this->payloadString('looking_for');
+    }
+
+    public function getNeededServiceAttribute(): ?string
+    {
+        return $this->payloadString('needed_service');
+    }
+
+    public function getResourceTypeAttribute(): ?string
+    {
+        return $this->payloadString('resource_type');
+    }
+
+    public function getHireWhenAttribute(): ?string
+    {
+        return $this->payloadString('hire_when');
+    }
+
+    /**
+     * Extra form answers stored in payload. Keys already shown as dedicated
+     * admin fields (service, job_title, asset_title) are omitted when they
+     * would duplicate another displayed value.
+     *
+     * @return list<array{key: string, label: string, value: string}>
+     */
+    public function extraAnswers(): array
+    {
+        $answers = [];
+
+        foreach ([
+            'package_selected' => 'Selected Plan',
+            'looking_for' => 'What are you looking for?',
+            'needed_service' => 'Which service do you need?',
+            'resource_type' => 'Resource Type',
+            'hire_when' => 'When do you want to hire?',
+        ] as $key => $label) {
+            $value = $this->payloadString($key);
+
+            if ($value === null) {
+                continue;
+            }
+
+            if ($key === 'looking_for' && $value === $this->service) {
+                continue;
+            }
+
+            $answers[] = [
+                'key' => $key,
+                'label' => $label,
+                'value' => $value,
+            ];
+        }
+
+        return $answers;
+    }
+
+    protected function payloadString(string $key): ?string
+    {
+        $value = data_get($this->payload, $key);
+
+        if (! is_string($value)) {
+            return null;
+        }
+
+        $value = trim($value);
+
+        return $value === '' ? null : $value;
     }
 }

@@ -13,7 +13,7 @@
                 Migration planning, Laravel implementation, content operations, and admin systems built for modern marketing teams.
             </p>
             <div class="inner-hero__actions">
-                <a href="{{ route('page.show', ['slug' => 'contact']) }}" class="button-primary">Request a Proposal</a>
+                <a href="{{ route('page.show', ['slug' => 'contact-us']) }}" class="button-primary">Request a Proposal</a>
                 <a href="{{ route('ebooks.index') }}" class="button-secondary">View Resources</a>
             </div>
         </div>

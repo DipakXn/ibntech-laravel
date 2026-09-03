@@ -62,7 +62,11 @@
                             <i class="fa-solid fa-medal" aria-hidden="true"></i>
                             {{ $slide['badge'] }}
                         </div>
-                        <h1>{!! $slide['title'] !!}</h1>
+                        @if ($index === 0)
+                            <h1>{!! $slide['title'] !!}</h1>
+                        @else
+                            <h2>{!! $slide['title'] !!}</h2>
+                        @endif
                         <p class="home-hero__tags">{{ $slide['tags'] }}</p>
                         <p class="home-hero__description">{{ $slide['description'] }}</p>
                         <div class="home-hero__actions">

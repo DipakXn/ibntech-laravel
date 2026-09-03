@@ -49,6 +49,17 @@ class SeoMetaTagsTest extends TestCase
         $this->assertStringNotContainsString('content=""', $this->optionalMetaSubset($html));
     }
 
+    public function test_layouts_render_html_lang_en_us(): void
+    {
+        $this->withoutVite();
+
+        $appHtml = view('layouts.app')->render();
+        $landingHtml = view('layouts.landing', ['landingPage' => null])->render();
+
+        $this->assertStringContainsString('<html lang="en-US">', $appHtml);
+        $this->assertStringContainsString('<html lang="en-US">', $landingHtml);
+    }
+
     /**
      * @return array<string, mixed>
      */

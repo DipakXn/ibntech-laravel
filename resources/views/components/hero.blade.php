@@ -1,7 +1,7 @@
 @props([
     'title' => 'Modern Corporate CMS on Laravel',
     'subtitle' => 'Migration-ready architecture using Blade templates, services, repositories, and admin tooling.',
-    'primaryAction' => route('page.show', ['slug' => 'contact']),
+    'primaryAction' => route('page.show', ['slug' => 'contact-us']),
     'secondaryAction' => route('blog.index'),
 ])
 

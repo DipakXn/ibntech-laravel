@@ -49,7 +49,11 @@ class PathPageUrl
         $segments = explode('/', trim($path, '/'));
         $first = strtolower($segments[0] ?? '');
 
-        if (in_array($first, ['admin', 'ibn-tech-cms-login', 'livewire', 'telescope', 'horizon', 'vendor'], true)) {
+        if (in_array($first, ['admin', 'ibn-tech-cms-login', 'livewire', 'telescope', 'horizon', 'vendor'], true)
+            || str_starts_with($first, 'livewire-')) {
+            // 'livewire-' prefix covers Livewire 4's hashed endpoint (e.g. livewire-4e37d65f/upload-file).
+            // Without this guard the trailing slash is baked into the HMAC-signed URL but stripped by
+            // request()->url() at validation time, causing a 401 on every temporary file upload.
             return false;
         }
 

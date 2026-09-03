@@ -14,7 +14,7 @@
                 structured publishing, and dependable operations.
             </p>
             <div class="inner-hero__actions">
-                <a href="{{ route('page.show', ['slug' => 'contact']) }}" class="button-primary">Talk to Our Team</a>
+                <a href="{{ route('page.show', ['slug' => 'contact-us']) }}" class="button-primary">Talk to Our Team</a>
                 <a href="{{ route('case-studies.index') }}" class="button-secondary">See Delivery Proof</a>
             </div>
         </div>

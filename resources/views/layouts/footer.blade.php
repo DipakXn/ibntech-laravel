@@ -208,7 +208,7 @@
                     <li><a href="{{ route('case-studies.index') }}"><i class="fa-solid fa-trophy" aria-hidden="true"></i><span>Awards and Recognition</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'about']) }}"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>History</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'current-job-opening']) }}"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Career</span></a></li>
-                    <li><a href="{{ route('page.show', ['slug' => 'contact']) }}"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Contact Us</span></a></li>
+                    <li><a href="{{ route('page.show', ['slug' => 'contact-us']) }}"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Contact Us</span></a></li>
                 </ul>
             </nav>
 

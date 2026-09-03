@@ -231,7 +231,8 @@
     font-weight: 700;
 }
 
-.home-hero h1 {
+.home-hero h1,
+.home-hero h2 {
     margin-top: 1.15rem;
     max-width: min(22ch, 100%);
     font-size: clamp(2rem, 3.8vw, 3.15rem);
@@ -239,7 +240,8 @@
     line-height: 1.15;
 }
 
-.home-hero h1 span {
+.home-hero h1 span,
+.home-hero h2 span {
     color: #53d05d;
 }
 
@@ -1676,7 +1678,8 @@
         padding: 2.5rem 0 5rem;
     }
 
-    .home-hero h1 {
+    .home-hero h1,
+    .home-hero h2 {
         max-width: 100%;
         font-size: clamp(1.7rem, 7vw, 2.25rem);
     }

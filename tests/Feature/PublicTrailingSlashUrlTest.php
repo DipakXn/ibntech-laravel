@@ -6,6 +6,7 @@ use App\Models\CaseStudy;
 use App\Models\PressRelease;
 use App\Support\PathPageUrl;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Mechanisms\HandleRequests\EndpointResolver;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -41,6 +42,82 @@ class PublicTrailingSlashUrlTest extends TestCase
         $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash('/build/app.js'));
     }
 
+    /**
+     * Regression test for the Livewire 4 hashed upload endpoint.
+     *
+     * Livewire 4 uses a dynamic prefix of the form /livewire-{8char-hash}/ rather
+     * than the literal /livewire/ prefix. Without the `str_starts_with($first, 'livewire-')`
+     * guard in shouldAppendTrailingSlash(), the custom UrlGenerator::format() would
+     * append a trailing slash to the HMAC-signed URL. That slash is then stripped by
+     * request()->url() at validation time, producing a signature mismatch → 401.
+     *
+     * This test asserts that:
+     *   1. shouldAppendTrailingSlash returns false for all livewire-{hash}/... paths.
+     *   2. The generated signed upload URL does NOT contain a trailing slash before '?'.
+     */
+    #[Test]
+    public function livewire_hashed_upload_endpoint_does_not_receive_trailing_slash(): void
+    {
+        $prefix      = EndpointResolver::prefix();          // e.g. /livewire-4e37d65f
+        $uploadPath  = EndpointResolver::uploadPath();      // e.g. /livewire-4e37d65f/upload-file
+        $previewPath = EndpointResolver::previewPath();     // e.g. /livewire-4e37d65f/preview-file/{filename}
+        $updatePath  = EndpointResolver::updatePath();      // e.g. /livewire-4e37d65f/update
+        $scriptPath  = EndpointResolver::scriptPath(false); // e.g. /livewire-4e37d65f/livewire.js
+
+        // All hashed-prefix paths must be exempt from trailing-slash appending.
+        $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash($uploadPath),
+            "$uploadPath should NOT receive a trailing slash (would break HMAC signing)");
+        $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash($updatePath),
+            "$updatePath should NOT receive a trailing slash");
+        $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash($previewPath),
+            "$previewPath should NOT receive a trailing slash");
+        $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash($scriptPath),
+            "$scriptPath should NOT receive a trailing slash");
+
+        // The route() helper must not append a slash to the upload route URL.
+        $generatedUploadUrl = route('livewire.upload-file');
+        $pathBeforeQuery = (string) parse_url($generatedUploadUrl, PHP_URL_PATH);
+        $this->assertStringEndsNotWith(
+            '/',
+            $pathBeforeQuery,
+            "route('livewire.upload-file') path must not end with '/' — got: $generatedUploadUrl"
+        );
+        $this->assertStringEndsWith(
+            $uploadPath,
+            $pathBeforeQuery,
+            "route('livewire.upload-file') path must end with $uploadPath — got: $generatedUploadUrl"
+        );
+
+
+        // Also confirm that a generic livewire- path (not in the exact prefix) is still exempted.
+        $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash('/livewire-abcd1234/upload-file'),
+            "Any /livewire-{hash}/... path must be exempt");
+        $this->assertFalse(PathPageUrl::shouldAppendTrailingSlash('/livewire-00000000/update'),
+            "Any /livewire-{hash}/... path must be exempt");
+    }
+
+    #[Test]
+    public function public_page_urls_still_receive_trailing_slashes_after_livewire_fix(): void
+    {
+        // Normal public-content routes must be unaffected by the livewire- exemption.
+        $this->assertTrue(PathPageUrl::shouldAppendTrailingSlash('/contact-us'),
+            '/contact-us should still receive a trailing slash');
+        $this->assertTrue(PathPageUrl::shouldAppendTrailingSlash('/blog'),
+            '/blog should still receive a trailing slash');
+        $this->assertTrue(PathPageUrl::shouldAppendTrailingSlash('/case-studies'),
+            '/case-studies should still receive a trailing slash');
+        $this->assertTrue(PathPageUrl::shouldAppendTrailingSlash('/pressrelease'),
+            '/pressrelease should still receive a trailing slash');
+        $this->assertTrue(PathPageUrl::shouldAppendTrailingSlash('/industries/healthcare'),
+            '/industries/healthcare should still receive a trailing slash');
+
+        // route() helper must still append slashes for all public routes.
+        $this->assertStringEndsWith('/', route('pressrelease.index'));
+        $this->assertStringEndsWith('/', route('case-studies.index'));
+        $this->assertStringEndsWith('/', route('blog.index'));
+        $this->assertStringEndsWith('/', route('page.show', ['slug' => 'about-us']));
+    }
+
     #[Test]
     public function unslashed_public_urls_receive_a_single_301(): void
     {
@@ -55,6 +132,18 @@ class PublicTrailingSlashUrlTest extends TestCase
         $this->get('/case-studies/page/2')
             ->assertStatus(301)
             ->assertRedirect('http://localhost/case-studies/page/2/');
+
+        $this->get('/contact')
+            ->assertStatus(301)
+            ->assertRedirect('http://localhost/contact/');
+
+        $this->get('/contact/')
+            ->assertStatus(301)
+            ->assertRedirect('http://localhost/contact-us/');
+
+        $this->get('/contact/contact-us/')
+            ->assertStatus(301)
+            ->assertRedirect('http://localhost/contact-us/');
     }
 
     #[Test]

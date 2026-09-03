@@ -66,6 +66,10 @@ Route::get('/industry/{slug}', [IndustryController::class, 'show'])->name('indus
 Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-pages.show');
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
+Route::redirect('/contact', '/contact-us/', 301);
+Route::redirect('/contact/contact-us', '/contact-us/', 301);
+
 Route::get('/{slug}', [PageController::class, 'show'])
     ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|white-papers$|livewire$|storage$|up$).+')
     ->name('page.show');
+

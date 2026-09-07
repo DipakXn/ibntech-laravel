@@ -99,23 +99,9 @@
     ];
     $formCount = count($claimForms);
 
-    $caseStudies = [
-        [
-            'title' => 'Boost Medical Claims Processing Efficiency with Advanced Automation',
-            'image' => $img('streamline-your-healthcare-operations-with-medical-claims-automation.webp'),
-            'slug' => 'medical-claims-process-automation',
-        ],
-        [
-            'title' => 'A Pioneer In Medical Practice Solutions Achieves HIPAA Compliance And Enhanced Security With VAPT',
-            'image' => asset('images/vapt-case-studies/medical-practice-hipaa-vapt.png'),
-            'slug' => 'a-pioneer-in-medical-practice-solutions-achieves-hipaa-compliance-and-enhanced-security-with-vapt',
-        ],
-        [
-            'title' => 'Enhance Government Invoice Processing with Full Automation',
-            'image' => asset('images/invoice-process-automation/invoice-process-automation-banner.webp'),
-            'slug' => 'government-invoice-processing-automation',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug(
+        limit: 3
+    );
 @endphp
 
 @extends('layouts.app')
@@ -403,35 +389,53 @@
             </div>
         </section>
 
-        <section class="mca-section mca-cases" aria-labelledby="mca-cases-title">
-            <div class="site-shell">
-                <div class="mca-heading">
-                    <h2 id="mca-cases-title">Medical Claims Automation in Action</h2>
+        @if ($caseStudies->isNotEmpty())
+            <section class="mca-section mca-cases" aria-labelledby="mca-cases-title">
+                <div class="site-shell">
+                    <div class="mca-heading">
+                        <h2 id="mca-cases-title">Medical Claims Automation in Action</h2>
+                    </div>
+                    <div class="mca-case-grid" role="list">
+                        @foreach ($caseStudies as $case)
+                            <article class="mca-case-card" role="listitem">
+                                @php
+                                    $caseImageUrl = $case->featuredImageUrl();
+                                    if (! $caseImageUrl && $case->featured_image) {
+                                        if (file_exists(public_path('images/medical-claim-automation/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/medical-claim-automation/' . $case->featured_image);
+                                        } elseif (file_exists(public_path('images/vapt-case-studies/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/vapt-case-studies/' . $case->featured_image);
+                                        } elseif (file_exists(public_path('images/invoice-process-automation/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/invoice-process-automation/' . $case->featured_image);
+                                        } elseif (file_exists(public_path($case->featured_image))) {
+                                            $caseImageUrl = asset($case->featured_image);
+                                        }
+                                    }
+                                @endphp
+                                @if ($caseImageUrl)
+                                    <div class="mca-case-card__media">
+                                        <img
+                                            src="{{ $caseImageUrl }}"
+                                            alt="{{ $case->title }}"
+                                            width="640"
+                                            height="400"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </div>
+                                @endif
+                                <div class="mca-case-card__body">
+                                    <h3>{{ $case->title }}</h3>
+                                    <a href="{{ route('case-studies.show', $case->slug) }}">Read More</a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+                    <div class="mca-cases__cta">
+                        <a href="{{ route('case-studies.index') }}" class="mca-btn">View All</a>
+                    </div>
                 </div>
-                <div class="mca-case-grid" role="list">
-                    @foreach ($caseStudies as $case)
-                        <article class="mca-case-card" role="listitem">
-                            <div class="mca-case-card__media">
-                                <img
-                                    src="{{ $case['image'] }}"
-                                    alt="{{ $case['title'] }}"
-                                    width="640"
-                                    height="400"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </div>
-                            <div class="mca-case-card__body">
-                                <h3>{{ $case['title'] }}</h3>
-                                <a href="{{ route('case-studies.show', ['slug' => $case['slug']]) }}">Read More</a>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-                <div class="mca-cases__cta">
-                    <a href="{{ route('case-studies.index') }}" class="mca-btn">View All</a>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
     </div>
 @endsection

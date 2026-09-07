@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
+use App\Support\PathPageUrl;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
@@ -71,11 +72,28 @@ class ConstructionConsultationForm extends Component
 
     public ?string $submitError = null;
 
-    public function mount(string $formName = 'free-consultation-for-construction', string $idPrefix = 'fccons'): void
-    {
+    public ?string $thankYouUrl = null;
+
+    public function mount(
+        string $formName = 'free-consultation-for-construction',
+        string $idPrefix = 'fccons',
+        ?string $thankYouUrl = null,
+    ): void {
         $this->formName = $formName !== '' ? $formName : 'free-consultation-for-construction';
         $this->idPrefix = $idPrefix !== '' ? $idPrefix : 'fccons';
+        if (is_string($thankYouUrl) && trim($thankYouUrl) !== '') {
+            $this->thankYouUrl = trim($thankYouUrl);
+        }
         $this->pageUrl = url()->current();
+    }
+
+    public function publishedThankYouUrl(): ?string
+    {
+        if (! is_string($this->thankYouUrl) || trim($this->thankYouUrl) === '') {
+            return null;
+        }
+
+        return PathPageUrl::withTrailingSlash(url(trim($this->thankYouUrl)));
     }
 
     public function needsDetailedRequirements(): bool
@@ -243,6 +261,14 @@ class ConstructionConsultationForm extends Component
                 'resource_type' => $this->needsDetailedRequirements() ? ($validated['resourceType'] ?? null) : null,
                 'hire_when' => $validated['hireWhen'] ?? null,
             ], $this->formName);
+
+            $thankYouUrl = $this->publishedThankYouUrl();
+
+            if ($thankYouUrl) {
+                $this->redirect($thankYouUrl);
+
+                return;
+            }
 
             $this->reset([
                 'name',

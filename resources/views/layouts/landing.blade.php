@@ -164,6 +164,7 @@
     @endif
 </head>
 <body class="lp-site">
+    @include('components.cms-preview-banner')
     @if(!empty($websiteSettings?->google_tag_manager_id))
         <noscript>
             <iframe src="https://www.googletagmanager.com/ns.html?id={{ $websiteSettings->google_tag_manager_id }}"

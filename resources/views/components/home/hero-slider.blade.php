@@ -7,6 +7,7 @@
             'description' => '24/7 Managed Cybersecurity: Anytime, Anywhere Protection for Your Digital Assets-Uniting Performance, Protection, and Leadership',
             'image' => asset('images/cyber-security-hero-banner.webp'),
             'alt' => 'Cybersecurity excellence hero banner',
+            'scroll_target' => 'home-form',
         ],
         [
             'badge' => 'Accelerate Innovation with Cloud-First Agility',
@@ -15,6 +16,7 @@
             'description' => 'We deliver scalable cloud solutions customized to your business goals. Experience agility, security,and performance powered by partnership.',
             'image' => asset('images/cloud-services-hero-banner.webp'),
             'alt' => 'Cloud services hero banner',
+            'scroll_target' => 'home-form',
         ],
         [
             'badge' => 'Automate Intelligently, Operate Effortlessly',
@@ -23,6 +25,7 @@
             'description' => 'Deploy intelligent automation with cognitive RPA and advanced analytics for real-time making. Streamline invoice management, align sales orders, and accelerate workflows for faster, accurate payment processing.',
             'image' => asset('images/robotic-process-automation-hero-banner.webp'),
             'alt' => 'Robotic process automation hero banner',
+            'scroll_target' => 'home-form',
         ],
         [
             'badge' => 'Expert Accounting, Delivered Remotely',
@@ -31,6 +34,7 @@
             'description' => 'Global leader in remote bookkeeping and accounting, delivering 100% accuracy, efficiency, and growth focused.',
             'image' => asset('images/accounting-and-Bookkeeping-hero-banner.webp'),
             'alt' => 'Accounting and bookkeeping hero banner',
+            'scroll_target' => 'home-form',
         ],
     ];
 @endphp
@@ -70,7 +74,7 @@
                         <p class="home-hero__tags">{{ $slide['tags'] }}</p>
                         <p class="home-hero__description">{{ $slide['description'] }}</p>
                         <div class="home-hero__actions">
-                            <a href="#" class="home-btn home-btn--green" data-contact-modal-trigger>
+                            <a href="javascript:void(0)" class="home-btn home-btn--green" data-scroll-target="{{ $slide['scroll_target'] }}">
                                 Contact Our Expert
                             </a>
                         </div>

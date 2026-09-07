@@ -2,6 +2,9 @@
 
 namespace App\Support\Html;
 
+use Symfony\Component\HtmlSanitizer\HtmlSanitizer;
+use Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig;
+
 class SafeHtml
 {
     public static function sanitizeForRender(?string $html): string
@@ -14,6 +17,10 @@ class SafeHtml
 
         $unwrapped = (new UnknownElementUnwrapper)->unwrap($html);
 
-        return (string) str($unwrapped)->sanitizeHtml();
+        $config = app(HtmlSanitizerConfig::class)
+            ->allowAttribute('data-scroll-target', allowedElements: '*')
+            ->allowAttribute('data-scroll-anchor', allowedElements: '*');
+
+        return (new HtmlSanitizer($config))->sanitize($unwrapped);
     }
 }

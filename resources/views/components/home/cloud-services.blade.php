@@ -1,10 +1,10 @@
 @php
     $services = [
-        ['title' => 'Multi Cloud Consulting & Migration', 'icon' => 'fa-cloud-arrow-up', 'color' => '#2f6fd6'],
-        ['title' => 'Managed Cloud & Security Services', 'icon' => 'fa-shield-halved', 'color' => '#4caf50'],
-        ['title' => 'Business Continuity & Disaster Recovery', 'icon' => 'fa-server', 'color' => '#6e65f2'],
-        ['title' => 'DevSecOps Implementation Services', 'icon' => 'fa-gears', 'color' => '#f0a202'],
-        ['title' => 'Microsoft 365 / Office 365 Migration', 'icon' => 'fa-envelope-open-text', 'color' => '#e85d75'],
+        ['title' => 'Multi Cloud Consulting & Migration', 'icon' => 'fa-cloud-arrow-up', 'color' => '#2f6fd6', 'href' => route('page.show', ['slug' => 'cloud-consulting-and-migration-services']),],
+        ['title' => 'Managed Cloud & Security Services', 'icon' => 'fa-shield-halved', 'color' => '#4caf50', 'href' => route('page.show', ['slug' => 'cloud-managed-services']),],
+        ['title' => 'Business Continuity & Disaster Recovery', 'icon' => 'fa-server', 'color' => '#6e65f2', 'href' => route('page.show', ['slug' => 'business-continuity-disaster-recovery-services']),],
+        ['title' => 'DevSecOps Implementation Services', 'icon' => 'fa-gears', 'color' => '#f0a202', 'href' => route('page.show', ['slug' => 'devsecops-services']),],
+        ['title' => 'Microsoft 365 / Office 365 Migration', 'icon' => 'fa-envelope-open-text', 'color' => '#e85d75', 'href' => route('page.show', ['slug' => 'microsoft-office-365-migration-support-services']),],
     ];
 
     $software = [
@@ -23,7 +23,7 @@
     ];
 @endphp
 
-<section class="home-section" aria-labelledby="home-cloud-title">
+<section class="home-section" aria-labelledby="home-cloud-title" data-scroll-anchor="cloud-section">
     <div class="home-shell">
         <div class="text-center">
             <h2 class="home-section-title">
@@ -61,8 +61,10 @@
             <div class="home-cloud__services">
                 @foreach ($services as $service)
                     <article>
-                        <i class="fa-solid {{ $service['icon'] }}" style="background: {{ $service['color'] }}" aria-hidden="true"></i>
-                        <h3>{{ $service['title'] }}</h3>
+                        <a href="{{ $service['href'] }}">
+                            <i class="fa-solid {{ $service['icon'] }}" style="background: {{ $service['color'] }}" aria-hidden="true"></i>
+                            <h3>{{ $service['title'] }}</h3>
+                        </a>
                     </article>
                 @endforeach
             </div>
@@ -96,7 +98,7 @@
                 <h3>Secure Your Cloud Before It’s Too Late - Book a Consultation</h3>
                 <p>Start your cloud transformation today with a proven plan that eliminates risks and ensures uninterrupted performance.</p>
             </div>
-            <a href="#" class="home-btn home-btn--white" data-contact-modal-trigger>Get Started Now →</a>
+            <a href="javascript:void(0)" class="home-btn home-btn--white" data-scroll-target="home-form">Get Started Now →</a>
         </div>
     </div>
 </section>

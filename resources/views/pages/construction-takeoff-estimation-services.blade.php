@@ -174,6 +174,7 @@
                         message-placeholder="Tell us about your takeoff or estimation project"
                         submit-label="Submit"
                         layout="home"
+                        thank-you-url="/thank-you-for-construction-services-consultation/"
                     />
                 </aside>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CmsPreview\CmsContentRenderer;
 use App\Http\Controllers\Concerns\PaginatesWithPathPages;
 use App\Services\CaseStudyService;
 use App\Services\SeoService;
@@ -17,6 +18,7 @@ class CaseStudyController extends Controller
     public function __construct(
         protected CaseStudyService $caseStudyService,
         protected SeoService $seoService,
+        protected CmsContentRenderer $renderer,
     ) {}
 
     public function index(Request $request): Response|RedirectResponse
@@ -35,7 +37,7 @@ class CaseStudyController extends Controller
 
         abort_unless($caseStudy, 404);
 
-        return response()->view('case-studies.templates.'.$caseStudy->template, compact('caseStudy'));
+        return $this->renderer->render($caseStudy);
     }
 
     public function download(Request $request, string $slug): RedirectResponse

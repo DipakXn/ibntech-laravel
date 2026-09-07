@@ -168,6 +168,7 @@
     @endif
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
+    @include('components.cms-preview-banner')
     @if(!empty($websiteSettings?->google_tag_manager_id))
         <noscript>
             <iframe src="https://www.googletagmanager.com/ns.html?id={{ $websiteSettings->google_tag_manager_id }}"

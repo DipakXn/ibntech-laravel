@@ -28,4 +28,15 @@ class UnknownElementUnwrapperTest extends TestCase
         $this->assertStringContainsString('<p>Hello <a href="/x">link</a></p>', $unwrapped);
         $this->assertStringContainsString('<ul><li>Item</li></ul>', $unwrapped);
     }
+
+    public function test_it_keeps_semantic_scroll_landmarks(): void
+    {
+        $html = '<section data-scroll-anchor="download-form"><p>Form</p></section><button type="button" data-scroll-target="download-form">Go</button>';
+
+        $unwrapped = (new UnknownElementUnwrapper)->unwrap($html);
+
+        $this->assertStringContainsString('<section data-scroll-anchor="download-form">', $unwrapped);
+        $this->assertStringContainsString('<button type="button" data-scroll-target="download-form">', $unwrapped);
+        $this->assertStringContainsString('<p>Form</p>', $unwrapped);
+    }
 }

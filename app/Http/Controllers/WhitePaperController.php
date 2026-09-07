@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CmsPreview\CmsContentRenderer;
 use App\Http\Controllers\Concerns\PaginatesWithPathPages;
 use App\Services\SeoService;
 use App\Services\WhitePaperService;
@@ -17,6 +18,7 @@ class WhitePaperController extends Controller
     public function __construct(
         protected WhitePaperService $whitePaperService,
         protected SeoService $seoService,
+        protected CmsContentRenderer $renderer,
     ) {}
 
     public function index(Request $request): Response|RedirectResponse
@@ -35,7 +37,7 @@ class WhitePaperController extends Controller
 
         abort_unless($whitePaper, 404);
 
-        return response()->view('white-papers.templates.'.$whitePaper->template, compact('whitePaper'));
+        return $this->renderer->render($whitePaper);
     }
 
     protected function showIndex(Request $request, ?int $page): Response|RedirectResponse

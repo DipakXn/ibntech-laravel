@@ -4,26 +4,30 @@
             'title' => 'AI Consulting Services',
             'text' => 'Align AI strategy with business goals to identify high-impact automation opportunities.',
             'icon' => 'fa-lightbulb',
+            'href' => route('page.show', ['slug' => 'ai-consulting-services']),
         ],
         [
             'title' => 'Agentic AI Services',
             'text' => 'Deploy autonomous AI agents that execute tasks, make decisions, and streamline operations.',
             'icon' => 'fa-brain',
+            'href' => route('page.show', ['slug' => 'agentic-ai-services']),
         ],
         [
             'title' => 'AI Development Services',
             'text' => 'Build custom AI solutions, copilots, and intelligent applications tailored to your workflows.',
             'icon' => 'fa-code',
+            'href' => route('page.show', ['slug' => 'ai-development-services']),
         ],
         [
             'title' => 'Robotic Process Automation (RPA)',
             'text' => 'Eliminate repetitive tasks through intelligent bots that work faster and more accurately.',
             'icon' => 'fa-robot',
+            'href' => route('page.show', ['slug' => 'robotics-process-automation']),
         ],
     ];
 @endphp
 
-<section class="home-section home-section--tint" aria-labelledby="home-ai-title">
+<section class="home-section home-section--tint" aria-labelledby="home-ai-title" data-scroll-anchor="ai-section">
     <div class="home-shell">
         <div class="flex items-center gap-3">
             <span class="inline-grid h-11 w-11 place-items-center rounded-xl bg-[#2f6fd6] text-white">
@@ -55,11 +59,13 @@
             <div class="home-ai__grid">
                 @foreach ($services as $service)
                     <article class="home-card home-service-card">
+                        <a href="{{ $service['href'] }}">
                         <div class="home-service-card__icon home-service-card__icon--violet !bg-[#2f6fd6]">
                             <i class="fa-solid {{ $service['icon'] }}" aria-hidden="true"></i>
                         </div>
                         <h3 class="!text-[#2f6fd6]">{{ $service['title'] }}</h3>
                         <p>{{ $service['text'] }}</p>
+                        </a>
                     </article>
                 @endforeach
             </div>
@@ -87,7 +93,7 @@
                 <h3>Ready to Eliminate Repetitive Work?</h3>
                 <p>Let IBN's automation experts map your workflows, deploy bots, and deliver measurable ROI — with zero disruption to your existing systems.</p>
             </div>
-            <a href="#" class="home-btn home-btn--white" data-contact-modal-trigger>Book Free Assessment →</a>
+            <a href="javascript:void(0)" class="home-btn home-btn--white" data-scroll-target="home-form">Book Free Assessment →</a>
         </div>
     </div>
 </section>

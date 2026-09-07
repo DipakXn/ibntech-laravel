@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\LandingPages\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class LandingPagesTable
             ->emptyStateDescription('Create a landing page to publish a campaign-specific destination page.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -248,6 +248,7 @@
                         message-placeholder="Message"
                         submit-label="Submit"
                         layout="home"
+                        thank-you-url="/thanks-you-for-bookkeeping/"
                     />
                 </aside>
             </div>

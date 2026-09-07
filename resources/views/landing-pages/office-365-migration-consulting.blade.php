@@ -81,6 +81,7 @@
                     :landing-page-title="$landingPage->title"
                     id-prefix="lp-office-365-migration-consulting-hero"
                     phone-country="in"
+                    thank-you-url="/lp/office-365-migration-consulting-thank-you/"
                     wire:key="landing-inquiry-office-365-migration-consulting-hero"
                 />
             </div>

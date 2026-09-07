@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Services\LeadService;
+use App\Support\PathPageUrl;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Throwable;
@@ -53,6 +54,8 @@ class ContactForm extends Component
 
     public ?int $messageRows = null;
 
+    public ?string $thankYouUrl = null;
+
     /**
      * @var list<string>
      */
@@ -81,6 +84,7 @@ class ContactForm extends Component
         string $companyPlaceholder = 'Company',
         ?string $initialService = null,
         ?int $messageRows = null,
+        ?string $thankYouUrl = null,
     ): void {
         $this->showCompany = $showCompany;
         $this->showService = $showService;
@@ -92,6 +96,9 @@ class ContactForm extends Component
         $this->messagePlaceholder = $messagePlaceholder !== '' ? $messagePlaceholder : 'Tell us how we can help';
         $this->companyPlaceholder = $companyPlaceholder !== '' ? $companyPlaceholder : 'Company';
         $this->messageRows = $messageRows !== null && $messageRows > 0 ? $messageRows : null;
+        if (is_string($thankYouUrl) && trim($thankYouUrl) !== '') {
+            $this->thankYouUrl = trim($thankYouUrl);
+        }
         if (is_array($serviceOptions) && $serviceOptions !== []) {
             $this->serviceOptions = array_values(array_filter(
                 $serviceOptions,
@@ -102,6 +109,15 @@ class ContactForm extends Component
             $this->service = $initialService;
         }
         $this->pageUrl = url()->current();
+    }
+
+    public function publishedThankYouUrl(): ?string
+    {
+        if (! is_string($this->thankYouUrl) || trim($this->thankYouUrl) === '') {
+            return null;
+        }
+
+        return PathPageUrl::withTrailingSlash(url(trim($this->thankYouUrl)));
     }
 
     public function isCompactLayout(): bool
@@ -156,6 +172,14 @@ class ContactForm extends Component
             }
 
             $leadService->createLead($leadPayload, 'contact');
+
+            $thankYouUrl = $this->publishedThankYouUrl();
+
+            if ($thankYouUrl) {
+                $this->redirect($thankYouUrl);
+
+                return;
+            }
 
             $this->reset(['name', 'email', 'phone', 'company', 'service', 'message']);
             $this->acceptedTerms = true;

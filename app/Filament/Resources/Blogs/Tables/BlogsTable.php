@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Blogs\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -59,6 +60,7 @@ class BlogsTable
             ->emptyStateDescription('Start the editorial pipeline by creating your first blog post.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -5,10 +5,21 @@ namespace App\Repositories;
 use App\Models\WhitePaper;
 use App\Pagination\PathPagePaginator;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class WhitePaperRepository
 {
+    public function latestPublished(int $limit = 1): Collection
+    {
+        return WhitePaper::query()
+            ->published()
+            ->with(['category', 'media.model'])
+            ->latest()
+            ->limit($limit)
+            ->get();
+    }
+
     public function paginatePublished(int $perPage = 9, int $page = 1, ?string $path = null): LengthAwarePaginator
     {
         $results = WhitePaper::query()

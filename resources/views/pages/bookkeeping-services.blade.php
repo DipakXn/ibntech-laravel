@@ -14,26 +14,7 @@
         ['value' => '30+', 'label' => 'Industries Served'],
     ];
 
-    $caseStudies = [
-        [
-            'image' => 'CPA-case-full.jpg',
-            'alt' => 'Nonprofit-focused CPA firm case study',
-            'title' => 'Nonprofit-Focused CPA Firm in New York Successfully Reduces Overheads by Outsourcing Finance and Accounting Services to IBN Technologies',
-            'href' => 'https://www.ibntech.com/case-study/nonprofit-focused-cpa-firm-in-new-york/',
-        ],
-        [
-            'image' => 'CPA-1.jpg',
-            'alt' => 'NJ-based CPA firm offshore accounting case study',
-            'title' => 'IBN Technologies’ Offshore Accounting Services Drive Operational Cost Savings and Boost Client Acquisition for NJ-based CPA Firm',
-            'href' => 'https://www.ibntech.com/case-study/finance-and-accounting-services-case-studies-for-cpa-firm-nj-usa/',
-        ],
-        [
-            'image' => 'outsourcing-bookkeeping-services.webp',
-            'alt' => 'Outsource bookkeeping case study for CFO and software industry',
-            'title' => 'Outsource Bookkeeping Case Study on Services offered to a CFO and Software Development & Consulting Services Industry',
-            'href' => 'https://www.ibntech.com/case-study/case-studies-6/',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug('finance-and-accounting-case-studies', limit: 3);
 
     $outsourcedCards = [
         [
@@ -521,36 +502,50 @@
         </section>
 
         {{-- 5. Success Stories --}}
-        <section class="bkpsvc-section" aria-labelledby="bkpsvc-stories-title">
-            <div class="site-shell">
-                <div class="bkpsvc-heading">
-                    <h2 id="bkpsvc-stories-title">Success Stories: Transforming Businesses Through Outsourced Bookkeeping</h2>
-                </div>
+        @if ($caseStudies->isNotEmpty())
+            <section class="bkpsvc-section" aria-labelledby="bkpsvc-stories-title">
+                <div class="site-shell">
+                    <div class="bkpsvc-heading">
+                        <h2 id="bkpsvc-stories-title">Success Stories: Transforming Businesses Through Outsourced Bookkeeping</h2>
+                    </div>
 
-                <div class="bkpsvc-stories" role="list">
-                    @foreach ($caseStudies as $study)
-                        <article class="bkpsvc-story-card" role="listitem">
-                            <div class="bkpsvc-story-card__media">
-                                <img
-                                    src="{{ $img($study['image']) }}"
-                                    alt="{{ $study['alt'] }}"
-                                    width="400"
-                                    height="225"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </div>
-                            <div class="bkpsvc-story-card__body">
-                                <h3>{{ $study['title'] }}</h3>
-                                <a href="{{ $study['href'] }}" target="_blank" rel="noopener noreferrer">
-                                    VIEW CASE STUDY »
-                                </a>
-                            </div>
-                        </article>
-                    @endforeach
+                    <div class="bkpsvc-stories" role="list">
+                        @foreach ($caseStudies as $study)
+                            <article class="bkpsvc-story-card" role="listitem">
+                                @php
+                                    $studyImageUrl = $study->featuredImageUrl();
+                                    if (! $studyImageUrl && $study->featured_image) {
+                                        if (file_exists(public_path('images/bookkeeping-services/' . $study->featured_image))) {
+                                            $studyImageUrl = asset('images/bookkeeping-services/' . $study->featured_image);
+                                        } elseif (file_exists(public_path($study->featured_image))) {
+                                            $studyImageUrl = asset($study->featured_image);
+                                        }
+                                    }
+                                @endphp
+                                @if ($studyImageUrl)
+                                    <div class="bkpsvc-story-card__media">
+                                        <img
+                                            src="{{ $studyImageUrl }}"
+                                            alt="{{ $study->title }}"
+                                            width="400"
+                                            height="225"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </div>
+                                @endif
+                                <div class="bkpsvc-story-card__body">
+                                    <h3>{{ $study->title }}</h3>
+                                    <a href="{{ route('case-studies.show', $study->slug) }}">
+                                        VIEW CASE STUDY »
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         {{-- 6. CTA band --}}
         <section class="bkpsvc-cta bkpsvc-cta--navy" aria-labelledby="bkpsvc-cta-success-title">
@@ -952,6 +947,7 @@
                         message-placeholder="Tell Us About Your Specific Bookkeeping Needs"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-bookkeeping/"
                     />
                 </aside>
             </div>

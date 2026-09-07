@@ -63,23 +63,9 @@
         'Enters data and PO images into Acumatica and other ECM platforms',
     ];
 
-    $caseStudies = [
-        [
-            'title' => 'Cloud Migration and Database Modernization for - ASC 606',
-            'image' => asset('images/aws-partner/cloud-optimization-and-database-modernization.png'),
-            'slug' => 'cloud-optimization-database-modernization-with-aws-rds',
-        ],
-        [
-            'title' => 'ASC 606 Revenue Recognition for Transcurance',
-            'image' => asset('images/aws-partner/aws-modernization.png'),
-            'slug' => 'aws-infrastructure-modernization-for-manufacturing',
-        ],
-        [
-            'title' => 'Detailed Monthly Data Deliverables for 30 Stores and Auto-Drafting Compliance Reports and Daily Reconciliation for a BPO Financial Company',
-            'image' => asset('images/cloud-consulting-and-migration-services/Gateway-for-JDE-USA.png'),
-            'slug' => 'secure-financial-data-exchange-for-jd-edwards-on-azure-enabling-compliance-speed-and-erp-modernization-for-a-us-financial-enterprise',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug(
+        limit: 3
+    );
 @endphp
 
 @extends('layouts.app')
@@ -302,45 +288,63 @@
         </section>
 
         {{-- Section 8: Case Studies / Real Results --}}
-        <section class="sop-section sop-cases" aria-labelledby="sop-cases-title">
-            <div class="site-shell sop-cases__inner">
-                <div class="sop-heading sop-heading--wide">
-                    <h2 id="sop-cases-title">
-                        Real Results<br>
-                        Success Stories of AP Automation in Action
-                    </h2>
-                </div>
+        @if ($caseStudies->isNotEmpty())
+            <section class="sop-section sop-cases" aria-labelledby="sop-cases-title">
+                <div class="site-shell sop-cases__inner">
+                    <div class="sop-heading sop-heading--wide">
+                        <h2 id="sop-cases-title">
+                            Real Results<br>
+                            Success Stories of AP Automation in Action
+                        </h2>
+                    </div>
 
-                <div class="sop-case-grid" role="list">
-                    @foreach ($caseStudies as $case)
-                        <article class="sop-case-card" role="listitem">
-                            <a
-                                href="{{ route('case-studies.show', ['slug' => $case['slug']]) }}"
-                                class="sop-case-card__link-wrap"
-                            >
-                                <div class="sop-case-card__media">
-                                    <img
-                                        src="{{ $case['image'] }}"
-                                        alt="{{ $case['title'] }}"
-                                        width="640"
-                                        height="400"
-                                        loading="lazy"
-                                        decoding="async"
-                                    >
-                                </div>
-                                <div class="sop-case-card__body">
-                                    <h3>{{ $case['title'] }}</h3>
-                                    <span class="sop-case-card__cta">Read More &raquo;</span>
-                                </div>
-                            </a>
-                        </article>
-                    @endforeach
-                </div>
+                    <div class="sop-case-grid" role="list">
+                        @foreach ($caseStudies as $case)
+                            <article class="sop-case-card" role="listitem">
+                                <a
+                                    href="{{ route('case-studies.show', $case->slug) }}"
+                                    class="sop-case-card__link-wrap"
+                                >
+                                    @php
+                                        $caseImageUrl = $case->featuredImageUrl();
+                                        if (! $caseImageUrl && $case->featured_image) {
+                                            if (file_exists(public_path('images/sales-order-processing/' . $case->featured_image))) {
+                                                $caseImageUrl = asset('images/sales-order-processing/' . $case->featured_image);
+                                            } elseif (file_exists(public_path('images/aws-partner/' . $case->featured_image))) {
+                                                $caseImageUrl = asset('images/aws-partner/' . $case->featured_image);
+                                            } elseif (file_exists(public_path('images/cloud-consulting-and-migration-services/' . $case->featured_image))) {
+                                                $caseImageUrl = asset('images/cloud-consulting-and-migration-services/' . $case->featured_image);
+                                            } elseif (file_exists(public_path($case->featured_image))) {
+                                                $caseImageUrl = asset($case->featured_image);
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($caseImageUrl)
+                                        <div class="sop-case-card__media">
+                                            <img
+                                                src="{{ $caseImageUrl }}"
+                                                alt="{{ $case->title }}"
+                                                width="640"
+                                                height="400"
+                                                loading="lazy"
+                                                decoding="async"
+                                            >
+                                        </div>
+                                    @endif
+                                    <div class="sop-case-card__body">
+                                        <h3>{{ $case->title }}</h3>
+                                        <span class="sop-case-card__cta">Read More &raquo;</span>
+                                    </div>
+                                </a>
+                            </article>
+                        @endforeach
+                    </div>
 
-                <div class="sop-cases__cta">
-                    <a href="{{ route('case-studies.index') }}" class="sop-btn">Learn More</a>
+                    <div class="sop-cases__cta">
+                        <a href="{{ route('case-studies.index') }}" class="sop-btn">Learn More</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
     </div>
 @endsection

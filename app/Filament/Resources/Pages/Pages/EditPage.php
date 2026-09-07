@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Pages\Pages;
 
+use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\Pages\PageResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
@@ -13,6 +14,7 @@ class EditPage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            PreviewAction::make(),
             DeleteAction::make(),
         ];
     }

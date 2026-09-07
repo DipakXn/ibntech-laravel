@@ -301,6 +301,7 @@
                         message-placeholder="Tell us about your project documentation needs"
                         submit-label="SUBMIT YOUR QUERY NOW"
                         layout="home"
+                        thank-you-url="/thank-you-for-construction-services-consultation/"
                     />
                 </aside>
 

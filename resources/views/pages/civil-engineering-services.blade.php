@@ -269,6 +269,7 @@
                         message-placeholder="Tell us more about your project"
                         submit-label="SUBMIT YOUR REQUEST"
                         layout="home"
+                        thank-you-url="/thank-you-for-construction-services-consultation/"
                     />
                 </aside>
             </div>

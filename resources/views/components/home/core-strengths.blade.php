@@ -1,10 +1,10 @@
 @php
     $strengths = [
-        ['title' => 'Cybersecurity', 'text' => 'VAPT, SOC, SEIM, vCISO', 'icon' => 'fa-shield-halved', 'tone' => 'navy'],
-        ['title' => 'Cloud', 'text' => 'AWS, Azure, Jio', 'icon' => 'fa-cloud', 'tone' => 'sky'],
-        ['title' => 'Finance & Accounting', 'text' => 'Bookkeeping, Tax', 'icon' => 'fa-calculator', 'tone' => 'green'],
-        ['title' => 'AI & Automation', 'text' => 'RPA, AP/AR', 'icon' => 'fa-robot', 'tone' => 'blue'],
-        ['title' => 'BPO', 'text' => 'Civil Engg, Hedge Fund.', 'icon' => 'fa-building', 'tone' => 'violet'],
+        ['title' => 'Cybersecurity', 'text' => 'VAPT, SOC, SEIM, vCISO', 'icon' => 'fa-shield-halved', 'tone' => 'navy', 'scroll_target' => 'cybersecurity-section'],
+        ['title' => 'Cloud', 'text' => 'AWS, Azure, Jio', 'icon' => 'fa-cloud', 'tone' => 'sky', 'scroll_target' => 'cloud-section'],
+        ['title' => 'Finance & Accounting', 'text' => 'Bookkeeping, Tax', 'icon' => 'fa-calculator', 'tone' => 'green', 'scroll_target' => 'finance-section'],
+        ['title' => 'AI & Automation', 'text' => 'RPA, AP/AR', 'icon' => 'fa-robot', 'tone' => 'blue', 'scroll_target' => 'ai-section'],
+        ['title' => 'BPO', 'text' => 'Civil Engg, Hedge Fund.', 'icon' => 'fa-building', 'tone' => 'violet', 'scroll_target' => 'bpo-section'],
     ];
 @endphp
 
@@ -14,7 +14,7 @@
             <h2 id="home-core-strengths-title">Navigate Our <span class="accent" style="color: var(--home-green)">Core Strengths</span></h2>
             <div class="home-strengths__grid">
                 @foreach ($strengths as $strength)
-                    <article class="home-card home-strength-card">
+                    <article class="home-card home-strength-card" data-scroll-target="{{ $strength['scroll_target'] }}">
                         <div class="home-strength-card__icon home-strength-card__icon--{{ $strength['tone'] }}">
                             <i class="fa-solid {{ $strength['icon'] }}" aria-hidden="true"></i>
                         </div>

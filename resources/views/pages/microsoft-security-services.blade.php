@@ -596,6 +596,7 @@
                             message-placeholder="Message"
                             submit-label="Book a Consultation"
                             layout="default"
+                            thank-you-url="/thanks-you-for-cybersecurity/"
                         />
                     </div>
                 </aside>

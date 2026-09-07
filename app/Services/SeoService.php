@@ -116,6 +116,16 @@ class SeoService
         $this->current = array_merge($this->defaults(), $meta);
     }
 
+    public function applyPreviewRestrictions(?string $canonicalUrl = null): void
+    {
+        $this->current['robots'] = 'noindex, nofollow';
+        $this->current['sitemap_include'] = false;
+
+        if (is_string($canonicalUrl) && $canonicalUrl !== '') {
+            $this->current['canonical_url'] = $canonicalUrl;
+        }
+    }
+
     public function current(): array
     {
         $seo = array_merge($this->defaults(), $this->current, [

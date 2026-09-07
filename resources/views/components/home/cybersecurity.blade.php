@@ -16,6 +16,7 @@
             'icon' => 'fa-satellite-dish',
             'tone' => 'green',
             'cta' => 'Explore SOC & SIEM',
+            'href' => route('page.show', ['slug' => 'managed-siem-soc-services']),
         ],
         [
             'title' => 'MDR Services',
@@ -24,6 +25,7 @@
             'icon' => 'fa-user-shield',
             'tone' => 'violet',
             'cta' => 'Explore MDR',
+            'href' => route('page.show', ['slug' => 'managed-detection-response-services']),
         ],
         [
             'title' => 'vCISO Services',
@@ -32,6 +34,7 @@
             'icon' => 'fa-user-tie',
             'tone' => 'green',
             'cta' => 'Explore vCISO',
+            'href' => route('page.show', ['slug' => 'vciso-services']),
         ],
         [
             'title' => 'Microsoft Security',
@@ -40,6 +43,7 @@
             'icon' => 'fa-microsoft',
             'tone' => 'violet',
             'cta' => 'Explore Microsoft Security',
+            'href' => route('page.show', ['slug' => 'microsoft-security-services']),
         ],
         [
             'title' => 'Cyber Security Maturity Risk Assessment',
@@ -48,11 +52,12 @@
             'icon' => 'fa-chart-line',
             'tone' => 'green',
             'cta' => 'Explore Risk Assessment',
+            'href' => route('page.show', ['slug' => 'cybersecurity-maturity-assessment-services']),
         ],
     ];
 @endphp
 
-<section class="home-section home-section--tint home-cyber" aria-labelledby="home-cyber-title">
+<section class="home-section home-section--tint home-cyber" aria-labelledby="home-cyber-title" data-scroll-anchor="cybersecurity-section">
     <div class="home-shell">
         <h2 id="home-cyber-title" class="home-section-title">
             Cybersecurity <span class="accent">Excellence</span>
@@ -91,7 +96,7 @@
                 <h3>Ready to Secure Your Future?</h3>
                 <p>Get a comprehensive cybersecurity assessment and discover how our quantum-ready solutions can protect your organization against tomorrow’s threats.</p>
             </div>
-            <a href="#" class="home-btn home-btn--light" data-contact-modal-trigger>Schedule Security Assessment</a>
+            <a href="javascript:void(0)" class="home-btn home-btn--light" data-scroll-target="home-form">Schedule Security Assessment</a>
         </div>
     </div>
 </section>

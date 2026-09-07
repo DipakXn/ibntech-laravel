@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Ebooks\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class EbooksTable
             ->emptyStateDescription('Create your first downloadable asset to start capturing leads.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

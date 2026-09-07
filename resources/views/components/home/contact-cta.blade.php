@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="home-contact__form">
+            <div class="home-contact__form" data-scroll-anchor="home-form">
                 <h3>Your Business Deserves Timely Expertise-Reach Out Now!</h3>
                 <livewire:forms.contact-form
                     form-name="homepage-contact"

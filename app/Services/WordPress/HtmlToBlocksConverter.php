@@ -149,6 +149,10 @@ class HtmlToBlocksConverter
                         continue;
                     }
 
+                    if (in_array($name, ['data-scroll-target', 'data-scroll-anchor'], true)) {
+                        continue;
+                    }
+
                     if (strtolower($element->tagName) === 'wp-block' && $name === 'data-i') {
                         continue;
                     }

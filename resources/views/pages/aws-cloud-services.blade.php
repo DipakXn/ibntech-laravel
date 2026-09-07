@@ -375,6 +375,7 @@
                         message-placeholder="Tell us about your AWS requirement"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-cloud/"
                     />
                 </aside>
             </div>

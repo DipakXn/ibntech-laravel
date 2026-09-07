@@ -150,6 +150,7 @@
                     :landing-page-title="$landingPage->title"
                     id-prefix="lp-cloud-consulting-services-hero"
                     phone-country="in"
+                    thank-you-url="/lp/cloud-consulting-services-thank-you/"
                     wire:key="landing-inquiry-cloud-consulting-services-hero"
                 />
             </div>

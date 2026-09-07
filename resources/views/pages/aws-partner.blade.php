@@ -30,18 +30,7 @@
         ['file' => 'aws-cloud-practitioner-foundational.webp', 'alt' => 'AWS Cloud Practitioner Foundational'],
     ];
 
-    $caseStudies = [
-        [
-            'title' => 'Cloud Optimization & Database Modernization with AWS RDS',
-            'image' => 'cloud-optimization-and-database-modernization.png',
-            'href' => 'https://www.ibntech.com/case-study/cloud-optimization-database-modernization-with-aws-rds/',
-        ],
-        [
-            'title' => 'AWS Infrastructure Modernization for Manufacturing',
-            'image' => 'aws-modernization.png',
-            'href' => 'https://www.ibntech.com/case-study/aws-infrastructure-modernization-for-manufacturing/',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug('aws', limit: 2, childOnly: true);
 
     $consultingServices = [
         [
@@ -260,42 +249,56 @@
         </section>
 
         {{-- Case Studies --}}
-        <section class="awsp-section awsp-section--cream" aria-labelledby="awsp-cases-title">
-            <div class="site-shell">
-                <div class="awsp-heading">
-                    <h2 id="awsp-cases-title">Case Studies</h2>
-                </div>
+        @if ($caseStudies->isNotEmpty())
+            <section class="awsp-section awsp-section--cream" aria-labelledby="awsp-cases-title">
+                <div class="site-shell">
+                    <div class="awsp-heading">
+                        <h2 id="awsp-cases-title">Case Studies</h2>
+                    </div>
 
-                <div class="awsp-cases" role="list">
-                    @foreach ($caseStudies as $case)
-                        <article class="awsp-case-card" role="listitem">
-                            <div class="awsp-case-card__media">
-                                <img
-                                    src="{{ $img($case['image']) }}"
-                                    alt="{{ $case['title'] }}"
-                                    width="768"
-                                    height="432"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </div>
-                            <div class="awsp-case-card__body">
-                                <h3>{{ $case['title'] }}</h3>
-                                <a href="{{ $case['href'] }}" class="awsp-case-card__link">
-                                    View Case Study »
-                                </a>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
+                    <div class="awsp-cases" role="list">
+                        @foreach ($caseStudies as $case)
+                            <article class="awsp-case-card" role="listitem">
+                                @php
+                                    $caseImageUrl = $case->featuredImageUrl();
+                                    if (! $caseImageUrl && $case->featured_image) {
+                                        if (file_exists(public_path('images/aws-partner/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/aws-partner/' . $case->featured_image);
+                                        } elseif (file_exists(public_path($case->featured_image))) {
+                                            $caseImageUrl = asset($case->featured_image);
+                                        }
+                                    }
+                                @endphp
+                                @if ($caseImageUrl)
+                                    <div class="awsp-case-card__media">
+                                        <img
+                                            src="{{ $caseImageUrl }}"
+                                            alt="{{ $case->title }}"
+                                            width="768"
+                                            height="432"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </div>
+                                @endif
+                                <div class="awsp-case-card__body">
+                                    <h3>{{ $case->title }}</h3>
+                                    <a href="{{ route('case-studies.show', $case->slug) }}" class="awsp-case-card__link">
+                                        View Case Study »
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
 
-                <div class="awsp-cases__cta">
-                    <a href="{{ route('case-studies.index') }}" class="awsp-btn awsp-btn--green">
-                        Open More Case Studies →
-                    </a>
+                    <div class="awsp-cases__cta">
+                        <a href="{{ route('case-studies.index') }}" class="awsp-btn awsp-btn--green">
+                            Open More Case Studies →
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         {{-- Consulting Services --}}
         <section class="awsp-section awsp-section--cream awsp-section--tight-top" aria-labelledby="awsp-services-title">
@@ -519,6 +522,7 @@
                         message-placeholder="Tell us about your AWS needs and let’s explore a strategic partnership"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-cloud/"
                     />
                 </aside>
             </div>

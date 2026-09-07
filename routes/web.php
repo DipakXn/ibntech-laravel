@@ -1,8 +1,10 @@
 <?php
 
+use App\CmsPreview\CmsPreviewType;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
+use App\Http\Controllers\CmsPreviewController;
 use App\Http\Controllers\EbookController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\LandingPageController;
@@ -69,7 +71,11 @@ Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('n
 Route::redirect('/contact', '/contact-us/', 301);
 Route::redirect('/contact/contact-us', '/contact-us/', 301);
 
-Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|white-papers$|livewire$|storage$|up$).+')
-    ->name('page.show');
+Route::get('/preview/{type}/{id}', [CmsPreviewController::class, 'show'])
+    ->whereIn('type', CmsPreviewType::values())
+    ->where('id', '[0-9]+')
+    ->name('cms.preview.show');
 
+Route::get('/{slug}', [PageController::class, 'show'])
+    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|preview$|white-papers$|livewire$|storage$|up$).+')
+    ->name('page.show');

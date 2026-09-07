@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\LandingPages\Pages;
 
+use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\LandingPages\LandingPageResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
@@ -13,6 +14,7 @@ class EditLandingPage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            PreviewAction::make(),
             DeleteAction::make(),
         ];
     }

@@ -288,6 +288,7 @@
                         message-placeholder="How can we help you?"
                         submit-label="Request Free Consultation"
                         layout="home"
+                        thank-you-url="/thanks-you-for-cybersecurity/"
                     />
                 </aside>
             </div>

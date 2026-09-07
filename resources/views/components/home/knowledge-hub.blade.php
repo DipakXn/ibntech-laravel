@@ -1,52 +1,66 @@
-@php
-    $resources = [
-        [
-            'title' => 'Case Studies',
-            'text' => 'Proven success stories from industry leaders',
-            'featured' => 'Featured: Digital Transformation for modern enterprises',
-            'route' => route('case-studies.index'),
-            'tone' => 'violet',
-            'icon' => 'fa-briefcase',
-            'cta' => 'Explore Case Studies',
-        ],
-        [
-            'title' => 'Whitepapers',
-            'text' => 'Deep dives into emerging tech and strategy',
-            'featured' => 'Featured: In-depth research and industry insights',
-            'route' => route('white-papers.index'),
-            'tone' => 'green',
-            'icon' => 'fa-file-lines',
-            'cta' => 'Explore Whitepapers',
-        ],
-        [
-            'title' => 'eBooks',
-            'text' => 'Practical guides for real-world execution',
-            'featured' => 'Featured: Zero Trust Architecture Made Simple',
-            'route' => route('ebooks.index'),
-            'tone' => 'green',
-            'icon' => 'fa-book-open',
-            'cta' => 'Explore eBooks',
-        ],
-    ];
+@props([
+    'latestCaseStudy' => null,
+    'latestWhitePaper' => null,
+    'latestEbook' => null,
+])
 
-    $featured = [
+@php
+    $latestCaseStudy = $latestCaseStudy ?? app(\App\Repositories\CaseStudyRepository::class)->latestPublished(1)->first();
+    $latestWhitePaper = $latestWhitePaper ?? app(\App\Repositories\WhitePaperRepository::class)->latestPublished(1)->first();
+    $latestEbook = $latestEbook ?? app(\App\Repositories\EbookRepository::class)->latestPublished(1)->first();
+
+    $toLatest = static function (?object $item, string $type, string $icon, string $cta, string $routeName): ?array {
+        if (! $item) {
+            return null;
+        }
+
+        return [
+            'type' => $type,
+            'title' => $item->title,
+            'text' => $item->excerpt ?: \App\Support\BlockContent::summary($item->content, 120),
+            'image' => $item->featuredImageUrl(),
+            'icon' => $icon,
+            'cta' => $cta,
+            'route' => route($routeName, $item->slug),
+        ];
+    };
+
+    $rows = [
         [
-            'title' => 'Cloud Optimization & Database Modernization with AWS RDS',
-            'text' => 'A leading AI-driven software corps connected with IBN Technologies to build its cloud infrastructure using AWS RDS.',
-            'cta' => 'Read Case Study →',
-            'route' => route('case-studies.index'),
+            'resource' => [
+                'title' => 'Case Studies',
+                'text' => 'Proven success stories from industry leaders',
+                'featured' => 'Featured: Digital Transformation for modern enterprises',
+                'route' => route('case-studies.index'),
+                'tone' => 'violet',
+                'icon' => 'fa-briefcase',
+                'cta' => 'Explore Case Studies',
+            ],
+            'latest' => $toLatest($latestCaseStudy, 'Case Study', 'fa-briefcase', 'Read Case Study →', 'case-studies.show'),
         ],
         [
-            'title' => 'How ProfitCents Adds Value to CFOs',
-            'text' => 'In todays cut throat competition it’s very important for the companies…',
-            'cta' => 'Read Article →',
-            'route' => route('articles.index'),
+            'resource' => [
+                'title' => 'Whitepapers',
+                'text' => 'Deep dives into emerging tech and strategy',
+                'featured' => 'Featured: In-depth research and industry insights',
+                'route' => route('white-papers.index'),
+                'tone' => 'green',
+                'icon' => 'fa-file-lines',
+                'cta' => 'Explore Whitepapers',
+            ],
+            'latest' => $toLatest($latestWhitePaper, 'Whitepaper', 'fa-file-lines', 'Read Whitepaper →', 'white-papers.show'),
         ],
         [
-            'title' => 'Step-by-Step Approach to Year-End Bookkeeping and Tax Preparation',
-            'text' => 'Prepare for tax season with confidence by transforming disorganized financial…',
-            'cta' => 'Read Guide →',
-            'route' => route('blog.index'),
+            'resource' => [
+                'title' => 'eBooks',
+                'text' => 'Practical guides for real-world execution',
+                'featured' => 'Featured: Zero Trust Architecture Made Simple',
+                'route' => route('ebooks.index'),
+                'tone' => 'green',
+                'icon' => 'fa-book-open',
+                'cta' => 'Explore eBooks',
+            ],
+            'latest' => $toLatest($latestEbook, 'eBook', 'fa-book-open', 'Read eBook →', 'ebooks.show'),
         ],
     ];
 @endphp
@@ -63,38 +77,48 @@
             </p>
         </div>
 
-        <div class="home-knowledge__grid">
-            <div>
-                <h3 class="mb-3 text-xl font-bold text-[var(--home-navy)]">Resource Library</h3>
-                <div class="home-knowledge__stack">
-                    @foreach ($resources as $resource)
-                        <article class="home-card home-resource-card">
-                            <div class="home-resource-card__head home-resource-card__head--{{ $resource['tone'] }}">
-                                <i class="fa-solid {{ $resource['icon'] }}" aria-hidden="true"></i>
-                                {{ $resource['title'] }}
-                            </div>
-                            <div class="home-resource-card__body">
-                                <p>{{ $resource['text'] }}</p>
-                                <p class="mt-2 text-sm font-semibold text-[var(--home-navy)]">{{ $resource['featured'] }}</p>
-                                <a href="{{ $resource['route'] }}" class="home-btn home-btn--grad">{{ $resource['cta'] }} →</a>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-            </div>
+        <div class="home-knowledge__rows">
+            @foreach ($rows as $row)
+                <div class="home-knowledge__row">
+                    <article class="home-card home-resource-card">
+                        <div class="home-resource-card__head home-resource-card__head--{{ $row['resource']['tone'] }}">
+                            <i class="fa-solid {{ $row['resource']['icon'] }}" aria-hidden="true"></i>
+                            {{ $row['resource']['title'] }}
+                        </div>
+                        <div class="home-resource-card__body">
+                            <p>{{ $row['resource']['text'] }}</p>
+                            <p class="mt-2 text-sm font-semibold text-[var(--home-navy)]">{{ $row['resource']['featured'] }}</p>
+                            <a href="{{ $row['resource']['route'] }}" class="home-btn home-btn--grad">{{ $row['resource']['cta'] }} →</a>
+                        </div>
+                    </article>
 
-            <div>
-                <h3 class="mb-3 text-xl font-bold text-[var(--home-navy)]">Featured Content</h3>
-                <div class="home-knowledge__stack">
-                    @foreach ($featured as $item)
+                    @if ($row['latest'])
                         <article class="home-card home-featured-card">
-                            <h4>{{ $item['title'] }}</h4>
-                            <p>{{ $item['text'] }}</p>
-                            <a href="{{ $item['route'] }}" class="home-btn home-btn--outline-green !inline-flex !w-auto">{{ $item['cta'] }}</a>
+                            <a href="{{ $row['latest']['route'] }}" class="home-featured-card__media" aria-label="{{ $row['latest']['title'] }}">
+                                @if (! empty($row['latest']['image']))
+                                    <img
+                                        src="{{ $row['latest']['image'] }}"
+                                        alt="{{ $row['latest']['title'] }}"
+                                        width="280"
+                                        height="180"
+                                        loading="lazy"
+                                        decoding="async"
+                                    >
+                                @else
+                                    <div class="home-featured-card__placeholder">
+                                        <i class="fa-solid {{ $row['latest']['icon'] }}" aria-hidden="true"></i>
+                                    </div>
+                                @endif
+                            </a>
+                            <div class="home-featured-card__body">
+                                <h4>{{ $row['latest']['title'] }}</h4>
+                                <p>{{ $row['latest']['text'] }}</p>
+                                <a href="{{ $row['latest']['route'] }}" class="home-btn home-btn--outline-green !inline-flex !w-auto">{{ $row['latest']['cta'] }}</a>
+                            </div>
                         </article>
-                    @endforeach
+                    @endif
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

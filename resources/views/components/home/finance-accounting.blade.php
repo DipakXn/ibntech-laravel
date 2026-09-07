@@ -1,13 +1,13 @@
 @php
     $services = [
-        ['title' => 'Bookkeeping Services', 'text' => 'Accurate, real-time records', 'icon' => 'fa-book'],
-        ['title' => 'Tax Return Preparation', 'text' => 'US, UK & 1040 filing', 'icon' => 'fa-file-invoice-dollar'],
-        ['title' => 'AP / AR Services', 'text' => 'Accounts payable & receivable', 'icon' => 'fa-file-invoice'],
-        ['title' => 'AP / AR Automation', 'text' => 'Automated AP & AR workflows', 'icon' => 'fa-robot'],
-        ['title' => 'Payroll Services', 'text' => 'Efficient payroll management', 'icon' => 'fa-money-check-dollar'],
-        ['title' => 'Treasury Management', 'text' => 'Optimising cash flow', 'icon' => 'fa-wallet'],
-        ['title' => 'Financial Reporting', 'text' => 'Insights & planning', 'icon' => 'fa-chart-pie'],
-        ['title' => 'Virtual CFO Services', 'text' => 'Strategic financial leadership', 'icon' => 'fa-briefcase'],
+        ['title' => 'Bookkeeping Services', 'text' => 'Accurate, real-time records', 'icon' => 'fa-book', 'href' => route('page.show', ['slug' => 'bookkeeping-services']),],
+        ['title' => 'Tax Return Preparation', 'text' => 'US, UK & 1040 filing', 'icon' => 'fa-file-invoice-dollar', 'href' => route('page.show', ['slug' => 'tax-preparation-services-usa']),],
+        ['title' => 'AP / AR Services', 'text' => 'Accounts payable & receivable', 'icon' => 'fa-file-invoice', 'href' => route('page.show', ['slug' => 'accounts-payable-and-accounts-receivable-services']),],
+        ['title' => 'AP / AR Automation', 'text' => 'Automated AP & AR workflows', 'icon' => 'fa-robot', 'href' => route('page.show', ['slug' => 'ap-ar-automation']),],
+        ['title' => 'Payroll Services', 'text' => 'Efficient payroll management', 'icon' => 'fa-money-check-dollar', 'href' => route('page.show', ['slug' => 'payroll-processing']),],
+        ['title' => 'Treasury Management', 'text' => 'Optimising cash flow', 'icon' => 'fa-wallet', 'href' => route('page.show', ['slug' => 'treasury-management-services-outsourcing']),],
+        ['title' => 'Financial Reporting', 'text' => 'Insights & planning', 'icon' => 'fa-chart-pie', 'href' => route('page.show', ['slug' => 'reporting-analysis-planning']),],
+        ['title' => 'Virtual CFO Services', 'text' => 'Strategic financial leadership', 'icon' => 'fa-briefcase', 'href' => route('page.show', ['slug' => 'cfo-services']),],
     ];
 
     $software = [
@@ -20,7 +20,7 @@
     ];
 @endphp
 
-<section class="home-section home-section--mint" aria-labelledby="home-finance-title">
+<section class="home-section home-section--mint" aria-labelledby="home-finance-title" data-scroll-anchor="finance-section">
     <div class="home-shell">
         <div class="flex items-center gap-3">
             <span class="inline-grid h-11 w-11 place-items-center rounded-xl bg-[#1f6b36] text-white">
@@ -53,9 +53,11 @@
             <div class="home-finance__services">
                 @foreach ($services as $service)
                     <article class="home-card">
+                        <a href="{{ $service['href'] }}">
                         <i class="fa-solid {{ $service['icon'] }}" aria-hidden="true"></i>
                         <h3>{{ $service['title'] }}</h3>
                         <p>{{ $service['text'] }}</p>
+                        </a>
                     </article>
                 @endforeach
             </div>
@@ -89,7 +91,7 @@
                 <h3>Don't Compromise Your Business Accounting with Inaccurate Books</h3>
                 <p>Outsource your bookkeeping and accounting to experienced professionals who ensure accuracy, compliance, and timely reporting.</p>
             </div>
-            <a href="#" class="home-btn home-btn--white" data-contact-modal-trigger>Schedule a Free Consultation →</a>
+            <a href="javascript:void(0)" class="home-btn home-btn--white" data-scroll-target="home-form">Schedule a Free Consultation →</a>
         </div>
     </div>
 </section>

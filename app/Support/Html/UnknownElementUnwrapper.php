@@ -15,8 +15,9 @@ class UnknownElementUnwrapper
      * @var list<string>
      */
     protected const ALLOWED_TAGS = [
-        'a', 'b', 'blockquote', 'br', 'code', 'em', 'figcaption', 'figure', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-        'hr', 'i', 'iframe', 'img', 'li', 'ol', 'p', 'pre', 'span', 'strong', 'table', 'tbody', 'td', 'tfoot',
+        'a', 'article', 'aside', 'b', 'blockquote', 'br', 'button', 'code', 'em', 'figcaption', 'figure',
+        'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hr', 'i', 'iframe', 'img', 'li',
+        'main', 'nav', 'ol', 'p', 'pre', 'section', 'span', 'strong', 'table', 'tbody', 'td', 'tfoot',
         'th', 'thead', 'tr', 'u', 'ul', 'wp-block',
     ];
 

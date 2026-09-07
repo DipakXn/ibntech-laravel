@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Schemas\WebsiteSettingsSchema;
 use App\Models\WebsiteSetting;
+use App\Services\ApplicationCacheService;
 use App\Services\WebsiteSettingService;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
@@ -13,6 +14,8 @@ use Filament\Schemas\Components\Form;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 /**
  * @property-read Schema $form
@@ -106,5 +109,43 @@ class WebsiteSettings extends Page
     public function getRecord(): ?WebsiteSetting
     {
         return WebsiteSetting::query()->first();
+    }
+
+    /**
+     * @return array<int, Action>
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('clearCache')
+                ->label('Clear cache')
+                ->color('danger')
+                ->icon(Heroicon::OutlinedArrowPath)
+                ->requiresConfirmation()
+                ->modalHeading('Clear application cache?')
+                ->modalDescription('This removes all cached application data from the configured cache store. Sessions, queue jobs, database content, and website settings are not affected.')
+                ->modalSubmitActionLabel('Clear cache')
+                ->action(function (): void {
+                    try {
+                        app(ApplicationCacheService::class)->clear();
+
+                        Notification::make()
+                            ->success()
+                            ->title('Application cache cleared')
+                            ->body('Cached CMS content will reload from the database on the next request.')
+                            ->send();
+                    } catch (Throwable $exception) {
+                        Log::error('Failed to clear application cache.', [
+                            'exception' => $exception,
+                        ]);
+
+                        Notification::make()
+                            ->danger()
+                            ->title('Failed to clear cache')
+                            ->body('Could not clear the application cache. Please try again or check the application logs.')
+                            ->send();
+                    }
+                }),
+        ];
     }
 }

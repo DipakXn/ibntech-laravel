@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Newsletters\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class NewslettersTable
             ->emptyStateDescription('Create a newsletter page to publish an insight-led email archive or editorial page.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

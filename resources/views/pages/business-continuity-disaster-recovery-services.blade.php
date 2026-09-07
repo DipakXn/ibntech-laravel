@@ -540,6 +540,7 @@
                         message-placeholder="Tell us about your BCDR requirements"
                         submit-label="Send Your Message"
                         layout="home"
+                        thank-you-url="/thanks-you-for-cloud/"
                     />
                 </aside>
             </div>

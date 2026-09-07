@@ -1,21 +1,21 @@
 @php
     $construction = [
-        ['title' => 'Civil Engineering Support', 'text' => 'Structural planning and engineering solutions', 'icon' => 'fa-compass-drafting'],
-        ['title' => 'Construction Documentation', 'text' => 'Detailed drawing & drafting and Project records', 'icon' => 'fa-file-lines'],
-        ['title' => 'Quantity Takeoff & Estimation', 'text' => 'Precise material and cost calculations', 'icon' => 'fa-ruler-combined'],
+        ['title' => 'Civil Engineering Support', 'text' => 'Structural planning and engineering solutions', 'icon' => 'fa-compass-drafting', 'href' => route('page.show', ['slug' => 'civil-engineering-services']),],
+        ['title' => 'Construction Documentation', 'text' => 'Detailed drawing & drafting and Project records', 'icon' => 'fa-file-lines', 'href' => route('page.show', ['slug' => 'construction-documentation-services']),],
+        ['title' => 'Quantity Takeoff & Estimation', 'text' => 'Precise material and cost calculations', 'icon' => 'fa-ruler-combined', 'href' => route('page.show', ['slug' => 'construction-takeoff-estimation-services']),],
     ];
 
     $fund = [
-        ['title' => 'Hedge Fund Support', 'text' => 'Fund accounting and reporting', 'icon' => 'fa-chart-column'],
-        ['title' => 'Family Office Services', 'text' => 'Asset and wealth management', 'icon' => 'fa-heart'],
-        ['title' => 'Fund Administration', 'text' => 'End-to-end fund operations', 'icon' => 'fa-database'],
+        ['title' => 'Hedge Fund Support', 'text' => 'Fund accounting and reporting', 'icon' => 'fa-chart-column', 'href' => route('page.show', ['slug' => 'hedge-fund-services']),],
+        ['title' => 'Family Office Services', 'text' => 'Asset and wealth management', 'icon' => 'fa-heart', 'href' => route('page.show', ['slug' => 'family-office-services']),],
+        ['title' => 'Fund Administration', 'text' => 'End-to-end fund operations', 'icon' => 'fa-database', 'href' => route('page.show', ['slug' => 'hedgefund-administration']),],
     ];
 
     $software = ['Trimble.webp', 'Procore.webp', 'Costx.webp', 'Stack.webp', 'Bluebeam.webp'];
     $trust = ['ISO 9001:2015', 'ISO 27001:2022', 'ISO 20000-1:2018', 'GDPR', 'SOC 2 Ready', 'HIPAA', 'PCI-DSS'];
 @endphp
 
-<section class="home-section" aria-labelledby="home-bpo-title">
+<section class="home-section" aria-labelledby="home-bpo-title" data-scroll-anchor="bpo-section">
     <div class="home-shell">
         <div class="home-card home-bpo__panel">
             <div class="home-bpo__header">
@@ -36,11 +36,13 @@
                     <div class="home-bpo__items">
                         @foreach ($construction as $item)
                             <article>
+                                <a href="{{ $item['href'] }}">
                                 <i class="fa-solid {{ $item['icon'] }}" aria-hidden="true"></i>
-                                <div>
-                                    <h4>{{ $item['title'] }}</h4>
-                                    <p>{{ $item['text'] }}</p>
-                                </div>
+                                    <div>
+                                        <h4>{{ $item['title'] }}</h4>
+                                        <p>{{ $item['text'] }}</p>
+                                    </div>
+                                </a>
                             </article>
                         @endforeach
                     </div>
@@ -57,7 +59,7 @@
                     </div>
 
                     <div class="home-bpo__actions">
-                        <a href="#" class="home-btn home-btn--navy" data-contact-modal-trigger>
+                        <a href="javascript:void(0)" class="home-btn home-btn--navy" data-scroll-target="home-form" data-contact-modal-trigger>
                             <i class="fa-regular fa-comments" aria-hidden="true"></i>
                             Hire Full-Time Remote Engineers →
                         </a>
@@ -74,11 +76,13 @@
                     <div class="home-bpo__items">
                         @foreach ($fund as $item)
                             <article>
+                                <a href="{{ $item['href'] }}">
                                 <i class="fa-solid {{ $item['icon'] }}" aria-hidden="true"></i>
                                 <div>
                                     <h4>{{ $item['title'] }}</h4>
                                     <p>{{ $item['text'] }}</p>
                                 </div>
+                                </a>
                             </article>
                         @endforeach
                     </div>
@@ -93,7 +97,7 @@
                     </div>
 
                     <div class="home-bpo__actions">
-                        <a href="#" class="home-btn home-btn--green" data-contact-modal-trigger>
+                        <a href="javascript:void(0)" class="home-btn home-btn--green" data-contact-modal-trigger>
                             <i class="fa-regular fa-comments" aria-hidden="true"></i>
                             Get Back Office Support →
                         </a>
@@ -109,7 +113,7 @@
             <p class="home-section-lead mx-auto max-w-3xl">
                 Explore our next-generation solutions designed to optimize your operations and future-proof your business for unprecedented growth and lasting competitive advantage.
             </p>
-            <a href="#" class="home-btn home-btn--grad mt-6" data-contact-modal-trigger>Connect with an Expert</a>
+            <a href="javascript:void(0)" class="home-btn home-btn--grad mt-6" data-scroll-target="home-form">Connect with an Expert</a>
         </div>
     </div>
 </section>

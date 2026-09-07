@@ -2,8 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\CmsPreview\CmsPreviewType;
 use App\Filament\Auth\Login;
 use App\Filament\Pages\AdminDashboard;
+use App\Http\Controllers\CmsPreviewController;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -81,6 +83,12 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 AdminDashboard::class,
             ])
+            ->authenticatedRoutes(function (): void {
+                Route::get('/content-preview/{type}/{id}', [CmsPreviewController::class, 'redirect'])
+                    ->whereIn('type', CmsPreviewType::values())
+                    ->where('id', '[0-9]+')
+                    ->name('content-preview');
+            })
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->middleware([
                 EncryptCookies::class,

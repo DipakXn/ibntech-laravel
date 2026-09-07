@@ -6,6 +6,7 @@ use App\Livewire\Concerns\HasReCaptcha;
 use App\Models\LandingPage;
 use App\Repositories\LeadRepository;
 use App\Services\LeadService;
+use App\Support\PathPageUrl;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Locked;
@@ -15,6 +16,8 @@ use Throwable;
 class LandingInquiryForm extends Component
 {
     use HasReCaptcha;
+
+    public ?string $thankYouUrl = null;
 
     #[Locked]
     public string $landingPageSlug = '';
@@ -88,6 +91,7 @@ class LandingInquiryForm extends Component
         bool $showStaffingFields = false,
         ?array $resourceTypeOptions = null,
         ?array $serviceOptions = null,
+        ?string $thankYouUrl = null,
     ): void {
         $this->landingPageSlug = $landingPageSlug;
         $this->landingPageTitle = $landingPageTitle;
@@ -98,6 +102,9 @@ class LandingInquiryForm extends Component
         $this->showStaffingFields = $showStaffingFields;
         $this->resourceTypeOptions = $this->normalizeOptions($resourceTypeOptions);
         $this->serviceOptions = $this->normalizeOptions($serviceOptions);
+        if (is_string($thankYouUrl) && trim($thankYouUrl) !== '') {
+            $this->thankYouUrl = trim($thankYouUrl);
+        }
         $this->pageUrl = url()->current();
         $this->formLoadedAt = time();
     }
@@ -287,9 +294,18 @@ class LandingInquiryForm extends Component
         return 'landing-inquiry:'.request()->ip();
     }
 
+    public function publishedThankYouUrl(): ?string
+    {
+        if (! is_string($this->thankYouUrl) || trim($this->thankYouUrl) === '') {
+            return null;
+        }
+
+        return PathPageUrl::withTrailingSlash(url(trim($this->thankYouUrl)));
+    }
+
     protected function completeSuccessfully(?LandingPage $landingPage = null): void
     {
-        $thankYouUrl = $landingPage?->publishedThankYouUrl();
+        $thankYouUrl = $this->publishedThankYouUrl();
 
         if ($thankYouUrl) {
             $this->redirect($thankYouUrl);

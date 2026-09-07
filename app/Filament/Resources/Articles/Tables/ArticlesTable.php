@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Articles\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class ArticlesTable
             ->emptyStateDescription('Add your first article to build the editorial library.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

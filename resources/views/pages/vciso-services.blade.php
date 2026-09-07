@@ -341,6 +341,7 @@
                             submit-label="BOOK FREE CONSULTATION"
                             layout="modal"
                             :message-rows="2"
+                            thank-you-url="/thanks-you-for-cybersecurity/"
                         />
                     </div>
                 </aside>

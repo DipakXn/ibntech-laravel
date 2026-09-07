@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PressReleases\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class PressReleasesTable
             ->emptyStateDescription('Add your first company announcement to build the press archive.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

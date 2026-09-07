@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\WhitePaper;
 use App\Repositories\WhitePaperRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class WhitePaperService
 {
@@ -12,6 +13,11 @@ class WhitePaperService
         protected WhitePaperRepository $whitePapers,
         protected SeoService $seoService,
     ) {}
+
+    public function latestPublished(int $limit = 1): Collection
+    {
+        return $this->whitePapers->latestPublished($limit);
+    }
 
     public function paginatePublished(int $page = 1, ?string $path = null, int $perPage = 9): LengthAwarePaginator
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Industries\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class IndustriesTable
             ->emptyStateDescription('Create an industry page to publish a custom vertical landing page.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

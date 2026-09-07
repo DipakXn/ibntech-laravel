@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CaseStudies\Tables;
 
+use App\Filament\Actions\PreviewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -49,6 +50,7 @@ class CaseStudiesTable
             ->emptyStateDescription('Add your first proof point to populate the case study library.')
             ->striped()
             ->recordActions([
+                PreviewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

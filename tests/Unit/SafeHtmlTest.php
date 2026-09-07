@@ -29,4 +29,16 @@ class SafeHtmlTest extends TestCase
         $this->assertStringNotContainsString('onerror', $sanitized);
         $this->assertStringNotContainsString('javascript:', $sanitized);
     }
+
+    public function test_it_preserves_opt_in_scroll_data_attributes(): void
+    {
+        $html = '<p><a href="#" data-scroll-target="download-form">Download</a></p><section data-scroll-anchor="download-form"><p>Form</p></section>';
+
+        $sanitized = SafeHtml::sanitizeForRender($html);
+
+        $this->assertStringContainsString('data-scroll-target="download-form"', $sanitized);
+        $this->assertStringContainsString('data-scroll-anchor="download-form"', $sanitized);
+        $this->assertStringContainsString('Download', $sanitized);
+        $this->assertStringContainsString('Form', $sanitized);
+    }
 }

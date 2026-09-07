@@ -1,4 +1,5 @@
 import './bootstrap';
+import './smooth-scroll-to-section';
 import intlTelInput from 'intl-tel-input';
 
 const initSiteNavbar = () => {

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Article;
 use App\Repositories\ArticleRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class ArticleService
 {
@@ -12,6 +13,11 @@ class ArticleService
         protected ArticleRepository $articles,
         protected SeoService $seoService,
     ) {}
+
+    public function latestPublished(int $limit = 3): Collection
+    {
+        return $this->articles->latestPublished($limit);
+    }
 
     public function paginatePublished(int $page = 1, ?string $path = null, int $perPage = 9): LengthAwarePaginator
     {

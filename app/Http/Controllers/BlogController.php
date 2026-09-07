@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CmsPreview\CmsContentRenderer;
 use App\Models\Category;
 use App\Services\BlogService;
 use App\Services\SeoService;
@@ -14,7 +15,8 @@ class BlogController extends Controller
 {
     public function __construct(
         protected BlogService $blogService,
-        protected SeoService $seoService
+        protected SeoService $seoService,
+        protected CmsContentRenderer $renderer,
     ) {}
 
     public function index(Request $request): Response
@@ -51,9 +53,7 @@ class BlogController extends Controller
 
         abort_unless($blog, 404);
 
-        $latestPosts = $this->blogService->latestPublished(6);
-
-        return response()->view('blog.templates.'.$blog->template, compact('blog', 'latestPosts'));
+        return $this->renderer->render($blog);
     }
 
     protected function showCategory(Request $request, string $slug, ?int $page): Response|RedirectResponse

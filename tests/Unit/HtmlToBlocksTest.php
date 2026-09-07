@@ -95,6 +95,19 @@ HTML;
         $this->assertStringContainsString('Contact', $htmlContent);
     }
 
+    public function test_it_keeps_opt_in_scroll_data_attributes_in_converted_html(): void
+    {
+        $html = '<p><a href="#" data-scroll-target="download-form">Download</a></p>';
+
+        $blocks = HtmlToBlocks::convert($html);
+        $htmlContent = implode('', array_map(
+            fn (array $block): string => (string) ($block['data']['content'] ?? ''),
+            $blocks,
+        ));
+
+        $this->assertStringContainsString('data-scroll-target="download-form"', $htmlContent);
+    }
+
     public function test_it_converts_tables_to_table_blocks(): void
     {
         $html = <<<'HTML'

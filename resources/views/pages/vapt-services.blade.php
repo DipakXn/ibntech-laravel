@@ -216,20 +216,10 @@
         ['category' => 'Pricing', 'silver' => 'Cost-effective', 'gold' => 'Balanced', 'platinum' => 'Premium'],
     ];
 
-    $caseStudies = [
-        [
-            'title' => 'A Pioneer In Medical Practice Solutions Achieves HIPAA Compliance And Enhanced Security With VAPT',
-            'image' => 'medical-practice-hipaa-vapt.png',
-        ],
-        [
-            'title' => 'An Innovative Digital Transformation Firm Enhances Security & Trust With Comprehensive VAPT For Swift Applications',
-            'image' => 'digital-transformation-vapt.png',
-        ],
-        [
-            'title' => 'US-Based Salesforce-Powered B2B Applications Solution Provider',
-            'image' => 'salesforce-b2b-vapt.png',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug(
+        categorySlug: 'cyber-security-case-studies',
+        limit: 3
+    );
 
     $faqs = [
         ['q' => 'What types of VAPT does IBN Technologies offer?', 'a' => 'We provide Web Application, Mobile Application, API, Network, Cloud, Wireless, Infrastructure, and External/Internal Penetration Testing services.'],
@@ -292,7 +282,7 @@
                         and global markets, including the USA, UK, UAE, Australia, and Singapore, helping SMBs and mid-market enterprises identify vulnerabilities, pass VAPT audit & strengthen cyber resilience.
                     </p>
                     <div class="vapt-hero__actions">
-                        <a href="#vapt-process" class="button-primary">View Our Process</a>
+                        <a href="javascript:void(0)" data-scroll-target="vapt-process" class="button-primary">View Our Process</a>
                     </div>
                     <div class="vapt-hero__stats" role="list">
                         <div class="vapt-hero__stat" role="listitem">
@@ -321,6 +311,7 @@
                         message-placeholder="Describe your security testing requirements"
                         submit-label="BOOK A CONSULTATION"
                         layout="vapt"
+                        thank-you-url="/thanks-you-for-cybersecurity/"
                     />
                 </div>
             </div>
@@ -444,7 +435,7 @@
         </section>
 
         {{-- Process --}}
-        <section class="section-block" id="vapt-process" aria-labelledby="vapt-process-title">
+        <section class="section-block" id="vapt-process" aria-labelledby="vapt-process-title" data-scroll-anchor="vapt-process">
             <div class="site-shell">
                 <div class="section-heading">
                     <h2 id="vapt-process-title">How the VAPT Process Works?</h2>
@@ -733,32 +724,46 @@
         </section>
 
         {{-- Case studies --}}
-        <section class="section-block" aria-labelledby="vapt-cases-title">
-            <div class="site-shell">
-                <div class="section-heading">
-                    <h2 id="vapt-cases-title">Case Studies</h2>
+        @if ($caseStudies->isNotEmpty())
+            <section class="section-block" aria-labelledby="vapt-cases-title">
+                <div class="site-shell">
+                    <div class="section-heading">
+                        <h2 id="vapt-cases-title">Case Studies</h2>
+                    </div>
+                    <div class="vapt-cases">
+                        @foreach ($caseStudies as $case)
+                            <a href="{{ route('case-studies.show', $case->slug) }}" class="vapt-case-card">
+                                @php
+                                    $caseImageUrl = $case->featuredImageUrl();
+                                    if (! $caseImageUrl && $case->featured_image) {
+                                        if (file_exists(public_path('images/vapt-case-studies/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/vapt-case-studies/' . $case->featured_image);
+                                        } elseif (file_exists(public_path($case->featured_image))) {
+                                            $caseImageUrl = asset($case->featured_image);
+                                        }
+                                    }
+                                @endphp
+                                @if ($caseImageUrl)
+                                    <div class="vapt-case-card__image">
+                                        <img
+                                            src="{{ $caseImageUrl }}"
+                                            alt="{{ $case->title }}"
+                                            width="480"
+                                            height="300"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </div>
+                                @endif
+                                <div class="vapt-case-card__body">
+                                    <h3>{{ $case->title }}</h3>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
-                <div class="vapt-cases">
-                    @foreach ($caseStudies as $case)
-                        <a href="{{ route('case-studies.index') }}" class="vapt-case-card">
-                            <div class="vapt-case-card__image">
-                                <img
-                                    src="{{ asset('images/vapt-case-studies/'.$case['image']) }}"
-                                    alt="{{ $case['title'] }}"
-                                    width="480"
-                                    height="300"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </div>
-                            <div class="vapt-case-card__body">
-                                <h3>{{ $case['title'] }}</h3>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         {{-- FAQ --}}
         <section class="section-block section-block--tint" aria-labelledby="vapt-faq-title">

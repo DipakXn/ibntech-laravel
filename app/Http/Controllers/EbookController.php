@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CmsPreview\CmsContentRenderer;
 use App\Http\Controllers\Concerns\PaginatesWithPathPages;
 use App\Services\EbookService;
 use App\Services\SeoService;
@@ -17,6 +18,7 @@ class EbookController extends Controller
     public function __construct(
         protected EbookService $ebookService,
         protected SeoService $seoService,
+        protected CmsContentRenderer $renderer,
     ) {}
 
     public function index(Request $request): Response|RedirectResponse
@@ -35,7 +37,7 @@ class EbookController extends Controller
 
         abort_unless($ebook, 404);
 
-        return response()->view('ebooks.templates.'.$ebook->template, compact('ebook'));
+        return $this->renderer->render($ebook);
     }
 
     public function download(Request $request, string $slug): RedirectResponse

@@ -456,6 +456,7 @@
                             submit-label="SEND YOUR MESSAGE"
                             layout="modal"
                             :message-rows="3"
+                            thank-you-url="/thanks-you-for-cybersecurity/"
                         />
                     </div>
                 </aside>

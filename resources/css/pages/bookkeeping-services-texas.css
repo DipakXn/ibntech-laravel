@@ -801,6 +801,37 @@
     opacity: 0.75;
 }
 
+/* Recent Articles */
+.bktx-articles {
+    background: #fff;
+}
+
+.bktx-article-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bktx-article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(20, 31, 78, 0.12);
+}
+
+.bktx-article-card h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.bktx-article-card h3 a {
+    color: var(--bktx-navy);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.bktx-article-card h3 a:hover {
+    color: var(--bktx-green);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .bktx-hero__inner,

@@ -299,6 +299,7 @@
                         message-placeholder="Tell us about your payroll needs"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-payroll-service/"
                     />
                 </aside>
             </div>

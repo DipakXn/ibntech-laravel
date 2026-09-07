@@ -450,6 +450,7 @@
                             message-placeholder="What kind of accounting solution are you looking for?"
                             submit-label="Submit"
                             layout="home"
+                            thank-you-url="/thanks-you-for-bookkeeping/"
                         />
                     </div>
                 </aside>

@@ -157,6 +157,7 @@ class LandingPageTest extends TestCase
         Livewire::test(LandingInquiryForm::class, [
             'landingPageSlug' => 'vapt-audit-services',
             'landingPageTitle' => 'VAPT Audit Services',
+            'thankYouUrl' => '/lp/vapt-audit-services-thank-you/',
         ])
             ->set('name', 'Jane Doe')
             ->set('email', 'jane@example.com')
@@ -243,6 +244,7 @@ class LandingPageTest extends TestCase
         Livewire::test(LandingInquiryForm::class, [
             'landingPageSlug' => 'vapt-audit-services',
             'landingPageTitle' => 'VAPT Audit Services',
+            'thankYouUrl' => '/lp/vapt-audit-services-thank-you/',
         ])
             ->set('name', 'Bot User')
             ->set('email', 'bot@example.com')
@@ -269,6 +271,7 @@ class LandingPageTest extends TestCase
         $payload = [
             'landingPageSlug' => 'vapt-audit-services',
             'landingPageTitle' => 'VAPT Audit Services',
+            'thankYouUrl' => '/lp/vapt-audit-services-thank-you/',
         ];
 
         $submit = function () use ($payload) {

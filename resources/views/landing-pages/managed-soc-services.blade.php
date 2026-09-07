@@ -297,6 +297,7 @@
                     :landing-page-title="$landingPage->title"
                     id-prefix="lp-managed-soc-services"
                     phone-country="in"
+                    thank-you-url="/lp/cybersecurity-thank-you/"
                     wire:key="landing-inquiry-managed-soc-services"
                 />
             </div>

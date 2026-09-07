@@ -274,6 +274,7 @@
                         message-placeholder="Tell us about your tax situation or any questions you have"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-tax-preparation/"
                     />
                 </aside>
             </div>

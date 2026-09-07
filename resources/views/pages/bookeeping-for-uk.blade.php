@@ -362,6 +362,7 @@
                         message-placeholder="How can we best support your bookkeeping needs?"
                         submit-label="BOOK A FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-bookkeeping/"
                     />
                 </aside>
             </div>

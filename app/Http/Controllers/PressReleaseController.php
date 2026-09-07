@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CmsPreview\CmsContentRenderer;
 use App\Http\Controllers\Concerns\PaginatesWithPathPages;
 use App\Services\PressReleaseService;
 use App\Services\SeoService;
@@ -17,6 +18,7 @@ class PressReleaseController extends Controller
     public function __construct(
         protected PressReleaseService $pressReleaseService,
         protected SeoService $seoService,
+        protected CmsContentRenderer $renderer,
     ) {}
 
     public function index(Request $request): Response|RedirectResponse
@@ -35,7 +37,7 @@ class PressReleaseController extends Controller
 
         abort_unless($pressRelease, 404);
 
-        return response()->view('press-releases.templates.'.$pressRelease->template, compact('pressRelease'));
+        return $this->renderer->render($pressRelease);
     }
 
     protected function showIndex(Request $request, ?int $page): Response|RedirectResponse

@@ -212,6 +212,8 @@
             'cite' => 'Graviton Consulting Services',
         ],
     ];
+
+    $recentArticles = $recentArticles ?? app(\App\Repositories\ArticleRepository::class)->latestPublished(3);
 @endphp
 
 @extends('layouts.app')
@@ -248,6 +250,7 @@
                         message-placeholder="Message"
                         submit-label="Submit"
                         layout="home"
+                        thank-you-url="/thanks-you-for-bookkeeping/"
                     />
                 </aside>
             </div>
@@ -518,6 +521,42 @@
                 </a>
             </div>
         </section>
+
+        {{-- Recent Articles --}}
+        @if ($recentArticles->isNotEmpty())
+            <section class="bktx-section bktx-articles" aria-labelledby="bktx-articles-title">
+                <div class="site-shell">
+                    <div class="bktx-heading bktx-heading--center">
+                        <h2 id="bktx-articles-title">Recent Articles</h2>
+                    </div>
+
+                    <div class="listing-grid" role="list">
+                        @foreach ($recentArticles as $article)
+                            <article class="card-panel case-study-card bktx-article-card" role="listitem">
+                                @if ($article->featuredImageUrl())
+                                    <a href="{{ route('articles.show', $article->slug) }}" class="case-study-card__image">
+                                        <img
+                                            src="{{ $article->featuredImageUrl() }}"
+                                            alt="{{ $article->title }}"
+                                            width="640"
+                                            height="400"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </a>
+                                @endif
+                                <p class="meta-chip">Article</p>
+                                <h3>
+                                    <a href="{{ route('articles.show', $article->slug) }}">
+                                        {{ $article->title }}
+                                    </a>
+                                </h3>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
 
         {{-- Testimonials --}}
         <section class="bktx-testimonials" aria-labelledby="bktx-testimonials-title">

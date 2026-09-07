@@ -543,6 +543,7 @@
                         message-placeholder="How can we help you?"
                         submit-label="SUBMIT YOUR MESSAGE"
                         layout="home"
+                        thank-you-url="/thanks-you-for-cloud/"
                     />
                 </aside>
             </div>

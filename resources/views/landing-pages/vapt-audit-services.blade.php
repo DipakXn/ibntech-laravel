@@ -203,6 +203,7 @@
                     :landing-page-title="$landingPage->title"
                     id-prefix="lp-vapt-audit-services-hero"
                     phone-country="in"
+                    thank-you-url="/lp/vapt-audit-services-thank-you/"
                     wire:key="landing-inquiry-vapt-audit-services-hero"
                 />
             </div>
@@ -337,6 +338,7 @@
                         :landing-page-title="$landingPage->title"
                         id-prefix="lp-vapt-audit-services-sales"
                         phone-country="in"
+                        thank-you-url="/lp/vapt-audit-services-thank-you/"
                         wire:key="landing-inquiry-vapt-audit-services-sales"
                     />
                 </div>

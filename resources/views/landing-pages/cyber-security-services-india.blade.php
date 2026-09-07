@@ -109,6 +109,7 @@
                         :landing-page-title="$landingPage->title"
                         id-prefix="lp-cyber-security-services-india-hero"
                         phone-country="in"
+                        thank-you-url="/lp/cyber-security-services-india-thank-you/"
                         wire:key="landing-inquiry-cyber-security-services-india-hero"
                     />
                 </div>

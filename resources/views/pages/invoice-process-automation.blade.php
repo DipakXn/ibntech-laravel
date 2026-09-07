@@ -41,23 +41,9 @@
         'Cascading Classification and Data Validation Matching',
     ];
 
-    $caseStudies = [
-        [
-            'title' => 'Cloud Optimization & Database Modernization with AWS RDS',
-            'image' => asset('images/aws-partner/cloud-optimization-and-database-modernization.png'),
-            'slug' => 'cloud-optimization-database-modernization-with-aws-rds',
-        ],
-        [
-            'title' => 'AWS Infrastructure Modernization for Manufacturing',
-            'image' => asset('images/aws-partner/aws-modernization.png'),
-            'slug' => 'aws-infrastructure-modernization-for-manufacturing',
-        ],
-        [
-            'title' => 'Secure Financial Data Exchange for JD Edwards on Azure Enabling Compliance, Speed, and ERP Modernization for a US Financial Enterprise',
-            'image' => asset('images/cloud-consulting-and-migration-services/Gateway-for-JDE-USA.png'),
-            'slug' => 'secure-financial-data-exchange-for-jd-edwards-on-azure-enabling-compliance-speed-and-erp-modernization-for-a-us-financial-enterprise',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug(
+        limit: 3
+    );
 @endphp
 
 @extends('layouts.app')
@@ -245,41 +231,59 @@
         </section>
 
         {{-- Success stories --}}
-        <section class="inva-section inva-cases" aria-labelledby="inva-cases-title">
-            <div class="site-shell">
-                <div class="inva-heading inva-heading--wide">
-                    <h2 id="inva-cases-title">
-                        Real Results<br>
-                        Success Stories of AP Automation in Action
-                    </h2>
-                </div>
-                <div class="inva-case-grid" role="list">
-                    @foreach ($caseStudies as $case)
-                        <article class="inva-case-card" role="listitem">
-                            <a
-                                href="{{ route('case-studies.show', ['slug' => $case['slug']]) }}"
-                                class="inva-case-card__link"
-                            >
-                                <img
-                                    src="{{ $case['image'] }}"
-                                    alt="{{ $case['title'] }}"
-                                    width="640"
-                                    height="400"
-                                    loading="lazy"
-                                    decoding="async"
+        @if ($caseStudies->isNotEmpty())
+            <section class="inva-section inva-cases" aria-labelledby="inva-cases-title">
+                <div class="site-shell">
+                    <div class="inva-heading inva-heading--wide">
+                        <h2 id="inva-cases-title">
+                            Real Results<br>
+                            Success Stories of AP Automation in Action
+                        </h2>
+                    </div>
+                    <div class="inva-case-grid" role="list">
+                        @foreach ($caseStudies as $case)
+                            <article class="inva-case-card" role="listitem">
+                                <a
+                                    href="{{ route('case-studies.show', $case->slug) }}"
+                                    class="inva-case-card__link"
                                 >
-                                <div class="inva-case-card__body">
-                                    <h3>{{ $case['title'] }}</h3>
-                                    <span>Read More &raquo;</span>
-                                </div>
-                            </a>
-                        </article>
-                    @endforeach
+                                    @php
+                                        $caseImageUrl = $case->featuredImageUrl();
+                                        if (! $caseImageUrl && $case->featured_image) {
+                                            if (file_exists(public_path('images/invoice-process-automation/' . $case->featured_image))) {
+                                                $caseImageUrl = asset('images/invoice-process-automation/' . $case->featured_image);
+                                            } elseif (file_exists(public_path('images/aws-partner/' . $case->featured_image))) {
+                                                $caseImageUrl = asset('images/aws-partner/' . $case->featured_image);
+                                            } elseif (file_exists(public_path('images/cloud-consulting-and-migration-services/' . $case->featured_image))) {
+                                                $caseImageUrl = asset('images/cloud-consulting-and-migration-services/' . $case->featured_image);
+                                            } elseif (file_exists(public_path($case->featured_image))) {
+                                                $caseImageUrl = asset($case->featured_image);
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($caseImageUrl)
+                                        <img
+                                            src="{{ $caseImageUrl }}"
+                                            alt="{{ $case->title }}"
+                                            width="640"
+                                            height="400"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    @endif
+                                    <div class="inva-case-card__body">
+                                        <h3>{{ $case->title }}</h3>
+                                        <span>Read More &raquo;</span>
+                                    </div>
+                                </a>
+                            </article>
+                        @endforeach
+                    </div>
+                    <div class="inva-cases__cta">
+                        <a href="{{ route('case-studies.index') }}" class="inva-btn">View All</a>
+                    </div>
                 </div>
-                <div class="inva-cases__cta">
-                    <a href="{{ route('case-studies.index') }}" class="inva-btn">View All</a>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
     </div>
 @endsection

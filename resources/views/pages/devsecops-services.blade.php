@@ -435,6 +435,7 @@
                             message-placeholder="Message"
                             submit-label="Request a Consultation"
                             layout="default"
+                            thank-you-url="/thanks-you-for-cloud/"
                         />
                     </div>
                 </aside>

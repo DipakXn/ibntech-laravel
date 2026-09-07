@@ -434,6 +434,7 @@
                                 submit-label="Schedule Your Free Consultation"
                                 layout="modal"
                                 :message-rows="2"
+                                thank-you-url="/thanks-you-for-tax-preparation/"
                             />
                         </div>
                     </aside>

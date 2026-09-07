@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CmsPreview\CmsContentRenderer;
 use App\Http\Controllers\Concerns\PaginatesWithPathPages;
 use App\Services\ArticleService;
 use App\Services\SeoService;
@@ -17,6 +18,7 @@ class ArticleController extends Controller
     public function __construct(
         protected ArticleService $articleService,
         protected SeoService $seoService,
+        protected CmsContentRenderer $renderer,
     ) {}
 
     public function index(Request $request): Response|RedirectResponse
@@ -35,7 +37,7 @@ class ArticleController extends Controller
 
         abort_unless($article, 404);
 
-        return response()->view('articles.templates.'.$article->template, compact('article'));
+        return $this->renderer->render($article);
     }
 
     protected function showIndex(Request $request, ?int $page): Response|RedirectResponse

@@ -708,6 +708,7 @@
                         message-placeholder="Tell us about your AP/AR needs"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-ap-ar-management/"
                     />
                 </aside>
             </div>

@@ -57,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['layouts.app', 'layouts.landing'], function ($view): void {
             $view->with('seo', app(SeoService::class)->current());
+            $view->with('cmsPreview', (bool) request()->attributes->get('cmsPreview', false));
         });
 
         Event::listen(JobFailed::class, function (JobFailed $event): void {

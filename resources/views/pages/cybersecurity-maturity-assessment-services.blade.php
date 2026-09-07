@@ -369,6 +369,7 @@
                             submit-label="GET MY SECURITY REPORT"
                             layout="modal"
                             :message-rows="3"
+                            thank-you-url="/thanks-you-for-cybersecurity/"
                         />
                     </div>
                 </aside>

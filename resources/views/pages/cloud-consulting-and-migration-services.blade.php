@@ -33,23 +33,11 @@
         'Mapmyindia.webp', 'Routematic.webp', 'Wint.webp', 'LT.webp', 'bike-bazaar.webp',
     ];
 
-    $caseStudies = [
-        [
-            'title' => 'Secure Financial Data Exchange for JD Edwards on Azure Enabling Compliance, Speed, and ERP Modernization for a US Financial Enterprise',
-            'image' => 'Gateway-for-JDE-USA.png',
-            'slug' => 'secure-financial-data-exchange-for-jd-edwards-on-azure-enabling-compliance-speed-and-erp-modernization-for-a-us-financial-enterprise',
-        ],
-        [
-            'title' => 'Transforming U.S. Healthcare with Secure, Scalable Azure Cloud Solutions',
-            'image' => 'Health-Care-Solution-Provider-USA.webp',
-            'slug' => 'transforming-u-s-healthcare-with-secure-scalable-azure-cloud-solutions',
-        ],
-        [
-            'title' => 'Secure, Scalable Azure Infrastructure for UAT & Production with MySQL HA Cluster Enabling High Availability, Compliance, and Seamless Migration for a Global Application Environment',
-            'image' => 'Azure-Infrastructure-Setup-and-Transition.webp',
-            'slug' => 'secure-scalable-azure-infrastructure-for-uat-production-with-mysql-ha-cluster-enabling-high-availability-compliance-and-seamless-migration-for-a-global-application-environment',
-        ],
-    ];
+    $caseStudies = $caseStudies ?? app(\App\Repositories\CaseStudyRepository::class)->getPublishedByCategorySlug(
+        'cloud-case-studies',
+        limit: 3,
+        includeChildren: true
+    );
 
     $whatWeDo = [
         [
@@ -280,42 +268,58 @@
         </section>
 
         {{-- Case Studies --}}
-        <section class="ccms-section" aria-labelledby="ccms-cases-title">
-            <div class="site-shell">
-                <div class="ccms-heading">
-                    <h2 id="ccms-cases-title">Organizations Trust Our Cloud Consulting Services</h2>
-                </div>
+        @if ($caseStudies->isNotEmpty())
+            <section class="ccms-section" aria-labelledby="ccms-cases-title">
+                <div class="site-shell">
+                    <div class="ccms-heading">
+                        <h2 id="ccms-cases-title">Organizations Trust Our Cloud Consulting Services</h2>
+                    </div>
 
-                <div class="ccms-cases" role="list">
-                    @foreach ($caseStudies as $case)
-                        <article class="ccms-case-card" role="listitem">
-                            <div class="ccms-case-card__media">
-                                <img
-                                    src="{{ $img($case['image']) }}"
-                                    alt="{{ $case['title'] }}"
-                                    width="640"
-                                    height="400"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </div>
-                            <div class="ccms-case-card__body">
-                                <h3>{{ $case['title'] }}</h3>
-                                <a href="{{ route('case-studies.show', ['slug' => $case['slug']]) }}" class="ccms-case-card__link">
-                                    View Case Study »
-                                </a>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
+                    <div class="ccms-cases" role="list">
+                        @foreach ($caseStudies as $case)
+                            <article class="ccms-case-card" role="listitem">
+                                @php
+                                    $caseImageUrl = $case->featuredImageUrl();
+                                    if (! $caseImageUrl && $case->featured_image) {
+                                        if (file_exists(public_path('images/cloud-consulting-and-migration-services/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/cloud-consulting-and-migration-services/' . $case->featured_image);
+                                        } elseif (file_exists(public_path('images/aws-partner/' . $case->featured_image))) {
+                                            $caseImageUrl = asset('images/aws-partner/' . $case->featured_image);
+                                        } elseif (file_exists(public_path($case->featured_image))) {
+                                            $caseImageUrl = asset($case->featured_image);
+                                        }
+                                    }
+                                @endphp
+                                @if ($caseImageUrl)
+                                    <div class="ccms-case-card__media">
+                                        <img
+                                            src="{{ $caseImageUrl }}"
+                                            alt="{{ $case->title }}"
+                                            width="640"
+                                            height="400"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </div>
+                                @endif
+                                <div class="ccms-case-card__body">
+                                    <h3>{{ $case->title }}</h3>
+                                    <a href="{{ route('case-studies.show', $case->slug) }}" class="ccms-case-card__link">
+                                        View Case Study »
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
 
-                <div class="ccms-cases__cta">
-                    <a href="{{ route('case-studies.index') }}" class="ccms-btn ccms-btn--green">
-                        Open More Case Studies →
-                    </a>
+                    <div class="ccms-cases__cta">
+                        <a href="{{ route('case-studies.index') }}" class="ccms-btn ccms-btn--green">
+                            Open More Case Studies →
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         {{-- Mid CTA 1 --}}
         <section class="ccms-cta-banner" aria-labelledby="ccms-cta-start-title">
@@ -492,6 +496,7 @@
                         message-placeholder="Have specific migration needs?"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
+                        thank-you-url="/thanks-you-for-cloud/"
                     />
                 </aside>
             </div>

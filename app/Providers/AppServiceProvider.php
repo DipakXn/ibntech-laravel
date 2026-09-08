@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Listeners\MarkOutgoingEmailSent;
-use App\Listeners\RecordOutgoingEmail;
 use App\Mail\OutgoingMailLogTracker;
 use App\Routing\UrlGenerator;
 use App\Services\EmailLogService;
@@ -11,8 +9,6 @@ use App\Services\SeoService;
 use App\Services\SmtpSettingService;
 use App\Services\WebsiteSettingService;
 use App\Support\Mail\SmtpExceptionSanitizer;
-use Illuminate\Mail\Events\MessageSending;
-use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Events\QueueBusy;
@@ -64,8 +60,6 @@ class AppServiceProvider extends ServiceProvider
             // SMTP settings table may not exist yet during early setup.
         }
 
-        Event::listen(MessageSending::class, RecordOutgoingEmail::class);
-        Event::listen(MessageSent::class, MarkOutgoingEmailSent::class);
         Event::listen(JobProcessing::class, function (): void {
             try {
                 app(SmtpSettingService::class)->applyToRuntimeConfig();

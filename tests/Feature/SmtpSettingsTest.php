@@ -207,7 +207,7 @@ class SmtpSettingsTest extends TestCase
 
         (new SendLeadSubmissionNotification($lead->id))->handle();
 
-        Mail::assertQueued(LeadReceivedMail::class, function (LeadReceivedMail $mail): bool {
+        Mail::assertSent(LeadReceivedMail::class, function (LeadReceivedMail $mail): bool {
             return $mail->hasTo('db-leads@example.test');
         });
     }

@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Mail\LeadReceivedMail;
 use App\Models\Lead;
 use App\Services\FormRecipientResolver;
+use App\Services\SmtpSettingService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Mail;
@@ -36,6 +37,11 @@ class SendLeadSubmissionNotification implements ShouldQueue
             return;
         }
 
-        Mail::to($recipient)->send(new LeadReceivedMail($submission));
+        $smtp = app(SmtpSettingService::class);
+        $smtp->applyToRuntimeConfig();
+
+        Mail::mailer((string) config('mail.default'))
+            ->to($recipient)
+            ->sendNow(new LeadReceivedMail($submission));
     }
 }

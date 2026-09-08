@@ -44,8 +44,8 @@ class FormNotificationRecipientTest extends TestCase
 
         $this->sendQueuedAdminNotification('contact');
 
-        Mail::assertQueued(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('default-admin@example.test'));
-        Mail::assertNotQueued(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('legacy@example.test'));
+        Mail::assertSent(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('default-admin@example.test'));
+        Mail::assertNotSent(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('legacy@example.test'));
     }
 
     public function test_form_override_wins_over_website_settings_default(): void
@@ -59,8 +59,8 @@ class FormNotificationRecipientTest extends TestCase
         $this->sendQueuedAdminNotification('contact');
         $this->sendQueuedAdminNotification('newsletter_inquiry');
 
-        Mail::assertQueued(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('contact-override@example.test'));
-        Mail::assertQueued(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('default-admin@example.test'));
+        Mail::assertSent(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('contact-override@example.test'));
+        Mail::assertSent(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('default-admin@example.test'));
     }
 
     public function test_blank_override_falls_back_to_website_settings_default(): void
@@ -126,8 +126,8 @@ class FormNotificationRecipientTest extends TestCase
 
         (new SendLeadSubmissionNotification($lead->id))->handle();
 
-        Mail::assertQueued(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('queued-new@example.test'));
-        Mail::assertNotQueued(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('queued-old@example.test'));
+        Mail::assertSent(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('queued-new@example.test'));
+        Mail::assertNotSent(LeadReceivedMail::class, fn (LeadReceivedMail $mail): bool => $mail->hasTo('queued-old@example.test'));
     }
 
     public function test_website_default_beats_smtp_legacy_lead_notification_to(): void

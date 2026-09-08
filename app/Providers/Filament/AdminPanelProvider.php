@@ -4,6 +4,9 @@ namespace App\Providers\Filament;
 
 use App\CmsPreview\CmsPreviewType;
 use App\Filament\Auth\Login;
+use App\Filament\Clusters\SmtpSettings\Pages\SmtpConfiguration;
+use App\Filament\Clusters\SmtpSettings\Pages\TestSmtp;
+use App\Filament\Clusters\SmtpSettings\Resources\EmailLogs\EmailLogResource;
 use App\Filament\Pages\AdminDashboard;
 use App\Http\Controllers\CmsPreviewController;
 use Filament\Enums\ThemeMode;
@@ -79,9 +82,15 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Administration')->icon(Heroicon::OutlinedShieldCheck)->collapsed(false),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\Filament\Clusters')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 AdminDashboard::class,
+                SmtpConfiguration::class,
+                TestSmtp::class,
+            ])
+            ->resources([
+                EmailLogResource::class,
             ])
             ->authenticatedRoutes(function (): void {
                 Route::get('/content-preview/{type}/{id}', [CmsPreviewController::class, 'redirect'])

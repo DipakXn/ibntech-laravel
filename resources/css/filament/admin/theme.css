@@ -1616,3 +1616,54 @@ body.fi-body {
     border-radius: 1rem;
     background: #0f172a;
 }
+
+/* SMTP Settings: full-width content with top tabs instead of a left sub-nav. */
+.ibn-smtp-settings.fi-page {
+    width: 100%;
+}
+
+.ibn-smtp-settings .fi-page-header-main-ctn,
+.ibn-smtp-settings .fi-page-main,
+.ibn-smtp-settings .fi-page-content {
+    width: 100%;
+    max-width: none;
+}
+
+.ibn-smtp-settings.fi-page-has-sub-navigation-top .fi-page-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.ibn-smtp-settings .fi-page-sub-navigation-tabs {
+    width: 100%;
+    padding: 0.35rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: var(--ibn-radius-lg);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.dark .ibn-smtp-settings .fi-page-sub-navigation-tabs {
+    background: rgba(15, 23, 42, 0.72);
+}
+
+.ibn-smtp-settings .fi-page-content .fi-sc-form,
+.ibn-smtp-settings .fi-page-content form,
+.ibn-smtp-settings .fi-ta-ctn {
+    width: 100%;
+    max-width: none;
+}
+
+.ibn-smtp-settings .fi-sc-actions {
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .ibn-smtp-settings.fi-page-has-sub-navigation-top .fi-page-main {
+        gap: 1rem;
+    }
+
+    .ibn-smtp-settings .fi-page-sub-navigation-tabs {
+        overflow-x: auto;
+    }
+}

@@ -3,6 +3,7 @@
 namespace App\Filament\Schemas;
 
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
+use App\Models\Lead;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -33,6 +34,8 @@ class WebsiteSettingsSchema
                         ->schema(self::robotsSection()),
                     Tab::make('Contact & Social')
                         ->schema(self::contactSection()),
+                    Tab::make('Form notifications')
+                        ->schema(self::formNotificationsSection()),
                     Tab::make('Analytics & Scripts')
                         ->schema(self::analyticsSection()),
                 ]),
@@ -334,6 +337,48 @@ class WebsiteSettingsSchema
                         ->maxLength(255),
                 ])
                 ->columns(2),
+        ];
+    }
+
+    /**
+     * @return array<int, Section>
+     */
+    protected static function formNotificationsSection(): array
+    {
+        return [
+            Section::make('Admin notification recipients')
+                ->description('Internal emails for new website form submissions. Visitor thank-you emails are unchanged.')
+                ->schema([
+                    TextInput::make('form_notification_to')
+                        ->label('Default Form Notification Email')
+                        ->email()
+                        ->maxLength(255)
+                        ->helperText('Global fallback “To” address for all form admin notifications when a form has no override.')
+                        ->columnSpanFull(),
+                    Repeater::make('form_notification_overrides')
+                        ->label('Form Notification Overrides')
+                        ->schema([
+                            Select::make('form_name')
+                                ->label('Form')
+                                ->options(fn (): array => Lead::formOptions())
+                                ->searchable()
+                                ->required()
+                                ->columnSpan(1),
+                            TextInput::make('admin_to')
+                                ->label('Admin notification email')
+                                ->email()
+                                ->maxLength(255)
+                                ->helperText('Leave blank to use the default.')
+                                ->columnSpan(1),
+                        ])
+                        ->columns(2)
+                        ->defaultItems(0)
+                        ->reorderable(false)
+                        ->collapsible()
+                        ->itemLabel(fn (array $state): ?string => $state['form_name'] ?? null)
+                        ->addActionLabel('Add form override')
+                        ->columnSpanFull(),
+                ]),
         ];
     }
 

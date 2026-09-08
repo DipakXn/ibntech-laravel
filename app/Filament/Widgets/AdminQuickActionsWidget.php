@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Clusters\SmtpSettings\Pages\SmtpConfiguration;
 use App\Filament\Pages\LogViewer;
 use App\Filament\Pages\QueueMonitor;
 use App\Filament\Resources\Blogs\BlogResource;
@@ -52,6 +53,7 @@ class AdminQuickActionsWidget extends Widget
         ];
 
         if ($user?->isAdministrator()) {
+            $actions[] = ['label' => 'SMTP settings', 'description' => 'Configure outgoing mail and review email logs', 'url' => SmtpConfiguration::getUrl()];
             $actions[] = ['label' => 'Monitor queues', 'description' => 'Inspect backlog and failed jobs', 'url' => QueueMonitor::getUrl()];
             $actions[] = ['label' => 'Review logs', 'description' => 'Inspect rotated application logs', 'url' => LogViewer::getUrl()];
         }
@@ -61,8 +63,8 @@ class AdminQuickActionsWidget extends Widget
             'metrics' => [
                 [
                     'label' => 'Publishing coverage',
-                    'value' => $totalContent > 0 ? (int) round(($publishedContent / $totalContent) * 100) . '%' : '0%',
-                    'hint' => $publishedContent . ' of ' . $totalContent . ' items live',
+                    'value' => $totalContent > 0 ? (int) round(($publishedContent / $totalContent) * 100).'%' : '0%',
+                    'hint' => $publishedContent.' of '.$totalContent.' items live',
                 ],
                 [
                     'label' => 'Submission queue',

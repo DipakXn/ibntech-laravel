@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Filament\Schemas\WebsiteSettingsSchema;
 use App\Models\WebsiteSetting;
 use App\Services\ApplicationCacheService;
+use App\Services\FormNotificationSettingService;
 use App\Services\WebsiteSettingService;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
@@ -50,9 +51,7 @@ class WebsiteSettings extends Page
 
     public function mount(): void
     {
-        $record = $this->getRecord();
-
-        $this->form->fill($record?->attributesToArray() ?? app(WebsiteSettingService::class)->defaultAttributes());
+        $this->form->fill($this->formDataFromRecord($this->getRecord()));
     }
 
     public function form(Schema $schema): Schema
@@ -79,13 +78,14 @@ class WebsiteSettings extends Page
     public function save(): void
     {
         $data = $this->form->getState();
+        $overrides = $data['form_notification_overrides'] ?? [];
+        unset($data['form_notification_overrides']);
+
         $service = app(WebsiteSettingService::class);
         $record = $this->getRecord();
-        $wasRecentlyCreated = false;
 
         if (! $record) {
             $record = new WebsiteSetting;
-            $wasRecentlyCreated = true;
         }
 
         $record->fill($data);
@@ -93,12 +93,12 @@ class WebsiteSettings extends Page
 
         $this->form->record($record)->saveRelationships();
 
+        app(FormNotificationSettingService::class)->sync(is_array($overrides) ? $overrides : []);
+
         $service->forget();
         $service->syncRobotsTxt($record->fresh());
 
-        if ($wasRecentlyCreated) {
-            $this->form->fill($record->fresh()->attributesToArray());
-        }
+        $this->form->fill($this->formDataFromRecord($record->fresh()));
 
         Notification::make()
             ->success()
@@ -109,6 +109,17 @@ class WebsiteSettings extends Page
     public function getRecord(): ?WebsiteSetting
     {
         return WebsiteSetting::query()->first();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function formDataFromRecord(?WebsiteSetting $record): array
+    {
+        $attributes = $record?->attributesToArray() ?? app(WebsiteSettingService::class)->defaultAttributes();
+        $attributes['form_notification_overrides'] = app(FormNotificationSettingService::class)->repeaterState();
+
+        return $attributes;
     }
 
     /**

@@ -32,6 +32,7 @@ class WebsiteSetting extends Model implements HasMedia
         'custom_meta_robots',
         'robots_txt',
         'contact_email',
+        'form_notification_to',
         'header_phones',
         'offices',
         'social_facebook',

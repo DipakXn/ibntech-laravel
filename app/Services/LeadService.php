@@ -13,8 +13,7 @@ class LeadService
     public function __construct(
         protected LeadRepository $leads,
         protected Request $request,
-    ) {
-    }
+    ) {}
 
     public function createLead(array $payload, string $formName = 'general'): Lead
     {
@@ -33,11 +32,7 @@ class LeadService
             'payload' => $payload,
         ]);
 
-        $recipient = config('mail.lead_notification_to', config('mail.from.address'));
-
-        if ($recipient) {
-            SendLeadSubmissionNotification::dispatch($lead->getKey(), $recipient)->afterCommit();
-        }
+        SendLeadSubmissionNotification::dispatch($lead->getKey())->afterCommit();
 
         return $lead;
     }

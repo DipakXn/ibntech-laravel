@@ -62,6 +62,7 @@ class WebsiteSettingService
             'custom_meta_robots' => null,
             'robots_txt' => "User-agent: *\nDisallow:\n",
             'contact_email' => 'sales@ibntech.com',
+            'form_notification_to' => null,
             'header_phones' => [
                 ['label' => 'USA', 'number' => '+1-844-644-8440'],
                 ['label' => 'UK', 'number' => '+44-800-041-8618'],

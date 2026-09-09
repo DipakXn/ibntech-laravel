@@ -234,7 +234,7 @@
 .home-hero h1,
 .home-hero h2 {
     margin-top: 1.15rem;
-    max-width: min(22ch, 100%);
+    max-width: min(25ch, 100%);
     font-size: clamp(2rem, 3.8vw, 3.15rem);
     font-weight: 700;
     line-height: 1.15;

@@ -2,9 +2,9 @@
     $services = [
         ['title' => 'Multi Cloud Consulting & Migration', 'icon' => 'fa-cloud-arrow-up', 'color' => '#2f6fd6', 'href' => route('page.show', ['slug' => 'cloud-consulting-and-migration-services']),],
         ['title' => 'Managed Cloud & Security Services', 'icon' => 'fa-shield-halved', 'color' => '#4caf50', 'href' => route('page.show', ['slug' => 'cloud-managed-services']),],
-        ['title' => 'Business Continuity & Disaster Recovery', 'icon' => 'fa-server', 'color' => '#6e65f2', 'href' => route('page.show', ['slug' => 'business-continuity-disaster-recovery-services']),],
+        ['title' => 'Business Continuity & Disaster Recovery', 'icon' => 'fa-layer-group', 'color' => '#6e65f2', 'href' => route('page.show', ['slug' => 'business-continuity-disaster-recovery-services']),],
         ['title' => 'DevSecOps Implementation Services', 'icon' => 'fa-gears', 'color' => '#f0a202', 'href' => route('page.show', ['slug' => 'devsecops-services']),],
-        ['title' => 'Microsoft 365 / Office 365 Migration', 'icon' => 'fa-envelope-open-text', 'color' => '#e85d75', 'href' => route('page.show', ['slug' => 'microsoft-office-365-migration-support-services']),],
+        ['title' => 'Microsoft 365 / Office 365 Migration', 'icon' => 'fa-headset', 'color' => '#e85d75', 'href' => route('page.show', ['slug' => 'microsoft-office-365-migration-support-services']),],
     ];
 
     $software = [
@@ -21,6 +21,17 @@
         'python-original.svg',
         'bash-original.svg',
     ];
+
+    $partnerships = [
+        ['src' => 'images/partners/aws-partner-advanced-tier.webp', 'alt' => 'AWS Partner Advanced Tier Services'],
+        ['src' => 'images/partners/MS-Gold-Partner.webp', 'alt' => 'Microsoft Gold Partner'],
+        ['src' => 'images/partners/DSCI-logo.webp', 'alt' => 'DSCI Promoting Data Protection'],
+        ['src' => 'images/Certificates/ms-azure-security-engineer.webp', 'alt' => 'Microsoft Azure Security Engineer Associate'],
+        ['src' => 'images/Certificates/ms-azure-solutions-architech.webp', 'alt' => 'Microsoft Azure Solutions Architect Expert'],
+        ['src' => 'images/Certificates/ms-azure-administrator.webp', 'alt' => 'Microsoft Azure Administrator Associate'],
+        ['src' => 'images/Certificates/ms-security-operations-analyst.webp', 'alt' => 'Microsoft Security Operations Analyst Associate'],
+        ['src' => 'images/Certificates/ms-enterprise-administrator.webp', 'alt' => 'Microsoft 365 Enterprise Administrator Expert'],
+    ];
 @endphp
 
 <section class="home-section" aria-labelledby="home-cloud-title" data-scroll-anchor="cloud-section">
@@ -34,19 +45,19 @@
             </p>
         </div>
 
-        <div class="home-cloud__panel mt-4">
+        <div class="home-cloud__panel">
             <div class="home-cloud__top">
                 <div>
-                    <div class="flex items-center gap-3">
-                        <span class="inline-grid h-10 w-10 place-items-center rounded-xl bg-[#2f6fd6] text-white">
+                    <div class="home-cloud__heading">
+                        <span class="home-cloud__icon">
                             <i class="fa-solid fa-cloud" aria-hidden="true"></i>
                         </span>
                         <div>
-                            <h2 id="home-cloud-title" class="text-xl font-bold text-[var(--home-navy)]">Cloud Services</h2>
-                            <p class="text-[#2f6fd6] font-semibold">Next-Gen Infrastructure for Scalable Growth</p>
+                            <h2 id="home-cloud-title" class="home-cloud__title">Cloud Services</h2>
+                            <p class="home-cloud__subtitle">Next-Gen Infrastructure for Scalable Growth</p>
                         </div>
                     </div>
-                    <p class="home-section-lead !mt-3">
+                    <p class="home-cloud__intro">
                         Multi-cloud solutions built around your business goals — with 99.9% uptime, zero-trust security, and DevSecOps agility at every layer.
                     </p>
                 </div>
@@ -72,11 +83,14 @@
 
         <div class="home-cloud__logos">
             <article class="home-card">
-                <h3 class="home-cloud__logos-title">Partnering with Industry Leaders</h3>
-                <div class="home-software-grid !grid-cols-3">
-                    @foreach (['aws-partner-advanced-tier.webp', 'MS-Gold-Partner.webp', 'DSCI-logo.webp'] as $logo)
+                <h3 class="home-cloud__logos-title">
+                    <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+                    Cloud Certifications &amp; Partnerships
+                </h3>
+                <div class="home-software-grid home-cloud__partners">
+                    @foreach ($partnerships as $logo)
                         <div class="home-logo-chip">
-                            <img src="{{ asset('images/partners/'.$logo) }}" alt="{{ pathinfo($logo, PATHINFO_FILENAME) }}" width="120" height="48" loading="lazy" decoding="async">
+                            <img src="{{ asset($logo['src']) }}" alt="{{ $logo['alt'] }}" width="120" height="80" loading="lazy" decoding="async">
                         </div>
                     @endforeach
                 </div>

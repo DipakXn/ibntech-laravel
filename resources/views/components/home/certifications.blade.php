@@ -51,7 +51,7 @@
 
         <div class="home-security-certs">
             @foreach ($securityExperts as $logo)
-                <article class="home-card home-cert-card">
+                <article class="home-cert-card">
                     <img
                         src="{{ asset('images/certified-security-experts/'.$logo) }}"
                         alt="{{ pathinfo($logo, PATHINFO_FILENAME) }} certification"

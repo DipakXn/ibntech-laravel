@@ -1,13 +1,13 @@
 @php
     $services = [
         ['title' => 'Bookkeeping Services', 'text' => 'Accurate, real-time records', 'icon' => 'fa-book', 'href' => route('page.show', ['slug' => 'bookkeeping-services']),],
-        ['title' => 'Tax Return Preparation', 'text' => 'US, UK & 1040 filing', 'icon' => 'fa-file-invoice-dollar', 'href' => route('page.show', ['slug' => 'tax-preparation-services-usa']),],
-        ['title' => 'AP / AR Services', 'text' => 'Accounts payable & receivable', 'icon' => 'fa-file-invoice', 'href' => route('page.show', ['slug' => 'accounts-payable-and-accounts-receivable-services']),],
-        ['title' => 'AP / AR Automation', 'text' => 'Automated AP & AR workflows', 'icon' => 'fa-robot', 'href' => route('page.show', ['slug' => 'ap-ar-automation']),],
-        ['title' => 'Payroll Services', 'text' => 'Efficient payroll management', 'icon' => 'fa-money-check-dollar', 'href' => route('page.show', ['slug' => 'payroll-processing']),],
-        ['title' => 'Treasury Management', 'text' => 'Optimising cash flow', 'icon' => 'fa-wallet', 'href' => route('page.show', ['slug' => 'treasury-management-services-outsourcing']),],
-        ['title' => 'Financial Reporting', 'text' => 'Insights & planning', 'icon' => 'fa-chart-pie', 'href' => route('page.show', ['slug' => 'reporting-analysis-planning']),],
-        ['title' => 'Virtual CFO Services', 'text' => 'Strategic financial leadership', 'icon' => 'fa-briefcase', 'href' => route('page.show', ['slug' => 'cfo-services']),],
+        ['title' => 'Tax Return Preparation', 'text' => 'US, UK & 1040 filing', 'icon' => 'fa-file-lines', 'href' => route('page.show', ['slug' => 'tax-preparation-services-usa']),],
+        ['title' => 'AP / AR Services', 'text' => 'Accounts payable & receivable', 'icon' => 'fa-arrows-rotate', 'href' => route('page.show', ['slug' => 'accounts-payable-and-accounts-receivable-services']),],
+        ['title' => 'AP / AR Automation', 'text' => 'Automated AP & AR workflows', 'icon' => 'fa-share-nodes', 'href' => route('page.show', ['slug' => 'ap-ar-automation']),],
+        ['title' => 'Payroll Services', 'text' => 'Efficient payroll management', 'icon' => 'fa-user', 'href' => route('page.show', ['slug' => 'payroll-processing']),],
+        ['title' => 'Treasury Management', 'text' => 'Optimising cash flow', 'icon' => 'fa-clock', 'href' => route('page.show', ['slug' => 'treasury-management-services-outsourcing']),],
+        ['title' => 'Financial Reporting', 'text' => 'Insights & planning', 'icon' => 'fa-heart-pulse', 'href' => route('page.show', ['slug' => 'reporting-analysis-planning']),],
+        ['title' => 'Virtual CFO Services', 'text' => 'Strategic financial leadership', 'icon' => 'fa-chart-column', 'href' => route('page.show', ['slug' => 'cfo-services']),],
     ];
 
     $software = [
@@ -34,9 +34,11 @@
 
         <div class="home-finance__layout">
             <aside class="home-finance__promo">
-                <span class="home-pill home-pill--soft !bg-white/15 !text-white">Since 1999 · ISO Certified</span>
-                <h3>Outsourced Accounting &amp; Bookeeping Solutions</h3>
-                <p>Accurate books, compliant taxes, and clear financial insights to help your business grow.</p>
+                <div class="home-finance__promo-top">
+                    <span class="home-pill home-pill--soft">Since 1999 · ISO Certified</span>
+                    <h3>Outsourced Accounting &amp; Bookkeeping Solutions</h3>
+                    <p>Accurate books, compliant taxes, and clear financial insights to help your business grow.</p>
+                </div>
                 <div class="home-finance__promo-stats">
                     <div>
                         <strong>1,500+</strong>
@@ -47,16 +49,20 @@
                         <span>Transactions processed</span>
                     </div>
                 </div>
-                <p class="mt-5 text-sm text-white/85">Compliant with GDPR · HIPAA · SOC 2 · PCI-DSS</p>
+                <p class="home-finance__promo-compliance">Compliant with GDPR · HIPAA · SOC 2 · PCI-DSS</p>
             </aside>
 
             <div class="home-finance__services">
                 @foreach ($services as $service)
-                    <article class="home-card">
+                    <article>
                         <a href="{{ $service['href'] }}">
-                        <i class="fa-solid {{ $service['icon'] }}" aria-hidden="true"></i>
-                        <h3>{{ $service['title'] }}</h3>
-                        <p>{{ $service['text'] }}</p>
+                            <span class="home-finance__service-icon" aria-hidden="true">
+                                <i class="fa-solid {{ $service['icon'] }}"></i>
+                            </span>
+                            <span class="home-finance__service-copy">
+                                <h3>{{ $service['title'] }}</h3>
+                                <p>{{ $service['text'] }}</p>
+                            </span>
                         </a>
                     </article>
                 @endforeach

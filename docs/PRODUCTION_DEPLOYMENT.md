@@ -312,6 +312,21 @@ Compress the project into a `.zip` archive for upload.
 - `storage/logs/*.log`
 - `storage/framework/cache/data/*` (optional; regenerated on server)
 - Local debug artifacts (`storage/debugbar/`, etc.)
+- **`bootstrap/cache/*.php`** *(critical — never deploy locally generated Laravel caches)*
+
+**Never run locally before creating the zip:**
+
+- `php artisan config:cache`
+- `php artisan route:cache`
+- `php artisan view:cache`
+- `php artisan event:cache`
+- `php artisan cms:optimize`
+- `php artisan optimize`
+
+These commands bake absolute filesystem paths from your local machine (for example `C:\Users\...` on Windows) into `bootstrap/cache/config.php` and related files. If those files reach cPanel/Linux, Laravel will try to use the Windows paths and can create malformed folders in `public_html/` or the core directory.
+
+> [!CAUTION]
+> **Laravel cache must be generated on the Linux server after deployment, never locally and uploaded.** After every deploy, run `php artisan optimize:clear` then `php artisan cms:optimize` from `/home/devtech/ibntech-core` (or your server core path) so paths resolve to `/home/devtech/ibntech-core/storage/...`.
 
 **Always include:**
 
@@ -382,12 +397,12 @@ return match (true) {
 
     // Staging
     $host === 'dev.ibntech.com' =>
-        '/home/USER/ibntech-staging',
+        '/home/devtech/ibntech-core',
 
     // Production
     $host === 'ibntech.com' ||
     $host === 'www.ibntech.com' =>
-        '/home/USER/ibntech',
+        '/home/ibntech/ibntech-core',
 
     // Fallback
     default =>
@@ -551,10 +566,11 @@ This command:
 2. Updates `disk` / related columns on Spatie `media` records.
 3. Optionally reorganizes into the purpose-based layout described in `docs/media-library-architecture.md`.
 
-After migration, rebuild config cache so `MEDIA_*` values are active:
+After migration, rebuild config cache on the server so `MEDIA_*` values are active:
 
 ```bash
-php artisan config:cache
+php artisan optimize:clear
+php artisan cms:optimize
 ```
 
 ---
@@ -586,15 +602,15 @@ Some shared hosts require `777` on `storage` / `bootstrap/cache` / `uploads` if 
 
 ### Step 7: Framework Cache & Asset Optimization
 
-Compile configurations, routes, and Blade views into production caches:
+Compile configurations, routes, and Blade views into production caches **on the server only**:
 
 ```bash
-cd /home/USER/ibntech
+cd /home/devtech/ibntech-core
 
-# Clear any stale development cache
+# Clear any stale or locally uploaded cache (required after every zip deploy)
 php artisan optimize:clear
 
-# Rebuild production caches (project helper)
+# Rebuild production caches (project helper) — must run on Linux, not locally
 php artisan cms:optimize
 # Equivalent to: config:cache + route:cache + view:cache
 
@@ -900,7 +916,28 @@ php artisan queue:retry all
 
 ---
 
-### Issue 8: Telescope or Debugbar Interfering in Production
+### Issue 8: Malformed Folders Named `C:\Users\...` in `public_html/` or Core Directory
+
+**Root Cause**: A Windows-generated `bootstrap/cache/config.php` (or related cache files from `config:cache` / `cms:optimize`) was included in the deployment zip. Cached paths such as `view.compiled` and `logging.channels.daily.path` contain absolute Windows paths. On Linux, those strings are treated as single relative directory names, so Laravel creates folders literally named `C:\Users\...\storage\logs` and `C:\Users\...\storage\framework\views`.
+
+**Solution**:
+
+1. Exclude `bootstrap/cache/*.php` from every deployment zip (see [Section 4](#4-pre-deployment-local-preparation)).
+2. On the server:
+
+```bash
+cd /home/devtech/ibntech-core
+php artisan optimize:clear
+php artisan cms:optimize
+```
+
+3. After caches are rebuilt with Linux paths, remove the malformed folders from `public_html/` and `ibntech-core/` via cPanel File Manager (they are not used by Laravel once the cache is correct).
+
+**Prevention**: Never run `config:cache`, `route:cache`, `view:cache`, `cms:optimize`, or `optimize` locally before packaging a cPanel deployment.
+
+---
+
+### Issue 9: Telescope or Debugbar Interfering in Production
 
 **Root Cause**: Dev tooling left enabled.
 
@@ -933,6 +970,8 @@ Use this checklist for every production release.
 - [ ] Code formatted (`./vendor/bin/pint` or `./vendor/bin/pint --test`).
 - [ ] Fresh production asset bundle generated (`npm ci && npm run build`).
 - [ ] Production dependencies installed (`composer install --no-dev --optimize-autoloader`).
+- [ ] Deployment zip **excludes** `bootstrap/cache/*.php` and contains **no** locally generated Laravel cache files.
+- [ ] Did **not** run `config:cache`, `cms:optimize`, or `optimize` locally before zipping.
 - [ ] Backup created of production database (`mysqldump`) **and** `uploads/` media tree.
 - [ ] Staging smoke-tested when the release includes schema or media changes.
 
@@ -946,13 +985,13 @@ php artisan down --secret="ibn-deploy-2026"
 
   *(Bypass URL: `https://ibntech.com/{secret}` while down.)*
 
-- [ ] Upload updated core files to `/home/USER/ibntech/` (preserve `.env` and `storage/`).
+- [ ] Upload updated core files to `/home/devtech/ibntech-core/` (preserve `.env` and `storage/`).
 - [ ] Upload updated Vite build to `public_html/build/`.
-- [ ] Confirm `bootstrap-path.php` host mappings still correct.
+- [ ] Confirm `bootstrap-path.php` maps staging to `/home/devtech/ibntech-core` and production to `/home/ibntech/ibntech-core`.
 - [ ] Execute database migrations (`php artisan migrate --force`).
 - [ ] Execute media migration only if needed (`php artisan media:migrate-to-uploads-disk`).
 - [ ] Verify permissions (`775` on `storage`, `bootstrap/cache`, and writable `uploads`).
-- [ ] Clear and rebuild caches (`php artisan cms:optimize`, `filament:optimize`).
+- [ ] Clear any uploaded/stale cache, then rebuild on the server only (`php artisan optimize:clear`, then `php artisan cms:optimize`, `filament:optimize`).
 - [ ] Restart queue workers (`php artisan queue:restart` or rely on cron `--stop-when-empty`).
 - [ ] Disable maintenance mode (`php artisan up`).
 

@@ -21,12 +21,12 @@ return match (true) {
 
     // Staging
     $host === 'dev.ibntech.com' =>
-        '/home/ibntech/ibntech-staging',
+        '/home/devtech/ibntech-core',
 
     // Production
     $host === 'ibntech.com' ||
     $host === 'www.ibntech.com' =>
-        '/home/ibntech/ibntech',
+        '/home/ibntech/ibntech-core',
 
     // Fallback
     default =>

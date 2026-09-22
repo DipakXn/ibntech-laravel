@@ -70,7 +70,7 @@ class PageForm
                             ->helperText('Optional page image used for social sharing and any page sections that surface the record visually.'),
                     ])
                     ->columnSpan(1),
-                SeoMetaSchema::make(),
+                SeoMetaSchema::make(pageSitemapOverrides: true),
             ]);
     }
 }

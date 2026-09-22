@@ -6,7 +6,10 @@ use App\Filament\Schemas\WebsiteSettingsSchema;
 use App\Models\WebsiteSetting;
 use App\Services\ApplicationCacheService;
 use App\Services\FormNotificationSettingService;
+use App\Services\Sitemap\SitemapCacheService;
 use App\Services\WebsiteSettingService;
+use App\Support\Sitemap\SitemapCustomUrls;
+use App\Support\Sitemap\SitemapType;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -81,6 +84,18 @@ class WebsiteSettings extends Page
         $overrides = $data['form_notification_overrides'] ?? [];
         unset($data['form_notification_overrides']);
 
+        if (isset($this->data['sitemap_types']) && is_array($this->data['sitemap_types'])) {
+            $data['sitemap_types'] = $this->data['sitemap_types'];
+        }
+
+        if (isset($data['sitemap_types']) && is_array($data['sitemap_types'])) {
+            $data['sitemap_types'] = SitemapType::storedState($data['sitemap_types']);
+        }
+
+        if (isset($data['sitemap_custom_urls']) && is_array($data['sitemap_custom_urls'])) {
+            $data['sitemap_custom_urls'] = SitemapCustomUrls::normalize($data['sitemap_custom_urls']);
+        }
+
         $service = app(WebsiteSettingService::class);
         $record = $this->getRecord();
 
@@ -97,6 +112,7 @@ class WebsiteSettings extends Page
 
         $service->forget();
         $service->syncRobotsTxt($record->fresh());
+        app(SitemapCacheService::class)->forgetAll();
 
         $this->form->fill($this->formDataFromRecord($record->fresh()));
 
@@ -118,6 +134,12 @@ class WebsiteSettings extends Page
     {
         $attributes = $record?->attributesToArray() ?? app(WebsiteSettingService::class)->defaultAttributes();
         $attributes['form_notification_overrides'] = app(FormNotificationSettingService::class)->repeaterState();
+        $attributes['sitemap_types'] = SitemapType::formState(
+            is_array($attributes['sitemap_types'] ?? null) ? $attributes['sitemap_types'] : null
+        );
+        $attributes['sitemap_custom_urls'] = is_array($attributes['sitemap_custom_urls'] ?? null)
+            ? $attributes['sitemap_custom_urls']
+            : [];
 
         return $attributes;
     }
@@ -128,6 +150,19 @@ class WebsiteSettings extends Page
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('clearSitemapCache')
+                ->label('Clear sitemap cache')
+                ->color('gray')
+                ->icon(Heroicon::OutlinedGlobeAlt)
+                ->action(function (): void {
+                    app(SitemapCacheService::class)->forgetAll();
+
+                    Notification::make()
+                        ->success()
+                        ->title('Sitemap cache cleared')
+                        ->body('XML sitemaps will be regenerated on the next request.')
+                        ->send();
+                }),
             Action::make('clearCache')
                 ->label('Clear cache')
                 ->color('danger')

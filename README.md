@@ -728,6 +728,21 @@ Images are resolved in priority order:
 2. Direct URL stored in `og_image`/`twitter_image` column
 3. Model's `featuredImageUrl()` method
 
+### XML sitemaps
+
+The site exposes a Laravel-generated sitemap index at `/sitemap.xml` (alias: `/sitemap_index.xml`) plus per-content child sitemaps such as `/page-sitemap.xml` and `/post-sitemap.xml`. URLs are built from `APP_URL` / `url()` / `route()`, so local, staging, and production each emit their own host. Sitemaps are not written as static files under `public/`.
+
+Admins manage sitemap settings from **Website Settings → Sitemap**:
+
+- Enable/disable the sitemap
+- Include/exclude `<lastmod>`, `<changefreq>`, and `<priority>`
+- Cache TTL
+- Add a `Sitemap:` line to `robots.txt` (existing Allow/Disallow rules are not rewritten)
+- Per content-type enablement and defaults
+- Custom URLs (`custom-sitemap.xml`), which preserve query strings
+
+Per-record exclusion still uses the existing SEO **Include in sitemap** toggle, plus `noindex`, `redirect_url`, and canonical mismatch. Child sitemaps split at 50,000 URLs (`post-sitemap.xml`, `post-sitemap2.xml`, …). Cache keys are invalidated per content type when CMS or SEO records change.
+
 ---
 
 ## 14. Lead Capture System

@@ -3,6 +3,20 @@
 namespace App\Providers;
 
 use App\Mail\OutgoingMailLogTracker;
+use App\Models\Article;
+use App\Models\Blog;
+use App\Models\CaseStudy;
+use App\Models\Category;
+use App\Models\Ebook;
+use App\Models\Industry;
+use App\Models\LandingPage;
+use App\Models\Newsletter;
+use App\Models\Page;
+use App\Models\PressRelease;
+use App\Models\SeoMeta;
+use App\Models\WebsiteSetting;
+use App\Models\WhitePaper;
+use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
 use App\Services\EmailLogService;
 use App\Services\SeoService;
@@ -87,6 +101,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('cmsPreview', (bool) request()->attributes->get('cmsPreview', false));
         });
 
+        $this->registerSitemapCacheObservers();
+
         Event::listen(JobFailed::class, function (JobFailed $event): void {
             Log::error('Queue job failed.', [
                 'connection' => $event->connectionName,
@@ -106,5 +122,28 @@ class AppServiceProvider extends ServiceProvider
                 'threshold' => (int) env('QUEUE_MONITOR_MAX', 100),
             ]);
         });
+    }
+
+    private function registerSitemapCacheObservers(): void
+    {
+        $models = [
+            Page::class,
+            Blog::class,
+            Article::class,
+            CaseStudy::class,
+            Ebook::class,
+            WhitePaper::class,
+            PressRelease::class,
+            Industry::class,
+            LandingPage::class,
+            Newsletter::class,
+            Category::class,
+            SeoMeta::class,
+            WebsiteSetting::class,
+        ];
+
+        foreach ($models as $model) {
+            $model::observe(SitemapCacheObserver::class);
+        }
     }
 }

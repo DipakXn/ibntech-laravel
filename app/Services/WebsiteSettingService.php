@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\WebsiteSetting;
+use App\Support\Sitemap\RobotsTxtSitemapDirective;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
@@ -61,6 +62,14 @@ class WebsiteSettingService
             'robots_max_image_preview' => 'large',
             'custom_meta_robots' => null,
             'robots_txt' => "User-agent: *\nDisallow:\n",
+            'sitemap_enabled' => true,
+            'sitemap_include_lastmod' => true,
+            'sitemap_include_changefreq' => false,
+            'sitemap_include_priority' => false,
+            'sitemap_add_to_robots' => true,
+            'sitemap_cache_ttl' => 3600,
+            'sitemap_types' => null,
+            'sitemap_custom_urls' => [],
             'contact_email' => 'sales@ibntech.com',
             'form_notification_to' => null,
             'header_phones' => [
@@ -118,6 +127,15 @@ class WebsiteSettingService
         if ($contents === null || trim($contents) === '') {
             $contents = "User-agent: *\nDisallow:\n";
         }
+
+        $addSitemap = (bool) ($settings->sitemap_enabled ?? true)
+            && (bool) ($settings->sitemap_add_to_robots ?? true);
+
+        $contents = RobotsTxtSitemapDirective::apply(
+            $contents,
+            $addSitemap,
+            $addSitemap ? url('/sitemap.xml') : null,
+        );
 
         File::put(public_path('robots.txt'), rtrim($contents)."\n");
     }

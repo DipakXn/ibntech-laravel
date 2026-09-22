@@ -31,6 +31,14 @@ class WebsiteSetting extends Model implements HasMedia
         'robots_max_image_preview',
         'custom_meta_robots',
         'robots_txt',
+        'sitemap_enabled',
+        'sitemap_include_lastmod',
+        'sitemap_include_changefreq',
+        'sitemap_include_priority',
+        'sitemap_add_to_robots',
+        'sitemap_cache_ttl',
+        'sitemap_types',
+        'sitemap_custom_urls',
         'contact_email',
         'form_notification_to',
         'header_phones',
@@ -53,6 +61,14 @@ class WebsiteSetting extends Model implements HasMedia
         return [
             'header_phones' => 'array',
             'offices' => 'array',
+            'sitemap_enabled' => 'boolean',
+            'sitemap_include_lastmod' => 'boolean',
+            'sitemap_include_changefreq' => 'boolean',
+            'sitemap_include_priority' => 'boolean',
+            'sitemap_add_to_robots' => 'boolean',
+            'sitemap_cache_ttl' => 'integer',
+            'sitemap_types' => 'array',
+            'sitemap_custom_urls' => 'array',
         ];
     }
 

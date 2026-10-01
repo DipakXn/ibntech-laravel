@@ -90,8 +90,8 @@
             'text' => 'Flexible deployment models tailored to startups, SMBs, and large enterprises.',
         ],
         [
-            'title' => '26+ Years IT Consulting Firm',
-            'text' => 'Backed by 26+ Years of Proven Cloud and Cybersecurity Consulting Expertise',
+            'title' => '27+ Years IT Consulting Firm',
+            'text' => 'Backed by 27+ Years of Proven Cloud and Cybersecurity Consulting Expertise',
         ],
     ];
 

@@ -84,7 +84,7 @@
     ];
 
     $stats = [
-        ['value' => '26+', 'label' => 'Years of Success', 'tone' => 'light'],
+        ['value' => '27+', 'label' => 'Years of Success', 'tone' => 'light'],
         ['value' => '120+', 'label' => 'Certified Accountant', 'tone' => 'navy'],
         ['value' => '1500+', 'label' => 'Clients Served', 'tone' => 'light'],
         ['value' => '99.99 %', 'label' => 'Accuracy Achieved', 'tone' => 'navy'],

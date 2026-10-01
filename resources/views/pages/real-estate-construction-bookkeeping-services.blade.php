@@ -141,7 +141,7 @@
                         Outsourced Real Estate and Construction Bookkeeping Services
                     </h1>
                     <p class="recbk-hero__lede">
-                        With 26+ years of experience, we provide tailored real estate and construction bookkeeping for contractors, single properties or large portfolios, using software like Yardi and QuickBooks for precise financial management, including month-end reporting, cost segregation, and property management accounting
+                        With 27+ years of experience, we provide tailored real estate and construction bookkeeping for contractors, single properties or large portfolios, using software like Yardi and QuickBooks for precise financial management, including month-end reporting, cost segregation, and property management accounting
                     </p>
                 </div>
 

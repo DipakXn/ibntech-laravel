@@ -147,7 +147,7 @@
                         The Quote-to-cash process is imperative for any organization to prioritize cash flow management as a means of sustaining a sound financial stance and enhancing profitability and liquidity.
                     </p>
                     <p>
-                        With over 26+ years of experience in Quote-to-Cash management, IBN Tech offers an extensive range of services, customized to your unique business needs. The synergy of our expert team, along with our steadfast commitment to automation and integration, enables your business to achieve operational excellence and drive sustainable growth.
+                        With over 27+ years of experience in Quote-to-Cash management, IBN Tech offers an extensive range of services, customized to your unique business needs. The synergy of our expert team, along with our steadfast commitment to automation and integration, enables your business to achieve operational excellence and drive sustainable growth.
                     </p>
                 </div>
             </div>

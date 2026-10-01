@@ -3,7 +3,7 @@
 
     $heroStats = [
         ['icon' => 'fa-cloud', 'value' => '500 +', 'label' => 'E-commerce & Retail Companies'],
-        ['icon' => 'fa-award', 'value' => '26 +', 'label' => 'Years of Proven Expertise'],
+        ['icon' => 'fa-award', 'value' => '27 +', 'label' => 'Years of Proven Expertise'],
         ['icon' => 'fa-server', 'value' => '99.9 %', 'label' => 'System Uptime'],
         ['icon' => 'fa-globe', 'value' => '40 %', 'label' => 'Average Cost Reduction'],
     ];

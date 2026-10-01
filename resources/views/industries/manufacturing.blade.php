@@ -3,7 +3,7 @@
 
     $heroStats = [
         ['icon' => 'fa-globe', 'value' => '2,500 +', 'label' => 'Global Clients'],
-        ['icon' => 'fa-award', 'value' => '26+', 'label' => 'Years of Expertise'],
+        ['icon' => 'fa-award', 'value' => '27+', 'label' => 'Years of Expertise'],
         ['icon' => 'fa-server', 'value' => '99.99%', 'label' => 'System Uptime & SLA Guarantee'],
         ['icon' => 'fa-heart', 'value' => '99%', 'label' => 'Client Retention Rate'],
     ];
@@ -100,7 +100,7 @@
 
     $trackRecord = [
         '2,500+ Global Clients including Fortune 500 companies',
-        '26+ Years of Expertise (Since 1999)',
+        '27+ Years of Expertise (Since 1999)',
         '99.99% System Uptime & SLA Guarantee',
         '80% Reduction in Security Breach Impact',
         '99% Compliance Success Rate',

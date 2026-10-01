@@ -15,7 +15,7 @@
     ];
 
     $whyChoose = [
-        '26+ Years Experience',
+        '27+ Years Experience',
         'ISO Certified Excellence',
         'Global Reach with Local Support',
     ];

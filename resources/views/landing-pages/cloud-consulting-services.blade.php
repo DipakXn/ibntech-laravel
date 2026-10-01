@@ -4,7 +4,7 @@
     $lpImg = fn (string $file): string => asset('images/landing-pages/'.$file);
 
     $heroItems = [
-        'Over 26+ years of experience in delivering cloud consulting services, multi-cloud solutions, Azure cloud consulting services, cloud infrastructure management services, and hybrid cloud solutions.',
+        'Over 27+ years of experience in delivering cloud consulting services, multi-cloud solutions, Azure cloud consulting services, cloud infrastructure management services, and hybrid cloud solutions.',
         'Processes and Safety Certified by ISO 9001:2015, ISO 27001-2013, ISO 20000 & CMMI Level 5.',
         'Trusted Azure managed service provider with a global recognition as a partner of Azure, AWS, Acronis, HPE Greenlake, and Jio Cloud.',
         'Shared and Dedicated Experts | Certified Team',
@@ -129,7 +129,7 @@
             <div class="lccs-hero__copy">
                 <h1 id="lccs-hero-title">Welcome to IBN Tech!</h1>
                 <p>
-                    With 26+ years of industry expertise, we excel in delivering comprehensive Cloud Consulting, Multi Cloud solutions, and Private Cloud solutions. Our services encompass Cloud Management Services, Azure Consulting Services, and Azure Expert Managed Services Provider capabilities, making us a trusted partner for Cloud Infrastructure management, Hybrid Cloud Solutions, and top-tier Cloud Security solutions.
+                    With 27+ years of industry expertise, we excel in delivering comprehensive Cloud Consulting, Multi Cloud solutions, and Private Cloud solutions. Our services encompass Cloud Management Services, Azure Consulting Services, and Azure Expert Managed Services Provider capabilities, making us a trusted partner for Cloud Infrastructure management, Hybrid Cloud Solutions, and top-tier Cloud Security solutions.
                 </p>
                 <ul class="lccs-hero__items">
                     @foreach ($heroItems as $item)

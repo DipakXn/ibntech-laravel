@@ -130,7 +130,7 @@
     ];
 
     $apartItems = [
-        ['title' => '26+ Years of Experience:', 'text' => 'Proven IT and cloud transformation success'],
+        ['title' => '27+ Years of Experience:', 'text' => 'Proven IT and cloud transformation success'],
         ['title' => 'High Availability:', 'text' => 'Reliable, scalable cloud environments'],
         ['title' => 'Real-Time Monitoring:', 'text' => 'Proactive issue detection and resolution'],
         ['title' => 'Expert Remediation:', 'text' => 'Seamless performance across AWS workloads'],

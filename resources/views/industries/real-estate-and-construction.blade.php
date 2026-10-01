@@ -2,7 +2,7 @@
     $img = fn (string $file): string => asset('images/industries/'.$file);
 
     $heroStats = [
-        ['icon' => 'fa-award', 'value' => '26+', 'label' => 'Years of Proven Expertise'],
+        ['icon' => 'fa-award', 'value' => '27+', 'label' => 'Years of Proven Expertise'],
         ['icon' => 'fa-percent', 'value' => '70%', 'label' => 'Cost Savings'],
         ['icon' => 'fa-diagram-project', 'value' => '95%+', 'label' => 'Client Retention Rate'],
     ];

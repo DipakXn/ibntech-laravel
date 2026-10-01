@@ -38,8 +38,8 @@
     $whyItems = [
         [
             'file' => '25-years-of-expertise.webp',
-            'alt' => '26+ years of industry experience',
-            'title' => '26+ Years of Industry Experience',
+            'alt' => '27+ years of industry experience',
+            'title' => '27+ Years of Industry Experience',
             'text' => 'Trusted by global clients, we understand local building codes and international standards, ensuring compliance and reliability.',
         ],
         [

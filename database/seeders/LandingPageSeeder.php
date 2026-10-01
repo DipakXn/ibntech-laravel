@@ -29,7 +29,7 @@ class LandingPageSeeder extends Seeder
                 'thank_you_slug' => 'cloud-consulting-services-thank-you',
                 'seo' => [
                     'meta_title' => 'Cloud Consulting Services',
-                    'meta_description' => 'With 26+ years of industry expertise, we excel in delivering comprehensive Cloud Consulting, Multi Cloud solutions, and Private Cloud solutions. Our services encompass Cloud Management Services, Azure Consulting Services, and Azure Expert Managed Services Provider capabilities.',
+                    'meta_description' => 'With 27+ years of industry expertise, we excel in delivering comprehensive Cloud Consulting, Multi Cloud solutions, and Private Cloud solutions. Our services encompass Cloud Management Services, Azure Consulting Services, and Azure Expert Managed Services Provider capabilities.',
                     'meta_keywords' => 'cloud consulting services, Azure consulting, AWS managed services, hybrid cloud, private cloud, cloud management services, cloud security',
                     'canonical_url' => 'https://www.ibntech.com/lp/cloud-consulting-services/',
                 ],

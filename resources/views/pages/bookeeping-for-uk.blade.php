@@ -217,7 +217,7 @@
 
     $stats = [
         ['value' => '30+', 'label' => 'Industry Served'],
-        ['value' => '26+', 'label' => 'Years of Experience'],
+        ['value' => '27+', 'label' => 'Years of Experience'],
         ['value' => '200+', 'label' => 'Active Global Clients'],
         ['value' => '50%', 'label' => 'Save operational cost'],
         ['value' => '95%', 'label' => 'Client Retention Rate'],
@@ -376,7 +376,7 @@
                         Expert Bookkeeping in the UK - Your Future-Ready Financial Partner!
                     </h2>
                     <p>
-                        IBN offers top-tier outsourced bookkeeping and accounting services across the UK. With over 26+ years of experience, we provide businesses of all sizes with confidential, cloud-based solutions that comply with UK legal and tax standards. Our services optimize operations, boost efficiency, and ensure accuracy. We proactively safeguard your business against future accounting challenges
+                        IBN offers top-tier outsourced bookkeeping and accounting services across the UK. With over 27+ years of experience, we provide businesses of all sizes with confidential, cloud-based solutions that comply with UK legal and tax standards. Our services optimize operations, boost efficiency, and ensure accuracy. We proactively safeguard your business against future accounting challenges
                     </p>
                 </div>
             </div>

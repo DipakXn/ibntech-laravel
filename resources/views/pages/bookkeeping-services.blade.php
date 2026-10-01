@@ -4,12 +4,12 @@
     $trustPills = [
         ['icon' => 'fa-medal', 'label' => '120+ Certified Bookkeeper'],
         ['icon' => 'fa-gauge-high', 'label' => '70% Operational Cost Savings'],
-        ['icon' => 'fa-layer-group', 'label' => '26+ Software Expertise'],
+        ['icon' => 'fa-layer-group', 'label' => '27+ Software Expertise'],
     ];
 
     $stats = [
         ['value' => '95%', 'label' => 'Client Retention Rate'],
-        ['value' => '26+', 'label' => 'Years of Experience'],
+        ['value' => '27+', 'label' => 'Years of Experience'],
         ['value' => '1,500+', 'label' => 'Active Global Clients'],
         ['value' => '30+', 'label' => 'Industries Served'],
     ];

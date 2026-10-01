@@ -1,7 +1,7 @@
 @php
     $heroStats = [
         ['value' => '2.5K+', 'label' => 'Global Clients'],
-        ['value' => '26+', 'label' => 'Years of Expertise'],
+        ['value' => '27+', 'label' => 'Years of Expertise'],
         ['value' => '100%', 'label' => 'Compliance Rate'],
         ['value' => '99.9%', 'label' => 'Cloud Uptime'],
     ];

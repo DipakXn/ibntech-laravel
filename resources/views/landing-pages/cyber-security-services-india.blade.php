@@ -37,7 +37,7 @@
     ];
 
     $reasonsLeft = [
-        '26+ years of experience in Cyber Security, Hosting and Cloud Consulting Services.',
+        '27+ years of experience in Cyber Security, Hosting and Cloud Consulting Services.',
         'Certified team of lead auditors.',
         '1200+ satisfied clients in 10 + countries.',
         'ISO 9001:2015 & 27001:2022 Certified Company',
@@ -125,7 +125,7 @@
                 impact on your business, reputation, time, energy, and money!
             </p>
             <p>
-                IBN Tech, has 26+ years of industry expertise in providing Managed SOC solutions and is one of the
+                IBN Tech, has 27+ years of industry expertise in providing Managed SOC solutions and is one of the
                 leading Cybersecurity solutions provider companies and best VAPT services providers in India.
             </p>
             <img

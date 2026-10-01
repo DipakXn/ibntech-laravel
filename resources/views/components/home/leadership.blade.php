@@ -14,7 +14,7 @@ We lead not only with strategy, but with clarity of purpose and a commitment to 
                 <span>Global Clients</span>
             </article>
             <article class="home-stat">
-                <strong>26+</strong>
+                <strong>27+</strong>
                 <span>Years of Expertise</span>
             </article>
             <article class="home-stat">

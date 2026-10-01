@@ -2,7 +2,7 @@
     $img = fn (string $file): string => asset('images/kpo-services/'.$file);
 
     $stats = [
-        ['value' => '26+', 'label' => 'Years of experience'],
+        ['value' => '27+', 'label' => 'Years of experience'],
         ['value' => '150+', 'label' => 'Experienced Employees'],
         ['value' => '1500+', 'label' => 'Global clients'],
         ['value' => '100%', 'label' => 'Data Security'],

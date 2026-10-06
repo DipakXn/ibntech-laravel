@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - /bin/sed -i 's/\r$//' $PWD/deploy.sh
+    - /bin/bash $PWD/deploy.sh

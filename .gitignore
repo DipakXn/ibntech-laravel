@@ -1,6 +1,7 @@
 .env
 .env.*
 !.env.example
+/public/hot
 /.phpunit.cache
 /node_modules
 /vendor

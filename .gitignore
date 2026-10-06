@@ -3,3 +3,8 @@
 /vendor
 .tmp-*/
 ibntech-laravel.zip
+
+# Historical Elementor exports contain personal form data. Keep them in
+# storage/app/old-submissions (outside the public web root) and never commit them.
+/storage/app/old-submissions/**
+!/storage/app/old-submissions/.gitignore

@@ -31,6 +31,7 @@ Related media-focused guides:
 9. [Troubleshooting & Common Deployment Issues](#9-troubleshooting--common-deployment-issues)
 10. [Production Deployment Checklist](#10-production-deployment-checklist)
 11. [Future Updates, Maintenance & Backups](#11-future-updates-maintenance--backups)
+12. [Historical Old Submissions CSV import](#12-historical-old-submissions-csv-import)
 
 ---
 
@@ -781,6 +782,7 @@ Complete this verification protocol immediately following every production relea
 - [ ] **Queue Monitor**: Open Queue Monitor (administrator role) and confirm connection/backlog display.
 - [ ] **Log Viewer**: Confirm application logs are readable from the admin panel when present.
 - [ ] **Media Upload Smoke Test**: Upload a Blog featured image; confirm file appears under `uploads/` and conversions complete after the queue worker runs.
+- [ ] **Old Submissions**: Confirm **Sales → Old Submissions** is visible and `/admin/old-submissions` loads. If the item is missing after deploy, run `php artisan filament:cache-components` (or `php artisan filament:optimize`) on the server. This list is read-only and does not affect live Form Submissions.
 
 ### Forms & Async Mail Verification
 
@@ -1070,6 +1072,92 @@ Retain off-site copies (external storage / object storage) for disaster recovery
 - Never wipe `public_html/uploads` during releases.
 - Keep `MEDIA_ROOT` outside release-temporary directories if you adopt a releases/ symlink deploy style later.
 - After changing any `MEDIA_*` or mail/queue env vars, always rebuild config cache.
+
+---
+
+## 12. Historical Old Submissions CSV import
+
+This import loads Elementor form-export CSVs into the dedicated `old_submissions` table. It **does not** write to live `form_submissions`, contact the old WordPress site, or modify the CSV files.
+
+### Where to upload the CSV files
+
+Upload the exports **only** to Laravel private storage (outside the public web root):
+
+```text
+{laravel-root}/storage/app/old-submissions/*.csv
+```
+
+Examples:
+
+| Environment | Laravel root | CSV directory |
+|---|---|---|
+| Local | project root | `storage/app/old-submissions/` |
+| Staging | `/home/devtech/ibntech-core` | `/home/devtech/ibntech-core/storage/app/old-submissions/` |
+| Production (Architecture A) | `/home/USER/ibntech` | `/home/USER/ibntech/storage/app/old-submissions/` |
+
+Do **not** place these files under `public/`, `public_html/`, or `uploads/`. They contain personal form data and must stay gitignored. Only `.csv` files in that directory are processed.
+
+Create the directory if it does not exist (`mkdir -p storage/app/old-submissions`) and set the same writable permissions used for `storage/` (`775` on the `storage` tree).
+
+### Exact import command
+
+From the Laravel application root (not `public_html`):
+
+```bash
+php artisan old-submissions:import
+```
+
+cPanel / staging PHP binary example:
+
+```bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import > /home/devtech/old-submissions-import.log 2>&1
+```
+
+Optional path argument (directory or a single CSV):
+
+```bash
+php artisan old-submissions:import storage/app/old-submissions
+```
+
+### Dry-run first (no database writes)
+
+Always run a dry-run on staging/production before the real import:
+
+```bash
+php artisan old-submissions:import --dry-run
+```
+
+```bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import --dry-run > /home/devtech/old-submissions-dry-run.log 2>&1
+```
+
+The command prints CSV files, rows read, **Would create**, **Skipped (already imported)**, and **Failed**. Dry-run does not insert, update, or delete rows.
+
+### How to verify imported record counts
+
+1. Compare the dry-run / import table to the database:
+
+```bash
+php artisan tinker --execute="echo App\\Models\\OldSubmission::query()->count();"
+```
+
+2. In Filament: **Sales → Old Submissions** (`/admin/old-submissions`). The list is searchable, filterable, and paginated. Open a row to view the original exported fields.
+
+3. Confirm live submissions are unchanged:
+
+```bash
+php artisan tinker --execute="echo App\\Models\\Lead::query()->count();"
+```
+
+`Lead` maps to `form_submissions`. That count must not change because of this import.
+
+### Safe to run repeatedly (idempotent)
+
+Each Elementor **Submission ID** is stored as unique `external_submission_id`. Re-running the command **skips** IDs that already exist and will not create duplicates. You can upload additional CSV files later and run the import again; only new IDs are inserted.
+
+Form-specific extra columns do not need a code change: they are stored in the JSON `fields` column. Every export must still include Elementor **Submission ID** and **Created At** (`Y-m-d H:i:s`).
+
+Do **not** schedule this as a permanent every-minute cron. If you must run it without SSH, use a one-time cPanel cron, inspect the log, then delete the cron job.
 
 ---
 

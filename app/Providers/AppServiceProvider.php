@@ -18,11 +18,15 @@ use App\Models\WebsiteSetting;
 use App\Models\WhitePaper;
 use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
+use App\Services\Analytics\PageViewTracker;
 use App\Services\EmailLogService;
 use App\Services\SeoService;
 use App\Services\SmtpSettingService;
 use App\Services\WebsiteSettingService;
+use App\Support\Cloudflare\CloudflareProxies;
 use App\Support\Mail\SmtpExceptionSanitizer;
+use Illuminate\Http\Middleware\TrustProxies;
+use Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Events\QueueBusy;
@@ -57,6 +61,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(OutgoingMailLogTracker::class);
         $this->app->singleton(SmtpSettingService::class);
         $this->app->singleton(EmailLogService::class);
+
+        // The trailing-slash middleware duplicates the request before routing,
+        // so handle() and the later terminating callback must share this instance.
+        $this->app->singleton(PageViewTracker::class);
     }
 
     /**
@@ -64,6 +72,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->trustCloudflareProxies();
+
+        $this->app->terminating(function (): void {
+            $this->app->make(PageViewTracker::class)->flush();
+        });
+
         Mail::extend(SmtpSettingService::TRANSPORT, function () {
             return app(SmtpSettingService::class)->createConfiguredTransport();
         });
@@ -145,5 +159,24 @@ class AppServiceProvider extends ServiceProvider
         foreach ($models as $model) {
             $model::observe(SitemapCacheObserver::class);
         }
+    }
+
+    /**
+     * Trust only Cloudflare's published ranges, and only after config is loaded.
+     * The middleware callback in bootstrap/app.php runs before config exists.
+     */
+    private function trustCloudflareProxies(): void
+    {
+        if (! CloudflareProxies::enabled()) {
+            return;
+        }
+
+        TrustProxies::at(CloudflareProxies::ranges());
+        TrustProxies::withHeaders(
+            Request::HEADER_X_FORWARDED_FOR
+            | Request::HEADER_X_FORWARDED_HOST
+            | Request::HEADER_X_FORWARDED_PORT
+            | Request::HEADER_X_FORWARDED_PROTO,
+        );
     }
 }

@@ -119,6 +119,34 @@ cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan filament:optimi
 
 Use these only when required by a Filament update/deployment.
 
+### Old Submissions CSV import
+
+Upload Elementor CSV exports to
+`/home/devtech/ibntech-core/storage/app/old-submissions/`
+(private storage, not `public_html`). Do not commit those files.
+
+Dry-run first (no database writes):
+
+``` bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import --dry-run > /home/devtech/old-submissions-dry-run.log 2>&1
+```
+
+Write import (only after the dry-run is approved):
+
+``` bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import > /home/devtech/old-submissions-import.log 2>&1
+```
+
+The command is safe to run more than once: existing Elementor Submission IDs (`external_submission_id`) are skipped. It does not modify live `form_submissions` or the CSV files.
+
+Verify counts after import:
+
+``` bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan tinker --execute="echo App\\Models\\OldSubmission::query()->count();"
+```
+
+Do not leave this as a permanent every-minute cron.
+
 ## Recommended Production Cache Sequence
 
 When production/staging caches need to be completely rebuilt:
@@ -241,6 +269,10 @@ cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan optimize:clear 
   Filament upgrade                    `artisan filament:upgrade`
 
   Filament optimize                   `artisan filament:optimize`
+
+  Old Submissions dry-run             `artisan old-submissions:import --dry-run`
+
+  Old Submissions import              `artisan old-submissions:import`
 
   Install Node dependencies           `npm ci`
 

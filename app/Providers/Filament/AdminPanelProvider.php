@@ -8,6 +8,7 @@ use App\Filament\Clusters\SmtpSettings\Pages\SmtpConfiguration;
 use App\Filament\Clusters\SmtpSettings\Pages\TestSmtp;
 use App\Filament\Clusters\SmtpSettings\Resources\EmailLogs\EmailLogResource;
 use App\Filament\Pages\AdminDashboard;
+use App\Filament\Resources\OldSubmissions\OldSubmissionResource;
 use App\Http\Controllers\CmsPreviewController;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
@@ -91,6 +92,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->resources([
                 EmailLogResource::class,
+                OldSubmissionResource::class,
             ])
             ->authenticatedRoutes(function (): void {
                 Route::get('/content-preview/{type}/{id}', [CmsPreviewController::class, 'redirect'])

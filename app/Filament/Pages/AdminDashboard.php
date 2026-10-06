@@ -9,13 +9,7 @@ use App\Filament\Widgets\DashboardSubmissionOverviewWidget;
 use App\Filament\Widgets\DashboardVisitorPreviewWidget;
 use App\Filament\Widgets\RecentActivityWidget;
 use App\Filament\Widgets\RecentLeadsWidget;
-use App\Models\Blog;
-use App\Models\CaseStudy;
-use App\Models\Ebook;
-use App\Models\Lead;
-use App\Models\Page;
-use App\Models\PressRelease;
-use App\Models\WhitePaper;
+use Carbon\CarbonInterface;
 use Filament\Pages\Dashboard;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\View\View;
@@ -30,25 +24,31 @@ class AdminDashboard extends Dashboard
 
     public function getHeader(): ?View
     {
-        $published = Blog::published()->count()
-            + CaseStudy::published()->count()
-            + Ebook::published()->count()
-            + PressRelease::published()->count()
-            + WhitePaper::published()->count()
-            + Page::published()->count();
+        $now = now()->timezone((string) config('app.timezone'));
+        $name = trim((string) auth()->user()?->name);
 
-        $drafts = Blog::query()->where('status', 'draft')->count()
-            + CaseStudy::query()->where('status', 'draft')->count()
-            + Ebook::query()->where('status', 'draft')->count()
-            + PressRelease::query()->where('status', 'draft')->count()
-            + WhitePaper::query()->where('status', 'draft')->count()
-            + Page::query()->where('status', 'draft')->count();
+        $greeting = $this->greeting($now);
 
         return view('filament.dashboard.hero', [
-            'published' => $published,
-            'drafts' => $drafts,
-            'leadCount' => Lead::query()->count(),
+            'headline' => $name !== '' ? $greeting.', '.$name.'!' : $greeting.'!',
+            'date' => $now->format('l, F j, Y'),
+            'dateIso' => $now->toDateString(),
         ]);
+    }
+
+    private function greeting(CarbonInterface $now): string
+    {
+        $hour = (int) $now->format('G');
+
+        if ($hour >= 5 && $hour < 12) {
+            return 'Good morning';
+        }
+
+        if ($hour >= 12 && $hour < 17) {
+            return 'Good afternoon';
+        }
+
+        return 'Good evening';
     }
 
     public function getWidgets(): array

@@ -123,15 +123,27 @@ class AdminDashboardOverviewTest extends TestCase
             'visitors_this_month' => $kpis['visitors_this_month'],
         ]);
 
-        $admin = User::factory()->create(['role' => User::ROLE_ADMINISTRATOR]);
+        $admin = User::factory()->create([
+            'name' => 'Dipak',
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]);
         $this->actingAs($admin);
 
         $this->get('/admin')
             ->assertOk()
             ->assertSeeInOrder([
-                'Published',
-                'Drafts',
-                'Submissions',
+                'Dipak',
+                'IBNTECH CONTROL CENTER',
+                'Admin Workspace',
+                'Good morning, Dipak!',
+                'Welcome back to the IBNTECH Control Center.',
+                'Tuesday, October 6, 2026',
+                'Content overview',
+            ])
+            ->assertDontSee('IBNTECH Admin')
+            ->assertDontSee('Powering IBNTECH')
+            ->assertDontSee('Live pages, posts, downloads, and case studies')
+            ->assertSeeInOrder([
                 'Content overview',
                 'Pages',
                 number_format($totals['pages']),
@@ -232,6 +244,38 @@ class AdminDashboardOverviewTest extends TestCase
 
         $this->assertNull($pages['url']);
         $this->assertNotNull($blogs['url']);
+    }
+
+    public function test_welcome_header_follows_the_application_timezone(): void
+    {
+        $admin = User::factory()->create([
+            'name' => 'Dipak',
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]);
+        $this->actingAs($admin);
+
+        $this->useTimezone('UTC');
+        Carbon::setTestNow(Carbon::parse('2026-10-06 18:30:00', 'UTC'));
+
+        $this->get('/admin')
+            ->assertOk()
+            ->assertSee('Good evening, Dipak!')
+            ->assertSee('Tuesday, October 6, 2026');
+
+        $this->useTimezone('Asia/Kolkata');
+
+        $this->get('/admin')
+            ->assertOk()
+            ->assertSee('Good evening, Dipak!')
+            ->assertSee('Wednesday, October 7, 2026')
+            ->assertDontSee('Tuesday, October 6, 2026');
+
+        Carbon::setTestNow(Carbon::parse('2026-10-07 13:15:00', 'Asia/Kolkata'));
+
+        $this->get('/admin')
+            ->assertOk()
+            ->assertSee('Good afternoon, Dipak!')
+            ->assertSee('Wednesday, October 7, 2026');
     }
 
     /**

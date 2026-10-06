@@ -6,19 +6,21 @@ use App\Filament\Resources\Blogs\BlogResource;
 use App\Filament\Resources\CaseStudies\CaseStudyResource;
 use App\Filament\Resources\Ebooks\EbookResource;
 use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Resources\PressReleases\PressReleaseResource;
+use App\Filament\Resources\WhitePapers\WhitePaperResource;
 use App\Models\Blog;
 use App\Models\CaseStudy;
 use App\Models\Ebook;
 use App\Models\Page;
 use App\Models\PressRelease;
 use App\Models\WhitePaper;
-use App\Filament\Resources\PressReleases\PressReleaseResource;
-use App\Filament\Resources\WhitePapers\WhitePaperResource;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Collection;
 
 class RecentActivityWidget extends Widget
 {
+    protected static bool $isLazy = false;
+
     protected string $view = 'filament.widgets.recent-activity-widget';
 
     protected int|string|array $columnSpan = 1;

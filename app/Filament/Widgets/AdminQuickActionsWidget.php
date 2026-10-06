@@ -29,6 +29,8 @@ use Filament\Widgets\Widget;
 
 class AdminQuickActionsWidget extends Widget
 {
+    protected static bool $isLazy = false;
+
     protected string $view = 'filament.widgets.admin-quick-actions-widget';
 
     protected int|string|array $columnSpan = 1;

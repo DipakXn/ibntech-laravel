@@ -4,6 +4,9 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\AdminQuickActionsWidget;
 use App\Filament\Widgets\ContentOverviewWidget;
+use App\Filament\Widgets\DashboardContentOverviewWidget;
+use App\Filament\Widgets\DashboardSubmissionOverviewWidget;
+use App\Filament\Widgets\DashboardVisitorPreviewWidget;
 use App\Filament\Widgets\RecentActivityWidget;
 use App\Filament\Widgets\RecentLeadsWidget;
 use App\Models\Blog;
@@ -51,6 +54,9 @@ class AdminDashboard extends Dashboard
     public function getWidgets(): array
     {
         return [
+            DashboardContentOverviewWidget::class,
+            DashboardSubmissionOverviewWidget::class,
+            DashboardVisitorPreviewWidget::class,
             ContentOverviewWidget::class,
             AdminQuickActionsWidget::class,
             RecentActivityWidget::class,

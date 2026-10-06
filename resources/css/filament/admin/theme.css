@@ -552,10 +552,10 @@ body.fi-body {
 .ibn-dashboard-hero {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
-    gap: 1.5rem;
-    margin-bottom: 1.25rem;
-    padding: 1.6rem;
-    border-radius: 1.75rem;
+    gap: 1rem;
+    margin-bottom: 0.85rem;
+    padding: 1.15rem 1.25rem;
+    border-radius: 1.35rem;
     background:
         radial-gradient(circle at top right, rgba(76, 175, 80, 0.22), transparent 25%),
         linear-gradient(135deg, #1b2557 0%, #2b2f79 52%, #35649f 100%);
@@ -564,23 +564,24 @@ body.fi-body {
 }
 
 .ibn-dashboard-hero h1 {
-    margin-top: 0.65rem;
-    max-width: 16ch;
-    font-size: clamp(2rem, 3.5vw, 3.2rem);
-    line-height: 1.05;
+    margin-top: 0.35rem;
+    max-width: 18ch;
+    font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+    line-height: 1.08;
     font-weight: 700;
     letter-spacing: 0em;
 }
 
 .ibn-dashboard-hero__description {
-    margin-top: 0.9rem;
+    margin-top: 0.45rem;
     max-width: 40rem;
     color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
 }
 
 .ibn-dashboard-hero__metrics {
     display: grid;
-    gap: 0.9rem;
+    gap: 0.55rem;
 }
 
 .ibn-dashboard-hero__metrics article,
@@ -593,7 +594,7 @@ body.fi-body {
 }
 
 .ibn-dashboard-hero__metrics article {
-    padding: 1rem 1.1rem;
+    padding: 0.7rem 0.85rem;
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -612,6 +613,12 @@ body.fi-body {
     margin-top: 0.25rem;
     font-size: 1.8rem;
     font-weight: 700;
+}
+
+.ibn-dashboard-hero__metrics strong {
+    margin-top: 0.1rem;
+    font-size: 1.45rem;
+    line-height: 1.15;
 }
 
 .ibn-dashboard-hero__metrics p,
@@ -767,6 +774,195 @@ body.fi-body {
     color: var(--ibn-text-muted);
 }
 
+.fi-wi-widget.ibn-dashboard-panel,
+.dark .fi-wi-widget.ibn-dashboard-panel {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.ibn-widget-card--compact {
+    padding: 0.9rem 1rem;
+}
+
+.ibn-widget-card--compact .ibn-widget-card__header h3 {
+    margin-top: 0.2rem;
+    font-size: 1.05rem;
+}
+
+.ibn-widget-card--compact .ibn-quick-actions-grid,
+.ibn-widget-card--compact .ibn-metric-grid,
+.ibn-widget-card--compact .ibn-activity-list {
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+}
+
+.ibn-widget-card--compact .ibn-quick-action,
+.ibn-widget-card--compact .ibn-activity-item,
+.ibn-widget-card--compact .ibn-metric-card {
+    padding: 0.65rem 0.75rem;
+}
+
+.ibn-widget-card--compact .ibn-quick-action span {
+    margin-top: 0.15rem;
+    font-size: 0.82rem;
+}
+
+.ibn-widget-card--compact .ibn-metric-card strong {
+    margin-top: 0.1rem;
+    font-size: 1.35rem;
+    line-height: 1.15;
+}
+
+.ibn-widget-card--compact .ibn-metric-card p,
+.ibn-widget-card--compact .ibn-activity-item strong {
+    margin-top: 0.15rem;
+}
+
+.ibn-dashboard-panel__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.ibn-dashboard-link {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: var(--ibn-secondary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.ibn-dashboard-link:hover {
+    background: var(--ibn-secondary-strong);
+    color: #fff;
+}
+
+.ibn-dashboard-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ibn-content-overview {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+}
+
+.ibn-content-overview__item {
+    display: block;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.9rem;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 46, 128, 0.06));
+    text-decoration: none;
+}
+
+a.ibn-content-overview__item:hover {
+    border-color: rgba(76, 175, 80, 0.4);
+}
+
+.ibn-content-overview__item span {
+    display: block;
+    color: var(--ibn-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.ibn-content-overview__item strong {
+    display: block;
+    margin-top: 0.1rem;
+    color: var(--ibn-text);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.ibn-dashboard-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(13rem, 0.7fr);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    align-items: start;
+}
+
+.ibn-dashboard-split__label {
+    margin: 0 0 0.45rem;
+    color: var(--ibn-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.ibn-dashboard-split__chart .fi-wi-widget.fi-wi-chart,
+.dark .ibn-dashboard-split__chart .fi-wi-widget.fi-wi-chart,
+.ibn-dashboard-panel .ibn-dashboard-split__chart .fi-section {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.ibn-top-forms {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ibn-top-forms__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.dark .ibn-top-forms__row {
+    background: rgba(15, 23, 42, 0.84);
+}
+
+.ibn-top-forms__row span {
+    color: var(--ibn-text);
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+.ibn-top-forms__row strong {
+    color: var(--ibn-secondary);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.fi-wi-stats-overview-stat {
+    padding: 0.7rem 0.85rem;
+}
+
+.fi-wi-stats-overview-stat-value {
+    font-size: 1.35rem;
+    line-height: 1.15;
+}
+
+.fi-wi-table .fi-ta-header {
+    padding-block: 0.7rem;
+}
+
 .fi-body.fi-body-has-sidebar-collapsible-on-desktop .fi-main-sidebar:not(.fi-sidebar-open) {
     width: var(--collapsed-sidebar-width) !important;
 }
@@ -830,6 +1026,27 @@ body.fi-body {
 
     .ibn-activity-item__meta {
         justify-items: start;
+    }
+
+    .ibn-dashboard-panel__header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1100px) {
+    .ibn-content-overview,
+    .ibn-dashboard-kpis,
+    .ibn-dashboard-split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .ibn-content-overview,
+    .ibn-dashboard-kpis,
+    .ibn-dashboard-split {
+        grid-template-columns: 1fr;
     }
 }
 

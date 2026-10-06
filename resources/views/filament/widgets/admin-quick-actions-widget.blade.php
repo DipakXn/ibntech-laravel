@@ -1,5 +1,5 @@
 <x-filament-widgets::widget>
-    <div class="ibn-widget-card">
+    <div class="ibn-widget-card ibn-widget-card--compact">
         <div class="ibn-widget-card__header">
             <div>
                 <p class="ibn-widget-card__eyebrow">Quick actions</p>

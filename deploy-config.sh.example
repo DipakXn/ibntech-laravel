@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+# IBN Technologies — server-only deployment configuration template.
+#
+# Copy this file to the server path for the account you are configuring.
+# Fill the TO VERIFY values on that server. Do not commit the filled file.
+#
+# Staging copy:
+#   /home/devtech/deploy-configs/staging/deploy-config.sh
+#
+# Production copy:
+#   /home/ibntech/deploy-configs/production/deploy-config.sh
+#
+# Those directories are not assumed to exist. Create them on the server
+# before the first deployment. Mode 600. Owner: the cPanel account user.
+#
+# Staging values:
+#   DEPLOY_ENV=staging
+#   SITE_HOST=dev.ibntech.com
+#   APP_DIR=/home/devtech/ibntech-core
+#   PUBLIC_DIR=/home/devtech/public_html
+#   BACKUP_DIR=/home/devtech/deploy-backups
+#   LOG_DIR=/home/devtech/deploy-logs
+#
+# Production values:
+#   DEPLOY_ENV=production
+#   SITE_HOST=ibntech.com
+#   APP_DIR=/home/ibntech/ibntech-core
+#   PUBLIC_DIR=/home/ibntech/public_html
+#   BACKUP_DIR=/home/ibntech/deploy-backups
+#   LOG_DIR=/home/ibntech/deploy-logs
+#
+# PHP_BIN and COMPOSER_BIN are TO VERIFY ON SERVER:
+#   which php
+#   php -v
+#   which composer
+#   composer -V
+# The application requires PHP ^8.2. If the default terminal PHP is older,
+# use the cPanel EasyApache binary you confirm (the exact path is not
+# recorded in this repository).
+#
+# Deployment must never copy, overwrite, delete, or sync:
+#   .env and .env.*
+#   public/.htaccess (live staging and production files differ)
+#   storage/
+#   public/uploads/
+#   public/hot
+#   bootstrap/cache/*.php
+# Do not put secrets from .env into this file.
+
+DEPLOY_ENV="staging"
+SITE_HOST="dev.ibntech.com"
+SITE_NAME="IBN Technologies staging"
+
+APP_DIR="/home/devtech/ibntech-core"
+PUBLIC_DIR="/home/devtech/public_html"
+
+# TO VERIFY ON SERVER
+PHP_BIN="TO_VERIFY_ON_SERVER"
+COMPOSER_BIN="TO_VERIFY_ON_SERVER"
+
+BACKUP_DIR="/home/devtech/deploy-backups"
+LOG_DIR="/home/devtech/deploy-logs"
+LOCK_FILE="/home/devtech/deploy-configs/staging/deploy.lock"
+
+# Optional. Set only inside the server file. Leave empty for a normal maintenance page.
+# Do not commit a real secret.
+MAINTENANCE_SECRET=""
+
+# How many application backup archives to keep in BACKUP_DIR.
+BACKUP_RETENTION=5

@@ -11,21 +11,40 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PressReleaseController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\WhitePaperController;
 use App\Services\WebsiteSettingService;
+use App\Support\Sitemap\RobotsTxtSitemapDirective;
+use App\Support\Sitemap\SitemapType;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/robots.txt', function (WebsiteSettingService $settings) {
-    $contents = $settings->get()->robots_txt;
+    $record = $settings->get();
+    $contents = $record->robots_txt;
 
     if ($contents === null || trim($contents) === '') {
         $contents = "User-agent: *\nDisallow:\n";
     }
 
+    $addSitemap = (bool) ($record->sitemap_enabled ?? true)
+        && (bool) ($record->sitemap_add_to_robots ?? true);
+
+    $contents = RobotsTxtSitemapDirective::apply(
+        $contents,
+        $addSitemap,
+        $addSitemap ? url('/sitemap.xml') : null,
+    );
+
     return response(rtrim($contents)."\n", 200, [
         'Content-Type' => 'text/plain; charset=UTF-8',
     ]);
 })->name('robots');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap_index.xml', [SitemapController::class, 'legacyIndex'])->name('sitemap.legacy-index');
+Route::get('/{file}', [SitemapController::class, 'show'])
+    ->where('file', SitemapType::filePattern())
+    ->name('sitemap.show');
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 
@@ -77,5 +96,5 @@ Route::get('/preview/{type}/{id}', [CmsPreviewController::class, 'show'])
     ->name('cms.preview.show');
 
 Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|preview$|white-papers$|livewire$|storage$|up$).+')
+    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|preview$|white-papers$|livewire$|storage$|up$|sitemap(?:_index)?\\.xml$|(?:page|post|category|article|case-study|ebook|white-paper|press-release|industry|lp|newsletter|custom)-sitemap\\d*\\.xml$).+')
     ->name('page.show');

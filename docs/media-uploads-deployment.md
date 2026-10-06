@@ -83,8 +83,12 @@ MEDIA_URL=/uploads
 
 ```bash
 php artisan media:migrate-to-uploads-disk
-php artisan config:cache
+php artisan optimize:clear
+php artisan cms:optimize
 ```
+
+Run cache commands on the staging server only; do not upload
+`bootstrap/cache/*.php` from local.
 
 6. Confirm `https://staging-host/uploads/...` serves files directly (not through Laravel).
 7. **Do not** rely on `php artisan storage:link` for media.
@@ -126,10 +130,13 @@ APP_URL=https://www.example.com
 ```bash
 php artisan media:migrate-to-uploads-disk --dry-run
 php artisan media:migrate-to-uploads-disk
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan optimize:clear
+php artisan cms:optimize
 ```
+
+Run cache commands **on the Linux server only** after deployment. Never
+upload locally generated `bootstrap/cache/*.php` files (see
+`docs/PRODUCTION_DEPLOYMENT.md`).
 
 4. Verify:
    - Filament upload/preview/delete

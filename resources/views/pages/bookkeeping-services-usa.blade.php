@@ -178,7 +178,7 @@
 
     $stats = [
         ['value' => '30+', 'label' => 'Industry Served'],
-        ['value' => '26+', 'label' => 'Years of Experience'],
+        ['value' => '27+', 'label' => 'Years of Experience'],
         ['value' => '1400+', 'label' => 'Active Global Clients'],
         ['value' => '50%', 'label' => 'Save operational cost'],
         ['value' => '95%', 'label' => 'Client Retention Rate'],

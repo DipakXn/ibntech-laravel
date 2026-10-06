@@ -3,7 +3,7 @@
 
     $heroStats = [
         ['value' => '70%', 'label' => 'Cost savings compared to local engineers', 'icon' => 'fa-percent'],
-        ['value' => '26+', 'label' => 'Years in outsourcing', 'icon' => 'fa-calendar-days'],
+        ['value' => '27+', 'label' => 'Years in outsourcing', 'icon' => 'fa-calendar-days'],
         ['value' => '100%', 'label' => 'Dedicated — works only for you', 'icon' => 'fa-user-check'],
     ];
 

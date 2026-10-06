@@ -43,7 +43,7 @@
 
             <aside class="blog-detail-sidebar">
                 <section class="blog-inquiry">
-                    <h2>26+ Years of Expertise. 2500+ Happy Clients. Get Your Strategy Call!</h2>
+                    <h2>27+ Years of Expertise. 2500+ Happy Clients. Get Your Strategy Call!</h2>
                     <livewire:forms.contact-form
                         :show-company="false"
                         :message-rows="2"
@@ -66,7 +66,7 @@
 
                 <section class="blog-company-card">
                     <h2>Trusted Solution Worldwide</h2>
-                    <p>26+ Years | ISO Certified | 500+ Tech Clients</p>
+                    <p>27+ Years | ISO Certified | 500+ Tech Clients</p>
                     <p>Cloud &amp; Security | Accounting &amp; Compliance</p>
                     <div>
                         <span>ISO 9001:2015</span>

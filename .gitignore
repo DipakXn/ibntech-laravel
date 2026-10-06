@@ -1,4 +1,16 @@
+.env
+.env.*
+!.env.example
 /.phpunit.cache
 /node_modules
 /vendor
 .tmp-*/
+ibntech-laravel.zip
+
+# Filled server deployment config. Commit deploy-config.sh.example only.
+/deploy-config.sh
+
+# Historical Elementor exports contain personal form data. Keep them in
+# storage/app/old-submissions (outside the public web root) and never commit them.
+/storage/app/old-submissions/**
+!/storage/app/old-submissions/.gitignore

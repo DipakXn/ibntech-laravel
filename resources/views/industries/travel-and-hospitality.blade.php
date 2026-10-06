@@ -3,7 +3,7 @@
 
     $heroStats = [
         ['icon' => 'fa-users', 'value' => '100 +', 'label' => 'Travel & Hospitality Clients'],
-        ['icon' => 'fa-award', 'value' => '26+', 'label' => 'Industry Expertise'],
+        ['icon' => 'fa-award', 'value' => '27+', 'label' => 'Industry Expertise'],
         ['icon' => 'fa-bullseye', 'value' => '99.99%', 'label' => 'Accuracy Rate'],
         ['icon' => 'fa-headset', 'value' => '24/7', 'label' => 'Operations Coverage'],
     ];

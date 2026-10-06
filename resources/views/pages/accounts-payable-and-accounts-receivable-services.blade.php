@@ -214,7 +214,7 @@
         [
             'icon' => 'fa-file-invoice-dollar',
             'title' => 'Tax Preparation',
-            'text' => '26+ years of experience ensuring tax return filings support and maximum savings.',
+            'text' => '27+ years of experience ensuring tax return filings support and maximum savings.',
             'href' => route('page.show', ['slug' => 'tax-preparation-services-usa']),
         ],
         [

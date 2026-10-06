@@ -119,6 +119,34 @@ cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan filament:optimi
 
 Use these only when required by a Filament update/deployment.
 
+### Old Submissions CSV import
+
+Upload Elementor CSV exports to
+`/home/devtech/ibntech-core/storage/app/old-submissions/`
+(private storage, not `public_html`). Do not commit those files.
+
+Dry-run first (no database writes):
+
+``` bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import --dry-run > /home/devtech/old-submissions-dry-run.log 2>&1
+```
+
+Write import (only after the dry-run is approved):
+
+``` bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import > /home/devtech/old-submissions-import.log 2>&1
+```
+
+The command is safe to run more than once: existing Elementor Submission IDs (`external_submission_id`) are skipped. It does not modify live `form_submissions` or the CSV files.
+
+Verify counts after import:
+
+``` bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan tinker --execute="echo App\\Models\\OldSubmission::query()->count();"
+```
+
+Do not leave this as a permanent every-minute cron.
+
 ## Recommended Production Cache Sequence
 
 When production/staging caches need to be completely rebuilt:
@@ -242,6 +270,10 @@ cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan optimize:clear 
 
   Filament optimize                   `artisan filament:optimize`
 
+  Old Submissions dry-run             `artisan old-submissions:import --dry-run`
+
+  Old Submissions import              `artisan old-submissions:import`
+
   Install Node dependencies           `npm ci`
 
   Build Vite assets                   `npm run build`
@@ -252,18 +284,26 @@ cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan optimize:clear 
 
 ## Important Deployment Rules
 
-1.  **Never copy local Laravel cache files to production.** In
-    particular, do not deploy environment-specific files such as
-    `bootstrap/cache/config.php` or `bootstrap/cache/routes-v7.php` from
-    local to staging/production.
-2.  Generate Laravel production caches on the staging/production server
+1.  **Never copy local Laravel cache files to production.** Exclude
+    **`bootstrap/cache/*.php`** from every deployment zip. Do not deploy
+    environment-specific files such as `bootstrap/cache/config.php`,
+    `bootstrap/cache/routes-v7.php`, `bootstrap/cache/events.php`, or
+    `bootstrap/cache/services.php` from local Windows/macOS/Linux dev
+    machines to staging/production.
+2.  **Laravel cache must be generated on the Linux server after
+    deployment, never locally and uploaded.** Do not run
+    `config:cache`, `route:cache`, `view:cache`, `event:cache`,
+    `cms:optimize`, or `optimize` locally before creating a cPanel zip.
+    Run `php artisan optimize:clear` then `php artisan cms:optimize`
+    from `/home/devtech/ibntech-core` after each deploy.
+3.  Generate Laravel production caches on the staging/production server
     using that server's own `.env`.
-3.  Do not leave one-time maintenance commands running every minute.
-4.  Delete temporary cron jobs after successful execution.
-5.  Remove temporary log files when they are no longer needed.
-6.  Do not use `queue:work` as a repeatedly started cron process. Use
+4.  Do not leave one-time maintenance commands running every minute.
+5.  Delete temporary cron jobs after successful execution.
+6.  Remove temporary log files when they are no longer needed.
+7.  Do not use `queue:work` as a repeatedly started cron process. Use
     `--stop-when-empty` for a one-time queue drain or a process manager
     for a permanent worker.
-7.  Do not use interactive `tinker` through cron.
-8.  Do not assume Node build output belongs in `public_html`; verify the
+8.  Do not use interactive `tinker` through cron.
+9.  Do not assume Node build output belongs in `public_html`; verify the
     project's deployment/asset mapping first.

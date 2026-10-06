@@ -2,7 +2,7 @@
     $img = fn (string $file): string => asset('images/procure-to-pay/'.$file);
 
     $stats = [
-        ['value' => '26+', 'label' => 'Years of Experience'],
+        ['value' => '27+', 'label' => 'Years of Experience'],
         ['value' => '30+', 'label' => 'Industries Served'],
         ['value' => '120+', 'label' => 'Experienced Professionals'],
     ];

@@ -216,7 +216,7 @@
                 </div>
                 <div class="de-intro__copy">
                     <h2 id="de-intro-title">Remote Data Entry Solutions</h2>
-                    <p class="de-subtitle">26+ Years of Secure and Confidential</p>
+                    <p class="de-subtitle">27+ Years of Secure and Confidential</p>
                     <p>
                         Are you tired of dealing with errors and inconsistencies in your data entry? At IBN Tech, a leading business process outsourcing company, through our data entry services, we are committed to maintaining a delicate equilibrium between fulfilling business requirements and providing our clients with the finest solutions. Our expertise in delivering data entry services to clients worldwide has been refined over numerous years, enabling us to offer an unparalleled combination of skills and capabilities to meet your specific needs.
                     </p>

@@ -60,7 +60,7 @@
     $whyChoose = [
         [
             'title' => 'Industry-Specific Expertise:',
-            'text' => 'With over 26+ years of experience, we understand the unique challenges of hospitality accounting, including high transaction volumes, multiple revenue streams, and fluctuating occupancy rates.',
+            'text' => 'With over 27+ years of experience, we understand the unique challenges of hospitality accounting, including high transaction volumes, multiple revenue streams, and fluctuating occupancy rates.',
         ],
         [
             'title' => 'Customized Solutions:',

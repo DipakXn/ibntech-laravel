@@ -6,7 +6,7 @@
             'icon' => 'certified-experts.webp',
             'alt' => 'certified experts',
             'title' => 'Certified Experts',
-            'text' => '120+ bookkeepers with 26+ years of experience.',
+            'text' => '120+ bookkeepers with 27+ years of experience.',
         ],
         [
             'icon' => 'save-70-on-costs.webp',
@@ -41,7 +41,7 @@
     ];
 
     $stats = [
-        ['value' => '26+', 'label' => 'Years of Success', 'tone' => 'light'],
+        ['value' => '27+', 'label' => 'Years of Success', 'tone' => 'light'],
         ['value' => '1500+', 'label' => "Active Client's", 'tone' => 'dark'],
         ['value' => '50M', 'label' => 'Transaction Processed', 'tone' => 'light'],
         ['value' => '50+', 'label' => 'Software Expertise', 'tone' => 'dark'],

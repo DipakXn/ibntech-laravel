@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\Leads\LeadResource;
 use App\Models\Lead;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -9,6 +10,13 @@ use Filament\Widgets\TableWidget;
 
 class RecentLeadsWidget extends TableWidget
 {
+    protected static bool $isLazy = false;
+
+    public static function canView(): bool
+    {
+        return LeadResource::canViewAny();
+    }
+
     protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table

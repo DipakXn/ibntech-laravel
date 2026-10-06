@@ -5,7 +5,7 @@
     $platformImg = fn (string $file): string => asset('images/cloud-managed-services/'.$file);
 
     $heroStats = [
-        ['value' => '26+', 'label' => 'Years in Business', 'icon' => 'fa-building'],
+        ['value' => '27+', 'label' => 'Years in Business', 'icon' => 'fa-building'],
         ['value' => '10+', 'label' => 'Countries Served', 'icon' => 'fa-globe'],
         ['value' => '500+', 'label' => 'Projects Delivered', 'icon' => 'fa-diagram-project'],
         ['value' => '150+', 'label' => 'Cloud Certifications', 'icon' => 'fa-certificate'],

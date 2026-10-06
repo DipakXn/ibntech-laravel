@@ -201,7 +201,7 @@
                 <div class="dp-intro__copy">
                     <h2 id="dp-intro-title">Data Management and Processing Services</h2>
                     <p>
-                        <strong>26+ Year's of Excellence</strong>
+                        <strong>27+ Year's of Excellence</strong>
                         In today's data-driven world, extracting valuable insights from raw data is crucial for business growth. IBN Technologies, a trusted partner with over two decades of experience, offers comprehensive data processing solutions tailored to your specific needs. Our team of experts leverages advanced techniques to transform your data into actionable intelligence, empowering you to make informed decisions and achieve your strategic goals.
                     </p>
                 </div>

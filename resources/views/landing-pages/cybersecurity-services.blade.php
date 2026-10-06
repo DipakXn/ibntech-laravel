@@ -37,7 +37,7 @@
     ];
 
     $reasonsLeft = [
-        '26+ years of experience in Cyber Security, Hosting and Cloud Consulting Services.',
+        '27+ years of experience in Cyber Security, Hosting and Cloud Consulting Services.',
         'Certified team of lead auditors.',
         '1200+ satisfied clients in 10 + countries',
         'ISO 9001:2015 & 27001:2022 Certified Company',

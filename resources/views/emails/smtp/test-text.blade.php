@@ -1,0 +1,3 @@
+SMTP configuration test
+
+{{ $testBody }}

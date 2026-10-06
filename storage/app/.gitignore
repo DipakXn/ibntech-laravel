@@ -2,3 +2,5 @@
 !private/
 !public/
 !.gitignore
+!old-submissions/
+!old-submissions/.gitignore

@@ -2,12 +2,15 @@
 
 namespace App\Filament\Pages;
 
+use App\Support\Queue\DatabaseQueueMonitor;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class QueueMonitor extends Page
 {
@@ -27,86 +30,124 @@ class QueueMonitor extends Page
 
     protected Width|string|null $maxContentWidth = 'full';
 
+    public string $lastUpdatedAt = '';
+
+    public ?string $expandedFailedJobUuid = null;
+
+    public function mount(): void
+    {
+        $this->markUpdated();
+    }
+
     public static function canAccess(): bool
     {
         return auth()->user()?->isAdministrator() ?? false;
     }
 
+    /**
+     * @return array<int, Action>
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('refresh')
+                ->label('Refresh')
+                ->icon(Heroicon::OutlinedArrowPath)
+                ->color('gray')
+                ->action(function (): void {
+                    $this->expandedFailedJobUuid = null;
+                    $this->markUpdated();
+                }),
+        ];
+    }
+
+    public function retryFailedJobAction(): Action
+    {
+        return Action::make('retryFailedJob')
+            ->label('Retry')
+            ->icon(Heroicon::OutlinedArrowUturnLeft)
+            ->color('warning')
+            ->requiresConfirmation()
+            ->modalHeading('Retry failed job?')
+            ->modalDescription('This job will be pushed back onto its original queue. Laravel then removes that single failed-job record. Other jobs, sessions, cache, and CMS data are not changed.')
+            ->modalSubmitActionLabel('Retry job')
+            ->action(function (array $arguments): void {
+                $uuid = isset($arguments['uuid']) && is_string($arguments['uuid'])
+                    ? $arguments['uuid']
+                    : '';
+
+                try {
+                    $this->monitor()->retryFailedJob($uuid);
+
+                    if ($this->expandedFailedJobUuid === $uuid) {
+                        $this->expandedFailedJobUuid = null;
+                    }
+
+                    $this->markUpdated();
+
+                    Notification::make()
+                        ->success()
+                        ->title('Failed job re-queued')
+                        ->body('The job was pushed back onto its original queue.')
+                        ->send();
+                } catch (Throwable $exception) {
+                    Log::error('Failed to retry a queue job from the Queue Monitor.', [
+                        'uuid' => $uuid,
+                        'exception' => $exception,
+                    ]);
+
+                    Notification::make()
+                        ->danger()
+                        ->title('Could not retry job')
+                        ->body('The failed job could not be retried. Please try again or check the application logs.')
+                        ->send();
+                }
+            });
+    }
+
+    public function toggleFailedJobException(string $uuid): void
+    {
+        $uuid = trim($uuid);
+
+        if ($this->expandedFailedJobUuid === $uuid) {
+            $this->expandedFailedJobUuid = null;
+
+            return;
+        }
+
+        if (! $this->monitor()->hasFailedJob($uuid)) {
+            return;
+        }
+
+        $this->expandedFailedJobUuid = $uuid;
+    }
+
     protected function getViewData(): array
     {
-        $jobsTableExists = Schema::hasTable('jobs');
-        $failedJobsTableExists = Schema::hasTable('failed_jobs');
+        $snapshot = $this->monitor()->snapshot();
 
-        $queues = collect();
-        $totalQueuedJobs = 0;
-        $totalReservedJobs = 0;
-        $totalPendingJobs = 0;
-
-        if ($jobsTableExists) {
-            $queues = DB::table('jobs')
-                ->selectRaw('queue, COUNT(*) as total_jobs')
-                ->selectRaw('SUM(CASE WHEN reserved_at IS NULL THEN 1 ELSE 0 END) as pending_jobs')
-                ->selectRaw('SUM(CASE WHEN reserved_at IS NOT NULL THEN 1 ELSE 0 END) as reserved_jobs')
-                ->selectRaw('MIN(created_at) as oldest_created_at')
-                ->groupBy('queue')
-                ->orderBy('queue')
-                ->get()
-                ->map(function (object $queue): array {
-                    $oldestCreatedAt = $queue->oldest_created_at
-                        ? Carbon::createFromTimestamp((int) $queue->oldest_created_at)
-                        : null;
-
-                    return [
-                        'name' => $queue->queue,
-                        'total_jobs' => (int) $queue->total_jobs,
-                        'pending_jobs' => (int) $queue->pending_jobs,
-                        'reserved_jobs' => (int) $queue->reserved_jobs,
-                        'oldest_job' => $oldestCreatedAt?->diffForHumans(),
-                    ];
-                });
-
-            $totalQueuedJobs = (int) $queues->sum('total_jobs');
-            $totalReservedJobs = (int) $queues->sum('reserved_jobs');
-            $totalPendingJobs = (int) $queues->sum('pending_jobs');
-        }
-
-        $failedJobs = collect();
-        $failedJobsCount = 0;
-        $failedJobsLastDay = 0;
-
-        if ($failedJobsTableExists) {
-            $failedJobsCount = DB::table('failed_jobs')->count();
-            $failedJobsLastDay = DB::table('failed_jobs')
-                ->where('failed_at', '>=', now()->subDay())
-                ->count();
-
-            $failedJobs = DB::table('failed_jobs')
-                ->select(['uuid', 'connection', 'queue', 'exception', 'failed_at'])
-                ->orderByDesc('failed_at')
-                ->limit(10)
-                ->get()
-                ->map(fn (object $job): array => [
-                    'uuid' => $job->uuid,
-                    'connection' => $job->connection,
-                    'queue' => $job->queue,
-                    'exception' => $job->exception,
-                    'failed_at' => Carbon::parse($job->failed_at)->diffForHumans(),
-                ]);
-        }
+        $expandedException = $this->expandedFailedJobUuid
+            ? $this->monitor()->failedJobException($this->expandedFailedJobUuid)
+            : null;
 
         return [
-            'monitorConnection' => env('QUEUE_CONNECTION', config('queue.default', 'database')),
-            'monitorQueue' => env('DB_QUEUE', config('queue.connections.database.queue', 'default')),
-            'monitorThreshold' => (int) env('QUEUE_MONITOR_MAX', 100),
-            'jobsTableExists' => $jobsTableExists,
-            'failedJobsTableExists' => $failedJobsTableExists,
-            'queues' => $queues,
-            'totalQueuedJobs' => $totalQueuedJobs,
-            'totalPendingJobs' => $totalPendingJobs,
-            'totalReservedJobs' => $totalReservedJobs,
-            'failedJobs' => $failedJobs,
-            'failedJobsCount' => $failedJobsCount,
-            'failedJobsLastDay' => $failedJobsLastDay,
+            ...$snapshot,
+            'expandedException' => $expandedException,
+            'lastUpdatedLabel' => $this->lastUpdatedAt !== ''
+                ? Carbon::parse($this->lastUpdatedAt)
+                    ->timezone((string) config('app.timezone'))
+                    ->format('M j, Y g:i:s A')
+                : null,
         ];
+    }
+
+    protected function markUpdated(): void
+    {
+        $this->lastUpdatedAt = now()->toIso8601String();
+    }
+
+    protected function monitor(): DatabaseQueueMonitor
+    {
+        return app(DatabaseQueueMonitor::class);
     }
 }

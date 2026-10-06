@@ -728,6 +728,21 @@ Images are resolved in priority order:
 2. Direct URL stored in `og_image`/`twitter_image` column
 3. Model's `featuredImageUrl()` method
 
+### XML sitemaps
+
+The site exposes a Laravel-generated sitemap index at `/sitemap.xml` (alias: `/sitemap_index.xml`) plus per-content child sitemaps such as `/page-sitemap.xml` and `/post-sitemap.xml`. URLs are built from `APP_URL` / `url()` / `route()`, so local, staging, and production each emit their own host. Sitemaps are not written as static files under `public/`.
+
+Admins manage sitemap settings from **Website Settings → Sitemap**:
+
+- Enable/disable the sitemap
+- Include/exclude `<lastmod>`, `<changefreq>`, and `<priority>`
+- Cache TTL
+- Add a `Sitemap:` line to `robots.txt` (existing Allow/Disallow rules are not rewritten)
+- Per content-type enablement and defaults
+- Custom URLs (`custom-sitemap.xml`), which preserve query strings
+
+Per-record exclusion still uses the existing SEO **Include in sitemap** toggle, plus `noindex`, `redirect_url`, and canonical mismatch. Child sitemaps split at 50,000 URLs (`post-sitemap.xml`, `post-sitemap2.xml`, …). Cache keys are invalidated per content type when CMS or SEO records change.
+
 ---
 
 ## 14. Lead Capture System
@@ -811,7 +826,7 @@ Set `MEDIA_QUEUE_CONNECTION` and `MEDIA_QUEUE=media` in `.env` for dedicated med
 
 | Command | Description |
 |---|---|
-| `php artisan cms:optimize` | Caches config, routes, and views for production performance |
+| `php artisan cms:optimize` | Caches config, routes, and views for production performance (**run on the server only after deploy; never upload the resulting `bootstrap/cache/*.php` files**) |
 | `php artisan inspire` | Displays an inspiring quote |
 
 ### Standard Laravel Commands (frequently used)
@@ -822,10 +837,9 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-# Cache for production
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+# Cache for production (server only — do not run locally before cPanel zip deploy)
+php artisan optimize:clear
+php artisan cms:optimize
 
 # Queue management
 php artisan queue:work
@@ -942,40 +956,48 @@ php artisan test tests/Unit/SeoServiceTest.php
 
 ## 20. Deployment Notes
 
-### Pre-Deployment Checklist
+Full cPanel guide: [`docs/PRODUCTION_DEPLOYMENT.md`](docs/PRODUCTION_DEPLOYMENT.md)
+
+### Deployment zip exclusions (critical)
+
+When packaging for cPanel upload, **exclude `bootstrap/cache/*.php`**. Never
+deploy locally generated Laravel cache files (`config.php`, `routes-v7.php`,
+`events.php`, `services.php`). Running `config:cache` or `cms:optimize` on
+Windows before zipping bakes paths like `C:\Users\...` into the cache; on
+Linux this creates malformed folders and breaks logging/view compilation.
+
+**Laravel cache must be generated on the Linux server after deployment, never
+locally and uploaded.**
+
+### Pre-Deployment Checklist (local)
 
 ```bash
-# 1. Set production environment
+# 1. Set production environment in server .env (not in the zip)
 APP_ENV=production
 APP_DEBUG=false
 DEBUGBAR_ENABLED=false
 TELESCOPE_ENABLED=false   # or restrict to admin IPs via TelescopeServiceProvider
 
-# 2. Configure production mail driver
-MAIL_MAILER=smtp
-# Set MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
-
-# 3. Configure production queue (database or redis)
-QUEUE_CONNECTION=database  # or redis
-
-# 4. Install production dependencies
+# 2. Install production dependencies
 composer install --no-dev --optimize-autoloader
 
-# 5. Build frontend assets
+# 3. Build frontend assets
 npm ci
 npm run build
 
-# 6. Run migrations
+# 4. Create deployment zip — exclude bootstrap/cache/*.php
+# Do NOT run config:cache, cms:optimize, or optimize locally before zipping
+```
+
+### Post-upload on the server (`/home/devtech/ibntech-core`)
+
+```bash
 php artisan migrate --force
-
-# 7. Optimize the CMS
+php artisan optimize:clear
 php artisan cms:optimize
-# Equivalent to:
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan filament:optimize
 
-# 8. Migrate legacy media into public/uploads (first deploy only, if needed)
+# First deploy only, if needed:
 php artisan media:migrate-to-uploads-disk
 ```
 

@@ -41,7 +41,7 @@
     $whyChoose = [
         [
             'icon' => 'fa-solid fa-bullseye',
-            'title' => '26+ Years of IT & Security Expertise',
+            'title' => '27+ Years of IT & Security Expertise',
         ],
         [
             'icon' => 'fa-solid fa-globe',

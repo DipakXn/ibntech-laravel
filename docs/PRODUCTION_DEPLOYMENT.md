@@ -31,6 +31,7 @@ Related media-focused guides:
 9. [Troubleshooting & Common Deployment Issues](#9-troubleshooting--common-deployment-issues)
 10. [Production Deployment Checklist](#10-production-deployment-checklist)
 11. [Future Updates, Maintenance & Backups](#11-future-updates-maintenance--backups)
+12. [Historical Old Submissions CSV import](#12-historical-old-submissions-csv-import)
 
 ---
 
@@ -312,6 +313,21 @@ Compress the project into a `.zip` archive for upload.
 - `storage/logs/*.log`
 - `storage/framework/cache/data/*` (optional; regenerated on server)
 - Local debug artifacts (`storage/debugbar/`, etc.)
+- **`bootstrap/cache/*.php`** *(critical — never deploy locally generated Laravel caches)*
+
+**Never run locally before creating the zip:**
+
+- `php artisan config:cache`
+- `php artisan route:cache`
+- `php artisan view:cache`
+- `php artisan event:cache`
+- `php artisan cms:optimize`
+- `php artisan optimize`
+
+These commands bake absolute filesystem paths from your local machine (for example `C:\Users\...` on Windows) into `bootstrap/cache/config.php` and related files. If those files reach cPanel/Linux, Laravel will try to use the Windows paths and can create malformed folders in `public_html/` or the core directory.
+
+> [!CAUTION]
+> **Laravel cache must be generated on the Linux server after deployment, never locally and uploaded.** After every deploy, run `php artisan optimize:clear` then `php artisan cms:optimize` from `/home/devtech/ibntech-core` (or your server core path) so paths resolve to `/home/devtech/ibntech-core/storage/...`.
 
 **Always include:**
 
@@ -382,12 +398,12 @@ return match (true) {
 
     // Staging
     $host === 'dev.ibntech.com' =>
-        '/home/USER/ibntech-staging',
+        '/home/devtech/ibntech-core',
 
     // Production
     $host === 'ibntech.com' ||
     $host === 'www.ibntech.com' =>
-        '/home/USER/ibntech',
+        '/home/ibntech/ibntech-core',
 
     // Fallback
     default =>
@@ -551,10 +567,11 @@ This command:
 2. Updates `disk` / related columns on Spatie `media` records.
 3. Optionally reorganizes into the purpose-based layout described in `docs/media-library-architecture.md`.
 
-After migration, rebuild config cache so `MEDIA_*` values are active:
+After migration, rebuild config cache on the server so `MEDIA_*` values are active:
 
 ```bash
-php artisan config:cache
+php artisan optimize:clear
+php artisan cms:optimize
 ```
 
 ---
@@ -586,15 +603,15 @@ Some shared hosts require `777` on `storage` / `bootstrap/cache` / `uploads` if 
 
 ### Step 7: Framework Cache & Asset Optimization
 
-Compile configurations, routes, and Blade views into production caches:
+Compile configurations, routes, and Blade views into production caches **on the server only**:
 
 ```bash
-cd /home/USER/ibntech
+cd /home/devtech/ibntech-core
 
-# Clear any stale development cache
+# Clear any stale or locally uploaded cache (required after every zip deploy)
 php artisan optimize:clear
 
-# Rebuild production caches (project helper)
+# Rebuild production caches (project helper) — must run on Linux, not locally
 php artisan cms:optimize
 # Equivalent to: config:cache + route:cache + view:cache
 
@@ -765,6 +782,7 @@ Complete this verification protocol immediately following every production relea
 - [ ] **Queue Monitor**: Open Queue Monitor (administrator role) and confirm connection/backlog display.
 - [ ] **Log Viewer**: Confirm application logs are readable from the admin panel when present.
 - [ ] **Media Upload Smoke Test**: Upload a Blog featured image; confirm file appears under `uploads/` and conversions complete after the queue worker runs.
+- [ ] **Old Submissions**: Confirm **Sales → Old Submissions** is visible and `/admin/old-submissions` loads. If the item is missing after deploy, run `php artisan filament:cache-components` (or `php artisan filament:optimize`) on the server. This list is read-only and does not affect live Form Submissions.
 
 ### Forms & Async Mail Verification
 
@@ -900,7 +918,28 @@ php artisan queue:retry all
 
 ---
 
-### Issue 8: Telescope or Debugbar Interfering in Production
+### Issue 8: Malformed Folders Named `C:\Users\...` in `public_html/` or Core Directory
+
+**Root Cause**: A Windows-generated `bootstrap/cache/config.php` (or related cache files from `config:cache` / `cms:optimize`) was included in the deployment zip. Cached paths such as `view.compiled` and `logging.channels.daily.path` contain absolute Windows paths. On Linux, those strings are treated as single relative directory names, so Laravel creates folders literally named `C:\Users\...\storage\logs` and `C:\Users\...\storage\framework\views`.
+
+**Solution**:
+
+1. Exclude `bootstrap/cache/*.php` from every deployment zip (see [Section 4](#4-pre-deployment-local-preparation)).
+2. On the server:
+
+```bash
+cd /home/devtech/ibntech-core
+php artisan optimize:clear
+php artisan cms:optimize
+```
+
+3. After caches are rebuilt with Linux paths, remove the malformed folders from `public_html/` and `ibntech-core/` via cPanel File Manager (they are not used by Laravel once the cache is correct).
+
+**Prevention**: Never run `config:cache`, `route:cache`, `view:cache`, `cms:optimize`, or `optimize` locally before packaging a cPanel deployment.
+
+---
+
+### Issue 9: Telescope or Debugbar Interfering in Production
 
 **Root Cause**: Dev tooling left enabled.
 
@@ -933,6 +972,8 @@ Use this checklist for every production release.
 - [ ] Code formatted (`./vendor/bin/pint` or `./vendor/bin/pint --test`).
 - [ ] Fresh production asset bundle generated (`npm ci && npm run build`).
 - [ ] Production dependencies installed (`composer install --no-dev --optimize-autoloader`).
+- [ ] Deployment zip **excludes** `bootstrap/cache/*.php` and contains **no** locally generated Laravel cache files.
+- [ ] Did **not** run `config:cache`, `cms:optimize`, or `optimize` locally before zipping.
 - [ ] Backup created of production database (`mysqldump`) **and** `uploads/` media tree.
 - [ ] Staging smoke-tested when the release includes schema or media changes.
 
@@ -946,13 +987,13 @@ php artisan down --secret="ibn-deploy-2026"
 
   *(Bypass URL: `https://ibntech.com/{secret}` while down.)*
 
-- [ ] Upload updated core files to `/home/USER/ibntech/` (preserve `.env` and `storage/`).
+- [ ] Upload updated core files to `/home/devtech/ibntech-core/` (preserve `.env` and `storage/`).
 - [ ] Upload updated Vite build to `public_html/build/`.
-- [ ] Confirm `bootstrap-path.php` host mappings still correct.
+- [ ] Confirm `bootstrap-path.php` maps staging to `/home/devtech/ibntech-core` and production to `/home/ibntech/ibntech-core`.
 - [ ] Execute database migrations (`php artisan migrate --force`).
 - [ ] Execute media migration only if needed (`php artisan media:migrate-to-uploads-disk`).
 - [ ] Verify permissions (`775` on `storage`, `bootstrap/cache`, and writable `uploads`).
-- [ ] Clear and rebuild caches (`php artisan cms:optimize`, `filament:optimize`).
+- [ ] Clear any uploaded/stale cache, then rebuild on the server only (`php artisan optimize:clear`, then `php artisan cms:optimize`, `filament:optimize`).
 - [ ] Restart queue workers (`php artisan queue:restart` or rely on cron `--stop-when-empty`).
 - [ ] Disable maintenance mode (`php artisan up`).
 
@@ -1031,6 +1072,92 @@ Retain off-site copies (external storage / object storage) for disaster recovery
 - Never wipe `public_html/uploads` during releases.
 - Keep `MEDIA_ROOT` outside release-temporary directories if you adopt a releases/ symlink deploy style later.
 - After changing any `MEDIA_*` or mail/queue env vars, always rebuild config cache.
+
+---
+
+## 12. Historical Old Submissions CSV import
+
+This import loads Elementor form-export CSVs into the dedicated `old_submissions` table. It **does not** write to live `form_submissions`, contact the old WordPress site, or modify the CSV files.
+
+### Where to upload the CSV files
+
+Upload the exports **only** to Laravel private storage (outside the public web root):
+
+```text
+{laravel-root}/storage/app/old-submissions/*.csv
+```
+
+Examples:
+
+| Environment | Laravel root | CSV directory |
+|---|---|---|
+| Local | project root | `storage/app/old-submissions/` |
+| Staging | `/home/devtech/ibntech-core` | `/home/devtech/ibntech-core/storage/app/old-submissions/` |
+| Production (Architecture A) | `/home/USER/ibntech` | `/home/USER/ibntech/storage/app/old-submissions/` |
+
+Do **not** place these files under `public/`, `public_html/`, or `uploads/`. They contain personal form data and must stay gitignored. Only `.csv` files in that directory are processed.
+
+Create the directory if it does not exist (`mkdir -p storage/app/old-submissions`) and set the same writable permissions used for `storage/` (`775` on the `storage` tree).
+
+### Exact import command
+
+From the Laravel application root (not `public_html`):
+
+```bash
+php artisan old-submissions:import
+```
+
+cPanel / staging PHP binary example:
+
+```bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import > /home/devtech/old-submissions-import.log 2>&1
+```
+
+Optional path argument (directory or a single CSV):
+
+```bash
+php artisan old-submissions:import storage/app/old-submissions
+```
+
+### Dry-run first (no database writes)
+
+Always run a dry-run on staging/production before the real import:
+
+```bash
+php artisan old-submissions:import --dry-run
+```
+
+```bash
+cd /home/devtech/ibntech-core && /usr/local/bin/ea-php84 artisan old-submissions:import --dry-run > /home/devtech/old-submissions-dry-run.log 2>&1
+```
+
+The command prints CSV files, rows read, **Would create**, **Skipped (already imported)**, and **Failed**. Dry-run does not insert, update, or delete rows.
+
+### How to verify imported record counts
+
+1. Compare the dry-run / import table to the database:
+
+```bash
+php artisan tinker --execute="echo App\\Models\\OldSubmission::query()->count();"
+```
+
+2. In Filament: **Sales → Old Submissions** (`/admin/old-submissions`). The list is searchable, filterable, and paginated. Open a row to view the original exported fields.
+
+3. Confirm live submissions are unchanged:
+
+```bash
+php artisan tinker --execute="echo App\\Models\\Lead::query()->count();"
+```
+
+`Lead` maps to `form_submissions`. That count must not change because of this import.
+
+### Safe to run repeatedly (idempotent)
+
+Each Elementor **Submission ID** is stored as unique `external_submission_id`. Re-running the command **skips** IDs that already exist and will not create duplicates. You can upload additional CSV files later and run the import again; only new IDs are inserted.
+
+Form-specific extra columns do not need a code change: they are stored in the JSON `fields` column. Every export must still include Elementor **Submission ID** and **Created At** (`Y-m-d H:i:s`).
+
+Do **not** schedule this as a permanent every-minute cron. If you must run it without SSH, use a one-time cPanel cron, inspect the log, then delete the cron job.
 
 ---
 

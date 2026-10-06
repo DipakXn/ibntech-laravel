@@ -14,7 +14,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-DTJja3YG.css",
+    "file": "assets/app-Dlns8XI4.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -23,7 +23,7 @@
     ]
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-BQmekVhT.css",
+    "file": "assets/theme-C7UEsoPl.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true,
     "name": "theme",
@@ -797,7 +797,7 @@
     ]
   },
   "resources/css/pages/bookkeeping-services-texas.css": {
-    "file": "assets/bookkeeping-services-texas-CZqsusCY.css",
+    "file": "assets/bookkeeping-services-texas-HKwR_4G1.css",
     "src": "resources/css/pages/bookkeeping-services-texas.css",
     "isEntry": true,
     "name": "bookkeeping-services-texas",
@@ -1463,7 +1463,7 @@
     ]
   },
   "resources/css/pages/home.css": {
-    "file": "assets/home-nC1jir4W.css",
+    "file": "assets/home-BfxIbcxr.css",
     "src": "resources/css/pages/home.css",
     "isEntry": true,
     "name": "home",
@@ -2433,7 +2433,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-DUoyN9av.js",
+    "file": "assets/app-CLXDyAmm.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

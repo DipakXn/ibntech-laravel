@@ -3,7 +3,7 @@
 
     $heroStats = [
         ['icon' => 'fa-scale-balanced', 'value' => '100+', 'label' => 'Travel & Hospitality Clients'],
-        ['icon' => 'fa-award', 'value' => '26+', 'label' => 'Years of Experience'],
+        ['icon' => 'fa-award', 'value' => '27+', 'label' => 'Years of Experience'],
         ['icon' => 'fa-shield-halved', 'value' => '99.99%', 'label' => 'Accuracy Rate '],
         ['icon' => 'fa-percent', 'value' => '40%', 'label' => 'Faster Case Turnaround'],
     ];

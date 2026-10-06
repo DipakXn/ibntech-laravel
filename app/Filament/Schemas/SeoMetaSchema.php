@@ -11,12 +11,12 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
-use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class SeoMetaSchema
 {
-    public static function make(string $heading = 'SEO Metadata'): Section
+    public static function make(string $heading = 'SEO Metadata', bool $pageSitemapOverrides = false): Section
     {
         return Section::make($heading)
             ->description('Manage search engine and social metadata for this record.')
@@ -191,6 +191,24 @@ class SeoMetaSchema
                         Toggle::make('sitemap_include')
                             ->label('Include in sitemap')
                             ->default(true),
+                        ...($pageSitemapOverrides ? [
+                            Select::make('sitemap_changefreq')
+                                ->label('Sitemap change frequency')
+                                ->options(array_combine(
+                                    config('sitemap.changefreq_values', []),
+                                    array_map('ucfirst', config('sitemap.changefreq_values', [])),
+                                ))
+                                ->placeholder('Use Pages sitemap default')
+                                ->helperText('Optional. Leave empty to use the Pages sitemap default.'),
+                            TextInput::make('sitemap_priority')
+                                ->label('Sitemap priority')
+                                ->numeric()
+                                ->minValue(0)
+                                ->maxValue(1)
+                                ->step(0.1)
+                                ->placeholder('Use Pages sitemap default')
+                                ->helperText('Optional. Leave empty to use the Pages sitemap default. Homepage uses 1.0 when empty.'),
+                        ] : []),
                         TextInput::make('redirect_url')
                             ->label('Redirect URL')
                             ->url()
@@ -219,13 +237,13 @@ class SeoMetaSchema
         $title = e(Str::limit($title, 60));
         $desc = e(Str::limit($desc, 160));
         $url = e($url);
-                $snippet = "<div style=\"font-family:Arial,Helvetica,sans-serif;\">".
-                        "<div style=\"color:#1a0dab;font-size:14px;margin-bottom:4px;\">{$url}</div>".
-                        "<div style=\"color:#202124;font-weight:600;font-size:18px;margin-bottom:4px;\">{$title}</div>".
-                        "<div style=\"color:#4d5156;font-size:13px;\">{$desc}</div>".
-                        "</div>";
+        $snippet = '<div style="font-family:Arial,Helvetica,sans-serif;">'.
+                "<div style=\"color:#1a0dab;font-size:14px;margin-bottom:4px;\">{$url}</div>".
+                "<div style=\"color:#202124;font-weight:600;font-size:18px;margin-bottom:4px;\">{$title}</div>".
+                "<div style=\"color:#4d5156;font-size:13px;\">{$desc}</div>".
+                '</div>';
 
-                $html = <<<HTML
+        $html = <<<HTML
 <div x-data="{ open: false }" @keydown.escape.window="open = false">
     <button
         type="button"
@@ -251,6 +269,6 @@ class SeoMetaSchema
 </div>
 HTML;
 
-                return new HtmlString($html);
+        return new HtmlString($html);
     }
 }

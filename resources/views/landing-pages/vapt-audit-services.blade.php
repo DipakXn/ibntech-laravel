@@ -126,7 +126,7 @@
     ];
 
     $reasons = [
-        '26+ years of experience in Cyber Security, Hosting and Cloud Consulting Services.',
+        '27+ years of experience in Cyber Security, Hosting and Cloud Consulting Services.',
         'Certified team of lead auditors.',
         '1200+ satisfied clients in 10 + countries.',
         'ISO 9001:2015 & 27001:2022 Certified Company',
@@ -243,7 +243,7 @@
             <h2 id="lvas-why-title">Why Entrust Us with Your Cybersecurity?</h2>
             <p class="lvas-why__lead">Did you know 95% of cybersecurity breaches are due to human error or system vulnerabilities?</p>
             <p>
-                Don’t be part of the vulnerable majority. IBN Tech has 26+ years of industry expertise in providing VAPT Testing Services and is one of the leading Cybersecurity solutions provider companies and best VAPT services providers in India. We offer complete VAPT services that protect your network, apps, cloud, APIs &amp; more ensuring compliance with GDPR, HIPAA, &amp; PCI DSS. Proactive, scalable, reliable, and customized to your needs—your security is our priority, while you stay at peace.
+                Don’t be part of the vulnerable majority. IBN Tech has 27+ years of industry expertise in providing VAPT Testing Services and is one of the leading Cybersecurity solutions provider companies and best VAPT services providers in India. We offer complete VAPT services that protect your network, apps, cloud, APIs &amp; more ensuring compliance with GDPR, HIPAA, &amp; PCI DSS. Proactive, scalable, reliable, and customized to your needs—your security is our priority, while you stay at peace.
             </p>
             <img
                 class="lvas-why__diagram"

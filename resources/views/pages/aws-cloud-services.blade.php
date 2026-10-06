@@ -112,7 +112,7 @@
 
     $apartPoints = [
         'End-to-end AWS expertise: strategy, migration, management, security, and optimization',
-        '26+ years of IT and cloud experience',
+        '27+ years of IT and cloud experience',
         'High-availability cloud environments',
         'Real-time monitoring for proactive issue detection',
         'Expert remediation for seamless AWS performance',
@@ -343,7 +343,7 @@
                         IBN Technologies is an <strong>AWS Advanced Partner</strong> delivering <strong>end-to-end AWS Cloud and Cyber Security Services.</strong>
                     </p>
                     <p>
-                        With <strong>26+ years of expertise</strong> in IT Infrastructure and <strong>a certified AWS team</strong>, we help enterprises build, migrate, and manage secure and scalable cloud environments with guaranteed uptime.
+                        With <strong>27+ years of expertise</strong> in IT Infrastructure and <strong>a certified AWS team</strong>, we help enterprises build, migrate, and manage secure and scalable cloud environments with guaranteed uptime.
                     </p>
                 </div>
             </div>

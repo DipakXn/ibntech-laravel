@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="infra-facility__copy">
-                        <p class="infra-facility__eyebrow">(26+ Years of Expertise)</p>
+                        <p class="infra-facility__eyebrow">(27+ Years of Expertise)</p>
                         <ul class="infra-list">
                             @foreach ($facilityItems as $item)
                                 <li>{{ $item }}</li>

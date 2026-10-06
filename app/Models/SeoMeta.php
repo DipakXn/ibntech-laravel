@@ -58,6 +58,8 @@ class SeoMeta extends Model implements HasMedia
         'faq_schema',
 
         'sitemap_include',
+        'sitemap_changefreq',
+        'sitemap_priority',
         'redirect_url',
         'custom_head_code',
     ];
@@ -118,4 +120,3 @@ class SeoMeta extends Model implements HasMedia
         return $this->twitter_image;
     }
 }
-

@@ -2,13 +2,11 @@
 
 namespace App\Filament\Pages;
 
+use App\Support\Logs\LaravelLogReader;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-use SplFileObject;
 
 class LogViewer extends Page
 {
@@ -30,11 +28,28 @@ class LogViewer extends Page
 
     public ?string $selectedFile = null;
 
+    public string $fileQuery = '';
+
+    public ?string $dateFrom = null;
+
+    public ?string $dateTo = null;
+
+    public string $search = '';
+
+    /**
+     * @var array<int, string>
+     */
+    public array $levels = [];
+
+    public string $viewMode = 'parsed';
+
+    public int $entryPage = 1;
+
     public int $lineLimit = 200;
 
     public function mount(): void
     {
-        $this->selectedFile ??= $this->getAvailableLogFiles()->first()['name'] ?? null;
+        $this->selectedFile ??= $this->availableFiles()->first()['name'] ?? null;
     }
 
     public static function canAccess(): bool
@@ -44,83 +59,161 @@ class LogViewer extends Page
 
     public function selectFile(string $fileName): void
     {
-        if (! $this->getAvailableLogFiles()->firstWhere('name', $fileName)) {
+        if (! $this->reader()->resolvePath($fileName)) {
             return;
         }
 
         $this->selectedFile = $fileName;
+        $this->entryPage = 1;
+    }
+
+    public function toggleLevel(string $level): void
+    {
+        $level = strtoupper($level);
+
+        if (! in_array($level, LaravelLogReader::LEVELS, true)) {
+            return;
+        }
+
+        if (in_array($level, $this->levels, true)) {
+            $this->levels = array_values(array_filter(
+                $this->levels,
+                fn (string $selected): bool => $selected !== $level,
+            ));
+        } else {
+            $this->levels[] = $level;
+        }
+
+        $this->entryPage = 1;
+    }
+
+    public function setViewMode(string $mode): void
+    {
+        if (! in_array($mode, ['parsed', 'raw'], true)) {
+            return;
+        }
+
+        $this->viewMode = $mode;
+    }
+
+    public function previousPage(): void
+    {
+        $this->entryPage = max(1, $this->entryPage - 1);
+    }
+
+    public function nextPage(): void
+    {
+        $this->entryPage++;
+    }
+
+    public function clearFilters(): void
+    {
+        $this->search = '';
+        $this->levels = [];
+        $this->fileQuery = '';
+        $this->dateFrom = null;
+        $this->dateTo = null;
+        $this->entryPage = 1;
+    }
+
+    public function updatedSearch(): void
+    {
+        $this->entryPage = 1;
+    }
+
+    public function updatedLevels(): void
+    {
+        $this->entryPage = 1;
+    }
+
+    public function updatedFileQuery(): void
+    {
+        $this->syncSelectedFile();
+    }
+
+    public function updatedDateFrom(): void
+    {
+        $this->syncSelectedFile();
+    }
+
+    public function updatedDateTo(): void
+    {
+        $this->syncSelectedFile();
     }
 
     protected function getViewData(): array
     {
-        $files = $this->getAvailableLogFiles();
-        $selectedFile = $files->firstWhere('name', $this->selectedFile) ?? $files->first();
+        $this->lineLimit = min(500, max(50, $this->lineLimit));
 
-        if ($selectedFile) {
-            $this->selectedFile = $selectedFile['name'];
+        $files = $this->availableFiles();
+        $this->syncSelectedFile($files);
+
+        $inspection = $this->selectedFile
+            ? $this->reader()->inspect(
+                fileName: $this->selectedFile,
+                search: $this->search,
+                levels: $this->levels,
+                page: $this->entryPage,
+                perPage: LaravelLogReader::DEFAULT_PER_PAGE,
+                rawLineLimit: $this->lineLimit,
+                includeEntries: $this->viewMode === 'parsed',
+            )
+            : null;
+
+        if ($inspection !== null) {
+            $this->entryPage = $inspection['page'];
         }
 
         return [
             'files' => $files,
-            'selectedFileDetails' => $selectedFile,
-            'logPreview' => $selectedFile ? $this->readTail($selectedFile['path'], $this->lineLimit) : null,
+            'selectedFileDetails' => $inspection['file'] ?? $files->firstWhere('name', $this->selectedFile),
+            'entries' => $inspection['entries'] ?? [],
+            'stats' => $inspection === null ? null : [
+                'total_entries' => $inspection['total_entries'],
+                'level_counts' => $inspection['level_counts'],
+                'matched_count' => $inspection['matched_count'],
+                'kept_count' => $inspection['kept_count'],
+                'truncated' => $inspection['truncated'],
+                'scanned_size' => $this->reader()->formatBytes($inspection['scanned_bytes']),
+            ],
+            'page' => $inspection['page'] ?? 1,
+            'lastPage' => $inspection['last_page'] ?? 1,
+            'rawPreview' => $inspection['raw_preview'] ?? null,
             'lineLimit' => $this->lineLimit,
+            'levels' => LaravelLogReader::LEVELS,
+            'activeLevels' => $this->levels,
         ];
     }
 
     /**
-     * @return Collection<int, array{name: string, path: string, size: string, modified_at: string}>
+     * @return Collection<int, array<string, mixed>>
      */
-    protected function getAvailableLogFiles(): Collection
+    protected function availableFiles(): Collection
     {
-        $logDirectory = storage_path('logs');
-
-        if (! File::isDirectory($logDirectory)) {
-            return collect();
-        }
-
-        return collect(File::files($logDirectory))
-            ->filter(fn (\SplFileInfo $file): bool => $file->getExtension() === 'log')
-            ->sortByDesc(fn (\SplFileInfo $file): int => $file->getMTime())
-            ->values()
-            ->map(fn (\SplFileInfo $file): array => [
-                'name' => $file->getFilename(),
-                'path' => $file->getPathname(),
-                'size' => $this->formatBytes($file->getSize()),
-                'modified_at' => Carbon::createFromTimestamp($file->getMTime())->diffForHumans(),
-            ]);
+        return $this->reader()->listFiles(
+            nameQuery: $this->fileQuery !== '' ? $this->fileQuery : null,
+            dateFrom: $this->dateFrom !== null && $this->dateFrom !== '' ? $this->dateFrom : null,
+            dateTo: $this->dateTo !== null && $this->dateTo !== '' ? $this->dateTo : null,
+        );
     }
 
-    protected function readTail(string $path, int $lines): string
+    /**
+     * @param  Collection<int, array<string, mixed>>|null  $files
+     */
+    protected function syncSelectedFile(?Collection $files = null): void
     {
-        $file = new SplFileObject($path, 'r');
-        $file->seek(PHP_INT_MAX);
+        $files ??= $this->availableFiles();
 
-        $lastLineNumber = $file->key();
-        $startLine = max(0, $lastLineNumber - ($lines - 1));
-
-        $buffer = [];
-
-        $file->seek($startLine);
-
-        while (! $file->eof()) {
-            $buffer[] = rtrim((string) $file->current(), "\r\n");
-            $file->next();
+        if ($this->selectedFile && $files->firstWhere('name', $this->selectedFile)) {
+            return;
         }
 
-        return implode(PHP_EOL, $buffer);
+        $this->selectedFile = $files->first()['name'] ?? null;
+        $this->entryPage = 1;
     }
 
-    protected function formatBytes(int $bytes): string
+    protected function reader(): LaravelLogReader
     {
-        if ($bytes < 1024) {
-            return $bytes . ' B';
-        }
-
-        if ($bytes < 1048576) {
-            return number_format($bytes / 1024, 1) . ' KB';
-        }
-
-        return number_format($bytes / 1048576, 1) . ' MB';
+        return app(LaravelLogReader::class);
     }
 }

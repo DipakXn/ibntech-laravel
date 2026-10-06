@@ -2,13 +2,37 @@
 
 namespace App\Providers;
 
+use App\Mail\OutgoingMailLogTracker;
+use App\Models\Article;
+use App\Models\Blog;
+use App\Models\CaseStudy;
+use App\Models\Category;
+use App\Models\Ebook;
+use App\Models\Industry;
+use App\Models\LandingPage;
+use App\Models\Newsletter;
+use App\Models\Page;
+use App\Models\PressRelease;
+use App\Models\SeoMeta;
+use App\Models\WebsiteSetting;
+use App\Models\WhitePaper;
+use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
+use App\Services\Analytics\PageViewTracker;
+use App\Services\EmailLogService;
 use App\Services\SeoService;
+use App\Services\SmtpSettingService;
 use App\Services\WebsiteSettingService;
+use App\Support\Cloudflare\CloudflareProxies;
+use App\Support\Mail\SmtpExceptionSanitizer;
+use Illuminate\Http\Middleware\TrustProxies;
+use Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Events\QueueBusy;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +58,13 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(SeoService::class, fn () => new SeoService);
         $this->app->singleton(WebsiteSettingService::class, fn () => new WebsiteSettingService);
+        $this->app->singleton(OutgoingMailLogTracker::class);
+        $this->app->singleton(SmtpSettingService::class);
+        $this->app->singleton(EmailLogService::class);
+
+        // The trailing-slash middleware duplicates the request before routing,
+        // so handle() and the later terminating callback must share this instance.
+        $this->app->singleton(PageViewTracker::class);
     }
 
     /**
@@ -41,6 +72,30 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->trustCloudflareProxies();
+
+        $this->app->terminating(function (): void {
+            $this->app->make(PageViewTracker::class)->flush();
+        });
+
+        Mail::extend(SmtpSettingService::TRANSPORT, function () {
+            return app(SmtpSettingService::class)->createConfiguredTransport();
+        });
+
+        try {
+            app(SmtpSettingService::class)->applyToRuntimeConfig();
+        } catch (\Throwable) {
+            // SMTP settings table may not exist yet during early setup.
+        }
+
+        Event::listen(JobProcessing::class, function (): void {
+            try {
+                app(SmtpSettingService::class)->applyToRuntimeConfig();
+            } catch (\Throwable) {
+                // Keep queue workers running even if SMTP settings cannot be loaded.
+            }
+        });
+
         // Filament Content Builder RichEditor state is TipTap JSON. Nested lists
         // produce Livewire paths deeper than the default payload.max_nesting_depth.
         config(['livewire.payload.max_nesting_depth' => 50]);
@@ -60,6 +115,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('cmsPreview', (bool) request()->attributes->get('cmsPreview', false));
         });
 
+        $this->registerSitemapCacheObservers();
+
         Event::listen(JobFailed::class, function (JobFailed $event): void {
             Log::error('Queue job failed.', [
                 'connection' => $event->connectionName,
@@ -67,7 +124,7 @@ class AppServiceProvider extends ServiceProvider
                 'job' => $event->job->resolveName(),
                 'job_id' => $event->job->getJobId(),
                 'exception' => $event->exception::class,
-                'message' => $event->exception->getMessage(),
+                'message' => app(SmtpExceptionSanitizer::class)->sanitize($event->exception->getMessage()),
             ]);
         });
 
@@ -79,5 +136,47 @@ class AppServiceProvider extends ServiceProvider
                 'threshold' => (int) env('QUEUE_MONITOR_MAX', 100),
             ]);
         });
+    }
+
+    private function registerSitemapCacheObservers(): void
+    {
+        $models = [
+            Page::class,
+            Blog::class,
+            Article::class,
+            CaseStudy::class,
+            Ebook::class,
+            WhitePaper::class,
+            PressRelease::class,
+            Industry::class,
+            LandingPage::class,
+            Newsletter::class,
+            Category::class,
+            SeoMeta::class,
+            WebsiteSetting::class,
+        ];
+
+        foreach ($models as $model) {
+            $model::observe(SitemapCacheObserver::class);
+        }
+    }
+
+    /**
+     * Trust only Cloudflare's published ranges, and only after config is loaded.
+     * The middleware callback in bootstrap/app.php runs before config exists.
+     */
+    private function trustCloudflareProxies(): void
+    {
+        if (! CloudflareProxies::enabled()) {
+            return;
+        }
+
+        TrustProxies::at(CloudflareProxies::ranges());
+        TrustProxies::withHeaders(
+            Request::HEADER_X_FORWARDED_FOR
+            | Request::HEADER_X_FORWARDED_HOST
+            | Request::HEADER_X_FORWARDED_PORT
+            | Request::HEADER_X_FORWARDED_PROTO,
+        );
     }
 }

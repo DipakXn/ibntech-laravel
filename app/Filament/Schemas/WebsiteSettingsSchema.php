@@ -3,13 +3,21 @@
 namespace App\Filament\Schemas;
 
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
+use App\Models\Lead;
+use App\Services\Sitemap\SitemapSettings;
+use App\Services\WebsiteSettingService;
+use App\Support\Sitemap\SitemapType;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use Illuminate\Support\HtmlString;
 
 class WebsiteSettingsSchema
 {
@@ -31,8 +39,12 @@ class WebsiteSettingsSchema
                         ->schema(self::socialMetaSection()),
                     Tab::make('Robots')
                         ->schema(self::robotsSection()),
+                    Tab::make('Sitemap')
+                        ->schema(self::sitemapSection()),
                     Tab::make('Contact & Social')
                         ->schema(self::contactSection()),
+                    Tab::make('Form notifications')
+                        ->schema(self::formNotificationsSection()),
                     Tab::make('Analytics & Scripts')
                         ->schema(self::analyticsSection()),
                 ]),
@@ -240,6 +252,190 @@ class WebsiteSettingsSchema
     /**
      * @return array<int, Section>
      */
+    protected static function sitemapSection(): array
+    {
+        $changefreqOptions = array_combine(
+            config('sitemap.changefreq_values', []),
+            array_map('ucfirst', config('sitemap.changefreq_values', [])),
+        ) ?: [];
+
+        return [
+            Section::make('XML sitemap')
+                ->description('Dynamic sitemap index and per-content sitemaps. URLs follow this environment\'s APP_URL.')
+                ->schema([
+                    Toggle::make('sitemap_enabled')
+                        ->label('Enable sitemap')
+                        ->default(true)
+                        ->dehydrated(true),
+                    Toggle::make('sitemap_add_to_robots')
+                        ->label('Add Sitemap directive to robots.txt')
+                        ->default(true)
+                        ->helperText('Only the Sitemap line is managed. Existing User-agent, Allow, and Disallow rules are left unchanged.'),
+                    Toggle::make('sitemap_include_lastmod')
+                        ->label('Include lastmod')
+                        ->default(true),
+                    Toggle::make('sitemap_include_changefreq')
+                        ->label('Include changefreq')
+                        ->default(false)
+                        ->helperText('Optional. Search engines typically ignore this hint.'),
+                    Toggle::make('sitemap_include_priority')
+                        ->label('Include priority')
+                        ->default(false)
+                        ->helperText('Optional. Search engines typically ignore this hint.'),
+                    TextInput::make('sitemap_cache_ttl')
+                        ->label('Cache TTL (seconds)')
+                        ->numeric()
+                        ->minValue(0)
+                        ->default(3600)
+                        ->helperText('0 disables sitemap caching. Content changes still invalidate cached sitemaps.'),
+                    Placeholder::make('sitemap_links')
+                        ->label('Sitemap URLs')
+                        ->content(function ($get): HtmlString {
+                            return new HtmlString(self::sitemapLinksHtml(
+                                (bool) ($get('sitemap_enabled') ?? true),
+                                is_array($get('sitemap_types')) ? $get('sitemap_types') : null,
+                            ));
+                        })
+                        ->columnSpanFull(),
+                ])
+                ->columns(2),
+            Section::make('Content types')
+                ->description('Enable or disable each child sitemap and set default changefreq/priority values.')
+                ->schema([
+                    Repeater::make('sitemap_types')
+                        ->label('Sitemaps')
+                        ->schema([
+                            TextInput::make('key')
+                                ->hidden()
+                                ->dehydrated(),
+                            Placeholder::make('label_display')
+                                ->label('Sitemap')
+                                ->content(fn ($get): string => SitemapType::tryFrom((string) $get('key'))?->label()
+                                    ?? (string) ($get('label') ?: $get('key') ?: '')),
+                            Toggle::make('enabled')
+                                ->label('Enabled')
+                                ->inline(false)
+                                ->dehydrated(true),
+                            Select::make('changefreq')
+                                ->label('Default changefreq')
+                                ->options($changefreqOptions),
+                            TextInput::make('priority')
+                                ->label('Default priority')
+                                ->numeric()
+                                ->minValue(0)
+                                ->maxValue(1)
+                                ->step(0.1),
+                        ])
+                        ->columns(4)
+                        ->addable(false)
+                        ->deletable(false)
+                        ->reorderable(false)
+                        ->columnSpanFull(),
+                ]),
+            Section::make('Custom URLs')
+                ->description('Optional extra URLs for custom-sitemap.xml. Do not add existing CMS pages here. Set change frequency and priority on the page instead. Query strings are preserved as entered.')
+                ->schema([
+                    Repeater::make('sitemap_custom_urls')
+                        ->label('Custom URLs')
+                        ->schema([
+                            TextInput::make('url')
+                                ->label('URL')
+                                ->required()
+                                ->maxLength(2048)
+                                ->helperText('Absolute http(s) URL or a path starting with /.')
+                                ->columnSpan(2),
+                            Toggle::make('enabled')
+                                ->label('Enabled')
+                                ->default(true),
+                            DateTimePicker::make('lastmod')
+                                ->label('Last modified')
+                                ->seconds(false),
+                            Select::make('changefreq')
+                                ->label('Change frequency')
+                                ->options($changefreqOptions),
+                            TextInput::make('priority')
+                                ->label('Priority')
+                                ->numeric()
+                                ->minValue(0)
+                                ->maxValue(1)
+                                ->step(0.1),
+                        ])
+                        ->columns(3)
+                        ->defaultItems(0)
+                        ->reorderable()
+                        ->collapsible()
+                        ->itemLabel(fn (array $state): ?string => $state['url'] ?? null)
+                        ->addActionLabel('Add custom URL')
+                        ->columnSpanFull(),
+                ]),
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>|null  $typeRows
+     */
+    private static function sitemapLinksHtml(bool $sitemapEnabled, ?array $typeRows): string
+    {
+        if (! $sitemapEnabled) {
+            return '<p class="text-sm text-gray-600 dark:text-gray-400">Sitemap generation is disabled. Enable the sitemap above and save to publish XML sitemaps.</p>';
+        }
+
+        $enabledTypes = self::enabledSitemapTypes($typeRows);
+        $items = '';
+
+        foreach ([
+            ['Sitemap index', url('/sitemap.xml')],
+            ['Sitemap index (alias)', url('/sitemap_index.xml')],
+        ] as [$label, $href]) {
+            $items .= '<li><span>'.e($label).':</span> <a href="'.e($href).'" target="_blank" rel="noopener">'.e($href).'</a></li>';
+        }
+
+        foreach (SitemapType::cases() as $type) {
+            $label = $type->label();
+            $href = url('/'.$type->fileName());
+
+            if (! in_array($type, $enabledTypes, true)) {
+                $items .= '<li class="text-gray-500 dark:text-gray-400"><span>'.e($label).':</span> '
+                    .e($href).' (disabled)</li>';
+
+                continue;
+            }
+
+            $items .= '<li><span>'.e($label).':</span> <a href="'.e($href).'" target="_blank" rel="noopener">'.e($href).'</a></li>';
+        }
+
+        return '<ul class="list-disc ps-5 space-y-1 text-sm">'.$items.'</ul>';
+    }
+
+    /**
+     * @param  list<array<string, mixed>>|null  $typeRows
+     * @return list<SitemapType>
+     */
+    private static function enabledSitemapTypes(?array $typeRows): array
+    {
+        $stored = is_array($typeRows) && $typeRows !== []
+            ? SitemapType::storedState($typeRows)
+            : null;
+
+        $sitemapSettings = new SitemapSettings(app(WebsiteSettingService::class)->get());
+        $enabled = [];
+
+        foreach (SitemapType::cases() as $type) {
+            $typeEnabled = $stored !== null
+                ? (bool) ($stored[$type->value]['enabled'] ?? $type->defaults()['enabled'])
+                : $sitemapSettings->typeEnabled($type);
+
+            if ($typeEnabled) {
+                $enabled[] = $type;
+            }
+        }
+
+        return $enabled;
+    }
+
+    /**
+     * @return array<int, Section>
+     */
     protected static function contactSection(): array
     {
         return [
@@ -334,6 +530,48 @@ class WebsiteSettingsSchema
                         ->maxLength(255),
                 ])
                 ->columns(2),
+        ];
+    }
+
+    /**
+     * @return array<int, Section>
+     */
+    protected static function formNotificationsSection(): array
+    {
+        return [
+            Section::make('Admin notification recipients')
+                ->description('Internal emails for new website form submissions. Visitor thank-you emails are unchanged.')
+                ->schema([
+                    TextInput::make('form_notification_to')
+                        ->label('Default Form Notification Email')
+                        ->email()
+                        ->maxLength(255)
+                        ->helperText('Global fallback “To” address for all form admin notifications when a form has no override.')
+                        ->columnSpanFull(),
+                    Repeater::make('form_notification_overrides')
+                        ->label('Form Notification Overrides')
+                        ->schema([
+                            Select::make('form_name')
+                                ->label('Form')
+                                ->options(fn (): array => Lead::formOptions())
+                                ->searchable()
+                                ->required()
+                                ->columnSpan(1),
+                            TextInput::make('admin_to')
+                                ->label('Admin notification email')
+                                ->email()
+                                ->maxLength(255)
+                                ->helperText('Leave blank to use the default.')
+                                ->columnSpan(1),
+                        ])
+                        ->columns(2)
+                        ->defaultItems(0)
+                        ->reorderable(false)
+                        ->collapsible()
+                        ->itemLabel(fn (array $state): ?string => $state['form_name'] ?? null)
+                        ->addActionLabel('Add form override')
+                        ->columnSpanFull(),
+                ]),
         ];
     }
 

@@ -16,7 +16,7 @@ class OldSubmissionAdminTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_administrators_and_authors_can_view_old_submissions_and_cannot_change_them(): void
+    public function test_administrators_can_view_old_submissions_and_cannot_change_them(): void
     {
         $this->withoutVite();
 
@@ -101,20 +101,21 @@ class OldSubmissionAdminTest extends TestCase
             ->assertActionDoesNotExist('delete')
             ->assertActionDoesNotExist('edit')
             ->assertSee('Contact Form (abc)');
-
-        $author = User::factory()->create(['role' => User::ROLE_AUTHOR]);
-        $this->actingAs($author);
-        $this->assertTrue(OldSubmissionResource::canViewAny());
-        $this->get('/admin/old-submissions')->assertOk();
-        $this->get('/admin/old-submissions/'.$record->getKey())->assertOk();
     }
 
-    public function test_guests_and_other_roles_cannot_open_old_submissions(): void
+    public function test_guests_authors_and_other_roles_cannot_open_old_submissions(): void
     {
         $record = $this->submission();
 
         $this->get('/admin/old-submissions')
             ->assertRedirect('/'.Login::ROUTE_PATH);
+
+        $author = User::factory()->create(['role' => User::ROLE_AUTHOR]);
+        $this->actingAs($author);
+        $this->assertFalse(OldSubmissionResource::canViewAny());
+        $this->assertFalse(OldSubmissionResource::canView($record));
+        $this->get('/admin/old-submissions')->assertForbidden();
+        $this->get('/admin/old-submissions/'.$record->getKey())->assertForbidden();
 
         $subscriber = User::factory()->create(['role' => 'subscriber']);
         $this->actingAs($subscriber);

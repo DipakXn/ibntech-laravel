@@ -100,8 +100,7 @@ class OldSubmissionResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return auth()->user() instanceof User
-            && (auth()->user()->isAdministrator() || auth()->user()->isAuthor());
+        return auth()->user() instanceof User && auth()->user()->isAdministrator();
     }
 
     public static function canView(Model $record): bool

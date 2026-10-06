@@ -3,11 +3,16 @@
 namespace Tests\Feature;
 
 use App\Filament\Pages\VisitorAnalytics;
+use App\Filament\Resources\Leads\LeadResource;
+use App\Filament\Resources\OldSubmissions\OldSubmissionResource;
+use App\Filament\Widgets\AdminQuickActionsWidget;
 use App\Filament\Widgets\DashboardContentOverviewWidget;
+use App\Filament\Widgets\RecentActivityWidget;
 use App\Filament\Widgets\DashboardSubmissionOverviewWidget;
 use App\Filament\Widgets\DashboardSubmissionTrendChart;
 use App\Filament\Widgets\DashboardVisitorPreviewWidget;
 use App\Filament\Widgets\DashboardVisitorTrendChart;
+use App\Filament\Widgets\RecentLeadsWidget;
 use App\Models\Article;
 use App\Models\Blog;
 use App\Models\CaseStudy;
@@ -136,8 +141,8 @@ class AdminDashboardOverviewTest extends TestCase
                 'IBNTECH CONTROL CENTER',
                 'Admin Workspace',
                 'Good morning, Dipak!',
-                'Welcome back to the IBNTECH Control Center.',
                 'Tuesday, October 6, 2026',
+                'Welcome back to the IBNTECH Control Center.',
                 'Content overview',
             ])
             ->assertDontSee('IBNTECH Admin')
@@ -217,7 +222,7 @@ class AdminDashboardOverviewTest extends TestCase
             ->assertSee(number_format($kpis['total_visitors']));
     }
 
-    public function test_authors_see_content_and_submissions_without_visitor_analytics(): void
+    public function test_authors_see_content_without_sales_or_visitor_analytics(): void
     {
         $this->seedContent();
         $author = User::factory()->create(['role' => User::ROLE_AUTHOR]);
@@ -225,15 +230,65 @@ class AdminDashboardOverviewTest extends TestCase
 
         $this->assertFalse(DashboardVisitorPreviewWidget::canView());
         $this->assertFalse(DashboardVisitorTrendChart::canView());
-        $this->assertTrue(DashboardSubmissionOverviewWidget::canView());
+        $this->assertFalse(DashboardSubmissionOverviewWidget::canView());
+        $this->assertFalse(RecentLeadsWidget::canView());
+        $this->assertFalse(LeadResource::canViewAny());
+        $this->assertFalse(OldSubmissionResource::canViewAny());
+
+        $this->get('/admin/leads')->assertForbidden();
+        $this->get('/admin/old-submissions')->assertForbidden();
+
+        Article::query()->where('title', 'Article 1')->update([
+            'title' => 'Author Visible Article',
+            'created_at' => now()->addMinutes(5),
+            'updated_at' => now()->addMinutes(5),
+        ]);
+        Page::query()->where('title', 'Page 1')->update([
+            'title' => 'Hidden Admin Page',
+            'created_at' => now()->addMinutes(10),
+            'updated_at' => now()->addMinutes(10),
+        ]);
 
         $this->get('/admin')
             ->assertOk()
             ->assertSee('Content overview')
-            ->assertSee('Submission overview')
             ->assertSee('Publishing performance')
+            ->assertDontSee('Submission overview')
+            ->assertDontSee('Recent submission activity')
+            ->assertDontSee('Review submissions')
+            ->assertDontSee('Old Submissions')
+            ->assertDontSee('Sales')
             ->assertDontSee('View analytics')
-            ->assertDontSee('Total Visitors');
+            ->assertDontSee('Total Visitors')
+            ->assertSeeInOrder([
+                'New blog',
+                'New case study',
+                'New press release',
+                'New eBook',
+                'New white paper',
+                'New article',
+            ])
+            ->assertDontSee('Update pages')
+            ->assertDontSee('Update industries')
+            ->assertDontSee('Update LPs')
+            ->assertDontSee('Update newsletters')
+            ->assertSee('0 of 40 items live')
+            ->assertSee('Author Visible Article')
+            ->assertDontSee('Hidden Admin Page');
+
+        $activity = collect((fn () => $this->getViewData()['items'])->call(
+            Livewire::test(RecentActivityWidget::class)->instance(),
+        ));
+        $allowedTypes = ['Blog', 'Case study', 'Press release', 'eBook', 'White paper', 'Article'];
+
+        $this->assertTrue($activity->contains(fn (array $item): bool => $item['title'] === 'Author Visible Article'));
+        $this->assertTrue($activity->every(fn (array $item): bool => in_array($item['type'], $allowedTypes, true)));
+        $this->assertFalse($activity->contains(fn (array $item): bool => $item['type'] === 'Page'));
+
+        Livewire::test(AdminQuickActionsWidget::class)
+            ->assertSee('New article')
+            ->assertDontSee('Update pages')
+            ->assertDontSee('Review submissions');
 
         $items = (fn () => $this->getViewData()['items'])->call(
             Livewire::test(DashboardContentOverviewWidget::class)->instance(),

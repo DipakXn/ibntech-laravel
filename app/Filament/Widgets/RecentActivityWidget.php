@@ -2,19 +2,24 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\Articles\ArticleResource;
 use App\Filament\Resources\Blogs\BlogResource;
 use App\Filament\Resources\CaseStudies\CaseStudyResource;
 use App\Filament\Resources\Ebooks\EbookResource;
 use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\PressReleases\PressReleaseResource;
 use App\Filament\Resources\WhitePapers\WhitePaperResource;
+use App\Models\Article;
 use App\Models\Blog;
 use App\Models\CaseStudy;
 use App\Models\Ebook;
 use App\Models\Page;
 use App\Models\PressRelease;
+use App\Models\User;
 use App\Models\WhitePaper;
+use Filament\Resources\Resource;
 use Filament\Widgets\Widget;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class RecentActivityWidget extends Widget
@@ -27,53 +32,44 @@ class RecentActivityWidget extends Widget
 
     protected function getViewData(): array
     {
-        $items = Collection::make()
-            ->merge(Blog::query()->latest()->limit(3)->get()->map(fn (Blog $blog): array => [
-                'title' => $blog->title,
-                'type' => 'Blog',
-                'status' => $blog->status,
-                'url' => BlogResource::getUrl('edit', ['record' => $blog]),
-                'date' => $blog->updated_at,
-            ]))
-            ->merge(CaseStudy::query()->latest()->limit(3)->get()->map(fn (CaseStudy $caseStudy): array => [
-                'title' => $caseStudy->title,
-                'type' => 'Case study',
-                'status' => $caseStudy->status,
-                'url' => CaseStudyResource::getUrl('edit', ['record' => $caseStudy]),
-                'date' => $caseStudy->updated_at,
-            ]))
-            ->merge(Ebook::query()->latest()->limit(3)->get()->map(fn (Ebook $ebook): array => [
-                'title' => $ebook->title,
-                'type' => 'eBook',
-                'status' => $ebook->status,
-                'url' => EbookResource::getUrl('edit', ['record' => $ebook]),
-                'date' => $ebook->updated_at,
-            ]))
-            ->merge(PressRelease::query()->latest()->limit(3)->get()->map(fn (PressRelease $pressRelease): array => [
-                'title' => $pressRelease->title,
-                'type' => 'Press release',
-                'status' => $pressRelease->status,
-                'url' => PressReleaseResource::getUrl('edit', ['record' => $pressRelease]),
-                'date' => $pressRelease->updated_at,
-            ]))
-            ->merge(WhitePaper::query()->latest()->limit(3)->get()->map(fn (WhitePaper $whitePaper): array => [
-                'title' => $whitePaper->title,
-                'type' => 'White paper',
-                'status' => $whitePaper->status,
-                'url' => WhitePaperResource::getUrl('edit', ['record' => $whitePaper]),
-                'date' => $whitePaper->updated_at,
-            ]))
-            ->merge(Page::query()->latest()->limit(3)->get()->map(fn (Page $page): array => [
-                'title' => $page->title,
-                'type' => 'Page',
-                'status' => $page->status,
-                'url' => PageResource::getUrl('edit', ['record' => $page]),
-                'date' => $page->updated_at,
-            ]))
+        $groups = [
+            $this->latestActivity(Blog::class, 'Blog', BlogResource::class),
+            $this->latestActivity(CaseStudy::class, 'Case study', CaseStudyResource::class),
+            $this->latestActivity(PressRelease::class, 'Press release', PressReleaseResource::class),
+            $this->latestActivity(Ebook::class, 'eBook', EbookResource::class),
+            $this->latestActivity(WhitePaper::class, 'White paper', WhitePaperResource::class),
+        ];
+
+        $user = auth()->user();
+
+        if ($user instanceof User && $user->isAuthor()) {
+            $groups[] = $this->latestActivity(Article::class, 'Article', ArticleResource::class);
+        } else {
+            $groups[] = $this->latestActivity(Page::class, 'Page', PageResource::class);
+        }
+
+        $items = collect($groups)
+            ->flatMap(fn (Collection $group): Collection => $group)
             ->sortByDesc('date')
             ->take(6)
             ->values();
 
         return ['items' => $items];
+    }
+
+    /**
+     * @param  class-string<Model>  $model
+     * @param  class-string<Resource>  $resource
+     * @return Collection<int, array{title: string, type: string, status: string, url: string, date: mixed}>
+     */
+    private function latestActivity(string $model, string $type, string $resource): Collection
+    {
+        return $model::query()->latest()->limit(3)->get()->map(fn (Model $record): array => [
+            'title' => (string) $record->getAttribute('title'),
+            'type' => $type,
+            'status' => (string) $record->getAttribute('status'),
+            'url' => $resource::getUrl('edit', ['record' => $record]),
+            'date' => $record->getAttribute('updated_at'),
+        ]);
     }
 }

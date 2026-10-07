@@ -9,7 +9,7 @@
                 </div>
                 <div class="ibn-brand-wordmark">
                     <strong>IBNTECH</strong>
-                    <small>Control</small>
+                    <small>Control Panel</small>
                 </div>
             </div>
 

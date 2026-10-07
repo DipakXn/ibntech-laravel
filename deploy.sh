@@ -253,15 +253,19 @@ fi
 rsync -a --delete \
   --exclude '.env' \
   --exclude '.env.*' \
+  --exclude '.git/' \
   --exclude '.htaccess' \
   --exclude 'public/.htaccess' \
-  --exclude '.git/' \
-  --exclude 'node_modules/' \
-  --exclude 'storage/' \
-  --exclude 'bootstrap/cache/*.php' \
   --exclude 'public/hot' \
   --exclude 'public/uploads/' \
+  --exclude 'public/robots.txt' \
+  --exclude 'storage/' \
+  --exclude 'bootstrap/cache/*.php' \
+  --exclude 'node_modules/' \
+  --exclude 'vendor/' \
   --exclude 'deploy-config.sh' \
+  --exclude '.idea/' \
+  --exclude '.vscode/' \
   "$SOURCE_DIR/" "$APP_DIR/"
 
 cd "$APP_DIR"
@@ -271,10 +275,48 @@ cd "$APP_DIR"
   --no-interaction \
   --no-scripts
 
-# Compiled assets. --delete is limited to build/, never to public_html or uploads.
+echo "Copying compiled website files. Uploads and Apache files are left alone."
+
+# --delete is limited to these two build directories, never public_html or uploads.
 mkdir -p "$APP_DIR/public/build" "$PUBLIC_DIR/build"
 rsync -a --delete "$SOURCE_DIR/public/build/" "$APP_DIR/public/build/"
 rsync -a --delete "$SOURCE_DIR/public/build/" "$PUBLIC_DIR/build/"
+
+for dir in css js fonts images favicon_io; do
+  if [ -d "$SOURCE_DIR/public/$dir" ]; then
+    mkdir -p "$APP_DIR/public/$dir" "$PUBLIC_DIR/$dir"
+    rsync -a "$SOURCE_DIR/public/$dir/" "$APP_DIR/public/$dir/"
+    rsync -a "$SOURCE_DIR/public/$dir/" "$PUBLIC_DIR/$dir/"
+  fi
+done
+
+# favicon.ico is code. robots.txt is CMS-owned at runtime.
+# Deploying robots.txt would overwrite CMS edits on every release.
+for file in favicon.ico; do
+  if [ -f "$SOURCE_DIR/public/$file" ]; then
+    cp -f "$SOURCE_DIR/public/$file" "$APP_DIR/public/$file"
+    cp -f "$SOURCE_DIR/public/$file" "$PUBLIC_DIR/$file"
+  fi
+done
+
+for file in "$SOURCE_DIR/public"/favicon*; do
+  [ -f "$file" ] || continue
+  base="$(basename "$file")"
+  if [ "$base" = "favicon.ico" ]; then
+    continue
+  fi
+  cp -f "$file" "$APP_DIR/public/$base"
+  cp -f "$file" "$PUBLIC_DIR/$base"
+done
+
+for file in index.php bootstrap-path.php; do
+  if [ -f "$SOURCE_DIR/public/$file" ]; then
+    cp -f "$SOURCE_DIR/public/$file" "$APP_DIR/public/$file"
+    cp -f "$SOURCE_DIR/public/$file" "$PUBLIC_DIR/$file"
+  fi
+done
+
+echo "Web assets published to $APP_DIR/public and $PUBLIC_DIR."
 
 publish_static_public() {
   local dir
@@ -288,11 +330,6 @@ publish_static_public() {
 
 publish_static_public
 
-# Git-managed public entry points. .htaccess and robots.txt are not in this list.
-for file in index.php bootstrap-path.php favicon.ico; do
-  cp -a "$APP_DIR/public/$file" "$PUBLIC_DIR/$file"
-done
-
 cd "$APP_DIR"
 # Drop generated caches before Artisan boots. A Windows config.php can
 # prevent artisan from starting, so do not rely on optimize:clear alone.
@@ -305,5 +342,37 @@ publish_static_public
 "$PHP_BIN" artisan cms:optimize
 "$PHP_BIN" artisan filament:optimize
 "$PHP_BIN" artisan queue:restart
+
+# --- Post-deploy integrity check ---
+echo "Verifying protected paths were not touched."
+
+integrity_fail=0
+for protected in \
+  "$APP_DIR/.env" \
+  "$APP_DIR/storage" \
+  "$APP_DIR/storage/app" \
+  "$APP_DIR/storage/logs" \
+  "$PUBLIC_DIR/uploads" \
+  "$PUBLIC_DIR/.htaccess"
+do
+  if [ ! -e "$protected" ]; then
+    echo "INTEGRITY FAILURE: missing after deploy: $protected"
+    integrity_fail=1
+  fi
+done
+
+if [ -d "$PUBLIC_DIR/uploads" ]; then
+  count=$(find "$PUBLIC_DIR/uploads" -mindepth 1 -maxdepth 1 | wc -l)
+  if [ "$count" -eq 0 ]; then
+    echo "WARNING: $PUBLIC_DIR/uploads is empty after deploy."
+  fi
+fi
+
+if [ "$integrity_fail" -ne 0 ]; then
+  echo "Post-deploy integrity check failed. See log for details."
+  exit 1
+fi
+
+echo "Protected paths verified intact."
 
 echo "Code deployment complete. Database migrations were not run."

@@ -853,44 +853,6 @@ body.fi-body {
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.ibn-content-overview {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.5rem;
-    margin-top: 0.7rem;
-}
-
-.ibn-content-overview__item {
-    display: block;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid var(--ibn-border);
-    border-radius: 0.9rem;
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 46, 128, 0.06));
-    text-decoration: none;
-}
-
-a.ibn-content-overview__item:hover {
-    border-color: rgba(76, 175, 80, 0.4);
-}
-
-.ibn-content-overview__item span {
-    display: block;
-    color: var(--ibn-text-muted);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-}
-
-.ibn-content-overview__item strong {
-    display: block;
-    margin-top: 0.1rem;
-    color: var(--ibn-text);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.15;
-}
-
 .ibn-dashboard-split {
     display: grid;
     grid-template-columns: minmax(0, 1.45fr) minmax(13rem, 0.7fr);
@@ -1037,7 +999,6 @@ a.ibn-content-overview__item:hover {
 }
 
 @media (max-width: 1100px) {
-    .ibn-content-overview,
     .ibn-dashboard-kpis,
     .ibn-dashboard-split {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1045,7 +1006,6 @@ a.ibn-content-overview__item:hover {
 }
 
 @media (max-width: 640px) {
-    .ibn-content-overview,
     .ibn-dashboard-kpis,
     .ibn-dashboard-split {
         grid-template-columns: 1fr;

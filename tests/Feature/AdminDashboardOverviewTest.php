@@ -6,7 +6,6 @@ use App\Filament\Pages\VisitorAnalytics;
 use App\Filament\Resources\Leads\LeadResource;
 use App\Filament\Resources\OldSubmissions\OldSubmissionResource;
 use App\Filament\Widgets\AdminQuickActionsWidget;
-use App\Filament\Widgets\DashboardContentOverviewWidget;
 use App\Filament\Widgets\RecentActivityWidget;
 use App\Filament\Widgets\DashboardSubmissionOverviewWidget;
 use App\Filament\Widgets\DashboardSubmissionTrendChart;
@@ -28,11 +27,9 @@ use App\Models\User;
 use App\Models\WhitePaper;
 use App\Services\Analytics\VisitorAnalyticsRange;
 use App\Services\Analytics\VisitorAnalyticsService;
-use App\Services\Content\ContentInventory;
 use App\Services\Leads\SubmissionOverview;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -61,25 +58,6 @@ class AdminDashboardOverviewTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_content_counts_come_from_one_aggregated_query(): void
-    {
-        $this->seedContent();
-
-        DB::flushQueryLog();
-        DB::enableQueryLog();
-
-        $totals = app(ContentInventory::class)->totals();
-
-        $queries = DB::getQueryLog();
-
-        $this->assertCount(1, $queries);
-        $sql = strtolower($queries[0]['query']);
-        $this->assertStringContainsString('union all', $sql);
-        $this->assertSame(10, substr_count($sql, 'count(*)'));
-        $this->assertStringNotContainsString('title', $sql);
-        $this->assertSame($this->directContentCounts(), $totals);
-    }
-
     public function test_dashboard_metrics_match_the_submission_and_visitor_modules(): void
     {
         $this->useTimezone('Asia/Kolkata');
@@ -88,7 +66,6 @@ class AdminDashboardOverviewTest extends TestCase
         $this->seedSubmissions();
         $this->seedVisitors();
 
-        $totals = app(ContentInventory::class)->totals();
         $counts = app(SubmissionOverview::class)->counts();
         $trend = app(SubmissionOverview::class)->dailyTrend();
         $forms = app(SubmissionOverview::class)->topForms();
@@ -97,7 +74,6 @@ class AdminDashboardOverviewTest extends TestCase
         $kpis = $analytics->kpis($range);
         $visitorTrend = $analytics->dailyTrend($range);
 
-        $this->assertSame($this->directContentCounts(), $totals);
         $this->assertSame($this->directSubmissionCounts(), $counts);
         $this->assertSame($this->directVisitorCounts(), [
             'total_visitors' => $kpis['total_visitors'],
@@ -143,33 +119,13 @@ class AdminDashboardOverviewTest extends TestCase
                 'Good morning, Dipak!',
                 'Tuesday, October 6, 2026',
                 'Welcome back to the IBNTECH Control Center.',
-                'Content overview',
+                'Submission overview',
             ])
             ->assertDontSee('IBNTECH Admin')
             ->assertDontSee('Powering IBNTECH')
             ->assertDontSee('Live pages, posts, downloads, and case studies')
+            ->assertDontSee('Content overview')
             ->assertSeeInOrder([
-                'Content overview',
-                'Pages',
-                number_format($totals['pages']),
-                'Blogs',
-                number_format($totals['blogs']),
-                'Industries',
-                number_format($totals['industries']),
-                'Case Studies',
-                number_format($totals['case_studies']),
-                'Landing Pages',
-                number_format($totals['landing_pages']),
-                'Newsletters',
-                number_format($totals['newsletters']),
-                'Press Releases',
-                number_format($totals['press_releases']),
-                'eBooks',
-                number_format($totals['ebooks']),
-                'White Papers',
-                number_format($totals['white_papers']),
-                'Articles',
-                number_format($totals['articles']),
                 'Submission overview',
                 'Total Submissions',
                 number_format($counts['total']),
@@ -251,7 +207,7 @@ class AdminDashboardOverviewTest extends TestCase
 
         $this->get('/admin')
             ->assertOk()
-            ->assertSee('Content overview')
+            ->assertDontSee('Content overview')
             ->assertSee('Publishing performance')
             ->assertDontSee('Submission overview')
             ->assertDontSee('Recent submission activity')
@@ -289,16 +245,6 @@ class AdminDashboardOverviewTest extends TestCase
             ->assertSee('New article')
             ->assertDontSee('Update pages')
             ->assertDontSee('Review submissions');
-
-        $items = (fn () => $this->getViewData()['items'])->call(
-            Livewire::test(DashboardContentOverviewWidget::class)->instance(),
-        );
-
-        $pages = collect($items)->firstWhere('label', 'Pages');
-        $blogs = collect($items)->firstWhere('label', 'Blogs');
-
-        $this->assertNull($pages['url']);
-        $this->assertNotNull($blogs['url']);
     }
 
     public function test_welcome_header_follows_the_application_timezone(): void
@@ -331,20 +277,6 @@ class AdminDashboardOverviewTest extends TestCase
             ->assertOk()
             ->assertSee('Good afternoon, Dipak!')
             ->assertSee('Wednesday, October 7, 2026');
-    }
-
-    /**
-     * @return array<string, int>
-     */
-    private function directContentCounts(): array
-    {
-        $counts = [];
-
-        foreach (app(ContentInventory::class)->models() as $key => $model) {
-            $counts[$key] = $model::query()->count();
-        }
-
-        return $counts;
     }
 
     /**

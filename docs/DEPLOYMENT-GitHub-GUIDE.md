@@ -477,11 +477,12 @@ Linux cache rebuild may delete generated files inside `bootstrap/cache/` and `st
 cleanup() {
   local status=$?
   if [ "$status" -ne 0 ]; then
-    rollback || true
+    rollback 2>&1 | tee -a "$LOG_FILE" || true
   fi
-  if [ -d "$APP_DIR" ] && [ -f "$APP_DIR/artisan" ]; then
-    (cd "$APP_DIR" && "$PHP_BIN" artisan up) || true
+  if [ -f "$APP_DIR/artisan" ]; then
+    (cd "$APP_DIR" && "$PHP_BIN" artisan up) 2>&1 | tee -a "$LOG_FILE" || true
   fi
+  echo "Deploy finished with status $status"
   exit "$status"
 }
 trap cleanup EXIT
@@ -491,11 +492,16 @@ The trap is the mechanism that returns the site to visitors. Do not rely on a fi
 
 ### Reference script
 
-This is the specification to place in `deploy.sh` later. It is not installed by this document.
+The same script is in the repository root as `deploy.sh`.
 
 ```bash
 #!/bin/bash
 set -euo pipefail
+
+# cPanel sometimes runs without HOME set
+if [ -z "${HOME:-}" ]; then
+  export HOME="$(cd ~ && pwd)"
+fi
 
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -512,8 +518,8 @@ case "${HOME:-}" in
     ;;
 esac
 
-if [ ! -f "$CONFIG_FILE" ]; then
-  echo "Missing $CONFIG_FILE" >&2
+if [ ! -r "$CONFIG_FILE" ]; then
+  echo "Cannot read $CONFIG_FILE (permissions?)" >&2
   exit 1
 fi
 
@@ -646,10 +652,10 @@ rollback() {
 cleanup() {
   local status=$?
   if [ "$status" -ne 0 ]; then
-    rollback || true
+    rollback 2>&1 | tee -a "$LOG_FILE" || true
   fi
   if [ -f "$APP_DIR/artisan" ]; then
-    (cd "$APP_DIR" && "$PHP_BIN" artisan up) || true
+    (cd "$APP_DIR" && "$PHP_BIN" artisan up) 2>&1 | tee -a "$LOG_FILE" || true
   fi
   echo "Deploy finished with status $status"
   exit "$status"

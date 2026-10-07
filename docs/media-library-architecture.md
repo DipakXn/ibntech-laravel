@@ -18,7 +18,17 @@ Media uses a dedicated `media` filesystem disk:
 | `MEDIA_ROOT` | `public/uploads` | Absolute or base-path-relative storage root |
 | `MEDIA_URL` | `/uploads` | Public URL prefix |
 
-Files are written directly under the web root uploads directory and served by Apache/Nginx. **`php artisan storage:link` is not required for media.**
+Files are written under the media disk and served by Apache. **`php artisan storage:link` is not required for media.**
+
+| Environment | Disk root |
+|---|---|
+| Local | `public/uploads` under the project (same folder as `index.php`) |
+| Staging | `/home/devtech/public_html/uploads` |
+| Production | `/home/ibntech/public_html/uploads` |
+
+On the servers, `public_path()` is `ibntech-core/public`, which is not the Apache document root. `MEDIA_ROOT` must be the absolute `public_html/uploads` path or the site will write media into the core tree, where Apache does not serve it. `deploy.sh` does not copy or delete that uploads directory.
+
+Spatie temporary conversions land in `storage/media-library/temp/` inside the core. That directory is gitignored and is under `storage/`, which deploy does not sync. Do not commit those files.
 
 To switch to S3/R2/Spaces later, point `MEDIA_DISK` at a cloud disk (for example `s3`) and configure that disk — no application code changes are required when collections use `config('media-library.disk_name')`.
 

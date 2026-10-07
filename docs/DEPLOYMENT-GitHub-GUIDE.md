@@ -4,13 +4,15 @@ Deployment runbook for the IBN Technologies Laravel 12 website.
 
 Local development is Windows with XAMPP. Staging and production are Linux cPanel accounts. Application code and the public document root stay in separate directories. This guide does not change that layout.
 
-Repository facts below were read from this project on 6 October 2026. Anything that cannot be confirmed from the repository is marked **TO VERIFY ON SERVER**.
+Repository facts below were read from this project on 7 October 2026. Anything that cannot be confirmed from the repository is marked **TO VERIFY ON SERVER**.
 
 Related documents:
 
+- `deploy.sh` and `.cpanel.yml` — the deploy that cPanel runs. Both are in the repository root
 - `deploy-config.sh.example` — committed template for the server-only config
-- `docs/PRODUCTION_DEPLOYMENT.md` — earlier cPanel notes (some paths in that file predate the confirmed layout in this guide)
-- `docs/media-uploads-deployment.md` — media disk background
+- `docs/PRODUCTION_DEPLOYMENT.md` — cPanel requirements, cron, and the same directory layout
+- `docs/media-uploads-deployment.md` — media disk paths for local, staging, and production
+- `docs/media-library-architecture.md` — folder map under the media disk
 
 ---
 
@@ -29,7 +31,7 @@ Git deployment must never copy, overwrite, delete, or sync `.env`.
 
 The same ban applies to `.env.*` on the server (`.env.backup`, `.env.production`, and any other sibling). Do not copy either environment's file onto the other. Do not print the file in logs.
 
-`.gitignore` contains `.env` and `.env.*`, and `!.env.example` keeps `.env.example` tracked. Server `.env` and `.env.*` files are permanently server-only. Deployment must never copy, overwrite, delete, or synchronize them. Taking `.env` out of the Git index is not a deployment step. The index still lists `.env` until that removal is committed; the ignore rules alone do not drop a file that is already indexed.
+`.gitignore` contains `.env` and `.env.*`, and `!.env.example` keeps `.env.example` tracked. `.env` is not in the Git index. Server `.env` and `.env.*` files are permanently server-only. Deployment must never copy, overwrite, delete, or synchronize them.
 
 ### `.htaccess` is permanent and server-only
 
@@ -54,7 +56,7 @@ public/hot
 bootstrap/cache/*.php
 ```
 
-`rsync --delete` must never target `public_html/` or `public_html/uploads/`. `--delete` is allowed only for the `build/` directory.
+`rsync --delete` must never target `public_html/` or `public_html/uploads/`. `--delete` is used on the application tree copied into `ibntech-core` (with the exclusion list below) and on the two `build/` directories. It is not used on `css/`, `js/`, `fonts/`, `images/`, or `favicon_io/`.
 
 Do not add `--delete-excluded`. Without that flag, excluded files stay on the destination. With it, a deploy could delete `.env`, `.htaccess`, `storage/`, or `uploads/`.
 
@@ -65,7 +67,7 @@ Do not add `--delete-excluded`. Without that flag, excluded files stay on the de
 - `public/bootstrap-path.php`
 - `public/build/` into both `{APP_DIR}/public/build/` and `public_html/build/`
 
-Other Git-tracked static directories (`css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `favicon.ico`) may still be copied. They are not a reason to sync `public_html` as a whole. `public/robots.txt` is not copied: the tracked file is a local development copy.
+Other Git-tracked static directories (`css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `favicon.ico`, and the other `favicon*` files) are copied to both `{APP_DIR}/public/` and `public_html/`. They are not a reason to sync `public_html` as a whole. `public/robots.txt` is excluded from the app rsync and is not copied. The CMS writes that file at runtime.
 
 ---
 
@@ -109,10 +111,12 @@ Those directories hold `.env`, `storage`, `vendor`, and application code. They m
 
 Laravel's `public_path()` is not overridden in this codebase. On the server it resolves to `{APP_DIR}/public` (for example `/home/devtech/ibntech-core/public`). Apache serves `{PUBLIC_DIR}` (`public_html`). Deployment therefore publishes web files to both places:
 
-1. `{APP_DIR}/public/` so Laravel can see `build/manifest.json`, `images/`, and `robots.txt`.
+1. `{APP_DIR}/public/` so Laravel's `public_path()` can see `build/manifest.json`, `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/`.
 2. `{PUBLIC_DIR}/` so browsers and Apache can request those same files.
 
-Uploaded media does not follow that dual copy. It stays only in `public_html/uploads/`, addressed by `MEDIA_ROOT` in that server's `.env`.
+`robots.txt` is not part of that dual copy. `WebsiteSettingService::syncRobotsTxt()` writes `public_path('robots.txt')`, which is `{APP_DIR}/public/robots.txt`. Apache serves `{PUBLIC_DIR}/robots.txt`. Deploy does not copy either file.
+
+Uploaded media does not follow that dual copy. On the server it stays only in `public_html/uploads/`, addressed by an absolute `MEDIA_ROOT` in that server's `.env`. Locally, `MEDIA_ROOT=public/uploads` resolves under the project `public/` directory.
 
 ---
 
@@ -128,19 +132,19 @@ Confirmed from the project. Do not replace these with assumptions from another a
 | Front end | Vite 7, Tailwind CSS 4, `laravel-vite-plugin`. Build script: `npm run build` |
 | Lockfiles | `composer.lock` and `package-lock.json` are present and tracked |
 | `public/build/` | Tracked. Includes `public/build/manifest.json`. Node.js is not required on the server to serve assets |
-| `public/hot` | Tracked. Contents are the local Vite URL `http://[::1]:5173`. Must not be deployed |
+| `public/hot` | Not tracked. `.gitignore` lists `/public/hot`. A local Vite file may still exist on disk (`http://[::1]:5173`). Must not be deployed |
 | `public/uploads/` | Only `public/uploads/.gitignore` is tracked. Upload files are ignored |
 | `public/index.php` | Tracked. Loads `bootstrap-path.php`, then the core `vendor/autoload.php` and `bootstrap/app.php` |
 | `public/bootstrap-path.php` | Tracked. Host map for local, staging, and production in one file |
 | `public/.htaccess` | Tracked in Git. Live staging and production copies differ and are never deployed |
 | Other tracked public paths | `css/`, `fonts/`, `images/`, `js/`, `favicon_io/`, `favicon.ico`, `robots.txt` |
 | `public/storage` | Present on the local disk, not tracked. Media does not use `storage:link` |
-| `.env` | Listed in `.gitignore`. The index still contains the file until that removal is committed. Permanently server-only. Never copied, overwritten, deleted, or synchronized. See [Environment files](#12-environment-files) |
+| `.env` | Not tracked. `.gitignore` lists `.env` and `.env.*`. Permanently server-only. Never copied, overwritten, deleted, or synchronized. See [Environment files](#12-environment-files) |
 | `.env.example` | Tracked. Safe template. No live passwords |
-| `vendor/` | Listed in `.gitignore`, but about 8,052 files are already tracked. Git ignore does not untrack them |
-| `node_modules/` | Listed in `.gitignore`, but about 3,886 files are already tracked |
+| `vendor/` | Not tracked. `/vendor` is in `.gitignore`. `deploy.sh` runs `composer install` on the server |
+| `node_modules/` | Not tracked. `/node_modules` is in `.gitignore`. The server does not need it |
 | `bootstrap/cache/*.php` | Not tracked. `bootstrap/cache/.gitignore` ignores everything except itself |
-| `deploy.sh`, `.cpanel.yml` | Not in the repository. Specified in this guide. Do not treat them as already installed |
+| `deploy.sh`, `.cpanel.yml` | Tracked in the repository root. Identical on `staging` and `main`. `.cpanel.yml` runs `/bin/bash $PWD/deploy.sh` |
 | `deploy-config.sh` | Must not be committed. Template: `deploy-config.sh.example` |
 | Cache default | `CACHE_STORE=database` (`config/cache.php`) |
 | Session default | `SESSION_DRIVER=database` |
@@ -148,15 +152,17 @@ Confirmed from the project. Do not replace these with assumptions from another a
 | Optimize command | `php artisan cms:optimize` in `routes/console.php` runs `config:cache`, `route:cache`, and `view:cache` |
 | Maintenance | `APP_MAINTENANCE_DRIVER=file` in `.env.example`. `index.php` loads `{core}/storage/framework/maintenance.php` when that file exists |
 | Media | Disk `media`. `MEDIA_ROOT` may be relative locally (`public/uploads`) or absolute on cPanel. No symlink required |
-| PHP binary on the server | **TO VERIFY ON SERVER** |
-| Composer binary on the server | **TO VERIFY ON SERVER** |
-| cPanel Git clone directory | **TO VERIFY ON SERVER** (create it; it must not be `public_html` or `ibntech-core`) |
+| PHP binary on staging | `/usr/local/bin/ea-php84` in the staging `deploy-config.sh`. EasyApache names the binary `ea-phpXX`, not `phpXX` |
+| Composer binary on staging | `/home/devtech/composer.phar` |
+| PHP and Composer on production | Set in `/home/ibntech/deploy-configs/production/deploy-config.sh`. Confirm that account's EasyApache path before the first `main` deploy |
+| cPanel Git clone, staging | `/home/devtech/repositories/ibntech-laravel`, branch `staging`. Not `public_html` and not `ibntech-core` |
+| cPanel Git clone, production | Must not be `public_html` or `ibntech-core`. Branch `main`. **TO VERIFY ON SERVER** the directory path |
 | Live `public_html/.htaccess` | Different on staging and production. Never replaced by Git |
 | Live `robots.txt` | Not part of the deploy copy. Tracked Git file is a local development copy |
 
 `package.json` also depends on Playwright, PDF.js, and `@napi-rs/canvas`. Those are local tooling. They are not part of serving the site. The server does not need Node.js, npm, or those packages when `public/build/` is deployed from Git.
 
-`docs/PRODUCTION_DEPLOYMENT.md` contains example CLI paths such as `/usr/local/bin/php` and `/usr/local/bin/ea-php84`. This guide does not treat either path as confirmed. Verify the binaries in cPanel Terminal before writing them into `deploy-config.sh`.
+Staging uses `/usr/local/bin/ea-php84` and `/home/devtech/composer.phar`. Production must use the binaries recorded in that account's `deploy-config.sh`. Do not assume the default `php` on the terminal is 8.2 or newer.
 
 ---
 
@@ -246,6 +252,8 @@ chmod 700 /home/devtech/deploy-configs /home/devtech/deploy-backups /home/devtec
 ```
 
 Repeat on the production account with `/home/ibntech/...` and `deploy-configs/production`.
+
+If the first staging deploy does not start, produces no log, or the site returns 500 after a successful deploy, work through [Appendix A](#appendix-a--deployment-issues-encountered-and-fixes) before changing any part of the script.
 
 ---
 
@@ -386,24 +394,24 @@ cPanel runs deployment tasks from the clone directory, as the cPanel user, witho
 
 ## 8. `.cpanel.yml`
 
-This file is not in the repository yet. Add the same file to both `staging` and `main`.
+The repository root already contains this file. Keep the same file on `staging` and `main`.
 
 ```yaml
 ---
 deployment:
   tasks:
-    - /bin/bash deploy.sh
+    - /bin/bash $PWD/deploy.sh
 ```
 
-cPanel runs that task with the clone as the working directory. `deploy.sh` then loads the server-only config and copies code into `ibntech-core` and web files into `public_html`.
+`$PWD` is required. A relative `deploy.sh` path does not run, because cPanel does not guarantee that the task starts in the clone root. `deploy.sh` then loads the server-only config, copies code into `ibntech-core`, and publishes web files into both `{APP_DIR}/public/` and `public_html`.
 
 Do not put `/home/devtech` or `/home/ibntech` inside `.cpanel.yml`.
 
 ---
 
-## 9. Future `deploy.sh`
+## 9. `deploy.sh`
 
-Do not add `deploy.sh` until this behaviour is reviewed. The script belongs in the repository root and stays identical on both branches. It should do the following, in this order.
+The script is `deploy.sh` in the repository root. It stays identical on both branches. It does the following, in this order.
 
 1. **Detect the account** from `$HOME`.
    - `/home/devtech` loads `/home/devtech/deploy-configs/staging/deploy-config.sh`
@@ -411,8 +419,8 @@ Do not add `deploy.sh` until this behaviour is reviewed. The script belongs in t
    - any other home aborts
 2. **Load** that config. Abort if a required variable is empty or still `TO_VERIFY_ON_SERVER`.
 3. **Validate directories** before changing the site. Rules are in [section 6](#6-server-only-configuration). Confirm `.env` already exists in `APP_DIR`. Confirm `PUBLIC_DIR/uploads` exists. If uploads is missing, stop and ask an administrator to create it. Do not invent an empty uploads tree over a path you have not checked.
-4. **Take a lock** with `flock` on `LOCK_FILE`. A second deploy exits immediately with a clear log line.
-5. **Open a log** at `$LOG_DIR/deploy-YYYYMMDD-HHMMSS.log`. Log the environment name, host, commit (`git rev-parse HEAD` inside the clone), `APP_DIR`, and `PUBLIC_DIR`. Do not log `.env` contents.
+4. **Open a log** at `$LOG_DIR/deploy-YYYYMMDD-HHMMSS.log` before the lock, the config checks, and any later failure. Log the environment name, host, commit (`git rev-parse HEAD` inside the clone), `APP_DIR`, and `PUBLIC_DIR`. Do not log `.env` contents.
+5. **Take a lock** with `flock -w 30` on `LOCK_FILE`. The lock file stores the deploy PID. A dead PID is removed. A live PID, or a missing or non-numeric PID, is not deleted. A second deploy that still cannot take the lock exits with a log line.
 6. **Back up** the current release ([Backups](#16-backups)).
 7. **Maintenance mode** from the existing application, before files are replaced:
 
@@ -443,15 +451,16 @@ Do not add `deploy.sh` until this behaviour is reviewed. The script belongs in t
 
    `--no-scripts` avoids `composer.json`'s `post-autoload-dump` hook, which runs `php artisan filament:upgrade` in the middle of install. The script runs `filament:upgrade` itself after caches are cleared.
 
-   `vendor/` is currently committed from Windows. The Linux `composer install` is the copy that must actually run. Do not skip Composer because `vendor/` arrived in the Git checkout.
+   `vendor/` is not in Git. The Linux `composer install` is the only copy that runs. Do not skip Composer.
 
 10. **Publish web files** ([section 10](#10-frontend-assets) and [section 11](#11-uploads)).
-11. **Leave server-only files untouched.** Never copy, overwrite, delete, or sync `.env`, `.env.*`, `public/.htaccess`, `storage/`, `public/uploads/`, `public/hot`, or `bootstrap/cache/*.php`. See [Permanent deployment rules](#permanent-deployment-rules).
+11. **Leave server-only files untouched.** Never copy, overwrite, delete, or sync `.env`, `.env.*`, `public/.htaccess`, `storage/`, `public/uploads/`, `public/hot`, `public/robots.txt`, or `bootstrap/cache/*.php`. See [Permanent deployment rules](#permanent-deployment-rules).
 12. **Remove Windows runtime cache and rebuild it on Linux** ([Commands the deploy must run on Linux](#commands-the-deploy-must-run-on-linux)).
 13. **Bring the site back** with an `EXIT` trap that runs `php artisan up` from `APP_DIR` even when a later command fails.
 14. **On failure, roll back** the code and public files from the backup taken in step 6, then leave maintenance mode ([Rollback](#22-rollback)).
 15. **Do not** run `php artisan migrate`.
 16. **Do not** run destructive database commands.
+17. **Check protected paths** still exist: `{APP_DIR}/.env`, `{APP_DIR}/storage`, `{APP_DIR}/storage/app`, `{APP_DIR}/storage/logs`, `{PUBLIC_DIR}/uploads`, and `{PUBLIC_DIR}/.htaccess`. A missing path exits 1. The `EXIT` trap then restores the release archive and runs `artisan up`. An empty `uploads/` directory is a warning, not a failure.
 
 ### Exclusions while copying into `APP_DIR`
 
@@ -464,8 +473,12 @@ The sync into `ibntech-core` must exclude:
 - `node_modules/`
 - `public/hot`
 - `public/uploads/`
+- `public/robots.txt`
 - `.git/`
+- `vendor/`
 - `deploy-config.sh`
+- `.idea/`
+- `.vscode/`
 
 Do not delete `bootstrap/` itself. Do not delete `storage/` itself. Do not delete `public/hot` as part of deploy; exclude it so it is neither copied nor removed. The reference script uses `rsync --delete` only for the application tree and for `build/`. That application-tree delete is safe only while the exclusions above are present and `--delete-excluded` is absent. `rsync` does not delete excluded destination files unless `--delete-excluded` is set. Never add that flag. Never point `rsync --delete` at `public_html/`.
 
@@ -492,248 +505,49 @@ The trap is the mechanism that returns the site to visitors. Do not rely on a fi
 
 ### Reference script
 
-The same script is in the repository root as `deploy.sh`.
+The script cPanel runs is the repository file `deploy.sh`. This guide does not keep a second copy.
+
+The app sync copies `$SOURCE_DIR/` into `$APP_DIR/` only:
 
 ```bash
-#!/bin/bash
-set -euo pipefail
-
-# cPanel sometimes runs without HOME set
-if [ -z "${HOME:-}" ]; then
-  export HOME="$(cd ~ && pwd)"
-fi
-
-SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-case "${HOME:-}" in
-  /home/devtech)
-    CONFIG_FILE="/home/devtech/deploy-configs/staging/deploy-config.sh"
-    ;;
-  /home/ibntech)
-    CONFIG_FILE="/home/ibntech/deploy-configs/production/deploy-config.sh"
-    ;;
-  *)
-    echo "Refusing to deploy: unknown HOME '${HOME:-}'." >&2
-    exit 1
-    ;;
-esac
-
-if [ ! -r "$CONFIG_FILE" ]; then
-  echo "Cannot read $CONFIG_FILE (permissions?)" >&2
-  exit 1
-fi
-
-# shellcheck disable=SC1090
-source "$CONFIG_FILE"
-
-: "${DEPLOY_ENV:?}"
-: "${APP_DIR:?}"
-: "${PUBLIC_DIR:?}"
-: "${PHP_BIN:?}"
-: "${COMPOSER_BIN:?}"
-: "${BACKUP_DIR:?}"
-: "${LOG_DIR:?}"
-: "${LOCK_FILE:?}"
-
-if [ "$PHP_BIN" = "TO_VERIFY_ON_SERVER" ] || [ "$COMPOSER_BIN" = "TO_VERIFY_ON_SERVER" ]; then
-  echo "Set PHP_BIN and COMPOSER_BIN in $CONFIG_FILE before deploying." >&2
-  exit 1
-fi
-
-if [ "$HOME" = "/home/devtech" ] && [ "$APP_DIR" != "/home/devtech/ibntech-core" ]; then
-  echo "Staging config APP_DIR is not /home/devtech/ibntech-core" >&2
-  exit 1
-fi
-
-if [ "$HOME" = "/home/ibntech" ] && [ "$APP_DIR" != "/home/ibntech/ibntech-core" ]; then
-  echo "Production config APP_DIR is not /home/ibntech/ibntech-core" >&2
-  exit 1
-fi
-
-if [ "$HOME" = "/home/devtech" ] && [ "$PUBLIC_DIR" != "/home/devtech/public_html" ]; then
-  echo "Staging config PUBLIC_DIR is not /home/devtech/public_html" >&2
-  exit 1
-fi
-
-if [ "$HOME" = "/home/ibntech" ] && [ "$PUBLIC_DIR" != "/home/ibntech/public_html" ]; then
-  echo "Production config PUBLIC_DIR is not /home/ibntech/public_html" >&2
-  exit 1
-fi
-
-if [ "$APP_DIR" = "$PUBLIC_DIR" ] || [ "$APP_DIR" = "$SOURCE_DIR" ]; then
-  echo "APP_DIR must be separate from PUBLIC_DIR and from the Git clone." >&2
-  exit 1
-fi
-
-if [[ "$APP_DIR" == *public_html* ]] || [[ "$PUBLIC_DIR" == *ibntech-core* ]]; then
-  echo "Refusing to swap the core directory and the document root." >&2
-  exit 1
-fi
-
-for required in "$APP_DIR/artisan" "$APP_DIR/.env" "$PUBLIC_DIR/index.php" "$PUBLIC_DIR/uploads"; do
-  if [ ! -e "$required" ]; then
-    echo "Missing required path: $required" >&2
-    exit 1
-  fi
-done
-
-if [ ! -x "$PHP_BIN" ]; then
-  echo "PHP_BIN is not executable: $PHP_BIN" >&2
-  exit 1
-fi
-
-mkdir -p "$BACKUP_DIR" "$LOG_DIR" "$(dirname "$LOCK_FILE")"
-
-exec 9>"$LOCK_FILE"
-if ! flock -n 9; then
-  echo "Another deployment holds $LOCK_FILE" >&2
-  exit 1
-fi
-
-LOG_FILE="$LOG_DIR/deploy-$(date +%Y%m%d-%H%M%S).log"
-exec > >(tee -a "$LOG_FILE") 2>&1
-
-echo "Deploy started: env=$DEPLOY_ENV host=${SITE_HOST:-unknown} commit=$(git -C "$SOURCE_DIR" rev-parse HEAD)"
-
-BACKUP_ARCHIVE="$BACKUP_DIR/release-$(date +%Y%m%d-%H%M%S).tar.gz"
-ROLLBACK_READY=0
-
-backup_release() {
-  local item
-  local -a paths=()
-  # Do not archive .env, .htaccess, or storage/. A later restore must not write them.
-  for item in \
-    "$APP_DIR" \
-    "$PUBLIC_DIR/build" \
-    "$PUBLIC_DIR/css" \
-    "$PUBLIC_DIR/js" \
-    "$PUBLIC_DIR/fonts" \
-    "$PUBLIC_DIR/images" \
-    "$PUBLIC_DIR/favicon_io" \
-    "$PUBLIC_DIR/index.php" \
-    "$PUBLIC_DIR/bootstrap-path.php" \
-    "$PUBLIC_DIR/favicon.ico"
-  do
-    if [ -e "$item" ]; then
-      paths+=("${item#/}")
-    fi
-  done
-
-  tar -C / -czf "$BACKUP_ARCHIVE" \
-    --exclude="${APP_DIR#/}/.env" \
-    --exclude="${APP_DIR#/}/.env.*" \
-    --exclude="${APP_DIR#/}/public/.htaccess" \
-    --exclude="${APP_DIR#/}/node_modules" \
-    --exclude="${APP_DIR#/}/storage" \
-    --exclude="${APP_DIR#/}/storage/*" \
-    --exclude="${PUBLIC_DIR#/}/.htaccess" \
-    --exclude="${PUBLIC_DIR#/}/uploads" \
-    "${paths[@]}"
-  ROLLBACK_READY=1
-  echo "Backup written: $BACKUP_ARCHIVE"
-}
-
-rollback() {
-  if [ "$ROLLBACK_READY" -ne 1 ] || [ ! -f "$BACKUP_ARCHIVE" ]; then
-    echo "No backup available to restore."
-    return 1
-  fi
-  echo "Restoring $BACKUP_ARCHIVE"
-  # storage/ is not in the archive. Exclude it on extract as well so a
-  # rollback cannot overwrite or restore it.
-  tar -C / -xzf "$BACKUP_ARCHIVE" \
-    --exclude="${APP_DIR#/}/storage" \
-    --exclude="${APP_DIR#/}/storage/*"
-  if [ -f "$APP_DIR/artisan" ]; then
-    (cd "$APP_DIR" && "$PHP_BIN" artisan optimize:clear) || true
-  fi
-}
-
-cleanup() {
-  local status=$?
-  if [ "$status" -ne 0 ]; then
-    rollback 2>&1 | tee -a "$LOG_FILE" || true
-  fi
-  if [ -f "$APP_DIR/artisan" ]; then
-    (cd "$APP_DIR" && "$PHP_BIN" artisan up) 2>&1 | tee -a "$LOG_FILE" || true
-  fi
-  echo "Deploy finished with status $status"
-  exit "$status"
-}
-trap cleanup EXIT
-
-backup_release
-
-cd "$APP_DIR"
-if [ -n "${MAINTENANCE_SECRET:-}" ]; then
-  "$PHP_BIN" artisan down --retry=60 --secret="$MAINTENANCE_SECRET"
-else
-  "$PHP_BIN" artisan down --retry=60
-fi
-
-# --delete removes stale application files. It does not delete excluded
-# paths unless --delete-excluded is added. Do not add --delete-excluded:
-# that would remove .env, .htaccess, storage/, uploads, and public/hot.
-# Never point --delete at public_html.
 rsync -a --delete \
   --exclude '.env' \
   --exclude '.env.*' \
+  --exclude '.git/' \
   --exclude '.htaccess' \
   --exclude 'public/.htaccess' \
-  --exclude '.git/' \
-  --exclude 'node_modules/' \
-  --exclude 'storage/' \
-  --exclude 'bootstrap/cache/*.php' \
   --exclude 'public/hot' \
   --exclude 'public/uploads/' \
+  --exclude 'public/robots.txt' \
+  --exclude 'storage/' \
+  --exclude 'bootstrap/cache/*.php' \
+  --exclude 'node_modules/' \
+  --exclude 'vendor/' \
   --exclude 'deploy-config.sh' \
+  --exclude '.idea/' \
+  --exclude '.vscode/' \
   "$SOURCE_DIR/" "$APP_DIR/"
-
-cd "$APP_DIR"
-"$PHP_BIN" "$COMPOSER_BIN" install \
-  --no-dev \
-  --optimize-autoloader \
-  --no-interaction \
-  --no-scripts
-
-# Compiled assets. --delete is limited to build/, never to public_html or uploads.
-mkdir -p "$APP_DIR/public/build" "$PUBLIC_DIR/build"
-rsync -a --delete "$SOURCE_DIR/public/build/" "$APP_DIR/public/build/"
-rsync -a --delete "$SOURCE_DIR/public/build/" "$PUBLIC_DIR/build/"
-
-publish_static_public() {
-  local dir
-  for dir in css js fonts images favicon_io; do
-    if [ -d "$APP_DIR/public/$dir" ]; then
-      mkdir -p "$PUBLIC_DIR/$dir"
-      rsync -a "$APP_DIR/public/$dir/" "$PUBLIC_DIR/$dir/"
-    fi
-  done
-}
-
-publish_static_public
-
-# Git-managed public entry points. .htaccess and robots.txt are not in this list.
-for file in index.php bootstrap-path.php favicon.ico; do
-  cp -a "$APP_DIR/public/$file" "$PUBLIC_DIR/$file"
-done
-
-cd "$APP_DIR"
-# Drop generated caches before Artisan boots. A Windows config.php can
-# prevent artisan from starting, so do not rely on optimize:clear alone.
-find "$APP_DIR/bootstrap/cache" -type f ! -name '.gitignore' -delete
-find "$APP_DIR/storage/framework/views" -type f ! -name '.gitignore' -delete
-find "$APP_DIR/storage/framework/cache/data" -type f ! -name '.gitignore' -delete
-"$PHP_BIN" artisan optimize:clear
-"$PHP_BIN" artisan filament:upgrade
-publish_static_public
-"$PHP_BIN" artisan cms:optimize
-"$PHP_BIN" artisan filament:optimize
-"$PHP_BIN" artisan queue:restart
-
-echo "Code deployment complete. Database migrations were not run."
 ```
 
+Web files are then published to both `{APP_DIR}/public/` and `{PUBLIC_DIR}/`:
+
+- `build/` with `rsync -a --delete`
+- `css/`, `js/`, `fonts/`, `images/`, `favicon_io/` with `rsync -a` and no `--delete`
+- `favicon.ico` and the other `favicon*` files with `cp -f`
+- `index.php` and `bootstrap-path.php` with `cp -f`
+
+`robots.txt` is not in that list. `publish_static_public()` still copies `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/` from `{APP_DIR}/public/` to `public_html/` after `filament:upgrade`.
+
+After `queue:restart`, the script checks that these paths still exist:
+
+- `$APP_DIR/.env`
+- `$APP_DIR/storage`
+- `$APP_DIR/storage/app`
+- `$APP_DIR/storage/logs`
+- `$PUBLIC_DIR/uploads`
+- `$PUBLIC_DIR/.htaccess`
+
+A missing path exits 1. The `EXIT` trap then restores the release archive and runs `artisan up`. An empty `uploads/` directory is logged as a warning and does not fail the deploy. The log ends with `Code deployment complete. Database migrations were not run.`
 `rsync` must be available on the server. **TO VERIFY ON SERVER** (`which rsync`). If it is missing, stop and install it through the host. Do not replace this sync with a copy of the whole `public_html` tree.
 
 `rsync --delete` for `build/` runs twice, once into `{APP_DIR}/public/build/` (what Laravel's `public_path()` reads) and once into `public_html/build/` (what Apache serves). Both sources are the Git checkout. Neither command may be pointed at `public_html/` or `uploads/`.
@@ -919,7 +733,7 @@ These files must:
 - never be committed
 - never have their secrets pasted into this guide, tickets, or deploy logs
 
-`.env.*` is under the same rule. `.env.example` remains tracked and must not be copied over a server `.env`. `.gitignore` matches `.env`, and the index still lists `.env` until the removal is committed.
+`.env.*` is under the same rule. `.env.example` remains tracked and must not be copied over a server `.env`. `.gitignore` matches `.env`. The index does not list `.env`.
 
 `.gitignore` already contains:
 
@@ -1014,9 +828,9 @@ Trailing slashes are enforced by `App\Http\Middleware\EnsureTrailingSlash`. If a
 
 ### `robots.txt`
 
-`public/robots.txt` is tracked. The committed file is a local development copy: it disallows many crawlers and ends with `Sitemap: http://localhost:8000/sitemap.xml`. Deployment does not copy it to `public_html`. There is no `robots.txt.deploy-preserve` marker.
+`public/robots.txt` is tracked. The committed file is a local development copy. Deploy excludes `public/robots.txt` from the app rsync and does not `cp` it to `{APP_DIR}/public/` or `public_html/`. There is no `robots.txt.deploy-preserve` marker.
 
-`App\Services\WebsiteSettingService::syncRobotsTxt()` writes `robots.txt` to `public_path('robots.txt')`, which is `{APP_DIR}/public/robots.txt`, not automatically `public_html/robots.txt`. **TO VERIFY ON SERVER** which file the live site is serving. Do not replace one environment's `robots.txt` with the other's.
+`App\Services\WebsiteSettingService::syncRobotsTxt()` writes `public_path('robots.txt')`, which is `{APP_DIR}/public/robots.txt`. Apache serves `{PUBLIC_DIR}/robots.txt`. Those are different files. A CMS save updates the core copy. It does not by itself update `public_html/robots.txt`. Do not replace one environment's file with the other's.
 
 ---
 
@@ -1032,7 +846,7 @@ Trailing slashes are enforced by `App\Http\Middleware\EnsureTrailingSlash`. If a
 | `{APP_DIR}/bootstrap/` directory | Application bootstrap. `bootstrap/cache/*.php` is not copied from Git |
 | `{PUBLIC_DIR}/uploads/` and `public/uploads/` | User and CMS media |
 | `public/hot` | Excluded. Deploy does not copy it and does not delete it |
-| `{PUBLIC_DIR}/robots.txt` | Not copied from Git |
+| `{APP_DIR}/public/robots.txt` and `{PUBLIC_DIR}/robots.txt` | CMS-owned. Not copied from Git |
 | `deploy-config.sh`, backups, deploy logs | Outside Git |
 
 ### Deployed from Git, then adjusted on Linux
@@ -1052,12 +866,12 @@ Trailing slashes are enforced by `App\Http\Middleware\EnsureTrailingSlash`. If a
 |---|---|
 | `.env`, `.env.*` | Permanent server-only files |
 | `.htaccess`, `public/.htaccess` | Permanent server-only files. Live copies differ by environment |
-| `node_modules/` | Not required on the server. Currently tracked by mistake |
+| `node_modules/` | Not required on the server. Not tracked |
 | `public/hot` | Vite dev-server marker. Excluded from every sync |
 | `bootstrap/cache/*.php` from Git or Windows | Breaks Linux paths. Rebuilt on the server |
 | `public/uploads/*` from Git | Would replace live media. Git has no media files |
 | `storage/` | Server runtime and private files. Not synced |
-| `public/robots.txt` | Tracked local development copy. Not copied to `public_html` |
+| `public/robots.txt` | Tracked local development copy. Not copied to either public directory |
 | `deploy-config.sh` | Server-only |
 
 ---
@@ -1187,6 +1001,8 @@ Order:
 5. Run the migration manually against that environment.
 6. Verify the application again.
 
+On shared hosting without SSH, the cron-job method in [Appendix A.8](#a8--site-returned-http-500-after-deploy-missing-database-table) is the most reliable way to run migrations. Always delete the cron job after the migration log shows success.
+
 Staging:
 
 ```bash
@@ -1290,37 +1106,27 @@ The deploy script's `queue:restart` only signals workers that are already runnin
 
 ## 24. Repository hygiene before the first Git deploy
 
-`.gitignore` already lists `.env` and `.env.*`, and `!.env.example` keeps the template tracked. The index still lists `.env` until that removal is committed. Do not treat that index change as a deployment step. Deployment must still never copy, overwrite, delete, or synchronize the server files.
+These paths are not in the Git index. `.gitignore` keeps them out. Do not add them back.
 
-Do the following on `staging` before cPanel clones the repository. Each command removes a path from the index and leaves the working file on disk.
+| Path | Rule |
+|---|---|
+| `.env`, `.env.*` | Server-only. `.env.example` stays tracked |
+| `/vendor` | Built on the server by `composer install` |
+| `/node_modules` | Not used on the server |
+| `/public/hot` | Local Vite marker. A file may still exist on a developer machine |
+| `/public/uploads/*` | CMS media. `public/uploads/.gitignore` stays tracked |
+| `/storage/media-library/` | Spatie temporary conversions |
+| `/storage/public/` | Not a disk this application writes. Do not commit files here |
+| `/storage/app/old-submissions/**` | Private CSV imports. The directory's `.gitignore` stays tracked |
+| `/deploy-config.sh` | Server-only. Commit `deploy-config.sh.example` only |
 
-`public/hot` (required):
-
-```bash
-git rm --cached public/hot
-```
-
-`node_modules/` (required before clone; the directory is large and must not be deployed):
-
-```bash
-git rm -r --cached node_modules
-```
-
-`vendor/` (required so Linux Composer, not a Windows tree, is the runtime):
-
-```bash
-git rm -r --cached vendor
-```
-
-`.gitignore` already lists `.env`, `.env.*`, `!.env.example`, `/node_modules`, `/vendor`, and `/deploy-config.sh`. Add `/public/hot` when `public/hot` is removed from the index.
-
-Commit the `public/hot`, `node_modules`, and `vendor` index removals together with that ignore update. Push `staging`, deploy and verify staging, then merge to `main`.
-
-The future `deploy.sh` still excludes `.env`, `.env.*`, `node_modules`, `public/hot`, and Windows cache files, and it still runs Composer on the server. Excluding `.env` does not change the server file. Removing `node_modules` and `vendor` from Git avoids a multi-thousand-file checkout and avoids a Windows `vendor/` directory being what PHP loads if Composer fails halfway.
+`deploy.sh` excludes `.env`, `.env.*`, `node_modules/`, `vendor/`, `public/hot`, `public/uploads/`, `public/robots.txt`, `storage/`, and `bootstrap/cache/*.php`. Excluding `.env` does not change the server file. Composer on the server is what builds `vendor/`.
 
 ---
 
 ## 25. Troubleshooting
+
+The initial staging setup exposed several issues that are not obvious from the runtime troubleshooting alone. See [Appendix A](#appendix-a--deployment-issues-encountered-and-fixes) for the full list, root causes, and fixes.
 
 ### Malformed folders named like `C:\...`
 
@@ -1451,3 +1257,237 @@ Expected behaviour is a lock refusal. Wait for the first log to finish. Do not d
 - Editing live secrets.
 
 Those stay manual, on the specific server, by an administrator who can see that server's Terminal output.
+
+---
+
+## Appendix A — Deployment issues encountered and fixes
+
+Record of the first staging setup. Apply the same checks on production before the first `main` deploy.
+
+### A.1 — cPanel clone created on `main`, not `staging`
+
+**Symptom** — The staging repository showed "Currently Checked-Out Branch: main". A deploy from that checkout would have published `main` onto `dev.ibntech.com`.
+
+**Root cause** — cPanel Git Version Control does not reliably clone a chosen branch from a `#branch` suffix on the Clone URL. The clone uses the repository default branch.
+
+**Diagnostic** — In the clone directory:
+
+```bash
+git rev-parse --abbrev-ref HEAD
+```
+
+The cPanel repository page also shows "Currently Checked-Out Branch".
+
+**Fix** — Create the cPanel repository without a `#branch` suffix. Switch the checked-out branch to `staging` in the cPanel UI. If the UI will not switch it, delete the clone and create it again, then confirm the branch before **Deploy HEAD Commit**. The production clone stays on `main`.
+
+### A.2 — Deploy HEAD Commit did nothing
+
+**Symptom** — **Deploy HEAD Commit** changed nothing. "Last Deployment Information" stayed "Last Deployed on: Not available." No file appeared in `/home/devtech/deploy-logs/`.
+
+**Root cause** — Two separate failures.
+
+1. `.cpanel.yml` invoked `/bin/bash deploy.sh` with a relative path. cPanel does not guarantee that deployment tasks start in the repository root. When `deploy.sh` was not found, cPanel recorded no deployment.
+2. After that path was fixed, `deploy.sh` took the lock before it opened the log. A lock left by an earlier failed run made the script exit before any log line was written.
+
+**Diagnostic** — "Last Deployed on" remained "Not available." `/home/devtech/deploy-logs/` stayed empty. After logging was moved first, the next failure appeared in that directory.
+
+**Fix** —
+
+1. Invoke the script from `$PWD`:
+
+```yaml
+---
+deployment:
+  tasks:
+    - /bin/sed -i 's/\r$//' $PWD/deploy.sh
+    - /bin/bash $PWD/deploy.sh
+```
+
+The `sed` task strips a Windows CRLF ending from `deploy.sh` before bash reads it.
+
+2. Open the log file before any check, lock, or validation. Each later `die` appends to that log and to stderr. Take the lock only after logging is running.
+3. Replace immediate `flock -n` with `flock -w "$LOCK_WAIT_SECONDS"` so a short overlap waits instead of failing at once.
+4. After the lock is acquired, write the deploy PID into the lock file. On the next run, if `kill -0` shows that PID is dead, remove the lock and continue. If the PID is missing, non-numeric, or its liveness is uncertain, do not delete the lock. Exit with a log line that names the file.
+
+Until this order was in place, a failed deploy left no log.
+
+### A.3 — `/usr/local/bin/php84` does not exist
+
+**Symptom** — The deploy log ended with `PHP was not found at: /usr/local/bin/php84`.
+
+**Root cause** — cPanel EasyApache names the binary `ea-phpXX`, not `phpXX`. The path in `deploy-config.sh` was wrong.
+
+**Diagnostic** — A temporary `check-paths.php` in `public_html/` tested each candidate with `file_exists()` and `is_executable()`. Delete that file after the check. See [A.9](#a9--diagnostic-helper-scripts).
+
+**Fix** — Set `PHP_BIN` in the server-only `deploy-config.sh`. On this host:
+
+```bash
+PHP_BIN="/usr/local/bin/ea-php84"
+```
+
+### A.4 — Composer is not installed on the shared host
+
+**Symptom** — After `PHP_BIN` was corrected, the deploy log ended with `Composer was not found at: /home/devtech/composer.phar`.
+
+**Root cause** — The shared host does not provide Composer. `shell_exec()` is disabled, so the usual `php -r "copy(...)"` installer cannot be run from the deploy script.
+
+**Diagnostic** — The deploy log named the missing `COMPOSER_BIN` path. A one-time `install-composer.php` in `public_html/` printed which download method succeeded.
+
+**Fix** — Place `install-composer.php` in `public_html/` once. It must:
+
+- Try `copy()` first.
+- Fall back to `curl` if `copy()` fails.
+- Fall back to `include` of the installer if `shell_exec` is disabled.
+- Print the result in the browser.
+- Be deleted from `public_html/` as soon as it succeeds.
+
+That run installed `/home/devtech/composer.phar`. Set `COMPOSER_BIN` in `deploy-config.sh` to that path.
+
+Do not install Composer from a cPanel cron that calls `copy('https://...')`. CLI PHP on this host has `allow_url_fopen` disabled, so that copy fails without a useful error. Use the web script when SSH is unavailable.
+
+### A.5 — Deploy lock held by a previous failed run
+
+**Symptom** — After the path, PHP, and Composer fixes, the deploy exited with `Another deployment holds /home/devtech/deploy-configs/staging/deploy.lock`. Before logging was reordered, the same condition exited with no message and no log.
+
+**Root cause** — A failed deploy left the lock file on disk. Linux releases `flock` when the process exits, but the file remains. The next deploy tried to take the same lock and stopped.
+
+**Diagnostic** — The log line names `/home/devtech/deploy-configs/staging/deploy.lock`. If no log exists, the script still exited before the log was opened (see [A.2](#a2--deploy-head-commit-did-nothing)).
+
+**Fix** — In `deploy.sh`:
+
+1. Acquire the lock with `flock -w 30`.
+2. Write the acquiring PID into the lock file. Before the next acquire, read that PID and run `kill -0`. If the process is dead, remove the lock file and continue. If the process is alive, stop and log the PID. If the PID is missing, empty, or non-numeric, do not delete the lock. Exit with a log line that says why.
+
+### A.6 — CRLF in `deploy-config.sh` broke variable values
+
+**Symptom** — The first deploy that reached `source` logged:
+
+```text
+.../deploy-config.sh: line 4: $'\r': command not found
+.../deploy-config.sh: line 7: $'\r': command not found
+Staging config APP_DIR is not /home/devtech/ibntech-core
+```
+
+**Root cause** — `deploy-config.sh` was saved on Windows with CRLF endings. Bash kept the trailing `\r` on each value, so `APP_DIR` was `/home/devtech/ibntech-core\r`.
+
+**Diagnostic** — The `$'\r': command not found` lines identify the config file. The following equality failure names `APP_DIR`.
+
+**Fix** —
+
+1. Recreate `deploy-config.sh` in cPanel File Manager so the editor writes LF. Do not paste it from a Windows editor.
+2. Strip CRLF in `deploy.sh` immediately before `source "$CONFIG_FILE"`:
+
+```bash
+if [ -w "$CONFIG_FILE" ]; then
+  if ! /bin/sed -i 's/\r$//' "$CONFIG_FILE"; then
+    echo "WARNING: could not strip CRLF from $CONFIG_FILE"
+  fi
+fi
+```
+
+A later run on an LF file does not change it. If the file is not writable, log a warning and continue.
+
+3. `.cpanel.yml` runs `/bin/sed -i 's/\r$//' $PWD/deploy.sh` before bash, so a Windows-saved `deploy.sh` does not break the task.
+
+### A.7 — Web assets reached `public_html/` and not `{APP_DIR}/public/`
+
+**Symptom** — The deploy finished and the site responded, but some pages and admin views kept stale assets. File Manager showed new timestamps under `public_html/build/`, `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/`. The same paths under `ibntech-core/public/` were older.
+
+**Root cause** — The publish block wrote compiled assets only to `$PUBLIC_DIR`. It did not write them to `$APP_DIR/public/`. `public_path()` is `{APP_DIR}/public`, so a read of `public_path('build/manifest.json')` could see an old manifest. `filament:upgrade` writes into `{APP_DIR}/public/`, and `publish_static_public()` then copies that output to `$PUBLIC_DIR`. The earlier static set (`build/`, `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, and the tracked static files) was not written to `{APP_DIR}/public/` in that same pass.
+
+**Diagnostic** — Compare mtimes of `public_html/build/manifest.json` and `{APP_DIR}/public/build/manifest.json`.
+
+**Fix** — Publish each static asset to both `$APP_DIR/public/` and `$PUBLIC_DIR/`:
+
+- `build/` — `rsync -a --delete` to both destinations
+- `css/`, `js/`, `fonts/`, `images/`, `favicon_io/` — `rsync -a` to both
+- `favicon.ico` and the other favicon files — `cp -f` to both
+
+`robots.txt` was in that copy list when this fix was applied. The current `deploy.sh` does not copy it. See [robots.txt](#robotstxt).
+
+Leave the post-`filament:upgrade` `publish_static_public()` call in place. It copies the new Filament files from `{APP_DIR}/public/` to `$PUBLIC_DIR/`.
+
+Keep `--delete` on `build/` only. Do not point it at `public_html/`, `public_html/uploads/`, or the rest of the application tree.
+
+### A.8 — Site returned HTTP 500 after deploy: missing database table
+
+**Symptom** — The deploy log ended with `Code deployment complete. Database migrations were not run.` The host answered, and every public request returned HTTP 500. The response was the framework error page.
+
+**Root cause** — `deploy.sh` does not run migrations. Migration files in the release had not been applied on the staging database. The first request queried a table that was not there.
+
+**Diagnostic** — Read `{APP_DIR}/storage/logs/laravel-YYYY-MM-DD.log`. The staging failure was:
+
+```text
+[YYYY-MM-DD HH:MM:SS] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'devtech_ibntech_laravel_12.analytics_excluded_ips' doesn't exist (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: devtech_ibntech_laravel_12, SQL: select `ip_address` from `analytics_excluded_ips` where `is_enabled` = 1 order by `id` asc)
+```
+
+The exception came from `App\Services\Analytics\ExcludedIpMatcher::rules()`, called by `App\Http\Middleware\TrackPublicPageView`. `public_html/` has no copy of this log.
+
+**Fix** — After the code deploy is verified, run migrations for that environment only. On a host without SSH, use one of these methods. Prefer them in this order.
+
+**Way 1 — cPanel Cron Job (one-time)**
+
+Used on staging. No SSH and no route change. The job runs once and writes a log. Delete it as soon as that log shows the migration output.
+
+In cPanel → Cron Jobs → Add New Cron Job:
+
+- Common Settings: `Once Per Minute (* * * * *)`. Delete the cron as soon as it has run.
+- Command (staging, PHP 8.4 EasyApache):
+
+```bash
+/usr/local/bin/ea-php84 /home/devtech/ibntech-core/artisan migrate --force >> /home/devtech/deploy-logs/migrate-staging.log 2>&1
+```
+
+- Command (production, same host layout, different account):
+
+```bash
+/usr/local/bin/ea-php84 /home/ibntech/ibntech-core/artisan migrate --force >> /home/ibntech/deploy-logs/migrate-production.log 2>&1
+```
+
+If `deploy-config.sh` records a different `PHP_BIN`, use that path instead of `/usr/local/bin/ea-php84`.
+
+Do not leave the cron in place. A leftover job runs migrations every minute.
+
+**Way 2 — Temporary secret web route**
+
+Use this only when the route is already in the deployed code and checks a token. Add `DEPLOY_MIGRATE_TOKEN` (a random string, 40–80 characters) to the server `.env` only. Visit:
+
+```text
+https://dev.ibntech.com/deploy/migrate/YOUR_TOKEN/
+```
+
+The route reads the token from `.env` on the request, compares it with the URL, and calls `Artisan::call('migrate', ['--force' => true])`. The response is the migration output as plain text. Remove the token from `.env` immediately afterward. Do not ship the route without that check. An open `migrate` URL can take over the site.
+
+**Way 3 — One-time PHP file in `public_html/`**
+
+Last resort. Put `run-migrate.php` in `public_html/`, require a query-string secret, and run:
+
+```php
+exec("$PHP_BIN $APP_DIR/artisan migrate --force 2>&1")
+```
+
+Print the output. Delete the file immediately after. Do not leave it in the document root.
+
+**Verification**
+
+- Reload the site. Pages must render.
+- `{APP_DIR}/storage/logs/laravel-*.log` must not gain new `42S02` lines.
+- `/admin` must render with its styles.
+
+The deploy log is supposed to end with:
+
+```text
+Code deployment complete. Database migrations were not run.
+```
+
+That line is intentional. Migrations stay outside `deploy.sh`.
+
+### A.9 — Diagnostic helper scripts
+
+**Symptom** — None. This records the temporary tools used during setup.
+
+**Root cause** — SSH was not available, so path checks and the Composer install had to run from the document root.
+
+**Diagnostic** — `check-paths.php` tested PHP binary candidates. `install-composer.php` installed Composer. Both lived in `public_html/` only for that check.
+
+**Fix** — Delete both files as soon as they succeed. Remove any later one-time script from `public_html/` before calling the deploy finished. A diagnostic script left on the public site is a security exposure.

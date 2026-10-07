@@ -2,10 +2,24 @@
 
 Comprehensive, step-by-step production deployment documentation for the **IBN Technologies Laravel CMS Platform**. This guide details how to deploy, configure, secure, and maintain the application in a cPanel hosting environment for both **Main Domain** (`production`) and **Staging Subdomain** (`staging`).
 
-Related media-focused guides:
+Related guides:
 
+- [`docs/DEPLOYMENT-GitHub-GUIDE.md`](DEPLOYMENT-GitHub-GUIDE.md) — Git deploy. `deploy.sh` is the release path
 - [`docs/media-uploads-deployment.md`](media-uploads-deployment.md) — environment-specific `MEDIA_*` setup
 - [`docs/media-library-architecture.md`](media-library-architecture.md) — disk layout, path map, and migration options
+
+The live layout is two cPanel accounts. Staging and production do not share a home directory, and neither document root is `ibntech-core/public`.
+
+| | Staging | Production |
+|---|---|---|
+| Account home | `/home/devtech/` | `/home/ibntech/` |
+| Domain | `dev.ibntech.com` | `ibntech.com` and `www.ibntech.com` |
+| Laravel core | `/home/devtech/ibntech-core/` | `/home/ibntech/ibntech-core/` |
+| Document root | `/home/devtech/public_html/` | `/home/ibntech/public_html/` |
+| Media (`MEDIA_ROOT`) | `/home/devtech/public_html/uploads` | `/home/ibntech/public_html/uploads` |
+| Git clone | `/home/devtech/repositories/ibntech-laravel` (`staging`) | Branch `main`. Path **TO VERIFY ON SERVER**. Not `public_html` and not `ibntech-core` |
+
+`public/bootstrap-path.php` maps those hosts to those core paths. Local `localhost` / `127.0.0.1` uses the directory above `public/`.
 
 ---
 
@@ -71,58 +85,50 @@ Ensure the following PHP extensions are enabled in cPanel (**PHP Select** or **M
 
 ---
 
-## 2. cPanel Deployment Architecture Options
+## 2. cPanel directory layout
 
-By default, cPanel assigns `public_html` as the web root for the primary domain. Hosting a Laravel application directly inside `public_html` without separating sensitive core files creates security risks (exposing `.env`, `storage/logs`, and source code).
+cPanel assigns `public_html` as the web root. The Laravel core stays outside that directory. Do not point a domain's document root at `ibntech-core` or `ibntech-core/public`. Those directories hold `.env`, `storage/`, `vendor/`, and application code.
 
-Choose one of the two recommended architecture options below.
+Staging and production are separate accounts. There is no `ibntech-staging` directory and no `public_html/dev` document root.
 
-> Replace `USER` with your cPanel username, and adjust hostnames (`ibntech.com`, `dev.ibntech.com`) to match the live DNS configuration.
+### Staging — `/home/devtech/`
 
-### Architecture A: Secure Core Separation (RECOMMENDED)
-
-Core application files are placed **above** `public_html` in a private directory, and only the contents of Laravel's `public/` folder are placed inside `public_html`.
-
-```
-/home/USER/
-├── ibntech/                          <-- Core Production Laravel Files (NOT web-accessible)
+```text
+/home/devtech/
+├── ibntech-core/                     Laravel application (not web-accessible)
 │   ├── app/
 │   ├── bootstrap/
-│   ├── config/
-│   ├── database/
-│   ├── resources/
-│   ├── routes/
+│   ├── public/                       Laravel public_path(); not the Apache root
 │   ├── storage/
-│   ├── vendor/
+│   ├── vendor/                       created by composer install on the server
 │   └── .env
-│
-├── ibntech-staging/                  <-- Core Staging Laravel Files (NOT web-accessible)
-│   └── ...
-│
-└── public_html/                      <-- Document Root (Web-accessible)
-    ├── build/                        <-- Vite output assets (manifest.json, CSS, JS)
-    ├── favicon_io/                   <-- Favicon package
-    ├── uploads/                      <-- Direct Media Root (MEDIA_ROOT)
-    ├── web-img/                      <-- Static marketing / error images (if used)
-    ├── .htaccess                     <-- Rewrite & cache control
-    ├── bootstrap-path.php            <-- Dynamic Base Path Resolver
-    ├── index.php                     <-- Clean Entry Point (uses bootstrap-path.php)
-    ├── robots.txt                    <-- Managed via Website Settings (optional overwrite)
-    └── favicon.ico
+├── public_html/                      Document root for dev.ibntech.com
+│   ├── build/
+│   ├── css/  js/  fonts/  images/  favicon_io/
+│   ├── uploads/                      MEDIA_ROOT
+│   ├── .htaccess                     server-only; deploy does not replace it
+│   ├── bootstrap-path.php
+│   ├── index.php
+│   └── robots.txt                    Apache copy; CMS writes the core public/robots.txt
+└── repositories/ibntech-laravel/     Git clone, branch staging
 ```
 
-> [!TIP]
-> This structure guarantees that sensitive configuration files (including `.env`) are physically located outside the web root and cannot be accessed via a web browser. With `bootstrap-path.php`, `index.php` does not need hardcoded path edits per environment — only the host → path map in `bootstrap-path.php` must match your server layout.
+### Production — `/home/ibntech/`
 
-### Architecture B: Custom Document Root (cPanel Domains Manager)
+```text
+/home/ibntech/
+├── ibntech-core/                     Laravel application (not web-accessible)
+│   └── .env
+├── public_html/                      Document root for ibntech.com
+│   ├── build/
+│   ├── uploads/                      MEDIA_ROOT
+│   ├── .htaccess
+│   ├── bootstrap-path.php
+│   └── index.php
+└── repositories/                     Git clone, branch main (path TO VERIFY ON SERVER)
+```
 
-If your cPanel account permits changing the Document Root for the main domain or subdomain (available under **Domains** in modern cPanel installations):
-
-1. Upload the entire Laravel codebase to `/home/USER/ibntech`.
-2. Change the Document Root of the domain to `/home/USER/ibntech/public`.
-3. Set `MEDIA_ROOT` to the absolute path of that public uploads directory (e.g. `/home/USER/ibntech/public/uploads`).
-
-Architecture B is simpler operationally; Architecture A is preferred when the primary domain Document Root cannot leave `public_html`.
+`deploy.sh` publishes Git web files to both `ibntech-core/public/` and `public_html/`. It does not copy `.env`, `.htaccess`, `storage/`, `public/uploads/`, `public/hot`, or `robots.txt`. Media stays in `public_html/uploads/` because `MEDIA_ROOT` is an absolute path there. Locally, `MEDIA_ROOT=public/uploads` is relative to the project root.
 
 ---
 
@@ -176,7 +182,7 @@ CACHE_STORE=database
 
 # Dedicated Spatie Media Library Disk (no storage:link required)
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/uploads
+MEDIA_ROOT=/home/ibntech/public_html/uploads
 MEDIA_URL=/uploads
 # MEDIA_PREFIX=
 # MEDIA_FALLBACK_PATH=media/miscellaneous/{YYYY}/{MM}
@@ -220,14 +226,14 @@ MEDIA_URL=/uploads
 #### 2. Staging Environment
 ```env
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/dev/uploads
+MEDIA_ROOT=/home/devtech/public_html/uploads
 MEDIA_URL=/uploads
 ```
 
 #### 3. Production Environment
 ```env
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/uploads
+MEDIA_ROOT=/home/ibntech/public_html/uploads
 MEDIA_URL=/uploads
 ```
 
@@ -331,7 +337,7 @@ These commands bake absolute filesystem paths from your local machine (for examp
 
 **Always include:**
 
-- `vendor/` *(if you cannot run Composer on the server)*
+- Do not upload `vendor/` or `node_modules/`. `deploy.sh` runs `composer install` on the server. Neither directory is tracked in Git.
 - `public/build/` *(required — Vite production assets)*
 - `public/uploads/.gitignore` *(directory scaffolding; do not wipe existing production uploads on update)*
 
@@ -355,15 +361,16 @@ These commands bake absolute filesystem paths from your local machine (for examp
 #### 1. Upload & Extract Core Code
 
 - Open cPanel **File Manager**.
-- Navigate to your home directory (`/home/USER/`).
+- Code releases use Git and `deploy.sh`. See `docs/DEPLOYMENT-GitHub-GUIDE.md`. The archive steps below are only for a first manual placement.
+- Staging home is `/home/devtech/`. Production home is `/home/ibntech/`.
 - Upload the deployment archive.
-- Extract the archive to `/home/USER/ibntech/`.
+- Extract the archive to `/home/ibntech/ibntech-core/`.
 
 #### 2. Move Public Assets to `public_html`
 
-- Go inside `/home/USER/ibntech/public/`.
-- Select **ALL** files and folders (including hidden files like `.htaccess`).
-- Move/copy them into `/home/USER/public_html/`.
+- Go inside `/home/ibntech/ibntech-core/public/`.
+- Copy `index.php`, `bootstrap-path.php`, `build/`, `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/` into `/home/ibntech/public_html/`.
+- Do not replace an existing `public_html/.htaccess`, `public_html/uploads/`, or `public_html/robots.txt`. On staging, use `/home/devtech/ibntech-core/public/` and `/home/devtech/public_html/` the same way.
 
 > [!CAUTION]
 > On subsequent deploys, **do not overwrite** or delete `public_html/uploads/` — that directory contains live media. Sync only code and `build/` assets unless you intentionally restore media from backup.
@@ -441,7 +448,7 @@ $app->handleRequest(Request::capture());
 
 The application enforces trailing slashes via `EnsureTrailingSlash` middleware (301). Laravel’s default `public/.htaccess` *removes* trailing slashes for non-directories, which can conflict on some hosts.
 
-For production document roots using Architecture A, prefer rewrite rules that **do not strip** trailing slashes from application routes, and that exclude static asset paths. Example Apache rules (adapt as needed; keep Authorization / XSRF header handling from the project `.htaccess`):
+For the `public_html` document root, prefer rewrite rules that do not strip trailing slashes from application routes, and that exclude static asset paths. Example Apache rules (adapt as needed; keep Authorization / XSRF header handling from the live server `.htaccess`, which deploy does not replace):
 
 ```apache
 <IfModule mod_rewrite.c>
@@ -491,12 +498,12 @@ For production document roots using Architecture A, prefer rewrite rules that **
 
 ### Step 3: Environment Setup & Encryption Key
 
-1. Inside `/home/USER/ibntech/`, create a `.env` file.
+1. Inside `/home/ibntech/ibntech-core/`, create a `.env` file.
 2. Paste the production configuration from [Section 3](#3-environment-configuration-env).
 3. Open cPanel **Terminal** (or connect via SSH) and generate a secure `APP_KEY`:
 
 ```bash
-cd /home/USER/ibntech
+cd /home/ibntech/ibntech-core
 php artisan key:generate
 ```
 
@@ -507,7 +514,7 @@ php artisan key:generate
 Run database migrations and seed the default users, website settings, and demo CMS content (first install only — or seed selectively on empty databases):
 
 ```bash
-cd /home/USER/ibntech
+cd /home/ibntech/ibntech-core
 
 # Run migrations in production mode
 php artisan migrate --force
@@ -533,15 +540,15 @@ php artisan db:seed --force
 
 ### Step 5: Media Storage Setup & Migration
 
-Spatie Media Library stores uploaded media (featured images, OG images, logos, PDFs for case studies/ebooks, content-block images) under `MEDIA_ROOT` (e.g. `/home/USER/public_html/uploads`).
+Spatie Media Library stores uploaded media (featured images, OG images, logos, PDFs for case studies/ebooks, content-block images) under `MEDIA_ROOT` (e.g. `/home/ibntech/public_html/uploads`).
 
 **No symbolic links (`php artisan storage:link`) are required for media serving.** Apache/Nginx serves files directly from the uploads directory.
 
 #### Ensure uploads directory exists
 
 ```bash
-mkdir -p /home/USER/public_html/uploads
-chmod 755 /home/USER/public_html/uploads
+mkdir -p /home/ibntech/public_html/uploads
+chmod 755 /home/ibntech/public_html/uploads
 ```
 
 #### Migrating existing legacy media
@@ -549,7 +556,7 @@ chmod 755 /home/USER/public_html/uploads
 If migrating from an installation that used `storage/app/public` (legacy `public` disk):
 
 ```bash
-cd /home/USER/ibntech
+cd /home/ibntech/ibntech-core
 
 # Preview changes
 php artisan media:migrate-to-uploads-disk --dry-run
@@ -582,19 +589,19 @@ Incorrect file permissions will trigger `500 Internal Server Error` or prevent u
 
 ```bash
 # Directories set to 755
-find /home/USER/ibntech -type d -exec chmod 755 {} \;
-find /home/USER/public_html -type d -exec chmod 755 {} \;
+find /home/ibntech/ibntech-core -type d -exec chmod 755 {} \;
+find /home/ibntech/public_html -type d -exec chmod 755 {} \;
 
 # Files set to 644
-find /home/USER/ibntech -type f -exec chmod 644 {} \;
-find /home/USER/public_html -type f -exec chmod 644 {} \;
+find /home/ibntech/ibntech-core -type f -exec chmod 644 {} \;
+find /home/ibntech/public_html -type f -exec chmod 644 {} \;
 
 # Storage and Bootstrap Cache must be writable by the web server
-chmod -R 775 /home/USER/ibntech/storage
-chmod -R 775 /home/USER/ibntech/bootstrap/cache
+chmod -R 775 /home/ibntech/ibntech-core/storage
+chmod -R 775 /home/ibntech/ibntech-core/bootstrap/cache
 
 # Uploads must be writable for Filament / Spatie uploads
-chmod -R 775 /home/USER/public_html/uploads
+chmod -R 775 /home/ibntech/public_html/uploads
 ```
 
 Some shared hosts require `777` on `storage` / `bootstrap/cache` / `uploads` if the PHP user differs from the account owner — use the least privilege that works.
@@ -627,34 +634,17 @@ Confirm Vite assets are present at `public_html/build/manifest.json`.
 
 ---
 
-## 6. Staging Environment Setup
+## 6. Staging environment
 
-Deploying a staging subdomain (e.g., `dev.ibntech.com`) allows safe testing of code updates before releasing to production.
+Staging is the cPanel account `/home/devtech`, domain `dev.ibntech.com`, document root `/home/devtech/public_html`. It is not a folder named `public_html/dev` on the production account, and the core is not `ibntech-staging`.
 
-### Directory Layout for Staging
+The directory tree is in [section 2](#2-cpanel-directory-layout).
 
-```
-/home/USER/
-├── ibntech/                          <-- Production Core
-├── ibntech-staging/                  <-- Staging Core
-│
-└── public_html/                      <-- Web Document Root
-    ├── build/                        <-- Production Vite Assets
-    ├── uploads/                      <-- Production Uploads
-    ├── bootstrap-path.php            <-- Maps hosts → core paths
-    ├── index.php
-    └── dev/                          <-- Staging Document Root (if subdomain points here)
-        ├── build/                    <-- Staging Vite Assets
-        ├── uploads/                  <-- Staging Uploads
-        ├── bootstrap-path.php
-        └── index.php
-```
+### Staging configuration checklist
 
-### Staging Configuration Checklist
-
-1. **Subdomain Creation**: In cPanel, navigate to **Domains** → **Create A New Domain**. Set domain to `dev.ibntech.com` and Document Root to `public_html/dev` (or shared `public_html` if using host-based bootstrap only).
-2. **Dedicated Staging Database**: Create a separate MySQL database (e.g. `cpaneluser_ibn_stg`) and user. Never share the production database with staging.
-3. **Staging `.env` Configuration**:
+1. **Document root**: keep `dev.ibntech.com` on `/home/devtech/public_html`.
+2. **Dedicated staging database**: never share the production database. The database named in the first staging error log was `devtech_ibntech_laravel_12`.
+3. **Staging `.env`**: file `/home/devtech/ibntech-core/.env`.
 
 ```env
 APP_ENV=staging
@@ -663,7 +653,7 @@ APP_URL=https://dev.ibntech.com
 DB_DATABASE=cpaneluser_ibn_stg
 
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/dev/uploads
+MEDIA_ROOT=/home/devtech/public_html/uploads
 MEDIA_URL=/uploads
 
 TELESCOPE_ENABLED=false
@@ -678,7 +668,7 @@ RECAPTCHA_SECRET_KEY=...
 ```
 
 4. **Prevent Search Engine Indexing**: In Website Settings / SEO defaults for staging, set robots to `noindex, nofollow` (and ensure staging `robots.txt` disallows crawling) to avoid duplicate-content penalties.
-5. **Automatic Path Bootstrapping**: Ensure `bootstrap-path.php` maps `$host === 'dev.ibntech.com'` to `/home/USER/ibntech-staging`.
+5. **Path bootstrapping**: `public/bootstrap-path.php` already maps `dev.ibntech.com` to `/home/devtech/ibntech-core` and `ibntech.com` / `www.ibntech.com` to `/home/ibntech/ibntech-core`. Do not point it at `ibntech-staging`.
 
 ---
 
@@ -697,17 +687,23 @@ Set up a system Cron Job in cPanel to invoke Laravel's schedule runner every min
 2. Under **Common Settings**, select **Once Per Minute (`* * * * *`)**.
 3. Set the command to:
 
+Staging (`/home/devtech`, PHP 8.4 EasyApache):
+
 ```bash
-/usr/local/bin/php /home/USER/ibntech/artisan schedule:run >> /dev/null 2>&1
+/usr/local/bin/ea-php84 /home/devtech/ibntech-core/artisan schedule:run >> /dev/null 2>&1
 ```
 
-*(Replace `/usr/local/bin/php` with the explicit path to your cPanel PHP 8.2+ CLI binary if the default PHP differs. Confirm with `which php` or MultiPHP INI Editor.)*
+Production (`/home/ibntech`). Use that account's `PHP_BIN` from `deploy-config.sh` if it is not `ea-php84`:
+
+```bash
+/usr/local/bin/ea-php84 /home/ibntech/ibntech-core/artisan schedule:run >> /dev/null 2>&1
+```
 
 Optional Telescope prune (only if Telescope remains enabled):
 
 ```bash
 # Daily at 02:00 — example cron
-0 2 * * * /usr/local/bin/php /home/USER/ibntech/artisan telescope:prune --hours=48 >> /dev/null 2>&1
+0 2 * * * /usr/local/bin/php /home/ibntech/ibntech-core/artisan telescope:prune --hours=48 >> /dev/null 2>&1
 ```
 
 ---
@@ -727,7 +723,7 @@ Because standard cPanel shared hosting does not include Supervisor, use one of t
 Run a cron job every 1–5 minutes to process queued jobs and exit cleanly:
 
 ```bash
-/usr/local/bin/php /home/USER/ibntech/artisan queue:work database --queue=media,default --stop-when-empty --tries=3 --timeout=900 >> /dev/null 2>&1
+/usr/local/bin/php /home/ibntech/ibntech-core/artisan queue:work database --queue=media,default --stop-when-empty --tries=3 --timeout=900 >> /dev/null 2>&1
 ```
 
 - `--stop-when-empty`: Processes pending jobs then exits (low memory footprint).
@@ -741,13 +737,13 @@ If your host supports Supervisor (`/etc/supervisor/conf.d/ibntech-worker.conf`):
 ```ini
 [program:ibntech-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /home/USER/ibntech/artisan queue:work database --queue=media,default --sleep=3 --tries=3 --timeout=900 --max-time=3600
+command=php /home/ibntech/ibntech-core/artisan queue:work database --queue=media,default --sleep=3 --tries=3 --timeout=900 --max-time=3600
 autostart=true
 autorestart=true
 user=USER
 numprocs=1
 redirect_stderr=true
-stdout_logfile=/home/USER/ibntech/storage/logs/worker.log
+stdout_logfile=/home/ibntech/ibntech-core/storage/logs/worker.log
 stopwaitsecs=3600
 ```
 
@@ -794,7 +790,7 @@ Complete this verification protocol immediately following every production relea
 ### Security Hardening Spot-Checks
 
 - [ ] `APP_DEBUG=false`, `DEBUGBAR_ENABLED=false`, `TELESCOPE_ENABLED=false` (or Telescope gated).
-- [ ] `.env` is **not** web-accessible (Architecture A / custom document root).
+- [ ] `.env` is not web-accessible. It lives in `ibntech-core/`, not in `public_html/`.
 - [ ] Default seeder passwords changed.
 - [ ] Production reCAPTCHA keys are hostname-correct.
 
@@ -862,7 +858,7 @@ php artisan media:migrate-to-uploads-disk
 **Solution**:
 
 ```bash
-cd /home/USER/ibntech
+cd /home/ibntech/ibntech-core
 php artisan filament:upgrade
 php artisan optimize:clear
 php artisan cms:optimize
@@ -1015,7 +1011,7 @@ php artisan down --secret="ibn-deploy-2026"
 To deploy incremental code updates:
 
 ```bash
-cd /home/USER/ibntech
+cd /home/ibntech/ibntech-core
 
 # 1. Put application into maintenance mode
 php artisan down --secret="ibn-maintenance-key"
@@ -1049,14 +1045,14 @@ php artisan up
 Set up automated daily database backups via cPanel Cron Job (or cPanel Backup / JetBackup):
 
 ```bash
-mkdir -p /home/USER/backups
-mysqldump -u cpaneluser_ibnuser -p'SecureProductionPassword123!' cpaneluser_ibntech | gzip > /home/USER/backups/db_backup_$(date +\%Y\%m\%d_\%H\%M\%S).sql.gz
+mkdir -p /home/ibntech/deploy-backups
+mysqldump -u cpaneluser_ibnuser -p'SecureProductionPassword123!' cpaneluser_ibntech | gzip > /home/ibntech/deploy-backups/db_backup_$(date +\%Y\%m\%d_\%H\%M\%S).sql.gz
 ```
 
 Also back up the media tree independently — databases do not contain binary uploads:
 
 ```bash
-tar -czf /home/USER/backups/uploads_$(date +\%Y\%m\%d).tar.gz -C /home/USER/public_html uploads
+tar -czf /home/ibntech/deploy-backups/uploads_$(date +\%Y\%m\%d).tar.gz -C /home/ibntech/public_html uploads
 ```
 
 Retain off-site copies (external storage / object storage) for disaster recovery.
@@ -1093,7 +1089,7 @@ Examples:
 |---|---|---|
 | Local | project root | `storage/app/old-submissions/` |
 | Staging | `/home/devtech/ibntech-core` | `/home/devtech/ibntech-core/storage/app/old-submissions/` |
-| Production (Architecture A) | `/home/USER/ibntech` | `/home/USER/ibntech/storage/app/old-submissions/` |
+| Production | `/home/ibntech/ibntech-core` | `/home/ibntech/ibntech-core/storage/app/old-submissions/` |
 
 Do **not** place these files under `public/`, `public_html/`, or `uploads/`. They contain personal form data and must stay gitignored. Only `.csv` files in that directory are processed.
 

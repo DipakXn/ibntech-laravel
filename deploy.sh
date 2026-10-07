@@ -58,6 +58,19 @@ if [ ! -r "$CONFIG_FILE" ]; then
   die "Cannot read $CONFIG_FILE (permissions?)"
 fi
 
+# The config file lives only on the server and may have been edited on
+# Windows. Strip any CRLF line endings so bash does not see a literal \r
+# at the end of every line. Only do this if the file is writable; if not,
+# log a warning and continue (the source call will still work if the file
+# happens to be LF already).
+if [ -w "$CONFIG_FILE" ]; then
+  if ! /bin/sed -i 's/\r$//' "$CONFIG_FILE"; then
+    echo "WARNING: could not strip CRLF from $CONFIG_FILE (sed failed). Continuing anyway."
+  fi
+else
+  echo "WARNING: $CONFIG_FILE is not writable; CRLF stripping skipped."
+fi
+
 # shellcheck disable=SC1090
 source "$CONFIG_FILE" || die "Failed to read $CONFIG_FILE"
 

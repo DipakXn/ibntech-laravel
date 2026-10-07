@@ -3,10 +3,37 @@ set -euo pipefail
 
 # cPanel sometimes runs without HOME set
 if [ -z "${HOME:-}" ]; then
-  export HOME="$(cd ~ && pwd)"
+  if ! HOME="$(cd ~ && pwd)"; then
+    printf '%s\n' "Refusing to deploy: HOME is unset and ~ could not be resolved." >&2
+    exit 1
+  fi
+  export HOME
 fi
 
-SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOCK_WAIT_SECONDS=30
+LOG_FILE=""
+BACKUP_ARCHIVE=""
+ROLLBACK_READY=0
+
+die() {
+  local msg="$1"
+  if [ -n "${LOG_FILE:-}" ]; then
+    printf '%s\n' "$msg" >> "$LOG_FILE" || true
+  fi
+  printf '%s\n' "$msg" >&2
+  exit 1
+}
+
+open_deploy_log() {
+  local dir="${1%/}"
+  mkdir -p "$dir" || die "Cannot create log directory $dir"
+  LOG_FILE="$dir/deploy-$(date +%Y%m%d-%H%M%S).log"
+  : > "$LOG_FILE" || die "Cannot write $LOG_FILE"
+  exec > >(tee -a "$LOG_FILE") 2>&1
+  echo "Logging to $LOG_FILE"
+}
+
+SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" || die "Cannot resolve deploy.sh directory."
 
 case "${HOME:-}" in
   /home/devtech)
@@ -16,90 +43,74 @@ case "${HOME:-}" in
     CONFIG_FILE="/home/ibntech/deploy-configs/production/deploy-config.sh"
     ;;
   *)
-    echo "Refusing to deploy: unknown HOME '${HOME:-}'." >&2
-    exit 1
+    if [ -n "${HOME:-}" ] && mkdir -p "${HOME}/deploy-logs" 2>/dev/null; then
+      open_deploy_log "${HOME}/deploy-logs"
+    fi
+    die "Refusing to deploy: unknown HOME '${HOME:-}'."
     ;;
 esac
 
+# Log before config, path checks, and the lock. Failures above this line
+# have no account log directory yet.
+open_deploy_log "${HOME}/deploy-logs"
+
 if [ ! -r "$CONFIG_FILE" ]; then
-  echo "Cannot read $CONFIG_FILE (permissions?)" >&2
-  exit 1
+  die "Cannot read $CONFIG_FILE (permissions?)"
 fi
 
 # shellcheck disable=SC1090
-source "$CONFIG_FILE"
+source "$CONFIG_FILE" || die "Failed to read $CONFIG_FILE"
 
-: "${DEPLOY_ENV:?}"
-: "${APP_DIR:?}"
-: "${PUBLIC_DIR:?}"
-: "${PHP_BIN:?}"
-: "${COMPOSER_BIN:?}"
-: "${BACKUP_DIR:?}"
-: "${LOG_DIR:?}"
-: "${LOCK_FILE:?}"
+for required_var in DEPLOY_ENV APP_DIR PUBLIC_DIR PHP_BIN COMPOSER_BIN BACKUP_DIR LOG_DIR LOCK_FILE; do
+  if [ -z "${!required_var:-}" ]; then
+    die "Missing ${required_var} in $CONFIG_FILE"
+  fi
+done
+
+if [ "${LOG_DIR%/}" != "${HOME}/deploy-logs" ]; then
+  echo "LOG_DIR is ${LOG_DIR%/}; switching to that log directory."
+  open_deploy_log "$LOG_DIR"
+fi
 
 if [ "$PHP_BIN" = "TO_VERIFY_ON_SERVER" ] || [ "$COMPOSER_BIN" = "TO_VERIFY_ON_SERVER" ]; then
-  echo "Set PHP_BIN and COMPOSER_BIN in $CONFIG_FILE before deploying." >&2
-  exit 1
+  die "Set PHP_BIN and COMPOSER_BIN in $CONFIG_FILE before deploying."
 fi
 
 if [ "$HOME" = "/home/devtech" ] && [ "$APP_DIR" != "/home/devtech/ibntech-core" ]; then
-  echo "Staging config APP_DIR is not /home/devtech/ibntech-core" >&2
-  exit 1
+  die "Staging config APP_DIR is not /home/devtech/ibntech-core"
 fi
 
 if [ "$HOME" = "/home/ibntech" ] && [ "$APP_DIR" != "/home/ibntech/ibntech-core" ]; then
-  echo "Production config APP_DIR is not /home/ibntech/ibntech-core" >&2
-  exit 1
+  die "Production config APP_DIR is not /home/ibntech/ibntech-core"
 fi
 
 if [ "$HOME" = "/home/devtech" ] && [ "$PUBLIC_DIR" != "/home/devtech/public_html" ]; then
-  echo "Staging config PUBLIC_DIR is not /home/devtech/public_html" >&2
-  exit 1
+  die "Staging config PUBLIC_DIR is not /home/devtech/public_html"
 fi
 
 if [ "$HOME" = "/home/ibntech" ] && [ "$PUBLIC_DIR" != "/home/ibntech/public_html" ]; then
-  echo "Production config PUBLIC_DIR is not /home/ibntech/public_html" >&2
-  exit 1
+  die "Production config PUBLIC_DIR is not /home/ibntech/public_html"
 fi
 
 if [ "$APP_DIR" = "$PUBLIC_DIR" ] || [ "$APP_DIR" = "$SOURCE_DIR" ]; then
-  echo "APP_DIR must be separate from PUBLIC_DIR and from the Git clone." >&2
-  exit 1
+  die "APP_DIR must be separate from PUBLIC_DIR and from the Git clone."
 fi
 
 if [[ "$APP_DIR" == *public_html* ]] || [[ "$PUBLIC_DIR" == *ibntech-core* ]]; then
-  echo "Refusing to swap the core directory and the document root." >&2
-  exit 1
+  die "Refusing to swap the core directory and the document root."
 fi
 
 for required in "$APP_DIR/artisan" "$APP_DIR/.env" "$PUBLIC_DIR/index.php" "$PUBLIC_DIR/uploads"; do
   if [ ! -e "$required" ]; then
-    echo "Missing required path: $required" >&2
-    exit 1
+    die "Missing required path: $required"
   fi
 done
 
 if [ ! -x "$PHP_BIN" ]; then
-  echo "PHP_BIN is not executable: $PHP_BIN" >&2
-  exit 1
+  die "PHP_BIN is not executable: $PHP_BIN"
 fi
 
-mkdir -p "$BACKUP_DIR" "$LOG_DIR" "$(dirname "$LOCK_FILE")"
-
-exec 9>"$LOCK_FILE"
-if ! flock -n 9; then
-  echo "Another deployment holds $LOCK_FILE" >&2
-  exit 1
-fi
-
-LOG_FILE="$LOG_DIR/deploy-$(date +%Y%m%d-%H%M%S).log"
-exec > >(tee -a "$LOG_FILE") 2>&1
-
-echo "Deploy started: env=$DEPLOY_ENV host=${SITE_HOST:-unknown} commit=$(git -C "$SOURCE_DIR" rev-parse HEAD)"
-
-BACKUP_ARCHIVE="$BACKUP_DIR/release-$(date +%Y%m%d-%H%M%S).tar.gz"
-ROLLBACK_READY=0
+mkdir -p "$BACKUP_DIR" "$(dirname "$LOCK_FILE")" || die "Cannot create backup or lock directories."
 
 backup_release() {
   local item
@@ -157,13 +168,61 @@ cleanup() {
   if [ "$status" -ne 0 ]; then
     rollback 2>&1 | tee -a "$LOG_FILE" || true
   fi
-  if [ -f "$APP_DIR/artisan" ]; then
+  if [ -f "${APP_DIR:-}/artisan" ]; then
     (cd "$APP_DIR" && "$PHP_BIN" artisan up) 2>&1 | tee -a "$LOG_FILE" || true
   fi
   echo "Deploy finished with status $status"
   exit "$status"
 }
 trap cleanup EXIT
+
+acquire_deploy_lock() {
+  local lock_pid="" kill_msg="" kill_rc=0
+
+  if [ -f "$LOCK_FILE" ]; then
+    lock_pid="$(head -n 1 "$LOCK_FILE" 2>/dev/null || true)"
+    lock_pid="${lock_pid//$'\r'/}"
+    lock_pid="${lock_pid#"${lock_pid%%[![:space:]]*}"}"
+    lock_pid="${lock_pid%"${lock_pid##*[![:space:]]}"}"
+
+    if [ -z "$lock_pid" ]; then
+      echo "Lock file $LOCK_FILE has no PID. Refusing to delete it."
+    elif [[ ! "$lock_pid" =~ ^[0-9]+$ ]]; then
+      echo "Lock file $LOCK_FILE PID is not numeric. Refusing to delete it."
+    else
+      set +e
+      kill_msg="$(kill -0 "$lock_pid" 2>&1)"
+      kill_rc=$?
+      set -e
+      if [ "$kill_rc" -eq 0 ]; then
+        echo "Deploy lock PID $lock_pid is still running. Not deleting $LOCK_FILE."
+      elif printf '%s\n' "$kill_msg" | grep -qi 'no such process'; then
+        echo "WARNING: stale deploy lock. PID $lock_pid is not running. Removing $LOCK_FILE"
+        rm -f -- "$LOCK_FILE" || die "Could not remove stale lock $LOCK_FILE"
+      else
+        echo "WARNING: PID check for $lock_pid was uncertain (${kill_msg:-exit $kill_rc}). Refusing to delete $LOCK_FILE."
+      fi
+    fi
+  fi
+
+  touch "$LOCK_FILE" || die "Cannot create $LOCK_FILE"
+  # Do not truncate before flock. A live holder still owns this inode.
+  exec 9<>"$LOCK_FILE" || die "Cannot open $LOCK_FILE"
+
+  echo "Waiting up to ${LOCK_WAIT_SECONDS}s for $LOCK_FILE"
+  if ! flock -w "$LOCK_WAIT_SECONDS" 9; then
+    die "Another deployment still holds $LOCK_FILE after ${LOCK_WAIT_SECONDS}s. Exiting."
+  fi
+
+  printf '%s\n' "$$" > "$LOCK_FILE" || die "Could not record PID in $LOCK_FILE"
+  echo "Lock acquired by PID $$ on $LOCK_FILE"
+}
+
+acquire_deploy_lock
+
+echo "Deploy started: env=$DEPLOY_ENV host=${SITE_HOST:-unknown} commit=$(git -C "$SOURCE_DIR" rev-parse HEAD)"
+
+BACKUP_ARCHIVE="$BACKUP_DIR/release-$(date +%Y%m%d-%H%M%S).tar.gz"
 
 backup_release
 

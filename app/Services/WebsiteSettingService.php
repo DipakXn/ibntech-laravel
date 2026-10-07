@@ -14,14 +14,23 @@ class WebsiteSettingService
     public function get(): WebsiteSetting
     {
         return Cache::rememberForever(self::CACHE_KEY, function (): WebsiteSetting {
-            $settings = WebsiteSetting::query()->first();
-
-            if (! $settings) {
-                $settings = WebsiteSetting::query()->create($this->defaultAttributes());
-            }
-
-            return $settings;
+            return $this->current();
         });
+    }
+
+    /**
+     * The singleton cache is forever. robots.txt must follow the saved row
+     * even when that cache still holds an older copy.
+     */
+    public function current(): WebsiteSetting
+    {
+        $settings = WebsiteSetting::query()->first();
+
+        if (! $settings) {
+            $settings = WebsiteSetting::query()->create($this->defaultAttributes());
+        }
+
+        return $settings;
     }
 
     public function refresh(): WebsiteSetting
@@ -121,7 +130,21 @@ class WebsiteSettingService
 
     public function syncRobotsTxt(?WebsiteSetting $settings = null): void
     {
-        $settings ??= $this->get();
+        if ($settings instanceof WebsiteSetting) {
+            $this->replaceStaleCache($settings);
+        }
+
+        $path = public_path('robots.txt');
+
+        if (File::exists($path)) {
+            File::delete($path);
+        }
+    }
+
+    public function robotsTxtContents(?WebsiteSetting $settings = null): string
+    {
+        $settings ??= $this->current();
+        $this->replaceStaleCache($settings);
         $contents = $settings->robots_txt;
 
         if ($contents === null || trim($contents) === '') {
@@ -131,13 +154,26 @@ class WebsiteSettingService
         $addSitemap = (bool) ($settings->sitemap_enabled ?? true)
             && (bool) ($settings->sitemap_add_to_robots ?? true);
 
-        $contents = RobotsTxtSitemapDirective::apply(
+        return RobotsTxtSitemapDirective::apply(
             $contents,
             $addSitemap,
             $addSitemap ? url('/sitemap.xml') : null,
         );
+    }
 
-        File::put(public_path('robots.txt'), rtrim($contents)."\n");
+    private function replaceStaleCache(WebsiteSetting $settings): void
+    {
+        $cached = Cache::get(self::CACHE_KEY);
+
+        if (
+            $cached instanceof WebsiteSetting
+            && (string) $cached->robots_txt === (string) $settings->robots_txt
+            && (string) $cached->updated_at === (string) $settings->updated_at
+        ) {
+            return;
+        }
+
+        Cache::forever(self::CACHE_KEY, $settings);
     }
 
     /**

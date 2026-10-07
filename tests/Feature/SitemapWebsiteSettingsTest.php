@@ -43,18 +43,6 @@ class SitemapWebsiteSettingsTest extends TestCase
 
     public function test_administrator_can_save_sitemap_settings_without_writing_unsafe_robots_rules(): void
     {
-        File::partialMock()
-            ->shouldReceive('put')
-            ->once()
-            ->withArgs(function (string $path, string $contents): bool {
-                return $path === public_path('robots.txt')
-                    && str_contains($contents, 'User-agent: *')
-                    && str_contains($contents, 'Disallow: /keep-this')
-                    && str_contains($contents, 'Sitemap: http://localhost/sitemap.xml')
-                    && substr_count(strtolower($contents), 'sitemap:') === 1;
-            })
-            ->andReturnTrue();
-
         $admin = $this->administrator();
         $this->seedWebsiteSettings([
             'robots_txt' => "User-agent: *\nDisallow: /keep-this\n",
@@ -85,15 +73,17 @@ class SitemapWebsiteSettingsTest extends TestCase
         $this->assertSame(120, (int) $settings->sitemap_cache_ttl);
         $this->assertSame('/guides/custom/?ref=sitemap', $settings->sitemap_custom_urls[0]['url']);
         $this->assertSame("User-agent: *\nDisallow: /keep-this\n", $settings->robots_txt);
+        $this->assertFileDoesNotExist(public_path('robots.txt'));
+
+        $robots = $this->get('/robots.txt');
+        $robots->assertOk();
+        $robots->assertSee("User-agent: *\nDisallow: /keep-this", false);
+        $robots->assertSee('Sitemap: http://localhost/sitemap.xml', false);
+        $this->assertSame(1, substr_count(strtolower($robots->getContent()), 'sitemap:'));
     }
 
     public function test_administrator_can_disable_global_sitemap_via_filament(): void
     {
-        File::partialMock()
-            ->shouldReceive('put')
-            ->once()
-            ->andReturnTrue();
-
         $this->administrator();
         $this->seedWebsiteSettings();
         $this->createPublishedPage('about-us', 'About us');
@@ -218,8 +208,6 @@ class SitemapWebsiteSettingsTest extends TestCase
 
     public function test_robots_txt_sitemap_directive_follows_sitemap_settings(): void
     {
-        File::partialMock()->shouldReceive('put')->times(3)->andReturnTrue();
-
         $this->administrator();
         $this->seedWebsiteSettings([
             'robots_txt' => "User-agent: *\nDisallow: /keep-this\n",

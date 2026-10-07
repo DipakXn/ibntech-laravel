@@ -14,29 +14,13 @@ use App\Http\Controllers\PressReleaseController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\WhitePaperController;
 use App\Services\WebsiteSettingService;
-use App\Support\Sitemap\RobotsTxtSitemapDirective;
 use App\Support\Sitemap\SitemapType;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/robots.txt', function (WebsiteSettingService $settings) {
-    $record = $settings->get();
-    $contents = $record->robots_txt;
-
-    if ($contents === null || trim($contents) === '') {
-        $contents = "User-agent: *\nDisallow:\n";
-    }
-
-    $addSitemap = (bool) ($record->sitemap_enabled ?? true)
-        && (bool) ($record->sitemap_add_to_robots ?? true);
-
-    $contents = RobotsTxtSitemapDirective::apply(
-        $contents,
-        $addSitemap,
-        $addSitemap ? url('/sitemap.xml') : null,
-    );
-
-    return response(rtrim($contents)."\n", 200, [
+    return response($settings->robotsTxtContents(), 200, [
         'Content-Type' => 'text/plain; charset=UTF-8',
+        'Cache-Control' => 'no-cache, private',
     ]);
 })->name('robots');
 

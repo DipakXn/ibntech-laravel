@@ -16,6 +16,10 @@
     # Trailing slashes are enforced by Laravel EnsureTrailingSlash.
     # Do not strip them here; that fights Laravel and causes redirect loops.
 
+    # Website Settings owns this response. A leftover public/robots.txt
+    # must not be served in place of the current database value.
+    RewriteRule ^robots\.txt$ index.php [L]
+
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

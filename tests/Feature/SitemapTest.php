@@ -10,6 +10,7 @@ use App\Models\Newsletter;
 use App\Models\Page;
 use App\Models\WebsiteSetting;
 use App\Services\WebsiteSettingService;
+use Illuminate\Support\Facades\Cache;
 use Tests\Support\UsesIsolatedSqliteSchema;
 use Tests\TestCase;
 
@@ -371,6 +372,30 @@ class SitemapTest extends TestCase
         $response->assertSee("User-agent: *\nDisallow: /secret\nAllow: /", false);
         $response->assertSee('Sitemap: http://localhost/sitemap.xml', false);
         $this->assertSame(1, substr_count(strtolower($response->getContent()), 'sitemap:'));
+    }
+
+    public function test_robots_txt_uses_the_latest_database_row_instead_of_a_stale_cache(): void
+    {
+        $settings = $this->seedWebsiteSettings([
+            'robots_txt' => "User-agent: *\nDisallow: /outdated\n",
+        ]);
+
+        $settings->robots_txt = "User-agent: *\nDisallow:\n";
+        $settings->save();
+
+        $stale = WebsiteSetting::query()->findOrFail($settings->id);
+        $stale->robots_txt = "User-agent: *\nDisallow: /outdated\n";
+        Cache::forever(WebsiteSettingService::CACHE_KEY, $stale);
+
+        $response = $this->get('/robots.txt');
+
+        $response->assertOk();
+        $response->assertSee("User-agent: *\nDisallow:\n", false);
+        $response->assertDontSee('Disallow: /outdated', false);
+        $this->assertSame(
+            "User-agent: *\nDisallow:\n",
+            Cache::get(WebsiteSettingService::CACHE_KEY)->robots_txt,
+        );
     }
 
     public function test_urls_follow_configured_app_url_not_a_hardcoded_domain(): void

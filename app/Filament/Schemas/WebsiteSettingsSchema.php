@@ -243,7 +243,7 @@ class WebsiteSettingsSchema
                         ->label('robots.txt Contents')
                         ->rows(8)
                         ->columnSpanFull()
-                        ->helperText('Saved to public/robots.txt when you save these settings.'),
+                        ->helperText('Published at /robots.txt from this field when the page is requested.'),
                 ])
                 ->columns(2),
         ];

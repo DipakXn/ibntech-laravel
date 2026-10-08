@@ -7,6 +7,7 @@ use App\Models\Industry;
 use App\Models\LandingPage;
 use App\Models\Newsletter;
 use App\Models\Page;
+use App\Support\ApplicationUrl;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -22,11 +23,12 @@ class SeoService
         $siteName = $siteDefaults['og_site_name'] ?? config('app.name');
         $defaultOgImage = $siteDefaults['og_image'] ?? null;
         $ogImageSource = $this->resolveOgImageSource($model, $seoMeta, $featuredImage, $defaultOgImage);
+        $ogImageSource['url'] = $this->environmentAssetUrl($ogImageSource['url']);
 
         if ($seoMeta) {
             $twitterImageSource = $this->resolveTwitterImageSource($model, $seoMeta, $ogImageSource);
             $ogImage = $ogImageSource['url'];
-            $twitterImage = $twitterImageSource['url'];
+            $twitterImage = $this->environmentAssetUrl($twitterImageSource['url']);
 
             $robotsParts = [];
             $robotsParts[] = $seoMeta->robots_index ?? ($siteDefaults['robots_index'] ?? 'index');
@@ -63,7 +65,7 @@ class SeoService
                 'twitter_creator' => $seoMeta->twitter_creator ?: ($siteDefaults['twitter_creator'] ?? null),
                 'twitter_site' => $seoMeta->twitter_site ?: ($siteDefaults['twitter_site'] ?? null),
 
-                'canonical_url' => $seoMeta->canonical_url ?: url()->current(),
+                'canonical_url' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
 
                 'robots' => $seoMeta->custom_meta_robots ?: $robots,
 
@@ -122,14 +124,14 @@ class SeoService
         $this->current['sitemap_include'] = false;
 
         if (is_string($canonicalUrl) && $canonicalUrl !== '') {
-            $this->current['canonical_url'] = $canonicalUrl;
+            $this->current['canonical_url'] = ApplicationUrl::canonical($canonicalUrl);
         }
     }
 
     public function current(): array
     {
         $seo = array_merge($this->defaults(), $this->current, [
-            'canonical_url' => $this->current['canonical_url'] ?? url()->current(),
+            'canonical_url' => ApplicationUrl::canonical($this->current['canonical_url'] ?? null),
         ]);
 
         $seo['og_locale'] = $this->normalizeOgLocale($seo['og_locale'] ?? null);
@@ -253,10 +255,10 @@ class SeoService
                 '@type' => 'BlogPosting',
                 'headline' => $seoMeta->meta_title ?? ($model->title ?? ($siteDefaults['meta_title'] ?? config('app.name'))),
                 'description' => $seoMeta->meta_description ?? ($siteDefaults['meta_description'] ?? null),
-                'url' => $seoMeta->canonical_url ?? url()->current(),
+                'url' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
                 'mainEntityOfPage' => [
                     '@type' => 'WebPage',
-                    '@id' => $seoMeta->canonical_url ?? url()->current(),
+                    '@id' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
                 ],
                 'datePublished' => $seoMeta->published_at?->toIso8601String()
                     ?? $this->modelPublishedAt($model)
@@ -271,6 +273,8 @@ class SeoService
                     'name' => $organizationName,
                 ],
             ];
+
+            $ogImage = $this->environmentAssetUrl(is_string($ogImage) ? $ogImage : null);
 
             if (! empty($ogImage)) {
                 $data['image'] = [
@@ -594,11 +598,28 @@ class SeoService
             $url = url($url);
         }
 
-        if (str_starts_with($url, 'http://')) {
+        $appUrl = strtolower((string) config('app.url'));
+
+        if (str_starts_with($url, 'http://') && str_starts_with($appUrl, 'https://')) {
             $url = 'https://'.substr($url, 7);
         }
 
         return str_starts_with($url, 'https://') ? $url : null;
+    }
+
+    protected function environmentAssetUrl(?string $url): ?string
+    {
+        $url = $this->nonEmptyString($url);
+
+        if ($url === null) {
+            return null;
+        }
+
+        if (str_starts_with($url, '/') || ApplicationUrl::isSameSiteUrl($url)) {
+            return ApplicationUrl::toApplicationUrl($url);
+        }
+
+        return $url;
     }
 
     protected function firstMedia(object $model, string $collection): ?Media

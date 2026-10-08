@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Services\WordPress\LinkRewriter;
 use App\Support\Html\HtmlToBlocks;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -13,10 +14,12 @@ class BlockContent
         $usedAnchors = [];
         $fallbackIndex = 1;
         $prepared = [];
+        $links = new LinkRewriter;
 
         foreach (HtmlToBlocks::expandHtmlCodeWorkspaces(self::normalize($content)) as $block) {
             $type = $block['type'] ?? null;
             $data = $block['data'] ?? [];
+            $data = is_array($data) ? $links->rewriteData($data) : $data;
 
             if ($type === 'heading') {
                 $level = in_array($data['level'] ?? 'h2', ['h2', 'h3', 'h4'], true) ? $data['level'] : 'h2';

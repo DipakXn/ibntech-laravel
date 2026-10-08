@@ -18,7 +18,6 @@ class NewsletterSeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'vCISO-as-a-Service: Executive Cyber Leadership Without the Full-Time Cost',
                     'meta_description' => 'How IBN helped a global hospitality enterprise strengthen governance, improve risk visibility, and achieve compliance readiness across multiple properties.',
-                    'canonical_url' => 'https://www.ibntech.com/newsletter/vciso-as-a-service/',
                 ],
             ],
             [
@@ -27,7 +26,6 @@ class NewsletterSeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Securing Enterprise AI: Data Protection, Prompt Integrity, and Governance at Scale',
                     'meta_description' => 'As generative AI embeds itself into enterprise operations, the security model is shifting from static vulnerabilities to dynamic, behavior-driven risks. Traditional controls alone are no longer sufficient.',
-                    'canonical_url' => 'https://www.ibntech.com/newsletter/securing-enterprise-ai-data-protection-prompt-integrity-and-governance-at-scale/',
                 ],
             ],
             [
@@ -36,7 +34,6 @@ class NewsletterSeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Cloud Misconfiguration Insights: Why Secure Architectures Still Fail in AWS & Azure',
                     'meta_description' => 'Cloud platforms provide robust, secure-by-design infrastructure. Yet most real-world incidents are not caused by platform weaknesses—but by misconfigurations in identity, storage, and network controls.',
-                    'canonical_url' => 'https://www.ibntech.com/newsletter/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure/',
                 ],
             ],
         ];
@@ -62,7 +59,6 @@ class NewsletterSeeder extends Seeder
                         'meta_description' => $newsletterData['seo']['meta_description'],
                         'og_title' => $newsletterData['seo']['meta_title'],
                         'og_description' => $newsletterData['seo']['meta_description'],
-                        'canonical_url' => $newsletterData['seo']['canonical_url'] ?? null,
                     ]
                 );
             }

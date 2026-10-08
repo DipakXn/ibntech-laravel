@@ -275,7 +275,7 @@
                         In the dynamic business landscape of New York City,
                         <strong>IBN Technologies</strong>
                         provides
-                        <a href="https://www.ibntech.com/blog/outsourced-bookkeeping-in-new-york/">expert bookkeeping services</a>
+                        <a href="{{ route('blog.show', ['slug' => 'outsourced-bookkeeping-in-new-york']) }}">expert bookkeeping services</a>
                         designed to navigate the complexities of local tax laws and business regulations. Our skilled team combines advanced software with deep industry knowledge to ensure your financials are accurate, compliant, and stress-free. We specialize in New York tax laws, understanding the nuances specific to your industry, and tailor our services to meet the unique demands of NYC businesses.
                     </p>
                 </div>

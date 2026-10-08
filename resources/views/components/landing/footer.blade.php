@@ -49,9 +49,9 @@
         <div class="lp-footer__legal-inner">
             <p class="lp-footer__copyright">All Rights Reserved &copy; {{ now()->year }} IBN Technologies Ltd</p>
             <nav class="lp-footer__policies" aria-label="Legal">
-                <a href="https://ibntech.com/privacy-policy/">Privacy Policy</a>
+                <a href="{{ route('page.show', ['slug' => 'privacy-policy']) }}">Privacy Policy</a>
                 <span class="lp-footer__divider" aria-hidden="true">|</span>
-                <a href="https://ibntech.com/terms-of-use/">Terms and Conditions</a>
+                <a href="{{ route('page.show', ['slug' => 'terms-of-use']) }}">Terms and Conditions</a>
             </nav>
         </div>
     </div>

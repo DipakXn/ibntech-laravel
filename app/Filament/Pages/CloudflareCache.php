@@ -178,7 +178,7 @@ class CloudflareCache extends Page
                     ->schema([
                         TextInput::make('url')
                             ->label('URL')
-                            ->placeholder('https://www.ibntech.com/')
+                            ->placeholder(rtrim((string) config('app.url'), '/').'/')
                             ->required()
                             ->maxLength(2048)
                             ->rules(['required', 'string', 'max:2048', 'url:http,https'])

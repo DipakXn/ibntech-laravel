@@ -46,8 +46,8 @@ class SitemapUrlNormalizer
      * Whether a stored canonical allows the CMS public URL in the sitemap.
      *
      * Paths must match. Cross-host canonicals are allowed on non-production APP_URL
-     * hosts (local/staging) so imported production SEO data remains usable. On
-     * production, a canonical on a different host excludes the URL.
+     * hosts (local, dev, and staging) so imported production SEO data remains usable.
+     * On production, a canonical on a different host excludes the URL.
      */
     public static function cmsCanonicalMatchesPublicUrl(string $publicUrl, string $canonicalUrl): bool
     {
@@ -93,6 +93,10 @@ class SitemapUrlNormalizer
         }
 
         if (str_ends_with($host, '.test') || str_ends_with($host, '.localhost') || str_ends_with($host, '.local')) {
+            return true;
+        }
+
+        if (str_starts_with($host, 'dev.')) {
             return true;
         }
 

@@ -36,6 +36,10 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function hideSensitiveRequestDetails(): void
     {
+        Telescope::hideRequestHeaders([
+            'authorization',
+        ]);
+
         if ($this->app->environment('local')) {
             return;
         }
@@ -46,6 +50,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             'cookie',
             'x-csrf-token',
             'x-xsrf-token',
+            'authorization',
         ]);
     }
 

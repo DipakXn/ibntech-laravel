@@ -33,7 +33,7 @@ class EbookDownloadFormTest extends TestCase
             ->set('name', 'Jane Doe')
             ->set('email', 'jane@example.com')
             ->set('acceptedTerms', true)
-            ->set('pageUrl', 'https://example.com/ebooks/cloud-playbook')
+            ->set('pageUrl', 'https://example.com/ebook/cloud-playbook')
             ->call('submit')
             ->assertHasNoErrors()
             ->assertSet('submitted', true)
@@ -45,7 +45,7 @@ class EbookDownloadFormTest extends TestCase
         $this->assertDatabaseHas('form_submissions', [
             'email' => 'jane@example.com',
             'form_name' => 'ebook_download',
-            'page_url' => 'https://example.com/ebooks/cloud-playbook',
+            'page_url' => 'https://example.com/ebook/cloud-playbook',
         ]);
 
         $lead = Lead::query()->where('email', 'jane@example.com')->first();
@@ -68,7 +68,7 @@ class EbookDownloadFormTest extends TestCase
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'form_name' => 'ebook_download',
-            'page_url' => 'https://example.com/ebooks/cloud-playbook',
+            'page_url' => 'https://example.com/ebook/cloud-playbook',
             'payload' => [
                 'asset_type' => 'ebook',
                 'asset_slug' => 'cloud-playbook',

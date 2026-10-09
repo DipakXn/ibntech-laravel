@@ -140,11 +140,11 @@ enum CmsPreviewType: string
                 ? url('/')
                 : PathPageUrl::withTrailingSlash(url('/'.$slug)),
             self::Blog => PathPageUrl::withTrailingSlash(url('/blog/'.$slug)),
-            self::Article => PathPageUrl::withTrailingSlash(url('/articles/'.$slug)),
-            self::CaseStudy => PathPageUrl::withTrailingSlash(url('/case-studies/'.$slug)),
+            self::Article => PathPageUrl::withTrailingSlash(route('articles.show', ['slug' => $slug])),
+            self::CaseStudy => PathPageUrl::withTrailingSlash(route('case-studies.show', ['slug' => $slug])),
             self::PressRelease => PathPageUrl::withTrailingSlash(url('/pressrelease/'.$slug)),
-            self::Ebook => PathPageUrl::withTrailingSlash(url('/ebooks/'.$slug)),
-            self::WhitePaper => PathPageUrl::withTrailingSlash(url('/white-papers/'.$slug)),
+            self::Ebook => PathPageUrl::withTrailingSlash(route('ebooks.show', ['slug' => $slug])),
+            self::WhitePaper => PathPageUrl::withTrailingSlash(route('white-papers.show', ['slug' => $slug])),
             self::LandingPage => $model instanceof LandingPage
                 ? $model->publicUrl()
                 : PathPageUrl::withTrailingSlash(url('/lp/'.$slug)),

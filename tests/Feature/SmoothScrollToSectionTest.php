@@ -180,7 +180,7 @@ class SmoothScrollToSectionTest extends TestCase
         ]);
 
         $this->assertRendersOptInScrollMarkup(
-            $this->followingRedirects()->get('/articles/scroll-utility-article/')
+            $this->followingRedirects()->get('/article/scroll-utility-article/')
         );
     }
 
@@ -198,7 +198,7 @@ class SmoothScrollToSectionTest extends TestCase
         ]);
 
         $this->assertRendersOptInScrollMarkup(
-            $this->followingRedirects()->get('/case-studies/scroll-utility-case-study/')
+            $this->followingRedirects()->get('/case-study/scroll-utility-case-study/')
         );
     }
 
@@ -234,7 +234,7 @@ class SmoothScrollToSectionTest extends TestCase
         ]);
 
         $this->assertRendersOptInScrollMarkup(
-            $this->followingRedirects()->get('/ebooks/scroll-utility-ebook/')
+            $this->followingRedirects()->get('/ebook/scroll-utility-ebook/')
         );
     }
 
@@ -252,7 +252,7 @@ class SmoothScrollToSectionTest extends TestCase
         ]);
 
         $this->assertRendersOptInScrollMarkup(
-            $this->followingRedirects()->get('/white-papers/scroll-utility-white-paper/')
+            $this->followingRedirects()->get('/whitepapers/scroll-utility-white-paper/')
         );
     }
 }

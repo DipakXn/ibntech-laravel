@@ -5,6 +5,15 @@
 
     RewriteEngine On
 
+    # Allowlist trusted IPs — skip bot block for these
+    RewriteCond %{REMOTE_ADDR} ^45\.64\.87\.187$ [OR]
+    RewriteCond %{REMOTE_ADDR} ^114\.143\.174\.98$
+    RewriteRule .* - [S=1]
+    
+    # Block ALL bots (including Google and AI crawlers)
+    RewriteCond %{HTTP_USER_AGENT} (bot|crawler|spider|scraper|scan|fetch|slurp|googlebot|bingbot|yandex|baidu|gptbot|claudebot|ccbot|perplexity|bytespider) [NC]
+    RewriteRule .* - [F,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -15,6 +24,10 @@
 
     # Trailing slashes are enforced by Laravel EnsureTrailingSlash.
     # Do not strip them here; that fights Laravel and causes redirect loops.
+
+    # Website Settings owns this response. A leftover public/robots.txt
+    # must not be served in place of the current database value.
+    RewriteRule ^robots\.txt$ index.php [L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

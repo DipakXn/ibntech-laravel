@@ -34,10 +34,10 @@ class SitemapUrlCollector
      */
     private const RESERVED_PAGE_SLUGS = [
         'admin',
-        'articles',
+        'article',
         'blog',
-        'case-studies',
-        'ebooks',
+        'case-study',
+        'ebook',
         'ibn-tech-cms-login',
         'industry',
         'lp',
@@ -45,7 +45,7 @@ class SitemapUrlCollector
         'pressrelease',
         'press-releases',
         'preview',
-        'white-papers',
+        'whitepapers',
         'livewire',
         'storage',
         'up',

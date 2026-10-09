@@ -147,7 +147,9 @@ return [
 
         Watchers\ClientRequestWatcher::class => [
             'enabled' => env('TELESCOPE_CLIENT_REQUEST_WATCHER', true),
-            'ignore_hosts' => [],
+            'ignore_hosts' => [
+                'api.cloudflare.com',
+            ],
         ],
 
         Watchers\CommandWatcher::class => [

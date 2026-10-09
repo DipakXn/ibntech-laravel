@@ -164,7 +164,7 @@
             <div class="site-shell tmso-banner__inner">
                 <h2 id="tmso-banner-title">Download a Case Study on Our Treasury Management Services</h2>
                 <a
-                    href="https://www.ibntech.com/case-study/treasury-operations-for-pennsylvania-based-company/"
+                    href="{{ route('case-studies.show', ['slug' => 'treasury-operations-for-pennsylvania-based-company']) }}"
                     class="tmso-btn tmso-btn--green"
                 >
                     Free Download

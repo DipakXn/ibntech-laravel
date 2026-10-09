@@ -203,7 +203,7 @@ class PublicPageViewTrackingTest extends TestCase
         $this->get('/robots.txt');
         $this->get('/js/filament/forms/components/slider.js');
         $this->get('/livewire/update');
-        $this->get('/case-studies/example/download');
+        $this->get('/case-study/example/download');
         $this->get('/up');
         $this->browser()->get(app(CmsPreviewService::class)->signedUrl($draft))->assertOk();
 
@@ -284,11 +284,11 @@ class PublicPageViewTrackingTest extends TestCase
         return match ($type) {
             CmsPreviewType::Page => $slug === 'home' ? '/' : '/'.$slug.'/',
             CmsPreviewType::Blog => '/blog/'.$slug.'/',
-            CmsPreviewType::Article => '/articles/'.$slug.'/',
-            CmsPreviewType::CaseStudy => '/case-studies/'.$slug.'/',
+            CmsPreviewType::Article => '/article/'.$slug.'/',
+            CmsPreviewType::CaseStudy => '/case-study/'.$slug.'/',
             CmsPreviewType::PressRelease => '/pressrelease/'.$slug.'/',
-            CmsPreviewType::Ebook => '/ebooks/'.$slug.'/',
-            CmsPreviewType::WhitePaper => '/white-papers/'.$slug.'/',
+            CmsPreviewType::Ebook => '/ebook/'.$slug.'/',
+            CmsPreviewType::WhitePaper => '/whitepapers/'.$slug.'/',
             CmsPreviewType::LandingPage => '/lp/'.$slug.'/',
             CmsPreviewType::Newsletter => '/newsletter/'.$slug.'/',
             CmsPreviewType::Industry => '/industry/'.$slug.'/',

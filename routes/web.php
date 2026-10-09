@@ -14,29 +14,13 @@ use App\Http\Controllers\PressReleaseController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\WhitePaperController;
 use App\Services\WebsiteSettingService;
-use App\Support\Sitemap\RobotsTxtSitemapDirective;
 use App\Support\Sitemap\SitemapType;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/robots.txt', function (WebsiteSettingService $settings) {
-    $record = $settings->get();
-    $contents = $record->robots_txt;
-
-    if ($contents === null || trim($contents) === '') {
-        $contents = "User-agent: *\nDisallow:\n";
-    }
-
-    $addSitemap = (bool) ($record->sitemap_enabled ?? true)
-        && (bool) ($record->sitemap_add_to_robots ?? true);
-
-    $contents = RobotsTxtSitemapDirective::apply(
-        $contents,
-        $addSitemap,
-        $addSitemap ? url('/sitemap.xml') : null,
-    );
-
-    return response(rtrim($contents)."\n", 200, [
+    return response($settings->robotsTxtContents(), 200, [
         'Content-Type' => 'text/plain; charset=UTF-8',
+        'Cache-Control' => 'no-cache, private',
     ]);
 })->name('robots');
 
@@ -54,23 +38,23 @@ Route::get('/blog/category/{slug}/page/{page}', [BlogController::class, 'categor
     ->where('page', '[1-9][0-9]*')
     ->name('blog.category.page');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/page/{page}', [ArticleController::class, 'page'])
+Route::get('/article', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/article/page/{page}', [ArticleController::class, 'page'])
     ->where('page', '[1-9][0-9]*')
     ->name('articles.page');
-Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies.index');
-Route::get('/case-studies/page/{page}', [CaseStudyController::class, 'page'])
+Route::get('/article/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/case-study', [CaseStudyController::class, 'index'])->name('case-studies.index');
+Route::get('/case-study/page/{page}', [CaseStudyController::class, 'page'])
     ->where('page', '[1-9][0-9]*')
     ->name('case-studies.page');
-Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-studies.show');
-Route::get('/case-studies/{slug}/download', [CaseStudyController::class, 'download'])->name('case-studies.download');
-Route::get('/ebooks', [EbookController::class, 'index'])->name('ebooks.index');
-Route::get('/ebooks/page/{page}', [EbookController::class, 'page'])
+Route::get('/case-study/{slug}', [CaseStudyController::class, 'show'])->name('case-studies.show');
+Route::get('/case-study/{slug}/download', [CaseStudyController::class, 'download'])->name('case-studies.download');
+Route::get('/ebook', [EbookController::class, 'index'])->name('ebooks.index');
+Route::get('/ebook/page/{page}', [EbookController::class, 'page'])
     ->where('page', '[1-9][0-9]*')
     ->name('ebooks.page');
-Route::get('/ebooks/{slug}', [EbookController::class, 'show'])->name('ebooks.show');
-Route::get('/ebooks/{slug}/download', [EbookController::class, 'download'])->name('ebooks.download');
+Route::get('/ebook/{slug}', [EbookController::class, 'show'])->name('ebooks.show');
+Route::get('/ebook/{slug}/download', [EbookController::class, 'download'])->name('ebooks.download');
 Route::get('/pressrelease', [PressReleaseController::class, 'index'])->name('pressrelease.index');
 Route::get('/pressrelease/page/{page}', [PressReleaseController::class, 'page'])
     ->where('page', '[1-9][0-9]*')
@@ -78,11 +62,11 @@ Route::get('/pressrelease/page/{page}', [PressReleaseController::class, 'page'])
 Route::get('/pressrelease/{slug}', [PressReleaseController::class, 'show'])
     ->where('slug', '^(?!page$).+')
     ->name('pressrelease.show');
-Route::get('/white-papers', [WhitePaperController::class, 'index'])->name('white-papers.index');
-Route::get('/white-papers/page/{page}', [WhitePaperController::class, 'page'])
+Route::get('/whitepapers', [WhitePaperController::class, 'index'])->name('white-papers.index');
+Route::get('/whitepapers/page/{page}', [WhitePaperController::class, 'page'])
     ->where('page', '[1-9][0-9]*')
     ->name('white-papers.page');
-Route::get('/white-papers/{slug}', [WhitePaperController::class, 'show'])->name('white-papers.show');
+Route::get('/whitepapers/{slug}', [WhitePaperController::class, 'show'])->name('white-papers.show');
 Route::get('/industry/{slug}', [IndustryController::class, 'show'])->name('industries.show');
 Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-pages.show');
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
@@ -96,5 +80,5 @@ Route::get('/preview/{type}/{id}', [CmsPreviewController::class, 'show'])
     ->name('cms.preview.show');
 
 Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|articles$|blog$|case-studies$|ebooks$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|preview$|white-papers$|livewire$|storage$|up$|sitemap(?:_index)?\\.xml$|(?:page|post|category|article|case-study|ebook|white-paper|press-release|industry|lp|newsletter|custom)-sitemap\\d*\\.xml$).+')
+    ->where('slug', '^(?!admin$|article$|blog$|case-study$|ebook$|ibn-tech-cms-login$|industry$|lp$|newsletter$|pressrelease$|press-releases$|preview$|whitepapers$|livewire$|storage$|up$|sitemap(?:_index)?\\.xml$|(?:page|post|category|article|case-study|ebook|white-paper|press-release|industry|lp|newsletter|custom)-sitemap\\d*\\.xml$).+')
     ->name('page.show');

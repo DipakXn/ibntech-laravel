@@ -33,7 +33,7 @@ class CaseStudyDownloadFormTest extends TestCase
             ->set('name', 'Jane Doe')
             ->set('email', 'jane@example.com')
             ->set('acceptedTerms', true)
-            ->set('pageUrl', 'https://example.com/case-studies/cloud-migration')
+            ->set('pageUrl', 'https://example.com/case-study/cloud-migration')
             ->call('submit')
             ->assertHasNoErrors()
             ->assertSet('submitted', true)
@@ -45,7 +45,7 @@ class CaseStudyDownloadFormTest extends TestCase
         $this->assertDatabaseHas('form_submissions', [
             'email' => 'jane@example.com',
             'form_name' => 'case_study_download',
-            'page_url' => 'https://example.com/case-studies/cloud-migration',
+            'page_url' => 'https://example.com/case-study/cloud-migration',
         ]);
 
         $lead = Lead::query()->where('email', 'jane@example.com')->first();
@@ -68,7 +68,7 @@ class CaseStudyDownloadFormTest extends TestCase
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'form_name' => 'case_study_download',
-            'page_url' => 'https://example.com/case-studies/cloud-migration',
+            'page_url' => 'https://example.com/case-study/cloud-migration',
             'payload' => [
                 'asset_type' => 'case_study',
                 'asset_slug' => 'cloud-migration',

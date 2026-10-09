@@ -21,11 +21,11 @@ class ListingPaginationTest extends TestCase
     public static function listings(): array
     {
         return [
-            'articles' => [Article::class, 'articles'],
-            'case-studies' => [CaseStudy::class, 'case-studies'],
-            'ebooks' => [Ebook::class, 'ebooks'],
+            'article' => [Article::class, 'article'],
+            'case-study' => [CaseStudy::class, 'case-study'],
+            'ebook' => [Ebook::class, 'ebook'],
             'press-releases' => [PressRelease::class, 'pressrelease'],
-            'white-papers' => [WhitePaper::class, 'white-papers'],
+            'whitepapers' => [WhitePaper::class, 'whitepapers'],
         ];
     }
 

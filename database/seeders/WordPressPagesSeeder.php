@@ -1133,743 +1133,595 @@ class WordPressPagesSeeder extends Seeder
             '1040-tax-filing' => [
                 'meta_title' => ' Accurate IRS 1040 Filing | Claim Every Tax Credit',
                 'meta_description' => 'Get the expert help you need for an accurate IRS 1040 filing. We specialize in maximizing refunds by securing every dollar you\'re entitled to',
-                'canonical_url' => 'https://www.ibntech.com/1040-tax-filing/',
             ],
             'about-ibn' => [
                 'meta_title' => 'About IBN | Trusted Outsourcing Partner Since 1999',
                 'meta_description' => 'Learn About IBN—offering finance, accounting, payroll, data, and IT outsourcing services to help global businesses grow efficiently since 1999.',
-                'canonical_url' => 'https://www.ibntech.com/about-ibn/',
             ],
             'accounting-services-for-small-business' => [
                 'meta_title' => 'Accounting Services for Small Business - IBN Technologies',
                 'meta_description' => 'We empower small businesses with affordable accounting services and cloud-based software tailored to your needs. From online bookkeeping to order management,',
-                'canonical_url' => 'https://www.ibntech.com/accounting-services-for-small-business/',
             ],
             'accounting-system-and-integration' => [
                 'meta_title' => 'Accounting System and Integration | IBN Technologies',
                 'meta_description' => 'An integrated accounting framework to improve processes, ensure financial stability, and give a holistic view across POS, stores, back office, and front office.',
-                'canonical_url' => 'https://www.ibntech.com/accounting-system-and-integration/',
             ],
             'ap-ar-automation' => [
                 'meta_title' => 'Accounts Payable and Receivable Automation Service Provider - IBN Tech',
                 'meta_description' => 'IBN Tech is leading AP and AR Automation Service provider, offering powerful analytical tools to streamline your business. Explore our services now!',
-                'canonical_url' => 'https://www.ibntech.com/ap-ar-automation/',
             ],
             'accounts-payable-and-accounts-receivable-services' => [
                 'meta_title' => 'Outsource Accounts Payable and Accounts Receivable Services | IBN Technologies',
                 'meta_description' => 'Outsource accounts payable and accounts receivable services to IBN for efficient AR or AP management. Trusted provider of online AP and AR solutions for businesses.',
-                'canonical_url' => 'https://www.ibntech.com/accounts-payable-and-accounts-receivable-services/',
             ],
             'ai-consulting-services' => [
                 'meta_title' => 'AI Consulting Services and Strategic AI Implementation Solutions',
                 'meta_description' => 'AI consulting services to unlock business value. We provide strategic roadmaps for generative AI integration, data readiness, and scalable cloud infrastructure.',
-                'canonical_url' => 'https://www.ibntech.com/ai-consulting-services/',
             ],
             'agentic-ai-services' => [
                 'meta_title' => 'Agentic AI Services and Autonomous Business Workflows',
                 'meta_description' => 'Agentic AI services to transform your operations. Deploy autonomous AI agents for complex decision-making, task automation, and secure data processing.',
-                'canonical_url' => 'https://www.ibntech.com/agentic-ai-services/',
             ],
             'ai-development-services' => [
                 'meta_title' => 'AI Development Services and Scalable Intelligence Solutions',
                 'meta_description' => 'AI development services to build advanced intelligence. Expert machine learning models, natural language processing, and secure cloud-native AI applications.',
-                'canonical_url' => 'https://www.ibntech.com/ai-development-services/',
             ],
             'assistant-to-cfo-services' => [
                 'meta_title' => 'Assistant To CFO Services - IBN Finance and Accounting',
                 'meta_description' => 'Hire expert Assistant to CFO services from IBN Technologies. Get virtual financial support to streamline operations and boost business growth',
-                'canonical_url' => 'https://www.ibntech.com/assistant-to-cfo-services/',
             ],
             'aws-cloud-services' => [
                 'meta_title' => 'AWS Consulting and Managed Cloud Services | IBN Technologies',
                 'meta_description' => 'Expert AWS cloud services with setup, monitoring, and migration support from IBN Technologies. Improve scalability, security, and cost efficiency through managed cloud services.',
-                'canonical_url' => 'https://www.ibntech.com/aws-cloud-services/',
             ],
             'aws-partner' => [
                 'meta_title' => 'AWS Cloud Partner and Managed Services | IBN Technologies',
                 'meta_description' => 'Leverage IBN Technologies’ AWS partnership for cloud migration, optimization, and 24×7 managed services. Boost performance, security, and scalability.',
-                'canonical_url' => 'https://www.ibntech.com/aws-partner/',
             ],
             'api-testing' => [
                 'meta_title' => 'Reliable API Testing Services | IBN Tech Experts',
                 'meta_description' => 'IBN Tech\'s API Testing services are designed to ensure the seamless functionality and interoperability of your application programming interfaces (API).',
-                'canonical_url' => 'https://www.ibntech.com/api-testing/',
             ],
             'cyber-security-testing' => [
                 'meta_title' => 'Cyber Security Testing - IBNTECH',
                 'meta_description' => 'Explore cutting-edge cyber security testing solutions at IBNTech for robust digital protection. Stay ahead of threats with us!',
-                'canonical_url' => 'https://www.ibntech.com/cyber-security-testing/',
             ],
             'functional-testing' => [
                 'meta_title' => 'Functional Testing Services | Functional Testing industry | IBN Tech',
                 'meta_description' => 'Explore Functional Testing Services to ensure your software performs flawlessly across all scenarios and platforms. Expertise meets efficiency here.',
-                'canonical_url' => 'https://www.ibntech.com/functional-testing/',
             ],
             'mobile-app-testing' => [
                 'meta_title' => 'Mobile App Testing Services | IBN Technologies',
                 'meta_description' => 'Ensure flawless performance with IBN’s mobile app testing services. We offer functional, usability, and automation testing to deliver bug-free mobile apps',
-                'canonical_url' => 'https://www.ibntech.com/mobile-app-testing/',
             ],
             'performance-testing' => [
                 'meta_title' => 'Reliable Performance Testing Services - Enhance Efficiency',
                 'meta_description' => 'Get reliable performance testing services from IBN’s expert team. Ensure speed, scalability, and efficiency to optimize your system’s performance.',
-                'canonical_url' => 'https://www.ibntech.com/performance-testing/',
             ],
             'data-entry' => [
                 'meta_title' => 'Outsourced Data Entry Services | Data Entry Company in India',
                 'meta_description' => 'Get reliable and cost-effective outsource data entry services tailored to your needs. Save time and resources. Contact us today!',
-                'canonical_url' => 'https://www.ibntech.com/data-entry/',
             ],
             'data-processing' => [
                 'meta_title' => 'Data Processing Services | Innovative Solutions - IBNTECH',
                 'meta_description' => 'Streamline your business operations with our Data Processing Services. Efficient, accurate, and secure handling of all your data needs.',
-                'canonical_url' => 'https://www.ibntech.com/data-processing/',
             ],
             'data-migration-services' => [
                 'meta_title' => 'Database Migration Services - IBNTECH',
                 'meta_description' => 'Expert Database Migration Services - Securely transition your data with our experts at IBN Tech',
-                'canonical_url' => 'https://www.ibntech.com/data-migration-services/',
             ],
             'data-conversion' => [
                 'meta_title' => 'Outsource Data Conversion Services | IBN Technologies',
                 'meta_description' => 'Looking to outsource data conversion services? We delivers high-quality, cost-effective solutions tailored to your business need. Contact Now',
-                'canonical_url' => 'https://www.ibntech.com/data-conversion/',
             ],
             'record-management' => [
                 'meta_title' => 'Outsource Record & Documents Management Services | IBN Tech',
                 'meta_description' => 'Discover top-tier record management services for streamlined organization and enhanced data security. Optimize efficiency with expert solutions.',
-                'canonical_url' => 'https://www.ibntech.com/record-management/',
             ],
             'electronic-funds-transfer' => [
                 'meta_title' => 'Electronic Funds Transfer (EFT) Solutions | IBN technologies',
                 'meta_description' => 'Explore IBN Tech’s EFT solutions for secure, fast money transfers. Learn about ACH, wire transfers, and more for efficient and seamless transactions.',
-                'canonical_url' => 'https://www.ibntech.com/electronic-funds-transfer/',
             ],
             'invoice-process-automation' => [
                 'meta_title' => 'Invoice Processing Automation Solutions | IBN Technologies',
                 'meta_description' => 'Optimize your business with invoice processing automation. Reduce errors, save time, and enhance efficiency with our expert solutions.',
-                'canonical_url' => 'https://www.ibntech.com/invoice-process-automation/',
             ],
             'medical-claim-automation' => [
                 'meta_title' => 'Efficient Medical Claims Processing Services | Streamline Healthcare Billing',
                 'meta_description' => 'Enhance your healthcare operations with our expert medical claims processing services. Reduce errors, expedite reimbursements, and improve efficiency.',
-                'canonical_url' => 'https://www.ibntech.com/medical-claim-automation/',
             ],
             'database-monitoring-and-support' => [
                 'meta_title' => 'Database Monitoring and Support',
                 'meta_description' => 'Unlock Peak Performance! IBN Tech\'s 24/7 Managed Database Services ensure smooth operations, real-time insights, and crucial security. Stay ahead!',
-                'canonical_url' => 'https://www.ibntech.com/database-monitoring-and-support/',
             ],
             'database-consulting' => [
                 'meta_title' => 'Database Consulting Services - IBNTECH',
                 'meta_description' => 'Maximize Your Data\'s Potential with IBN Tech\'s Professional Database Consulting Services. Enhance, Update, and Safeguard Your Database Systems for Success.',
-                'canonical_url' => 'https://www.ibntech.com/database-consulting/',
             ],
             'database-performance-tuning' => [
                 'meta_title' => 'Database Performance Tuning - IBNTECH',
                 'meta_description' => 'IBN offers expert Database Performance Tuning Services—Oracle to SQL Server migration, monitoring, and SQL tuning for improved speed and reliability.',
-                'canonical_url' => 'https://www.ibntech.com/database-performance-tuning/',
             ],
             'back-and-middle-office-services' => [
                 'meta_title' => 'Middle and Back Office Services | Accounting Outsourcing',
                 'meta_description' => 'Back-office accounting outsourcing can support nav calculation, reduce costs and increase operational efficiency. Hire middle and back office services.',
-                'canonical_url' => 'https://www.ibntech.com/back-and-middle-office-services/',
             ],
             'finance-businesses-bookkeeping-service' => [
                 'meta_title' => 'Outsourced Bookkeeping for Finance Businesses | IBN Tech',
                 'meta_description' => 'Expert Outsourced Bookkeeping Services for Finance Businesses - Trustworthy and Efficient Solutions for Accurate Financial Records.',
-                'canonical_url' => 'https://www.ibntech.com/finance-businesses-bookkeeping-service/',
             ],
             'it-business-bookkeeping-service' => [
                 'meta_title' => 'Outsource Bookkeeping for IT Businesses',
                 'meta_description' => 'Ibn Technologies provides specialized bookkeeping services for IT businesses. Our experts ensure accurate financial management. Contact us NOW !',
-                'canonical_url' => 'https://www.ibntech.com/it-business-bookkeeping-service/',
             ],
             'it-services' => [
                 'meta_title' => 'Application Development | IT Services and S/W Consulting',
                 'meta_description' => 'IBN provides Application Development and end-to-end IT consulting through flexible, cost-efficient offshore delivery models. Get a free consultation today.',
-                'canonical_url' => 'https://www.ibntech.com/it-services/',
             ],
             'it-staff-sourcing' => [
                 'meta_title' => 'Expert IT Staff Sourcing Services | IBN Technologies',
                 'meta_description' => 'Discover more about IT Staffing Services,Our expert team delivers tailored solutions for seamless recruitment.',
-                'canonical_url' => 'https://www.ibntech.com/it-staff-sourcing/',
             ],
             'food-and-beverage-bookkeeping-services' => [
                 'meta_title' => 'Outsourced Bookkeeping Services for Food & Beverage Industry',
                 'meta_description' => 'Outsourced Food and Beverage Bookkeeping Services for Your Business. Streamline finances, ensure accuracy, and boost profitability.',
-                'canonical_url' => 'https://www.ibntech.com/food-and-beverage-bookkeeping-services/',
             ],
             'legal-bookkeeping-services' => [
                 'meta_title' => 'Outsourced Bookkeeping Services for Legal firm | IBN tech',
                 'meta_description' => 'Expert Legal Bookkeeping Services - Optimize your legal practice with our reliable bookkeeping services designed specifically for law firms.',
-                'canonical_url' => 'https://www.ibntech.com/legal-bookkeeping-services/',
             ],
             'managed-siem-soc-services' => [
                 'meta_title' => 'Managed SOC and SIEM Services | 24/7 Monitoring and Response',
                 'meta_description' => '24/7 managed SOC and SIEM services from IBN Technologies. Real-time threat detection, fast incident response, zero in-house overhead.',
-                'canonical_url' => 'https://www.ibntech.com/managed-siem-soc-services/',
             ],
             'vciso-services' => [
                 'meta_title' => 'vCISO Services | Virtual Chief Information Security Officer',
                 'meta_description' => 'Strengthen your cybersecurity strategy with our vCISO services. Get expert guidance, risk management, and compliance support at a fraction of the cost.',
-                'canonical_url' => 'https://www.ibntech.com/vciso-services/',
             ],
             'managed-detection-response-services' => [
                 'meta_title' => 'Managed Detection and Response (MDR) Services | 24/7 Threat Defense',
                 'meta_description' => 'Detect, respond, and neutralize cyber threats with our MDR services. Round-the-clock monitoring, rapid response, and advanced security intelligence.',
-                'canonical_url' => 'https://www.ibntech.com/managed-detection-response-services/',
             ],
             'microsoft-certified-partners' => [
                 'meta_title' => 'Microsoft Certified Gold Partner Services | IBN Technologies',
                 'meta_description' => 'IBN, a Microsoft Certified Gold & SPLA Partner in India, offers Microsoft licenses, technical support, training, and marketing tools for your business.',
-                'canonical_url' => 'https://www.ibntech.com/microsoft-certified-partners/',
             ],
             'microsoft-dynamics-nav' => [
                 'meta_title' => 'Dynamics Navision, ERP & Business Management Solutions',
                 'meta_description' => 'IBN is a leading Microsoft Dynamics NAV partner, providing ERP and business management solutions to small and mid-size companies worldwide.',
-                'canonical_url' => 'https://www.ibntech.com/microsoft-dynamics-nav/',
             ],
             'microsoft-office-365-migration-support-services' => [
                 'meta_title' => 'Microsoft 365 / Office 365 Migration and Support Services | IBN Techologies',
                 'meta_description' => 'Seamless Microsoft 365 / Office 365 migration by IBN Tech with Azure and AWS integration for SMBs in the US, UK, and India ensuring zero downtime, secure cutover, and dedicated global support.',
-                'canonical_url' => 'https://www.ibntech.com/microsoft-office-365-migration-support-services/',
             ],
             'microsoft-security-services' => [
                 'meta_title' => 'Microsoft Security Services | Advanced Cloud Protection',
                 'meta_description' => 'Safeguard your Microsoft 365 and Azure environment with our expert Microsoft security services. Protect data, prevent threats, and ensure compliance',
-                'canonical_url' => 'https://www.ibntech.com/microsoft-security-services/',
             ],
             'devsecops-services' => [
                 'meta_title' => 'DevSecOps Services | Secure Code and Compliance Automation',
                 'meta_description' => 'DevSecOps services from IBN Technologies accelerate software delivery by securing code, protecting pipelines, automating testing, and ensuring compliance.',
-                'canonical_url' => 'https://www.ibntech.com/devsecops-services/',
             ],
             'manufacturing-accounting-and-bookkeeping-services' => [
                 'meta_title' => 'Accounting and Bookkeeping Services for Manufacturing - IBN',
                 'meta_description' => 'Get the best manufacturing accounting and bookkeeping services to streamline costs, improve cash flow, and maximize profits.',
-                'canonical_url' => 'https://www.ibntech.com/manufacturing-accounting-and-bookkeeping-services/',
             ],
             'marketing-and-advertising-bookkeeping-services' => [
                 'meta_title' => 'Bookkeeping Services for Marketing & Advertising Companies | IBN',
                 'meta_description' => 'Elevate Your Business with Outsourced Bookkeeping Services for Marketing and Advertising Companies - Drive success with our tailored solutions. Book now!',
-                'canonical_url' => 'https://www.ibntech.com/marketing-and-advertising-bookkeeping-services/',
             ],
             'real-estate-construction-bookkeeping-services' => [
                 'meta_title' => 'Real Estate & Construction Bookkeeping | IBN Tech',
                 'meta_description' => 'Get outsourced real estate and construction bookkeeping services from IBN. Save time, cut costs & ensure accurate financials tailored to your industry.',
-                'canonical_url' => 'https://www.ibntech.com/real-estate-construction-bookkeeping-services/',
             ],
             'real-estate-and-construction-engineering-services' => [
                 'meta_title' => 'Real Estate & Construction BPO Services | IBN Technologies',
                 'meta_description' => 'Outsource Real Estate & Construction Engineering back-office support to streamline projects, boost efficiency and enhance overall business productivity.',
-                'canonical_url' => 'https://www.ibntech.com/real-estate-and-construction-engineering-services/',
             ],
             'bookeeping-for-uk' => [
                 'meta_title' => 'Outsourced Bookkeeping Services for UK | Online Bookkeeper',
                 'meta_description' => 'Bookkeeping services for UK businesses. IBN Technologies provides accurate, timely bookkeeping outsourced to experts.',
-                'canonical_url' => 'https://www.ibntech.com/bookeeping-for-uk/',
             ],
             'bookkeeping-for-us' => [
                 'meta_title' => 'Bookkeeping Services for USA by IBN | Online Bookkeeper',
                 'meta_description' => 'Hire bookkeeping services for USA by IBN, an online bookkeeper for small and medium businesses, expert in Sage, Line, Xero, Quick books accounting, Quicken',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-for-us/',
             ],
             'bookkeeping-services-california' => [
                 'meta_title' => 'Outsource Bookkeeping and Accounting Services in California, US',
                 'meta_description' => 'Discover expert bookkeeping services California, USA. IBNTECH offers tailored, compliant, and efficient financial solutions for your business needs.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-california/',
             ],
             'bookkeeping-services-florida' => [
                 'meta_title' => 'Bookkeeping Service in Miami, Florida | IBN Technologies',
                 'meta_description' => 'Streamline finances with IBN’s bookkeeping service in Miami, Florida. Get accurate records, tax prep & custom accounting solutions for your business.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-florida/',
             ],
             'bookkeeping-services-texas' => [
                 'meta_title' => 'Bookkeeping Services in Texas | Expert Accounting | IBN',
                 'meta_description' => 'Get accurate and cost-effective bookkeeping services in Texas. Outsource to IBN’s expert team for reliable accounting tailored to your business needs.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-texas/',
             ],
             'bookkeeping-services-chicago' => [
                 'meta_title' => 'Professional Bookkeeping Services in Chicago | IBN Tech',
                 'meta_description' => 'Get expert bookkeeping services in Chicago with IBN. Accurate records, tax support & tailored accounting solutions for businesses of all sizes.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-chicago/',
             ],
             'bookkeeping-services-las-vegas' => [
                 'meta_title' => 'Reliable Bookkeeping Services Las Vegas, NV | IBN Tech',
                 'meta_description' => 'Discover expert bookkeeping services in Las Vegas, NV to streamline your finances. Our professionals ensure accuracy and compliance for your peace of mind.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-las-vegas/',
             ],
             'bookkeeping-services-new-york' => [
                 'meta_title' => 'Bookkeeping Services in New York | IBN Technologies',
                 'meta_description' => 'Boost efficiency with IBN’s bookkeeping services in New York. Get expert financial solutions tailored to streamline your business operations.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-new-york/',
             ],
             'bookkeeping-services-vermont' => [
                 'meta_title' => 'Bookkeeping Services in Vermont | IBN Tech',
                 'meta_description' => 'Discover expert outsourced bookkeeping services in Vermont. Enhance accuracy, save time, and focus on growth with our tailored financial solutions.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-vermont/',
             ],
             'bookkeeping-services-phoenix' => [
                 'meta_title' => 'Bookkeeping Services in Phoenix, AZ | Accurate & Reliable Solutions',
                 'meta_description' => 'Professional bookkeeping services in Phoenix, AZ, designed to streamline your finances. Get accurate records, customized solutions, and tax Support.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-phoenix/',
             ],
             'bookkeeping-services-austin' => [
                 'meta_title' => 'Bookkeeping services for small business in Austin- IBN Tech',
                 'meta_description' => 'Streamline your Austin business with our comprehensive bookkeeping services. Payroll, invoicing, tax planning, and financial reporting done right.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-austin/',
             ],
             'bookkeeping-services-hartford' => [
                 'meta_title' => 'Hartford Bookkeeping Services for Small Businesses | IBN Tech',
                 'meta_description' => 'Streamline your finances with expert bookkeeping services in Hartford. We offer comprehensive solutions for small businesses. Contact us NOW!',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-hartford/',
             ],
             'bookkeeping-services-san-jose' => [
                 'meta_title' => 'Bookkeeping Services San Jose | IBN Technologies LLC',
                 'meta_description' => 'San Jose bookkeeping : Ibn Technologies provides expert bookkeeping, financial reporting services for businesses in San Jose. Contact us Now!',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-san-jose/',
             ],
             'bookkeeping-services-san-diego' => [
                 'meta_title' => 'Best Bookkeeping Services San Diego | IBN Technologies LLC',
                 'meta_description' => 'Ibn Technologies offers reliable bookkeeping services in San Diego. We can handle ap-ar services, payroll, financial reporting for businesses.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-san-diego/',
             ],
             'bookkeeping-services-los-angeles' => [
                 'meta_title' => 'Bookkeeping Services in Los Angeles | IBN Technologies LTD',
                 'meta_description' => 'IBN Technologies provides expert bookkeeping services in Los Angeles. Accurate financial records, reporting, payroll - Contact us NOW !',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-los-angeles/',
             ],
             'bookkeeping-services-san-francisco' => [
                 'meta_title' => 'Bookkeeping Services In San Francisco | IBN Technologies LTD',
                 'meta_description' => 'Ibn Technologies offers expert bookkeeping, payroll, tax, and financial reporting services in San Francisco. Contact us Now !',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-san-francisco/',
             ],
             'restaurants-bookkeeping-services' => [
                 'meta_title' => 'Restaurants Bookkeeping Services | Restaurant Bookkeeper | IBN',
                 'meta_description' => 'IBN is Leading Restaurants Bookkeeping Service Provider. Streamline financial management for your restaurant business with expert bookkeeping solutions.',
-                'canonical_url' => 'https://www.ibntech.com/restaurants-bookkeeping-services/',
             ],
             'bookkeeping-services-for-retail-stores' => [
                 'meta_title' => 'Expert Retail Bookkeeping Services | IBN Technologies',
                 'meta_description' => 'IBN Technologies offers specialized retail bookkeeping services to manage your inventory, sales, and financials, ensuring accuracy and efficiency for you.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-for-retail-stores/',
             ],
             'bookkeeping-services-usa' => [
                 'meta_title' => 'Outsourced Bookkeeping Services in USA | Offshore Bookkeeper',
                 'meta_description' => 'IBN is an offshore finance and accounting service provider offering outsourced bookkeeping services in the USA',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-usa/',
             ],
             'bookkeeping-for-large-organisation' => [
                 'meta_title' => 'Bookkeeping Services for Large Organizations | Bookkeeper',
                 'meta_description' => 'Bookkeeping services for large organizations, hire online bookkeeper for general ledger, invoicing, financial statement preparation, MIS preparations, AP/AR',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-for-large-organisation/',
             ],
             'bookkeeping-for-small-business' => [
                 'meta_title' => 'Online Bookkeeping Services Company for Small Businesses',
                 'meta_description' => 'Affordable bookkeeping services for small businesses by IBN, hire an online bookkeeper to deal with your all financial needs.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-for-small-business/',
             ],
             'bookkeeping-services-for-small-businesses' => [
                 'meta_title' => 'Hire Bookkeeping Services for Small Business | IBN Tech',
                 'meta_description' => 'Outsource bookkeeping services for small businesses; we offer reliable & cost-effective solutions to all financial solutions across USA & UK.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-services-for-small-businesses/',
             ],
             'bookkeeping-service-restaurants' => [
                 'meta_title' => 'Virtual Bookkeeping Expert for Restaurants',
                 'meta_description' => 'We offer outsource bookkeeping accounting services for restaurants. Our virtual bookkeeper streamline payroll process and update your books to enhance growth.',
-                'canonical_url' => 'https://www.ibntech.com/bookkeeping-service-restaurants/',
             ],
             'bpo-services' => [
                 'meta_title' => 'Business Process Outsourcing Services (BPO) by IBN Technologies',
                 'meta_description' => 'IBN Tech offers specialized Business Process Outsourcing Services customized to streamline your operations. Maximize efficiency and profitability today!',
-                'canonical_url' => 'https://www.ibntech.com/bpo-services/',
             ],
             'sales-order-processing' => [
                 'meta_title' => 'Efficient Sales Order Process Solutions | IBN technologies',
                 'meta_description' => 'Enhance your sales order process with our automation solutions. Improve accuracy, speed up order fulfillment, and drive customer satisfaction effortlessly.',
-                'canonical_url' => 'https://www.ibntech.com/sales-order-processing/',
             ],
             'kpo-services' => [
                 'meta_title' => 'Improve Efficiency with IBN\'s Outsourced KPO Solutions',
                 'meta_description' => 'Outsourced KPO solutions to IBN Technologies and boost efficiency with expert support in bookkeeping, analytics, and process optimization. Contact us today!',
-                'canonical_url' => 'https://www.ibntech.com/kpo-services/',
             ],
             'bpotransition-methodology' => [
                 'meta_title' => 'Transition Methodology Services | IBN Technologies',
                 'meta_description' => 'Discover IBN’s Transition Methodology Services for BPO/KPO. Ensure smooth knowledge transfer, planning, and execution for successful outsourcing transitions.',
-                'canonical_url' => 'https://www.ibntech.com/bpotransition-methodology/',
             ],
             'infrastructure' => [
                 'meta_title' => 'State of Art Infrastructure, Secured Network - India | IBN Technologies',
                 'meta_description' => 'State of Art Infrastructure, Secured Network, Data Protection Policies place in India.',
-                'canonical_url' => 'https://www.ibntech.com/infrastructure/',
             ],
             'boost-your-business-with-accounting-offers' => [
                 'meta_title' => 'Boost your business with Best Accounting offers | USA',
                 'meta_description' => 'Boost your business with expert accounting solutions from IBN Finance & Accounting. Streamline finances, ensure compliance & maximize profits effortlessly!',
-                'canonical_url' => 'https://www.ibntech.com/boost-your-business-with-accounting-offers/',
             ],
             'business-intelligence-and-reporting' => [
                 'meta_title' => 'Business Intelligence And Reporting - IBN Technologies',
                 'meta_description' => 'Unlock the power of Business Intelligence Reporting and make data-driven decisions. Enhance your business insights with advanced analytics. Discover more.',
-                'canonical_url' => 'https://www.ibntech.com/business-intelligence-and-reporting/',
             ],
             'business-partner' => [
                 'meta_title' => 'IBN Business Partner Program | Sustain Business Growth',
                 'meta_description' => 'Join IBN Business Partner Program to boost growth, build strong client relationships, and unlock efficiency with proven business and cost benefits.',
-                'canonical_url' => 'https://www.ibntech.com/business-partner/',
             ],
             'business-continuity-disaster-recovery-services' => [
                 'meta_title' => 'Business Continuity and Disaster Recovery Services | IBN Technologies',
                 'meta_description' => 'IBN Techologies offers reliable business continuity and disaster recovery services to safeguard IT systems, ensure compliance, and provide strategies to minimize downtime.',
-                'canonical_url' => 'https://www.ibntech.com/business-continuity-disaster-recovery-services/',
             ],
             'cfo-services' => [
                 'meta_title' => 'Optimize Finances with Outsourced CFO Services - IBNTECH',
                 'meta_description' => 'Maximize your financial strategy with outsourced CFO services. Gain insights, improve decision-making, and drive growth. Contact us now!',
-                'canonical_url' => 'https://www.ibntech.com/cfo-services/',
             ],
             'civil-engineering-services' => [
                 'meta_title' => 'Full-Time Remote Construction and Civil Engineering Support',
                 'meta_description' => 'Full-time remote civil engineers supporting construction estimation, drawing, and drafting. Reduce cost, 99% accuracy, and scale your construction operations.',
-                'canonical_url' => 'https://www.ibntech.com/civil-engineering-services/',
             ],
             'construction-takeoff-estimation-services' => [
                 'meta_title' => 'Construction Takeoff and Estimation Services in USA | IBN Technologies',
                 'meta_description' => 'IBN Technologies provides accurate construction takeoff and cost estimation services with BIM expertise. Improve bidding, reduce errors, and streamline costs with precise material takeoff for projects in the US and UAE.',
-                'canonical_url' => 'https://www.ibntech.com/construction-takeoff-estimation-services/',
             ],
             'cloud-consulting-and-migration-services' => [
                 'meta_title' => 'Cloud Consulting and Migration Services | IBN Technologies',
                 'meta_description' => 'IBN Tech delivers expert cloud consulting and migration services across Azure, AWS, GCP & JioCloud. Secure, cost-efficient solutions for SMBs & enterprises.',
-                'canonical_url' => 'https://www.ibntech.com/cloud-consulting-and-migration-services/',
             ],
             'cloud-managed-services' => [
                 'meta_title' => 'Cloud Managed Services | Secure & Scalable Cloud Solutions — IBN Technologies',
                 'meta_description' => 'IBN Technologies delivers Cloud Managed Services with secure migration, real time monitoring, and advanced cloud security tailored for enterprises',
-                'canonical_url' => 'https://www.ibntech.com/cloud-managed-services/',
             ],
             'construction-documentation-services' => [
                 'meta_title' => 'RFI Management and Construction Documentation Services | IBN Technologies',
                 'meta_description' => 'IBN Technologies offers professional RFI management and construction documentation services, helping firms streamline submittals, BIM coordination, and project delivery with accuracy and efficiency.',
-                'canonical_url' => 'https://www.ibntech.com/construction-documentation-services/',
             ],
             'cookies-policy' => [
                 'meta_title' => 'Cookies Policy - IBN Technologies',
                 'meta_description' => 'This Cookies Policy explains how IBN Technologies Limited uses cookies and similar technologies on our websites, and the choices you have.',
-                'canonical_url' => 'https://www.ibntech.com/cookies-policy/',
             ],
             'cpa-outsourcing' => [
                 'meta_title' => 'Outsourcing Services for CPA Firms | IBN Technologies',
                 'meta_description' => 'IBN offers reliable outsourcing services for CPA firms—covering tax preparation, bookkeeping, and payroll to improve accuracy, compliance, and efficiency.',
-                'canonical_url' => 'https://www.ibntech.com/cpa-outsourcing/',
             ],
             'pricing' => [
                 'meta_title' => 'Transparent Bookkeeping Pricing | IBN Technologies',
                 'meta_description' => 'Explore our transparent bookkeeping services pricing with affordable bookkeeping packages. Get a clear breakdown of bookkeeping costs & fees for virtual bookkeeping services.',
-                'canonical_url' => 'https://www.ibntech.com/pricing/',
             ],
             'procure-to-pay' => [
                 'meta_title' => 'IBN Technologies End-to-End Procure-to-Pay Solutions',
                 'meta_description' => 'IBN Tech offers end-to-end Procure-to-Pay services designed to optimize your procurement cycle and deliver cost-effective solutions.',
-                'canonical_url' => 'https://www.ibntech.com/procure-to-pay/',
             ],
             'privacy-policy' => [
                 'meta_title' => 'Privacy Policy - IBN Technologies',
                 'meta_description' => 'At IBNTech, we prioritize your data security. Our comprehensive privacy policy outlines our commitment to protecting your personal information.',
-                'canonical_url' => 'https://www.ibntech.com/privacy-policy/',
             ],
             'terms-of-use' => [
                 'meta_title' => 'Terms of Use | IBN Technologies Website Policies',
                 'meta_description' => 'All content on this website—including text, images, video, and software—is the exclusive property of IBN. Unauthorized use or copying is prohibited.',
-                'canonical_url' => 'https://www.ibntech.com/terms-of-use/',
             ],
             'testimonials' => [
                 'meta_title' => 'Testimonials - IBN Technologies',
                 'meta_description' => 'Our 22-year track record of successfully generating value through outsourcing is attested to by the glowing reviews we receive from clients.',
-                'canonical_url' => 'https://www.ibntech.com/testimonials/',
             ],
             'contact-us' => [
                 'meta_title' => 'Get in Touch with IBN Tech | Contact Us Today',
                 'meta_description' => 'Get in touch with IBN Tech for expert business solutions. Contact us today to learn more about our services and how we can help your business thrive.',
-                'canonical_url' => 'https://www.ibntech.com/contact-us/',
             ],
             'current-job-opening' => [
                 'meta_title' => 'Job Opportunities at IBN Technologies Pune | Apply Now',
                 'meta_description' => 'Explore job opportunities at IBN Technologies, Pune. Find career openings for freshers and professionals. Join us to grow your skills and achieve success.',
-                'canonical_url' => 'https://www.ibntech.com/current-job-opening/',
             ],
             'cybersecurity-audit-compliance-services' => [
                 'meta_title' => 'Cybersecurity Audit and Compliance Services | IBN Tech – Ensure Regulatory Security',
                 'meta_description' => 'Cybersecurity Audit and Compliance Services from IBN Tech deliver audit-ready risk analysis, regulatory alignment, and ongoing compliance to protect your business.',
-                'canonical_url' => 'https://www.ibntech.com/cybersecurity-audit-compliance-services/',
             ],
             'cybersecurity-maturity-assessment-services' => [
                 'meta_title' => 'Cybersecurity Maturity Assessment Services | IBN Tech Security Experts',
                 'meta_description' => 'IBN Tech offers Cybersecurity Maturity Assessment Services to identify gaps, ensure compliance, and build a roadmap for stronger security and resilience.',
-                'canonical_url' => 'https://www.ibntech.com/cybersecurity-maturity-assessment-services/',
             ],
             'treasury-management' => [
                 'meta_title' => 'Treasury Management Services | Optimize Cash Flow & Liquidity',
                 'meta_description' => 'Improve cash flow and reduce financial risk with IBN’s Treasury Management Services. Optimize liquidity, forecasting, and investments for smart decisions.',
-                'canonical_url' => 'https://www.ibntech.com/treasury-management/',
             ],
             'treasury-management-services-outsourcing' => [
                 'meta_title' => 'Outsource Treasury Management Services - IBN Technologies',
                 'meta_description' => 'IBN\'s outsourced treasury services can help you with payments, liquidity management, receivables, tax management, fee reconciliation, and more.',
-                'canonical_url' => 'https://www.ibntech.com/treasury-management-services-outsourcing/',
             ],
             'travel-bpo-outsourcing-services' => [
                 'meta_title' => 'Travel BPO services | IBN Technologies',
                 'meta_description' => 'Maximize productivity with Ibn Technologies\' Travel Business Process Outsourcing Services. Benefit from our experts and innovative solutions.',
-                'canonical_url' => 'https://www.ibntech.com/travel-bpo-outsourcing-services/',
             ],
             'faq' => [
                 'meta_title' => 'Outsourcing FAQs Answered | IBN Technologies',
                 'meta_description' => 'Clear your doubts about outsourcing with IBN Technologies’ expert FAQs. Get answers, debunk myths, and understand the process with confidence.',
-                'canonical_url' => 'https://www.ibntech.com/faq/',
             ],
             'free-consultation' => [
                 'meta_title' => 'Free 30 Min Consultation | Outsourced Finance & Accounting Services',
                 'meta_description' => 'Book a free 30-minute consultation with IBN Technologies. Cut operational costs by up to 70% with expert outsourced finance and accounting solutions.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation/',
             ],
             'free-consultation-for-ap-ar-management' => [
                 'meta_title' => 'Free Consultation For AP AR Management - IBN Technologies',
                 'meta_description' => 'Take control of cash flow with expert AP/AR management. Improve cash flow, increase on-time payments, and save 15+ hours per week with IBN Technologies.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-ap-ar-management/',
             ],
             'free-consultation-for-cloud' => [
                 'meta_title' => 'Free Consultation For Cloud - IBN Technologies',
                 'meta_description' => 'Accelerate cloud transformation with IBN Technologies. Expert-led managed cloud, security, DevSecOps, and Microsoft 365 migration support.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-cloud/',
             ],
             'free-consultation-for-construction' => [
                 'meta_title' => 'Free Consultation For Construction - IBN Technologies',
                 'meta_description' => 'Hire skilled full-time remote engineers for construction support. Estimation, RFIs, drafting, and documentation with IBN Technologies.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-construction/',
             ],
             'free-consultation-for-cybersecurity' => [
                 'meta_title' => 'Free Consultation For Cybersecurity - IBN Technologies',
                 'meta_description' => 'Get a free cybersecurity assessment from IBN Tech. VAPT, SIEM & SOC, vCISO, MDR, Microsoft Security, and compliance audits.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-cybersecurity/',
             ],
             'free-consultation-for-ipa' => [
                 'meta_title' => 'Free Consultation For IPA - IBN Technologies',
                 'meta_description' => 'Experience workflow automation with IBN Technologies. Reduce AP/AR processing time, speed up order handling, and improve three-way matching accuracy.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-ipa/',
             ],
             'free-consultation-for-payroll-service' => [
                 'meta_title' => 'Free Consultation For Payroll Service - IBN Technologies',
                 'meta_description' => 'Outsourced payroll processing that is easy and accurate. Get a 100% accuracy guarantee, year-end reporting, and expert payroll support from IBN Technologies.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-payroll-service/',
             ],
             'free-consultation-for-tax-return' => [
                 'meta_title' => 'Free Consultation For Tax Return Preparation - IBN Technologies',
                 'meta_description' => 'Accurate tax return preparation with expert support. IBN Technologies handles 1120, 1120S, 1040, 1065, 990, and 1099 filings with 99% accuracy.',
-                'canonical_url' => 'https://www.ibntech.com/free-consultation-for-tax-return/',
             ],
             'free-trial' => [
                 'meta_title' => 'Free Trial - IBN Technologies',
                 'meta_description' => 'Start a free 20-hour professional bookkeeping trial with IBN Technologies. No credit card required. Get a dedicated expert and real-time financial data.',
-                'canonical_url' => 'https://www.ibntech.com/free-trial/',
             ],
             'family-office-services' => [
                 'meta_title' => 'IBNTech: Your Family Office Outsourcing Services Partner',
                 'meta_description' => 'Maximize investment value with IBN’s Family Office Outsourcing Services. Strengthen operations and gain strategic support for long-term financial growth.',
-                'canonical_url' => 'https://www.ibntech.com/family-office-services/',
             ],
             'fund-accounting-services' => [
                 'meta_title' => 'Fund Accounting Services | IBN Technologies',
                 'meta_description' => 'IBN offers expert Fund Accounting Services with precise NAV calculation, reconciliation & reporting for hedge funds, mutual funds & private equity firms.',
-                'canonical_url' => 'https://www.ibntech.com/fund-accounting-services/',
             ],
             'healthcare-bookkeeping-services' => [
                 'meta_title' => 'Healthcare Bookkeeping Services | IBN Technologies',
                 'meta_description' => 'Streamline your healthcare finances with expert healthcare bookkeeping services tailored for medical practices. Contact IBN Technologies today!',
-                'canonical_url' => 'https://www.ibntech.com/healthcare-bookkeeping-services/',
             ],
             'hedgefund-administration' => [
                 'meta_title' => 'IBNTech\'s Hedge Fund Administration Outsourcing Services',
                 'meta_description' => 'Get the most efficient Hedge Fund Administration Outsourcing services with IBN Tech. With secure and reliable services. Contact Us NOW !',
-                'canonical_url' => 'https://www.ibntech.com/hedgefund-administration/',
             ],
             'hedge-fund-services' => [
                 'meta_title' => 'Expert Middle and Back Office Services for Hedge Funds',
                 'meta_description' => 'Improve your hedge fund\'s performance with IBN Tech\'s middle and back office solutions, designed to streamline operations and reduce risk.',
-                'canonical_url' => 'https://www.ibntech.com/hedge-fund-services/',
             ],
             'hedge-fund-accounting' => [
                 'meta_title' => 'Hedge Fund Accounting - IBN Technologies',
                 'meta_description' => 'Get reliable back and middle office services for your investment strategies. Let us manage your hedge fund accounting while you focus on returns.',
-                'canonical_url' => 'https://www.ibntech.com/hedge-fund-accounting/',
             ],
             'hospitality' => [
                 'meta_title' => 'Business Process Outsourcing (BPO) Services for Hospitality | IBN',
                 'meta_description' => 'Boost efficiency and cut costs with expert Business Process outsourcing services. Streamline operations, and focus on core business growth for hospitality.',
-                'canonical_url' => 'https://www.ibntech.com/hospitality/',
             ],
             'multi-location-business' => [
                 'meta_title' => 'Multiple Location Business Services | Back Office Support Services',
                 'meta_description' => 'IBN\'s core functions to facilitate Multi location Businesses including end-to-end service delivery across multiple locations, business development.',
-                'canonical_url' => 'https://www.ibntech.com/multi-location-business/',
             ],
             'mortgage' => [
                 'meta_title' => 'Mortgage Process Outsourcing Services in USA | IBN tech',
                 'meta_description' => 'Streamline loan origination, servicing, closing & consumer lending with expert mortgage process outsourcing. Boost efficiency—book a call with IBN today!',
-                'canonical_url' => 'https://www.ibntech.com/mortgage/',
             ],
             'order-to-cash' => [
                 'meta_title' => 'Improve Order-to-Cash Cycle with Expert Solutions | IBN Tech',
                 'meta_description' => 'Optimize your order-to-cash cycle for increased efficiency and profitability. Explore our comprehensive solutions today.',
-                'canonical_url' => 'https://www.ibntech.com/order-to-cash/',
             ],
             'quote-to-cash' => [
                 'meta_title' => 'Quote to Cash Process Outsourcing Service Provider | IBN Tech',
                 'meta_description' => 'Optimize your quote to cash process outsourcing with IBN. From quoting to payment recording, we streamline bank uploads and cash application for efficiency.',
-                'canonical_url' => 'https://www.ibntech.com/quote-to-cash/',
             ],
             'record-to-report' => [
                 'meta_title' => 'Record-to-Report Services - Outsource your R2R Process to Experts',
                 'meta_description' => 'Outsource your Record-to-Report process to IBN Tech. Automate financial close, reconciliation, analysis, and reporting to reduce risk and improve decision-making.',
-                'canonical_url' => 'https://www.ibntech.com/record-to-report/',
             ],
             'record-to-report-cfo' => [
                 'meta_title' => 'Record to Report CFO Services | IBN Technologies',
                 'meta_description' => 'Enhance financial performance with expert Record to Report CFO solutions from IBN Technologies. Reliable virtual support for smarter business decisions.',
-                'canonical_url' => 'https://www.ibntech.com/record-to-report-cfo/',
             ],
             'recruitment-firms' => [
                 'meta_title' => 'Outsource Accounting for Recruitment Firms | IBN',
                 'meta_description' => 'IBN offers outsourced accounting, bookkeeping, payroll, and tax services for recruitment firms—solving data, compliance, and digitalization challenges.',
-                'canonical_url' => 'https://www.ibntech.com/recruitment-firms/',
             ],
             'retail' => [
                 'meta_title' => 'Retail Outsourcing Services | Retail Sales Outsourcing | IBN Tech',
                 'meta_description' => 'Transform your retail sales with IBN Tech\'s leading retail outsourcing services. Elevate efficiency, reduce costs, and enhance customer satisfaction.',
-                'canonical_url' => 'https://www.ibntech.com/retail/',
             ],
             'hospitality-bookkeeping-and-accounting-services' => [
                 'meta_title' => 'Hospitality Accounting and Bookkeeping Services | IBN',
                 'meta_description' => 'IBN offers expert hospitality accounting and bookkeeping services to streamline finances, ensure compliance, maintain accuracy, and boost profitability.',
-                'canonical_url' => 'https://www.ibntech.com/hospitality-bookkeeping-and-accounting-services/',
             ],
             'ibn-team' => [
                 'meta_title' => 'IBNTech Team - IBN Technologies',
                 'meta_description' => 'IBN Technologies\' management team consists of global leaders and outstanding achievers in business and society.',
-                'canonical_url' => 'https://www.ibntech.com/ibn-team/',
             ],
             'finance-and-accounting-services' => [
                 'meta_title' => 'Finance and Accounting Outsourcing Services | IBN Tech',
                 'meta_description' => 'Streamline operations with IBN\'s finance and accounting outsourcing services. expert solutions for bookkeeping, payroll, tax preparation, and AP automation.',
-                'canonical_url' => 'https://www.ibntech.com/finance-and-accounting-services/',
             ],
             'fund-investor-reporting' => [
                 'meta_title' => 'Optimize Your Investments with Fund Investor Reporting',
                 'meta_description' => 'Perfect for fund managers- IBNTech\'s Fund Investor Reporting will make life easier. Get real-time insights and make decisions that matter. Get started Now!',
-                'canonical_url' => 'https://www.ibntech.com/fund-investor-reporting/',
             ],
 
             'soc-2-compliance' => [
                 'meta_title' => 'SOC 2 Type 2 Compliance and Audit Services for Businesses',
                 'meta_description' => 'Achieve SOC 2 Type 2 compliance and audit support, with expert security controls, and continuous monitoring. Ensure data protection, trust, and regulatory readiness.',
-                'canonical_url' => 'https://www.ibntech.com/soc-2-compliance/',
             ],
             'payroll-processing' => [
                 'meta_title' => 'Outsource Payroll Services | Online and Affordable Payroll Processing',
                 'meta_description' => 'Outsource payroll services to IBN Tech for accurate, affordable payroll processing. Trusted provider of online payroll and HR solutions for USA businesses.',
-                'canonical_url' => 'https://www.ibntech.com/payroll-processing/',
             ],
             'outsourcing' => [
                 'meta_title' => 'Outsourcing Services for SMBs | IBN Technologies',
                 'meta_description' => 'IBN Technologies offers expert outsourcing services to SMBs in the USA and UK—covering finance, accounting, back-office support & more across industries.',
-                'canonical_url' => 'https://www.ibntech.com/outsourcing/',
             ],
             'outsourced-bookkeeping' => [
                 'meta_title' => 'Expert Bookkeeping to Fuel Your Business Growth Landing Page - IBN Technologies',
                 'meta_description' => 'Ditch time-consuming bookkeeping. IBN Tech\'s outsourced services save up to 70% on costs, streamline financials, and let you focus on scaling your business.',
-                'canonical_url' => 'https://www.ibntech.com/outsourced-bookkeeping/',
             ],
             'outsourced-bookkeeping-services-usa' => [
                 'meta_title' => 'Outsource Accounting Services To India - IBN Technologies',
                 'meta_description' => 'Accounting and bookkeeping outsourcing to india. IBN helps businesses like you to take care of their accounting and bookkeeping',
-                'canonical_url' => 'https://www.ibntech.com/outsourced-bookkeeping-services-usa/',
             ],
             'finance-management' => [
                 'meta_title' => 'Financial Management Services - IBNTECH',
                 'meta_description' => 'Harness the power of finance management to drive success and overcome challenges. Explore our solutions for efficient financial planning and decision-making.',
-                'canonical_url' => 'https://www.ibntech.com/finance-management/',
             ],
             'project-management' => [
                 'meta_title' => 'Project Management - Resources Basic | IBN Technologies',
                 'meta_description' => 'IBN is a leading Project Management Service providing firm that helps Businesses to Manage Basic Resources, Capacity Management.',
-                'canonical_url' => 'https://www.ibntech.com/project-management/',
             ],
             'sales-marketing-and-service-management' => [
                 'meta_title' => 'Sales & Marketing, Service Management at IBN Technologies',
                 'meta_description' => 'IBN Tech provides Customer centric Sales & Marketing and Service Management Solutions. Also Analyses the present stand of every situation in the Market.',
-                'canonical_url' => 'https://www.ibntech.com/sales-marketing-and-service-management/',
             ],
             'human-resources-management-hrm' => [
                 'meta_title' => 'Human Resources Management -Organize Employee Information | IBN',
                 'meta_description' => 'We at IBN Tech provides Human Resources Management Services to Efficiently Manage your Company’s Man power. I',
-                'canonical_url' => 'https://www.ibntech.com/human-resources-management-hrm/',
             ],
             'us-uk-tax-preparation-services' => [
                 'meta_title' => 'USA & UK Tax Advisory Services | Tax Professionals | IBN Tech',
                 'meta_description' => 'IBN Tech is the leading provider of USA & UK Tax Advisory Services. Get personalized advice and accurate tax filing from our expert Team.',
-                'canonical_url' => 'https://www.ibntech.com/us-uk-tax-preparation-services/',
             ],
             'tax-preparation-services-usa' => [
                 'meta_title' => 'Business Tax Preparation Services USA | IBN Technologies',
                 'meta_description' => 'USA business tax preparation service: S-Corp, C-Corp and partnership filings, expense optimization & IRS audit support. Accurate, timely & compliant.',
-                'canonical_url' => 'https://www.ibntech.com/tax-preparation-services-usa/',
             ],
             'tax-preparation-services-uk' => [
                 'meta_title' => 'UK Tax Preparation Service | IBN Technologies',
                 'meta_description' => 'Expert UK Tax Preparation Service for businesses and individuals. Accurate self-assessment, VAT, and corporate tax filing with full HMRC compliance.',
-                'canonical_url' => 'https://www.ibntech.com/tax-preparation-services-uk/',
             ],
             'sap-services' => [
                 'meta_title' => 'SAP Services and Managed ERP Solution',
                 'meta_description' => 'SAP services to optimize your enterprise. We offer expert SAP S/4HANA migration, financial module accounting, and secure cloud hosting for global firms.',
-                'canonical_url' => 'https://www.ibntech.com/sap-services/',
             ],
             'reporting-analysis-planning' => [
                 'meta_title' => 'Reporting Analysis Planning | IBN Tech',
                 'meta_description' => 'Explore IBN Tech\'s comprehensive solutions for Strategic Reporting Analysis and Planning. Gain insights and optimize with our expert tools and resources.',
-                'canonical_url' => 'https://www.ibntech.com/reporting-analysis-planning/',
             ],
             'robotics-process-automation' => [
                 'meta_title' => 'Robotic Process Automation Services | IBN Technologies',
                 'meta_description' => 'Enhance efficiency with IBN Tech’s RPA services. Automate tasks, reduce errors, and improve productivity with AI-driven robotic process automation.',
-                'canonical_url' => 'https://www.ibntech.com/robotics-process-automation/',
             ],
             'intelligent-process-automation' => [
                 'meta_title' => 'Intelligent Process Automation Services | IBN Tech',
                 'meta_description' => 'Streamline workflows, automate document processes, and boost efficiency across multiple document types and industries with our Intelligent Automation Solutions.',
-                'canonical_url' => 'https://www.ibntech.com/intelligent-process-automation/',
             ],
             'empowering-business-processes-with-ai-ml-and-rpa-driven-cloud-automation' => [
                 'meta_title' => 'Empowering Business Processes with AI, ML, and RPA-Driven Cloud Automation',
                 'meta_description' => 'Discover outsourcing accounting and bookkeeping services with IBN. We streamline your finances and provide accurate, timely insights to grow your business.',
-                'canonical_url' => 'https://www.ibntech.com/empowering-business-processes-with-ai-ml-and-rpa-driven-cloud-automation/',
             ],
             'salesforce' => [
                 'meta_title' => 'Salesforce Consulting Services | IBN Tech',
                 'meta_description' => 'Unlock your business potential with expert Salesforce Consulting Services. Visit IBN Tech for tailored solutions. Maximize efficiency and growth.',
-                'canonical_url' => 'https://www.ibntech.com/salesforce/',
             ],
             'security-testing' => [
                 'meta_title' => 'Security Testing Services | IBN Technologies',
                 'meta_description' => 'Enhance your cybersecurity with top-notch security testing services. Trust our experts to safeguard your systems. Contact us now!',
-                'canonical_url' => 'https://www.ibntech.com/security-testing/',
             ],
             'thank-you-brochures-download' => [
                 'meta_title' => 'Thank You Brochures Download - IBN Technologies',
                 'meta_description' => 'Thank you for choosing to download our brochures. Please check your email for the brochure you requested. If you don\'t see it in your inbox, please ensure to check your spam or junk folder.',
-                'canonical_url' => 'https://www.ibntech.com/thank-you-brochures-download/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'custom_meta_robots' => 'nofollow, noindex, nosnippet',
@@ -1878,7 +1730,6 @@ class WordPressPagesSeeder extends Seeder
             'thank-you-download' => [
                 'meta_title' => 'Thank You Download - IBN Technologies',
                 'meta_description' => 'Your file download link has been sent to your email.Please check your inbox (and spam/junk folder just in case) to access the file.',
-                'canonical_url' => 'https://www.ibntech.com/thank-you-download/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1886,7 +1737,6 @@ class WordPressPagesSeeder extends Seeder
             'thank-you-free-trial' => [
                 'meta_title' => 'Thank You Free Trial - IBN Technologies',
                 'meta_description' => 'Thank you for signing up! Enjoy the free trial of our outsourcing service. One of our team members will get in touch with you soon, to guide you through the next steps.',
-                'canonical_url' => 'https://www.ibntech.com/thank-you-free-trial/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1894,7 +1744,6 @@ class WordPressPagesSeeder extends Seeder
             'thank-you' => [
                 'meta_title' => 'Thanks You - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thank-you/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1902,7 +1751,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-ap-ar-management' => [
                 'meta_title' => 'Thanks You For AP AR Management - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-ap-ar-management/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1910,7 +1758,6 @@ class WordPressPagesSeeder extends Seeder
             'thank-you-for-construction-services-consultation' => [
                 'meta_title' => 'Thanks You For Construction - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thank-you-for-construction-services-consultation/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1918,7 +1765,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-free-trail' => [
                 'meta_title' => 'Thanks You For Free Trail - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-free-trail/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1926,7 +1772,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-ipa' => [
                 'meta_title' => 'Thanks You For IPA - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-ipa/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1934,7 +1779,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-bookkeeping' => [
                 'meta_title' => 'Thanks You For Bookkeeping - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-bookkeeping/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1942,7 +1786,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-cloud' => [
                 'meta_title' => 'Thanks You For Cloud - IBN Technologies',
                 'meta_description' => 'Thank You for Choosing IBN Technologies for Your Cloud Transformation! Empower your business with flexible, cost-effective cloud solutions for seamless growth.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-cloud/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1950,7 +1793,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-cybersecurity' => [
                 'meta_title' => 'Thanks You For Cybersecurity - IBN Technologies',
                 'meta_description' => 'Thank You for Trusting IBN Technologies with Your Cybersecurity Needs! Secure your business with trusted cybersecurity solutions for resilience and peace of mind.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-cybersecurity/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1958,7 +1800,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-payroll-service' => [
                 'meta_title' => 'Thanks You for payroll service - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-payroll-service/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1966,7 +1807,6 @@ class WordPressPagesSeeder extends Seeder
             'thanks-you-for-tax-preparation' => [
                 'meta_title' => 'Thanks You For Tax Preparation - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
-                'canonical_url' => 'https://www.ibntech.com/thanks-you-for-tax-preparation/',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
@@ -1974,37 +1814,30 @@ class WordPressPagesSeeder extends Seeder
             'sharepoint' => [
                 'meta_title' => 'SharePoint Consulting Services - IBNTECH',
                 'meta_description' => 'Unlock the full potential of your SharePoint environment with IBNTECH’s expert consulting services. For more information, Contact us today!',
-                'canonical_url' => 'https://www.ibntech.com/sharepoint/',
             ],
             'supply-chain-management-manufacturing' => [
                 'meta_title' => 'Supply Chain Management Manufacturing Services | IBN',
                 'meta_description' => 'IBN offers supply chain management manufacturing services—covering sales, tax, inventory, warehouse, payables, and capacity planning. Boost efficiency today.',
-                'canonical_url' => 'https://www.ibntech.com/supply-chain-management-manufacturing/',
             ],
             'tech-support-services' => [
                 'meta_title' => 'Top Outsourced Technical Support Services | IBN Technologies',
                 'meta_description' => 'Discover top-notch outsourced technical support services by IBN Technologies, ensuring efficiency and reliability for your business needs.',
-                'canonical_url' => 'https://www.ibntech.com/tech-support-services/',
             ],
             'technology-solutions' => [
                 'meta_title' => 'Technology Solutions | Business Intelligence Services',
                 'meta_description' => 'IBN offers technology solutions including business intelligence and data warehousing services, business rule management system to run the business smoothly',
-                'canonical_url' => 'https://www.ibntech.com/technology-solutions/',
             ],
             'test-automation' => [
                 'meta_title' => 'Test Automation Services Streamline Testing Processes with Precision | IBN',
                 'meta_description' => 'Streamline testing processes and enhance efficiency with our test automation services. Experience faster releases and higher quality. Get in touch today!',
-                'canonical_url' => 'https://www.ibntech.com/test-automation/',
             ],
             'transport-and-logistics' => [
                 'meta_title' => 'Transport & Logistics Services | IBN Tech',
                 'meta_description' => 'Partner with IBNTech for unparalleled Transport and Logistics Services. Experience seamless operations and optimized supply chains now.',
-                'canonical_url' => 'https://www.ibntech.com/transport-and-logistics/',
             ],
             'virtual-dba-services' => [
                 'meta_title' => 'Virtual DBA Services | IBN Technologies',
                 'meta_description' => 'Discover reliable Virtual DBA Services by IBN Technologies, ensuring expert database management, security, and performance optimization for your business.',
-                'canonical_url' => 'https://www.ibntech.com/virtual-dba-services/',
             ],
         ];
 
@@ -2020,7 +1853,6 @@ class WordPressPagesSeeder extends Seeder
                 'meta_description' => $seo['meta_description'],
                 'og_title' => $seo['meta_title'],
                 'og_description' => $seo['meta_description'],
-                'canonical_url' => $seo['canonical_url'] ?? null,
             ];
 
             foreach (['robots_index', 'robots_follow', 'custom_meta_robots', 'sitemap_include', 'robots_max_image_preview'] as $field) {

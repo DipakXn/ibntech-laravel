@@ -149,7 +149,7 @@ class FormNotificationRecipientTest extends TestCase
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'form_name' => 'ebook_download',
-            'page_url' => 'https://example.com/ebooks/cloud-playbook',
+            'page_url' => 'https://example.com/ebook/cloud-playbook',
             'payload' => [
                 'asset_type' => 'ebook',
                 'asset_title' => 'Cloud Playbook',

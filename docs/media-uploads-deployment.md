@@ -10,11 +10,11 @@ MEDIA_ROOT=public/uploads
 MEDIA_URL=/uploads
 ```
 
-| Environment | `MEDIA_ROOT` example | `MEDIA_URL` |
-|---|---|---|
-| Local | `public/uploads` | `/uploads` |
-| cPanel Staging | `/home/USER/public_html/dev/uploads` | `/uploads` |
-| cPanel Production | `/home/USER/public_html/uploads` | `/uploads` |
+| Environment | `MEDIA_ROOT` | `MEDIA_URL` | Where files are |
+|---|---|---|---|
+| Local (XAMPP) | `public/uploads` | `/uploads` | `{project}/public/uploads` |
+| Staging | `/home/devtech/public_html/uploads` | `/uploads` | Apache document root, not `ibntech-core/public` |
+| Production | `/home/ibntech/public_html/uploads` | `/uploads` | Apache document root, not `ibntech-core/public` |
 
 `MEDIA_ROOT` may be:
 
@@ -57,28 +57,25 @@ php artisan queue:work --queue=media,default --tries=1 --timeout=900
 
 ## Staging (cPanel)
 
-Typical layout:
+Account `/home/devtech`. Domain `dev.ibntech.com`.
 
-```
-/home/USER/
-  laravel-stg/          ← application code (outside or beside web root)
-  public_html/dev/      ← document root (dev.ibntech.com)
-    index.php
-    uploads/            ← MEDIA_ROOT target
-    ...
+```text
+/home/devtech/ibntech-core/          Laravel application (public_path() is ibntech-core/public)
+/home/devtech/public_html/           Apache document root
+/home/devtech/public_html/uploads/   MEDIA_ROOT
 ```
 
-1. Deploy application files (FTP/File Manager/Git — no SSH required for media setup).
-2. Point the staging document root at the Laravel public entry (or copy/sync `public/` contents into `public_html/dev`).
-3. Set staging `.env`:
+1. Deploy with `deploy.sh`. It does not copy or delete `public/uploads/` or `public_html/uploads/`.
+2. Keep the document root on `/home/devtech/public_html`. Do not point it at `ibntech-core/public`.
+3. Set staging `.env` at `/home/devtech/ibntech-core/.env`:
 
 ```env
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/dev/uploads
+MEDIA_ROOT=/home/devtech/public_html/uploads
 MEDIA_URL=/uploads
 ```
 
-4. Ensure `public_html/dev/uploads` exists and is writable by PHP (`0755` or `0775` as appropriate).
+4. Ensure `/home/devtech/public_html/uploads` exists and is writable by PHP (`0755` or `0775` as appropriate).
 5. Run (once, via cPanel Terminal / cron / locally against staging DB if available):
 
 ```bash
@@ -90,7 +87,7 @@ php artisan cms:optimize
 Run cache commands on the staging server only; do not upload
 `bootstrap/cache/*.php` from local.
 
-6. Confirm `https://staging-host/uploads/...` serves files directly (not through Laravel).
+6. Confirm `https://dev.ibntech.com/uploads/...` serves files directly (not through Laravel).
 7. **Do not** rely on `php artisan storage:link` for media.
 
 Optional Apache rewrite for old `/storage/...` bookmarks:
@@ -104,27 +101,24 @@ RewriteRule ^storage/(.*)$ /uploads/$1 [L,R=301]
 
 ## Production (cPanel)
 
-Typical layout:
+Account `/home/ibntech`. Domain `ibntech.com`.
 
-```
-/home/USER/
-  laravel/                 ← application code
-  public_html/             ← document root
-    index.php
-    uploads/
-    ...
+```text
+/home/ibntech/ibntech-core/          Laravel application
+/home/ibntech/public_html/           Apache document root
+/home/ibntech/public_html/uploads/   MEDIA_ROOT
 ```
 
-1. Deploy code and set production `.env`:
+1. Deploy with `deploy.sh` and set production `.env` at `/home/ibntech/ibntech-core/.env`:
 
 ```env
 MEDIA_DISK=media
-MEDIA_ROOT=/home/USER/public_html/uploads
+MEDIA_ROOT=/home/ibntech/public_html/uploads
 MEDIA_URL=/uploads
-APP_URL=https://www.example.com
+APP_URL=https://ibntech.com
 ```
 
-2. Ensure `public_html/uploads` exists, is writable, and is **not** wiped by deploys (exclude from cleanup / keep outside the release directory if you use releases).
+2. Ensure `/home/ibntech/public_html/uploads` exists and is writable. `deploy.sh` excludes `public/uploads/` from the app sync and never points `rsync --delete` at `public_html/` or `uploads/`.
 3. Migrate existing media once:
 
 ```bash

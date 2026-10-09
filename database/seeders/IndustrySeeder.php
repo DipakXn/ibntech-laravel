@@ -19,7 +19,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'ICT Outsourcing services - IBN Tech',
                     'meta_description' => 'Drive tech innovation with outsourced cloud services, cybersecurity, and specialized ICT finance and accounting solutions for global tech firms.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/information-and-communication-technology/',
                 ],
             ],
             [
@@ -29,7 +28,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Power Your Real Estate & Construction Growth with Secure IT & Outsourcing',
                     'meta_description' => 'Protect sensitive data and streamline workflows with IBN Technology’s cloud migration, security, and outsourcing solutions for real estate & construction.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/real-estate-and-construction/',
                 ],
             ],
             [
@@ -39,7 +37,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Travel and Hospitality Outsourcing services - IBN Tech',
                     'meta_description' => 'Enhance guest services with outsourced finance, accounting, and cloud infrastructure. Secure your hospitality data with our advanced cybersecurity.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/travel-and-hospitality/',
                 ],
             ],
             [
@@ -49,7 +46,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'E-commerce and Retail Outsourcing services - IBN Tech',
                     'meta_description' => 'Scale your retail business with outsourced finance and accounting. We provide expert inventory data management and scalable cloud infrastructure support.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/ecommerce-and-retail/',
                 ],
             ],
             [
@@ -59,7 +55,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Legal Firm Outsourcing services - IBN Technologies',
                     'meta_description' => 'Comprehensive outsourcing for law firms. We provide secure legal accounting, cloud document management, and robust cybersecurity to protect firm data.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/legal-firm/',
                 ],
             ],
             [
@@ -69,7 +64,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Manufacturing Outsourcing services - IBN Technologies',
                     'meta_description' => 'Optimize manufacturing with outsourced finance, accounting, and cloud solutions. Streamline your supply chain operations and cybersecurity protocols.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/manufacturing/',
                 ],
             ],
             [
@@ -79,7 +73,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Chemical and Energy Outsourcing services - IBN Tech',
                     'meta_description' => 'Strategic outsourcing for the energy sector. We manage complex finance and accounting, cloud data environments, and industrial cybersecurity.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/chemical-and-energy/',
                 ],
             ],
             [
@@ -89,7 +82,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Finance, Security & Compliance Solutions for Healthcare & Pharmaceuticals',
                     'meta_description' => 'Achieve operational excellence with secure, compliant, and cost-efficient solutions for healthcare and pharma sectors.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/healthcare-and-pharma/',
                 ],
             ],
             [
@@ -99,7 +91,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'BFSI Outsourcing services - IBN Technologies',
                     'meta_description' => 'Secure outsourced solutions for banking and insurance. We specialize in financial accounting, cloud migration, and high-level cybersecurity compliance.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/bfsi/',
                 ],
             ],
             [
@@ -109,7 +100,6 @@ class IndustrySeeder extends Seeder
                 'seo' => [
                     'meta_title' => 'Logistics and Transportation Outsourcing Services - IBN Tech',
                     'meta_description' => 'Streamline logistics with outsourced finance, accounting, and cloud tracking systems. Protect your supply chain with our dedicated cybersecurity services.',
-                    'canonical_url' => 'https://www.ibntech.com/industry/logistics-and-transportation/',
                 ],
             ],
         ];
@@ -135,7 +125,6 @@ class IndustrySeeder extends Seeder
                         'meta_description' => $industryData['seo']['meta_description'],
                         'og_title' => $industryData['seo']['meta_title'],
                         'og_description' => $industryData['seo']['meta_description'],
-                        'canonical_url' => $industryData['seo']['canonical_url'] ?? null,
                     ]
                 );
             }

@@ -1,6 +1,6 @@
 # IBN Technologies — Laravel CMS
 
-> A production-grade, Blade-first CMS built on Laravel 12 with clean architecture, rich content types, gated asset downloads, and a Filament v4 admin panel.
+> A production-grade, Blade-first CMS built on Laravel 12 with clean architecture, rich content types, gated asset downloads, and a Filament v5 admin panel.
 
 ---
 
@@ -36,7 +36,7 @@
 
 IBN Technologies Laravel CMS is a full-featured content management system originally designed as a clean, scalable alternative to WordPress. It is built with a **Blade-first** approach — thin controllers delegate to Service and Repository layers, and all views use reusable Blade section components.
 
-The CMS manages multiple content types (Blog, Articles, Case Studies, eBooks, White Papers, Press Releases, Landing Pages, Industry Pages, Newsletter Issues, and generic CMS Pages), a lead capture pipeline, and a comprehensive SEO metadata system — all managed via the **Filament v4** admin panel.
+The CMS manages multiple content types (Blog, Articles, Case Studies, eBooks, White Papers, Press Releases, Landing Pages, Industry Pages, Newsletter Issues, and generic CMS Pages), a lead capture pipeline, and a comprehensive SEO metadata system — all managed via the **Filament v5** admin panel.
 
 ---
 
@@ -62,7 +62,7 @@ The CMS manages multiple content types (Blog, Articles, Case Studies, eBooks, Wh
 - **Newsletter Inquiry Form** — email-only opt-in
 - **eBook Download Form** — gated PDF access with lead capture
 - **Case Study Download Form** — gated PDF access with lead capture
-- All forms are **Livewire v3** components with server-side validation
+- All forms are **Livewire v4** components with server-side validation
 - Every submission dispatches an async queue job (`SendLeadSubmissionNotification`) to send an email notification
 
 ### SEO System
@@ -83,7 +83,7 @@ The CMS manages multiple content types (Blog, Articles, Case Studies, eBooks, Wh
 > **Note:** `AiService` contains local heuristic logic only. No external AI API is wired up by default.
 
 ### Admin Panel
-- Custom **IBNTECH Control** branded Filament v4 panel at `/admin`
+- Custom **IBNTECH Control** branded Filament v5 panel at `/admin`
 - Dashboard with content overview, quick actions, recent activity, and recent leads widgets
 - **Queue Monitor** — real-time view of database queue backlog and failed jobs (admin-only)
 - **Log Viewer** — view application log entries from the admin panel
@@ -104,9 +104,9 @@ The CMS manages multiple content types (Blog, Articles, Case Studies, eBooks, Wh
 |---|---|
 | PHP | `^8.2` |
 | Laravel Framework | `^12.0` |
-| Livewire | `~3.7.0` |
-| Filament | `~4.10.0` |
-| Filament Spatie Media Library Plugin | `^4.10` |
+| Livewire | `~4.0` |
+| Filament | `~5.0` |
+| Filament Spatie Media Library Plugin | `~5.0` |
 | Spatie Laravel Media Library | `^11.21` |
 | Laravel Telescope | `5.20` |
 | Laravel Tinker | `^2.10.1` |
@@ -231,7 +231,8 @@ app/
 │   └── ...
 └── Support/
     ├── BlockContent.php               # Block-content renderer & plain-text extractor
-    └── MediaLibrary/                  # Custom path generator (YYYY/MM layout)
+    ├── Filesystem/MediaRoot.php       # Resolves MEDIA_ROOT (relative or absolute)
+    └── MediaLibrary/                  # Purpose-based path generator
 
 resources/
 ├── css/
@@ -261,9 +262,38 @@ database/
 │   └── CmsDemoSeeder.php              # Demo pages, blogs, case studies, ebooks, etc.
 └── factories/
 
+public/
+├── index.php                          # Loads bootstrap-path.php, then the core
+├── bootstrap-path.php                 # Host → Laravel core path
+├── build/                             # Tracked Vite output (npm run build)
+├── uploads/                           # Local MEDIA_ROOT; file contents are gitignored
+└── robots.txt                         # Local copy. Deploy does not copy it
+
+deploy.sh                                # cPanel deploy script (same on staging and main)
+.cpanel.yml                              # Runs /bin/bash $PWD/deploy.sh
+deploy-config.sh.example                 # Template only. The filled file stays on the server
+
 docs/
-└── media-library-architecture.md      # Media library storage layout reference
+├── DEPLOYMENT-GitHub-GUIDE.md         # Git + cPanel deploy
+├── PRODUCTION_DEPLOYMENT.md           # Server requirements, cron, permissions
+├── media-uploads-deployment.md        # MEDIA_ROOT per environment
+└── media-library-architecture.md      # Folder map under the media disk
 ```
+
+`vendor/` and `node_modules/` are not in Git. Composer and npm install them locally. The server runs `composer install` and does not need Node when `public/build/` is already in Git.
+
+### Server layout
+
+The Laravel core is not the website document root. `public/bootstrap-path.php` selects the core from the request host.
+
+| | Local | Staging | Production |
+|---|---|---|---|
+| Host | `localhost` / `127.0.0.1` | `dev.ibntech.com` | `ibntech.com`, `www.ibntech.com` |
+| Laravel core | project root | `/home/devtech/ibntech-core/` | `/home/ibntech/ibntech-core/` |
+| Document root | `public/` | `/home/devtech/public_html/` | `/home/ibntech/public_html/` |
+| `MEDIA_ROOT` | `public/uploads` | `/home/devtech/public_html/uploads` | `/home/ibntech/public_html/uploads` |
+
+On the servers, `public_path()` is `ibntech-core/public`. Apache serves `public_html`. Deploy publishes web assets to both. Media stays only in `public_html/uploads`.
 
 ### Architecture Diagram
 
@@ -280,7 +310,7 @@ flowchart TD
     SeoService --> View["Blade View\n(layouts/app)"]
     View --> Browser
 
-    Admin["Admin /admin"] --> Filament["Filament v4 Panel\n(AdminPanelProvider)"]
+    Admin["Admin /admin"] --> Filament["Filament v5 Panel\n(AdminPanelProvider)"]
     Filament --> Resources["CRUD Resources"]
     Resources --> Model
 
@@ -332,7 +362,7 @@ php artisan migrate
 php artisan db:seed
 
 # 7. Ensure media uploads directory exists (no storage:link required)
-#    MEDIA_DISK=media / MEDIA_ROOT=public/uploads / MEDIA_URL=/uploads in .env
+#    Local: MEDIA_DISK=media, MEDIA_ROOT=public/uploads, MEDIA_URL=/uploads
 
 # 8. Install Node dependencies
 npm install
@@ -440,6 +470,16 @@ Copy `.env.example` to `.env` and configure the following variables:
 | `AWS_BUCKET` | |
 | `AWS_USE_PATH_STYLE_ENDPOINT` | `false` |
 
+### Media disk
+
+| Variable | Local default | Server |
+|---|---|---|
+| `MEDIA_DISK` | `media` | `media` |
+| `MEDIA_ROOT` | `public/uploads` | Absolute `public_html/uploads` path for that account |
+| `MEDIA_URL` | `/uploads` | `/uploads` |
+
+A relative `MEDIA_ROOT` is resolved from the Laravel base path. On cPanel that would write into `ibntech-core/public/uploads`, which Apache does not serve. Staging and production `.env` files use the absolute `public_html/uploads` path.
+
 ### Vite
 
 | Variable | Default |
@@ -460,15 +500,11 @@ Copy `.env.example` to `.env` and configure the following variables:
 ### Running Migrations
 
 ```bash
-# Fresh install (first time)
+# Fresh install (first time) or a later additive migration
 php artisan migrate
-
-# Drop and re-create all tables (destructive)
-php artisan migrate:fresh
-
-# With seeding
-php artisan migrate:fresh --seed
 ```
+
+Do not run `migrate:fresh`, `migrate:refresh`, `migrate:reset`, or `db:wipe` against a database that already has CMS content. Staging and production migrations are a separate step after code deploy, and `deploy.sh` does not run them.
 
 ### Migration History
 
@@ -570,7 +606,7 @@ An admin-only **Queue Monitor** page is available at `/admin/queue-monitor` disp
 
 - **Default disk:** `local`
 - **Media disk:** `media` (dedicated; root via `MEDIA_ROOT`, URL via `MEDIA_URL`)
-- **No symlink required for media** — files live in `public/uploads` (or the absolute path set in `MEDIA_ROOT`) and are served directly by the web server at `/uploads`
+- **No symlink required for media.** Local files live in `public/uploads`. On staging and production they live in that account's `public_html/uploads` and are served at `/uploads`
 - **Media path layout:** purpose-based folders (see `docs/media-library-architecture.md`), e.g. `logos/website/`, `blogs/featured/{YYYY}/{MM}/`
 - **Migration command:** `php artisan media:migrate-to-uploads-disk`
 - **Deployment guide:** `docs/media-uploads-deployment.md`
@@ -791,16 +827,24 @@ All public-facing forms require Google reCAPTCHA v2 (Checkbox) verification befo
 
 Powered by **Spatie Laravel Media Library v11** with Filament integration.
 
-### Storage Layout
+### Storage layout
+
+Files are written on the `media` disk. Locally that is `public/uploads`. On the servers it is `public_html/uploads`. Purpose folders come from `config/media-library.php`:
+
+```text
+uploads/
+├── logos/website|branding
+├── seo/og-images|social-share
+├── pages/{slug}/
+├── blogs/featured|blocks/{YYYY}/{MM}/
+├── articles/...
+├── case-studies/...
+├── ebooks/...
+├── media/downloads/...
+└── media/miscellaneous/{YYYY}/{MM}/   ← fallback
 ```
-storage/app/public/
-└── media/
-    └── {YYYY}/
-        └── {MM}/
-            ├── {filename}             ← original
-            ├── conversions/           ← WebP conversions
-            └── responsive-images/     ← srcset variants
-```
+
+`storage/app/public` is the Laravel `public` disk. It is not the live media root. Spatie temporary conversions use `storage/media-library/temp/` inside the core. That directory is gitignored, and deploy does not sync `storage/`.
 
 ### Blog Model — Reference Implementation
 The `Blog` model is the reference for media library patterns:
@@ -837,7 +881,7 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-# Cache for production (server only — do not run locally before cPanel zip deploy)
+# Cache for production (server only — do not run locally before a Git deploy)
 php artisan optimize:clear
 php artisan cms:optimize
 
@@ -956,62 +1000,53 @@ php artisan test tests/Unit/SeoServiceTest.php
 
 ## 20. Deployment Notes
 
-Full cPanel guide: [`docs/PRODUCTION_DEPLOYMENT.md`](docs/PRODUCTION_DEPLOYMENT.md)
+Releases go through Git and cPanel, not a zip of the working tree.
 
-### Deployment zip exclusions (critical)
+- [`docs/DEPLOYMENT-GitHub-GUIDE.md`](docs/DEPLOYMENT-GitHub-GUIDE.md) — deploy runbook
+- [`docs/PRODUCTION_DEPLOYMENT.md`](docs/PRODUCTION_DEPLOYMENT.md) — requirements, cron, permissions
+- [`docs/media-uploads-deployment.md`](docs/media-uploads-deployment.md) — `MEDIA_ROOT` per environment
 
-When packaging for cPanel upload, **exclude `bootstrap/cache/*.php`**. Never
-deploy locally generated Laravel cache files (`config.php`, `routes-v7.php`,
-`events.php`, `services.php`). Running `config:cache` or `cms:optimize` on
-Windows before zipping bakes paths like `C:\Users\...` into the cache; on
-Linux this creates malformed folders and breaks logging/view compilation.
+One repository. Branch `staging` deploys to `dev.ibntech.com`. Branch `main` deploys to `ibntech.com`. `.cpanel.yml` runs `/bin/bash $PWD/deploy.sh`. Paths live only in the server file `deploy-config.sh`.
 
-**Laravel cache must be generated on the Linux server after deployment, never
-locally and uploaded.**
+| | Staging | Production |
+|---|---|---|
+| Core | `/home/devtech/ibntech-core/` | `/home/ibntech/ibntech-core/` |
+| Document root | `/home/devtech/public_html/` | `/home/ibntech/public_html/` |
+| Git clone | `/home/devtech/repositories/ibntech-laravel` | Branch `main`. Not `public_html` and not `ibntech-core` |
+| PHP | `/usr/local/bin/ea-php84` | That account's EasyApache binary |
 
-### Pre-Deployment Checklist (local)
+`deploy.sh` copies application code into `ibntech-core`, runs `composer install` there, and publishes `build/`, `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, favicon files, `index.php`, and `bootstrap-path.php` to both `ibntech-core/public/` and `public_html/`.
+
+It does not copy, overwrite, or delete:
+
+- `.env` and `.env.*`
+- `.htaccess` (staging and production files differ)
+- `storage/`
+- `public/uploads/` and `public_html/uploads/`
+- `public/hot`
+- `public/robots.txt` (the CMS writes `ibntech-core/public/robots.txt`; Apache serves `public_html/robots.txt`)
+- `bootstrap/cache/*.php`
+
+Do not run `config:cache` or `cms:optimize` on Windows before pushing. A Windows `bootstrap/cache/config.php` breaks Linux. The script rebuilds those caches on the server. It does not run migrations. After a release that contains new migrations, run `php artisan migrate --force` once for that environment, then remove any one-time cron used to do it.
+
+### Before the first push
 
 ```bash
-# 1. Set production environment in server .env (not in the zip)
-APP_ENV=production
-APP_DEBUG=false
-DEBUGBAR_ENABLED=false
-TELESCOPE_ENABLED=false   # or restrict to admin IPs via TelescopeServiceProvider
-
-# 2. Install production dependencies
-composer install --no-dev --optimize-autoloader
-
-# 3. Build frontend assets
 npm ci
 npm run build
-
-# 4. Create deployment zip — exclude bootstrap/cache/*.php
-# Do NOT run config:cache, cms:optimize, or optimize locally before zipping
 ```
 
-### Post-upload on the server (`/home/devtech/ibntech-core`)
+Commit `public/build/`. Do not commit `.env`, `vendor/`, `node_modules/`, or `public/hot`.
+
+### Queue worker
+
+Shared hosting uses a cPanel cron, not Supervisor. Staging example, every one to five minutes:
 
 ```bash
-php artisan migrate --force
-php artisan optimize:clear
-php artisan cms:optimize
-php artisan filament:optimize
-
-# First deploy only, if needed:
-php artisan media:migrate-to-uploads-disk
+/usr/local/bin/ea-php84 /home/devtech/ibntech-core/artisan queue:work database --queue=media,default --stop-when-empty --tries=3 --timeout=900 >> /dev/null 2>&1
 ```
 
-### Queue Worker (Production)
-Set up a **process supervisor** (Supervisor, systemd, or similar) to keep the queue worker running:
-
-```ini
-# /etc/supervisor/conf.d/ibntech-worker.conf
-[program:ibntech-worker]
-command=php /path/to/app/artisan queue:work --tries=3 --timeout=30
-autostart=true
-autorestart=true
-user=www-data
-```
+Production uses `/home/ibntech/ibntech-core/artisan` and that account's PHP binary. The scheduler cron is `schedule:run` every minute. See `docs/PRODUCTION_DEPLOYMENT.md`.
 
 ### Telescope in Production
 By default, Telescope is enabled. In `TelescopeServiceProvider`, the `gate()` method restricts access. For production, either:
@@ -1027,9 +1062,11 @@ REDIS_HOST=127.0.0.1
 REDIS_PORT=6379
 ```
 
-### Storage Configuration
-- For **local / cPanel single-server**: set `MEDIA_DISK=media`, `MEDIA_ROOT`, and `MEDIA_URL` (see `docs/media-uploads-deployment.md`)
-- For **multi-server or CDN**: set `MEDIA_DISK=s3` and configure `AWS_*` variables
+### Storage configuration
+- **Local:** `MEDIA_DISK=media`, `MEDIA_ROOT=public/uploads`, `MEDIA_URL=/uploads`
+- **Staging:** `MEDIA_ROOT=/home/devtech/public_html/uploads`
+- **Production:** `MEDIA_ROOT=/home/ibntech/public_html/uploads`
+- **Cloud:** set `MEDIA_DISK=s3` and configure `AWS_*`
 
 ---
 
@@ -1074,7 +1111,7 @@ REDIS_PORT=6379
 ## 22. Troubleshooting
 
 ### Media uploads directory missing
-Ensure `MEDIA_ROOT` exists and is writable (local default: `public/uploads`). Media does **not** require `php artisan storage:link`.
+Ensure `MEDIA_ROOT` exists and is writable. Local default is `public/uploads`. Staging and production use `public_html/uploads` on that account. Media does not require `php artisan storage:link`.
 
 ### Queue jobs not running
 Make sure the queue worker is running:

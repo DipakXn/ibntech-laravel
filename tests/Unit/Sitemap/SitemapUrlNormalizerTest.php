@@ -118,6 +118,21 @@ class SitemapUrlNormalizerTest extends TestCase
         ));
     }
 
+    public function test_canonical_allows_cross_host_on_dev_app_url(): void
+    {
+        config(['app.url' => 'https://dev.ibntech.com']);
+
+        $this->assertTrue(SitemapUrlNormalizer::cmsCanonicalMatchesPublicUrl(
+            'https://dev.ibntech.com/blog/hello/',
+            'http://localhost:8000/blog/hello/',
+        ));
+
+        $this->assertTrue(SitemapUrlNormalizer::cmsCanonicalMatchesPublicUrl(
+            'https://dev.ibntech.com/industry/manufacturing/',
+            'https://www.ibntech.com/industry/manufacturing/',
+        ));
+    }
+
     public function test_canonical_excludes_intentional_cross_host_on_production(): void
     {
         config(['app.url' => 'https://www.ibntech.com']);

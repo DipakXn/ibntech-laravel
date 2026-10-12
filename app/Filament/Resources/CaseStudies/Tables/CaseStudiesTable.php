@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\CaseStudies\Tables;
 
+use App\Filament\Tables\ContentBulkActions;
 use App\Filament\Tables\ContentRecordActions;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use App\Filament\Tables\ContentTableColumns;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -30,6 +30,7 @@ class CaseStudiesTable
                     ->dateTime()
                     ->sortable()
                     ->placeholder('—'),
+                ContentTableColumns::trashedAt(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -49,9 +50,7 @@ class CaseStudiesTable
             ->emptyStateDescription('Add your first proof point to populate the case study library.')
             ->striped()
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                ContentBulkActions::group(),
             ]);
 
         return ContentRecordActions::apply($table);

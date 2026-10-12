@@ -4,7 +4,7 @@ namespace App\Filament\Resources\PressReleases\Pages;
 
 use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\PressReleases\PressReleaseResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditPressRelease extends EditRecord
@@ -15,7 +15,7 @@ class EditPressRelease extends EditRecord
     {
         return [
             PreviewAction::make(),
-            DeleteAction::make(),
+            MoveToTrashAction::make(),
         ];
     }
 }

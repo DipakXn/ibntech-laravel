@@ -4,7 +4,7 @@ namespace App\Filament\Resources\CaseStudies\Pages;
 
 use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\CaseStudies\CaseStudyResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditCaseStudy extends EditRecord
@@ -15,7 +15,7 @@ class EditCaseStudy extends EditRecord
     {
         return [
             PreviewAction::make(),
-            DeleteAction::make(),
+            MoveToTrashAction::make(),
         ];
     }
 }

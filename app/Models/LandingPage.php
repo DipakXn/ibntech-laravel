@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasPublishedAt;
+use App\Models\Concerns\SoftDeletesContent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,7 @@ class LandingPage extends Model implements HasMedia
 {
     use HasPublishedAt;
     use InteractsWithMedia;
+    use SoftDeletesContent;
 
     protected $fillable = [
         'title',

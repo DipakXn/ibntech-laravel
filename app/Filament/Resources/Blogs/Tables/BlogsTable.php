@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Blogs\Tables;
 
+use App\Filament\Tables\ContentBulkActions;
 use App\Filament\Tables\ContentRecordActions;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use App\Filament\Tables\ContentTableColumns;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -40,6 +40,7 @@ class BlogsTable
                     ->dateTime()
                     ->sortable()
                     ->placeholder('—'),
+                ContentTableColumns::trashedAt(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -59,9 +60,7 @@ class BlogsTable
             ->emptyStateDescription('Start the editorial pipeline by creating your first blog post.')
             ->striped()
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                ContentBulkActions::group(),
             ]);
 
         return ContentRecordActions::apply($table);

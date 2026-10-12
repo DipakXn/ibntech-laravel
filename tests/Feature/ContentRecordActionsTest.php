@@ -3,7 +3,10 @@
 namespace Tests\Feature;
 
 use App\CmsPreview\CmsPreviewType;
+use App\Filament\Actions\ForceDeleteContentAction;
+use App\Filament\Actions\MoveToTrashAction;
 use App\Filament\Actions\PreviewAction;
+use App\Filament\Actions\RestoreContentAction;
 use App\Filament\Resources\Articles\Pages\ListArticles;
 use App\Filament\Resources\Blogs\Pages\ListBlogs;
 use App\Filament\Resources\CaseStudies\Pages\ListCaseStudies;
@@ -27,7 +30,6 @@ use App\Models\PressRelease;
 use App\Models\User;
 use App\Models\WhitePaper;
 use Filament\Actions\ActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Facades\Filament;
 use Filament\Support\Icons\Heroicon;
@@ -77,18 +79,18 @@ class ContentRecordActionsTest extends TestCase
         $component = Livewire::test($listPage)
             ->assertCanSeeTableRecords([$record])
             ->assertTableFilterExists('status')
-            ->assertTableBulkActionExists('delete')
+            ->assertTableBulkActionExists('trash')
             ->assertTableActionVisible('preview', $record)
             ->assertTableActionVisible('edit', $record)
-            ->assertTableActionVisible('delete', $record)
+            ->assertTableActionVisible('trash', $record)
             ->assertTableActionHasLabel('preview', 'Preview', $record)
             ->assertTableActionHasLabel('edit', 'Edit', $record)
-            ->assertTableActionHasLabel('delete', 'Delete', $record)
+            ->assertTableActionHasLabel('trash', 'Move to Trash', $record)
             ->assertTableActionHasIcon('preview', Heroicon::OutlinedEye, $record)
             ->assertTableActionHasIcon('edit', Heroicon::OutlinedPencil, $record)
-            ->assertTableActionHasIcon('delete', Heroicon::OutlinedTrash, $record)
+            ->assertTableActionHasIcon('trash', Heroicon::OutlinedTrash, $record)
             ->assertTableActionHasColor('edit', 'gray', $record)
-            ->assertTableActionHasColor('delete', 'danger', $record)
+            ->assertTableActionHasColor('trash', 'danger', $record)
             ->assertTableActionHasUrl(
                 'preview',
                 route('filament.admin.content-preview', ['type' => $previewType->value, 'id' => $record->getKey()]),
@@ -98,8 +100,8 @@ class ContentRecordActionsTest extends TestCase
             ->assertTableActionHasUrl('edit', $resource::getUrl('edit', ['record' => $record]), $record)
             ->assertTableActionShouldNotOpenUrlInNewTab('edit', $record)
             ->assertTableActionExists(
-                'delete',
-                fn (DeleteAction $action): bool => $action->isConfirmationRequired(),
+                'trash',
+                fn (MoveToTrashAction $action): bool => $action->isConfirmationRequired(),
                 $record,
             )
             ->set('tableSearch', $record->slug)
@@ -121,10 +123,12 @@ class ContentRecordActionsTest extends TestCase
         $this->assertSame('Actions', $actions[0]->getLabel());
         $this->assertSame(Heroicon::EllipsisVertical, $actions[0]->getIcon());
         $this->assertSame('Actions', $component->instance()->getTable()->getRecordActionsColumnLabel());
-        $this->assertSame(['preview', 'edit', 'delete'], array_keys($actions[0]->getFlatActions()));
+        $this->assertSame(['preview', 'edit', 'trash', 'restore', 'forceDelete'], array_keys($actions[0]->getFlatActions()));
         $this->assertInstanceOf(PreviewAction::class, $actions[0]->getFlatActions()['preview']);
         $this->assertInstanceOf(EditAction::class, $actions[0]->getFlatActions()['edit']);
-        $this->assertInstanceOf(DeleteAction::class, $actions[0]->getFlatActions()['delete']);
+        $this->assertInstanceOf(MoveToTrashAction::class, $actions[0]->getFlatActions()['trash']);
+        $this->assertInstanceOf(RestoreContentAction::class, $actions[0]->getFlatActions()['restore']);
+        $this->assertInstanceOf(ForceDeleteContentAction::class, $actions[0]->getFlatActions()['forceDelete']);
 
         $html = $component->html();
         $this->assertStringContainsString('ibn-content-actions', $html);
@@ -132,13 +136,13 @@ class ContentRecordActionsTest extends TestCase
         $this->assertStringContainsString('fi-dropdown', $html);
         $this->assertMatchesRegularExpression('/fi-dropdown-list-item-label">\s*Preview\s*</', $html);
         $this->assertMatchesRegularExpression('/fi-dropdown-list-item-label">\s*Edit\s*</', $html);
-        $this->assertMatchesRegularExpression('/fi-dropdown-list-item-label">\s*Delete\s*</', $html);
+        $this->assertMatchesRegularExpression('/fi-dropdown-list-item-label">\s*Move to Trash\s*</', $html);
 
         $component
-            ->callTableAction('delete', $record)
+            ->callTableAction('trash', $record)
             ->assertNotified();
 
-        $this->assertModelMissing($record);
+        $this->assertSoftDeleted($record);
     }
 
     #[DataProvider('contentModules')]
@@ -165,7 +169,7 @@ class ContentRecordActionsTest extends TestCase
         Livewire::test($this->listPage($previewType))
             ->assertTableActionVisible('preview', $record)
             ->assertTableActionVisible('edit', $record)
-            ->assertTableActionVisible('delete', $record)
+            ->assertTableActionVisible('trash', $record)
             ->assertTableActionHasUrl(
                 'preview',
                 route('filament.admin.content-preview', ['type' => $previewType->value, 'id' => $record->getKey()]),
@@ -178,7 +182,7 @@ class ContentRecordActionsTest extends TestCase
     {
         $group = ContentRecordActions::make();
 
-        $this->assertSame(['preview', 'edit', 'delete'], array_keys($group->getFlatActions()));
+        $this->assertSame(['preview', 'edit', 'trash', 'restore', 'forceDelete'], array_keys($group->getFlatActions()));
         $this->assertSame('Actions', $group->getLabel());
         $this->assertTrue($group->isButton());
     }

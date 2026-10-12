@@ -4,7 +4,7 @@ namespace App\Filament\Resources\LandingPages\Pages;
 
 use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\LandingPages\LandingPageResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditLandingPage extends EditRecord
@@ -15,7 +15,7 @@ class EditLandingPage extends EditRecord
     {
         return [
             PreviewAction::make(),
-            DeleteAction::make(),
+            MoveToTrashAction::make(),
         ];
     }
 }

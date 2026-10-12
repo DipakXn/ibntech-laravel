@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\WhitePapers\Pages;
 
+use App\Filament\Concerns\HasContentTrashTabs;
 use App\Filament\Resources\Concerns\ShowsPeriodOverview;
 use App\Filament\Resources\WhitePapers\WhitePaperResource;
 use Filament\Actions\CreateAction;
@@ -9,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListWhitePapers extends ListRecords
 {
+    use HasContentTrashTabs;
     use ShowsPeriodOverview;
 
     protected static string $resource = WhitePaperResource::class;

@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Industries\Pages;
 
 use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\Industries\IndustryResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditIndustry extends EditRecord
@@ -15,7 +15,7 @@ class EditIndustry extends EditRecord
     {
         return [
             PreviewAction::make(),
-            DeleteAction::make(),
+            MoveToTrashAction::make(),
         ];
     }
 }

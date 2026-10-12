@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\LandingPages\Pages;
 
+use App\Filament\Concerns\HasContentTrashTabs;
 use App\Filament\Resources\Concerns\ShowsPeriodOverview;
 use App\Filament\Resources\LandingPages\LandingPageResource;
 use Filament\Actions\CreateAction;
@@ -9,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListLandingPages extends ListRecords
 {
+    use HasContentTrashTabs;
     use ShowsPeriodOverview;
 
     protected static string $resource = LandingPageResource::class;

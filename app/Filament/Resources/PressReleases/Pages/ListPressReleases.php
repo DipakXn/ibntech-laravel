@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PressReleases\Pages;
 
+use App\Filament\Concerns\HasContentTrashTabs;
 use App\Filament\Resources\Concerns\ShowsPeriodOverview;
 use App\Filament\Resources\PressReleases\PressReleaseResource;
 use Filament\Actions\CreateAction;
@@ -9,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListPressReleases extends ListRecords
 {
+    use HasContentTrashTabs;
     use ShowsPeriodOverview;
 
     protected static string $resource = PressReleaseResource::class;

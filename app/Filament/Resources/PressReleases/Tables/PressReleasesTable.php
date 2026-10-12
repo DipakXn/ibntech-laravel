@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\PressReleases\Tables;
 
+use App\Filament\Tables\ContentBulkActions;
 use App\Filament\Tables\ContentRecordActions;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use App\Filament\Tables\ContentTableColumns;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -30,6 +30,7 @@ class PressReleasesTable
                     ->dateTime()
                     ->sortable()
                     ->placeholder('—'),
+                ContentTableColumns::trashedAt(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -49,9 +50,7 @@ class PressReleasesTable
             ->emptyStateDescription('Add your first company announcement to build the press archive.')
             ->striped()
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                ContentBulkActions::group(),
             ]);
 
         return ContentRecordActions::apply($table);

@@ -73,6 +73,8 @@ Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newslet
 Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
 Route::redirect('/contact', '/contact-us/', 301);
 Route::redirect('/contact/contact-us', '/contact-us/', 301);
+Route::redirect('/white-paper-2', '/whitepapers/how-cfos-benefit-from-profitcents/', 301);
+Route::redirect('/white-paper-3', '/whitepapers/how-ibn-helping-cfos-by-combining-efforts-with-profitcents/', 301);
 
 Route::get('/preview/{type}/{id}', [CmsPreviewController::class, 'show'])
     ->whereIn('type', CmsPreviewType::values())

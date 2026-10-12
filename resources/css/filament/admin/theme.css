@@ -1846,3 +1846,29 @@ body.fi-body {
         overflow-x: auto;
     }
 }
+
+.ibn-content-actions.fi-btn {
+    --ibn-actions-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    align-items: center;
+    border-radius: 0.55rem;
+    background: var(--ibn-surface-strong);
+    box-shadow: none;
+    font-weight: 500;
+    gap: 0.35rem;
+    white-space: nowrap;
+}
+
+.ibn-content-actions.fi-btn::after {
+    content: "";
+    display: block;
+    width: 0.8rem;
+    height: 0.8rem;
+    flex: none;
+    background-color: currentColor;
+    -webkit-mask: var(--ibn-actions-chevron) center / contain no-repeat;
+    mask: var(--ibn-actions-chevron) center / contain no-repeat;
+}
+
+.fi-ta-actions {
+    white-space: nowrap;
+}

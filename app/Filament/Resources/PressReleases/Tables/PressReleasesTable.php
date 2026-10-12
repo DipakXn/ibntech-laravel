@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\PressReleases\Tables;
 
-use App\Filament\Actions\PreviewAction;
+use App\Filament\Tables\ContentRecordActions;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -14,7 +13,7 @@ class PressReleasesTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table
             ->columns([
                 TextColumn::make('title')
                     ->searchable()
@@ -49,14 +48,12 @@ class PressReleasesTable
             ->emptyStateHeading('No press releases yet')
             ->emptyStateDescription('Add your first company announcement to build the press archive.')
             ->striped()
-            ->recordActions([
-                PreviewAction::make(),
-                EditAction::make(),
-            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
             ]);
+
+        return ContentRecordActions::apply($table);
     }
 }

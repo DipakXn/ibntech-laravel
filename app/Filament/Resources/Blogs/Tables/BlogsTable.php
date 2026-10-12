@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\Blogs\Tables;
 
-use App\Filament\Actions\PreviewAction;
+use App\Filament\Tables\ContentRecordActions;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -15,7 +14,7 @@ class BlogsTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table
             ->columns([
                 SpatieMediaLibraryImageColumn::make('featured_image')
                     ->label('Image')
@@ -59,14 +58,12 @@ class BlogsTable
             ->emptyStateHeading('No blogs yet')
             ->emptyStateDescription('Start the editorial pipeline by creating your first blog post.')
             ->striped()
-            ->recordActions([
-                PreviewAction::make(),
-                EditAction::make(),
-            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
             ]);
+
+        return ContentRecordActions::apply($table);
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\WhitePapers\Tables;
 
-use App\Filament\Actions\PreviewAction;
+use App\Filament\Tables\ContentRecordActions;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -14,7 +13,7 @@ class WhitePapersTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table
             ->columns([
                 TextColumn::make('title')
                     ->searchable()
@@ -49,14 +48,12 @@ class WhitePapersTable
             ->emptyStateHeading('No white papers yet')
             ->emptyStateDescription('Add your first long-form resource to build the white paper archive.')
             ->striped()
-            ->recordActions([
-                PreviewAction::make(),
-                EditAction::make(),
-            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
             ]);
+
+        return ContentRecordActions::apply($table);
     }
 }

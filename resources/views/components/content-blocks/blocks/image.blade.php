@@ -10,7 +10,7 @@
     <figure class="content-block content-block--image">
         <img
             src="{{ $src }}"
-            alt="{{ $data['alt'] ?? $image?->getAttribute('name') }}"
+            alt="{{ filled($data['alt'] ?? null) ? $data['alt'] : trim((string) ($image?->getCustomProperty('alt') ?? '')) }}"
             loading="lazy"
         >
 

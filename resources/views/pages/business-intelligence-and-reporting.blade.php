@@ -60,7 +60,7 @@
             <img
                 class="bir-hero__bg"
                 src="{{ $img('business-intelligence-and-reporting.webp') }}"
-                alt=""
+                alt="Business intelligence and reporting services"
                 aria-hidden="true"
                 width="1400"
                 height="700"

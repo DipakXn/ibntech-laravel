@@ -107,7 +107,7 @@
         <img
             class="lces-hero__bg"
             src="{{ $lpImg('construction-lp-hero.jpg') }}"
-            alt=""
+            alt="Construction and engineering services"
             aria-hidden="true"
             width="1024"
             height="1024"
@@ -199,7 +199,7 @@
                 @foreach ($services as $service)
                     <article>
                         <span class="lces-team__icon">
-                            <img src="{{ $lpImg($service['icon']) }}" alt="" width="28" height="28">
+                            <img src="{{ $lpImg($service['icon']) }}" alt="{{ $service['title'] }}" width="28" height="28">
                         </span>
                         <h3>{{ $service['title'] }}</h3>
                         <p>{{ $service['text'] }}</p>

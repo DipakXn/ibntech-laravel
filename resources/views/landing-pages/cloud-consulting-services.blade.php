@@ -118,7 +118,7 @@
         <img
             class="lccs-hero__bg"
             src="{{ $lpImg('cloudlp-Website-banner.webp') }}"
-            alt=""
+            alt="Cloud consulting and migration services"
             aria-hidden="true"
             width="1920"
             height="900"
@@ -232,7 +232,7 @@
                     <article>
                         <img
                             src="{{ $lpImg('cloud-lp-page-Website-Image-1.webp') }}"
-                            alt=""
+                            alt="{{ $step['title'] }}"
                             width="350"
                             height="251"
                             loading="lazy"
@@ -254,7 +254,7 @@
                     <article>
                         <img
                             src="{{ $lpImg($reason['icon']) }}"
-                            alt=""
+                            alt="{{ $reason['title'] }}"
                             width="105"
                             height="105"
                             loading="lazy"

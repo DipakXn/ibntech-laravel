@@ -155,7 +155,7 @@
         <img
             class="lvas-hero__bg"
             src="{{ $lpImg('vapt-lp-hero-img.webp') }}"
-            alt=""
+            alt="Vulnerability assessment and penetration testing services"
             aria-hidden="true"
             width="1920"
             height="900"
@@ -228,7 +228,7 @@
                 @foreach ($services as $service)
                     <article>
                         <span class="lvas-services__icon">
-                            <img src="{{ $lpImg($service['icon']) }}" alt="" width="1080" height="1080">
+                            <img src="{{ $lpImg($service['icon']) }}" alt="{{ $service['title'] }}" width="1080" height="1080">
                         </span>
                         <h3>{{ $service['title'] }}</h3>
                         <p>{{ $service['text'] }}</p>

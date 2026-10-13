@@ -476,7 +476,7 @@
                             >
                                 <img
                                     src="{{ $img($industry['file']) }}"
-                                    alt=""
+                                    alt="{{ $industry['title'] }}"
                                     width="75"
                                     height="75"
                                     loading="lazy"

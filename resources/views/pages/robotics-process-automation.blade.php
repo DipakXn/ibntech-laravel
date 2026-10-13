@@ -165,7 +165,7 @@
             <div class="rpa-hero__media" aria-hidden="true">
                 <img
                     src="{{ $img('rpa-banner.webp') }}"
-                    alt=""
+                    alt="Robotic process automation services"
                     width="1920"
                     height="700"
                     fetchpriority="high"

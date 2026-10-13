@@ -251,7 +251,7 @@
                             <a href="{{ route('page.show', ['slug' => $item['slug']]) }}" tabindex="-1" aria-hidden="true">
                                 <img
                                     src="{{ $img($item['icon']) }}"
-                                    alt=""
+                                    alt="{{ $item['title'] }}"
                                     width="65"
                                     height="65"
                                     loading="lazy"

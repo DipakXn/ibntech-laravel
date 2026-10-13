@@ -339,7 +339,7 @@
             <div class="bksj-narrative__media" aria-hidden="true">
                 <img
                     src="{{ $img('narrative-office.jpg') }}"
-                    alt=""
+                    alt="Accounting team supporting San Jose businesses"
                     width="900"
                     height="600"
                     loading="lazy"

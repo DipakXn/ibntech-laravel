@@ -230,7 +230,7 @@
                 <div class="aic-hero__media" aria-hidden="true">
                     <img
                         src="{{ $img('hero-visual.webp') }}"
-                        alt=""
+                        alt="AI consulting services for business transformation"
                         width="880"
                         height="480"
                         fetchpriority="high"

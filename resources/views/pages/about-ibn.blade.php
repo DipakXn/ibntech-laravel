@@ -127,7 +127,7 @@
                             <div class="about-ibn-value__icon">
                                 <img
                                     src="{{ asset('images/about-ibn/'.$value['icon']) }}"
-                                    alt=""
+                                    alt="{{ $value['title'] }}"
                                     width="75"
                                     height="75"
                                     loading="lazy"

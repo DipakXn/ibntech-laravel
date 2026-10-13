@@ -262,7 +262,7 @@
             <img
                 class="vapt-hero__bg"
                 src="{{ asset('images/vapt-hero-img.webp') }}"
-                alt=""
+                alt="Vulnerability assessment and penetration testing services"
                 aria-hidden="true"
                 width="1536"
                 height="1024"
@@ -446,7 +446,7 @@
                             <div class="vapt-process__icon" aria-hidden="true">
                                 <img
                                     src="{{ asset('images/vapt-icons/'.$step['icon']) }}"
-                                    alt=""
+                                    alt="{{ $step['title'] }}"
                                     width="48"
                                     height="48"
                                     loading="lazy"

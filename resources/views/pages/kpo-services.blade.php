@@ -214,7 +214,7 @@
                             >
                                 <img
                                     src="{{ $img($service['icon']) }}"
-                                    alt=""
+                                    alt="{{ $service['title'] }}"
                                     width="65"
                                     height="65"
                                     loading="lazy"

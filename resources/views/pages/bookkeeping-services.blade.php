@@ -598,7 +598,7 @@
                                 @if (! empty($service['image']))
                                     <img
                                         src="{{ $img($service['image']) }}"
-                                        alt=""
+                                        alt="{{ $service['title'] }}"
                                         width="65"
                                         height="65"
                                         loading="lazy"
@@ -651,7 +651,7 @@
                         <header class="bkpsvc-region__head">
                             <img
                                 src="{{ $img('united-states-flag-icon.webp') }}"
-                                alt=""
+                                alt="United States"
                                 width="48"
                                 height="48"
                                 loading="lazy"
@@ -681,7 +681,7 @@
                         <header class="bkpsvc-region__head">
                             <img
                                 src="{{ $img('united-kingdom-flag-icon.webp') }}"
-                                alt=""
+                                alt="United Kingdom"
                                 width="48"
                                 height="48"
                                 loading="lazy"
@@ -891,7 +891,7 @@
                                     @if (! empty($service['image']))
                                         <img
                                             src="{{ $img($service['image']) }}"
-                                            alt=""
+                                            alt="{{ $service['title'] }}"
                                             width="52"
                                             height="52"
                                             loading="lazy"

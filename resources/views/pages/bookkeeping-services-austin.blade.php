@@ -340,7 +340,7 @@
             <div class="bkau-narrative__media" aria-hidden="true">
                 <img
                     src="{{ $img('narrative-office.jpg') }}"
-                    alt=""
+                    alt="Accounting team supporting Austin businesses"
                     width="900"
                     height="600"
                     loading="lazy"

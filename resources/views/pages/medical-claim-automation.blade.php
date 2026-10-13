@@ -179,7 +179,7 @@
                         <article class="mca-benefit-card">
                             <img
                                 src="{{ $img($benefit['icon']) }}"
-                                alt=""
+                                alt="{{ $benefit['title'] }}"
                                 width="75"
                                 height="75"
                                 loading="lazy"

@@ -131,7 +131,7 @@
             <img
                 class="fm-hero__bg"
                 src="{{ $img('finance-management.webp') }}"
-                alt=""
+                alt="Finance management services"
                 aria-hidden="true"
                 width="1400"
                 height="700"

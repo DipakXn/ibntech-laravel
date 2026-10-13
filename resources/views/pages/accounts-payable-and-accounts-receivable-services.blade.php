@@ -409,7 +409,7 @@
                         <article class="aparsvc-circle-card" role="listitem">
                             <img
                                 src="{{ $img($item['icon']) }}"
-                                alt=""
+                                alt="{{ $item['title'] }}"
                                 width="64"
                                 height="64"
                                 loading="lazy"
@@ -491,7 +491,7 @@
                         <article class="aparsvc-circle-card" role="listitem">
                             <img
                                 src="{{ $img($item['icon']) }}"
-                                alt=""
+                                alt="{{ $item['title'] }}"
                                 width="64"
                                 height="64"
                                 loading="lazy"

@@ -9,7 +9,14 @@
         <div class="content-gallery">
             @foreach ($images as $image)
                 <figure>
-                    <img src="{{ $image->getUrl() }}" alt="{{ $image->getAttribute('name') }}" loading="lazy">
+                    @php
+                        $galleryAlt = trim((string) ($image->getCustomProperty('alt') ?? ''));
+                    @endphp
+                    <img
+                        src="{{ $image->getUrl() }}"
+                        alt="{{ $galleryAlt !== '' ? $galleryAlt : '' }}"
+                        loading="lazy"
+                    >
                 </figure>
             @endforeach
         </div>

@@ -69,7 +69,7 @@
         <img
             class="lcsi-hero__bg"
             src="{{ $lpImg('cyber-security-services-india-hero-img.webp') }}"
-            alt=""
+            alt="Cybersecurity services in India"
             aria-hidden="true"
             width="1920"
             height="900"
@@ -145,7 +145,7 @@
                 @foreach ($services as $service)
                     <article>
                         <span class="lcsi-services__icon">
-                            <img src="{{ $lpImg($service['icon']) }}" alt="" width="70" height="70">
+                            <img src="{{ $lpImg($service['icon']) }}" alt="{{ $service['title'] }}" width="70" height="70">
                         </span>
                         <h3>{{ $service['title'] }}</h3>
                         <p>{{ $service['text'] }}</p>

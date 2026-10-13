@@ -140,7 +140,7 @@
                     <div class="rm-split__heading">
                         <img
                             src="{{ $img('back-office-icon.webp') }}"
-                            alt=""
+                            alt="Back-office support services"
                             width="90"
                             height="90"
                             decoding="async"
@@ -162,7 +162,7 @@
                     <div class="rm-split__heading">
                         <img
                             src="{{ $img('industries-icon.webp') }}"
-                            alt=""
+                            alt="Industries served by record management"
                             width="47"
                             height="47"
                             decoding="async"

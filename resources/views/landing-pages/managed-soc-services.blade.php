@@ -129,7 +129,7 @@
         <img
             class="lmss-hero__bg"
             src="{{ $lpImg('Microsoft-Security-Services-1.webp') }}"
-            alt=""
+            alt="Managed SOC as a service"
             aria-hidden="true"
             width="1920"
             height="700"

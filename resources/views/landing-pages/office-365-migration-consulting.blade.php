@@ -97,7 +97,7 @@
                         <span class="lomc-services__icon">
                             <img
                                 src="{{ $lpImg($service['icon']) }}"
-                                alt=""
+                                alt="{{ $service['title'] }}"
                                 width="70"
                                 height="70"
                                 loading="lazy"

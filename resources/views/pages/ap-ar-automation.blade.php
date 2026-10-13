@@ -375,7 +375,7 @@
                     <ul class="apar-cap-list">
                         @foreach ($apCapabilities as $item)
                             <li>
-                                <img src="{{ $img($item['icon']) }}" alt="" width="64" height="64" loading="lazy" decoding="async">
+                                <img src="{{ $img($item['icon']) }}" alt="{{ $item['title'] }}" width="64" height="64" loading="lazy" decoding="async">
                                 <div>
                                     <strong>{{ $item['title'] }}</strong>
                                     <span>– {{ $item['text'] }}</span>
@@ -401,7 +401,7 @@
                     <ul class="apar-cap-list">
                         @foreach ($arCapabilities as $item)
                             <li>
-                                <img src="{{ $img($item['icon']) }}" alt="" width="64" height="64" loading="lazy" decoding="async">
+                                <img src="{{ $img($item['icon']) }}" alt="{{ $item['title'] }}" width="64" height="64" loading="lazy" decoding="async">
                                 <div>
                                     <strong>{{ $item['title'] }}</strong>
                                     <span>– {{ $item['text'] }}</span>
@@ -476,7 +476,7 @@
                                 <span class="apar-steps__number">{{ $index + 1 }}</span>
                                 <img
                                     src="{{ $img($step['icon']) }}"
-                                    alt=""
+                                    alt="{{ $step['title'] }}"
                                     width="60"
                                     height="60"
                                     loading="lazy"

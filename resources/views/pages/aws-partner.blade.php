@@ -456,7 +456,7 @@
                                 <footer>
                                     <img
                                         src="{{ $img('user-icon.webp') }}"
-                                        alt=""
+                                        alt="Testimonial from {{ $item['cite'] }}"
                                         width="48"
                                         height="48"
                                         loading="lazy"

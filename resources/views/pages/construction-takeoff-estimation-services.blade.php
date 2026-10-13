@@ -238,7 +238,7 @@
                         <article class="ctes-why__item" role="listitem">
                             <img
                                 src="{{ $img($item['file']) }}"
-                                alt=""
+                                alt="{{ $item['title'] }}"
                                 width="75"
                                 height="75"
                                 loading="lazy"
@@ -294,7 +294,7 @@
                             <span class="ctes-serve__icon" aria-hidden="true">
                                 <img
                                     src="{{ $img($item['file']) }}"
-                                    alt=""
+                                    alt="{{ $item['title'] }}"
                                     width="104"
                                     height="69"
                                     loading="lazy"

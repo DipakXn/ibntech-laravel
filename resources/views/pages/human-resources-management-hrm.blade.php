@@ -14,7 +14,7 @@
             <img
                 class="hrm-hero__bg"
                 src="{{ $img('hrm-banner.webp') }}"
-                alt=""
+                alt="Human resources management services"
                 aria-hidden="true"
                 width="1400"
                 height="700"

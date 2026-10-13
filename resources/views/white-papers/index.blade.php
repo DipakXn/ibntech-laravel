@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="inner-hero">
+    <section class="inner-hero inner-hero--listing">
         <div class="site-shell inner-hero__inner">
-            <p class="inner-hero__eyebrow">White Papers</p>
-            <h1>Research-driven white papers, reports, and strategic resources.</h1>
+            <h1 class="inner-hero__eyebrow">White Papers</h1>
+            <h2>Research-driven white papers, reports, and strategic resources.</h2>
             <p class="inner-hero__lede">
                 Explore long-form perspectives, practical frameworks, and advisory content published by the team.
             </p>

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="inner-hero">
+    <section class="inner-hero inner-hero--listing">
         <div class="site-shell inner-hero__inner">
-            <p class="inner-hero__eyebrow">eBooks</p>
-            <h1>Downloadable guides built for migration and delivery teams.</h1>
+            <h1 class="inner-hero__eyebrow">eBooks</h1>
+            <h2>Downloadable guides built for migration and delivery teams.</h2>
             <p class="inner-hero__lede">
                 Practical playbooks, checklists, and planning resources that support technical evaluation, delivery planning, and lead capture.
             </p>

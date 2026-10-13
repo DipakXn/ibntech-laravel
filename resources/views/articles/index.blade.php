@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="inner-hero">
+    <section class="inner-hero inner-hero--listing">
         <div class="site-shell inner-hero__inner">
-            <p class="inner-hero__eyebrow">Articles</p>
-            <h1>Editorial articles, explainers, and insight-led perspectives.</h1>
+            <h1 class="inner-hero__eyebrow">Articles</h1>
+            <h2>Editorial articles, explainers, and insight-led perspectives.</h2>
             <p class="inner-hero__lede">
                 Explore practical analysis, strategic thinking, and published viewpoints from the team.
             </p>

@@ -151,6 +151,27 @@ p {
     font-weight: 700;
 }
 
+/* Resource listing pages: eyebrow is h1, intro line is h2 (visual layout unchanged). */
+.inner-hero--listing h1.inner-hero__eyebrow {
+    margin: 0;
+    color: #7fd9ff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.7;
+    text-transform: uppercase;
+}
+
+.inner-hero--listing h2 {
+    margin: 0.9rem 0 0;
+    color: inherit;
+    font-size: clamp(2.6rem, 4.5vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 1.05;
+    text-transform: none;
+}
+
 .inner-hero__lede {
     max-width: 48rem;
     margin-top: 1rem;

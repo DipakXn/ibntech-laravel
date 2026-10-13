@@ -70,6 +70,8 @@ Ensure the following PHP extensions are enabled in cPanel (**PHP Select** or **M
 
 - `bcmath`, `ctype`, `curl`, `dom`, `fileinfo`, `gd` or `imagick` (required for Spatie Media Library image conversions), `intl` (required for E.164 phone validation / `intl-tel-input` workflows), `json`, `libxml`, `mbstring`, `openssl`, `pdo`, `pdo_mysql`, `tokenizer`, `xml`, `zip`.
 
+In **MultiPHP INI Editor** for the site’s PHP version, set `upload_max_filesize = 12M` and `post_max_size = 16M`. `post_max_size` must stay larger than `upload_max_filesize`. Livewire’s temporary upload allows 12 MB, and the Case Study / eBook PDF field allows 10 MB. The usual cPanel default of 2 MB accepts small images and rejects a multi-megabyte PDF with HTTP 422.
+
 ### Core Application Characteristics
 
 - **Framework**: Laravel 12.x
@@ -669,6 +671,7 @@ RECAPTCHA_SECRET_KEY=...
 
 4. **Prevent Search Engine Indexing**: In Website Settings / SEO defaults for staging, set robots to `noindex, nofollow` (and ensure staging `robots.txt` disallows crawling) to avoid duplicate-content penalties.
 5. **Path bootstrapping**: `public/bootstrap-path.php` already maps `dev.ibntech.com` to `/home/devtech/ibntech-core` and `ibntech.com` / `www.ibntech.com` to `/home/ibntech/ibntech-core`. Do not point it at `ibntech-staging`.
+6. **Admin uploads**: the Cloudflare zone for `ibntech.com` also covers `dev.ibntech.com`. Filament uploads need the WAF skip in [Issue 10](#issue-10-admin-file-upload-returns-403-cloudflare-owasp), PHP limits of `upload_max_filesize = 12M` and `post_max_size = 16M` ([Issue 12](#issue-12-pdf-or-large-file-upload-returns-422)), and the absolute `MEDIA_ROOT` above so previews are not 404 ([Issue 11](#issue-11-upload-succeeds-but-the-preview-url-returns-404)).
 
 ---
 
@@ -777,7 +780,7 @@ Complete this verification protocol immediately following every production relea
 - [ ] **Website Settings**: Navigate to Website Settings; save a change; verify logo / favicon uploads land under `/uploads/...` and update on the frontend.
 - [ ] **Queue Monitor**: Open Queue Monitor (administrator role) and confirm connection/backlog display.
 - [ ] **Log Viewer**: Confirm application logs are readable from the admin panel when present.
-- [ ] **Media Upload Smoke Test**: Upload a Blog featured image; confirm file appears under `uploads/` and conversions complete after the queue worker runs.
+- [ ] **Media Upload Smoke Test**: Upload a Blog featured image and a Case Study or eBook PDF larger than 2 MB. Confirm the `upload-file` request returns 200, the preview URL returns the file (not 404), and the PDF is not rejected with 422. See [Issue 10](#issue-10-admin-file-upload-returns-403-cloudflare-owasp), [Issue 11](#issue-11-upload-succeeds-but-the-preview-url-returns-404), and [Issue 12](#issue-12-pdf-or-large-file-upload-returns-422).
 - [ ] **Old Submissions**: Confirm **Sales → Old Submissions** is visible and `/admin/old-submissions` loads. If the item is missing after deploy, run `php artisan filament:cache-components` (or `php artisan filament:optimize`) on the server. This list is read-only and does not affect live Form Submissions.
 
 ### Forms & Async Mail Verification
@@ -955,6 +958,79 @@ php artisan config:cache
 ```
 
 If Telescope must remain on, restrict access in `TelescopeServiceProvider::gate()` to trusted admin emails/IPs only.
+
+---
+
+### Issue 10: Admin file upload returns 403 (Cloudflare OWASP)
+
+**Symptom**: Filament shows “failed to upload.” DevTools shows `POST /livewire-{hash}/upload-file` with **403**, `cf-mitigated: challenge`, and an HTML “Just a moment…” body. The same upload works locally. WordPress media uploads on `ibntech.com` still work.
+
+**Root Cause**: The `ibntech.com` Cloudflare zone also proxies `dev.ibntech.com`. The **Cloudflare OWASP Core Ruleset** rule **949110: Inbound Anomaly Score Exceeded** (rule ID `6179ae15870a4bb7b2d480d4843b323c`) challenges the Livewire multipart upload. Confirmed on 9 Oct 2026, Ray ID `a47b49e1ee0085ff`, score 65. WordPress is exempt because the custom rules **Bypass wordpress rule** and **Allow WordPress AJAX** skip those paths. Livewire’s path is `/livewire-{hash}/upload-file` (a hyphen, not `/livewire/`). A skip expression that contains `/livewire/` does not match, so the challenge continues and `php artisan optimize` cannot clear it.
+
+**Solution**: In **Security → WAF → Custom rules**, add a rule and place it **First**:
+
+- **Expression**: `(http.host eq "dev.ibntech.com" and http.request.uri.path contains "upload-file")`
+- **Action**: Skip → **All managed rules** (this includes OWASP rule 949110)
+
+Leave the rest of the OWASP ruleset enabled. When this Laravel app is served on `ibntech.com`, add that hostname to the same expression. Do not use `/livewire/` in the path check.
+
+A missing Security Event does not prove the rule matched. Events are sampled. The response must no longer contain `cf-mitigated: challenge`, and the request must return **200** with JSON.
+
+---
+
+### Issue 11: Upload succeeds but the preview URL returns 404
+
+**Symptom**: `POST /livewire-{hash}/upload-file` returns **200**, then the admin preview requests `GET /uploads/pages/{slug}/{file}` and receives **404** with `Content-Type: text/html`. The file never appears in the browser.
+
+**Root Cause**: The temporary upload is stored by Livewire. The preview URL is the public media URL. Apache serves `/uploads/...` only from `public_html/uploads/`. A relative `MEDIA_ROOT=public/uploads` on the server writes the file under `ibntech-core/public/uploads/`, which is not the document root. `php artisan optimize` caches that path until the config cache is rebuilt.
+
+This is the same misconfiguration as [Issue 2](#issue-2-broken-images--uploaded-media-404-errors). A Content-Security-Policy `blob:` warning in the console is separate: it can hide the local thumbnail, but a 404 on `/uploads/...` means the saved file is not in the document root.
+
+**Solution**:
+
+1. Set the absolute root in that server’s `.env` (`/home/devtech/ibntech-core/.env` or `/home/ibntech/ibntech-core/.env`):
+
+```env
+MEDIA_DISK=media
+MEDIA_ROOT=/home/devtech/public_html/uploads
+MEDIA_URL=/uploads
+```
+
+Use `/home/ibntech/public_html/uploads` on production.
+
+2. Rebuild the cached config on that server:
+
+```bash
+php artisan optimize:clear
+php artisan cms:optimize
+```
+
+3. Confirm the file exists under `public_html/uploads/...` and that the same URL returns `Content-Type: image/png` (or `application/pdf`), not HTML.
+
+If the console blocks a `blob:` thumbnail while the `/uploads/` file itself loads, the page `Content-Security-Policy` is missing `blob:`. That header is not set by this application or by `public_html/.htaccess`. It is added in Cloudflare (**Rules → Transform Rules → Modify Response Header**, or a Worker / Page Rule) or in the Apache virtual host. Zone-wide header rules apply to `dev.ibntech.com` as well as `ibntech.com`. Add `blob:` to the existing image and worker sources without replacing the rest of the policy:
+
+```text
+img-src 'self' https: data: blob:; worker-src 'self' blob:
+```
+
+The **Add security headers** managed transform does not set `img-src`.
+
+---
+
+### Issue 12: PDF or large-file upload returns 422
+
+**Symptom**: A small image uploads, but a Case Study or eBook PDF (for example 4.1 MB) shows “failed to upload.” DevTools shows `POST /livewire-{hash}/upload-file` with **422** and `Content-Type: application/json`. There is no `cf-mitigated: challenge`.
+
+**Root Cause**: PHP rejected the body before Livewire stored it. The usual cPanel values are `upload_max_filesize = 2M` and a small `post_max_size`. Laravel’s `file` rule then returns 422 with `The files.0 failed to upload.` The field limit (`maxSize(10240)`, 10 MB) and Livewire’s temporary limit (12 MB) are both higher than 2 MB, so the failure is the PHP INI, not the form rule.
+
+**Solution**: In cPanel **MultiPHP INI Editor** for the domain’s PHP version:
+
+```ini
+upload_max_filesize = 12M
+post_max_size = 16M
+```
+
+`post_max_size` must be larger than `upload_max_filesize`. Upload the same PDF again. The `upload-file` response should be **200** JSON. The 422 **Response** body confirms the cause when it says `The files.0 failed to upload.`
 
 ---
 

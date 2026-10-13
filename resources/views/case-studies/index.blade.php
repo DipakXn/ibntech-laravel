@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="inner-hero">
+    <section class="inner-hero inner-hero--listing">
         <div class="site-shell inner-hero__inner">
-            <p class="inner-hero__eyebrow">Case Studies</p>
-            <h1>Proof of delivery, not brochure copy.</h1>
+            <h1 class="inner-hero__eyebrow">Case Studies</h1>
+            <h2>Proof of delivery, not brochure copy.</h2>
             <p class="inner-hero__lede">
                 Migration outcomes, implementation decisions, and platform changes that produced measurable delivery improvements.
             </p>

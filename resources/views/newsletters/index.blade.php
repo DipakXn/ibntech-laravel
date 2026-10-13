@@ -18,7 +18,7 @@
                     <article class="card-panel case-study-card">
                         @if($newsletter->featuredImageUrl())
                             <a href="{{ $newsletter->publicUrl() }}" class="case-study-card__image">
-                                <img src="{{ $newsletter->featuredImageUrl() }}" alt="{{ $newsletter->title }}">
+                                <x-featured-image :model="$newsletter" />
                             </a>
                         @endif
                         <p class="meta-chip">Newsletter</p>

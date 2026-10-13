@@ -16,7 +16,7 @@
                     </div>
                     @if($pressRelease->featuredImageUrl())
                         <div class="press-release-detail__hero">
-                            <img src="{{ $pressRelease->featuredImageUrl() }}" alt="{{ $pressRelease->title }}">
+                            <x-featured-image :model="$pressRelease" />
                         </div>
                     @endif
                 </section>

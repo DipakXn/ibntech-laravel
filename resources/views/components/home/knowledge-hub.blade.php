@@ -19,6 +19,7 @@
             'title' => $item->title,
             'text' => $item->excerpt ?: \App\Support\BlockContent::summary($item->content, 120),
             'image' => $item->featuredImageUrl(),
+            'dimensions' => method_exists($item, 'featuredImageDimensions') ? $item->featuredImageDimensions() : null,
             'icon' => $icon,
             'cta' => $cta,
             'route' => route($routeName, $item->slug),
@@ -99,8 +100,10 @@
                                     <img
                                         src="{{ $row['latest']['image'] }}"
                                         alt="{{ $row['latest']['title'] }}"
-                                        width="280"
-                                        height="180"
+                                        @if (! empty($row['latest']['dimensions']))
+                                            width="{{ $row['latest']['dimensions']['width'] }}"
+                                            height="{{ $row['latest']['dimensions']['height'] }}"
+                                        @endif
                                         loading="lazy"
                                         decoding="async"
                                     >

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasAdditionalAssets;
+use App\Models\Concerns\HasFeaturedImageDimensions;
 use App\Models\Concerns\HasBlockContent;
 use App\Models\Concerns\HasPublishedAt;
 use App\Models\Concerns\SoftDeletesContent;
@@ -20,6 +21,7 @@ class Ebook extends Model implements HasMedia
     use HasBlockContent {
         HasBlockContent::casts as blockContentCasts;
     }
+    use HasFeaturedImageDimensions;
     use HasPublishedAt;
     use InteractsWithMedia;
     use SoftDeletesContent;

@@ -16,7 +16,7 @@
                     </div>
                     @if($ebook->featuredImageUrl())
                         <div class="case-study-detail__hero">
-                            <img src="{{ $ebook->featuredImageUrl() }}" alt="{{ $ebook->title }}">
+                            <x-featured-image :model="$ebook" />
                         </div>
                     @endif
                 </section>

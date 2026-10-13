@@ -18,7 +18,7 @@
                     <article class="card-panel case-study-card">
                         @if($article->featuredImageUrl())
                             <a href="{{ route('articles.show', $article->slug) }}" class="case-study-card__image">
-                                <img src="{{ $article->featuredImageUrl() }}" alt="{{ $article->title }}">
+                                <x-featured-image :model="$article" />
                             </a>
                         @endif
                         <p class="meta-chip">Article</p>

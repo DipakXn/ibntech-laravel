@@ -18,7 +18,7 @@
                     <article class="card-panel case-study-card">
                         @if($pressRelease->featuredImageUrl())
                             <a href="{{ route('pressrelease.show', $pressRelease->slug) }}" class="case-study-card__image">
-                                <img src="{{ $pressRelease->featuredImageUrl() }}" alt="{{ $pressRelease->title }}">
+                                <x-featured-image :model="$pressRelease" />
                             </a>
                         @endif
                         <p class="meta-chip">Press Release</p>

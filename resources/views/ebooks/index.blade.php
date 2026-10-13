@@ -18,7 +18,7 @@
                     <article class="card-panel case-study-card">
                         @if($ebook->featuredImageUrl())
                             <a href="{{ route('ebooks.show', $ebook->slug) }}" class="case-study-card__image">
-                                <img src="{{ $ebook->featuredImageUrl() }}" alt="{{ $ebook->title }}">
+                                <x-featured-image :model="$ebook" />
                             </a>
                         @endif
                         <p class="meta-chip">eBook</p>

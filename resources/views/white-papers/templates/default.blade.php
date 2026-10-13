@@ -16,7 +16,7 @@
                     </div>
                     @if($whitePaper->featuredImageUrl())
                         <div class="white-paper-detail__hero">
-                            <img src="{{ $whitePaper->featuredImageUrl() }}" alt="{{ $whitePaper->title }}">
+                            <x-featured-image :model="$whitePaper" />
                         </div>
                     @endif
                 </section>

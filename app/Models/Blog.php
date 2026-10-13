@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasAdditionalAssets;
+use App\Models\Concerns\HasFeaturedImageDimensions;
 use App\Models\Concerns\HasBlockContent;
 use App\Models\Concerns\SoftDeletesContent;
 use Carbon\CarbonInterface;
@@ -24,6 +25,7 @@ class Blog extends Model implements HasMedia
     use HasBlockContent {
         HasBlockContent::casts as blockContentCasts;
     }
+    use HasFeaturedImageDimensions;
     use InteractsWithMedia;
     use SoftDeletesContent;
 

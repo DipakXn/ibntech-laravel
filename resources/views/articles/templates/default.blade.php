@@ -17,7 +17,7 @@
                     </div>
                     @if($article->featuredImageUrl())
                         <div class="article-detail__hero d-none">
-                            <img src="{{ $article->featuredImageUrl() }}" alt="{{ $article->title }}">
+                            <x-featured-image :model="$article" />
                         </div>
                     @endif
                 </section>

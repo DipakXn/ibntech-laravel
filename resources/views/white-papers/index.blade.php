@@ -18,7 +18,7 @@
                     <article class="card-panel case-study-card">
                         @if($whitePaper->featuredImageUrl())
                             <a href="{{ route('white-papers.show', $whitePaper->slug) }}" class="case-study-card__image">
-                                <img src="{{ $whitePaper->featuredImageUrl() }}" alt="{{ $whitePaper->title }}">
+                                <x-featured-image :model="$whitePaper" />
                             </a>
                         @endif
                         <p class="meta-chip">White Paper</p>

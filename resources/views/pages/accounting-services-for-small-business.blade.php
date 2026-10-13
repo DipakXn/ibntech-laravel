@@ -222,7 +222,7 @@
                             <div class="acct-smb-hero-card__icon" aria-hidden="true">
                                 <i class="fa-solid fa-cloud"></i>
                             </div>
-                            <h3>Cloud Accounting</h3>
+                            <span class="acct-smb-hero-card__title">Cloud Accounting</span>
                             <p>Access anywhere, anytime</p>
                             <ul>
                                 <li>Real-time financial insights</li>

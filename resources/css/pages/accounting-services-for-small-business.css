@@ -172,7 +172,8 @@
     font-size: 1.2rem;
 }
 
-.acct-smb-hero-card h3 {
+.acct-smb-hero-card__title {
+    display: block;
     margin-top: 0.85rem;
     color: var(--acct-navy);
     font-size: 1.2rem;

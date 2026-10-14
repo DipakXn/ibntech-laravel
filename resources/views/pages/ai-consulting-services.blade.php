@@ -333,7 +333,7 @@
                 <figure class="aic-figure">
                     <img
                         src="{{ $img('High-Impact-AI-Use-Case-Discovery.webp') }}"
-                        alt="High-Impact AI Use Case Discovery: five-step discovery process from business process analysis through prioritized use-case backlog"
+                        alt="Five-step AI use case discovery from business analysis to a prioritized backlog"
                         width="1640"
                         height="780"
                         loading="lazy"

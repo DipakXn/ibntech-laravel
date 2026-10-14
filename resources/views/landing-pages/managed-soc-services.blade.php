@@ -165,7 +165,7 @@
         <div class="lmss-shell">
             <img
                 src="{{ $lpImg('Microsoft-Solutions-Partner.webp') }}"
-                alt="Microsoft Solutions Partner badges for Digital &amp; App Innovation, Modern Work, Security, and Azure"
+                alt="Microsoft Solutions Partner badges for Digital, Modern Work, Security, and Azure"
                 width="1400"
                 height="150"
             >

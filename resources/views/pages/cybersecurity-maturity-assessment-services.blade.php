@@ -300,7 +300,7 @@
                 <figure class="cmas-method">
                     <img
                         src="{{ $img('cyber-security-maturity-assessment-services-methodology.png') }}"
-                        alt="Cybersecurity maturity assessment methodology: policy and documentation review, discussion and gap analysis, automated scans and benchmarking, risk rating and impact assessment, and customized roadmap delivery"
+                        alt="Cyber maturity assessment steps: policy review, gap analysis, scans, risk rating, and roadmap"
                         width="960"
                         height="500"
                         loading="lazy"

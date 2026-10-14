@@ -451,7 +451,7 @@
                 <figure class="cms-work-figure">
                     <img
                         src="{{ $img('How-We-Work.png') }}"
-                        alt="How we work: assessment and strategy, migration and implementation, ongoing management and optimization, continuous improvement"
+                        alt="Cloud managed services workflow: assess, migrate, manage, optimize, and improve"
                         width="960"
                         height="540"
                         loading="lazy"

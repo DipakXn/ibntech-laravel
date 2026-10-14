@@ -310,7 +310,7 @@
                 <img
                     class="rces-onboard__graphic"
                     src="{{ $img('onboard-top-construction-engineers-now.webp') }}"
-                    alt="Onboard process: Book a call, fill out the form, connect with domain engineers, define work scope, and get professional assistance"
+                    alt="Construction engineer onboarding: book a call, define scope, and get expert support"
                     width="1536"
                     height="733"
                     loading="lazy"

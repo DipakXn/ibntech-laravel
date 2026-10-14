@@ -190,7 +190,7 @@
                 <img
                     class="lvas-hero__awards"
                     src="{{ $lpImg('Logo-for-VAPT-Website.webp') }}"
-                    alt="SiliconIndia 25 Most Promising Cloud Computing Companies and CIO Review 10 Most Promising Cloud Migration Solution Providers"
+                    alt="SiliconIndia and CIO Review awards for cloud computing and migration services"
                     width="290"
                     height="50"
                 >

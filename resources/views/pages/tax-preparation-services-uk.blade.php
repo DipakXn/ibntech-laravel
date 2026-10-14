@@ -317,7 +317,7 @@
                 <div class="tpsuk-how__media">
                     <img
                         src="{{ $img('How-It-Works-1.webp') }}"
-                        alt="How tax preparation with IBN Tech works: efficient onboarding, transparent communication, and accurate financial management"
+                        alt="UK tax preparation workflow: onboarding, communication, and accurate financial reporting"
                         width="800"
                         height="687"
                         loading="lazy"

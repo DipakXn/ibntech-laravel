@@ -95,7 +95,8 @@
 
                     @if ($row['latest'])
                         <article class="home-card home-featured-card">
-                            <a href="{{ $row['latest']['route'] }}" class="home-featured-card__media" aria-label="{{ $row['latest']['title'] }}">
+                            <a href="{{ $row['latest']['route'] }}" class="home-featured-card__media">
+                                <span class="sr-only">{{ $row['latest']['title'] }}</span>
                                 @if (! empty($row['latest']['image']))
                                     <img
                                         src="{{ $row['latest']['image'] }}"

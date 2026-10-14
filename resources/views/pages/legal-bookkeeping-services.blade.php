@@ -248,16 +248,15 @@
                 <div class="legbk-trust-grid" role="list">
                     @foreach ($trustFeatures as $item)
                         <article class="legbk-trust-card" role="listitem">
-                            <a href="{{ route('page.show', ['slug' => $item['slug']]) }}" tabindex="-1" aria-hidden="true">
-                                <img
-                                    src="{{ $img($item['icon']) }}"
-                                    alt="{{ $item['title'] }}"
-                                    width="65"
-                                    height="65"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </a>
+                            <img
+                                src="{{ $img($item['icon']) }}"
+                                alt=""
+                                width="65"
+                                height="65"
+                                loading="lazy"
+                                decoding="async"
+                                aria-hidden="true"
+                            >
                             <h3>
                                 <a href="{{ route('page.show', ['slug' => $item['slug']]) }}">
                                     {{ $item['title'] }}

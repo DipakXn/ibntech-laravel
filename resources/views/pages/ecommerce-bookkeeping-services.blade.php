@@ -161,7 +161,7 @@
                 </div>
 
                 <aside class="ecbk-hero__form" id="contact-us" aria-labelledby="ecbk-hero-form-title">
-                    <h2 id="ecbk-hero-form-title">Want to Improve Your Accounting ?</h2>
+                    <p class="ecbk-hero__form-title" id="ecbk-hero-form-title">Want to Improve Your Accounting ?</p>
                     <p class="ecbk-hero__form-sub">Submit the Form to Get Started!</p>
 
                     <livewire:forms.contact-form

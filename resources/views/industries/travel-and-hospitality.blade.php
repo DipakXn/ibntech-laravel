@@ -209,7 +209,7 @@
         <section class="tah-section tah-section--soft" aria-labelledby="tah-certs-title">
             <div class="site-shell">
                 <div class="tah-heading">
-                    <h2 id="tah-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="tah-certs-title">Hospitality Data Protection &amp; <span>PCI Standards</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="tah-certs" role="list">

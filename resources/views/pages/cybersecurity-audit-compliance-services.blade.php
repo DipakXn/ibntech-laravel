@@ -139,7 +139,7 @@
         <section class="cacs-certs-section" aria-labelledby="cacs-certs-title">
             <div class="site-shell">
                 <div class="cacs-certs-panel">
-                    <h2 id="cacs-certs-title">Industry Certifications &amp; Strategic Partnerships</h2>
+                    <h2 id="cacs-certs-title">Certified Expertise &amp; Technology Partnerships</h2>
                     <p>Professional skills validated by top industry certifications and technological alliances</p>
                     <div class="cacs-certs">
                         @foreach ($certs as $cert)

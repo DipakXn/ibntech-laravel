@@ -255,7 +255,7 @@
         <section class="rec-section rec-section--soft" aria-labelledby="rec-certs-title">
             <div class="site-shell">
                 <div class="rec-heading">
-                    <h2 id="rec-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="rec-certs-title">Construction Compliance &amp; <span>Standards</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="rec-certs" role="list">

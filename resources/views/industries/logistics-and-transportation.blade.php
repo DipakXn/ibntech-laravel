@@ -253,7 +253,7 @@
         <section class="lat-section lat-section--soft" aria-labelledby="lat-certs-title">
             <div class="site-shell">
                 <div class="lat-heading">
-                    <h2 id="lat-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="lat-certs-title">Logistics Compliance &amp; <span>Supply Chain Security</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="lat-certs" role="list">

@@ -301,7 +301,7 @@
                 </div>
 
                 <div class="vapt-hero__form" id="vapt-quote">
-                    <h2>Get Your VAPT Quote</h2>
+                    <p class="vapt-hero__form-title">Get Your VAPT Quote</p>
                     <livewire:forms.contact-form
                         form-name="vapt-services-quote"
                         id-prefix="vapt-hero"

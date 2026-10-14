@@ -232,7 +232,7 @@
         <section class="ecr-section ecr-section--soft" aria-labelledby="ecr-certs-title">
             <div class="site-shell">
                 <div class="ecr-heading">
-                    <h2 id="ecr-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="ecr-certs-title">Retail Compliance &amp; <span>Payment Security</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="ecr-certs" role="list">

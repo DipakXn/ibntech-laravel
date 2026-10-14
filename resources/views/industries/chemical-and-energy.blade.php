@@ -219,7 +219,7 @@
         <section class="cae-section cae-section--soft" aria-labelledby="cae-certs-title">
             <div class="site-shell">
                 <div class="cae-heading">
-                    <h2 id="cae-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="cae-certs-title">Energy Sector Governance &amp; <span>Safety Certs</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="cae-certs" role="list">

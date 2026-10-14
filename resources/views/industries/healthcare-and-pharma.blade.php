@@ -203,7 +203,7 @@
         <section class="hcp-section" aria-labelledby="hcp-certs-title">
             <div class="site-shell">
                 <div class="hcp-heading">
-                    <h2 id="hcp-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="hcp-certs-title">Healthcare Compliance &amp; <span>HIPAA Security</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="hcp-certs" role="list">

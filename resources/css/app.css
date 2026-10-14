@@ -395,7 +395,8 @@ p {
     box-shadow: 0 14px 30px rgba(20, 31, 78, 0.08);
 }
 
-.article-detail__panel h2 {
+.article-detail__panel-title {
+    margin: 0;
     color: var(--site-navy);
     font-size: 1.05rem;
     font-weight: 700;

@@ -246,7 +246,7 @@
         <section class="ict-section ict-section--soft" aria-labelledby="ict-certs-title">
             <div class="site-shell">
                 <div class="ict-heading">
-                    <h2 id="ict-certs-title">Certifications &amp; Compliance</h2>
+                    <h2 id="ict-certs-title">ICT Governance &amp; Security Frameworks</h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="ict-certs" role="list">

@@ -103,7 +103,7 @@
                 </div>
 
                 <aside class="atcfo-hero__form" id="atcfo-hero-form" aria-labelledby="atcfo-hero-form-title">
-                    <h2 id="atcfo-hero-form-title">Want to Improve Your Accounting ?</h2>
+                    <p class="atcfo-hero__form-title" id="atcfo-hero-form-title">Want to Improve Your Accounting ?</p>
                     <p class="atcfo-hero__form-sub">Submit the Form to Get Started!</p>
 
                     <livewire:forms.contact-form

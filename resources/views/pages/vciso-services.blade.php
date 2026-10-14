@@ -153,7 +153,7 @@
         <section class="vciso-certs-section" aria-labelledby="vciso-certs-title">
             <div class="site-shell">
                 <div class="vciso-certs-panel">
-                    <h2 id="vciso-certs-title">Certified and Trusted by Global Cybersecurity Accreditation Leaders</h2>
+                    <h2 id="vciso-certs-title">Certified by Trusted Global Security and Compliance Leaders</h2>
                     <div class="vciso-certs">
                         @foreach ($certs as $cert)
                             <img

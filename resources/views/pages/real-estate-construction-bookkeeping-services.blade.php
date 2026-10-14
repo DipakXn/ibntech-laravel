@@ -146,7 +146,7 @@
                 </div>
 
                 <aside class="recbk-hero__form" id="contact-us" aria-labelledby="recbk-hero-form-title">
-                    <h2 id="recbk-hero-form-title">Want to Improve Your Accounting ?</h2>
+                    <p class="recbk-hero__form-title" id="recbk-hero-form-title">Want to Improve Your Accounting ?</p>
                     <p class="recbk-hero__form-sub">Submit the Form to Get Started!</p>
 
                     <livewire:forms.contact-form

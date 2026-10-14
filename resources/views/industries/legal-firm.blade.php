@@ -181,7 +181,7 @@
         <section class="lf-section lf-section--soft" aria-labelledby="lf-certs-title">
             <div class="site-shell">
                 <div class="lf-heading">
-                    <h2 id="lf-certs-title">Certifications &amp; Compliance</h2>
+                    <h2 id="lf-certs-title">Legal Compliance &amp; Client Confidentiality</h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="lf-certs" role="list">

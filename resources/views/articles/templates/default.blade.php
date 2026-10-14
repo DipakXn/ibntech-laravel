@@ -28,7 +28,7 @@
                         <aside class="article-detail__sidebar">
                             @if($tocItems !== [])
                                 <section class="article-detail__panel article-detail__panel--toc" data-article-toc-root>
-                                    <h2>Table of Contents</h2>
+                                    <p class="article-detail__panel-title">Table of Contents</p>
                                     @php($h2Index = 0)
                                     @php($h3Index = 0)
                                     <ol class="article-detail__toc" data-article-toc-list>
@@ -56,7 +56,7 @@
 
                             @if($article->summary)
                                 <section class="article-detail__panel">
-                                    <h2>Summary</h2>
+                                    <p class="article-detail__panel-title">Summary</p>
                                     <div class="article-detail__summary">
                                         {!! nl2br(e($article->summary)) !!}
                                     </div>

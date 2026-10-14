@@ -264,7 +264,7 @@
         <section class="mdr-certs-section" aria-labelledby="mdr-certs-title">
             <div class="site-shell">
                 <div class="mdr-certs-panel">
-                    <h2 id="mdr-certs-title">Industry Certifications &amp; Strategic Partnerships</h2>
+                    <h2 id="mdr-certs-title">Industry Accreditations &amp; Strategic Alliances</h2>
                     <p>Professional skills validated by top industry certifications and technological alliances</p>
                     <div class="mdr-certs">
                         @foreach ($certs as $cert)

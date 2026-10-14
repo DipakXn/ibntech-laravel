@@ -217,7 +217,7 @@
         <section class="bfsi-section bfsi-section--soft" aria-labelledby="bfsi-certs-title">
             <div class="site-shell">
                 <div class="bfsi-heading">
-                    <h2 id="bfsi-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="bfsi-certs-title">BFSI Regulatory Compliance &amp; <span>Audits</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="bfsi-certs" role="list">

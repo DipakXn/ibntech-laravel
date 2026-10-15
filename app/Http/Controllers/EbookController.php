@@ -74,7 +74,7 @@ class EbookController extends Controller
             $ebooks,
             $resolved,
             'eBooks',
-            'Downloadable guides, migration playbooks, and gated content assets.'
+            'Explore free finance and accounting eBooks from IBN Tech—insights, expert tips & practical guides to sharpen your skills and boost business success.'
         );
 
         return response()->view('ebooks.index', compact('ebooks'));

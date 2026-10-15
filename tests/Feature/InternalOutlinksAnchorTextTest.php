@@ -33,6 +33,12 @@ class InternalOutlinksAnchorTextTest extends TestCase
                 'template' => 'legal-bookkeeping-services',
                 'title' => 'Legal Bookkeeping Services',
             ]],
+            'accounting-services-for-small-business' => [[
+                'path' => '/accounting-services-for-small-business/',
+                'slug' => 'accounting-services-for-small-business',
+                'template' => 'accounting-services-for-small-business',
+                'title' => 'Accounting Services for Small Business',
+            ]],
         ];
     }
 
@@ -121,6 +127,42 @@ class InternalOutlinksAnchorTextTest extends TestCase
         $this->assertSame([], $offenders);
     }
 
+    public function test_accounting_services_for_small_business_uses_descriptive_service_anchor_text(): void
+    {
+        $this->withoutVite();
+
+        Page::query()->create([
+            'title' => 'Accounting Services for Small Business',
+            'slug' => 'accounting-services-for-small-business',
+            'template' => 'accounting-services-for-small-business',
+            'status' => 'published',
+        ]);
+
+        $response = $this->followingRedirects()->get('/accounting-services-for-small-business/');
+        $response->assertOk();
+
+        $expected = [
+            'Start a bookkeeping consultation',
+            'Start an accounting software consultation',
+            'Start an outsourcing consultation',
+            'Start an order management consultation',
+            'Start a tax consultation',
+            'Start a cash flow consultation',
+        ];
+
+        $serviceLinks = $this->anchorTextsForHref($response->getContent(), '#contact-us-section');
+
+        $this->assertSame($expected, $serviceLinks);
+
+        $vague = $this->findVagueInternalAnchorText($response->getContent());
+
+        $this->assertSame(
+            [],
+            $vague,
+            "Vague internal anchor text on /accounting-services-for-small-business/:\n".implode("\n", $vague)
+        );
+    }
+
     /**
      * @return list<string>
      */
@@ -194,6 +236,99 @@ class InternalOutlinksAnchorTextTest extends TestCase
         }
 
         return false;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function anchorTextsForHref(string $html, string $href): array
+    {
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML('<?xml encoding="UTF-8">'.$html);
+        libxml_clear_errors();
+
+        $texts = [];
+
+        /** @var DOMElement $anchor */
+        foreach ((new DOMXPath($dom))->query('//a[@href]') as $anchor) {
+            if ($anchor->getAttribute('href') !== $href) {
+                continue;
+            }
+
+            $texts[] = trim(preg_replace('/\s+/u', ' ', $anchor->textContent ?? '') ?? '');
+        }
+
+        return $texts;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function findVagueInternalAnchorText(string $html): array
+    {
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML('<?xml encoding="UTF-8">'.$html);
+        libxml_clear_errors();
+
+        $xpath = new DOMXPath($dom);
+        $offenders = [];
+
+        /** @var DOMElement $anchor */
+        foreach ($xpath->query('//a[@href]') as $anchor) {
+            $href = trim($anchor->getAttribute('href'));
+            if (! $this->isContentInternalHref($href)) {
+                continue;
+            }
+
+            $text = trim(preg_replace('/\s+/u', ' ', $anchor->textContent ?? '') ?? '');
+            if (! $this->isVagueAnchorText($text)) {
+                continue;
+            }
+
+            $snippet = preg_replace('/\s+/u', ' ', $dom->saveHTML($anchor) ?: '') ?? '';
+            $offenders[] = $href.' => '.$snippet;
+        }
+
+        return $offenders;
+    }
+
+    private function isContentInternalHref(string $href): bool
+    {
+        if ($href === '' || $href === '#' || str_starts_with($href, 'mailto:') || str_starts_with($href, 'tel:') || str_starts_with($href, 'javascript:')) {
+            return false;
+        }
+
+        if (str_starts_with($href, '#') && strlen($href) > 1) {
+            return true;
+        }
+
+        return $this->isInternalHref($href);
+    }
+
+    private function isVagueAnchorText(string $text): bool
+    {
+        $normalized = strtolower(trim(preg_replace('/\s+/u', ' ', $text) ?? ''));
+        $normalized = trim($normalized, " \t\n\r\0\x0B.»›→-");
+
+        return in_array($normalized, [
+            'click here',
+            'read more',
+            'learn more',
+            'know more',
+            'find out more',
+            'see more',
+            'view more',
+            'more info',
+            'more information',
+            'more details',
+            'continue reading',
+            'here',
+            'this',
+            'link',
+            'more',
+        ], true);
     }
 
     private function linkHasAccessibleName(DOMElement $anchor): bool

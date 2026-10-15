@@ -28,9 +28,9 @@ class BlogController extends Controller
 
         $this->seoService->setCurrent([
             'meta_title' => 'Blog | '.config('app.name'),
-            'meta_description' => 'Latest articles and resources from our team.',
+            'meta_description' => 'Explore expert insights, tips, and updates on accounting, finance, automation, and outsourcing from IBN Tech Blog.',
             'og_title' => 'Blog',
-            'og_description' => 'Latest articles and resources from our team.',
+            'og_description' => 'Explore expert insights, tips, and updates on accounting, finance, automation, and outsourcing from IBN Tech Blog.',
             'canonical_url' => route('blog.index'),
         ]);
 

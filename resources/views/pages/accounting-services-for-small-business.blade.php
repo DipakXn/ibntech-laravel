@@ -46,6 +46,7 @@
             ],
             'image' => 'online-bookkeeping-services.webp',
             'image_alt' => 'online bookkeeping services',
+            'cta' => 'Start a bookkeeping consultation',
         ],
         [
             'id' => 'software',
@@ -60,6 +61,7 @@
             ],
             'image' => 'accounting-software.webp',
             'image_alt' => 'accounting software',
+            'cta' => 'Start an accounting software consultation',
         ],
         [
             'id' => 'outsource',
@@ -74,6 +76,7 @@
             ],
             'image' => 'outsourcing.webp',
             'image_alt' => 'outsourcing',
+            'cta' => 'Start an outsourcing consultation',
         ],
         [
             'id' => 'orders',
@@ -88,6 +91,7 @@
             ],
             'image' => 'order-management.webp',
             'image_alt' => 'order management',
+            'cta' => 'Start an order management consultation',
         ],
         [
             'id' => 'tax',
@@ -102,6 +106,7 @@
             ],
             'image' => 'tax-servies.webp',
             'image_alt' => 'tax services',
+            'cta' => 'Start a tax consultation',
         ],
         [
             'id' => 'cashflow',
@@ -116,6 +121,7 @@
             ],
             'image' => 'cash-flow.webp',
             'image_alt' => 'cash flow',
+            'cta' => 'Start a cash flow consultation',
         ],
     ];
 
@@ -309,7 +315,7 @@
                                 @endforeach
                             </ul>
                             <a href="#contact-us-section" class="acct-smb-btn acct-smb-btn--navy">
-                                Learn More
+                                {{ $serviceTab['cta'] }}
                             </a>
                         </div>
                         <div class="acct-smb-tab-panel__media">

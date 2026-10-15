@@ -9,6 +9,10 @@
         ['label' => 'Service', 'value' => $lead->service],
     ];
 
+    if (filled($lead->lead_source)) {
+        array_splice($rows, 1, 0, [['label' => 'Lead Source', 'value' => $lead->lead_source]]);
+    }
+
     foreach ($lead->extraAnswers() as $extraRow) {
         $rows[] = ['label' => $extraRow['label'], 'value' => $extraRow['value']];
     }

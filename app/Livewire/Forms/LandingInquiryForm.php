@@ -202,7 +202,7 @@ class LandingInquiryForm extends Component
                     'resource_type' => $validated['resourceType'] ?? null,
                     'service' => $validated['service'] ?? null,
                 ] : []),
-            ], $landingPage->formName());
+            ], $landingPage->formName(), recordOrganicLeadSource: false);
         } catch (Throwable $exception) {
             report($exception);
             $this->submitError = 'Something went wrong while sending your message. Please try again.';

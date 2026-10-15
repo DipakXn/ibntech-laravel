@@ -3,6 +3,9 @@ New Submission Received
 Someone submitted the {{ $lead->form_label }} on {{ config('app.name', 'IBN Technologies') }}.
 
 Form: {{ $lead->form_label }}
+@if(filled($lead->lead_source))
+Lead Source: {{ $lead->lead_source }}
+@endif
 Name: {{ $lead->name }}
 Email: {{ $lead->email }}
 Phone: {{ $lead->phone ?: 'N/A' }}

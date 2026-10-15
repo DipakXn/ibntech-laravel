@@ -6,6 +6,7 @@ use App\Jobs\SendLeadSubmissionNotification;
 use App\Mail\LeadReceivedMail;
 use App\Models\Lead;
 use App\Services\LeadService;
+use App\Support\LeadSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -55,8 +56,38 @@ class FormSubmissionTest extends TestCase
         $this->assertSame('Homepage Contact', $fresh->form_label);
         $this->assertSame('Cybersecurity', $fresh->service);
         $this->assertSame('Cybersecurity', data_get($fresh->payload, 'service'));
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($fresh->payload, 'lead_source'));
+        $this->assertSame(LeadSource::ORGANIC_SEO, $fresh->lead_source);
         Queue::assertPushed(SendLeadSubmissionNotification::class, fn (SendLeadSubmissionNotification $job): bool => $job->submissionId === $submission->id);
         Mail::assertNothingSent();
+    }
+
+    public function test_create_lead_overwrites_tampered_lead_source_for_organic_submissions(): void
+    {
+        Queue::fake();
+
+        $submission = app(LeadService::class)->createLead([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+            'form_name' => 'contact',
+            'lead_source' => 'Google Ads',
+        ]);
+
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($submission->fresh()->payload, 'lead_source'));
+    }
+
+    public function test_create_lead_strips_lead_source_when_landing_flag_is_false(): void
+    {
+        Queue::fake();
+
+        $submission = app(LeadService::class)->createLead([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+            'form_name' => 'lp-vapt-audit-services',
+            'lead_source' => LeadSource::ORGANIC_SEO,
+        ], 'lp-vapt-audit-services', recordOrganicLeadSource: false);
+
+        $this->assertNull(data_get($submission->fresh()->payload, 'lead_source'));
     }
 
     public function test_lead_model_uses_form_submissions_table(): void
@@ -78,16 +109,39 @@ class FormSubmissionTest extends TestCase
             'user_agent' => 'PHPUnit',
             'payload' => [
                 'service' => 'Cybersecurity',
+                'lead_source' => LeadSource::ORGANIC_SEO,
             ],
         ]);
 
         $html = (new LeadReceivedMail($lead))->render();
+        $text = view('emails.leads.received-text', ['lead' => $lead])->render();
 
         $this->assertStringContainsString('Admin Notification', $html);
         $this->assertStringContainsString('New Submission Received', $html);
+        $this->assertStringContainsString('Lead Source', $html);
+        $this->assertStringContainsString(LeadSource::ORGANIC_SEO, $html);
         $this->assertStringContainsString('Service', $html);
         $this->assertStringContainsString('Cybersecurity', $html);
         $this->assertStringContainsString('Lead ID', $html);
         $this->assertStringContainsString('#'.$lead->id, $html);
+        $this->assertStringContainsString('Lead Source: '.LeadSource::ORGANIC_SEO, $text);
+    }
+
+    public function test_admin_notification_email_omits_lead_source_when_not_stored(): void
+    {
+        $lead = Lead::query()->create([
+            'name' => 'Landing Lead',
+            'email' => 'landing@example.com',
+            'form_name' => 'lp-vapt-audit-services',
+            'message' => 'LP inquiry.',
+            'payload' => [],
+        ]);
+
+        $html = (new LeadReceivedMail($lead))->render();
+        $text = view('emails.leads.received-text', ['lead' => $lead])->render();
+
+        $this->assertStringNotContainsString('Lead Source', $html);
+        $this->assertStringNotContainsString('Not recorded', $html);
+        $this->assertStringNotContainsString('Lead Source:', $text);
     }
 }

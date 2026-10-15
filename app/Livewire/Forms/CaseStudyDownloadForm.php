@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Jobs\SendCaseStudyThankYouMail;
 use App\Livewire\Concerns\HasReCaptcha;
+use App\Livewire\Concerns\ProvidesOrganicLeadSource;
 use App\Models\CaseStudy;
 use App\Services\LeadService;
 use Illuminate\Support\Facades\URL;
@@ -12,6 +13,7 @@ use Livewire\Component;
 class CaseStudyDownloadForm extends Component
 {
     use HasReCaptcha;
+    use ProvidesOrganicLeadSource;
     public string $caseStudySlug = '';
     public string $caseStudyTitle = '';
     public string $formName = 'case_study_download';

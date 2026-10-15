@@ -3,8 +3,10 @@
 namespace Tests\Feature;
 
 use App\Filament\Resources\Leads\Pages\EditLead;
+use App\Filament\Resources\Leads\Pages\ListLeads;
 use App\Models\Lead;
 use App\Models\User;
+use App\Support\LeadSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -85,5 +87,67 @@ class LeadAdminDisplayTest extends TestCase
             ->assertDontSee('Which service do you need?')
             ->assertDontSee('When do you want to hire?')
             ->assertDontSee('Resource Type');
+    }
+
+    public function test_submission_detail_shows_lead_source_or_dash_when_missing(): void
+    {
+        $this->withoutVite();
+
+        $user = User::factory()->create([
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]);
+
+        $withSource = Lead::query()->create([
+            'name' => 'Organic Lead',
+            'email' => 'organic@example.com',
+            'form_name' => 'contact',
+            'payload' => [
+                'lead_source' => LeadSource::ORGANIC_SEO,
+            ],
+        ]);
+
+        $withoutSource = Lead::query()->create([
+            'name' => 'Legacy Lead',
+            'email' => 'legacy@example.com',
+            'form_name' => 'contact',
+            'payload' => [],
+        ]);
+
+        $this->actingAs($user);
+
+        Livewire::test(EditLead::class, ['record' => $withSource->getRouteKey()])
+            ->assertOk()
+            ->assertSee('Lead Source')
+            ->assertSee(LeadSource::ORGANIC_SEO);
+
+        Livewire::test(EditLead::class, ['record' => $withoutSource->getRouteKey()])
+            ->assertOk()
+            ->assertDontSee('Lead Source');
+    }
+
+    public function test_submissions_table_shows_lead_source_column(): void
+    {
+        $this->withoutVite();
+
+        $user = User::factory()->create([
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]);
+
+        $lead = Lead::query()->create([
+            'name' => 'Table Lead',
+            'email' => 'table@example.com',
+            'form_name' => 'contact',
+            'payload' => [
+                'lead_source' => LeadSource::ORGANIC_SEO,
+            ],
+        ]);
+
+        $this->actingAs($user);
+
+        Livewire::test(ListLeads::class)
+            ->assertOk()
+            ->assertSee('Lead Source')
+            ->assertSee(LeadSource::ORGANIC_SEO)
+            ->assertCanSeeTableRecords([$lead]);
     }
 }

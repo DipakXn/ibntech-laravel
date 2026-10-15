@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
+use App\Livewire\Concerns\ProvidesOrganicLeadSource;
 use App\Services\LeadService;
 use App\Support\PathPageUrl;
 use Illuminate\Validation\ValidationException;
@@ -12,6 +13,7 @@ use Throwable;
 class ContactForm extends Component
 {
     use HasReCaptcha;
+    use ProvidesOrganicLeadSource;
 
     public string $formName = 'contact';
 

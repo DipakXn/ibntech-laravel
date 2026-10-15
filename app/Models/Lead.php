@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\LeadSource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -100,6 +101,16 @@ class Lead extends Model
     public function getServiceAttribute(): ?string
     {
         return data_get($this->payload, 'service');
+    }
+
+    public function getLeadSourceAttribute(): ?string
+    {
+        return $this->payloadString('lead_source');
+    }
+
+    public function getLeadSourceLabelAttribute(): string
+    {
+        return LeadSource::displayLabel($this->lead_source);
     }
 
     public function getPackageSelectedAttribute(): ?string

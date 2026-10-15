@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Jobs\SendEbookThankYouMail;
 use App\Livewire\Concerns\HasReCaptcha;
+use App\Livewire\Concerns\ProvidesOrganicLeadSource;
 use App\Models\Ebook;
 use App\Services\LeadService;
 use Illuminate\Support\Facades\URL;
@@ -12,6 +13,7 @@ use Livewire\Component;
 class EbookDownloadForm extends Component
 {
     use HasReCaptcha;
+    use ProvidesOrganicLeadSource;
     public string $ebookSlug = '';
     public string $ebookTitle = '';
     public string $formName = 'ebook_download';

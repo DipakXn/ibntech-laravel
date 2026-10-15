@@ -182,6 +182,7 @@ class LandingPageTest extends TestCase
         $this->assertSame('VAPT Audit Services', $submission->form_label);
         $this->assertSame('vapt-audit-services', data_get($submission->payload, 'landing_page_slug'));
         $this->assertSame('VAPT Audit Services', data_get($submission->payload, 'landing_page_title'));
+        $this->assertNull(data_get($submission->payload, 'lead_source'));
     }
 
     public function test_construction_engineering_form_stays_on_page_without_a_thank_you_redirect(): void

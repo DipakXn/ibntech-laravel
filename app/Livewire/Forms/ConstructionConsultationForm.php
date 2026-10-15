@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
+use App\Livewire\Concerns\ProvidesOrganicLeadSource;
 use App\Services\LeadService;
 use App\Support\PathPageUrl;
 use Illuminate\Validation\Rule;
@@ -13,6 +14,7 @@ use Throwable;
 class ConstructionConsultationForm extends Component
 {
     use HasReCaptcha;
+    use ProvidesOrganicLeadSource;
 
     public const LOOKING_FOR_DETAILED = 'Construction Engineering & Back Office Support';
 

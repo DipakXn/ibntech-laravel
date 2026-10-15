@@ -3,12 +3,14 @@
 namespace App\Livewire\Forms;
 
 use App\Livewire\Concerns\HasReCaptcha;
+use App\Livewire\Concerns\ProvidesOrganicLeadSource;
 use App\Services\LeadService;
 use Livewire\Component;
 
 class LeadForm extends Component
 {
     use HasReCaptcha;
+    use ProvidesOrganicLeadSource;
     public string $formName = 'lead';
     public string $pageUrl = '';
     public string $name = '';

@@ -1,6 +1,7 @@
 <form wire:submit="submit" class="space-y-3">
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
+    <x-forms.lead-source-hidden />
 
     @if($submitted)
         <x-forms.success-alert title="Request received">

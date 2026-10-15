@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SendLeadSubmissionNotification;
 use App\Models\Lead;
 use App\Repositories\LeadRepository;
+use App\Support\LeadSource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -15,9 +16,16 @@ class LeadService
         protected Request $request,
     ) {}
 
-    public function createLead(array $payload, string $formName = 'general'): Lead
-    {
+    /**
+     * @param  bool  $recordOrganicLeadSource  When true, stores Organic / SEO in payload. Only LandingInquiryForm should pass false.
+     */
+    public function createLead(
+        array $payload,
+        string $formName = 'general',
+        bool $recordOrganicLeadSource = true,
+    ): Lead {
         $payload = $this->normalizePayload($payload);
+        $payload = $this->applyLeadSourceToPayload($payload, $recordOrganicLeadSource);
 
         $lead = $this->leads->create([
             'name' => $payload['name'],
@@ -48,5 +56,22 @@ class LeadService
 
             return $value === '' ? null : $value;
         });
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    protected function applyLeadSourceToPayload(array $payload, bool $recordOrganicLeadSource): array
+    {
+        if ($recordOrganicLeadSource) {
+            $payload['lead_source'] = LeadSource::ORGANIC_SEO;
+
+            return $payload;
+        }
+
+        unset($payload['lead_source']);
+
+        return $payload;
     }
 }

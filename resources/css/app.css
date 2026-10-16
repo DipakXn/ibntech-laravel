@@ -231,7 +231,7 @@ p {
 }
 
 .content-block li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .article-shell {
@@ -682,7 +682,7 @@ p {
 
 .content-blocks {
     display: grid;
-    gap: 1.5rem;
+    gap: 0.875rem;
 }
 
 .content-blocks a {
@@ -704,6 +704,37 @@ p {
 .content-blocks ul,
 .content-blocks ol {
     padding-left: 1.35rem;
+}
+
+.content-blocks .content-block--heading h2,
+.content-blocks .content-block--heading h3,
+.content-blocks .content-block--heading h4 {
+    margin: 0;
+}
+
+.content-blocks .content-block--paragraph + .content-block--heading {
+    margin-top: 0.25rem;
+}
+
+.content-block--buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.content-block--buttons h3 {
+    margin: 0;
+}
+
+.content-block--faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.content-block--faq h3 {
+    margin: 0;
 }
 
 .content-block--heading.is-centered {
@@ -806,14 +837,15 @@ p {
 
 .content-faq-list {
     display: grid;
-    gap: 0.85rem;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 .content-faq-list details {
     border: 1px solid rgba(61, 86, 166, 0.12);
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.82);
-    padding: 1rem 1.1rem;
+    padding: 0.85rem 1rem;
 }
 
 .content-faq-list summary {
@@ -823,7 +855,7 @@ p {
 }
 
 .content-faq-list details > div {
-    margin-top: 0.85rem;
+    margin-top: 0.65rem;
 }
 
 .content-block--callout {
@@ -1536,10 +1568,6 @@ p {
     line-height: 1.8;
 }
 
-.blog-detail__content > * + * {
-    margin-top: 1.05rem;
-}
-
 .blog-detail__content h2,
 .blog-detail__content h3,
 .blog-detail__content h4 {
@@ -1549,12 +1577,10 @@ p {
 }
 
 .blog-detail__content h2 {
-    margin-top: 1.35rem;
     font-size: 1.55rem;
 }
 
 .blog-detail__content h3 {
-    margin-top: 1.25rem;
     font-size: 1.3rem;
 }
 

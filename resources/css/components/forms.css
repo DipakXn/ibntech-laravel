@@ -44,6 +44,12 @@
     background: #2f2f85;
     color: #fff;
     padding: 0.9rem 1rem;
+    cursor: pointer;
+}
+
+.newsletter-form__submit:disabled {
+    cursor: wait;
+    opacity: 0.72;
 }
 
 .newsletter-form .form-success,

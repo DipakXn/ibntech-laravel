@@ -7,7 +7,8 @@
 
     # Allowlist trusted IPs — skip bot block for these
     RewriteCond %{REMOTE_ADDR} ^45\.64\.87\.187$ [OR]
-    RewriteCond %{REMOTE_ADDR} ^114\.143\.174\.98$
+    RewriteCond %{REMOTE_ADDR} ^114\.143\.174\.98$ [OR]
+    RewriteCond %{REMOTE_ADDR} ^103\.175\.177\.133$
     RewriteRule .* - [S=1]
     
     # Block ALL bots (including Google and AI crawlers)

@@ -413,6 +413,7 @@
     gap: 0.75rem;
 }
 
+.case-study-download-form__intro h2,
 .case-study-download-form__intro h3 {
     color: #fff;
     font-size: 1.45rem;

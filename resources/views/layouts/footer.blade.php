@@ -203,10 +203,10 @@
             <nav aria-label="Company">
                 <ul class="site-footer__links">
                     <li><a href="{{ route('page.show', ['slug' => 'about-ibn']) }}"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>About Us</span></a></li>
-                    <li><a href="{{ route('page.show', ['slug' => 'our-vision']) }}"><i class="fa-regular fa-eye" aria-hidden="true"></i><span>Vision and Mission</span></a></li>
-                    <li><a href="{{ route('page.show', ['slug' => 'services']) }}"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Thought Leadership</span></a></li>
-                    <li><a href="{{ route('case-studies.index') }}"><i class="fa-solid fa-trophy" aria-hidden="true"></i><span>Awards and Recognition</span></a></li>
-                    <li><a href="{{ route('page.show', ['slug' => 'about']) }}"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>History</span></a></li>
+                    <li><a href="javascript:void(0)"><i class="fa-regular fa-eye" aria-hidden="true"></i><span>Vision and Mission</span></a></li>
+                    <li><a href="{{ route('page.show', ['slug' => 'ibn-team']) }}"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i><span>Thought Leadership</span></a></li>
+                    <li><a href="javascript:void(0)"><i class="fa-solid fa-trophy" aria-hidden="true"></i><span>Awards and Recognition</span></a></li>
+                    <li><a href="javascript:void(0)"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>History</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'current-job-opening']) }}"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Career</span></a></li>
                     <li><a href="{{ route('page.show', ['slug' => 'contact-us']) }}"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Contact Us</span></a></li>
                 </ul>
@@ -225,7 +225,7 @@
                         <li><a href="{{ route('pressrelease.index') }}"><i class="fa-regular fa-newspaper" aria-hidden="true"></i><span>Press Releases</span></a></li>
                         <li><a href="{{ route('ebooks.index') }}"><i class="fa-solid fa-book" aria-hidden="true"></i><span>eBooks</span></a></li>
                         <li><a href="{{ route('white-papers.index') }}"><i class="fa-regular fa-folder-open" aria-hidden="true"></i><span>White Papers &amp; Reports</span></a></li>
-                        <li><a href="{{ route('blog.index') }}"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i><span>Articles</span></a></li>
+                        <li><a href="{{ route('articles.index') }}"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i><span>Articles</span></a></li>
                         <li><a href="{{ route('page.show', ['slug' => 'faq']) }}"><i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>FAQ's</span></a></li>
                     </ul>
                 </nav>

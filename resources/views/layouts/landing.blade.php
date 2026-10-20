@@ -163,7 +163,13 @@
         {!! $websiteSettings->custom_head_code !!}
     @endif
 </head>
-<body class="lp-site">
+<body @class([
+    'lp-site',
+    'has-admin-toolbar' => ! empty($adminToolbar),
+])>
+    @if (! empty($adminToolbar))
+        <x-admin-toolbar :toolbar="$adminToolbar" />
+    @endif
     @include('components.cms-preview-banner')
     @if(!empty($websiteSettings?->google_tag_manager_id))
         <noscript>

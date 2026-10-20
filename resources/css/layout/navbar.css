@@ -7,6 +7,12 @@
     background: #fff;
 }
 
+@media (min-width: 992px) {
+    .has-admin-toolbar .site-ibn-header {
+        top: var(--admin-toolbar-height);
+    }
+}
+
 .site-ibn-topbar {
     background: #2d306d;
     color: #fff;

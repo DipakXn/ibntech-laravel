@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'intl-tel-input/styles';
 @import './layout/navbar.css';
+@import './layout/admin-toolbar.css';
 @import './layout/contact-modal.css';
 @import './layout/footer.css';
 @import './newsletters/footer.css';

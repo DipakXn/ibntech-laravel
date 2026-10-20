@@ -167,7 +167,13 @@
         {!! $websiteSettings->custom_head_code !!}
     @endif
 </head>
-<body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
+<body @class([
+    'min-h-screen bg-slate-100 text-slate-900 antialiased',
+    'has-admin-toolbar' => ! empty($adminToolbar),
+])>
+    @if (! empty($adminToolbar))
+        <x-admin-toolbar :toolbar="$adminToolbar" />
+    @endif
     @include('components.cms-preview-banner')
     @if(!empty($websiteSettings?->google_tag_manager_id))
         <noscript>

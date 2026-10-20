@@ -1027,7 +1027,113 @@ const initHomeTestimonials = () => {
     });
 };
 
+const initAdminToolbar = () => {
+    const root = document.querySelector('#admin-toolbar');
+
+    if (!root || root.dataset.toolbarReady === 'true') {
+        return;
+    }
+
+    root.dataset.toolbarReady = 'true';
+
+    const menus = [...root.querySelectorAll('[data-admin-toolbar-menu]')];
+
+    const closeMenus = () => {
+        menus.forEach((menu) => {
+            const button = menu.querySelector('[aria-expanded]');
+            const panel = menu.querySelector('[data-admin-toolbar-panel]');
+
+            button?.setAttribute('aria-expanded', 'false');
+
+            if (panel) {
+                panel.hidden = true;
+            }
+        });
+    };
+
+    const canHover = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    const openMenu = (menu) => {
+        const button = menu.querySelector('[aria-expanded]');
+        const panel = menu.querySelector('[data-admin-toolbar-panel]');
+
+        closeMenus();
+
+        if (!button || !panel) {
+            return;
+        }
+
+        button.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+    };
+
+    menus.forEach((menu) => {
+        const button = menu.querySelector('[aria-expanded]');
+        const panel = menu.querySelector('[data-admin-toolbar-panel]');
+        let openedByPointer = false;
+
+        menu.addEventListener('pointerenter', () => {
+            if (!canHover()) {
+                return;
+            }
+
+            openedByPointer = true;
+            openMenu(menu);
+        });
+
+        menu.addEventListener('pointerleave', () => {
+            if (!canHover()) {
+                return;
+            }
+
+            openedByPointer = false;
+
+            if (menu.contains(document.activeElement) && document.activeElement !== button) {
+                return;
+            }
+
+            button?.setAttribute('aria-expanded', 'false');
+
+            if (panel) {
+                panel.hidden = true;
+            }
+        });
+
+        button?.addEventListener('click', () => {
+            if (openedByPointer) {
+                openedByPointer = false;
+
+                return;
+            }
+
+            const open = button.getAttribute('aria-expanded') === 'true';
+
+            closeMenus();
+
+            if (!open && panel) {
+                button.setAttribute('aria-expanded', 'true');
+                panel.hidden = false;
+            }
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (root.contains(event.target)) {
+            return;
+        }
+
+        closeMenus();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeMenus();
+        }
+    });
+};
+
 const initApp = () => {
+    initAdminToolbar();
     initSiteNavbar();
     initContactModalTriggers();
     initConsentTooltips();
@@ -1068,6 +1174,7 @@ document.addEventListener('livewire:init', () => {
 });
 
 document.addEventListener('livewire:navigated', () => {
+    initAdminToolbar();
     initSiteNavbar();
     initContactModalTriggers();
     initConsentTooltips();

@@ -13,6 +13,10 @@ class ContactModal extends Component
 
     public ?string $service = null;
 
+    public ?string $customTitle = null;
+
+    public ?string $customSubtitle = null;
+
     /**
      * @var list<string>
      */
@@ -23,10 +27,16 @@ class ContactModal extends Component
     ];
 
     #[On('open-contact-modal')]
-    public function open(?string $service = null, ?string $variant = null): void
-    {
+    public function open(
+        ?string $service = null,
+        ?string $variant = null,
+        ?string $title = null,
+        ?string $subtitle = null,
+    ): void {
         $this->variant = in_array($variant, ['default', 'vapt-quote', 'pricing-enquire'], true) ? $variant : 'default';
         $this->service = is_string($service) && $service !== '' ? $service : null;
+        $this->customTitle = is_string($title) && $title !== '' ? $title : null;
+        $this->customSubtitle = is_string($subtitle) && $subtitle !== '' ? $subtitle : null;
 
         if ($this->variant === 'vapt-quote' && $this->service !== null && ! in_array($this->service, $this->planOptions, true)) {
             $this->service = null;
@@ -43,6 +53,8 @@ class ContactModal extends Component
         $this->isOpen = false;
         $this->variant = 'default';
         $this->service = null;
+        $this->customTitle = null;
+        $this->customSubtitle = null;
 
         $this->dispatch('contact-modal-closed');
     }

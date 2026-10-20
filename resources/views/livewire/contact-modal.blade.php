@@ -9,7 +9,7 @@
 
 <div
     x-data="contactModal()"
-    x-on:open-contact-modal.window="$wire.open($event.detail?.service ?? null, $event.detail?.variant ?? null)"
+    x-on:open-contact-modal.window="$wire.open($event.detail?.service ?? null, $event.detail?.variant ?? null, $event.detail?.title ?? null, $event.detail?.subtitle ?? null)"
     x-on:keydown.escape.window="if ($wire.isOpen && !document.querySelector('[data-consent-tooltip].is-open')) close()"
     x-cloak
 >
@@ -55,6 +55,8 @@
                                 Please provide the following details to request a quote.
                             @elseif($isPricingEnquire)
                                 Overwhelmed By Your Books ?
+                            @elseif($customTitle)
+                                {{ $customTitle }}
                             @else
                                 Get In Touch
                             @endif
@@ -63,6 +65,8 @@
                             <p id="contact-modal-description" class="contact-modal__subtitle">
                                 @if($isPricingEnquire)
                                     Catch up Now at the Lowest Rates Guaranteed !
+                                @elseif($customSubtitle)
+                                    {{ $customSubtitle }}
                                 @else
                                     Tell us about your goals and our team will respond shortly.
                                 @endif

@@ -453,6 +453,8 @@ const openContactModal = (options = {}) => {
     const detail = {
         service: typeof options.service === 'string' && options.service !== '' ? options.service : null,
         variant: typeof options.variant === 'string' && options.variant !== '' ? options.variant : null,
+        title: typeof options.title === 'string' && options.title !== '' ? options.title : null,
+        subtitle: typeof options.subtitle === 'string' && options.subtitle !== '' ? options.subtitle : null,
     };
 
     window.dispatchEvent(new CustomEvent('open-contact-modal', { detail }));
@@ -584,6 +586,54 @@ document.addEventListener('alpine:init', () => {
         },
     }));
 });
+
+let blogContactModalAutoTimer = null;
+
+const clearBlogContactModalAutoTimer = () => {
+    if (blogContactModalAutoTimer !== null) {
+        window.clearTimeout(blogContactModalAutoTimer);
+        blogContactModalAutoTimer = null;
+    }
+};
+
+const initBlogContactModalAutoOpen = () => {
+    clearBlogContactModalAutoTimer();
+
+    const root = document.querySelector('[data-blog-contact-modal-auto]');
+
+    if (!root) {
+        return;
+    }
+
+    const title = root.dataset.contactModalTitle;
+    const subtitle = root.dataset.contactModalSubtitle;
+
+    if (!title || !subtitle) {
+        return;
+    }
+
+    const schedule = () => {
+        clearBlogContactModalAutoTimer();
+
+        blogContactModalAutoTimer = window.setTimeout(() => {
+            blogContactModalAutoTimer = null;
+
+            if (document.documentElement.classList.contains('contact-modal-open')) {
+                return;
+            }
+
+            openContactModal({ title, subtitle });
+        }, 30000);
+    };
+
+    if (document.readyState === 'complete') {
+        schedule();
+    } else {
+        window.addEventListener('load', schedule, { once: true });
+    }
+};
+
+window.addEventListener('pagehide', clearBlogContactModalAutoTimer);
 
 const initContactModalTriggers = () => {
     document.querySelectorAll('[data-contact-modal-trigger]').forEach((trigger) => {
@@ -1136,6 +1186,7 @@ const initApp = () => {
     initAdminToolbar();
     initSiteNavbar();
     initContactModalTriggers();
+    initBlogContactModalAutoOpen();
     initConsentTooltips();
     initPhoneInputs();
     initArticleToc();
@@ -1174,9 +1225,11 @@ document.addEventListener('livewire:init', () => {
 });
 
 document.addEventListener('livewire:navigated', () => {
+    clearBlogContactModalAutoTimer();
     initAdminToolbar();
     initSiteNavbar();
     initContactModalTriggers();
+    initBlogContactModalAutoOpen();
     initConsentTooltips();
     initPhoneInputs();
     initArticleToc();

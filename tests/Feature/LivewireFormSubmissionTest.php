@@ -242,6 +242,24 @@ class LivewireFormSubmissionTest extends TestCase
             ->assertSee('Catch up Now at the Lowest Rates Guaranteed !');
     }
 
+    public function test_contact_modal_accepts_custom_heading_and_subtitle(): void
+    {
+        Livewire::test(ContactModal::class)
+            ->dispatch(
+                'open-contact-modal',
+                title: 'Questions about SOC 2 compliance?',
+                subtitle: 'Speak with our compliance team about what your organization actually needs.',
+            )
+            ->assertSet('isOpen', true)
+            ->assertSet('variant', 'default')
+            ->assertSet('customTitle', 'Questions about SOC 2 compliance?')
+            ->assertSee('Questions about SOC 2 compliance?')
+            ->assertSee('Speak with our compliance team about what your organization actually needs.')
+            ->call('close')
+            ->assertSet('customTitle', null)
+            ->assertSet('customSubtitle', null);
+    }
+
     public function test_pricing_enquire_form_stores_selected_plan_in_payload(): void
     {
         Queue::fake();

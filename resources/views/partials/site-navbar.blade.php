@@ -1024,7 +1024,7 @@
                   <div>About IBN</div>
                 </a></li>
 
-              <li><a href="{{ route('page.show', ['slug' => 'our-vision']) }}">
+              <li><a href="javascript:void(0)">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1038,7 +1038,7 @@
                   <div>Vision and Mission</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="javascript:void(0)">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1052,7 +1052,7 @@
                   <div>From the CEO</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="{{ route('page.show', ['slug' => 'ibn-team']) }}">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1066,7 +1066,7 @@
                   <div>Thought Leadership</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="javascript:void(0)">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -1094,7 +1094,7 @@
                   <div>Client Stories</div>
                 </a></li>
 
-              <li><a href="#">
+              <li><a href="javascript:void(0)">
                   <span class="icoms">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">

@@ -35,3 +35,19 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<IfModule mod_headers.c>
+    # Vite filenames are content-hashed, so they can be cached for a year.
+    <If "%{REQUEST_URI} =~ m#^/build/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+
+    # Static images change with deploys, not on every request.
+    <If "%{REQUEST_URI} =~ m#^/(images|vendor/font-awesome)/#">
+        Header set Cache-Control "public, max-age=2592000"
+    </If>
+
+    <If "%{REQUEST_URI} =~ m#^/(uploads|favicon_io)/#">
+        Header set Cache-Control "public, max-age=604800"
+    </If>
+</IfModule>

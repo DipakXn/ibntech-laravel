@@ -400,8 +400,29 @@
 }
 
 .home-marquee {
+    position: relative;
     overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.home-marquee::before,
+.home-marquee::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    width: 8%;
+    pointer-events: none;
+}
+
+.home-marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, #fff, transparent);
+}
+
+.home-marquee::after {
+    right: 0;
+    background: linear-gradient(270deg, #fff, transparent);
 }
 
 .home-marquee__track {
@@ -409,6 +430,7 @@
     width: max-content;
     gap: 0.75rem;
     align-items: center;
+    will-change: transform;
     animation: home-marquee 42s linear infinite;
 }
 
@@ -725,12 +747,13 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
-    transition: width 0.2s ease, background-color 0.2s ease;
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .home-testimonials__dots button.is-active {
     background: #7eb6ff;
-    width: 1.2rem;
+    transform: scaleX(2.2);
 }
 
 /* Partners */

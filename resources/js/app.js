@@ -769,6 +769,7 @@ const initHomeHero = () => {
     let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
     index = index < 0 ? 0 : index;
     let timer = null;
+    let allowPrefetch = false;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const swipeThreshold = 48;
     let pointerId = null;
@@ -778,8 +779,28 @@ const initHomeHero = () => {
     let lockedAxis = null;
     let suppressClick = false;
 
+    const loadSlideImage = (slide) => {
+        const image = slide?.querySelector('img[data-src]');
+
+        if (!image || image.getAttribute('src')) {
+            return;
+        }
+
+        if (image.dataset.srcset) {
+            image.sizes = image.dataset.sizes || '100vw';
+            image.srcset = image.dataset.srcset;
+        }
+
+        image.src = image.dataset.src;
+    };
+
     const show = (nextIndex) => {
         index = (nextIndex + slides.length) % slides.length;
+        loadSlideImage(slides[index]);
+
+        if (allowPrefetch) {
+            loadSlideImage(slides[(index + 1) % slides.length]);
+        }
 
         slides.forEach((slide, slideIndex) => {
             const active = slideIndex === index;
@@ -924,7 +945,18 @@ const initHomeHero = () => {
     });
 
     show(index);
+    allowPrefetch = true;
     start();
+
+    const prefetchUpcoming = () => {
+        loadSlideImage(slides[(index + 1) % slides.length]);
+    };
+
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(prefetchUpcoming, { timeout: 4000 });
+    } else {
+        window.addEventListener('load', () => window.setTimeout(prefetchUpcoming, 1200), { once: true });
+    }
 };
 
 const initHomeTestimonials = () => {

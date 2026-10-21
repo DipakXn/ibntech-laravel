@@ -5,7 +5,7 @@
             'title' => 'Setting the Standard for <span>Cybersecurity Excellence</span>',
             'tags' => 'Risk Assessment • Threat Detection • Compliance • Zero Trust • SOC',
             'description' => '24/7 Managed Cybersecurity: Anytime, Anywhere Protection for Your Digital Assets-Uniting Performance, Protection, and Leadership',
-            'image' => asset('images/cyber-security-hero-banner.webp'),
+            'image' => 'images/cyber-security-hero-banner.webp',
             'alt' => 'Cybersecurity excellence hero banner',
             'scroll_target' => 'home-form',
         ],
@@ -14,7 +14,7 @@
             'title' => 'Cloud Services: Migration to Modernization, <span>With You at Every Step</span>',
             'tags' => 'Migration • Management • FinOps • DevSecOps • Kubernetes',
             'description' => 'We deliver scalable cloud solutions customized to your business goals. Experience agility, security,and performance powered by partnership.',
-            'image' => asset('images/cloud-services-hero-banner.webp'),
+            'image' => 'images/cloud-services-hero-banner.webp',
             'alt' => 'Cloud services hero banner',
             'scroll_target' => 'home-form',
         ],
@@ -23,7 +23,7 @@
             'title' => 'Robotic Process Automation for <span>Smarter Workflows</span>',
             'tags' => 'Automation • Integration • Efficiency • Accuracy • Scalability',
             'description' => 'Deploy intelligent automation with cognitive RPA and advanced analytics for real-time making. Streamline invoice management, align sales orders, and accelerate workflows for faster, accurate payment processing.',
-            'image' => asset('images/robotic-process-automation-hero-banner.webp'),
+            'image' => 'images/robotic-process-automation-hero-banner.webp',
             'alt' => 'Robotic process automation hero banner',
             'scroll_target' => 'home-form',
         ],
@@ -32,7 +32,7 @@
             'title' => 'Lead with Confidence in <span>Outsource Accounting and Bookkeeping Services</span>',
             'tags' => 'Accounting • Bookkeeping • Compliance • Reporting • Insights',
             'description' => 'Global leader in remote bookkeeping and accounting, delivering 100% accuracy, efficiency, and growth focused.',
-            'image' => asset('images/accounting-and-Bookkeeping-hero-banner.webp'),
+            'image' => 'images/accounting-and-Bookkeeping-hero-banner.webp',
             'alt' => 'Accounting and bookkeeping hero banner',
             'scroll_target' => 'home-form',
         ],
@@ -51,13 +51,26 @@
                 @if($index !== 0) aria-hidden="true" @endif
             >
                 <div class="home-hero__media">
+                    @php
+                        $imageUrl = asset($slide['image']);
+                        $imageSrcset = asset(preg_replace('/\.webp$/', '-800.webp', $slide['image'])).' 800w, '.$imageUrl.' 1400w';
+                    @endphp
                     <img
-                        src="{{ $slide['image'] }}"
+                        @if ($index === 0)
+                            src="{{ $imageUrl }}"
+                            srcset="{{ $imageSrcset }}"
+                            sizes="100vw"
+                            fetchpriority="high"
+                        @else
+                            data-src="{{ $imageUrl }}"
+                            data-srcset="{{ $imageSrcset }}"
+                            data-sizes="100vw"
+                            loading="lazy"
+                            decoding="async"
+                        @endif
                         alt="{{ $slide['alt'] }}"
-                        width="1920"
-                        height="900"
-                        @if($index === 0) fetchpriority="high" @else loading="lazy" @endif
-                        decoding="async"
+                        width="1400"
+                        height="700"
                     >
                 </div>
                 <div class="home-hero__content">

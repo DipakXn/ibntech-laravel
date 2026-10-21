@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+@push('preload')
+    <link
+        rel="preload"
+        as="image"
+        href="{{ asset('images/cyber-security-hero-banner.webp') }}"
+        imagesrcset="{{ asset('images/cyber-security-hero-banner-800.webp') }} 800w, {{ asset('images/cyber-security-hero-banner.webp') }} 1400w"
+        imagesizes="100vw"
+        fetchpriority="high"
+    >
+@endpush
+
 @push('styles')
     @vite(['resources/css/pages/home.css'])
 @endpush

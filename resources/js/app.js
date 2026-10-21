@@ -11,6 +11,38 @@ const initSiteNavbar = () => {
 
     navbarRoot.dataset.navbarReady = 'true';
 
+    const loadNavIcons = () => {
+        navbarRoot.querySelectorAll('image[data-nav-icon]').forEach((node) => {
+            if (node.getAttribute('href')) {
+                return;
+            }
+
+            const src = node.getAttribute('data-nav-icon');
+
+            if (src) {
+                node.setAttribute('href', src);
+            }
+        });
+    };
+
+    navbarRoot.addEventListener('pointerover', loadNavIcons, { once: true, passive: true });
+    navbarRoot.addEventListener('focusin', loadNavIcons, { once: true });
+
+    const scheduleNavIcons = () => {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadNavIcons, { timeout: 1500 });
+            return;
+        }
+
+        window.setTimeout(loadNavIcons, 300);
+    };
+
+    if (document.readyState === 'complete') {
+        scheduleNavIcons();
+    } else {
+        window.addEventListener('load', scheduleNavIcons, { once: true });
+    }
+
     const navbarToggler = navbarRoot.querySelector('#navbarToggler');
     const navbarNav = navbarRoot.querySelector('#navbarNav');
     const dropdowns = navbarRoot.querySelectorAll('.has-megamenu');

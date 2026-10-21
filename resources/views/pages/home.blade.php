@@ -1,14 +1,8 @@
 @extends('layouts.app')
 
 @push('preload')
-    <link
-        rel="preload"
-        as="image"
-        href="{{ asset('images/cyber-security-hero-banner.webp') }}"
-        imagesrcset="{{ asset('images/cyber-security-hero-banner-800.webp') }} 800w, {{ asset('images/cyber-security-hero-banner.webp') }} 1400w"
-        imagesizes="100vw"
-        fetchpriority="high"
-    >
+    <link rel="preload" as="image" href="{{ asset('images/cyber-security-hero-banner-800.webp') }}" media="(max-width: 767px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('images/cyber-security-hero-banner.webp') }}" media="(min-width: 768px)" fetchpriority="high">
 @endpush
 
 @push('styles')

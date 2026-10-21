@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SendLeadSubmissionNotification;
 use App\Models\Lead;
 use App\Repositories\LeadRepository;
+use App\Support\FormSubmissionPageUrl;
 use App\Support\LeadSource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -34,7 +35,9 @@ class LeadService
             'company' => $payload['company'] ?? null,
             'message' => $payload['message'] ?? null,
             'form_name' => $payload['form_name'] ?? $formName,
-            'page_url' => $payload['page_url'] ?? $this->request->headers->get('referer'),
+            'page_url' => FormSubmissionPageUrl::resolve(
+                is_string($payload['page_url'] ?? null) ? $payload['page_url'] : null
+            ),
             'user_agent' => $this->request->userAgent(),
             'ip_address' => $this->request->ip(),
             'payload' => $payload,

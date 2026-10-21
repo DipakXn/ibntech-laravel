@@ -10,6 +10,7 @@
     wire:target="submit"
     novalidate
 >
+    <x-forms.submission-page-url-hidden />
     <div class="honeypot-field" aria-hidden="true">
         <label for="{{ $fieldId('website') }}">Website</label>
         <input

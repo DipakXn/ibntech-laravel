@@ -15,7 +15,7 @@
     wire:target="submit"
 >
     <input type="hidden" wire:model="formName">
-    <input type="hidden" wire:model="pageUrl">
+    <x-forms.submission-page-url-hidden />
     <x-forms.lead-source-hidden />
     @if($formName === 'pricing-enquire')
         <input type="hidden" wire:model="service" name="package_selected" aria-hidden="true">

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\CapturesFormSubmissionPageUrl;
 use App\Livewire\Concerns\HasReCaptcha;
 use App\Models\LandingPage;
 use App\Repositories\LeadRepository;
@@ -15,6 +16,7 @@ use Throwable;
 
 class LandingInquiryForm extends Component
 {
+    use CapturesFormSubmissionPageUrl;
     use HasReCaptcha;
 
     public ?string $thankYouUrl = null;
@@ -105,8 +107,8 @@ class LandingInquiryForm extends Component
         if (is_string($thankYouUrl) && trim($thankYouUrl) !== '') {
             $this->thankYouUrl = trim($thankYouUrl);
         }
-        $this->pageUrl = url()->current();
         $this->formLoadedAt = time();
+        $this->syncFormSubmissionPageUrl();
     }
 
     protected function rules(): array
@@ -151,6 +153,8 @@ class LandingInquiryForm extends Component
 
             return;
         }
+
+        $this->syncFormSubmissionPageUrl();
 
         $validated = $this->validate();
 

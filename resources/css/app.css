@@ -19,6 +19,10 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+html {
+    overflow-x: clip;
+}
+
 :root {
     --site-navy: #2e2e80;
     --site-navy-deep: #1f1f5c;

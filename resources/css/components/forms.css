@@ -214,6 +214,7 @@
     grid-template-columns: auto minmax(0, 1fr);
     gap: 0.55rem;
     align-items: start;
+    min-width: 0;
     color: #fff;
     font-size: 0.95rem;
     font-weight: 600;
@@ -274,8 +275,8 @@
     bottom: 125%;
     left: 50%;
     box-sizing: border-box;
-    width: 430px;
-    max-width: 90vw;
+    width: min(430px, 90vw);
+    max-width: min(430px, 90vw);
     transform: translateX(-50%);
     border-radius: 5px;
     background-color: #4caf50;
@@ -304,9 +305,10 @@
 @media (max-width: 600px) {
     .consent-tooltip__content {
         bottom: 140%;
-        left: -150% !important;
-        width: max-content;
-        max-width: min(90vw, 18rem);
+        left: auto;
+        right: 0;
+        width: min(18rem, calc(100vw - 1.5rem));
+        max-width: min(18rem, calc(100vw - 1.5rem));
         transform: none;
         padding: 8px;
         font-size: 11px;

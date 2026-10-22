@@ -106,7 +106,7 @@ Staging and production are separate accounts. There is no `ibntech-staging` dire
 │   └── .env
 ├── public_html/                      Document root for dev.ibntech.com
 │   ├── build/
-│   ├── css/  js/  fonts/  images/  favicon_io/
+│   ├── css/  js/  fonts/  images/  favicon_io/  vendor/
 │   ├── uploads/                      MEDIA_ROOT
 │   ├── .htaccess                     server-only; deploy does not replace it
 │   ├── bootstrap-path.php
@@ -371,7 +371,7 @@ These commands bake absolute filesystem paths from your local machine (for examp
 #### 2. Move Public Assets to `public_html`
 
 - Go inside `/home/ibntech/ibntech-core/public/`.
-- Copy `index.php`, `bootstrap-path.php`, `build/`, `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/` into `/home/ibntech/public_html/`.
+- Copy `index.php`, `bootstrap-path.php`, `build/`, `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, and `vendor/` (Font Awesome) into `/home/ibntech/public_html/`.
 - Do not replace an existing `public_html/.htaccess`, `public_html/uploads/`, or `public_html/robots.txt`. On staging, use `/home/devtech/ibntech-core/public/` and `/home/devtech/public_html/` the same way.
 
 > [!CAUTION]

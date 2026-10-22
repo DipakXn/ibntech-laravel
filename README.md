@@ -1015,7 +1015,7 @@ One repository. Branch `staging` deploys to `dev.ibntech.com`. Branch `main` dep
 | Git clone | `/home/devtech/repositories/ibntech-laravel` | Branch `main`. Not `public_html` and not `ibntech-core` |
 | PHP | `/usr/local/bin/ea-php84` | That account's EasyApache binary |
 
-`deploy.sh` copies application code into `ibntech-core`, runs `composer install` there, and publishes `build/`, `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, favicon files, `index.php`, and `bootstrap-path.php` to both `ibntech-core/public/` and `public_html/`.
+`deploy.sh` copies application code into `ibntech-core`, runs `composer install` there, and publishes `build/`, `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `vendor/` (Font Awesome under `public/vendor/`), favicon files, `index.php`, and `bootstrap-path.php` to both `ibntech-core/public/` and `public_html/`.
 
 It does not copy, overwrite, or delete:
 

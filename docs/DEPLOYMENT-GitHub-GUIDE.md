@@ -56,7 +56,7 @@ public/hot
 bootstrap/cache/*.php
 ```
 
-`rsync --delete` must never target `public_html/` or `public_html/uploads/`. `--delete` is used on the application tree copied into `ibntech-core` (with the exclusion list below) and on the two `build/` directories. It is not used on `css/`, `js/`, `fonts/`, `images/`, or `favicon_io/`.
+`rsync --delete` must never target `public_html/` or `public_html/uploads/`. `--delete` is used on the application tree copied into `ibntech-core` (with the exclusion list below) and on the two `build/` directories. It is not used on `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, or `vendor/`.
 
 Do not add `--delete-excluded`. Without that flag, excluded files stay on the destination. With it, a deploy could delete `.env`, `.htaccess`, `storage/`, or `uploads/`.
 
@@ -67,7 +67,7 @@ Do not add `--delete-excluded`. Without that flag, excluded files stay on the de
 - `public/bootstrap-path.php`
 - `public/build/` into both `{APP_DIR}/public/build/` and `public_html/build/`
 
-Other Git-tracked static directories (`css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `favicon.ico`, and the other `favicon*` files) are copied to both `{APP_DIR}/public/` and `public_html/`. They are not a reason to sync `public_html` as a whole. `public/robots.txt` is excluded from the app rsync and is not copied. The CMS writes that file at runtime.
+Other Git-tracked static directories (`css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `vendor/` for Font Awesome, `favicon.ico`, and the other `favicon*` files) are copied to both `{APP_DIR}/public/` and `public_html/`. They are not a reason to sync `public_html` as a whole. `public/robots.txt` is excluded from the app rsync and is not copied. The CMS writes that file at runtime.
 
 ---
 
@@ -111,7 +111,7 @@ Those directories hold `.env`, `storage`, `vendor`, and application code. They m
 
 Laravel's `public_path()` is not overridden in this codebase. On the server it resolves to `{APP_DIR}/public` (for example `/home/devtech/ibntech-core/public`). Apache serves `{PUBLIC_DIR}` (`public_html`). Deployment therefore publishes web files to both places:
 
-1. `{APP_DIR}/public/` so Laravel's `public_path()` can see `build/manifest.json`, `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/`.
+1. `{APP_DIR}/public/` so Laravel's `public_path()` can see `build/manifest.json`, `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, and `vendor/`.
 2. `{PUBLIC_DIR}/` so browsers and Apache can request those same files.
 
 `robots.txt` is not part of that dual copy. `WebsiteSettingService::syncRobotsTxt()` writes `public_path('robots.txt')`, which is `{APP_DIR}/public/robots.txt`. Apache serves `{PUBLIC_DIR}/robots.txt`. Deploy does not copy either file.
@@ -522,21 +522,23 @@ rsync -a --delete \
   --exclude 'storage/' \
   --exclude 'bootstrap/cache/*.php' \
   --exclude 'node_modules/' \
-  --exclude 'vendor/' \
+  --exclude '/vendor/' \
   --exclude 'deploy-config.sh' \
   --exclude '.idea/' \
   --exclude '.vscode/' \
   "$SOURCE_DIR/" "$APP_DIR/"
 ```
 
+The `/vendor/` exclude is anchored to the repository root so Composer dependencies are not copied from Git, while `public/vendor/` (Font Awesome) still syncs into `{APP_DIR}/public/`.
+
 Web files are then published to both `{APP_DIR}/public/` and `{PUBLIC_DIR}/`:
 
 - `build/` with `rsync -a --delete`
-- `css/`, `js/`, `fonts/`, `images/`, `favicon_io/` with `rsync -a` and no `--delete`
+- `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `vendor/` with `rsync -a` and no `--delete`
 - `favicon.ico` and the other `favicon*` files with `cp -f`
 - `index.php` and `bootstrap-path.php` with `cp -f`
 
-`robots.txt` is not in that list. `publish_static_public()` still copies `css/`, `js/`, `fonts/`, `images/`, and `favicon_io/` from `{APP_DIR}/public/` to `public_html/` after `filament:upgrade`.
+`robots.txt` is not in that list. `publish_static_public()` still copies `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, and `vendor/` from `{APP_DIR}/public/` to `public_html/` after `filament:upgrade`.
 
 After `queue:restart`, the script checks that these paths still exist:
 
@@ -1120,7 +1122,7 @@ These paths are not in the Git index. `.gitignore` keeps them out. Do not add th
 | `/storage/app/old-submissions/**` | Private CSV imports. The directory's `.gitignore` stays tracked |
 | `/deploy-config.sh` | Server-only. Commit `deploy-config.sh.example` only |
 
-`deploy.sh` excludes `.env`, `.env.*`, `node_modules/`, `vendor/`, `public/hot`, `public/uploads/`, `public/robots.txt`, `storage/`, and `bootstrap/cache/*.php`. Excluding `.env` does not change the server file. Composer on the server is what builds `vendor/`.
+`deploy.sh` excludes `.env`, `.env.*`, `node_modules/`, `/vendor/` (Composer at repo root only), `public/hot`, `public/uploads/`, `public/robots.txt`, `storage/`, and `bootstrap/cache/*.php`. Excluding `.env` does not change the server file. Composer on the server is what builds `vendor/`.
 
 ---
 
@@ -1400,7 +1402,7 @@ A later run on an LF file does not change it. If the file is not writable, log a
 **Fix** — Publish each static asset to both `$APP_DIR/public/` and `$PUBLIC_DIR/`:
 
 - `build/` — `rsync -a --delete` to both destinations
-- `css/`, `js/`, `fonts/`, `images/`, `favicon_io/` — `rsync -a` to both
+- `css/`, `js/`, `fonts/`, `images/`, `favicon_io/`, `vendor/` — `rsync -a` to both
 - `favicon.ico` and the other favicon files — `cp -f` to both
 
 `robots.txt` was in that copy list when this fix was applied. The current `deploy.sh` does not copy it. See [robots.txt](#robotstxt).

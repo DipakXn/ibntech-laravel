@@ -1,4 +1,8 @@
 /* Homepage ? matched to live IBN Technologies screenshot layouts */
+.home-page .home-section[id] {
+    scroll-margin-top: 6.5rem;
+}
+
 .home-page {
     --home-navy: #2e2e80;
     --home-navy-deep: #23235f;
@@ -280,6 +284,7 @@
     gap: 0.65rem;
     transform: translateX(-50%);
     width: min(100% - 2rem, 22rem);
+    visibility: hidden;
 }
 
 .home-hero__arrow {
@@ -363,8 +368,24 @@
 }
 
 .home-strength-card {
+    padding: 0;
+}
+
+.home-strength-card__trigger {
+    display: block;
+    width: 100%;
     padding: 1.2rem 0.85rem;
+    border: 0;
+    background: transparent;
     text-align: center;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.home-strength-card__trigger:focus-visible {
+    outline: 2px solid var(--home-green);
+    outline-offset: 3px;
 }
 
 .home-strength-card__icon {
@@ -384,13 +405,15 @@
 .home-strength-card__icon--blue { background: #5c90c8; }
 .home-strength-card__icon--violet { background: #7261d5; }
 
-.home-strength-card h3 {
+.home-strength-card__title {
+    display: block;
     color: var(--home-navy);
     font-size: 1.1rem;
     font-weight: 700;
 }
 
-.home-strength-card p {
+.home-strength-card__text {
+    display: block;
     margin-top: 0.35rem;
     color: var(--home-muted);
     font-size: 0.92rem;

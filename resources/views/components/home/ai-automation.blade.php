@@ -27,7 +27,7 @@
     ];
 @endphp
 
-<section class="home-section home-section--tint" aria-labelledby="home-ai-title" data-scroll-anchor="ai-section">
+<section id="ai-section" class="home-section home-section--tint" aria-labelledby="home-ai-title" data-scroll-anchor="ai-section">
     <div class="home-shell">
         <div class="flex items-center gap-3">
             <span class="inline-grid h-11 w-11 place-items-center rounded-xl bg-[#2f6fd6] text-white">

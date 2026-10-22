@@ -14,18 +14,19 @@
             <h2 id="home-core-strengths-title">Navigate Our <span class="accent" style="color: var(--home-green)">Core Strengths</span></h2>
             <div class="home-strengths__grid">
                 @foreach ($strengths as $strength)
-                    <article
-                        class="home-card home-strength-card"
-                        data-scroll-target="{{ $strength['scroll_target'] }}"
-                        tabindex="0"
-                        role="link"
-                        aria-label="Jump to {{ $strength['title'] }} section"
-                    >
-                        <div class="home-strength-card__icon home-strength-card__icon--{{ $strength['tone'] }}">
-                            <i class="fa-solid {{ $strength['icon'] }}" aria-hidden="true"></i>
-                        </div>
-                        <h3>{{ $strength['title'] }}</h3>
-                        <p>{{ $strength['text'] }}</p>
+                    <article class="home-card home-strength-card">
+                        <button
+                            type="button"
+                            class="home-strength-card__trigger"
+                            data-scroll-target="{{ $strength['scroll_target'] }}"
+                            aria-label="{{ $strength['title'] }} — {{ $strength['text'] }}. Go to {{ $strength['title'] }} section."
+                        >
+                            <span class="home-strength-card__icon home-strength-card__icon--{{ $strength['tone'] }}" aria-hidden="true">
+                                <i class="fa-solid {{ $strength['icon'] }}"></i>
+                            </span>
+                            <span class="home-strength-card__title">{{ $strength['title'] }}</span>
+                            <span class="home-strength-card__text">{{ $strength['text'] }}</span>
+                        </button>
                     </article>
                 @endforeach
             </div>

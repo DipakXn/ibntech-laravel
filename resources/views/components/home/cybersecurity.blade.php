@@ -57,7 +57,7 @@
     ];
 @endphp
 
-<section class="home-section home-section--tint home-cyber" aria-labelledby="home-cyber-title" data-scroll-anchor="cybersecurity-section">
+<section id="cybersecurity-section" class="home-section home-section--tint home-cyber" aria-labelledby="home-cyber-title" data-scroll-anchor="cybersecurity-section">
     <div class="home-shell">
         <h2 id="home-cyber-title" class="home-section-title">
             Cybersecurity <span class="accent">Excellence</span>

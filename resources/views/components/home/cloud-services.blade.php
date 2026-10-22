@@ -34,7 +34,7 @@
     ];
 @endphp
 
-<section class="home-section" aria-labelledby="home-cloud-title" data-scroll-anchor="cloud-section">
+<section id="cloud-section" class="home-section" aria-labelledby="home-cloud-title" data-scroll-anchor="cloud-section">
     <div class="home-shell">
         <div class="text-center">
             <h2 class="home-section-title">

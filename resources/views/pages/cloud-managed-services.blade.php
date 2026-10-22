@@ -290,9 +290,10 @@
                         <template x-for="page in pages" :key="page">
                             <button
                                 type="button"
+                                role="tab"
                                 class="cms-certs__dot"
                                 :class="{ 'is-active': index === page - 1 }"
-                                :aria-current="index === page - 1 ? 'true' : 'false'"
+                                :aria-selected="index === page - 1"
                                 :aria-label="'Show certifications page ' + page"
                                 @click="index = page - 1"
                             ></button>

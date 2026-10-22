@@ -127,9 +127,16 @@ const initSiteNavbar = () => {
 
     injectMobileSubmenus();
 
+    const navTogglerLabel = navbarToggler.querySelector('.navbar-toggler__label');
+
     const syncNavTogglerState = (open) => {
+        const label = open ? 'Close menu' : 'Open menu';
         navbarToggler.setAttribute('aria-expanded', open ? 'true' : 'false');
-        navbarToggler.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        navbarToggler.setAttribute('aria-label', label);
+
+        if (navTogglerLabel) {
+            navTogglerLabel.textContent = label;
+        }
     };
 
     navbarToggler.addEventListener('click', () => {
@@ -873,6 +880,12 @@ const initHomeHero = () => {
             const active = slideIndex === index;
             slide.classList.toggle('is-active', active);
             slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+
+            if (active) {
+                slide.removeAttribute('inert');
+            } else {
+                slide.setAttribute('inert', '');
+            }
         });
 
         dots.forEach((dot, dotIndex) => {
@@ -1086,8 +1099,14 @@ const initHomeTestimonials = () => {
             }
 
             Array.from(dotsHost.querySelectorAll('[data-home-testimonials-dot]')).forEach((dot, index) => {
-                dot.classList.toggle('is-active', index === page);
-                dot.setAttribute('aria-selected', index === page ? 'true' : 'false');
+                const active = index === page;
+                dot.classList.toggle('is-active', active);
+
+                if (active) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
             });
         };
 
@@ -1114,7 +1133,14 @@ const initHomeTestimonials = () => {
                 card.style.maxWidth = `${cardWidth}px`;
 
                 const pageIndex = Math.floor(index / perPage);
-                card.setAttribute('aria-hidden', pageIndex === page ? 'false' : 'true');
+                const visible = pageIndex === page;
+                card.setAttribute('aria-hidden', visible ? 'false' : 'true');
+
+                if (visible) {
+                    card.removeAttribute('inert');
+                } else {
+                    card.setAttribute('inert', '');
+                }
             });
 
             // Include the trailing gap between page groups so pages stay aligned.

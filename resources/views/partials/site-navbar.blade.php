@@ -8,6 +8,7 @@
       aria-expanded="false"
       aria-label="Open menu"
     >
+      <span class="sr-only navbar-toggler__label">Open menu</span>
       <i class="fas fa-bars nav-menu-icon" aria-hidden="true"></i>
     </button>
 

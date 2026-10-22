@@ -269,6 +269,7 @@
                         <template x-for="n in pages" :key="n">
                             <button
                                 type="button"
+                                role="tab"
                                 :class="{ 'is-active': page === n - 1 }"
                                 :aria-selected="page === n - 1"
                                 :aria-label="'Show software logos page ' + n"

@@ -376,6 +376,7 @@
                         @foreach ($testimonialPages as $pageIndex => $page)
                             <button
                                 type="button"
+                                role="tab"
                                 class="fas-testimonials__dot"
                                 :class="{ 'is-active': index === {{ $pageIndex }} }"
                                 :aria-selected="index === {{ $pageIndex }} ? 'true' : 'false'"

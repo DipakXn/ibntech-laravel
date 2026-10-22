@@ -48,7 +48,7 @@
                 role="group"
                 aria-roledescription="slide"
                 aria-label="Slide {{ $index + 1 }} of {{ count($slides) }}"
-                @if($index !== 0) aria-hidden="true" @endif
+                @if($index !== 0) aria-hidden="true" inert @endif
             >
                 <div class="home-hero__media">
                     @php

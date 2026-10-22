@@ -302,6 +302,7 @@
                         <template x-for="i in (maxIndex + 1)" :key="i">
                             <button
                                 type="button"
+                                role="tab"
                                 class="recbk-software__dot"
                                 :class="{ 'is-active': index === (i - 1) }"
                                 @click="go(i - 1)"

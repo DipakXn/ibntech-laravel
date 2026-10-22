@@ -476,8 +476,10 @@
                         @foreach ($testimonials as $i => $item)
                             <button
                                 type="button"
+                                role="tab"
                                 class="awsp-testimonials__dot"
                                 :class="{ 'is-active': index === {{ $i }} }"
+                                :aria-selected="index === {{ $i }}"
                                 @click="go({{ $i }})"
                                 aria-label="Show testimonial {{ $i + 1 }}"
                             ></button>

@@ -370,6 +370,7 @@
                         <template x-for="i in pages" :key="i">
                             <button
                                 type="button"
+                                role="tab"
                                 class="tpsusa-logos__dot"
                                 :class="{ 'is-active': index === i }"
                                 :aria-selected="index === i ? 'true' : 'false'"

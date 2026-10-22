@@ -265,6 +265,7 @@
                         @foreach ($docPages as $pageIndex => $pageCards)
                             <button
                                 type="button"
+                                role="tab"
                                 class="rpa-docs__dot"
                                 :class="{ 'is-active': slide === {{ $pageIndex }} }"
                                 :aria-selected="slide === {{ $pageIndex }} ? 'true' : 'false'"

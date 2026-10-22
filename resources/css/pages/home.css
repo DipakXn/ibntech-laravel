@@ -270,7 +270,67 @@
 }
 
 .home-hero__controls {
-    display: none !important;
+    position: absolute;
+    z-index: 4;
+    left: 50%;
+    bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    transform: translateX(-50%);
+    width: min(100% - 2rem, 22rem);
+}
+
+.home-hero__arrow {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.55);
+    color: #fff;
+    cursor: pointer;
+}
+
+.home-hero__dots {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.home-hero__dot {
+    position: relative;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.home-hero__dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin: auto;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.home-hero__dot.is-active::after {
+    background: #fff;
+    transform: scale(1.35);
 }
 
 /* Core strengths */
@@ -741,17 +801,31 @@
 }
 
 .home-testimonials__dots button {
+    position: relative;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.home-testimonials__dots button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     width: 0.55rem;
     height: 0.55rem;
-    border: 0;
+    margin: auto;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
     transform-origin: center;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.home-testimonials__dots button.is-active {
+.home-testimonials__dots button.is-active::after {
     background: #7eb6ff;
     transform: scaleX(2.2);
 }
@@ -2150,8 +2224,10 @@
     }
 
     .home-testimonials__arrow {
-        width: 2.4rem;
-        height: 2.4rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        min-width: 2.75rem;
+        min-height: 2.75rem;
     }
 
     .home-testimonials__carousel .home-testimonials__arrow[data-home-testimonials-prev] {

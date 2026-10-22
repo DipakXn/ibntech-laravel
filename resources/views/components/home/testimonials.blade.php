@@ -144,7 +144,7 @@
                 </button>
             </div>
 
-            <div class="home-testimonials__dots" role="tablist" aria-label="Testimonial pages" data-home-testimonials-dots></div>
+            <div class="home-testimonials__dots" role="group" aria-label="Testimonial pages" data-home-testimonials-dots></div>
         </div>
     </div>
 </section>

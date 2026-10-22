@@ -359,6 +359,8 @@
         display: block;
         order: 2;
         margin-inline-start: auto;
+        min-width: 2.75rem;
+        min-height: 2.75rem;
     }
 
     .site-ibn-navbar .d-block.d-sm-none {

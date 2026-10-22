@@ -18,7 +18,6 @@
             class="contact-modal{{ $isQuoteVariant ? ' contact-modal--quote' : '' }}"
             x-show="$wire.isOpen"
             x-transition.opacity.duration.200ms
-            role="presentation"
         >
             <div
                 class="contact-modal__backdrop"

@@ -85,6 +85,8 @@ const initSiteNavbar = () => {
             }
 
             const clone = submenu.cloneNode(true);
+            clone.removeAttribute('id');
+            clone.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
             clone.classList.remove('active');
             heading.insertAdjacentElement('afterend', clone);
         });
@@ -92,13 +94,19 @@ const initSiteNavbar = () => {
         menuContent.style.display = 'none';
     };
 
+    const syncDropdownToggleState = (dropdown, open) => {
+        dropdown.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
     const resetDesktopState = () => {
         navbarNav.classList.remove('active');
+        syncNavTogglerState(false);
         navMenuIcon?.classList.remove('fa-times');
         navMenuIcon?.classList.add('fa-bars');
 
         dropdowns.forEach((dropdown) => {
             dropdown.classList.remove('active');
+            syncDropdownToggleState(dropdown, false);
 
             const tabbedMenu = dropdown.querySelector('.deskmeg-menu');
 
@@ -119,10 +127,17 @@ const initSiteNavbar = () => {
 
     injectMobileSubmenus();
 
-    navbarToggler.addEventListener('click', () => {
-        navbarNav.classList.toggle('active');
+    const syncNavTogglerState = (open) => {
+        navbarToggler.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navbarToggler.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
 
-        if (navbarNav.classList.contains('active')) {
+    navbarToggler.addEventListener('click', () => {
+        const open = !navbarNav.classList.contains('active');
+        navbarNav.classList.toggle('active', open);
+        syncNavTogglerState(open);
+
+        if (open) {
             navMenuIcon?.classList.remove('fa-bars');
             navMenuIcon?.classList.add('fa-times');
             return;
@@ -152,6 +167,8 @@ const initSiteNavbar = () => {
             if (!wasActive) {
                 dropdown.classList.add('active');
             }
+
+            syncDropdownToggleState(dropdown, dropdown.classList.contains('active'));
         });
 
         const tabbedMenu = dropdown.querySelector('.deskmeg-menu');
@@ -551,6 +568,24 @@ document.addEventListener('alpine:init', () => {
         init() {
             this.$watch('$wire.isOpen', (open) => {
                 document.documentElement.classList.toggle('contact-modal-open', Boolean(open));
+
+                const inertTargets = [
+                    document.getElementById('main-content'),
+                    document.getElementById('site-header'),
+                ];
+
+                inertTargets.forEach((element) => {
+                    if (!element) {
+                        return;
+                    }
+
+                    if (open) {
+                        element.setAttribute('inert', '');
+                        return;
+                    }
+
+                    element.removeAttribute('inert');
+                });
 
                 if (!open) {
                     this.$nextTick(() => {

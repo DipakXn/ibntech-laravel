@@ -42,6 +42,28 @@ body {
     color: var(--site-ink);
 }
 
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 120;
+    padding: 0.65rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--site-navy);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--site-green);
+    outline-offset: 2px;
+}
+
 .cms-preview-banner {
     position: sticky;
     top: 0;

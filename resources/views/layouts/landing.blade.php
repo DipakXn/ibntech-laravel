@@ -167,6 +167,7 @@
     'lp-site',
     'has-admin-toolbar' => ! empty($adminToolbar),
 ])>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     @if (! empty($adminToolbar))
         <x-admin-toolbar :toolbar="$adminToolbar" />
     @endif
@@ -179,7 +180,7 @@
     @endif
 
     <x-landing.header />
-    <main>
+    <main id="main-content" tabindex="-1">
         @yield('content')
     </main>
     <x-landing.footer />

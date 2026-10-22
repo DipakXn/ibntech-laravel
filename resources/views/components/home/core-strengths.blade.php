@@ -14,7 +14,13 @@
             <h2 id="home-core-strengths-title">Navigate Our <span class="accent" style="color: var(--home-green)">Core Strengths</span></h2>
             <div class="home-strengths__grid">
                 @foreach ($strengths as $strength)
-                    <article class="home-card home-strength-card" data-scroll-target="{{ $strength['scroll_target'] }}">
+                    <article
+                        class="home-card home-strength-card"
+                        data-scroll-target="{{ $strength['scroll_target'] }}"
+                        tabindex="0"
+                        role="link"
+                        aria-label="Jump to {{ $strength['title'] }} section"
+                    >
                         <div class="home-strength-card__icon home-strength-card__icon--{{ $strength['tone'] }}">
                             <i class="fa-solid {{ $strength['icon'] }}" aria-hidden="true"></i>
                         </div>

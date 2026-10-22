@@ -96,4 +96,26 @@
             </div>
         @endforeach
     </div>
+
+    <div class="home-hero__controls">
+        <button type="button" class="home-hero__arrow" data-home-hero-prev aria-label="Previous slide">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+
+        <div class="home-hero__dots" role="group" aria-label="Choose slide">
+            @foreach ($slides as $index => $slide)
+                <button
+                    type="button"
+                    class="home-hero__dot{{ $index === 0 ? ' is-active' : '' }}"
+                    data-home-hero-dot
+                    aria-label="Go to slide {{ $index + 1 }}: {{ $slide['badge'] }}"
+                    @if($index === 0) aria-current="true" @endif
+                ></button>
+            @endforeach
+        </div>
+
+        <button type="button" class="home-hero__arrow" data-home-hero-next aria-label="Next slide">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+    </div>
 </section>

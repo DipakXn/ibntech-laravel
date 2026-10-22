@@ -1,7 +1,14 @@
-<nav class="navbar">
+<nav class="navbar" aria-label="Primary">
   <div class="navbar-container">
-    <button class="navbar-toggler" id="navbarToggler">
-      <i class="fas fa-bars nav-menu-icon"></i>
+    <button
+      type="button"
+      class="navbar-toggler"
+      id="navbarToggler"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Open menu"
+    >
+      <i class="fas fa-bars nav-menu-icon" aria-hidden="true"></i>
     </button>
 
     <a class="navbar-brand" href="{{ route('home') }}">
@@ -19,7 +26,7 @@
     <ul class="navbar-nav" id="navbarNav">
 
       <li class="nav-item dropdown has-megamenu">
-        <a class="nav-link dropdown-toggle" href="#" onclick="event.preventDefault();">
+        <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
           Capabilities
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
@@ -32,28 +39,28 @@
               <div class="menu-categories">
                 <div class="menulinks deskmeg-menu">
                   <div class="menu-category-heading active" data-target="cybersecurity-services">
-                    <span class="icoms">
+                    <span class="icoms" aria-hidden="true">
 
                       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                         <defs>
                           <image width="56" height="64" id="Cybersecurity"
                             data-nav-icon="{{ asset('images/nav-icons/e76124d19493a299.png') }}" />
                         </defs>
-<use id="Background" href="#Cybersecurity" x="4" y="0" />
+<use href="#Cybersecurity" x="4" y="0" />
                       </svg>
                     </span>
                     <div>Cybersecurity Services<span class="sutile">Protecting your digital
                         assets</span></div>
                   </div>
                   <div class="menu-category-heading" data-target="cloud-services">
-                    <span class="icoms">
+                    <span class="icoms" aria-hidden="true">
 
                       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                         <defs>
                           <image width="64" height="48" id="Cloud"
                             data-nav-icon="{{ asset('images/nav-icons/3104da9db4596bcf.png') }}" />
                         </defs>
-<use id="Background" href="#Cloud" x="0" y="8" />
+<use href="#Cloud" x="0" y="8" />
                       </svg>
                     </span>
                     <div>Cloud Services<span class="sutile">Scalable cloud solutions</span>
@@ -61,7 +68,7 @@
                   </div>
 
                   <div class="menu-category-heading" data-target="automation">
-                    <span class="icoms">
+                    <span class="icoms" aria-hidden="true">
                       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="60" height="62" id="ai" data-nav-icon="{{ asset('images/nav-icons/b0bd0929c77bba07.png') }}"/></defs><use href="#ai" x="2" y="1"/></svg>
                     </span>
                     <div>AI Consulting & Development<span class="sutile">AI Strategy & Solutions</span>
@@ -69,7 +76,7 @@
                   </div>
 
                   <div class="menu-category-heading" data-target="sap-services">
-                    <span class="icoms">
+                    <span class="icoms" aria-hidden="true">
                       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="64" height="64" id="sap" data-nav-icon="{{ asset('images/nav-icons/c44ad35466cc9d2b.png') }}"/></defs><use href="#sap"/></svg>
                     </span>
                     <div>SAP Services<span class="sutile">SAP solutions & support</span>
@@ -77,14 +84,14 @@
                   </div>
 
                   <div class="menu-category-heading" data-target="finance-accounting">
-                    <span class="icoms">
+                    <span class="icoms" aria-hidden="true">
 
                       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                         <defs>
                           <image width="64" height="64" id="Finance"
                             data-nav-icon="{{ asset('images/nav-icons/30bf977c8eeda3b7.png') }}" />
                         </defs>
-<use id="Background" href="#Finance" x="0" y="0" />
+<use href="#Finance" x="0" y="0" />
                       </svg>
                     </span>
                     <div>Finance &amp; Accounting<span class="sutile">Expert financial
@@ -92,13 +99,13 @@
                   </div>
                   
                   <div class="menu-category-heading" data-target="bpo-services">
-                    <span class="icoms">
+                    <span class="icoms" aria-hidden="true">
                       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                         <defs>
                           <image width="52" height="64" id="BPO"
                             data-nav-icon="{{ asset('images/nav-icons/b56a21ed9c973ad5.png') }}" />
                         </defs>
-<use id="Background" href="#BPO" x="6" y="0" />
+<use href="#BPO" x="6" y="0" />
                       </svg></span>
                     <div>BPO Services<span class="sutile">Outsourcing for efficiency</span>
                     </div>
@@ -110,14 +117,14 @@
                   <div class="submenu-column">
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'vapt-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120"
                             height="120">
                             <defs>
                               <image width="120" height="120" id="vapt"
                                 data-nav-icon="{{ asset('images/nav-icons/3fa094b78ee072d6.png') }}" />
                             </defs>
-<use id="Background" href="#vapt" x="0" y="0" />
+<use href="#vapt" x="0" y="0" />
                           </svg>
                         </span>
                         <div>Vulnerability Assessment and Penetration Testing (VAPT)
@@ -127,7 +134,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'managed-siem-soc-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -135,7 +142,7 @@
                               <image width="64" height="46" id="SIEM"
                                 data-nav-icon="{{ asset('images/nav-icons/26ed416dd0116523.png') }}" />
                             </defs>
-<use id="Background" href="#SIEM" x="0" y="9" />
+<use href="#SIEM" x="0" y="9" />
                           </svg>
                         </span>
                         <div>Managed SIEM And SOC Services
@@ -145,7 +152,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'vciso-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -153,7 +160,7 @@
                               <image width="61" height="61" id="vCISO"
                                 data-nav-icon="{{ asset('images/nav-icons/8c92aca924fd93df.png') }}" />
                             </defs>
-<use id="Background" href="#vCISO" x="1" y="2" />
+<use href="#vCISO" x="1" y="2" />
                           </svg>
                         </span>
                         <div>vCISO Services
@@ -170,7 +177,7 @@
                             <image width="27" height="27" id="Detection"
                               data-nav-icon="{{ asset('images/nav-icons/b3356d79d4606fd8.png') }}" />
                           </defs>
-<use id="Background" href="#Detection" x="4" y="4" />
+<use href="#Detection" x="4" y="4" />
                         </svg>
                         <div>Managed Detection and Response
                           <span class="sub-dc">Rapid threat response</span>
@@ -181,7 +188,7 @@
                   <div class="submenu-column">
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'microsoft-security-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 452" width="452"
                             height="452">
@@ -189,7 +196,7 @@
                               <image width="358" height="378" id="Microsoft"
                                 data-nav-icon="{{ asset('images/nav-icons/c590a71401a313dc.png') }}" />
                             </defs>
-<use id="Background" href="#Microsoft" x="47" y="37" />
+<use href="#Microsoft" x="47" y="37" />
                           </svg>
                         </span>
                         <div>Managed Microsoft Security Services
@@ -199,7 +206,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'cybersecurity-maturity-assessment-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -207,7 +214,7 @@
                               <image width="60" height="54" id="Maturity-Risk-Assessment"
                                 data-nav-icon="{{ asset('images/nav-icons/2fe5e2f1682dfba8.png') }}" />
                             </defs>
-<use id="Background" href="#Maturity-Risk-Assessment" x="3" y="5" />
+<use href="#Maturity-Risk-Assessment" x="3" y="5" />
                           </svg>
                         </span>
                         <div>Cyber Security Maturity Risk Assessment
@@ -217,7 +224,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'cybersecurity-audit-compliance-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -225,7 +232,7 @@
                               <image width="56" height="54" id="Audit"
                                 data-nav-icon="{{ asset('images/nav-icons/9743184541005b18.png') }}" />
                             </defs>
-<use id="Background" href="#Audit" x="4" y="5" />
+<use href="#Audit" x="4" y="5" />
                           </svg>
                         </span>
                         <div>Compliance Management and Audit Services
@@ -235,7 +242,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'soc-2-compliance']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="86" height="86" id="soc2" data-nav-icon="{{ asset('images/nav-icons/2063fcf6540e9b6b.png') }}"/></defs><use href="#soc2" x="-9" y="-14"/></svg>
                         </span>
                         <div>SOC 2 Compliance
@@ -249,7 +256,7 @@
                   <div class="submenu-column">
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'cloud-consulting-and-migration-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -257,7 +264,7 @@
                               <image width="64" height="60" id="Multi-Cloud"
                                 data-nav-icon="{{ asset('images/nav-icons/0e68f0c8f11a2a68.png') }}" />
                             </defs>
-<use id="Background" href="#Multi-Cloud" x="0" y="2" />
+<use href="#Multi-Cloud" x="0" y="2" />
                           </svg>
                         </span>
                         <div>Multi Cloud Consulting and Migration Services
@@ -267,7 +274,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'cloud-managed-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100"
                             height="100">
@@ -275,7 +282,7 @@
                               <image width="100" height="100" id="Managed-Cloud"
                                 data-nav-icon="{{ asset('images/nav-icons/c2210556d81d151f.png') }}" />
                             </defs>
-<use id="Background" href="#Managed-Cloud" x="1" y="15" />
+<use href="#Managed-Cloud" x="1" y="15" />
                           </svg>
                         </span>
                         <div>Managed Cloud and Security Services
@@ -285,7 +292,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'business-continuity-disaster-recovery-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -293,7 +300,7 @@
                               <image width="55" height="55" id="Recovery"
                                 data-nav-icon="{{ asset('images/nav-icons/4287b30a1accc414.png') }}" />
                             </defs>
-<use id="Background" href="#Recovery" x="6" y="6" />
+<use href="#Recovery" x="6" y="6" />
                           </svg>
                         </span>
                         <div>Business Continuity and Disaster Recovery
@@ -303,7 +310,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'devsecops-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100"
                             height="100">
@@ -311,7 +318,7 @@
                               <image width="100" height="100" id="DevSecOps"
                                 data-nav-icon="{{ asset('images/nav-icons/08eb907655a5c224.png') }}" />
                             </defs>
-<use id="Background" href="#DevSecOps" x="0" y="0" />
+<use href="#DevSecOps" x="0" y="0" />
                           </svg>
                         </span>
                         <div>DevSecOps Implementation Services
@@ -324,7 +331,7 @@
 
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'microsoft-office-365-migration-support-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg width="30" height="30" viewBox="0 0 24 24">
                             <rect x="2" y="2" width="8" height="8" fill="#2196f3">
                             </rect>
@@ -343,7 +350,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'aws-cloud-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg width="30" height="30" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                             fill="none">
 
@@ -369,13 +376,13 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'aws-partner']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <!-- Replace this SVG with your AWS Partner icon -->
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="90" height="90">
                             <defs>
                               <image width="78" height="90" id="awspartner" data-nav-icon="{{ asset('images/nav-icons/5db17444f4fa64df.png') }}" />
                             </defs>
-<use id="Layer 1" href="#awspartner" x="6" y="0" />
+<use href="#awspartner" x="6" y="0" />
                           </svg>
                         </span>
                         <div>AWS Partner
@@ -389,7 +396,7 @@
                                 <div id="automation" class="submenu">
                   <div class="submenu-column">
                     <div>
-                      <a href="{{ route('page.show', ['slug' => 'ai-consulting-services']) }}"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'ai-consulting-services']) }}"><span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 59" width="64" height="59"><defs><image width="63" height="53" id="aiconsulting" data-nav-icon="{{ asset('images/nav-icons/bc20991676506869.png') }}"/></defs><use href="#aiconsulting" x="1" y="5"/></svg>
                         </span>
                         <div>AI Consulting Services<span class="sub-dc">AI strategy & roadmap</span>
@@ -397,7 +404,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="{{ route('page.show', ['slug' => 'agentic-ai-services']) }}"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'agentic-ai-services']) }}"><span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="62" height="60" id="aiagent" data-nav-icon="{{ asset('images/nav-icons/4713f1a862f24c51.png') }}"/></defs><use href="#aiagent" x="1" y="2"/></svg>
                         </span>
                         <div>Agentic AI Services<span class="sub-dc">Autonomous AI agent solutions</span>
@@ -405,7 +412,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="{{ route('page.show', ['slug' => 'ai-development-services']) }}"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'ai-development-services']) }}"><span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><defs><image width="58" height="50" id="aidevelopement" data-nav-icon="{{ asset('images/nav-icons/02cfe80559ea4201.png') }}"/></defs><use href="#aidevelopement" x="3" y="7"/></svg>
                         </span>
                         <div>AI Development Services<span class="sub-dc">Custom AI solution development</span>
@@ -417,7 +424,7 @@
                       
                   </div>
                   <div class="submenu-column">
-                    <div><a href="{{ route('page.show', ['slug' => 'ap-ar-automation']) }}"><span class="icoms">
+                    <div><a href="{{ route('page.show', ['slug' => 'ap-ar-automation']) }}"><span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -433,7 +440,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="{{ route('page.show', ['slug' => 'robotics-process-automation']) }}"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'robotics-process-automation']) }}"><span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
@@ -454,7 +461,7 @@
                 <div id="sap-services" class="submenu">
                   <div class="submenu-column">
                     <div>
-                      <a href="{{ route('page.show', ['slug' => 'sap-services']) }}"><span class="icoms">
+                      <a href="{{ route('page.show', ['slug' => 'sap-services']) }}"><span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 56" width="64" height="56"><defs><image width="64" height="49" id="saphana" data-nav-icon="{{ asset('images/nav-icons/bc07f163f10158b4.png') }}"/></defs><use href="#saphana" y="4"/></svg>
                         </span>
@@ -470,7 +477,7 @@
                   <div class="submenu-column">
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'bookkeeping-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -478,7 +485,7 @@
                               <image width="60" height="60" id="Bookkeeping"
                                 data-nav-icon="{{ asset('images/nav-icons/0d8123d1e8220ce7.png') }}" />
                             </defs>
-<use id="Background" href="#Bookkeeping" x="2" y="2" />
+<use href="#Bookkeeping" x="2" y="2" />
                           </svg>
                         </span>
                         <div>Bookkeeping Services
@@ -488,7 +495,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'cfo-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -496,7 +503,7 @@
                               <image width="61" height="64" id="CFO"
                                 data-nav-icon="{{ asset('images/nav-icons/c48e769627bb63fd.png') }}" />
                             </defs>
-<use id="Background" href="#CFO" x="1" y="0" />
+<use href="#CFO" x="1" y="0" />
                           </svg>
                         </span>
                         <div>CFO Services
@@ -506,14 +513,14 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'payroll-processing']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
                               <image width="58" height="59" id="Payroll"
                                 data-nav-icon="{{ asset('images/nav-icons/ac7a796ba52dea93.png') }}" />
                             </defs>
-<use id="Background" href="#Payroll" x="3" y="3" />
+<use href="#Payroll" x="3" y="3" />
                           </svg>
                         </span>
                         <div>Payroll Services
@@ -523,14 +530,14 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'accounts-payable-and-accounts-receivable-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
                               <image width="56" height="55" id="AP-AR"
                                 data-nav-icon="{{ asset('images/nav-icons/a043f7d890e68970.png') }}" />
                             </defs>
-<use id="Background" href="#AP-AR" x="4" y="4" />
+<use href="#AP-AR" x="4" y="4" />
                           </svg>
                         </span>
                         <div>AP/AR Services
@@ -540,7 +547,7 @@
                     </div>
                     <div>
                       <a href="#">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -548,7 +555,7 @@
                               <image width="48" height="64" id="Financial-Reporting"
                                 data-nav-icon="{{ asset('images/nav-icons/cc085328bf58b73e.png') }}" />
                             </defs>
-<use id="Background" href="#Financial-Reporting" x="8" y="0" />
+<use href="#Financial-Reporting" x="8" y="0" />
                           </svg>
                         </span>
                         <div>Financial Reporting
@@ -560,7 +567,7 @@
                   <div class="submenu-column">
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'treasury-management']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -568,7 +575,7 @@
                               <image width="62" height="58" id="Treasury"
                                 data-nav-icon="{{ asset('images/nav-icons/f5e7d773eafab2aa.png') }}" />
                             </defs>
-<use id="Background" href="#Treasury" x="1" y="3" />
+<use href="#Treasury" x="1" y="3" />
                           </svg>
                         </span>
                         <div>Treasury Management
@@ -580,13 +587,13 @@
                     <div class="submenu-header">Tax Return Preparation Services</div>
                     <div class="submenu-header-sub">
                       <a href="#">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
 	<defs>
 		<image  width="64" height="64" id="1040tax" data-nav-icon="{{ asset('images/nav-icons/047b55f1058f95a1.png') }}"/>
 	</defs>
-<use id="Background" href="#1040tax" x="0" y="0"/>
+<use href="#1040tax" x="0" y="0"/>
 </svg>
                           
                         </span>
@@ -597,7 +604,7 @@
                     </div>
                     <div class="submenu-header-sub">
                       <a href="#">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -615,7 +622,7 @@
                     </div>
                     <div class="submenu-header-sub">
                       <a href="#">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -639,12 +646,12 @@
                     <div class="submenu-header">Construction Engineering Services</div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'civil-engineering-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
 	<defs>
 		<image  width="60" height="62" id="civil-engineering" data-nav-icon="{{ asset('images/nav-icons/fbb548cb5c6b0b0b.png') }}"/>
 	</defs>
-<use id="Background" href="#civil-engineering" x="2" y="1"/>
+<use href="#civil-engineering" x="2" y="1"/>
 </svg>
                         </span>
                         <div>Civil Engineering Services
@@ -654,7 +661,7 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'construction-documentation-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
@@ -662,7 +669,7 @@
                               <image width="56" height="60" id="Construction-Documentation"
                                 data-nav-icon="{{ asset('images/nav-icons/982ac74118bf1d3c.png') }}" />
                             </defs>
-<use id="Background" href="#Construction-Documentation" x="4" y="2" />
+<use href="#Construction-Documentation" x="4" y="2" />
                           </svg>
                         </span>
                         <div>Construction Documentation Services
@@ -672,14 +679,14 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'construction-takeoff-estimation-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
                               <image width="89" height="89" id="Takeoff-and-Estimation"
                                 data-nav-icon="{{ asset('images/nav-icons/8ba29673e9a42643.png') }}" />
                             </defs>
-<use id="Background" href="#Takeoff-and-Estimation" x="-10" y="-5" />
+<use href="#Takeoff-and-Estimation" x="-10" y="-5" />
                           </svg>
 
                         </span>
@@ -694,14 +701,14 @@
                     <div class="submenu-header">Fund Middle and Back Office Services</div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'hedge-fund-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
                               <image width="64" height="64" id="Hedge-Fund"
                                 data-nav-icon="{{ asset('images/nav-icons/6770f33bd4d84a2f.png') }}" />
                             </defs>
-<use id="Background" href="#Hedge-Fund" x="0" y="0" />
+<use href="#Hedge-Fund" x="0" y="0" />
                           </svg>
                         </span>
                         <div>Hedge Fund
@@ -711,14 +718,14 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'family-office-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
                               <image width="83" height="88" id="Family-Office"
                                 data-nav-icon="{{ asset('images/nav-icons/38a3b782640c7859.png') }}" />
                             </defs>
-<use id="Background" href="#Family-Office" x="-22" y="7" />
+<use href="#Family-Office" x="-22" y="7" />
                           </svg>
                         </span>
                         <div>Family Office
@@ -728,14 +735,14 @@
                     </div>
                     <div>
                       <a href="{{ route('page.show', ['slug' => 'back-and-middle-office-services']) }}">
-                        <span class="icoms">
+                        <span class="icoms" aria-hidden="true">
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
                             height="64">
                             <defs>
                               <image width="64" height="64" id="Fund-Administration"
                                 data-nav-icon="{{ asset('images/nav-icons/131b7496a38853cc.png') }}" />
                             </defs>
-<use id="Background" href="#Fund-Administration" x="0" y="0" />
+<use href="#Fund-Administration" x="0" y="0" />
                           </svg>
                         </span>
                         <div>Fund Administration
@@ -752,7 +759,7 @@
       </li>
 
       <li class="nav-item dropdown has-megamenu">
-        <a class="nav-link dropdown-toggle" href="#" onclick="event.preventDefault();">
+        <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
           Industries
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
@@ -763,93 +770,93 @@
           <div class="megamenu">
             <ul class="submenu active">
 
-              <li><a href="{{ route('industries.show', ['slug' => 'information-and-communication-technology']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'information-and-communication-technology']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="42" id="IT-Business"
                           data-nav-icon="{{ asset('images/nav-icons/96820a60e5bd8607.png') }}" />
                       </defs>
-<use id="Background" href="#IT-Business" x="0" y="1" />
+<use href="#IT-Business" x="0" y="1" />
                     </svg>
                   </span>
                   <div>Information & Communication Technology</div>
                 </a></li>
                 
-              <li><a href="{{ route('industries.show', ['slug' => 'real-estate-and-construction']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'real-estate-and-construction']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="real-estate"
                           data-nav-icon="{{ asset('images/nav-icons/b9c23c011866ebdc.png') }}" />
                       </defs>
-<use id="Background" href="#real-estate" x="0" y="0" />
+<use href="#real-estate" x="0" y="0" />
                     </svg>
                   </span>
                   <div>Real Estate and Construction</div>
                 </a>
               </li>
 
-              <li><a href="{{ route('industries.show', ['slug' => 'travel-and-hospitality']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'travel-and-hospitality']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="56" height="44" id="Hospitality"
                           data-nav-icon="{{ asset('images/nav-icons/5b938807b422a1dc.png') }}" />
                       </defs>
-<use id="Background" href="#Hospitality" x="4" y="10" />
+<use href="#Hospitality" x="4" y="10" />
                     </svg>
                   </span>
                   <div>Travel and Hospitality</div>
                 </a></li>
 
-              <li><a href="{{ route('industries.show', ['slug' => 'ecommerce-and-retail']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'ecommerce-and-retail']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="56" height="48" id="Ecommerce"
                           data-nav-icon="{{ asset('images/nav-icons/a091dec8a2c5d5f8.png') }}" />
                       </defs>
-<use id="Background" href="#Ecommerce" x="4" y="8" />
+<use href="#Ecommerce" x="4" y="8" />
                     </svg>
                   </span>
                   <div>E-commerce and Retail</div>
                 </a></li>
 
-              <li><a href="{{ route('industries.show', ['slug' => 'legal-firm']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'legal-firm']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="40" height="44" id="Legal"
                           data-nav-icon="{{ asset('images/nav-icons/82a29abcd9e64080.png') }}" />
                       </defs>
-<use id="Background" href="#Legal" x="2" y="0" />
+<use href="#Legal" x="2" y="0" />
                     </svg>
                   </span>
                   <div>Legal Firm</div>
                 </a></li>
 
-              <li><a href="{{ route('industries.show', ['slug' => 'manufacturing']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'manufacturing']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Manufacturing"
                           data-nav-icon="{{ asset('images/nav-icons/d31bd276f9be2593.png') }}" />
                       </defs>
-<use id="Background" href="#Manufacturing" x="0" y="0" />
+<use href="#Manufacturing" x="0" y="0" />
                     </svg>
                   </span>
                   <div>Manufacturing</div>
                 </a></li>
 
-                <li><a href="{{ route('industries.show', ['slug' => 'chemical-and-energy']) }}"><span class="icoms">
+                <li><a href="{{ route('industries.show', ['slug' => 'chemical-and-energy']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Chemical"
                           data-nav-icon="{{ asset('images/nav-icons/09d0f01bf31cb76b.png') }}" />
                       </defs>
-<use id="Background" href="#Chemical" x="0" y="0" />
+<use href="#Chemical" x="0" y="0" />
                     </svg>
                   </span>
                   <div>Chemical & Energy</div>
@@ -857,40 +864,40 @@
 
               
 
-              <li><a href="{{ route('industries.show', ['slug' => 'healthcare-and-pharma']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'healthcare-and-pharma']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Healthcare"
                           data-nav-icon="{{ asset('images/nav-icons/5328eecea7bb3f7a.png') }}" />
                       </defs>
-<use id="Background" href="#Healthcare" x="0" y="0" />
+<use href="#Healthcare" x="0" y="0" />
                     </svg>
                   </span>
                   <div>Healthcare & Pharma</div>
                 </a></li>
 
-                <li><a href="{{ route('industries.show', ['slug' => 'bfsi']) }}"><span class="icoms">
+                <li><a href="{{ route('industries.show', ['slug' => 'bfsi']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="39" id="Banking"
                           data-nav-icon="{{ asset('images/nav-icons/f2d91c566ff87a92.png') }}" />
                       </defs>
-<use id="Background" href="#Banking" x="2" y="5" />
+<use href="#Banking" x="2" y="5" />
                     </svg>
                   </span>
                   <div>BFSI</div>
                 </a></li>
 
-              <li><a href="{{ route('industries.show', ['slug' => 'logistics-and-transportation']) }}"><span class="icoms">
+              <li><a href="{{ route('industries.show', ['slug' => 'logistics-and-transportation']) }}"><span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Logistic"
                           data-nav-icon="{{ asset('images/nav-icons/3efa407467735343.png') }}" />
                       </defs>
-<use id="Background" href="#Logistic" x="1" y="2" />
+<use href="#Logistic" x="1" y="2" />
                     </svg>
                   </span>
                   <div>Logistics and Transportation</div>
@@ -903,7 +910,7 @@
       </li>
 
       <li class="nav-item dropdown has-megamenu">
-        <a class="nav-link dropdown-toggle" href="#" onclick="event.preventDefault();">
+        <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
           Insights &amp; Resources
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
@@ -914,67 +921,67 @@
           <div class="megamenu">
             <ul class="submenu active">
               <li><a href="{{ route('case-studies.index') }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="case-study"
                           data-nav-icon="{{ asset('images/nav-icons/4655df7b20c59332.png') }}" />
                       </defs>
-<use id="Background" href="#case-study" x="0" y="0" />
+<use href="#case-study" x="0" y="0" />
                     </svg>
                   </span>
                   <div>Case Studies</div>
                 </a></li>
 
               <li><a href="{{ route('blog.index') }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Blog"
                           data-nav-icon="{{ asset('images/nav-icons/7fa7608da7893cfe.png') }}" />
                       </defs>
-<use id="Background" href="#Blog" x="1" y="1" />
+<use href="#Blog" x="1" y="1" />
                     </svg>
                   </span>
                   <div>Blog</div>
                 </a></li>
 
               <li><a href="{{ route('ebooks.index') }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="eBooks"
                           data-nav-icon="{{ asset('images/nav-icons/205f7160658a5482.png') }}" />
                       </defs>
-<use id="Background" href="#eBooks" x="0" y="5" />
+<use href="#eBooks" x="0" y="5" />
                     </svg>
                   </span>
                   <div>eBooks</div>
                 </a></li>
 
               <li><a href="{{ route('white-papers.index') }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Whitepapers-and-Reports"
                           data-nav-icon="{{ asset('images/nav-icons/0b575756e30a76ee.png') }}" />
                       </defs>
-<use id="Background" href="#Whitepapers-and-Reports" x="2" y="0" />
+<use href="#Whitepapers-and-Reports" x="2" y="0" />
                     </svg>
                   </span>
                   <div>Whitepapers &amp; Reports</div>
                 </a></li>
 
               <li><a href="{{ route('pressrelease.index') }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Press-Releases"
                           data-nav-icon="{{ asset('images/nav-icons/4058aeb7d2023d72.png') }}" />
                       </defs>
-<use id="Background" href="#Press-Releases" x="1" y="0" />
+<use href="#Press-Releases" x="1" y="0" />
                     </svg>
 
                   </span>
@@ -982,14 +989,14 @@
                 </a></li>
 
               <li><a href="{{ route('articles.index') }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Articles"
                           data-nav-icon="{{ asset('images/nav-icons/ee9decf101741fac.png') }}" />
                       </defs>
-<use id="Background" href="#Articles" x="0" y="0" />
+<use href="#Articles" x="0" y="0" />
                     </svg>
                   </span>
                   <div>Articles</div>
@@ -1000,7 +1007,7 @@
       </li>
 
       <li class="nav-item dropdown has-megamenu">
-        <a class="nav-link dropdown-toggle" href="#" onclick="event.preventDefault();">
+        <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
           Company
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
@@ -1011,98 +1018,98 @@
           <div class="megamenu">
             <ul class="submenu active">
               <li><a href="{{ route('page.show', ['slug' => 'about-ibn']) }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="About-IBN"
                           data-nav-icon="{{ asset('images/nav-icons/050daf5da8446d6c.png') }}" />
                       </defs>
-<use id="Background" href="#About-IBN" x="5" y="0" />
+<use href="#About-IBN" x="5" y="0" />
                     </svg>
                   </span>
                   <div>About IBN</div>
                 </a></li>
 
               <li><a href="javascript:void(0)">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Vision-and-Mission"
                           data-nav-icon="{{ asset('images/nav-icons/c584dfdbaaad3970.png') }}" />
                       </defs>
-<use id="Background" href="#Vision-and-Mission" x="1" y="1" />
+<use href="#Vision-and-Mission" x="1" y="1" />
                     </svg>
                   </span>
                   <div>Vision and Mission</div>
                 </a></li>
 
               <li><a href="javascript:void(0)">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="45" height="48" id="ceo"
                           data-nav-icon="{{ asset('images/nav-icons/0e098f18fc295248.png') }}" />
                       </defs>
-<use id="Background" href="#ceo" x="9" y="8" />
+<use href="#ceo" x="9" y="8" />
                     </svg>
                   </span>
                   <div>From the CEO</div>
                 </a></li>
 
               <li><a href="{{ route('page.show', ['slug' => 'ibn-team']) }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Leadership"
                           data-nav-icon="{{ asset('images/nav-icons/a1e680baf959b21c.png') }}" />
                       </defs>
-<use id="Background" href="#Leadership" x="5" y="0" />
+<use href="#Leadership" x="5" y="0" />
                     </svg>
                   </span>
                   <div>Thought Leadership</div>
                 </a></li>
 
               <li><a href="javascript:void(0)">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Awards"
                           data-nav-icon="{{ asset('images/nav-icons/a337ee989a722e23.png') }}" />
                       </defs>
-<use id="Background" href="#Awards" x="2" y="0" />
+<use href="#Awards" x="2" y="0" />
                     </svg>
                   </span>
                   <div>Awards and Recognition</div>
                 </a></li>
 
               <li><a href="{{ route('page.show', ['slug' => 'testimonials']) }}">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="Client-Stories"
                           data-nav-icon="{{ asset('images/nav-icons/1d1115023c641b3d.png') }}" />
                       </defs>
-<use id="Background" href="#Client-Stories" x="4" y="1" />
+<use href="#Client-Stories" x="4" y="1" />
                     </svg>
                   </span>
                   <div>Client Stories</div>
                 </a></li>
 
               <li><a href="javascript:void(0)">
-                  <span class="icoms">
+                  <span class="icoms" aria-hidden="true">
 
                     <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
                       <defs>
                         <image width="44" height="44" id="History"
                           data-nav-icon="{{ asset('images/nav-icons/dec44444876595aa.png') }}" />
                       </defs>
-<use id="Background" href="#History" x="3" y="3" />
+<use href="#History" x="3" y="3" />
                     </svg>
                   </span>
                   <div>History</div>

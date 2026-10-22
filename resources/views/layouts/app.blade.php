@@ -171,6 +171,7 @@
     'min-h-screen bg-slate-100 text-slate-900 antialiased',
     'has-admin-toolbar' => ! empty($adminToolbar),
 ])>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     @if (! empty($adminToolbar))
         <x-admin-toolbar :toolbar="$adminToolbar" />
     @endif
@@ -183,7 +184,7 @@
     @endif
 
     @include('layouts.header')
-    <main>
+    <main id="main-content" tabindex="-1">
         @yield('content')
     </main>
     @hasSection('footer')

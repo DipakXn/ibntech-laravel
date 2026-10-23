@@ -132,7 +132,7 @@ html:has(.lomc-page) {
     margin: 0;
     color: #fff;
     font-size: clamp(2.15rem, 4vw, 3.15rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.12;
 }
 
@@ -402,7 +402,7 @@ html:has(.lomc-page) {
     margin: 0;
     color: #fff;
     font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1.35;
     text-transform: uppercase;

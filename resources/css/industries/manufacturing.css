@@ -208,7 +208,7 @@
     display: block;
     color: var(--mfg-navy);
     font-size: 1.05rem;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .mfg-stats__icon {
@@ -534,7 +534,7 @@
     background: var(--mfg-chip);
     color: #fff;
     font-size: 0.92rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.02em;
 }
 

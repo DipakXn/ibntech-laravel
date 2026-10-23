@@ -200,7 +200,7 @@
     display: block;
     margin-bottom: 0.15rem;
     font-size: 1.15rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
 }
 
@@ -574,7 +574,7 @@
     background: var(--ces-step);
     color: #fff;
     font-size: 0.72rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.12em;
     clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 16px 50%);
 }

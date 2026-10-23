@@ -91,7 +91,7 @@ html:has(.lmss-page) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right center;
+    object-position: top center;
     pointer-events: none;
     user-select: none;
 }

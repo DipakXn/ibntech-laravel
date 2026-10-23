@@ -393,7 +393,7 @@
     margin-top: 0.65rem;
     color: var(--mss-ink);
     font-size: 0.95rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.35;
 }
 
@@ -864,7 +864,7 @@
 .mss-calc__row [role='cell'] {
     color: var(--mss-navy);
     font-size: 1.05rem;
-    font-weight: 800;
+    font-weight: 700;
     white-space: nowrap;
 }
 

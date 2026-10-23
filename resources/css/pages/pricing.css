@@ -41,7 +41,7 @@
     margin: 0;
     color: var(--pricing-navy);
     font-size: clamp(1.55rem, 3vw, 2.15rem);
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1.25;
     text-transform: uppercase;
@@ -148,7 +148,7 @@
     text-align: center;
     color: var(--pricing-accent);
     font-size: clamp(1.55rem, 2.6vw, 2.05rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.2;
 }
 
@@ -181,7 +181,7 @@
     position: relative;
     padding: 1.05rem 0.7rem 0.95rem;
     font-size: 0.92rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #374151;
@@ -256,7 +256,7 @@
     background: var(--pricing-orange);
     color: #fff;
     font-size: 0.62rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     line-height: 1;
@@ -298,7 +298,7 @@
     background: #c8e6c9;
     color: #1b7a32;
     font-size: 0.68rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.02em;
     line-height: 1;
     padding: 0.28rem 0.45rem;
@@ -326,7 +326,7 @@
 .pricing-price__custom {
     color: var(--pricing-price);
     font-size: 1.45rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
 }
 

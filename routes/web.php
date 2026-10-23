@@ -71,10 +71,19 @@ Route::get('/industry/{slug}', [IndustryController::class, 'show'])->name('indus
 Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-pages.show');
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
+
+
+// Redirections
 Route::redirect('/contact', '/contact-us/', 301);
 Route::redirect('/contact/contact-us', '/contact-us/', 301);
 Route::redirect('/white-paper-2', '/whitepapers/how-cfos-benefit-from-profitcents/', 301);
 Route::redirect('/white-paper-3', '/whitepapers/how-ibn-helping-cfos-by-combining-efforts-with-profitcents/', 301);
+Route::redirect('/case-studies', '/case-study/', 301);
+//Redirections end here
+
+// Permanently removed pages (410 Gone)
+Route::get('/payroll-processing-old', fn () => abort(410));
+Route::get('/back-offices-services', fn () => abort(410));
 
 Route::get('/preview/{type}/{id}', [CmsPreviewController::class, 'show'])
     ->whereIn('type', CmsPreviewType::values())

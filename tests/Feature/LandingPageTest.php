@@ -7,6 +7,7 @@ use App\Livewire\Forms\LandingInquiryForm;
 use App\Models\LandingPage;
 use App\Models\Lead;
 use App\Models\Page;
+use App\Models\SeoMeta;
 use Database\Seeders\LandingPageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
@@ -83,6 +84,41 @@ class LandingPageTest extends TestCase
         ]);
 
         $this->get('/lp/draft-landing-page/')->assertNotFound();
+    }
+
+    public function test_landing_page_index_lists_published_campaign_pages_and_excludes_thank_you_pages(): void
+    {
+        $this->withoutVite();
+
+        LandingPage::query()->create([
+            'title' => 'VAPT Audit Services Thank You',
+            'slug' => 'vapt-audit-services-thank-you',
+            'template' => 'vapt-audit-services-thank-you',
+            'status' => 'published',
+        ]);
+
+        $landingPage = LandingPage::query()->create([
+            'title' => 'VAPT Audit Services',
+            'slug' => 'vapt-audit-services',
+            'template' => 'vapt-audit-services',
+            'thank_you_slug' => 'vapt-audit-services-thank-you',
+            'status' => 'published',
+        ]);
+
+        SeoMeta::query()->create([
+            'metable_type' => LandingPage::class,
+            'metable_id' => $landingPage->id,
+            'meta_description' => 'Landing page summary for the archive card.',
+        ]);
+
+        $response = $this->followingRedirects()->get('/lp/');
+
+        $response->assertOk();
+        $response->assertSee('VAPT Audit Services');
+        $response->assertSee('Landing page summary for the archive card.');
+        $response->assertDontSee('VAPT Audit Services Thank You');
+        $response->assertSee('lp-header', false);
+        $response->assertSee('lp-footer', false);
     }
 
     public function test_seeded_campaign_and_thank_you_pages_are_publicly_accessible(): void

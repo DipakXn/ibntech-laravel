@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\LandingPage;
 use App\Repositories\LandingPageRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class LandingPageService
 {
@@ -11,6 +12,11 @@ class LandingPageService
         protected LandingPageRepository $landingPages,
         protected SeoService $seoService
     ) {
+    }
+
+    public function paginatePublishedCampaignPages(int $perPage = 9): LengthAwarePaginator
+    {
+        return $this->landingPages->paginatePublishedCampaignPages($perPage);
     }
 
     public function getPublishedLandingPageBySlug(string $slug): ?LandingPage

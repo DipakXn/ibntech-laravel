@@ -289,6 +289,7 @@ class AdminToolbar
             'white-papers.index' => [WhitePaperResource::class, 'Manage White Papers'],
             'white-papers.page' => [WhitePaperResource::class, 'Manage White Papers'],
             'newsletters.index' => [NewsletterResource::class, 'Manage Newsletters'],
+            'landing-pages.index' => [LandingPageResource::class, 'Manage Landing Pages'],
         ];
     }
 

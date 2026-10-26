@@ -59,6 +59,13 @@ class LandingPage extends Model implements HasMedia
         return $query->where('status', 'published');
     }
 
+    public function scopeExcludingThankYouPages(Builder $query): Builder
+    {
+        return $query
+            ->where('slug', '!=', 'thank-you')
+            ->where('slug', 'not like', '%-thank-you');
+    }
+
     public function registerMediaCollections(): void
     {
         $this

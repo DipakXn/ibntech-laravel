@@ -108,15 +108,6 @@ Route::redirect('/bookkeeping-accounting-trends-for-small-businesses', '/blog/bo
 Route::redirect('/fund-accounting-services-hedge-funds', '/fund-accounting-services/', 301);
 Route::redirect('/bookkeeping-services-in-florida', '/bookkeeping-services-florida//', 301);
 Route::redirect('/blog/bookkeeping-accounting-trends-for-small-businesses', '/blog/bookkeeping-accounting-small-business/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
-Route::redirect('/case', '/case/', 301);
 
 //Redirections end here
 

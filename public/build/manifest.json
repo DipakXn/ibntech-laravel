@@ -14,7 +14,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-C-hnAobo.css",
+    "file": "assets/app-CpQFVf2L.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -32,7 +32,7 @@
     ]
   },
   "resources/css/industries/bfsi.css": {
-    "file": "assets/bfsi-D1k7tanU.css",
+    "file": "assets/bfsi-DZHhQuI0.css",
     "src": "resources/css/industries/bfsi.css",
     "isEntry": true,
     "name": "bfsi",
@@ -41,7 +41,7 @@
     ]
   },
   "resources/css/industries/chemical-and-energy.css": {
-    "file": "assets/chemical-and-energy-dEZy15kN.css",
+    "file": "assets/chemical-and-energy-Bqy06vCR.css",
     "src": "resources/css/industries/chemical-and-energy.css",
     "isEntry": true,
     "name": "chemical-and-energy",
@@ -50,7 +50,7 @@
     ]
   },
   "resources/css/industries/ecommerce-and-retail.css": {
-    "file": "assets/ecommerce-and-retail-DYKiI1_c.css",
+    "file": "assets/ecommerce-and-retail-iijDCdf8.css",
     "src": "resources/css/industries/ecommerce-and-retail.css",
     "isEntry": true,
     "name": "ecommerce-and-retail",
@@ -68,7 +68,7 @@
     ]
   },
   "resources/css/industries/information-and-communication-technology.css": {
-    "file": "assets/information-and-communication-technology-C7s_nuwo.css",
+    "file": "assets/information-and-communication-technology-DdpqYLgJ.css",
     "src": "resources/css/industries/information-and-communication-technology.css",
     "isEntry": true,
     "name": "information-and-communication-technology",
@@ -77,7 +77,7 @@
     ]
   },
   "resources/css/industries/legal-firm.css": {
-    "file": "assets/legal-firm-GVQNeb5v.css",
+    "file": "assets/legal-firm-DbmuMzN0.css",
     "src": "resources/css/industries/legal-firm.css",
     "isEntry": true,
     "name": "legal-firm",
@@ -95,7 +95,7 @@
     ]
   },
   "resources/css/industries/manufacturing.css": {
-    "file": "assets/manufacturing-CEDtUxs8.css",
+    "file": "assets/manufacturing-B_cVSwJ6.css",
     "src": "resources/css/industries/manufacturing.css",
     "isEntry": true,
     "name": "manufacturing",
@@ -104,7 +104,7 @@
     ]
   },
   "resources/css/industries/real-estate-and-construction.css": {
-    "file": "assets/real-estate-and-construction-CK1LWaTT.css",
+    "file": "assets/real-estate-and-construction-C8UkiALp.css",
     "src": "resources/css/industries/real-estate-and-construction.css",
     "isEntry": true,
     "name": "real-estate-and-construction",
@@ -113,7 +113,7 @@
     ]
   },
   "resources/css/industries/travel-and-hospitality.css": {
-    "file": "assets/travel-and-hospitality-BtudRaCu.css",
+    "file": "assets/travel-and-hospitality-BU2iK8ma.css",
     "src": "resources/css/industries/travel-and-hospitality.css",
     "isEntry": true,
     "name": "travel-and-hospitality",
@@ -161,7 +161,7 @@
     ]
   },
   "resources/css/landing-pages/construction-engineering-services.css": {
-    "file": "assets/construction-engineering-services-Z_L2ejSE.css",
+    "file": "assets/construction-engineering-services-CThcm0NC.css",
     "src": "resources/css/landing-pages/construction-engineering-services.css",
     "isEntry": true,
     "name": "construction-engineering-services",
@@ -257,7 +257,7 @@
     ]
   },
   "resources/css/landing-pages/managed-soc-services.css": {
-    "file": "assets/managed-soc-services-DYtqcMm5.css",
+    "file": "assets/managed-soc-services-Ck_ZT5sy.css",
     "src": "resources/css/landing-pages/managed-soc-services.css",
     "isEntry": true,
     "name": "managed-soc-services",
@@ -296,7 +296,7 @@
     ]
   },
   "resources/css/landing-pages/office-365-migration-consulting.css": {
-    "file": "assets/office-365-migration-consulting-BRz25PGc.css",
+    "file": "assets/office-365-migration-consulting-C3F5T1Uq.css",
     "src": "resources/css/landing-pages/office-365-migration-consulting.css",
     "isEntry": true,
     "name": "office-365-migration-consulting",
@@ -383,7 +383,7 @@
     ]
   },
   "resources/css/newsletters/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure.css": {
-    "file": "assets/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure-C_4bKAbj.css",
+    "file": "assets/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure-BHe-WqTY.css",
     "src": "resources/css/newsletters/cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure.css",
     "isEntry": true,
     "name": "cloud-misconfiguration-insights-why-secure-architectures-still-fail-in-aws-azure",
@@ -494,7 +494,7 @@
     ]
   },
   "resources/css/pages/ai-consulting-services.css": {
-    "file": "assets/ai-consulting-services-BHQHDZga.css",
+    "file": "assets/ai-consulting-services-DaBO_nkF.css",
     "src": "resources/css/pages/ai-consulting-services.css",
     "isEntry": true,
     "name": "ai-consulting-services",
@@ -503,7 +503,7 @@
     ]
   },
   "resources/css/pages/ai-development-services.css": {
-    "file": "assets/ai-development-services-DgbOPLh0.css",
+    "file": "assets/ai-development-services-L932X86r.css",
     "src": "resources/css/pages/ai-development-services.css",
     "isEntry": true,
     "name": "ai-development-services",
@@ -569,7 +569,7 @@
     ]
   },
   "resources/css/pages/aws-cloud-services.css": {
-    "file": "assets/aws-cloud-services-Blbddino.css",
+    "file": "assets/aws-cloud-services-BUJkd8ET.css",
     "src": "resources/css/pages/aws-cloud-services.css",
     "isEntry": true,
     "name": "aws-cloud-services",
@@ -578,7 +578,7 @@
     ]
   },
   "resources/css/pages/aws-partner.css": {
-    "file": "assets/aws-partner-DDfWylfw.css",
+    "file": "assets/aws-partner-DxgzdRe6.css",
     "src": "resources/css/pages/aws-partner.css",
     "isEntry": true,
     "name": "aws-partner",
@@ -824,7 +824,7 @@
     ]
   },
   "resources/css/pages/bookkeeping-services.css": {
-    "file": "assets/bookkeeping-services-ChwIVf4u.css",
+    "file": "assets/bookkeeping-services-BM4AaL2z.css",
     "src": "resources/css/pages/bookkeeping-services.css",
     "isEntry": true,
     "name": "bookkeeping-services",
@@ -833,7 +833,7 @@
     ]
   },
   "resources/css/pages/boost-your-business-with-accounting-offers.css": {
-    "file": "assets/boost-your-business-with-accounting-offers-BpNSUAOg.css",
+    "file": "assets/boost-your-business-with-accounting-offers-D8MWELat.css",
     "src": "resources/css/pages/boost-your-business-with-accounting-offers.css",
     "isEntry": true,
     "name": "boost-your-business-with-accounting-offers",
@@ -896,7 +896,7 @@
     ]
   },
   "resources/css/pages/civil-engineering-services.css": {
-    "file": "assets/civil-engineering-services-DBwYQVlF.css",
+    "file": "assets/civil-engineering-services-8FXtPxrY.css",
     "src": "resources/css/pages/civil-engineering-services.css",
     "isEntry": true,
     "name": "civil-engineering-services",
@@ -905,7 +905,7 @@
     ]
   },
   "resources/css/pages/cloud-consulting-and-migration-services.css": {
-    "file": "assets/cloud-consulting-and-migration-services-BRn1mXBA.css",
+    "file": "assets/cloud-consulting-and-migration-services-BtasqMk8.css",
     "src": "resources/css/pages/cloud-consulting-and-migration-services.css",
     "isEntry": true,
     "name": "cloud-consulting-and-migration-services",
@@ -923,7 +923,7 @@
     ]
   },
   "resources/css/pages/construction-documentation-services.css": {
-    "file": "assets/construction-documentation-services-D1qTw6bh.css",
+    "file": "assets/construction-documentation-services-Cdhx6Mss.css",
     "src": "resources/css/pages/construction-documentation-services.css",
     "isEntry": true,
     "name": "construction-documentation-services",
@@ -1160,7 +1160,7 @@
     ]
   },
   "resources/css/pages/finance-and-accounting-services.css": {
-    "file": "assets/finance-and-accounting-services-D_KKtzuJ.css",
+    "file": "assets/finance-and-accounting-services-DNO8hNyL.css",
     "src": "resources/css/pages/finance-and-accounting-services.css",
     "isEntry": true,
     "name": "finance-and-accounting-services",
@@ -1436,7 +1436,7 @@
     ]
   },
   "resources/css/pages/hedge-fund-accounting.css": {
-    "file": "assets/hedge-fund-accounting-DHrgrB5Q.css",
+    "file": "assets/hedge-fund-accounting-BqgcgaLH.css",
     "src": "resources/css/pages/hedge-fund-accounting.css",
     "isEntry": true,
     "name": "hedge-fund-accounting",
@@ -1445,7 +1445,7 @@
     ]
   },
   "resources/css/pages/hedge-fund-services.css": {
-    "file": "assets/hedge-fund-services-B5uoi_ja.css",
+    "file": "assets/hedge-fund-services-D696iGcn.css",
     "src": "resources/css/pages/hedge-fund-services.css",
     "isEntry": true,
     "name": "hedge-fund-services",
@@ -1463,7 +1463,7 @@
     ]
   },
   "resources/css/pages/home.css": {
-    "file": "assets/home-Bbl8__Zh.css",
+    "file": "assets/home-DR7OZUnX.css",
     "src": "resources/css/pages/home.css",
     "isEntry": true,
     "name": "home",
@@ -1562,7 +1562,7 @@
     ]
   },
   "resources/css/pages/kpo-services.css": {
-    "file": "assets/kpo-services-CAMKHghh.css",
+    "file": "assets/kpo-services-D-VClUvZ.css",
     "src": "resources/css/pages/kpo-services.css",
     "isEntry": true,
     "name": "kpo-services",
@@ -1589,7 +1589,7 @@
     ]
   },
   "resources/css/pages/managed-siem-soc-services.css": {
-    "file": "assets/managed-siem-soc-services-CrRpr_D4.css",
+    "file": "assets/managed-siem-soc-services-ABeIsYWV.css",
     "src": "resources/css/pages/managed-siem-soc-services.css",
     "isEntry": true,
     "name": "managed-siem-soc-services",
@@ -1598,7 +1598,7 @@
     ]
   },
   "resources/css/pages/manufacturing-accounting-and-bookkeeping-services.css": {
-    "file": "assets/manufacturing-accounting-and-bookkeeping-services-B6iGh13x.css",
+    "file": "assets/manufacturing-accounting-and-bookkeeping-services-CgVgDape.css",
     "src": "resources/css/pages/manufacturing-accounting-and-bookkeeping-services.css",
     "isEntry": true,
     "name": "manufacturing-accounting-and-bookkeeping-services",
@@ -1706,7 +1706,7 @@
     ]
   },
   "resources/css/pages/outsourced-bookkeeping.css": {
-    "file": "assets/outsourced-bookkeeping-CIWujFk-.css",
+    "file": "assets/outsourced-bookkeeping-LFro52K1.css",
     "src": "resources/css/pages/outsourced-bookkeeping.css",
     "isEntry": true,
     "name": "outsourced-bookkeeping",
@@ -1802,7 +1802,7 @@
     ]
   },
   "resources/css/pages/pricing.css": {
-    "file": "assets/pricing-CUFJi6cA.css",
+    "file": "assets/pricing-C_rGJjTT.css",
     "src": "resources/css/pages/pricing.css",
     "isEntry": true,
     "name": "pricing",
@@ -1820,7 +1820,7 @@
     ]
   },
   "resources/css/pages/procure-to-pay.css": {
-    "file": "assets/procure-to-pay-DHQhPxzk.css",
+    "file": "assets/procure-to-pay-SRF-XBZu.css",
     "src": "resources/css/pages/procure-to-pay.css",
     "isEntry": true,
     "name": "procure-to-pay",
@@ -1847,7 +1847,7 @@
     ]
   },
   "resources/css/pages/real-estate-and-construction-engineering-services.css": {
-    "file": "assets/real-estate-and-construction-engineering-services-BdCRBzy_.css",
+    "file": "assets/real-estate-and-construction-engineering-services-BXlgwUya.css",
     "src": "resources/css/pages/real-estate-and-construction-engineering-services.css",
     "isEntry": true,
     "name": "real-estate-and-construction-engineering-services",
@@ -1874,7 +1874,7 @@
     ]
   },
   "resources/css/pages/record-to-report-cfo.css": {
-    "file": "assets/record-to-report-cfo-LNXBOCBM.css",
+    "file": "assets/record-to-report-cfo-CaouXSyt.css",
     "src": "resources/css/pages/record-to-report-cfo.css",
     "isEntry": true,
     "name": "record-to-report-cfo",
@@ -2232,7 +2232,7 @@
     ]
   },
   "resources/css/pages/transport-and-logistics.css": {
-    "file": "assets/transport-and-logistics-DCFVeVaE.css",
+    "file": "assets/transport-and-logistics-CkaQvDR0.css",
     "src": "resources/css/pages/transport-and-logistics.css",
     "isEntry": true,
     "name": "transport-and-logistics",
@@ -2241,7 +2241,7 @@
     ]
   },
   "resources/css/pages/travel-bookkeeping-service.css": {
-    "file": "assets/travel-bookkeeping-service-NLSmRYvX.css",
+    "file": "assets/travel-bookkeeping-service-DxSbEv5C.css",
     "src": "resources/css/pages/travel-bookkeeping-service.css",
     "isEntry": true,
     "name": "travel-bookkeeping-service",
@@ -2250,7 +2250,7 @@
     ]
   },
   "resources/css/pages/travel-bpo-outsourcing-services.css": {
-    "file": "assets/travel-bpo-outsourcing-services-DGRF3XYP.css",
+    "file": "assets/travel-bpo-outsourcing-services-Co-ezp6U.css",
     "src": "resources/css/pages/travel-bpo-outsourcing-services.css",
     "isEntry": true,
     "name": "travel-bpo-outsourcing-services",
@@ -2433,7 +2433,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CQrALOsS.js",
+    "file": "assets/app-pOOIdG-B.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

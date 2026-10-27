@@ -28,7 +28,10 @@
 
       <li class="nav-item dropdown has-megamenu">
         <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-          Capabilities
+          <span class="nav-link__main">
+            <span class="nav-link__icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
+            <span class="nav-link__text">Capabilities</span>
+          </span>
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
               d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z" />
@@ -761,7 +764,10 @@
 
       <li class="nav-item dropdown has-megamenu">
         <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-          Industries
+          <span class="nav-link__main">
+            <span class="nav-link__icon" aria-hidden="true"><i class="fa-solid fa-industry"></i></span>
+            <span class="nav-link__text">Industries</span>
+          </span>
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
               d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z" />
@@ -912,7 +918,10 @@
 
       <li class="nav-item dropdown has-megamenu">
         <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-          Insights &amp; Resources
+          <span class="nav-link__main">
+            <span class="nav-link__icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>
+            <span class="nav-link__text">Insights &amp; Resources</span>
+          </span>
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
               d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z" />
@@ -1009,7 +1018,10 @@
 
       <li class="nav-item dropdown has-megamenu">
         <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-          Company
+          <span class="nav-link__main">
+            <span class="nav-link__icon" aria-hidden="true"><i class="fa-solid fa-building"></i></span>
+            <span class="nav-link__text">Company</span>
+          </span>
           <svg class="dd-arow" width="12" height="12" viewBox="0 0 24 24">
             <path fill="currentColor"
               d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z" />

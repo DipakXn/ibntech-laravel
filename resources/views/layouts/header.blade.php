@@ -27,4 +27,6 @@
     <div class="site-ibn-navbar">
         @include('partials.site-navbar')
     </div>
+
+    <button type="button" class="site-ibn-nav-backdrop" hidden aria-label="Close menu"></button>
 </header>

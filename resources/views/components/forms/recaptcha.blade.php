@@ -67,9 +67,11 @@
             });
         }
      }"
-     {{ $attributes->merge(['class' => 'my-4']) }}
+     {{ $attributes->merge(['class' => 'contact-form__recaptcha my-4']) }}
 >
-    <div id="recaptcha-{{ $this->getId() }}"></div>
+    <div class="contact-form__recaptcha-inner">
+        <div id="recaptcha-{{ $this->getId() }}"></div>
+    </div>
     @error($model)
         <p class="{{ $errorClass }}">{{ $message }}</p>
     @enderror

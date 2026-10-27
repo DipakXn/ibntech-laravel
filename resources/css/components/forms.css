@@ -93,11 +93,14 @@
 .contact-form {
     display: grid;
     gap: 0.85rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .contact-form__field {
     position: relative;
     isolation: isolate;
+    min-width: 0;
 }
 
 .contact-form__field:has(.phone-input-field) {
@@ -120,7 +123,9 @@
 .contact-form select,
 .contact-form input:not([type='checkbox']):not([type='hidden']),
 .contact-form textarea {
+    box-sizing: border-box;
     width: 100%;
+    max-width: 100%;
     border: 0;
     border-radius: 0.35rem;
     background: #f3f6fb;
@@ -157,6 +162,14 @@
 .phone-input-field,
 .phone-input-field .iti {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.phone-input-field .iti__tel-input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 }
 
 .phone-input-field .iti__tel-input.is-invalid {
@@ -199,8 +212,9 @@
 
 .contact-form__row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
+    min-width: 0;
 }
 
 @media (max-width: 720px) {
@@ -316,11 +330,40 @@
     }
 }
 
+.contact-form__recaptcha {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    container-type: inline-size;
+}
+
+.contact-form__recaptcha-inner {
+    width: 304px;
+    max-width: none;
+}
+
+.contact-form .contact-form__recaptcha .g-recaptcha,
+.contact-form .contact-form__recaptcha iframe {
+    transform: none;
+}
+
+@container (max-width: 303px) {
+    .contact-form__recaptcha-inner {
+        --contact-form-recaptcha-scale: calc(100cqw / 304px);
+        transform: scale(var(--contact-form-recaptcha-scale));
+        transform-origin: left top;
+        margin-bottom: calc(78px * (var(--contact-form-recaptcha-scale) - 1));
+    }
+}
+
 .contact-form__submit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     width: 100%;
+    max-width: 100%;
     border-radius: 0.45rem;
     background: #fff;
     padding: 0.95rem 1.2rem;

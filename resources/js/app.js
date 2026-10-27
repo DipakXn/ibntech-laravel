@@ -1412,6 +1412,17 @@ const initHomeTestimonials = () => {
 
             // Include the trailing gap between page groups so pages stay aligned.
             track.style.transform = `translateX(-${page * (viewportWidth + gap)}px)`;
+
+            const visibleStart = page * perPage;
+            const visibleCards = cards.slice(visibleStart, visibleStart + perPage);
+            const visibleHeight = Math.max(0, ...visibleCards.map((card) => card.offsetHeight));
+
+            if (visibleHeight > 0) {
+                viewport.style.height = `${visibleHeight}px`;
+            } else {
+                viewport.style.removeProperty('height');
+            }
+
             syncDots();
         };
 

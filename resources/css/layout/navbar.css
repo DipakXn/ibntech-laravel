@@ -362,15 +362,18 @@
         position: fixed;
         top: var(--nav-bar-bottom);
         right: 0;
-        bottom: 0;
+        bottom: var(--drawer-topbar-height);
         left: 0;
         z-index: 2;
         display: block;
         width: 100%;
         max-height: none;
         margin: 0;
-        padding: 0.35rem 0 calc(var(--drawer-topbar-height) + 1rem);
+        padding: 0.35rem 0 1rem;
+        overflow-x: hidden;
         overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
         background: #fff;
         visibility: hidden;
         transform: translateX(100%);
@@ -843,6 +846,7 @@
     }
 }
 
+html.nav-menu-open,
 body.nav-menu-open {
     overflow: hidden;
 }

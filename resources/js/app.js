@@ -212,6 +212,7 @@ const initSiteNavbar = () => {
     const setMobileOpen = (open) => {
         navbarNav.classList.toggle('active', open);
         header.classList.toggle('is-open', open);
+        document.documentElement.classList.toggle('nav-menu-open', open);
         document.body.classList.toggle('nav-menu-open', open);
         syncNavTogglerState(open);
         navMenuIcon?.classList.toggle('fa-times', open);

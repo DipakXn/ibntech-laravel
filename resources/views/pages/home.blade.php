@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @push('preload')
-    <link rel="preload" as="image" href="{{ asset('images/cyber-security-hero-banner-800.webp') }}" media="(max-width: 767px)" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('images/cyber-security-hero-banner.webp') }}" media="(min-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('images/Futuristic-Cybersecurity-Shield-Network.webp') }}" fetchpriority="high">
 @endpush
 
 @push('styles')
@@ -12,7 +11,6 @@
 @section('content')
     <div class="home-page">
         <x-home.hero-slider />
-        <x-home.core-strengths />
         <x-home.leadership />
         <x-home.client-logos />
         <x-home.impact-metrics />

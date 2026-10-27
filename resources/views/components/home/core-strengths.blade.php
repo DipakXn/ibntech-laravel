@@ -11,10 +11,10 @@
 <section class="home-strengths" aria-labelledby="home-core-strengths-title">
     <div class="home-shell">
         <div class="home-strengths__panel">
-            <h2 id="home-core-strengths-title">Navigate Our <span class="accent" style="color: var(--home-green)">Core Strengths</span></h2>
+            <h2 id="home-core-strengths-title">Navigate Our <span class="accent">Core Strengths</span></h2>
             <div class="home-strengths__grid">
                 @foreach ($strengths as $strength)
-                    <article class="home-card home-strength-card">
+                    <article class="home-strength-card">
                         <button
                             type="button"
                             class="home-strength-card__trigger"
@@ -24,8 +24,10 @@
                             <span class="home-strength-card__icon home-strength-card__icon--{{ $strength['tone'] }}" aria-hidden="true">
                                 <i class="fa-solid {{ $strength['icon'] }}"></i>
                             </span>
-                            <span class="home-strength-card__title">{{ $strength['title'] }}</span>
-                            <span class="home-strength-card__text">{{ $strength['text'] }}</span>
+                            <span class="home-strength-card__copy">
+                                <span class="home-strength-card__title">{{ $strength['title'] }}</span>
+                                <span class="home-strength-card__text">{{ $strength['text'] }}</span>
+                            </span>
                         </button>
                     </article>
                 @endforeach

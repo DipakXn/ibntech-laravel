@@ -26,22 +26,8 @@ const initSiteNavbar = () => {
     };
 
     navbarRoot.addEventListener('pointerover', loadNavIcons, { once: true, passive: true });
+    navbarRoot.addEventListener('pointerdown', loadNavIcons, { once: true, passive: true });
     navbarRoot.addEventListener('focusin', loadNavIcons, { once: true });
-
-    const scheduleNavIcons = () => {
-        if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(loadNavIcons, { timeout: 1500 });
-            return;
-        }
-
-        window.setTimeout(loadNavIcons, 300);
-    };
-
-    if (document.readyState === 'complete') {
-        scheduleNavIcons();
-    } else {
-        window.addEventListener('load', scheduleNavIcons, { once: true });
-    }
 
     const header = navbarRoot.closest('.site-ibn-header');
     const navbarToggler = navbarRoot.querySelector('#navbarToggler');
@@ -510,7 +496,19 @@ const initSiteNavbar = () => {
         }
     });
 
-    window.addEventListener('scroll', updatePanelTop, { passive: true });
+    let panelTopFrame = 0;
+    const schedulePanelTop = () => {
+        if (panelTopFrame) {
+            return;
+        }
+
+        panelTopFrame = window.requestAnimationFrame(() => {
+            panelTopFrame = 0;
+            updatePanelTop();
+        });
+    };
+
+    window.addEventListener('scroll', schedulePanelTop, { passive: true });
 };
 
 const getPhoneInputValue = (input, instance) => {
@@ -597,6 +595,43 @@ const initPhoneInputs = (root = document) => {
         input.form?.addEventListener('submit', () => syncPhoneInput(input, instance));
 
         instance.promise.then(() => syncPhoneInput(input, instance));
+    });
+};
+
+const schedulePhoneInputs = (root = document) => {
+    const inputs = root.matches?.('[data-phone-input]')
+        ? [root]
+        : Array.from(root.querySelectorAll?.('[data-phone-input]') || []);
+
+    if (!inputs.length) {
+        return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        initPhoneInputs(root);
+
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            observer.unobserve(entry.target);
+            initPhoneInputs(entry.target);
+        });
+    }, { rootMargin: '400px 0px' });
+
+    inputs.forEach((input) => {
+        if (input.dataset.phoneReady === 'true' || input.dataset.phoneObserved === 'true') {
+            return;
+        }
+
+        input.dataset.phoneObserved = 'true';
+        input.addEventListener('focus', () => initPhoneInputs(input), { once: true });
+        observer.observe(input);
     });
 };
 
@@ -1591,7 +1626,7 @@ const initApp = () => {
     initContactModalTriggers();
     initBlogContactModalAutoOpen();
     initConsentTooltips();
-    initPhoneInputs();
+    schedulePhoneInputs();
     initArticleToc();
     initHomeHero();
     initHomeTestimonials();
@@ -1605,7 +1640,7 @@ if (document.readyState === 'loading') {
 
 document.addEventListener('livewire:init', () => {
     window.Livewire?.hook('morph.updated', ({ el }) => {
-        initPhoneInputs(el);
+        schedulePhoneInputs(el);
         initArticleToc(el);
         initContactModalTriggers();
         initConsentTooltips(el);
@@ -1634,7 +1669,7 @@ document.addEventListener('livewire:navigated', () => {
     initContactModalTriggers();
     initBlogContactModalAutoOpen();
     initConsentTooltips();
-    initPhoneInputs();
+    schedulePhoneInputs();
     initArticleToc();
     initHomeHero();
     initHomeTestimonials();

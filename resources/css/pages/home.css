@@ -69,7 +69,7 @@
     text-decoration: none;
     border: 0;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .home-btn:hover {
@@ -847,11 +847,11 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.4);
     transform-origin: center;
-    transition: width 0.2s ease, background-color 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .home-testimonials__dots button.is-active::after {
-    width: 1.15rem;
+    transform: scaleX(2.09);
     background: #7eb6ff;
 }
 

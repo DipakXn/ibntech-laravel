@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('vendor/font-awesome/6.5.2/all.min.css') }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ asset('vendor/font-awesome/6.5.2/all.min.css') }}" media="print" fetchpriority="low" onload="this.media='all'">
 <noscript>
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/6.5.2/all.min.css') }}">
 </noscript>

@@ -48,6 +48,6 @@
     </If>
 
     <If "%{REQUEST_URI} =~ m#^/(uploads|favicon_io)/#">
-        Header set Cache-Control "public, max-age=604800"
+        Header set Cache-Control "public, max-age=2592000"
     </If>
 </IfModule>

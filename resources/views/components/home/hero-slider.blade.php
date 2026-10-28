@@ -1,11 +1,22 @@
+@php
+    $homeHeroSrcset = implode(', ', [
+        asset('images/Futuristic-Cybersecurity-Shield-Network-768.webp').' 768w',
+        asset('images/Futuristic-Cybersecurity-Shield-Network-1280.webp').' 1280w',
+        asset('images/Futuristic-Cybersecurity-Shield-Network-1600.webp').' 1600w',
+        asset('images/Futuristic-Cybersecurity-Shield-Network.webp').' 1983w',
+    ]);
+@endphp
 <section class="home-hero" aria-labelledby="home-hero-title">
     <div class="home-hero__media">
         <img
-            src="{{ asset('images/Futuristic-Cybersecurity-Shield-Network.webp') }}"
+            src="{{ asset('images/Futuristic-Cybersecurity-Shield-Network-1280.webp') }}"
+            srcset="{{ $homeHeroSrcset }}"
+            sizes="100vw"
             alt=""
             width="1983"
             height="793"
             fetchpriority="high"
+            decoding="sync"
         >
     </div>
 

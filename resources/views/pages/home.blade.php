@@ -1,7 +1,22 @@
 @extends('layouts.app')
 
 @push('preload')
-    <link rel="preload" as="image" href="{{ asset('images/Futuristic-Cybersecurity-Shield-Network.webp') }}" fetchpriority="high">
+    @php
+        $homeHeroSrcset = implode(', ', [
+            asset('images/Futuristic-Cybersecurity-Shield-Network-768.webp').' 768w',
+            asset('images/Futuristic-Cybersecurity-Shield-Network-1280.webp').' 1280w',
+            asset('images/Futuristic-Cybersecurity-Shield-Network-1600.webp').' 1600w',
+            asset('images/Futuristic-Cybersecurity-Shield-Network.webp').' 1983w',
+        ]);
+    @endphp
+    <link
+        rel="preload"
+        as="image"
+        href="{{ asset('images/Futuristic-Cybersecurity-Shield-Network-768.webp') }}"
+        imagesrcset="{{ $homeHeroSrcset }}"
+        imagesizes="100vw"
+        fetchpriority="high"
+    >
 @endpush
 
 @push('styles')

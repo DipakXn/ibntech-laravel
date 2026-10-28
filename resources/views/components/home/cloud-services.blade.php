@@ -17,7 +17,7 @@
         'ansible-original.svg',
         'jenkins-original.svg',
         'prometheus-original.svg',
-        'linux-original.svg',
+        'linux-original.webp',
         'python-original.svg',
         'bash-original.svg',
     ];

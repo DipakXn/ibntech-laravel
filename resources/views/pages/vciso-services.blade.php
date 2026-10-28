@@ -145,7 +145,7 @@
                 <p class="vciso-hero__lede">
                     Get strategic security leadership without the full-time cost schedule a consultation today to customize our vCISO services for your organization's unique needs!
                 </p>
-                <a href="#vciso-enquire" class="button-secondary vciso-hero__cta">Schedule Free Consultation</a>
+                <a href="javascript:void(0)" class="button-secondary vciso-hero__cta" data-scroll-target="vciso-form">Schedule Free Consultation</a>
             </div>
         </section>
 
@@ -200,7 +200,7 @@
             <div class="site-shell vciso-cta__inner">
                 <h2 id="vciso-cta1-title">Ready to Strengthen Your Cybersecurity Posture?</h2>
                 <p>Get a personalized estimate based on your region, business size, and security needs. Our experts are standing by to help secure your digital future</p>
-                <a href="#vciso-enquire" class="button-primary">
+                <a href="javascript:void(0)" class="button-primary" data-scroll-target="vciso-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Schedule a Free Consultation
                 </a>
@@ -257,7 +257,7 @@
             <div class="site-shell vciso-cta__inner">
                 <h2 id="vciso-cta2-title">Get a Custom Cybersecurity Roadmap Today</h2>
                 <p>Our experienced virtual CISOs will develop a custom plan to strengthen your security and guarantee compliance before a threat occurs.</p>
-                <a href="#vciso-enquire" class="vciso-cta__ghost">Limited slots available this month. Don’t wait.</a>
+                <a href="javascript:void(0)" class="vciso-cta__ghost" data-scroll-target="vciso-form">Limited slots available this month. Don’t wait.</a>
             </div>
         </section>
 
@@ -331,7 +331,7 @@
                         <h2 id="vciso-form-title">vCISO Services – Your Security Strategist On Demand</h2>
                         <p>Expert security leadership to assess risks, build strategy, and ensure compliance — without the full-time cost.</p>
                     </div>
-                    <div class="vciso-form__body">
+                    <div class="vciso-form__body" data-scroll-anchor="vciso-form">
                         <livewire:forms.contact-form
                             form-name="vciso-services"
                             id-prefix="vciso"

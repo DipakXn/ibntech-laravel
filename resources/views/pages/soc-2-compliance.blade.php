@@ -353,7 +353,7 @@
                     </ul>
                 </div>
 
-                <aside class="s2c-hero__form" id="contact-us" aria-labelledby="s2c-form-title">
+                <aside class="s2c-hero__form" id="contact-us" aria-labelledby="s2c-form-title" data-scroll-anchor="s2c-form">
                     <h2 id="s2c-form-title">Scale Securely with SOC 2 Compliance</h2>
                     <livewire:forms.contact-form
                         form-name="soc-2-compliance"
@@ -491,7 +491,7 @@
                     <h2 id="s2c-band-title">Ready to start SOC 2 Type 2 audit in Pune?</h2>
                     <p>Get a Free SOC 2 Readiness Assessment from One of the Best SOC 2 Compliance Services in Pune.</p>
                 </div>
-                <a href="#contact-us" class="s2c-band__btn">Book a Consultation</a>
+                <a href="javascript:void(0)" class="s2c-band__btn" data-scroll-target="s2c-form">Book a Consultation</a>
             </div>
         </section>
 
@@ -619,7 +619,7 @@
             <div class="site-shell s2c-cta__inner">
                 <h2 id="s2c-cta-title">Ready to Get SOC 2 Certified?</h2>
                 <p>Simplify your journey to SOC 2 certification with expert guidance.</p>
-                <a href="#contact-us" class="s2c-cta__btn">Schedule a Consultation</a>
+                <a href="javascript:void(0)" class="s2c-cta__btn" data-scroll-target="s2c-form">Schedule a Consultation</a>
             </div>
         </section>
     </div>

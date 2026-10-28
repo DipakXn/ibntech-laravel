@@ -245,7 +245,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <a href="#mdr-enquire" class="button-primary mdr-hero__cta">Request Free Consultation</a>
+                    <a href="javascript:void(0)" class="button-primary mdr-hero__cta" data-scroll-target="mdr-form">Request Free Consultation</a>
                 </div>
                 <figure class="mdr-hero__media">
                     <img
@@ -289,7 +289,7 @@
             <div class="site-shell mdr-cta__inner">
                 <h2 id="mdr-cta1-title">Don't Wait Until It's Too Late</h2>
                 <p>The average dwell time for threats is 277 days. Our MDR services can reduce this to minutes, dramatically limiting the impact of security incidents.</p>
-                <a href="#mdr-enquire" class="button-primary">Book a 30 Min Free Demo</a>
+                <a href="javascript:void(0)" class="button-primary" data-scroll-target="mdr-form">Book a 30 Min Free Demo</a>
             </div>
         </section>
 
@@ -394,7 +394,7 @@
             <div class="site-shell mdr-cta__inner">
                 <h2 id="mdr-cta2-title">Strengthen Your Security Posture Today</h2>
                 <p>Discover how our MDR services can help protect your organization from evolving cyber threats with 24/7 expert monitoring and response.</p>
-                <a href="#mdr-enquire" class="button-primary">Schedule a Free Consultation</a>
+                <a href="javascript:void(0)" class="button-primary" data-scroll-target="mdr-form">Schedule a Free Consultation</a>
             </div>
         </section>
 
@@ -441,7 +441,7 @@
                     </div>
                 </div>
 
-                <aside class="mdr-form" id="mdr-enquire" aria-labelledby="mdr-form-title">
+                <aside class="mdr-form" id="mdr-enquire" aria-labelledby="mdr-form-title" data-scroll-anchor="mdr-form">
                     <div class="mdr-form__head">
                         <h2 id="mdr-form-title">24/7 Threat Protection – Expert Help at the Ready</h2>
                         <p>Detect, investigate, and stop cyber threats before they disrupt your business- customized to your needs.</p>

@@ -151,7 +151,7 @@
                     </div>
 
                     <div class="awscs-hero__actions">
-                        <a href="#awscs-consult" class="awscs-btn awscs-btn--green">
+                        <a href="javascript:void(0)" class="awscs-btn awscs-btn--green" data-scroll-target="awscs-form">
                             Talk to an AWS Cloud Expert
                             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                         </a>
@@ -280,7 +280,7 @@
                 <p>
                     Schedule a free consultation with our AWS certified experts to discuss your specific needs and develop a customized strategy for your organization.
                 </p>
-                <a href="#" class="awscs-btn awscs-btn--green" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="awscs-btn awscs-btn--green" data-scroll-target="awscs-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Schedule a Free Consultation
                 </a>
@@ -361,7 +361,7 @@
                     </ul>
                 </div>
 
-                <aside class="awscs-consult__card" id="awscs-consult-form" aria-labelledby="awscs-consult-form-title">
+                <aside class="awscs-consult__card" id="awscs-consult-form" aria-labelledby="awscs-consult-form-title" data-scroll-anchor="awscs-form">
                     <h3 id="awscs-consult-form-title">Get in Touch with Our AWS Experts</h3>
                     <p class="awscs-consult__lede">
                         Get started with enterprise-grade AWS cloud services. Our AWS-certified experts are ready to optimize your cloud infrastructure.

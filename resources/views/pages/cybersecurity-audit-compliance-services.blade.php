@@ -119,7 +119,7 @@
                     <p class="cacs-hero__lede">
                         IBN Tech offers cybersecurity compliance services to businesses in the US, UK, and India, providing expert-led programs customized to each client's industry, risk profile, and regulatory needs.
                     </p>
-                    <a href="#cacs-consult" class="cacs-btn cacs-btn--light">Schedule Your Consultation Today</a>
+                    <a href="javascript:void(0)" class="cacs-btn cacs-btn--light" data-scroll-target="cacs-form">Schedule Your Consultation Today</a>
                 </div>
 
                 <figure class="cacs-hero__media">
@@ -168,7 +168,7 @@
                     </h2>
                     <p>Cyber threats are evolving fast, don't let outdated systems leave your business exposed. Our Cyber Security Audit delivers a deep dive into your IT environment, identifying vulnerabilities across infrastructure, Microsoft 365, dark web Monitoring, and compliance gaps.</p>
                     <p>Get expert insights, a personalized security roadmap, and actionable steps to strengthen your defenses, before attackers strike.</p>
-                    <a href="#cacs-consult" class="cacs-btn cacs-btn--green">Speak to an expert</a>
+                    <a href="javascript:void(0)" class="cacs-btn cacs-btn--green" data-scroll-target="cacs-form">Speak to an expert</a>
                 </div>
                 <div class="cacs-protect__art" aria-hidden="true">
                     <i class="fa-solid fa-user-shield"></i>
@@ -233,7 +233,7 @@
             <div class="site-shell cacs-journey__inner">
                 <h2 id="cacs-journey-title">Let's Start your Cyber Security Audit Journey</h2>
                 <p>Schedule a consultation with our cybersecurity specialists and discover how our audit services can safeguard your IT environment.</p>
-                <a href="#cacs-consult" class="cacs-btn cacs-btn--green">Speak to our experts about a Cyber Security Audit</a>
+                <a href="javascript:void(0)" class="cacs-btn cacs-btn--green" data-scroll-target="cacs-form">Speak to our experts about a Cyber Security Audit</a>
             </div>
         </section>
 
@@ -277,7 +277,7 @@
                     </div>
                 </div>
 
-                <aside class="cacs-consult__card" id="cacs-consult" aria-labelledby="cacs-consult-title">
+                <aside class="cacs-consult__card" id="cacs-consult" aria-labelledby="cacs-consult-title" data-scroll-anchor="cacs-form">
                     <h3 id="cacs-consult-title">Request Your Cybersecurity Audit &amp; Compliance Consultation</h3>
                     <p>Get expert advice to boost compliance and reduce risks. Fill out the form to contact us.</p>
                     <livewire:forms.contact-form

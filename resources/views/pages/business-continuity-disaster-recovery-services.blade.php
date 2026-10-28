@@ -214,7 +214,7 @@
                     </ul>
 
                     <div class="bcdr-hero__actions">
-                        <a href="#bcdr-consult" class="bcdr-btn bcdr-btn--white">
+                        <a href="javascript:void(0)" class="bcdr-btn bcdr-btn--white" data-scroll-target="bcdr-form">
                             Get a Free BCDR Assessment
                         </a>
                     </div>
@@ -301,7 +301,7 @@
                         @endforeach
                     </ul>
 
-                    <a href="#bcdr-consult" class="bcdr-btn bcdr-btn--green">
+                    <a href="javascript:void(0)" class="bcdr-btn bcdr-btn--green" data-scroll-target="bcdr-form">
                         Schedule Your Free Consultation
                     </a>
                 </div>
@@ -390,7 +390,7 @@
                     <h2 id="bcdr-cta-title">Protect your data with world-class cloud-based disaster recovery solutions</h2>
                     <p>Speak with our business continuity experts to discuss your organization's specific needs and how our services can help protect your critical operations.</p>
                 </div>
-                <a href="#bcdr-consult" class="bcdr-btn bcdr-btn--green">
+                <a href="javascript:void(0)" class="bcdr-btn bcdr-btn--green" data-scroll-target="bcdr-form">
                     Schedule Your Free Consultation
                 </a>
             </div>
@@ -526,7 +526,7 @@
                     </div>
                 </div>
 
-                <aside class="bcdr-consult__card" id="bcdr-consult-form" aria-labelledby="bcdr-consult-form-title">
+                <aside class="bcdr-consult__card" id="bcdr-consult-form" aria-labelledby="bcdr-consult-form-title" data-scroll-anchor="bcdr-form">
                     <h3 id="bcdr-consult-form-title">Protect Your Operations with Trusted BCDR Experts</h3>
                     <p class="bcdr-consult__lede">
                         Secure your business with proven BCDR strategies. Maintain uptime and recover fast from any disruption.

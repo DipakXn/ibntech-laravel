@@ -195,7 +195,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <a href="#m365-consult" class="m365-btn m365-btn--green">
+                    <a href="javascript:void(0)" class="m365-btn m365-btn--green" data-scroll-target="m365-form">
                         Get Instant Support
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </a>
@@ -333,7 +333,7 @@
             <div class="site-shell m365-cta__inner">
                 <h2 id="m365-cta-title">Ready to Transform Your Business?</h2>
                 <p>Start your Microsoft 365 migration journey with confidence. Our experts are ready to help.</p>
-                <a href="#m365-consult" class="m365-btn m365-btn--green">Get Started Today</a>
+                <a href="javascript:void(0)" class="m365-btn m365-btn--green" data-scroll-target="m365-form">Get Started Today</a>
             </div>
         </section>
 
@@ -397,7 +397,7 @@
             <div class="site-shell m365-cta__inner">
                 <h2 id="m365-partner-title">Partner with Microsoft 365 Migration Experts</h2>
                 <p>Join hundreds of organizations that have successfully migrated to Microsoft 365 with our expert guidance and support.</p>
-                <a href="#m365-consult" class="m365-btn m365-btn--green">
+                <a href="javascript:void(0)" class="m365-btn m365-btn--green" data-scroll-target="m365-form">
                     Request Your Free Consultation
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -488,7 +488,7 @@
                     </div>
                 </div>
 
-                <aside class="m365-consult__card" id="m365-consult-form" aria-labelledby="m365-consult-form-title">
+                <aside class="m365-consult__card" id="m365-consult-form" aria-labelledby="m365-consult-form-title" data-scroll-anchor="m365-form">
                     <div class="m365-consult__card-head">
                         <h3 id="m365-consult-form-title">Migrate to Microsoft 365 or Office 365 with zero downtime</h3>
                         <p>Upgrade to Office 365 without the hassle. We handle everything from planning to post-migration support.</p>

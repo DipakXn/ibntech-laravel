@@ -300,7 +300,7 @@
                     </div>
                 </div>
 
-                <div class="vapt-hero__form" id="vapt-quote">
+                <div class="vapt-hero__form" id="vapt-quote" data-scroll-anchor="vapt-form">
                     <p class="vapt-hero__form-title">Get Your VAPT Quote</p>
                     <livewire:forms.contact-form
                         form-name="vapt-services-quote"
@@ -429,7 +429,7 @@
                     <div>
                         <p>Tell us about your environment and we’ll scope the right combination of testing services for your risk profile and budget.</p>
                     </div>
-                    <a href="#" class="button-primary" data-contact-modal-trigger>Request a Consultation</a>
+                    <a href="javascript:void(0)" class="button-primary" data-scroll-target="vapt-form">Request a Consultation</a>
                 </div>
             </div>
         </section>
@@ -488,7 +488,7 @@
                         <h3>Stronger Security. Lower Risk. Greater Confidence.</h3>
                         <p>VAPT helps you stay secure, compliant, and ahead of threats.</p>
                     </div>
-                    <a href="#vapt-quote" class="button-primary">Get Started Today</a>
+                    <a href="javascript:void(0)" class="button-primary" data-scroll-target="vapt-form">Get Started Today</a>
                 </div>
             </div>
         </section>
@@ -645,7 +645,7 @@
                         <h3>Protect your digital assets now — get fast, compliance-ready testing today!</h3>
                         <p>Our comprehensive Vulnerability Assessment and Penetration Testing services help identify and address security weaknesses before they can be exploited.</p>
                     </div>
-                    <a href="#" class="button-primary" data-contact-modal-trigger>Request a Consultation</a>
+                    <a href="javascript:void(0)" class="button-primary" data-scroll-target="vapt-form">Request a Consultation</a>
                 </div>
             </div>
         </section>
@@ -790,7 +790,7 @@
                         <h3>Protect Your Applications from Emerging Threats</h3>
                         <p>Our expert team conducts comprehensive Web &amp; Mobile Application Penetration Testing to identify vulnerabilities before attackers exploit them.</p>
                     </div>
-                    <a href="#" class="button-primary" data-contact-modal-trigger>Request a Consultation</a>
+                    <a href="javascript:void(0)" class="button-primary" data-scroll-target="vapt-form">Request a Consultation</a>
                 </div>
             </div>
         </section>

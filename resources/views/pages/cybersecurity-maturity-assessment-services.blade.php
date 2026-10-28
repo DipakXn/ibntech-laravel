@@ -158,7 +158,7 @@
                     <p class="cmas-hero__lede">
                         Gain a crystal-clear picture of your security strengths and gaps, then follow a laser-focused roadmap to elevate your cyber resilience and protect your bottom line.
                     </p>
-                    <a href="#cmas-enquire" class="cmas-btn cmas-btn--green">
+                    <a href="javascript:void(0)" class="cmas-btn cmas-btn--green" data-scroll-target="cmas-form">
                         Start Free Assessment
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </a>
@@ -286,7 +286,7 @@
             <div class="site-shell cmas-cta__inner">
                 <h2 id="cmas-cta-title">Ready to Strengthen Your Cyber Defenses?</h2>
                 <p>Get started with a comprehensive cybersecurity maturity assessment tailored to your business needs.</p>
-                <a href="#cmas-enquire" class="cmas-btn cmas-btn--green">Get Your Free Assessment</a>
+                <a href="javascript:void(0)" class="cmas-btn cmas-btn--green" data-scroll-target="cmas-form">Get Your Free Assessment</a>
             </div>
         </section>
 
@@ -354,7 +354,7 @@
                     </div>
                 </div>
 
-                <aside class="cmas-form" id="cmas-enquire" aria-labelledby="cmas-form-title">
+                <aside class="cmas-form" id="cmas-enquire" aria-labelledby="cmas-form-title" data-scroll-anchor="cmas-form">
                     <div class="cmas-form__head">
                         <h2 id="cmas-form-title">Request Your Cybersecurity Maturity Assessment</h2>
                         <p>Get expert insights into your organization's security posture and maturity level. Fill out the form below to connect with our team.</p>

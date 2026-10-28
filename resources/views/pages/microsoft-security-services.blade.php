@@ -279,7 +279,7 @@
                     <p class="mssec-hero__lede">
                         From configuration to compliance, our solutions ensure your Microsoft 365 environment is secure, efficient, and future-ready.
                     </p>
-                    <a href="#mssec-consult" class="mssec-btn mssec-btn--light">Request Free Consultation</a>
+                    <a href="javascript:void(0)" class="mssec-btn mssec-btn--light" data-scroll-target="mssec-form">Request Free Consultation</a>
                 </div>
                 <figure class="mssec-hero__media">
                     <img
@@ -471,7 +471,7 @@
             <div class="site-shell mssec-cta__inner">
                 <h2 id="mssec-cta1-title">Ready to strengthen your Microsoft security posture?</h2>
                 <p>Our team of certified experts is ready to help you maximize the security of your Microsoft environment.</p>
-                <a href="#mssec-consult" class="mssec-btn mssec-btn--navy">Schedule Your Security Assessment</a>
+                <a href="javascript:void(0)" class="mssec-btn mssec-btn--navy" data-scroll-target="mssec-form">Schedule Your Security Assessment</a>
             </div>
         </section>
 
@@ -529,7 +529,7 @@
             <div class="site-shell mssec-cta__inner">
                 <h2 id="mssec-cta2-title">Get Started with Your Microsoft Cloud Security Environment</h2>
                 <p>Speak with our skilled consultants to learn how we can help secure your Microsoft cloud environment.</p>
-                <a href="#mssec-consult" class="mssec-btn mssec-btn--green">Schedule a Free Consultation</a>
+                <a href="javascript:void(0)" class="mssec-btn mssec-btn--green" data-scroll-target="mssec-form">Schedule a Free Consultation</a>
             </div>
         </section>
 
@@ -583,7 +583,7 @@
                     </div>
                 </div>
 
-                <aside class="mssec-consult__card" id="mssec-consult-form" aria-labelledby="mssec-consult-form-title">
+                <aside class="mssec-consult__card" id="mssec-consult-form" aria-labelledby="mssec-consult-form-title" data-scroll-anchor="mssec-form">
                     <div class="mssec-consult__card-head">
                         <h3 id="mssec-consult-form-title">Microsoft Security Services – Protect Your Cloud &amp; Data</h3>
                         <p>Safeguard Microsoft 365, Azure, and your data with expert security solutions tailored to your business.</p>

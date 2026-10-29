@@ -206,19 +206,15 @@
         ['file' => 'revit.webp', 'alt' => 'Revit', 'w' => 219, 'h' => 100],
     ];
 
-    $serviceOptions = [
-        'Estimation Support',
-        'Project Management',
-        'Bid Management Support',
-        'Drawing & Drafting Support',
-        'Other',
-    ];
 @endphp
 
 @extends('layouts.app')
 
 @push('styles')
-    @vite(['resources/css/pages/civil-engineering-services.css'])
+    @vite([
+        'resources/css/pages/free-consultation-for-construction.css',
+        'resources/css/pages/civil-engineering-services.css',
+    ])
 @endpush
 
 @section('content')
@@ -257,18 +253,11 @@
                     </div>
                 </div>
 
-                <aside class="ces-hero__form" id="contact-us" aria-labelledby="ces-hero-form-title">
+                <aside class="ces-hero__form fccons-hero__form" id="contact-us" aria-labelledby="ces-hero-form-title">
                     <h2 id="ces-hero-form-title">Get a Quote</h2>
-                    <livewire:forms.contact-form
+                    <livewire:forms.construction-consultation-form
                         form-name="civil-engineering-services"
                         id-prefix="ces"
-                        :show-company="false"
-                        :show-service="true"
-                        service-placeholder="How can we help you?"
-                        :service-options="$serviceOptions"
-                        message-placeholder="Tell us more about your project"
-                        submit-label="SUBMIT YOUR REQUEST"
-                        layout="home"
                         thank-you-url="/thank-you-for-construction-services-consultation/"
                     />
                 </aside>

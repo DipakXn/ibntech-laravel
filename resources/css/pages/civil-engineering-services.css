@@ -4,6 +4,10 @@
     --ces-navy: #2e2e80;
     --ces-navy-deep: #233166;
     --ces-green: #4caf50;
+    --fccons-navy: var(--ces-navy);
+    --fccons-navy-deep: var(--ces-navy-deep);
+    --fccons-green: var(--ces-green);
+    --fccons-ink: #172033;
     --ces-green-soft: #61bd75;
     --ces-green-dark: #3d9140;
     --ces-sky: #2ca5d4;
@@ -231,6 +235,12 @@
     padding: 1.35rem 1.2rem 1.4rem;
     box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
     color: var(--ces-ink);
+}
+
+.ces-hero__form.fccons-hero__form {
+    align-self: start;
+    height: fit-content;
+    overflow: visible;
 }
 
 .ces-hero__form h2 {

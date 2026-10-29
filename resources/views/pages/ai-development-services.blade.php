@@ -210,7 +210,7 @@
                     </ul>
 
                     <div class="aidev-hero__actions">
-                        <a href="#aidev-consult" class="aidev-btn aidev-btn--light">
+                        <a href="javascript:void(0)" class="aidev-btn aidev-btn--light" data-scroll-target="aidev-form">
                             Start Your AI Journey
                             <i class="fa-solid fa-circle-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -333,7 +333,7 @@
                 <p>
                     Talk to our AI architects and get a customized plan Customized to your data, your workflow, and your scale from strategy to production.
                 </p>
-                <a href="#aidev-consult" class="aidev-link-cta">
+                <a href="javascript:void(0)" class="aidev-link-cta" data-scroll-target="aidev-form">
                     Talk to Us
                     <i class="fa-solid fa-circle-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -647,7 +647,7 @@
                     </div>
                 </div>
 
-                <aside class="aidev-consult__card" aria-labelledby="aidev-form-title">
+                <aside class="aidev-consult__card" aria-labelledby="aidev-form-title" data-scroll-anchor="aidev-form">
                     <h3 id="aidev-form-title">Talk to Our AI Experts</h3>
 
                     <livewire:forms.contact-form

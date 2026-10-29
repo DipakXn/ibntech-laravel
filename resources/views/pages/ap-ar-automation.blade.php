@@ -163,7 +163,7 @@
                         @endforeach
                     </ul>
                     <div class="apar-hero__actions">
-                        <a href="#" class="apar-btn apar-btn--light" data-contact-modal-trigger>
+                        <a href="javascript:void(0)" class="apar-btn apar-btn--light" data-scroll-target="apar-form">
                             Request Consultation
                         </a>
                     </div>
@@ -239,7 +239,7 @@
             <div class="site-shell apar-cta-banner__inner">
                 <h2 id="apar-cta-modernize-title">Ready to modernize AP and AR?</h2>
                 <p>Book a 30-minute walkthrough to see how automation can cut costs and speed up cash.</p>
-                <a href="#" class="apar-btn apar-btn--green" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="apar-btn apar-btn--green" data-scroll-target="apar-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Schedule Your Consultation
                 </a>
@@ -342,7 +342,7 @@
             <div class="site-shell apar-cta-banner__inner">
                 <h2 id="apar-cta-growth-title">Discover how automation can unlock new growth opportunities</h2>
                 <p>Schedule a personalized consultation to identify which processes are costing you the most - and how automation can turn them into growth drivers.</p>
-                <a href="#" class="apar-btn apar-btn--green" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="apar-btn apar-btn--green" data-scroll-target="apar-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Book Your Consultation
                 </a>
@@ -430,7 +430,7 @@
             <div class="site-shell apar-cta-banner__inner">
                 <h2 id="apar-cta-transform-title">Let's Transform Your Finance Function</h2>
                 <p>Connect with our AP/AR automation experts to explore how we can help you reduce costs, improve cash flow, and scale with confidence</p>
-                <a href="#apar-consult" class="apar-btn apar-btn--light">
+                <a href="javascript:void(0)" class="apar-btn apar-btn--light" data-scroll-target="apar-form">
                     Book a Consultation
                 </a>
             </div>
@@ -508,7 +508,7 @@
                     >
                 </div>
 
-                <aside class="apar-consult__card">
+                <aside class="apar-consult__card" data-scroll-anchor="apar-form">
                     <h2 id="apar-consult-title">Let's Transform Your Finance Function</h2>
                     <p>Connect with our AP/AR automation experts to explore how we can help you reduce costs, improve cash flow, and scale with confidence</p>
 

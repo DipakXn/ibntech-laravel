@@ -243,7 +243,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <a href="#sap-consult" class="sap-btn sap-btn--green">
+                    <a href="javascript:void(0)" class="sap-btn sap-btn--green" data-scroll-target="sap-form">
                         Talk to an Expert
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </a>
@@ -379,7 +379,7 @@
             <div class="site-shell sap-cta-banner__inner">
                 <h2 id="sap-cta-title">Take the First Step Toward Smarter SAP Performance</h2>
                 <p>Partner with a trusted SAP consulting team to drive secure, efficient, and measurable outcomes from strategy and migration to optimization and scale.</p>
-                <a href="#sap-consult" class="sap-btn sap-btn--white">
+                <a href="javascript:void(0)" class="sap-btn sap-btn--white" data-scroll-target="sap-form">
                     Turn SAP Into Value
                     <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                 </a>
@@ -643,7 +643,7 @@
                     </ul>
                 </div>
 
-                <aside class="sap-consult__card" aria-labelledby="sap-form-title">
+                <aside class="sap-consult__card" aria-labelledby="sap-form-title" data-scroll-anchor="sap-form">
                     <h3 id="sap-form-title">Talk to Our SAP Experts</h3>
                     <p class="sap-consult__lede">Connect directly with our SAP transformation team</p>
                     <livewire:forms.contact-form

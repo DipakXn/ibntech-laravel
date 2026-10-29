@@ -177,7 +177,7 @@
                 <p class="rpa-hero__lede">
                     Break Free from the Cycle of Repetitive and Manual Processes and Embrace Digital Transformation with RPA
                 </p>
-                <a href="#form-banner" class="rpa-btn rpa-btn--navy">Get A Quote</a>
+                <a href="javascript:void(0)" class="rpa-btn rpa-btn--navy" data-scroll-target="rpa-form">Get A Quote</a>
             </div>
         </section>
 
@@ -324,7 +324,7 @@
                     <p>
                         Drive measurable ROI with <strong>RPA process</strong> automation. Streamline routine workflows, large and small, at speed and scale across your business. Bridge the automation gap securely with extensive integrations and governance at every step. Start automating today!
                     </p>
-                    <a href="#form-banner" class="rpa-btn rpa-btn--green">GET STARTED NOW</a>
+                    <a href="javascript:void(0)" class="rpa-btn rpa-btn--green" data-scroll-target="rpa-form">GET STARTED NOW</a>
                 </div>
                 <div class="rpa-benefits__media">
                     <img
@@ -423,7 +423,7 @@
                     
                 </div>
 
-                <aside class="rpa-consult__card" aria-labelledby="rpa-form-title">
+                <aside class="rpa-consult__card" aria-labelledby="rpa-form-title" data-scroll-anchor="rpa-form">
                     <h2 id="rpa-form-title" class="sr-only">Request an RPA quote</h2>
                     <livewire:forms.contact-form
                         form-name="robotics-process-automation"

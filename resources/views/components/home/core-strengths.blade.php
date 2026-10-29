@@ -1,6 +1,6 @@
 @php
     $strengths = [
-        ['title' => 'Cybersecurity', 'text' => 'VAPT, SOC, SEIM, vCISO', 'icon' => 'fa-shield-halved', 'tone' => 'navy', 'scroll_target' => 'cybersecurity-section'],
+        ['title' => 'Cybersecurity', 'text' => 'VAPT, SOC, SIEM, vCISO', 'icon' => 'fa-shield-halved', 'tone' => 'navy', 'scroll_target' => 'cybersecurity-section'],
         ['title' => 'Cloud', 'text' => 'AWS, Azure, Jio', 'icon' => 'fa-cloud', 'tone' => 'sky', 'scroll_target' => 'cloud-section'],
         ['title' => 'Finance & Accounting', 'text' => 'Bookkeeping, Tax', 'icon' => 'fa-calculator', 'tone' => 'green', 'scroll_target' => 'finance-section'],
         ['title' => 'AI & Automation', 'text' => 'RPA, AP/AR', 'icon' => 'fa-robot', 'tone' => 'blue', 'scroll_target' => 'ai-section'],

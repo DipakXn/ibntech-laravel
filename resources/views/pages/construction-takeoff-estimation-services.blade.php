@@ -164,7 +164,7 @@
                     </ul>
                 </div>
 
-                <aside class="ctes-hero__form" id="contact-us" aria-labelledby="ctes-hero-form-title">
+                <aside class="ctes-hero__form" id="contact-us" aria-labelledby="ctes-hero-form-title" data-scroll-anchor="ctes-form">
                     <h2 id="ctes-hero-form-title">Schedule A Free Consultation!</h2>
                     <livewire:forms.contact-form
                         form-name="construction-takeoff-estimation-services"
@@ -215,7 +215,7 @@
             <div class="site-shell ctes-cta__inner">
                 <h2 id="ctes-cta-title">Ready to Improve Your Estimation Accuracy?</h2>
                 <p>Professional construction estimating services can help you win more bids and increase project profitability through precise material takeoffs and cost projections.</p>
-                <a href="#contact-us" class="ctes-btn ctes-btn--green">
+                <a href="javascript:void(0)" class="ctes-btn ctes-btn--green" data-scroll-target="ctes-form">
                     <svg aria-hidden="true" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
                         <path fill="currentColor" d="M400 64h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V160h352v298c0 3.3-2.7 6-6 6z"></path>
                     </svg>
@@ -317,7 +317,7 @@
                 <div class="ctes-transform__copy">
                     <h2 id="ctes-transform-title">Ready to Transform Your Construction Estimation Process?</h2>
                     <p>Take the first step toward more accurate bids, reduced costs, and improved project outcomes with professional construction estimation and takeoff services.</p>
-                    <a href="#contact-us" class="ctes-btn ctes-btn--green">
+                    <a href="javascript:void(0)" class="ctes-btn ctes-btn--green" data-scroll-target="ctes-form">
                         <svg aria-hidden="true" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="M400 64h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V160h352v298c0 3.3-2.7 6-6 6z"></path>
                         </svg>

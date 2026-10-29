@@ -243,17 +243,17 @@
                     </ul>
 
                     <div class="ces-hero__actions">
-                        <a href="#contact-us" class="ces-btn ces-btn--green">
+                        <a href="javascript:void(0)" class="ces-btn ces-btn--green" data-scroll-target="ces-form">
                             <svg aria-hidden="true" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"></path>
                             </svg>
                             Onboard Your Dedicated Resource
                         </a>
-                        <a href="#ces-roles" class="ces-btn ces-btn--outline">See What We Cover</a>
+                        <a href="javascript:void(0)" class="ces-btn ces-btn--outline" data-scroll-target="ces-roles">See What We Cover</a>
                     </div>
                 </div>
 
-                <aside class="ces-hero__form fccons-hero__form" id="contact-us" aria-labelledby="ces-hero-form-title">
+                <aside class="ces-hero__form fccons-hero__form" id="ces-form" aria-labelledby="ces-hero-form-title" data-scroll-anchor="ces-form">
                     <h2 id="ces-hero-form-title">Get a Quote</h2>
                     <livewire:forms.construction-consultation-form
                         form-name="civil-engineering-services"
@@ -313,7 +313,7 @@
         </section>
 
         {{-- Full-time professionals --}}
-        <section class="ces-roles" id="ces-roles" aria-labelledby="ces-roles-title">
+        <section class="ces-roles" id="ces-roles" aria-labelledby="ces-roles-title" data-scroll-anchor="ces-roles">
             <div class="site-shell">
                 <div class="ces-heading ces-heading--center ces-heading--light">
                     <p class="ces-eyebrow ces-eyebrow--light">Virtual Civil Engineering Resource</p>
@@ -450,7 +450,7 @@
                 <p class="ces-eyebrow ces-eyebrow--light">Start Your Journey</p>
                 <h2 id="ces-cta-title">Ready to onboard a skilled Construction engineer?</h2>
                 <p>Outline your role and we’ll connect you with qualified professionals.</p>
-                <a href="#" class="ces-btn ces-btn--green ces-btn--lg" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="ces-btn ces-btn--green ces-btn--lg" data-scroll-target="ces-form">
                     <svg aria-hidden="true" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                         <path fill="currentColor" d="M256 32C114.52 32 0 146.496 0 288v48a32 32 0 0 0 17.689 28.622l14.383 7.191C34.083 431.903 83.421 480 144 480h24c13.255 0 24-10.745 24-24V280c0-13.255-10.745-24-24-24h-24c-31.342 0-59.671 12.879-80 33.627V288c0-105.869 86.131-192 192-192s192 86.131 192 192v1.627C427.671 268.879 399.342 256 368 256h-24c-13.255 0-24 10.745-24 24v176c0 13.255 10.745 24 24 24h24c60.579 0 109.917-48.098 111.928-108.187l14.382-7.191A32 32 0 0 0 512 336v-48c0-141.479-114.496-256-256-256z"></path>
                     </svg>

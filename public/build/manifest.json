@@ -32,7 +32,7 @@
     ]
   },
   "resources/css/industries/bfsi.css": {
-    "file": "assets/bfsi-DZHhQuI0.css",
+    "file": "assets/bfsi-CPq3nZTH.css",
     "src": "resources/css/industries/bfsi.css",
     "isEntry": true,
     "name": "bfsi",
@@ -41,7 +41,7 @@
     ]
   },
   "resources/css/industries/chemical-and-energy.css": {
-    "file": "assets/chemical-and-energy-Bqy06vCR.css",
+    "file": "assets/chemical-and-energy-D2P-_Tbk.css",
     "src": "resources/css/industries/chemical-and-energy.css",
     "isEntry": true,
     "name": "chemical-and-energy",
@@ -50,7 +50,7 @@
     ]
   },
   "resources/css/industries/ecommerce-and-retail.css": {
-    "file": "assets/ecommerce-and-retail-iijDCdf8.css",
+    "file": "assets/ecommerce-and-retail-DHLNM_Xr.css",
     "src": "resources/css/industries/ecommerce-and-retail.css",
     "isEntry": true,
     "name": "ecommerce-and-retail",
@@ -59,7 +59,7 @@
     ]
   },
   "resources/css/industries/healthcare-and-pharma.css": {
-    "file": "assets/healthcare-and-pharma-xCUy1nZZ.css",
+    "file": "assets/healthcare-and-pharma-DYYwIHAy.css",
     "src": "resources/css/industries/healthcare-and-pharma.css",
     "isEntry": true,
     "name": "healthcare-and-pharma",
@@ -77,7 +77,7 @@
     ]
   },
   "resources/css/industries/legal-firm.css": {
-    "file": "assets/legal-firm-DbmuMzN0.css",
+    "file": "assets/legal-firm-Qeu19tCh.css",
     "src": "resources/css/industries/legal-firm.css",
     "isEntry": true,
     "name": "legal-firm",
@@ -113,7 +113,7 @@
     ]
   },
   "resources/css/industries/travel-and-hospitality.css": {
-    "file": "assets/travel-and-hospitality-BU2iK8ma.css",
+    "file": "assets/travel-and-hospitality-Drm-4zFQ.css",
     "src": "resources/css/industries/travel-and-hospitality.css",
     "isEntry": true,
     "name": "travel-and-hospitality",
@@ -476,7 +476,7 @@
     ]
   },
   "resources/css/pages/accounts-payable-and-accounts-receivable-services.css": {
-    "file": "assets/accounts-payable-and-accounts-receivable-services-DFD38nBU.css",
+    "file": "assets/accounts-payable-and-accounts-receivable-services-BiP-LTKp.css",
     "src": "resources/css/pages/accounts-payable-and-accounts-receivable-services.css",
     "isEntry": true,
     "name": "accounts-payable-and-accounts-receivable-services",
@@ -2048,7 +2048,7 @@
     ]
   },
   "resources/css/pages/tax-preparation-services-uk.css": {
-    "file": "assets/tax-preparation-services-uk-cOFmNimb.css",
+    "file": "assets/tax-preparation-services-uk-LOsp80yO.css",
     "src": "resources/css/pages/tax-preparation-services-uk.css",
     "isEntry": true,
     "name": "tax-preparation-services-uk",
@@ -2111,7 +2111,7 @@
     ]
   },
   "resources/css/pages/testimonials.css": {
-    "file": "assets/testimonials-DwbEPHL3.css",
+    "file": "assets/testimonials-BypKQX7S.css",
     "src": "resources/css/pages/testimonials.css",
     "isEntry": true,
     "name": "testimonials",
@@ -2433,7 +2433,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-DG0KKWA1.js",
+    "file": "assets/app-EEjXZCJk.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

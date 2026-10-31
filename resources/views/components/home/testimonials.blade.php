@@ -2,6 +2,7 @@
     'items' => null,
     'title' => 'What Our Clients Say',
     'subtitle' => 'Trusted by industry leaders',
+    'autoplay' => false,
 ])
 
 @php
@@ -106,7 +107,12 @@
     $resolvedItems = is_array($items) && $items !== [] ? $items : $defaultTestimonials;
 @endphp
 
-<section class="home-testimonials" aria-labelledby="home-testimonials-title" data-home-testimonials>
+<section
+    class="home-testimonials"
+    aria-labelledby="home-testimonials-title"
+    data-home-testimonials
+    @if ($autoplay) data-home-testimonials-autoplay @endif
+>
     <div class="home-testimonials__banner">
         <div class="home-shell">
             <h2 id="home-testimonials-title">{{ $title }}</h2>

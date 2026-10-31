@@ -151,7 +151,7 @@
                         Our strength balances in diverse, cross-functional teams with cloud architects and cybersecurity specialists, working alongside product managers, bookkeepers, data scientists, automation specialists, and project leads. With our collective capabilities, companies can operate with confidence and realize sustained growth through our solutions in cloud transformation and cybersecurity, finance and accounting, and automation solutions.
                     </p>
                     <div class="about-ibn-split__actions">
-                        <a href="#" class="button-primary" data-contact-modal-trigger>
+                        <a href="javascript:void(0)" class="button-primary" data-contact-modal-trigger>
                             Schedule a Free Consultation
                         </a>
                     </div>
@@ -200,7 +200,7 @@
                 <p>
                     Whether it’s securing your digital infrastructure, modernizing your cloud environment, automating workflows, or managing finance and accounting operations, IBN Technologies is your partner in innovation, efficiency, and growth.
                 </p>
-                <a href="#" class="button-primary" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="button-primary" data-contact-modal-trigger>
                     Book a Call
                 </a>
             </div>

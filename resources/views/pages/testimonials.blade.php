@@ -30,6 +30,6 @@
             </div>
         </section>
 
-        <x-home.testimonials />
+        <x-home.testimonials autoplay />
     </div>
 @endsection

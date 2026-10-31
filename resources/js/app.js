@@ -1365,6 +1365,13 @@ const initHomeTestimonials = () => {
         let pageCount = 1;
         let gap = 16;
         let touchStartX = null;
+        let timer = 0;
+        let hovered = false;
+        let focused = false;
+        const autoplay = root.hasAttribute('data-home-testimonials-autoplay');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const autoplayDelay = 6000;
 
         const getPerPage = () => (window.matchMedia('(max-width: 720px)').matches ? 1 : 2);
 
@@ -1376,6 +1383,41 @@ const initHomeTestimonials = () => {
         };
 
         const maxPage = () => Math.max(0, pageCount - 1);
+
+        const stopAutoplay = () => {
+            if (timer) {
+                window.clearInterval(timer);
+                timer = 0;
+            }
+        };
+
+        const startAutoplay = () => {
+            stopAutoplay();
+
+            if (!autoplay || reduceMotion || hovered || focused || document.hidden || pageCount < 2) {
+                return;
+            }
+
+            timer = window.setInterval(() => {
+                page = page >= maxPage() ? 0 : page + 1;
+                render();
+            }, autoplayDelay);
+        };
+
+        const goTo = (nextPage) => {
+            page = nextPage;
+            render();
+            startAutoplay();
+        };
+
+        const step = (direction) => {
+            if (direction < 0) {
+                goTo(page <= 0 ? maxPage() : page - 1);
+                return;
+            }
+
+            goTo(page >= maxPage() ? 0 : page + 1);
+        };
 
         const syncDots = () => {
             if (!dotsHost) {
@@ -1392,8 +1434,7 @@ const initHomeTestimonials = () => {
                         button.setAttribute('data-home-testimonials-dot', '');
                         button.setAttribute('aria-label', `Show testimonials page ${index + 1}`);
                         button.addEventListener('click', () => {
-                            page = Math.min(index, maxPage());
-                            render();
+                            goTo(Math.min(index, maxPage()));
                         });
                         return button;
                     }),
@@ -1462,13 +1503,11 @@ const initHomeTestimonials = () => {
         };
 
         prev?.addEventListener('click', () => {
-            page = page <= 0 ? maxPage() : page - 1;
-            render();
+            step(-1);
         });
 
         next?.addEventListener('click', () => {
-            page = page >= maxPage() ? 0 : page + 1;
-            render();
+            step(1);
         });
 
         viewport.addEventListener(
@@ -1495,23 +1534,62 @@ const initHomeTestimonials = () => {
                 }
 
                 if (delta < 0) {
-                    page = page >= maxPage() ? 0 : page + 1;
+                    step(1);
                 } else {
-                    page = page <= 0 ? maxPage() : page - 1;
+                    step(-1);
                 }
-
-                render();
             },
             { passive: true },
         );
 
+        if (canHover) {
+            root.addEventListener('mouseenter', () => {
+                hovered = true;
+                stopAutoplay();
+            });
+
+            root.addEventListener('mouseleave', () => {
+                hovered = false;
+                startAutoplay();
+            });
+        }
+
+        root.addEventListener('focusin', (event) => {
+            if (!event.target.matches(':focus-visible')) {
+                return;
+            }
+
+            focused = true;
+            stopAutoplay();
+        });
+
+        root.addEventListener('focusout', (event) => {
+            if (!root.contains(event.relatedTarget)) {
+                focused = false;
+                startAutoplay();
+            }
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoplay();
+                return;
+            }
+
+            startAutoplay();
+        });
+
         let resizeFrame = 0;
         window.addEventListener('resize', () => {
             window.cancelAnimationFrame(resizeFrame);
-            resizeFrame = window.requestAnimationFrame(render);
+            resizeFrame = window.requestAnimationFrame(() => {
+                render();
+                startAutoplay();
+            });
         });
 
         render();
+        startAutoplay();
     });
 };
 

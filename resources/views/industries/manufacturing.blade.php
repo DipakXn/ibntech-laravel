@@ -155,7 +155,7 @@
                     <p class="mfg-hero__lede">
                         Transform your operational challenges into your greatest strengths. We offer expert help in Cloud Migration, Cybersecurity, Finance &amp; Accounting, and BPO services.
                     </p>
-                    <a href="#mfg-assessment" class="mfg-btn mfg-btn--green">
+                    <a href="javascript:void(0)" class="mfg-btn mfg-btn--green" data-scroll-target="mfg-form">
                         Schedule Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -251,7 +251,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="#mfg-assessment" class="mfg-btn mfg-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="mfg-btn mfg-btn--card" data-scroll-target="mfg-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -263,7 +263,7 @@
             <div class="site-shell mfg-cta__inner">
                 <h2 id="mfg-cta-title">Start Your Digital Manufacturing Transformation</h2>
                 <p>Modernize systems, reduce costs, and improve operational efficiency—faster.</p>
-                <a href="#mfg-assessment" class="mfg-btn mfg-btn--white">Book a Call</a>
+                <a href="javascript:void(0)" class="mfg-btn mfg-btn--white" data-scroll-target="mfg-form">Book a Call</a>
             </div>
         </section>
 
@@ -333,7 +333,7 @@
                     <p>Every hour of inefficiency costs you production. Automate, secure, and streamline with our proven solutions before the next cycle begins.</p>
                 </div>
 
-                <aside class="mfg-assess__card" aria-labelledby="mfg-form-title">
+                <aside class="mfg-assess__card" aria-labelledby="mfg-form-title" data-scroll-anchor="mfg-form">
                     <h3 id="mfg-form-title">Schedule Your Discounted Assessment</h3>
                     <livewire:forms.contact-form
                         form-name="manufacturing"

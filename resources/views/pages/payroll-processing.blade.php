@@ -117,7 +117,7 @@
                     <p class="prlp-hero__lede">
                         As a trusted payroll service provider, we offer full-service payroll that saves you time, reduces mistakes, and ensures compliance
                     </p>
-                    <a href="#contact-us" class="prlp-btn">Get Free Consultation</a>
+                    <a href="javascript:void(0)" class="prlp-btn" data-scroll-target="prlp-form">Get Free Consultation</a>
                     <ul class="prlp-hero__trust" aria-label="Payroll service strengths">
                         @foreach ($trustItems as $item)
                             <li>
@@ -173,7 +173,7 @@
                 </div>
 
                 <div class="prlp-section__cta">
-                    <a href="#our-services" class="prlp-btn">Explore Our Solution</a>
+                    <a href="javascript:void(0)" class="prlp-btn" data-scroll-target="our-services">Explore Our Solution</a>
                 </div>
             </div>
         </section>
@@ -289,7 +289,7 @@
                     </div>
                 </div>
 
-                <aside class="prlp-consult__card" aria-labelledby="prlp-form-title">
+                <aside class="prlp-consult__card" aria-labelledby="prlp-form-title" data-scroll-anchor="prlp-form">
                     <h2 id="prlp-form-title">Get Started with a Free Consultation Today</h2>
                     <livewire:forms.contact-form
                         form-name="payroll-processing"

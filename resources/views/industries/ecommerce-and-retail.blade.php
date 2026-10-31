@@ -194,7 +194,7 @@
                     <p class="ecr-hero__lede">
                         Your growth is our mission. We provide secure cloud, data protection, and financial solutions to help retail and e-commerce businesses thrive.
                     </p>
-                    <a href="#ecr-assessment" class="ecr-btn ecr-btn--green">
+                    <a href="javascript:void(0)" class="ecr-btn ecr-btn--green" data-scroll-target="ecr-form">
                         Schedule Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -295,7 +295,7 @@
                                 {{ $service['outcome'] }}
                             </p>
 
-                            <a href="#ecr-assessment" class="ecr-btn ecr-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="ecr-btn ecr-btn--card" data-scroll-target="ecr-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -327,7 +327,7 @@
             <div class="site-shell ecr-cta__inner">
                 <h2 id="ecr-cta-title">Ready to Transform Your E-Commerce Operations?</h2>
                 <p>Schedule a consultation with our team to see how IBN Technology can solve your specific challenges and accelerate growth.</p>
-                <a href="#ecr-assessment" class="ecr-btn ecr-btn--white">Schedule Now</a>
+                <a href="javascript:void(0)" class="ecr-btn ecr-btn--white" data-scroll-target="ecr-form">Schedule Now</a>
             </div>
         </section>
 
@@ -370,7 +370,7 @@
                     </ul>
                 </div>
 
-                <aside class="ecr-assess__card" aria-labelledby="ecr-form-title">
+                <aside class="ecr-assess__card" aria-labelledby="ecr-form-title" data-scroll-anchor="ecr-form">
                     <h3 id="ecr-form-title">Scale Smarter in E-commerce &amp; Retail</h3>
                     <p>We help brands scale faster with secure, automated, and cost-efficient operations.</p>
                     <livewire:forms.contact-form

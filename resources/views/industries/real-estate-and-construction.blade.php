@@ -217,7 +217,7 @@
                     <p class="rec-hero__lede">
                         Access a team of experienced remote civil engineers for project estimation, BIM modeling, bid support, site documentation, and project management.
                     </p>
-                    <a href="#rec-assessment" class="rec-btn rec-btn--green">
+                    <a href="javascript:void(0)" class="rec-btn rec-btn--green" data-scroll-target="rec-form">
                         Schedule a Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -399,7 +399,7 @@
             <div class="site-shell rec-cta__inner">
                 <h2 id="rec-cta-title">Ready to Scale Your Engineering Capacity?</h2>
                 <p>Schedule a free consultation with our civil engineers to discuss your project needs, current challenges, and how we can deliver remote engineering support tailored to your workflow.</p>
-                <a href="#rec-assessment" class="rec-btn rec-btn--white">Schedule Engineering Consultation</a>
+                <a href="javascript:void(0)" class="rec-btn rec-btn--white" data-scroll-target="rec-form">Schedule Engineering Consultation</a>
             </div>
         </section>
 
@@ -428,7 +428,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="#rec-assessment" class="rec-solution__link">
+                            <a href="javascript:void(0)" class="rec-solution__link" data-scroll-target="rec-form">
                                 Request a Consultation
                                 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                             </a>
@@ -440,7 +440,7 @@
                             <i class="fa-solid fa-comments"></i>
                         </span>
                         <p>Let's discuss how our integrated solutions can drive efficiency and value for your business.</p>
-                        <a href="#rec-assessment" class="rec-btn rec-btn--white">
+                        <a href="javascript:void(0)" class="rec-btn rec-btn--white" data-scroll-target="rec-form">
                             Request a Consultation
                             <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -468,7 +468,7 @@
                     </ul>
                 </div>
 
-                <aside class="rec-assess__card" aria-labelledby="rec-form-title">
+                <aside class="rec-assess__card" aria-labelledby="rec-form-title" data-scroll-anchor="rec-form">
                     <h3 id="rec-form-title">Your Strategic Partner for Real Estate &amp; Construction Excellence</h3>
                     <livewire:forms.contact-form
                         form-name="real-estate-and-construction"

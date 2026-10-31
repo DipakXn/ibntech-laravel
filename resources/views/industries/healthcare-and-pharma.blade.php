@@ -181,7 +181,7 @@
                     <p class="hcp-hero__lede">
                         Serving hospitals, clinics, healthtech, and healthcare investors globally with ISO-certified processes and 24/7 support
                     </p>
-                    <a href="#hcp-assessment" class="hcp-btn hcp-btn--green">
+                    <a href="javascript:void(0)" class="hcp-btn hcp-btn--green" data-scroll-target="hcp-form">
                         Schedule A Free Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -249,7 +249,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <a href="#hcp-assessment" class="hcp-btn hcp-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="hcp-btn hcp-btn--card" data-scroll-target="hcp-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -294,7 +294,7 @@
             <div class="site-shell hcp-cta__inner">
                 <h2 id="hcp-cta-title">Ready to Transform Your Healthcare Operations?</h2>
                 <p>Healthcare organizations deserve a technology partner who understands the complexity of your operations, the sensitivity of your data, and the importance of every patient interaction.</p>
-                <a href="#hcp-assessment" class="hcp-btn hcp-btn--white">Schedule Consultation</a>
+                <a href="javascript:void(0)" class="hcp-btn hcp-btn--white" data-scroll-target="hcp-form">Schedule Consultation</a>
             </div>
         </section>
 
@@ -333,7 +333,7 @@
                     </ul>
                 </div>
 
-                <aside class="hcp-assess__card" aria-labelledby="hcp-form-title">
+                <aside class="hcp-assess__card" aria-labelledby="hcp-form-title" data-scroll-anchor="hcp-form">
                     <h3 id="hcp-form-title">Secure, Compliant, and Scalable Healthcare Solutions</h3>
                     <p>From digital transformation to financial operations, we simplify complexity across healthcare and pharma.</p>
                     <livewire:forms.contact-form

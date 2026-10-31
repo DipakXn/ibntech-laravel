@@ -385,7 +385,7 @@
 
 .lf-btn--card {
     width: 100%;
-    margin-top: auto;
+    margin-top: 17px;
     background: var(--lf-accent);
     color: #fff;
     box-shadow: 0 10px 22px rgba(46, 46, 128, 0.18);

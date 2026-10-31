@@ -284,7 +284,7 @@
                     <span class="aparsvc-promo__bell" aria-hidden="true">🔔</span>
                     <strong>Book now and Get 20% off for the coming quarter – limited time offer!</strong>
                 </p>
-                <a href="#aparsvc-consult" class="aparsvc-promo__btn">Schedule Free Consultation</a>
+                <a href="javascript:void(0)" class="aparsvc-promo__btn" data-scroll-target="aparsvc-form">Schedule Free Consultation</a>
                 <button type="button" class="aparsvc-promo__close" @click="dismiss()" aria-label="Close banner">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
@@ -306,7 +306,7 @@
                         IBN Technologies delivers flexible, innovative, and cost-effective accounts receivable outsourcing and accounts payable services. As one of the most trusted accounts payable solution providers, our smart approach ensures quick implementation and exceptional quality—setting a new standard for financial process excellence.
                     </p>
                     <div class="aparsvc-hero__actions">
-                        <a href="#aparsvc-consult" class="aparsvc-btn aparsvc-btn--light">
+                        <a href="javascript:void(0)" class="aparsvc-btn aparsvc-btn--light" data-scroll-target="aparsvc-form">
                             Book a Free Consultation
                             <i class="fa-solid fa-circle-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -430,7 +430,7 @@
                 <p>
                     Don’t let scaling volume disrupt your finances. Strengthen your system with proactive follow-ups and predictable accounts payable turnover for consistent cash flow stability.
                 </p>
-                <a href="#" class="aparsvc-btn aparsvc-btn--green" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="aparsvc-btn aparsvc-btn--green" data-scroll-target="aparsvc-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Schedule a Consultation to Scale Up
                 </a>
@@ -512,7 +512,7 @@
                 <p>
                     Learn how our accounts receivable services can reduce your DSO by up to 30% and minimize bad debt write-offs.
                 </p>
-                <a href="#" class="aparsvc-btn aparsvc-btn--green" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="aparsvc-btn aparsvc-btn--green" data-scroll-target="aparsvc-form">
                     Schedule a Free Call
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -579,7 +579,7 @@
             <div class="site-shell aparsvc-cta__inner">
                 <h2 id="aparsvc-cta-workflow-title">Are you Struggling with slow invoices and delayed payments?</h2>
                 <p>Our experts identify bottlenecks, speed up approvals, and keep your cash flow healthy.</p>
-                <a href="#" class="aparsvc-btn aparsvc-btn--light" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="aparsvc-btn aparsvc-btn--light" data-scroll-target="aparsvc-form">
                     Request a Free AP Workflow Assessment
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -696,7 +696,7 @@
                     </div>
                 </div>
 
-                <aside class="aparsvc-consult__card" aria-labelledby="aparsvc-consult-title">
+                <aside class="aparsvc-consult__card" aria-labelledby="aparsvc-consult-title" data-scroll-anchor="aparsvc-form">
                     <h3 id="aparsvc-consult-title">Ready to transform your financial operations?</h3>
                     <p>Fill out the form below and our experts will help you optimize your Accounts Payable and Receivable processes.</p>
 

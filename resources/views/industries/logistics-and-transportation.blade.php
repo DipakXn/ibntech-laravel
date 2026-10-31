@@ -231,7 +231,7 @@
                     <p class="lat-hero__lede">
                         Integrated cloud migration, cybersecurity, finance automation, and BPO services. Proven to reduce operational costs by 40-60% while improving operational efficiency.
                     </p>
-                    <a href="#lat-assessment" class="lat-btn lat-btn--green">
+                    <a href="javascript:void(0)" class="lat-btn lat-btn--green" data-scroll-target="lat-form">
                         Schedule Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -322,7 +322,7 @@
                                 </div>
                             </div>
 
-                            <a href="#lat-assessment" class="lat-btn lat-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="lat-btn lat-btn--card" data-scroll-target="lat-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -334,7 +334,7 @@
             <div class="site-shell lat-cta__inner">
                 <h2 id="lat-cta-title">Ready to Transform Your Operations?</h2>
                 <p>Schedule a free consultation with our logistics experts. We'll assess your specific challenges and design a custom solution tailored to your business.</p>
-                <a href="#lat-assessment" class="lat-btn lat-btn--white">Schedule a Free Consultation</a>
+                <a href="javascript:void(0)" class="lat-btn lat-btn--white" data-scroll-target="lat-form">Schedule a Free Consultation</a>
             </div>
         </section>
 
@@ -376,7 +376,7 @@
                     </ul>
                 </div>
 
-                <aside class="lat-assess__card" aria-labelledby="lat-form-title">
+                <aside class="lat-assess__card" aria-labelledby="lat-form-title" data-scroll-anchor="lat-form">
                     <h3 id="lat-form-title">Driving Smarter Transportation Operations</h3>
                     <p>Helping transportation companies streamline customer support, strengthen compliance, and scale operations with confidence</p>
                     <livewire:forms.contact-form

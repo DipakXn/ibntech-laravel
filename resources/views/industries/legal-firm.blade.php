@@ -143,7 +143,7 @@
                     <p class="lf-hero__lede">
                         Complete managed solutions for law firms - cloud migration, cybersecurity, accounting, bookkeeping, payroll &amp; BPO services in one trusted partnership.
                     </p>
-                    <a href="#lf-assessment" class="lf-btn lf-btn--green">
+                    <a href="javascript:void(0)" class="lf-btn lf-btn--green" data-scroll-target="lf-form">
                         Get a Free Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -238,7 +238,7 @@
                                 @endforeach
                             </ul>
 
-                            <a href="#lf-assessment" class="lf-btn lf-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="lf-btn lf-btn--card" data-scroll-target="lf-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -250,7 +250,7 @@
             <div class="site-shell lf-cta__inner">
                 <h2 id="lf-cta-title">Ready to streamline your legal operations?</h2>
                 <p>Schedule your free consultation today and discover how we can help you cut costs, ensure compliance, and boost efficiency</p>
-                <a href="#lf-assessment" class="lf-btn lf-btn--white">Schedule a Free Consultation</a>
+                <a href="javascript:void(0)" class="lf-btn lf-btn--white" data-scroll-target="lf-form">Schedule a Free Consultation</a>
             </div>
         </section>
 
@@ -292,7 +292,7 @@
                     </ul>
                 </div>
 
-                <aside class="lf-assess__card" aria-labelledby="lf-form-title">
+                <aside class="lf-assess__card" aria-labelledby="lf-form-title" data-scroll-anchor="lf-form">
                     <h3 id="lf-form-title">Compliance-Driven Outsourcing for Legal Excellence</h3>
                     <p>Delegate payroll, accounting, and IT security to experts so you can concentrate on winning cases.</p>
                     <livewire:forms.contact-form

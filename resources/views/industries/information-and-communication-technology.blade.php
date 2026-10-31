@@ -208,7 +208,7 @@
                     <p class="ict-hero__lede">
                         Managing cloud infrastructure, cybersecurity, financial compliance, and operational efficiency simultaneously
                     </p>
-                    <a href="#ict-assessment" class="ict-btn ict-btn--green">
+                    <a href="javascript:void(0)" class="ict-btn ict-btn--green" data-scroll-target="ict-form">
                         Schedule a Free Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -309,7 +309,7 @@
                                 {{ $service['benefit'] }}
                             </p>
 
-                            <a href="#ict-assessment" class="ict-btn ict-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="ict-btn ict-btn--card" data-scroll-target="ict-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -321,7 +321,7 @@
             <div class="site-shell ict-cta__inner">
                 <h2 id="ict-cta-title">Ready to Transform Your IT Operations?</h2>
                 <p>Discover where you're losing time and money. Our experts will analyze your current processes and show you exactly how much you could save.</p>
-                <a href="#ict-assessment" class="ict-btn ict-btn--white">Schedule a Free Consultation</a>
+                <a href="javascript:void(0)" class="ict-btn ict-btn--white" data-scroll-target="ict-form">Schedule a Free Consultation</a>
             </div>
         </section>
 
@@ -396,7 +396,7 @@
                     </ul>
                 </div>
 
-                <aside class="ict-assess__card" aria-labelledby="ict-form-title">
+                <aside class="ict-assess__card" aria-labelledby="ict-form-title" data-scroll-anchor="ict-form">
                     <h3 id="ict-form-title">Scale Smarter with ICT Solutions</h3>
                     <p>We help organizations strengthen security, move to the cloud, and optimize IT, finance, and back-office operations through scalable and cost-efficient solutions.</p>
                     <livewire:forms.contact-form

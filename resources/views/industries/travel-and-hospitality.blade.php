@@ -171,7 +171,7 @@
                     <p class="tah-hero__lede">
                         Navigate operational complexity, ensure data security, and drive profitability with integrated cloud migration, cybersecurity, and outsourcing solutions built for travel and hospitality.
                     </p>
-                    <a href="#tah-assessment" class="tah-btn tah-btn--green">
+                    <a href="javascript:void(0)" class="tah-btn tah-btn--green" data-scroll-target="tah-form">
                         Schedule Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -266,7 +266,7 @@
                                 </ul>
                             </div>
 
-                            <a href="#tah-assessment" class="tah-btn tah-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="tah-btn tah-btn--card" data-scroll-target="tah-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -278,7 +278,7 @@
             <div class="site-shell tah-cta__inner">
                 <h2 id="tah-cta-title">Ready to Transform Your Operations?</h2>
                 <p>Save up to 70% on operational costs while improving compliance, security, and guest satisfaction.</p>
-                <a href="#tah-assessment" class="tah-btn tah-btn--white">Schedule a Free Consultation</a>
+                <a href="javascript:void(0)" class="tah-btn tah-btn--white" data-scroll-target="tah-form">Schedule a Free Consultation</a>
             </div>
         </section>
 
@@ -334,7 +334,7 @@
                     </ul>
                 </div>
 
-                <aside class="tah-assess__card" aria-labelledby="tah-form-title">
+                <aside class="tah-assess__card" aria-labelledby="tah-form-title" data-scroll-anchor="tah-form">
                     <h3 id="tah-form-title">Your Strategic Partner for Travel &amp; Hospitality Excellence</h3>
                     <p>Empowering travel and hospitality businesses with tailored digital and operational solutions.</p>
                     <livewire:forms.contact-form

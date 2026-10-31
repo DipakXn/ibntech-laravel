@@ -404,7 +404,7 @@
 }
 
 .tah-service__impact {
-    margin: auto 0 1.15rem;
+    margin: 1.15rem 0 1.15rem;
     border-radius: 0.7rem;
     background: #fff;
     border: 1px solid rgba(46, 46, 128, 0.1);

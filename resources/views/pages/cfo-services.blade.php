@@ -28,7 +28,7 @@
                         In USA | For Small Business | Outsourced | Fractional | Part Time | Virtual
                     </p>
                     <div class="cfosvc-hero__actions">
-                        <a href="#accounting-enquire" class="cfosvc-btn cfosvc-btn--cream">
+                        <a href="javascript:void(0)" class="cfosvc-btn cfosvc-btn--cream" data-scroll-target="cfosvc-form">
                             Free Consultation
                         </a>
                     </div>
@@ -71,7 +71,7 @@
                     <p>
                         By leveraging the expertise of a virtual, part time or fractional CFO, small businesses and organizations can make forward-thinking financial decisions maximize their financial resources and improve their financial health. And with an offshore team of IBN Tech working as your extended finance and accounting arm, these CFO services come at a fraction of a cost when compared to CFO services in USA.
                     </p>
-                    <a href="#accounting-enquire" class="cfosvc-btn cfosvc-btn--navy">
+                    <a href="javascript:void(0)" class="cfosvc-btn cfosvc-btn--navy" data-scroll-target="cfosvc-form">
                         Free Consultation
                     </a>
                 </div>
@@ -86,7 +86,7 @@
                     We have something for you too! Checkout our service offerings for CFOs- CTAs for PDF of
                     <a href="{{ route('page.show', ['slug' => 'assistant-to-cfo-services']) }}">Assistance to CFO Services</a>.
                 </p>
-                <a href="#accounting-enquire" class="cfosvc-btn cfosvc-btn--green">
+                <a href="javascript:void(0)" class="cfosvc-btn cfosvc-btn--green" data-scroll-target="cfosvc-form">
                     Free Consultation
                 </a>
             </div>
@@ -114,7 +114,7 @@
                         <h2 id="cfosvc-consult-title">Schedule A Call with Our Experts</h2>
                         <p>Explore our packages and enhance your finances with our team !</p>
                     </div>
-                    <div class="cfosvc-consult__body">
+                    <div class="cfosvc-consult__body" data-scroll-anchor="cfosvc-form">
                         <livewire:forms.contact-form
                             form-name="cfo-services"
                             id-prefix="cfosvc"

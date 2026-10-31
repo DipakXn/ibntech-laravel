@@ -550,7 +550,7 @@
                       </a>
                     </div>
                     <div>
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'reporting-analysis-planning']) }}">
                         <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -590,7 +590,7 @@
 
                     <div class="submenu-header">Tax Return Preparation Services</div>
                     <div class="submenu-header-sub">
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => '1040-tax-filing']) }}">
                         <span class="icoms" aria-hidden="true">
 
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
@@ -607,7 +607,7 @@
                       </a>
                     </div>
                     <div class="submenu-header-sub">
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'tax-preparation-services-usa']) }}">
                         <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"
@@ -625,7 +625,7 @@
                       </a>
                     </div>
                     <div class="submenu-header-sub">
-                      <a href="#">
+                      <a href="{{ route('page.show', ['slug' => 'tax-preparation-services-uk']) }}">
                         <span class="icoms" aria-hidden="true">
 
                           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64"

@@ -208,7 +208,7 @@ html:has(.lccs-page) {
     border-radius: 0.28rem !important;
     background: #fff !important;
     color: #172033 !important;
-    font-size: 0.86rem !important;
+    /* font-size: 0.86rem !important; */
     min-height: 0;
     line-height: 1.35;
 }

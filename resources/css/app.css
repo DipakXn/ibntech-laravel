@@ -33,6 +33,7 @@ html {
     --site-violet: #6e65f2;
     --site-ink: #172033;
     --site-muted: #667085;
+    --site-form-placeholder: #9ca3af;
     --site-shell: 1180px;
 }
 
@@ -1324,6 +1325,11 @@ p {
     padding: 1.05rem 1.2rem;
     color: #1f2937;
     outline: 0;
+}
+
+.blog-search input::placeholder {
+    color: var(--site-form-placeholder);
+    opacity: 1;
 }
 
 .blog-search button {

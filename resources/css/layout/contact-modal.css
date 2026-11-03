@@ -165,7 +165,7 @@ html.contact-modal-open body {
 .contact-modal__body .contact-form--modal select,
 .contact-modal__body .contact-form--modal input:not([type='checkbox']):not([type='hidden']),
 .contact-modal__body .contact-form--modal textarea {
-    padding: 0.75rem 0.9rem;
+    padding: 0.5rem 1rem;
 }
 
 .contact-modal__body .contact-form--modal .contact-form__field--message textarea {

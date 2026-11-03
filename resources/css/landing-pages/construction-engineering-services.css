@@ -259,7 +259,7 @@ html:has(.lces-page) {
     border-radius: 0.4rem !important;
     background-color: #f5f6fa !important;
     color: #172033 !important;
-    font-size: 0.86rem !important;
+    /* font-size: 0.86rem !important; */
     min-height: 0;
     line-height: 1.35;
 }

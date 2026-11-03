@@ -14,7 +14,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-V6WPzr2y.css",
+    "file": "assets/app-C5f9aPaB.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -152,7 +152,7 @@
     ]
   },
   "resources/css/landing-pages/cloud-consulting-services.css": {
-    "file": "assets/cloud-consulting-services-Dj2j0_9z.css",
+    "file": "assets/cloud-consulting-services-Cm7cgQuC.css",
     "src": "resources/css/landing-pages/cloud-consulting-services.css",
     "isEntry": true,
     "name": "cloud-consulting-services",
@@ -161,7 +161,7 @@
     ]
   },
   "resources/css/landing-pages/construction-engineering-services.css": {
-    "file": "assets/construction-engineering-services-CThcm0NC.css",
+    "file": "assets/construction-engineering-services-oQZzHyII.css",
     "src": "resources/css/landing-pages/construction-engineering-services.css",
     "isEntry": true,
     "name": "construction-engineering-services",
@@ -200,7 +200,7 @@
     ]
   },
   "resources/css/landing-pages/cyber-security-services-india.css": {
-    "file": "assets/cyber-security-services-india-CS5ohXje.css",
+    "file": "assets/cyber-security-services-india-diBahKy-.css",
     "src": "resources/css/landing-pages/cyber-security-services-india.css",
     "isEntry": true,
     "name": "cyber-security-services-india",
@@ -296,7 +296,7 @@
     ]
   },
   "resources/css/landing-pages/office-365-migration-consulting.css": {
-    "file": "assets/office-365-migration-consulting-C3F5T1Uq.css",
+    "file": "assets/office-365-migration-consulting-eznZp0VJ.css",
     "src": "resources/css/landing-pages/office-365-migration-consulting.css",
     "isEntry": true,
     "name": "office-365-migration-consulting",
@@ -374,7 +374,7 @@
     ]
   },
   "resources/css/landing-pages/vapt-audit-services.css": {
-    "file": "assets/vapt-audit-services-bL03idFO.css",
+    "file": "assets/vapt-audit-services-Bk5SabNr.css",
     "src": "resources/css/landing-pages/vapt-audit-services.css",
     "isEntry": true,
     "name": "vapt-audit-services",

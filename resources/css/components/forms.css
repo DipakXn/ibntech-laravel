@@ -121,13 +121,13 @@
 }
 
 .contact-form select,
-.contact-form input:not([type='checkbox']):not([type='hidden']),
+.contact-form input:not([type='checkbox']):not([type='hidden']):not(.iti__search-input),
 .contact-form textarea {
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-    border: 0;
-    border-radius: 0.35rem;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
     background: #f3f6fb;
     padding: 0.5rem 1rem;
     color: #1f2937;
@@ -149,9 +149,11 @@
     background: #f3f6fb;
 }
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #4b5563;
+.contact-form input:not(.iti__search-input)::placeholder,
+.contact-form textarea::placeholder,
+.contact-form .phone-input-field .iti__tel-input::placeholder {
+    color: var(--site-form-placeholder);
+    opacity: 1;
 }
 
 .contact-form select:focus,
@@ -177,13 +179,33 @@
     outline-color: #f87171;
 }
 
+/* intl-tel-input v29 — country list must not inherit light text from dark hero forms */
+.phone-input-field .iti__country-selector,
+.iti--detached-country-selector .iti__country-selector,
 .phone-input-field .iti__dropdown-content {
-    color: #172033;
+    color: var(--site-ink);
+    background-color: #fff;
 }
 
-.phone-input-field .iti__search-input {
+.phone-input-field .iti__country-name,
+.phone-input-field .iti__dial-code,
+.iti--detached-country-selector .iti__country-name,
+.iti--detached-country-selector .iti__dial-code {
+    color: var(--site-ink);
+}
+
+.phone-input-field .iti__search-input,
+.iti--detached-country-selector .iti__search-input {
     border-radius: 0;
     outline: 0;
+    color: var(--site-ink);
+    background-color: #fff;
+}
+
+.phone-input-field .iti__search-input::placeholder,
+.iti--detached-country-selector .iti__search-input::placeholder {
+    color: var(--site-form-placeholder);
+    opacity: 1;
 }
 
 @media (min-width: 721px) {

@@ -45,8 +45,28 @@ const initSiteNavbar = () => {
     const closeDelay = 180;
     let closeTimer = null;
     let desktopMode = window.innerWidth >= 992;
+    let mobileMenuScrollY = 0;
 
     const isDesktop = () => window.innerWidth >= 992;
+
+    const lockMobilePageScroll = () => {
+        mobileMenuScrollY = window.scrollY || document.documentElement.scrollTop;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${mobileMenuScrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+    };
+
+    const unlockMobilePageScroll = () => {
+        const scrollY = mobileMenuScrollY;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+    };
 
     const normalizePath = (pathname) => {
         const trimmed = (pathname || '/').replace(/\/+$/, '');
@@ -88,6 +108,24 @@ const initSiteNavbar = () => {
         });
     };
 
+    const getMobileNavBarInset = () => {
+        const bar = navbarRoot.querySelector('.navbar');
+        const height = bar?.offsetHeight ?? navbarRoot.offsetHeight;
+
+        return Math.max(Math.round(height), 56);
+    };
+
+    const syncMobileDrawerInsets = () => {
+        header.style.setProperty('--nav-bar-bottom', `${getMobileNavBarInset()}px`);
+
+        const topbar = header.querySelector('.site-ibn-topbar');
+        const topbarHeight = header.classList.contains('is-open') && topbar
+            ? Math.round(topbar.offsetHeight)
+            : 0;
+
+        header.style.setProperty('--drawer-topbar-height', `${topbarHeight}px`);
+    };
+
     const updatePanelTop = () => {
         const bar = navbarRoot.querySelector('.navbar');
 
@@ -95,19 +133,21 @@ const initSiteNavbar = () => {
             return;
         }
 
-        header.style.setProperty('--nav-panel-top', `${Math.round(bar.getBoundingClientRect().bottom)}px`);
-        header.style.setProperty('--nav-bar-bottom', `${Math.round(bar.getBoundingClientRect().bottom)}px`);
+        if (!isDesktop()) {
+            header.style.setProperty('--nav-panel-top', `${getMobileNavBarInset()}px`);
 
-        const topbar = header.querySelector('.site-ibn-topbar');
+            if (header.classList.contains('is-open')) {
+                return;
+            }
 
-        if (!isDesktop() && header.classList.contains('is-open') && topbar) {
-            header.style.setProperty('--drawer-topbar-height', `${Math.round(topbar.getBoundingClientRect().height)}px`);
+            header.style.setProperty('--nav-bar-bottom', `${getMobileNavBarInset()}px`);
+            header.style.setProperty('--drawer-topbar-height', '0px');
             return;
         }
 
-        if (!isDesktop()) {
-            header.style.setProperty('--drawer-topbar-height', '0px');
-        }
+        const barBottom = Math.round(bar.getBoundingClientRect().bottom);
+        header.style.setProperty('--nav-panel-top', `${barBottom}px`);
+        header.style.setProperty('--nav-bar-bottom', `${barBottom}px`);
     };
 
     const injectMobileSubmenus = () => {
@@ -197,6 +237,10 @@ const initSiteNavbar = () => {
     };
 
     const setMobileOpen = (open) => {
+        if (open && !isDesktop()) {
+            lockMobilePageScroll();
+        }
+
         navbarNav.classList.toggle('active', open);
         header.classList.toggle('is-open', open);
         document.documentElement.classList.toggle('nav-menu-open', open);
@@ -211,11 +255,17 @@ const initSiteNavbar = () => {
 
         if (open) {
             navbarNav.removeAttribute('inert');
-            window.requestAnimationFrame(() => window.requestAnimationFrame(updatePanelTop));
+            syncMobileDrawerInsets();
+            window.requestAnimationFrame(syncMobileDrawerInsets);
             return;
         }
 
         navbarNav.setAttribute('inert', '');
+
+        if (!isDesktop()) {
+            unlockMobilePageScroll();
+        }
+
         dropdowns.forEach((dropdown) => {
             dropdown.classList.remove('active');
             syncDropdownToggleState(dropdown, false);
@@ -475,6 +525,11 @@ const initSiteNavbar = () => {
 
     window.addEventListener('resize', () => {
         const nowDesktop = isDesktop();
+
+        if (!nowDesktop && header.classList.contains('is-open')) {
+            syncMobileDrawerInsets();
+        }
+
         updatePanelTop();
 
         if (nowDesktop === desktopMode) {
@@ -499,6 +554,10 @@ const initSiteNavbar = () => {
 
     let panelTopFrame = 0;
     const schedulePanelTop = () => {
+        if (!isDesktop() && header.classList.contains('is-open')) {
+            return;
+        }
+
         if (panelTopFrame) {
             return;
         }

@@ -357,11 +357,23 @@
     content: none;
 }
 
-.site-footer__legal a:hover {
+.site-footer__legal button {
+    padding: 0;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.site-footer__legal a:hover,
+.site-footer__legal button:hover {
     color: #d8f5da;
 }
 
-.site-footer__legal a:focus-visible {
+.site-footer__legal a:focus-visible,
+.site-footer__legal button:focus-visible {
     outline: 2px solid var(--footer-green);
     outline-offset: 4px;
     border-radius: 2px;

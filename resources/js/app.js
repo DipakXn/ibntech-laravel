@@ -1,4 +1,5 @@
 import './bootstrap';
+import './cookie-consent';
 import './smooth-scroll-to-section';
 import intlTelInput from 'intl-tel-input';
 

@@ -7,6 +7,7 @@ use App\Filament\Auth\Login;
 use App\Models\Article;
 use App\Models\Blog;
 use App\Models\CaseStudy;
+use App\Models\CookieConsentSetting;
 use App\Models\Ebook;
 use App\Models\Industry;
 use App\Models\LandingPage;
@@ -256,7 +257,24 @@ class PublicPageViewTrackingTest extends TestCase
 
     private function browser(): static
     {
-        return $this->withHeaders(['User-Agent' => self::CHROME]);
+        return $this->withHeaders(['User-Agent' => self::CHROME])
+            ->withUnencryptedCookie('ibn_cookie_consent', $this->analyticsConsentCookie());
+    }
+
+    private function analyticsConsentCookie(): string
+    {
+        $settings = CookieConsentSetting::query()->firstOrFail();
+
+        return json_encode([
+            'v' => $settings->policy_version,
+            'cv' => (int) $settings->config_version,
+            'ts' => time(),
+            'necessary' => true,
+            'analytics' => true,
+            'marketing' => false,
+            'functional' => false,
+            'action' => 'custom',
+        ], JSON_THROW_ON_ERROR);
     }
 
     private function writesPageView(string $sql): bool

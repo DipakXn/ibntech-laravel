@@ -19,6 +19,7 @@ use App\Models\WhitePaper;
 use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
 use App\Services\Analytics\PageViewTracker;
+use App\Services\CookieConsent\CookieConsentRepository;
 use App\Services\EmailLogService;
 use App\Services\SeoService;
 use App\Services\SmtpSettingService;
@@ -100,6 +101,14 @@ class AppServiceProvider extends ServiceProvider
         // Filament Content Builder RichEditor state is TipTap JSON. Nested lists
         // produce Livewire paths deeper than the default payload.max_nesting_depth.
         config(['livewire.payload.max_nesting_depth' => 50]);
+
+        WebsiteSetting::saved(function (): void {
+            try {
+                app(CookieConsentRepository::class)->forget();
+            } catch (\Throwable) {
+                // Cookie tables may not exist during early setup.
+            }
+        });
 
         View::composer(['layouts.app', 'layouts.landing', 'layouts.header', 'layouts.footer', 'newsletters.partials.footer'], function ($view): void {
             try {

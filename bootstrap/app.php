@@ -27,6 +27,12 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     })
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->encryptCookies(except: [
+            'ibn_cookie_consent',
+        ]);
+        $middleware->validateCsrfTokens(except: [
+            'cookie-consent',
+        ]);
         $middleware->append(EnsureTrailingSlash::class);
         $middleware->web(append: [
             TrackPublicPageView::class,

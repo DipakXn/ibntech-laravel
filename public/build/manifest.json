@@ -14,7 +14,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-CbZwLaVA.css",
+    "file": "assets/app-UFswzqtX.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -23,7 +23,7 @@
     ]
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-D7tBHgmQ.css",
+    "file": "assets/theme-N7xm36WN.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true,
     "name": "theme",
@@ -248,7 +248,7 @@
     ]
   },
   "resources/css/landing-pages/layout.css": {
-    "file": "assets/layout-DqmPSOMa.css",
+    "file": "assets/layout-D7PjxkYC.css",
     "src": "resources/css/landing-pages/layout.css",
     "isEntry": true,
     "name": "layout",
@@ -2433,7 +2433,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-EEjXZCJk.js",
+    "file": "assets/app-DUc0gypK.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

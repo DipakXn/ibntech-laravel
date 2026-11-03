@@ -8,6 +8,7 @@
 @import './components/buttons.css';
 @import './components/forms.css';
 @import './components/cards.css';
+@import './components/cookie-consent.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

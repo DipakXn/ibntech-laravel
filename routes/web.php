@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\CmsPreviewController;
+use App\Http\Controllers\CookieConsentMetricController;
 use App\Http\Controllers\EbookController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\LandingPageController;
@@ -29,6 +30,10 @@ Route::get('/sitemap_index.xml', [SitemapController::class, 'legacyIndex'])->nam
 Route::get('/{file}', [SitemapController::class, 'show'])
     ->where('file', SitemapType::filePattern())
     ->name('sitemap.show');
+
+Route::post('/cookie-consent', [CookieConsentMetricController::class, 'store'])
+    ->middleware('throttle:12,1')
+    ->name('cookie-consent.metrics');
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 
@@ -73,7 +78,6 @@ Route::get('/lp/{slug}', [LandingPageController::class, 'show'])->name('landing-
 Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletter/{slug}', [NewsletterController::class, 'show'])->name('newsletters.show');
 
-
 // Redirections
 Route::redirect('/contact', '/contact-us/', 301);
 Route::redirect('/contact/contact-us', '/contact-us/', 301);
@@ -109,7 +113,7 @@ Route::redirect('/fund-accounting-services-hedge-funds', '/fund-accounting-servi
 Route::redirect('/bookkeeping-services-in-florida', '/bookkeeping-services-florida//', 301);
 Route::redirect('/blog/bookkeeping-accounting-trends-for-small-businesses', '/blog/bookkeeping-accounting-small-business/', 301);
 
-//Redirections end here
+// Redirections end here
 
 // Permanently removed pages (410 Gone)
 Route::get('/payroll-processing-old', fn () => abort(410));

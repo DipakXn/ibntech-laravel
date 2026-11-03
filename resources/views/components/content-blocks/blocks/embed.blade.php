@@ -6,13 +6,15 @@
             <h3>{{ $data['title'] }}</h3>
         @endif
 
-        <div class="content-embed-frame">
-            <iframe
-                src="{{ $embedUrl }}"
-                title="{{ $data['title'] ?? 'Embedded media' }}"
-                loading="lazy"
-                allowfullscreen
-            ></iframe>
+        <div
+            class="content-embed-frame"
+            data-cookie-embed="{{ $embedUrl }}"
+            data-cookie-embed-title="{{ $data['title'] ?? 'Embedded media' }}"
+        >
+            <div class="cookie-embed">
+                <p>This video stays off until you allow functional cookies.</p>
+                <button type="button" class="cookie-banner__button cookie-banner__button--primary" data-cookie-settings>Cookie Settings</button>
+            </div>
         </div>
 
         @if (filled($data['caption'] ?? null))

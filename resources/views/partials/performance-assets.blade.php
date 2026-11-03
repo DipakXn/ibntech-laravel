@@ -6,8 +6,12 @@
     (function () {
         var loaded = false;
 
+        function pageCanUseRecaptcha() {
+            return document.querySelector('.contact-form__recaptcha, [id^="recaptcha-"], .g-recaptcha, [data-contact-modal-trigger]');
+        }
+
         function loadRecaptcha() {
-            if (loaded) {
+            if (loaded || !pageCanUseRecaptcha()) {
                 return;
             }
 
@@ -18,16 +22,29 @@
             document.head.appendChild(script);
         }
 
-        window.addEventListener('load', function () {
-            if ('requestIdleCallback' in window) {
-                window.requestIdleCallback(loadRecaptcha, { timeout: 2500 });
-            } else {
-                window.setTimeout(loadRecaptcha, 2000);
-            }
-        });
+        function scheduleRecaptcha() {
+            if (document.querySelector('.contact-form__recaptcha, [id^="recaptcha-"], .g-recaptcha')) {
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(loadRecaptcha, { timeout: 2500 });
+                } else {
+                    window.setTimeout(loadRecaptcha, 2000);
+                }
 
-        ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
-            window.addEventListener(eventName, loadRecaptcha, { once: true, passive: true });
-        });
+                return;
+            }
+
+            document.addEventListener('pointerdown', function (event) {
+                if (event.target.closest('[data-contact-modal-trigger], .contact-form__recaptcha')) {
+                    loadRecaptcha();
+                }
+            }, { passive: true });
+            window.addEventListener('open-contact-modal', loadRecaptcha);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', scheduleRecaptcha, { once: true });
+        } else {
+            scheduleRecaptcha();
+        }
     })();
 </script>

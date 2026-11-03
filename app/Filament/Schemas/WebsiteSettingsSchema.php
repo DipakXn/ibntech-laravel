@@ -607,12 +607,12 @@ class WebsiteSettingsSchema
                         ->label('Custom Head Code')
                         ->rows(5)
                         ->columnSpanFull()
-                        ->helperText('Injected into every page <head>. Use carefully.'),
+                        ->helperText('Injected into every page head. Scripts placed here are not controlled by the cookie consent manager.'),
                     Textarea::make('custom_body_end_code')
                         ->label('Custom Body End Code')
                         ->rows(5)
                         ->columnSpanFull()
-                        ->helperText('Injected before </body> on every page.'),
+                        ->helperText('Injected before the closing body tag. Scripts placed here are not controlled by the cookie consent manager.'),
                 ]),
         ];
     }

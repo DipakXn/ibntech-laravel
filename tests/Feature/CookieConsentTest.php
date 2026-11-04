@@ -213,6 +213,10 @@ class CookieConsentTest extends TestCase
             collect($administration->getItems())->map(fn ($item): string => (string) $item->getLabel())->all(),
         );
         $this->assertNull($navigation->first(fn ($group): bool => $group->getLabel() === 'Cookie Management'));
+
+        $clusteredComponents = filament()->getClusteredComponents(CookieManagementCluster::class);
+        $this->assertCount(5, $clusteredComponents);
+        $this->assertSame($clusteredComponents, array_values(array_unique($clusteredComponents)));
     }
 
     public function test_unknown_countries_stay_on_opt_in(): void

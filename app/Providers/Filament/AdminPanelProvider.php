@@ -4,11 +4,6 @@ namespace App\Providers\Filament;
 
 use App\CmsPreview\CmsPreviewType;
 use App\Filament\Auth\Login;
-use App\Filament\Clusters\CookieManagement\Pages\CookieConsentOverview;
-use App\Filament\Clusters\CookieManagement\Pages\CookieConsentSettings;
-use App\Filament\Clusters\CookieManagement\Resources\CookieCategories\CookieCategoryResource;
-use App\Filament\Clusters\CookieManagement\Resources\CookieIntegrations\CookieIntegrationResource;
-use App\Filament\Clusters\CookieManagement\Resources\CookieRegistryEntries\CookieRegistryEntryResource;
 use App\Filament\Clusters\SmtpSettings\Pages\SmtpConfiguration;
 use App\Filament\Clusters\SmtpSettings\Pages\TestSmtp;
 use App\Filament\Clusters\SmtpSettings\Resources\EmailLogs\EmailLogResource;
@@ -95,15 +90,10 @@ class AdminPanelProvider extends PanelProvider
                 AdminDashboard::class,
                 SmtpConfiguration::class,
                 TestSmtp::class,
-                CookieConsentSettings::class,
-                CookieConsentOverview::class,
             ])
             ->resources([
                 EmailLogResource::class,
                 OldSubmissionResource::class,
-                CookieCategoryResource::class,
-                CookieRegistryEntryResource::class,
-                CookieIntegrationResource::class,
             ])
             ->authenticatedRoutes(function (): void {
                 Route::get('/content-preview/{type}/{id}', [CmsPreviewController::class, 'redirect'])

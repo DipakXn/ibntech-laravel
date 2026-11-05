@@ -268,7 +268,6 @@
                 <a href="{{ route('page.show', ['slug' => 'privacy-policy']) }}">Privacy Policy</a>
                 <a href="{{ route('page.show', ['slug' => 'terms-of-use']) }}">Terms and Conditions</a>
                 <a href="{{ route('page.show', ['slug' => 'cookies-policy']) }}">Cookies Policy</a>
-                <button type="button" data-cookie-settings>Manage Cookies</button>
             </nav>
         </div>
     </div>

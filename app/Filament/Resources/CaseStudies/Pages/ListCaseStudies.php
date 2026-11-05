@@ -3,12 +3,14 @@
 namespace App\Filament\Resources\CaseStudies\Pages;
 
 use App\Filament\Resources\CaseStudies\CaseStudyResource;
+use App\Filament\Concerns\HasContentTrashTabs;
 use App\Filament\Resources\Concerns\ShowsPeriodOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListCaseStudies extends ListRecords
 {
+    use HasContentTrashTabs;
     use ShowsPeriodOverview;
 
     protected static string $resource = CaseStudyResource::class;

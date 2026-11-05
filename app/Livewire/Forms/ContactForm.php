@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\Livewire\Concerns\CapturesFormSubmissionPageUrl;
 use App\Livewire\Concerns\HasReCaptcha;
+use App\Livewire\Concerns\ProvidesOrganicLeadSource;
 use App\Services\LeadService;
 use App\Support\PathPageUrl;
 use Illuminate\Validation\ValidationException;
@@ -11,7 +13,9 @@ use Throwable;
 
 class ContactForm extends Component
 {
+    use CapturesFormSubmissionPageUrl;
     use HasReCaptcha;
+    use ProvidesOrganicLeadSource;
 
     public string $formName = 'contact';
 
@@ -108,7 +112,7 @@ class ContactForm extends Component
         if (is_string($initialService) && $initialService !== '') {
             $this->service = $initialService;
         }
-        $this->pageUrl = url()->current();
+        $this->syncFormSubmissionPageUrl();
     }
 
     public function publishedThankYouUrl(): ?string
@@ -147,6 +151,8 @@ class ContactForm extends Component
         $this->submitError = null;
 
         try {
+            $this->syncFormSubmissionPageUrl();
+
             $validated = $this->validate();
 
             unset($validated['acceptedTerms'], $validated['recaptchaToken']);
@@ -183,7 +189,7 @@ class ContactForm extends Component
 
             $this->reset(['name', 'email', 'phone', 'company', 'service', 'message']);
             $this->acceptedTerms = true;
-            $this->pageUrl = url()->current();
+            $this->syncFormSubmissionPageUrl();
             $this->resetReCaptcha();
             $this->submitted = true;
             $this->dispatch('contact-form-submitted');

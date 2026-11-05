@@ -117,7 +117,7 @@
             <div class="bpo-hero__bg" aria-hidden="true">
                 <img
                     src="{{ $img('bpo-services.webp') }}"
-                    alt=""
+                    alt="Business process outsourcing services"
                     width="1920"
                     height="640"
                     fetchpriority="high"

@@ -63,7 +63,7 @@ class WhitePaperController extends Controller
             $whitePapers,
             $resolved,
             'White Papers',
-            'Research-led white papers, reports, and strategic resources from the team.'
+            'Read articles on Assistance to CFO, How Profit Cents Adds Value to CFOs, How IBN Helping CFO’s by Combining Efforts with Profit Cents and many more'
         );
 
         return response()->view('white-papers.index', compact('whitePapers'));

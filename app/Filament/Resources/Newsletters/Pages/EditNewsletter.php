@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Newsletters\Pages;
 
 use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\Newsletters\NewsletterResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditNewsletter extends EditRecord
@@ -15,7 +15,7 @@ class EditNewsletter extends EditRecord
     {
         return [
             PreviewAction::make(),
-            DeleteAction::make(),
+            MoveToTrashAction::make(),
         ];
     }
 }

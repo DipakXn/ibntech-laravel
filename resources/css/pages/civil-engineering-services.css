@@ -4,6 +4,10 @@
     --ces-navy: #2e2e80;
     --ces-navy-deep: #233166;
     --ces-green: #4caf50;
+    --fccons-navy: var(--ces-navy);
+    --fccons-navy-deep: var(--ces-navy-deep);
+    --fccons-green: var(--ces-green);
+    --fccons-ink: #172033;
     --ces-green-soft: #61bd75;
     --ces-green-dark: #3d9140;
     --ces-sky: #2ca5d4;
@@ -200,7 +204,7 @@
     display: block;
     margin-bottom: 0.15rem;
     font-size: 1.15rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
 }
 
@@ -231,6 +235,12 @@
     padding: 1.35rem 1.2rem 1.4rem;
     box-shadow: 0 22px 48px rgba(4, 10, 30, 0.22);
     color: var(--ces-ink);
+}
+
+.ces-hero__form.fccons-hero__form {
+    align-self: start;
+    height: fit-content;
+    overflow: visible;
 }
 
 .ces-hero__form h2 {
@@ -574,7 +584,7 @@
     background: var(--ces-step);
     color: #fff;
     font-size: 0.72rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.12em;
     clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 16px 50%);
 }

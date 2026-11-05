@@ -212,7 +212,7 @@
     display: block;
     color: var(--ict-navy);
     font-size: 1.05rem;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .ict-stats__icon {
@@ -525,7 +525,7 @@
     background: var(--ict-navy);
     color: #fff;
     font-size: 1rem;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .ict-ops__discover li:nth-child(even) .ict-ops__step {

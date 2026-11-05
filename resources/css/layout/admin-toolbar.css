@@ -1,0 +1,167 @@
+:root {
+    --admin-toolbar-height: 32px;
+}
+
+@media (max-width: 991.98px) {
+    :root {
+        --admin-toolbar-height: 46px;
+    }
+}
+
+body.has-admin-toolbar {
+    padding-top: var(--admin-toolbar-height);
+}
+
+body.has-admin-toolbar .cms-preview-banner {
+    top: var(--admin-toolbar-height);
+    z-index: 65;
+}
+
+.admin-toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    height: var(--admin-toolbar-height);
+    padding: 0 0.5rem;
+    background: #1d2327;
+    color: #f0f0f1;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.admin-toolbar a,
+.admin-toolbar button {
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+}
+
+.admin-toolbar button {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.admin-toolbar__mark,
+.admin-toolbar__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: var(--admin-toolbar-height);
+    padding: 0 0.65rem;
+    white-space: nowrap;
+}
+
+.admin-toolbar__link svg {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    fill: currentColor;
+}
+
+.admin-toolbar__mark {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.admin-toolbar__mark:hover,
+.admin-toolbar__mark:focus-visible,
+.admin-toolbar__link:hover,
+.admin-toolbar__link:focus-visible,
+.admin-toolbar__panel a:hover,
+.admin-toolbar__panel a:focus-visible,
+.admin-toolbar__panel button:hover,
+.admin-toolbar__panel button:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+    outline: 0;
+}
+
+.admin-toolbar__primary,
+.admin-toolbar__end {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.admin-toolbar__end {
+    margin-left: auto;
+}
+
+.admin-toolbar__clear-cache {
+    margin: 0;
+}
+
+.admin-toolbar__menu {
+    position: relative;
+}
+
+.admin-toolbar__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    min-width: 12rem;
+    max-height: calc(100vh - var(--admin-toolbar-height));
+    overflow: auto;
+    background: #2c3338;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+.admin-toolbar__panel--end {
+    right: 0;
+    left: auto;
+}
+
+.admin-toolbar__panel[hidden] {
+    display: none !important;
+}
+
+.admin-toolbar__panel a,
+.admin-toolbar__panel button {
+    display: block;
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+}
+
+.admin-toolbar__notice {
+    margin-right: 0.35rem;
+    color: #b7ebc1;
+    font-size: 12px;
+}
+
+.admin-toolbar__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.1rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: #d63638;
+    color: #fff;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.admin-toolbar__overflow {
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    .admin-toolbar__new,
+    .admin-toolbar__context,
+    .admin-toolbar__control,
+    .admin-toolbar__clear-cache,
+    .admin-toolbar__submissions-label {
+        display: none;
+    }
+
+    .admin-toolbar__overflow {
+        display: block;
+    }
+}

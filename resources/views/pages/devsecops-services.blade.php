@@ -212,7 +212,7 @@
                     @endforeach
                 </div>
 
-                <a href="#dso-consult" class="dso-btn dso-btn--green">Talk to an Architect</a>
+                <a href="javascript:void(0)" class="dso-btn dso-btn--green" data-scroll-target="dso-form">Talk to an Architect</a>
             </div>
         </section>
 
@@ -353,7 +353,7 @@
             <div class="site-shell dso-cta__inner">
                 <h2 id="dso-cta-title">Ready to launch your DevSecOps solution?</h2>
                 <p>Talk to an expert about devsecops as a service, devsecops automation, and devsecops managed services tailored to your Azure or AWS pipelines.</p>
-                <a href="#dso-consult" class="dso-btn dso-btn--green">Contact Our Experts</a>
+                <a href="javascript:void(0)" class="dso-btn dso-btn--green" data-scroll-target="dso-form">Contact Our Experts</a>
             </div>
         </section>
 
@@ -421,7 +421,7 @@
                     </div>
                 </div>
 
-                <aside class="dso-consult__card" id="dso-consult-form" aria-labelledby="dso-consult-form-title">
+                <aside class="dso-consult__card" id="dso-consult-form" aria-labelledby="dso-consult-form-title" data-scroll-anchor="dso-form">
                     <div class="dso-consult__card-head">
                         <h3 id="dso-consult-form-title">Speed Up Development with Built-In Security</h3>
                         <p>Secure every stage of your development process. Our DevSecOps experts help you deliver faster, safer software.</p>

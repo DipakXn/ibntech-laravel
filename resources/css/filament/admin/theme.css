@@ -442,110 +442,573 @@ body.fi-body {
     font-weight: 700;
 }
 
-.ibn-login-screen .fi-simple-page-content {
+body.fi-body.ibn-login-screen,
+.dark body.fi-body.ibn-login-screen {
+    background:
+        radial-gradient(ellipse 38% 32% at 96% 4%, rgba(156, 224, 176, 0.72), transparent 70%),
+        radial-gradient(ellipse 34% 30% at 4% 98%, rgba(156, 206, 224, 0.62), transparent 68%),
+        radial-gradient(ellipse 22% 18% at 0% 42%, rgba(196, 204, 255, 0.38), transparent 72%),
+        linear-gradient(180deg, #eef1fb 0%, #f6f4fc 52%, #eef3f8 100%);
+    color: #1c2434;
+}
+
+.ibn-login-screen .fi-simple-layout {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: transparent;
+}
+
+.ibn-login-screen .fi-simple-layout::before,
+.ibn-login-screen .fi-simple-layout::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.ibn-login-screen .fi-simple-layout::before {
+    width: 42vw;
+    height: 34vw;
+    top: -14vw;
+    right: -8vw;
+    background: radial-gradient(circle, rgba(168, 230, 186, 0.55), transparent 68%);
+}
+
+.ibn-login-screen .fi-simple-layout::after {
+    width: 38vw;
+    height: 32vw;
+    bottom: -16vw;
+    left: -10vw;
+    background: radial-gradient(circle, rgba(164, 214, 230, 0.5), transparent 70%);
+}
+
+.ibn-login-screen .fi-simple-main-ctn {
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    padding: clamp(1rem, 2.4vw, 1.75rem);
+}
+
+.ibn-login-screen .fi-simple-main,
+.dark .ibn-login-screen .fi-simple-main {
+    width: min(100%, 68rem);
+    max-width: 68rem;
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000;
+}
+
+.ibn-login-screen .fi-simple-page-content,
+.dark .ibn-login-screen .fi-simple-page-content {
     background: transparent;
     border: 0;
     box-shadow: none;
     padding: 0;
 }
 
-.ibn-login-shell {
+.ibn-login-card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.05rem;
     align-items: stretch;
-    width: min(100%, 72rem);
-    margin-inline: auto;
+    width: 100%;
+    padding: 1.05rem;
+    border-radius: 1.9rem;
+    background: #fff;
+    box-shadow:
+        0 28px 70px rgba(46, 46, 128, 0.12),
+        0 8px 24px rgba(46, 46, 128, 0.06);
 }
 
-.ibn-login-panel,
-.ibn-login-aside__surface {
-    border: 1px solid var(--ibn-border);
-    border-radius: 1.75rem;
-    box-shadow: var(--ibn-shadow);
+.dark .ibn-login-card {
+    background: #fff;
 }
 
 .ibn-login-panel {
-    background: rgba(255, 255, 255, 0.94);
-    padding: 1.8rem;
     min-width: 0;
+    padding: 1.15rem 1.05rem 0.85rem 1.2rem;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 
-.dark .ibn-login-panel {
-    background: rgba(15, 23, 42, 0.94);
+.dark .ibn-login-panel,
+.dark .ibn-login-panel h1,
+.dark .ibn-login-panel .ibn-login-kicker,
+.dark .ibn-login-screen .fi-fo-field-label,
+.dark .ibn-login-screen .fi-fo-field-label-content {
+    color: #1c2434;
+}
+
+.ibn-brand-lockup-login {
+    gap: 0.75rem;
+}
+
+.ibn-brand-lockup-login .ibn-brand-mark {
+    padding: 0;
+    gap: 0.38rem;
+    border-radius: 0;
+    background: transparent;
+    grid-template-columns: repeat(3, 2.35rem);
+}
+
+.ibn-brand-lockup-login .ibn-brand-mark span {
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 0.68rem;
+    font-size: 0.98rem;
+    box-shadow: 0 8px 16px rgba(46, 46, 128, 0.12);
+}
+
+.ibn-brand-lockup-login .ibn-brand-mark span:first-child {
+    background: #2e2e80;
+}
+
+.ibn-brand-lockup-login .ibn-brand-mark span:nth-child(2) {
+    background: #3d4db7;
+}
+
+.ibn-brand-lockup-login .ibn-brand-mark span:last-child {
+    background: #4caf50;
+}
+
+.ibn-brand-lockup-login .ibn-brand-wordmark {
+    gap: 0.28rem;
+}
+
+.ibn-brand-lockup-login .ibn-brand-wordmark strong {
+    color: #2e2e80;
+    font-size: 1.18rem;
+    font-weight: 800;
+    letter-spacing: 0.045em;
+}
+
+.ibn-brand-lockup-login .ibn-brand-wordmark small {
+    color: #8b93a7;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.ibn-login-panel .ibn-login-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.45rem;
+    color: #1d2433;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+}
+
+.ibn-login-panel .ibn-login-kicker::after {
+    content: "";
+    width: 2.35rem;
+    height: 3px;
+    border-radius: 999px;
+    background: #4caf50;
 }
 
 .ibn-login-panel__intro h1 {
-    margin-top: 1rem;
-    font-size: clamp(2rem, 4vw, 2.9rem);
-    line-height: 1.03;
+    margin-top: 0.55rem;
+    color: #171a21;
+    font-size: clamp(2.05rem, 3.2vw, 2.7rem);
+    line-height: 1.05;
     font-weight: 700;
-    letter-spacing: 0em;
+    letter-spacing: -0.04em;
 }
 
 .ibn-login-panel__intro > p:last-child {
-    margin-top: 0.7rem;
-    max-width: 36rem;
-    color: var(--ibn-text-muted);
+    margin-top: 0.65rem;
+    max-width: 28rem;
+    color: #6d7589;
+    font-size: 0.96rem;
+    line-height: 1.55;
 }
 
 .ibn-login-panel__form {
-    margin-top: 1.5rem;
-    padding: 1.25rem;
-    border: 1px solid var(--ibn-border);
-    border-radius: 1.4rem;
-    background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(241, 246, 255, 0.96));
+    margin-top: 1.35rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
 .dark .ibn-login-panel__form {
-    background: linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96));
+    background: transparent;
 }
 
-.ibn-login-aside__surface {
-    height: 100%;
-    padding: 1.6rem;
-    background:
-        radial-gradient(circle at top right, rgba(76, 175, 80, 0.22), transparent 24%),
-        linear-gradient(135deg, #1b2557 0%, #2b2f79 52%, #35649f 100%);
+.ibn-login-screen .ibn-login-panel__form .fi-sc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-sc.fi-sc-has-gap {
+    row-gap: 0.9rem;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field {
+    gap: 0.42rem;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field-label-content {
+    color: #1c2434;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field-label-required-mark {
+    color: #e11d48;
+    font-size: 0.85em;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp,
+.dark .ibn-login-screen .ibn-login-panel__form .fi-input-wrp {
+    min-height: 3rem;
+    overflow: hidden;
+    border: 1px solid #e4e7ee !important;
+    border-radius: 0.78rem !important;
+    background: #fff !important;
+    background-color: #fff !important;
+    box-shadow: none !important;
+    color-scheme: light;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp:focus-within {
+    border-color: #4caf50 !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.16) !important;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp.fi-invalid {
+    border-color: #e11d48 !important;
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12) !important;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input,
+.dark .ibn-login-screen .ibn-login-panel__form .fi-input {
+    min-height: 2.95rem;
+    color: #1c2434 !important;
+    color-scheme: light;
+    font-size: 0.95rem;
+    caret-color: #1c2434;
+    transition: background-color 99999s ease-out 0s;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input:-webkit-autofill,
+.ibn-login-screen .ibn-login-panel__form .fi-input:-webkit-autofill:hover,
+.ibn-login-screen .ibn-login-panel__form .fi-input:-webkit-autofill:focus,
+.ibn-login-screen .ibn-login-panel__form .fi-input:-webkit-autofill:active,
+.ibn-login-screen .ibn-login-panel__form .fi-input:autofill,
+.ibn-login-screen .ibn-login-panel__form .fi-input:autofill:hover,
+.ibn-login-screen .ibn-login-panel__form .fi-input:autofill:focus,
+.ibn-login-screen .ibn-login-panel__form .fi-input:autofill:active {
+    -webkit-text-fill-color: #1c2434 !important;
+    caret-color: #1c2434;
+    color: #1c2434 !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    -webkit-box-shadow: inset 0 0 0 1000px #fff !important;
+    box-shadow: inset 0 0 0 1000px #fff !important;
+    transition: background-color 99999s ease-out 0s;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input::placeholder {
+    color: #a0a8b8;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp-prefix,
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp-suffix,
+.dark .ibn-login-screen .ibn-login-panel__form .fi-input-wrp-prefix,
+.dark .ibn-login-screen .ibn-login-panel__form .fi-input-wrp-suffix {
+    border: 0 !important;
+    background: #fff !important;
+    background-color: #fff !important;
+    box-shadow: none !important;
+    color: #98a2b3;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp-suffix .fi-icon-btn,
+.ibn-login-screen .ibn-login-panel__form .fi-input-wrp-suffix button {
+    color: #98a2b3;
+    background: transparent;
+    box-shadow: none;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field-wrp-error-message {
+    color: #e11d48;
+    font-size: 0.82rem;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field:has(.fi-checkbox-input),
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field:has(.fi-checkbox-input) .fi-fo-field-label-col,
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field:has(.fi-checkbox-input) .fi-fo-field-label-ctn {
+    width: 100%;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field:has(.fi-checkbox-input) .fi-fo-field-label-ctn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-checkbox-input {
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 0.28rem;
+    border-color: #cfd5e2;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-fo-field:has(.fi-checkbox-input) .fi-fo-field-label {
+    color: #3a4254;
+    font-size: 0.92rem;
+    font-weight: 500;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-link {
+    color: #2e2e80;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-link:hover {
+    color: #20205d;
+    text-decoration: underline;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-sc-form > .fi-sc:last-child {
+    margin-top: 0.25rem;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-btn,
+.dark .ibn-login-screen .ibn-login-panel__form .fi-btn {
+    width: 100%;
+    min-height: 3.15rem;
+    justify-content: center;
+    border: 0;
+    border-radius: 0.8rem;
+    background: linear-gradient(90deg, #62d35a 0%, #3ea844 100%);
     color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    box-shadow: 0 12px 24px rgba(76, 175, 80, 0.28);
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-btn:hover {
+    background: linear-gradient(90deg, #57c850 0%, #34963a 100%);
+    color: #fff;
+}
+
+.ibn-login-screen .ibn-login-panel__form .fi-btn:focus-visible {
+    outline: 3px solid rgba(76, 175, 80, 0.35);
+    outline-offset: 2px;
+}
+
+.ibn-login-aside {
     min-width: 0;
 }
 
+.ibn-login-aside__surface {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-width: 0;
+    padding: 1.7rem 1.55rem 6.5rem;
+    border: 0;
+    border-radius: 1.45rem;
+    background:
+        radial-gradient(circle at 88% 8%, rgba(110, 150, 230, 0.32), transparent 28%),
+        radial-gradient(circle at 72% 0%, rgba(76, 175, 80, 0.18), transparent 24%),
+        linear-gradient(165deg, #26266f 0%, #2e2e80 46%, #243068 100%);
+    color: #fff;
+    box-shadow: none;
+}
+
+.ibn-login-aside .ibn-login-kicker {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+}
+
 .ibn-login-aside__surface h2 {
-    margin-top: 0.7rem;
-    font-size: 1.6rem;
-    line-height: 1.08;
-    font-weight: 600;
+    position: relative;
+    margin-top: 0.55rem;
+    padding-bottom: 0.9rem;
+    max-width: 16.5rem;
+    color: #fff;
+    font-size: clamp(1.5rem, 2vw, 1.85rem);
+    line-height: 1.16;
+    font-weight: 700;
     letter-spacing: -0.03em;
 }
 
+.ibn-login-aside__surface h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 2.45rem;
+    height: 3px;
+    border-radius: 999px;
+    background: #4caf50;
+}
+
 .ibn-login-points {
+    position: relative;
+    z-index: 1;
     display: grid;
-    gap: 0.9rem;
-    margin-top: 1.5rem;
+    gap: 1.25rem;
+    margin-top: 1.55rem;
 }
 
 .ibn-login-points article {
-    padding: 1rem;
-    border-radius: 1.1rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
 }
 
-.ibn-login-points span {
-    display: inline-block;
-    color: #9af2a4;
-    font-size: 0.78rem;
+.ibn-login-point__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #69d36d;
+}
+
+.ibn-login-point__icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.ibn-login-points strong {
+    display: block;
+    color: #fff;
+    font-size: 0.98rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
 }
 
 .ibn-login-points p {
-    margin-top: 0.45rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.92rem;
-    line-height: 1.55;
+    margin-top: 0.22rem;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.ibn-login-aside__surface::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 46%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 0.7px, transparent 0.75px);
+    background-size: 7px 7px;
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 8%, transparent 78%);
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.ibn-login-aside__waves {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 42%;
+    pointer-events: none;
+}
+
+@media (max-width: 960px) {
+    .ibn-login-card {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+    }
+
+    .ibn-login-aside__surface {
+        padding-bottom: 5.25rem;
+    }
+
+    .ibn-login-aside__surface h2 {
+        max-width: 22rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .ibn-login-screen .fi-simple-main-ctn {
+        align-items: flex-start;
+        padding: 0.75rem;
+    }
+
+    .ibn-login-card {
+        gap: 0.75rem;
+        padding: 0.7rem;
+        border-radius: 1.35rem;
+    }
+
+    .ibn-login-panel {
+        padding: 0.85rem 0.7rem 0.35rem;
+    }
+
+    .ibn-login-panel .ibn-login-kicker {
+        margin-top: 1.05rem;
+    }
+
+    .ibn-login-panel__intro h1 {
+        font-size: 1.85rem;
+    }
+
+    .ibn-login-panel__intro > p:last-child {
+        font-size: 0.9rem;
+    }
+
+    .ibn-login-panel__form {
+        margin-top: 1rem;
+    }
+
+    .ibn-brand-lockup-login .ibn-brand-mark,
+    .ibn-brand-lockup-login .ibn-brand-mark span {
+        width: auto;
+    }
+
+    .ibn-brand-lockup-login .ibn-brand-mark {
+        grid-template-columns: repeat(3, 2.05rem);
+    }
+
+    .ibn-brand-lockup-login .ibn-brand-mark span {
+        width: 2.05rem;
+        height: 2.05rem;
+    }
+
+    .ibn-login-aside__surface {
+        padding: 1.2rem 1.05rem 4.4rem;
+        border-radius: 1.15rem;
+    }
+
+    .ibn-login-aside__surface h2 {
+        font-size: 1.4rem;
+    }
+
+    .ibn-login-points {
+        gap: 1rem;
+    }
 }
 
 .ibn-dashboard-welcome {
@@ -950,16 +1413,6 @@ body.fi-body {
     padding-inline: 0.35rem;
 }
 
-@media (max-width: 1024px) {
-    .ibn-login-shell {
-        grid-template-columns: 1fr;
-    }
-
-    .ibn-login-shell {
-        width: 100%;
-    }
-}
-
 @media (max-width: 768px) {
     .fi-main-ctn {
         padding: 0.85rem;
@@ -973,14 +1426,6 @@ body.fi-body {
     .ibn-quick-actions-grid,
     .ibn-metric-grid {
         grid-template-columns: 1fr;
-    }
-
-    .ibn-login-panel {
-        padding: 1.1rem;
-    }
-
-    .ibn-login-panel__form {
-        padding: 1rem;
     }
 
     .ibn-activity-item {
@@ -1844,5 +2289,316 @@ body.fi-body {
 
     .ibn-smtp-settings .fi-page-sub-navigation-tabs {
         overflow-x: auto;
+    }
+}
+
+.ibn-content-actions.fi-btn {
+    --ibn-actions-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    align-items: center;
+    border-radius: 0.55rem;
+    background: var(--ibn-surface-strong);
+    box-shadow: none;
+    font-weight: 500;
+    gap: 0.35rem;
+    white-space: nowrap;
+}
+
+.ibn-content-actions.fi-btn::after {
+    content: "";
+    display: block;
+    width: 0.8rem;
+    height: 0.8rem;
+    flex: none;
+    background-color: currentColor;
+    -webkit-mask: var(--ibn-actions-chevron) center / contain no-repeat;
+    mask: var(--ibn-actions-chevron) center / contain no-repeat;
+}
+
+.fi-ta-actions {
+    white-space: nowrap;
+}
+
+.fi-page:has(.ibn-user-guide) {
+    padding-top: 1rem;
+}
+
+.fi-page:has(.ibn-user-guide) .fi-header {
+    margin-bottom: 0.45rem;
+}
+
+.ibn-user-guide {
+    display: grid;
+    grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: start;
+}
+
+.ibn-user-guide__nav,
+.ibn-user-guide__article {
+    min-width: 0;
+}
+
+.ibn-user-guide__nav {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 7.5rem);
+    overflow: auto;
+}
+
+.ibn-user-guide__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin: 0 0 0.75rem;
+}
+
+.ibn-user-guide__field span {
+    color: var(--ibn-text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.ibn-user-guide__field input {
+    width: 100%;
+    border: 1px solid var(--ibn-border-strong);
+    border-radius: 0.85rem;
+    background: var(--ibn-surface-strong);
+    color: var(--ibn-text);
+    padding: 0.7rem 0.85rem;
+}
+
+.ibn-user-guide__field input:focus {
+    outline: 2px solid rgba(76, 175, 80, 0.45);
+    outline-offset: 1px;
+}
+
+.ibn-user-guide__clear {
+    margin: -0.25rem 0 0.85rem;
+    border: 0;
+    background: transparent;
+    color: var(--ibn-secondary);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.dark .ibn-user-guide__clear {
+    color: #b7f7b9;
+}
+
+.ibn-user-guide__groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ibn-user-guide__groups h4 {
+    margin: 0 0 0.4rem;
+    color: var(--ibn-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.ibn-user-guide__topic {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.4rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.95rem;
+    background: transparent;
+    color: var(--ibn-text);
+    padding: 0.7rem 0.8rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ibn-user-guide__topic strong {
+    font-size: 0.92rem;
+}
+
+.ibn-user-guide__topic span {
+    color: var(--ibn-text-muted);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
+.ibn-user-guide__topic:hover,
+.ibn-user-guide__topic.is-selected {
+    border-color: rgba(76, 175, 80, 0.45);
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.14), rgba(46, 46, 128, 0.08));
+}
+
+.ibn-user-guide__article-header h2 {
+    margin: 0.15rem 0 0.35rem;
+    color: var(--ibn-text);
+    font-size: 1.65rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.ibn-user-guide__article-header > p:last-child {
+    margin: 0;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-user-guide__toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.75rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--ibn-border);
+    padding-top: 0.85rem;
+}
+
+.ibn-user-guide__toc p {
+    width: 100%;
+    margin: 0;
+    color: var(--ibn-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.ibn-user-guide__toc a {
+    color: var(--ibn-secondary);
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dark .ibn-user-guide__toc a {
+    color: #d5def3;
+}
+
+.ibn-user-guide__toc a.is-level-3 {
+    font-weight: 500;
+}
+
+.ibn-user-guide__toc a:hover {
+    text-decoration: underline;
+}
+
+.ibn-user-guide__prose {
+    margin-top: 1.1rem;
+    color: var(--ibn-text);
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+.ibn-user-guide__prose > :first-child {
+    margin-top: 0;
+}
+
+.ibn-user-guide__prose h2,
+.ibn-user-guide__prose h3 {
+    margin: 1.5rem 0 0.55rem;
+    color: var(--ibn-text);
+    letter-spacing: -0.02em;
+    scroll-margin-top: 5.5rem;
+}
+
+.ibn-user-guide__prose h2 {
+    font-size: 1.25rem;
+}
+
+.ibn-user-guide__prose h3 {
+    font-size: 1.05rem;
+}
+
+.ibn-user-guide__prose p,
+.ibn-user-guide__prose ul,
+.ibn-user-guide__prose ol,
+.ibn-user-guide__prose blockquote {
+    margin: 0.7rem 0;
+}
+
+.ibn-user-guide__prose ul,
+.ibn-user-guide__prose ol {
+    padding-left: 1.25rem;
+}
+
+.ibn-user-guide__prose li + li {
+    margin-top: 0.25rem;
+}
+
+.ibn-user-guide__prose a {
+    color: var(--ibn-secondary);
+    font-weight: 600;
+}
+
+.dark .ibn-user-guide__prose a {
+    color: #b7f7b9;
+}
+
+.ibn-user-guide__prose code {
+    border-radius: 0.35rem;
+    background: rgba(46, 46, 128, 0.08);
+    padding: 0.1rem 0.35rem;
+    font-size: 0.86em;
+}
+
+.dark .ibn-user-guide__prose code {
+    background: rgba(148, 163, 184, 0.16);
+}
+
+.ibn-user-guide__prose pre {
+    overflow: auto;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.9rem;
+    background: #10182b;
+    color: #e8eefc;
+    padding: 0.9rem 1rem;
+}
+
+.ibn-user-guide__prose pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+.ibn-user-guide__prose blockquote {
+    border-left: 3px solid var(--ibn-primary);
+    padding-left: 0.85rem;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-user-guide__prose table {
+    width: 100%;
+    margin: 0.9rem 0 1.1rem;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.ibn-user-guide__prose th,
+.ibn-user-guide__prose td {
+    border: 1px solid var(--ibn-border);
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.ibn-user-guide__prose th {
+    background: rgba(46, 46, 128, 0.06);
+    font-weight: 700;
+}
+
+.dark .ibn-user-guide__prose th {
+    background: rgba(148, 163, 184, 0.08);
+}
+
+@media (max-width: 960px) {
+    .ibn-user-guide {
+        grid-template-columns: 1fr;
+    }
+
+    .ibn-user-guide__nav {
+        position: static;
+        max-height: none;
     }
 }

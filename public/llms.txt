@@ -1,0 +1,91 @@
+# IBN Technologies – Cybersecurity, Cloud, Finance & Accounting, AI, SAP, and Outsourced Business Services
+
+> IBN Technologies is an ISO-certified (ISO 9001:2015, ISO 20000-1:2018, ISO 27001:2022) global outsourcing and digital transformation partner, founded in 1999 and registered in the United States, United Kingdom, and India, with a Global Delivery Center in Pune, India. Trusted by 2,500+ clients across the USA, UK, India, the Middle East and beyond, IBN Technologies offers an integrated portfolio of Cybersecurity, Cloud, Finance and Accounting, Construction Engineering, BPO, AI, and SAP services, helping organizations manage critical business and technology functions through a single service provider.
+
+## Who we are
+- [IBN Technologies](https://www.ibntech.com/) - Main company website and overview of services.
+- [About IBN](https://www.ibntech.com/about-ibn/): Company overview of IBN Technologies.
+- [Case Studies](https://www.ibntech.com/case-studies/): Client success stories and measurable outcomes across service lines.
+- [Client Stories](https://www.ibntech.com/testimonials/): Testimonials from IBN Technologies' clients.
+- [Blog](https://www.ibntech.com/blog/): Blogs and insights on finance, cybersecurity, cloud, and automation topics.
+- [Contact Us](https://www.ibntech.com/contact-us/): Contact details and inquiry form for IBN Technologies.
+
+
+## Cybersecurity Services
+- [Vulnerability Assessment and Penetration Testing (VAPT)](https://www.ibntech.com/vapt-services/): AI-enhanced penetration testing and quantum-resilient methodologies to identify and remediate security gaps with compliance-ready reporting.
+- [Managed SIEM and SOC Services](https://www.ibntech.com/managed-siem-soc-services/): 24/7 AI-powered Security Operations Center for continuous monitoring, threat intelligence, incident response, and audit-ready reporting.
+- [Managed Detection and Response (MDR)](https://www.ibntech.com/managed-detection-response-services/): Machine learning-driven threat hunting, behavioral analytics, automated response, and deep forensics for rapid threat containment.
+- [vCISO Services](https://www.ibntech.com/vciso-services/): Virtual CISO expertise providing strategic cybersecurity leadership, risk and compliance oversight, board-level reporting, and security roadmaps.
+- [Managed Microsoft Security Services](https://www.ibntech.com/microsoft-security-services/): Expert management of identity and access control, threat protection, and cloud compliance across Azure and Microsoft 365 environments.
+- [Cyber Security Maturity Risk Assessment](https://www.ibntech.com/cybersecurity-maturity-assessment-services/): Risk identification, gap analysis, security controls evaluation, and governance insights to strengthen security posture.
+- [Compliance Management and Audit Services](https://www.ibntech.com/cybersecurity-audit-compliance-services/): Services to help organizations stay compliant with regulatory frameworks such as GDPR, HIPAA, PCI-DSS, and SOC 2.
+- [SOC 2 Compliance](https://www.ibntech.com/soc-2-compliance/): Support for achieving and proving SOC 2 compliance.
+
+## Cloud Services
+- [Multi Cloud Consulting and Migration Services](https://www.ibntech.com/cloud-consulting-and-migration-services/): Seamless, near-zero-downtime cloud migration and consulting across AWS, Azure, and other platforms.
+- [Managed Cloud and Security Services](https://www.ibntech.com/cloud-managed-services/): Secure, 24/7 managed cloud infrastructure operations with 99.9% uptime.
+- [Business Continuity and Disaster Recovery](https://www.ibntech.com/business-continuity-disaster-recovery-services/): Solutions to ensure business resilience and continuity in the event of disruption.
+- [DevSecOps Implementation Services](https://www.ibntech.com/devsecops-services/): Integration of security practices directly into DevOps pipelines for faster, safer CI/CD deployments.
+- [Microsoft 365 / Office 365 Migration and Support Services](https://www.ibntech.com/microsoft-office-365-migration-support-services/): Migration and ongoing support for Microsoft cloud productivity environments.
+- [AWS Cloud Services](https://www.ibntech.com/aws-cloud-services/): Scalable and secure cloud solutions built on AWS.
+- [AWS Partner](https://www.ibntech.com/aws-partner/): Trusted AWS consulting and solutions delivered as an AWS Consulting Partner.
+
+## Finance and Accounting Services
+- [Bookkeeping Services](https://www.ibntech.com/bookkeeping-services/): Accurate, real-time financial record-keeping with 100% accuracy focus for global clients.
+  - [Bookkeeping Services USA](https://www.ibntech.com/bookkeeping-services-usa/): Offshore outsourced bookkeeping for US businesses, built on USA GAAP standards with up to 70% cost savings.
+    - [Bookkeeping Services California](https://www.ibntech.com/bookkeeping-services-california/): Bookkeeping outsourcing for businesses in California.
+    - [Bookkeeping Services San Francisco](https://www.ibntech.com/bookkeeping-services-san-francisco/): Bookkeeping outsourcing for businesses in San Francisco.
+    - [Bookkeeping Services Los Angeles](https://www.ibntech.com/bookkeeping-services-los-angeles/): Bookkeeping outsourcing for businesses in Los Angeles.
+    - [Bookkeeping Services San Diego](https://www.ibntech.com/bookkeeping-services-san-diego/): Bookkeeping outsourcing for businesses in San Diego.
+    - [Bookkeeping Services Las Vegas](https://www.ibntech.com/bookkeeping-services-las-vegas/): Bookkeeping outsourcing for businesses in Las Vegas.
+    - [Bookkeeping Services San Jose](https://www.ibntech.com/bookkeeping-services-san-jose/): Bookkeeping outsourcing for businesses in San Jose.
+    - [Bookkeeping Services Chicago](https://www.ibntech.com/bookkeeping-services-chicago/): Bookkeeping outsourcing for businesses in Chicago.
+    - [Bookkeeping Services New York](https://www.ibntech.com/bookkeeping-services-new-york/): Bookkeeping outsourcing for businesses in New York.
+    - [Bookkeeping Services Florida](https://www.ibntech.com/bookkeeping-services-florida/): Bookkeeping outsourcing for businesses in Florida.
+    - [Bookkeeping Services Texas](https://www.ibntech.com/bookkeeping-services-texas/): Bookkeeping outsourcing for businesses in Texas.
+    - [Bookkeeping Services Vermont](https://www.ibntech.com/bookkeeping-services-vermont/): Bookkeeping outsourcing for businesses in Vermont.
+    - [Bookkeeping Services Hartford](https://www.ibntech.com/bookkeeping-services-hartford/): Bookkeeping outsourcing for businesses in Hartford.
+    - [Bookkeeping Services Austin](https://www.ibntech.com/bookkeeping-services-austin/): Bookkeeping outsourcing for businesses in Austin.
+    - [Bookkeeping Services Phoenix](https://www.ibntech.com/bookkeeping-services-phoenix/): Bookkeeping outsourcing for businesses in Phoenix.
+  - [Bookkeeping Services UK](https://www.ibntech.com/bookeeping-for-uk/): Outsourced bookkeeping for UK businesses, compliant with HMRC VAT and CIS regulations, cutting operational costs by up to 50%.
+  - [Bookkeeping for Small Business](https://www.ibntech.com/bookkeeping-for-small-business/): Outsourced bookkeeping and accounting services tailored for small businesses across the USA and UK.
+- [Payroll Services](https://www.ibntech.com/payroll-processing/): Efficient, compliant payroll processing and management.
+- [AP/AR Services](https://www.ibntech.com/accounts-payable-and-accounts-receivable-services/): Accounts payable and accounts receivable management to improve cash flow and accuracy.
+- [AP/AR Automation](https://www.ibntech.com/ap-ar-automation/): AI- and RPA-driven automation of accounts payable and accounts receivable processes, reducing invoice cycle times by up to 75%.
+- [Financial Reporting](https://www.ibntech.com/reporting-analysis-planning/): Insightful financial reporting, analysis, and planning support.
+- [CFO Services](https://www.ibntech.com/cfo-services/): Strategic, outsourced virtual CFO leadership for financial planning and decision-making.
+- [Treasury Management](https://www.ibntech.com/treasury-management-services-outsourcing/): Outsourced treasury management services for optimizing cash flow.
+- [US Tax Preparation Services](https://www.ibntech.com/tax-preparation-services-usa/): Federal and state tax preparation services for US businesses and individuals.
+- [UK Tax Preparation Services](https://www.ibntech.com/tax-preparation-services-uk/): HMRC-compliant tax preparation and filing for UK clients.
+- [1040 Tax Filing](https://www.ibntech.com/1040-tax-filing/): Individual income tax return preparation and filing.
+
+## Construction Engineering Services
+- [Civil Engineering Services](https://www.ibntech.com/civil-engineering-services/): Full time remote Civil engineering solutions and back-office support for construction/civil projects.
+- [Construction Documentation Services](https://www.ibntech.com/construction-documentation-services/): Experienced remote engineers for construction documentation and project record management.
+- [Construction Takeoff and Estimation Services](https://www.ibntech.com/construction-takeoff-estimation-services/): Dedicated full-time remote estimators for quantity takeoffs, cost estimates, and bid management support.
+
+## BPO Services
+- [Hedge Fund Services](https://www.ibntech.com/hedge-fund-services/): Hedge fund back-office and middle-office administration support.
+- [Family Office Services](https://www.ibntech.com/family-office-services/): Outsourced management and administrative support for family offices.
+- [Fund Administration](https://www.ibntech.com/hedgefund-administration/): Fund administration services for hedge funds and alternative investment vehicles.
+
+## AI and Automation Services
+- [AI Consulting Services](https://www.ibntech.com/ai-consulting-services/): AI strategy and roadmap development tailored to business goals.
+- [Agentic AI Services](https://www.ibntech.com/agentic-ai-services/): Design and deployment of autonomous AI agent solutions for business processes.
+- [AI Development Services](https://www.ibntech.com/ai-development-services/): Custom AI solution development for business-specific use cases.
+- [Robotic Process Automation (RPA)](https://www.ibntech.com/robotics-process-automation/): Cognitive RPA and advanced analytics to automate repetitive workflows and tasks.
+
+## SAP Services
+- [SAP S/4HANA & AI Transformation Services](https://www.ibntech.com/sap-services/): SAP S/4HANA implementation and AI-driven transformation services for enterprise resource planning.
+
+## Industries
+- [Information & Communication Technology](https://www.ibntech.com/industry/information-and-communication-technology/): Solutions tailored for ICT sector businesses.
+- [Real Estate and Construction](https://www.ibntech.com/industry/real-estate-and-construction/): Outsourcing and technology solutions tailored for real estate and construction businesses.
+- [Healthcare & Pharma](https://www.ibntech.com/industry/healthcare-and-pharma/): Cybersecurity, compliance, and finance solutions tailored for healthcare and pharmaceutical organizations.
+- [Manufacturing](https://www.ibntech.com/industry/manufacturing/): Outsourcing and technology solutions tailored for manufacturing businesses.
+- [E-commerce and Retail](https://www.ibntech.com/industry/ecommerce-and-retail/): Outsourcing and digital solutions tailored for e-commerce and retail businesses.
+- [Travel and Hospitality](https://www.ibntech.com/industry/travel-and-hospitality/): Cybersecurity, cloud, and finance & accounting solutions tailored for the travel and hospitality sector.
+- [Logistics and Transportation](https://www.ibntech.com/industry/logistics-and-transportation/): Solutions tailored for logistics and transportation businesses.
+- [Legal Firm](https://www.ibntech.com/industry/legal-firm/): Finance, accounting, and IT solutions tailored for legal firms.
+- [Chemical & Energy](https://www.ibntech.com/industry/chemical-and-energy/): Solutions tailored for the chemical and energy industry.
+- [BFSI](https://www.ibntech.com/industry/bfsi/): Solutions tailored for the banking, financial services, and insurance industry.

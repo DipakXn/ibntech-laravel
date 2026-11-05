@@ -10,7 +10,7 @@
             @forelse($latestNewsletters as $latestNewsletter)
                 <a href="{{ $latestNewsletter->publicUrl() }}" class="newsletter-latest__item">
                     @if($latestNewsletter->featuredImageUrl())
-                        <img src="{{ $latestNewsletter->featuredImageUrl() }}" alt="{{ $latestNewsletter->title }}">
+                        <x-featured-image :model="$latestNewsletter" />
                     @else
                         <div class="blog-image-placeholder newsletter-latest__placeholder">
                             <span>Newsletter</span>

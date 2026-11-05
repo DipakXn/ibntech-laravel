@@ -193,7 +193,7 @@
 .awsp-hero__copy h1 {
     color: #fff;
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.15;
 }
 
@@ -255,7 +255,7 @@
     display: block;
     color: #fff;
     font-size: 1.35rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.15;
 }
 

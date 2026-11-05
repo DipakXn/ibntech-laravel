@@ -250,7 +250,7 @@
             <img
                 class="faq-hero__bg"
                 src="{{ $img('faq-hero.webp') }}"
-                alt=""
+                alt="Frequently asked questions about IBN Technologies services"
                 aria-hidden="true"
                 width="1400"
                 height="700"

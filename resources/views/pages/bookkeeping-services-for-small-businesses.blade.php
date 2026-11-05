@@ -89,7 +89,7 @@
             <div class="bkssb-hero__bg" aria-hidden="true">
                 <img
                     src="{{ $img('accounting-advisory-services-for-small-businesses.webp') }}"
-                    alt=""
+                    alt="Accounting advisory services for small businesses"
                     width="960"
                     height="640"
                     fetchpriority="high"
@@ -172,7 +172,7 @@
                             >
                                 <img
                                     src="{{ $img($service['icon']) }}"
-                                    alt=""
+                                    alt="{{ $service['title'] }}"
                                     width="65"
                                     height="65"
                                     loading="lazy"

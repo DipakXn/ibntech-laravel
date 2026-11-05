@@ -9,6 +9,7 @@ use App\Filament\Clusters\SmtpSettings\Pages\TestSmtp;
 use App\Filament\Clusters\SmtpSettings\Resources\EmailLogs\EmailLogResource;
 use App\Filament\Pages\AdminDashboard;
 use App\Filament\Resources\OldSubmissions\OldSubmissionResource;
+use App\Http\Controllers\AdminToolbarCacheController;
 use App\Http\Controllers\CmsPreviewController;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
@@ -99,6 +100,8 @@ class AdminPanelProvider extends PanelProvider
                     ->whereIn('type', CmsPreviewType::values())
                     ->where('id', '[0-9]+')
                     ->name('content-preview');
+                Route::post('/clear-cache', [AdminToolbarCacheController::class, 'store'])
+                    ->name('clear-cache');
             })
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->middleware([

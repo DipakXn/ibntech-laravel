@@ -74,7 +74,7 @@ class CaseStudyController extends Controller
             $caseStudies,
             $resolved,
             'Case Studies',
-            'Delivery stories, migration outcomes, and platform transformation case studies.'
+            'Explore IBN case studies to see how our tailored finance and accounting solutions helped businesses boost efficiency, accuracy, and sustainable growth.'
         );
 
         return response()->view('case-studies.index', compact('caseStudies'));

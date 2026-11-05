@@ -181,7 +181,7 @@
                     <p class="cae-hero__lede">
                         We fix your operations, security, and finances all at once. Integrated solutions that eliminate vendor fragmentation.
                     </p>
-                    <a href="#cae-assessment" class="cae-btn cae-btn--green">
+                    <a href="javascript:void(0)" class="cae-btn cae-btn--green" data-scroll-target="cae-form">
                         Schedule Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -219,7 +219,7 @@
         <section class="cae-section cae-section--soft" aria-labelledby="cae-certs-title">
             <div class="site-shell">
                 <div class="cae-heading">
-                    <h2 id="cae-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="cae-certs-title">Energy Sector Governance &amp; <span>Safety Certs</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="cae-certs" role="list">
@@ -272,7 +272,7 @@
                                 {{ $service['impact'] }}
                             </p>
 
-                            <a href="#cae-assessment" class="cae-btn cae-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="cae-btn cae-btn--card" data-scroll-target="cae-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -284,7 +284,7 @@
             <div class="site-shell cae-cta__inner">
                 <h2 id="cae-cta-title">Ready to Transform Your Operations?</h2>
                 <p>Get a free 30-minute audit to identify your biggest efficiency gaps and potential savings.</p>
-                <a href="#cae-assessment" class="cae-btn cae-btn--white">Schedule Now</a>
+                <a href="javascript:void(0)" class="cae-btn cae-btn--white" data-scroll-target="cae-form">Schedule Now</a>
             </div>
         </section>
 
@@ -323,7 +323,7 @@
                     </ul>
                 </div>
 
-                <aside class="cae-assess__card" aria-labelledby="cae-form-title">
+                <aside class="cae-assess__card" aria-labelledby="cae-form-title" data-scroll-anchor="cae-form">
                     <h3 id="cae-form-title">Optimize Chemical &amp; Energy Operations</h3>
                     <p>Achieve safer, smarter, and more efficient performance with integrated cybersecurity, cloud modernization, automation, and managed back-office support.</p>
                     <livewire:forms.contact-form

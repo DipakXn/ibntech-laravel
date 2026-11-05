@@ -15,7 +15,7 @@
     $trust = ['ISO 9001:2015', 'ISO 27001:2022', 'ISO 20000-1:2018', 'GDPR', 'SOC 2 Ready', 'HIPAA', 'PCI-DSS'];
 @endphp
 
-<section class="home-section home-section--lavender" aria-labelledby="home-bpo-title" data-scroll-anchor="bpo-section">
+<section id="bpo-section" class="home-section home-section--lavender" aria-labelledby="home-bpo-title" data-scroll-anchor="bpo-section">
     <div class="home-shell">
         <div class="home-card home-bpo__panel">
             <div class="home-bpo__header">

@@ -56,7 +56,7 @@
             <img
                 class="pm-hero__bg"
                 src="{{ $img('project-management.webp') }}"
-                alt=""
+                alt="Project management services"
                 aria-hidden="true"
                 width="1400"
                 height="700"

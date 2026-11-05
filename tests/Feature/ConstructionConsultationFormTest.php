@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Jobs\SendLeadSubmissionNotification;
 use App\Livewire\Forms\ConstructionConsultationForm;
 use App\Models\Lead;
+use App\Support\LeadSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
@@ -164,6 +165,7 @@ class ConstructionConsultationFormTest extends TestCase
         $this->assertSame('Drafting / Drawing Service', data_get($lead->payload, 'needed_service'));
         $this->assertSame('Full-Time Dedicated Resource', data_get($lead->payload, 'resource_type'));
         $this->assertSame('2–4 weeks', data_get($lead->payload, 'hire_when'));
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($lead->payload, 'lead_source'));
         Queue::assertPushed(SendLeadSubmissionNotification::class, 1);
     }
 

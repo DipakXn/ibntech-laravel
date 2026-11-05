@@ -27,6 +27,10 @@ class LeadsTable
                     ->toggleable(),
                 TextColumn::make('company')
                     ->toggleable(),
+                TextColumn::make('lead_source')
+                    ->label('Lead Source')
+                    ->placeholder('')
+                    ->toggleable(),
                 TextColumn::make('service')
                     ->label('Service / Plan')
                     ->toggleable(),

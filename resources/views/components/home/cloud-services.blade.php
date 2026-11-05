@@ -17,7 +17,7 @@
         'ansible-original.svg',
         'jenkins-original.svg',
         'prometheus-original.svg',
-        'linux-original.svg',
+        'linux-original.webp',
         'python-original.svg',
         'bash-original.svg',
     ];
@@ -34,7 +34,7 @@
     ];
 @endphp
 
-<section class="home-section" aria-labelledby="home-cloud-title" data-scroll-anchor="cloud-section">
+<section id="cloud-section" class="home-section" aria-labelledby="home-cloud-title" data-scroll-anchor="cloud-section">
     <div class="home-shell">
         <div class="text-center">
             <h2 class="home-section-title">

@@ -12,6 +12,7 @@
 >
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
+    <x-forms.lead-source-hidden />
 
     <ol class="fccons-steps" data-step="{{ $step }}" aria-label="Form progress">
         <li class="{{ $step === 1 ? 'is-active' : 'is-complete' }}">

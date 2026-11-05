@@ -213,7 +213,7 @@
                     <p class="cms-hero__lede">
                         MSSP-grade solutions for SMBs across India • US • UK. Platform-agnostic management with proactive security, performance, and cost governance.
                     </p>
-                    <a href="#cms-consult" class="cms-btn cms-btn--green">
+                    <a href="javascript:void(0)" class="cms-btn cms-btn--green" data-scroll-target="cms-form">
                         Get a security-first assessment
                     </a>
                 </div>
@@ -290,9 +290,10 @@
                         <template x-for="page in pages" :key="page">
                             <button
                                 type="button"
+                                role="tab"
                                 class="cms-certs__dot"
                                 :class="{ 'is-active': index === page - 1 }"
-                                :aria-current="index === page - 1 ? 'true' : 'false'"
+                                :aria-selected="index === page - 1"
                                 :aria-label="'Show certifications page ' + page"
                                 @click="index = page - 1"
                             ></button>
@@ -354,7 +355,7 @@
             <div class="site-shell cms-cta__inner">
                 <h2 id="cms-cta-title">Transform Your Cloud Infrastructure Today</h2>
                 <p>Speak with our cloud experts to discover how managed cloud services can optimize your infrastructure while reducing costs.</p>
-                <a href="#cms-consult" class="cms-btn cms-btn--green">Schedule Your Free Consultation</a>
+                <a href="javascript:void(0)" class="cms-btn cms-btn--green" data-scroll-target="cms-form">Schedule Your Free Consultation</a>
             </div>
         </section>
 
@@ -437,7 +438,7 @@
             <div class="site-shell cms-cta__inner">
                 <h2 id="cms-assess-title">Ready to modernize with security-first operations?</h2>
                 <p>Request a tailored assessment to benchmark cost, performance, and compliance across your cloud footprint.</p>
-                <a href="#cms-consult" class="cms-btn cms-btn--green">Request Assessment</a>
+                <a href="javascript:void(0)" class="cms-btn cms-btn--green" data-scroll-target="cms-form">Request Assessment</a>
             </div>
         </section>
 
@@ -451,7 +452,7 @@
                 <figure class="cms-work-figure">
                     <img
                         src="{{ $img('How-We-Work.png') }}"
-                        alt="How we work: assessment and strategy, migration and implementation, ongoing management and optimization, continuous improvement"
+                        alt="Cloud managed services workflow: assess, migrate, manage, optimize, and improve"
                         width="960"
                         height="540"
                         loading="lazy"
@@ -529,7 +530,7 @@
                     </div>
                 </div>
 
-                <aside class="cms-consult__card" id="cms-consult-form" aria-labelledby="cms-consult-form-title">
+                <aside class="cms-consult__card" id="cms-consult-form" aria-labelledby="cms-consult-form-title" data-scroll-anchor="cms-form">
                     <h3 id="cms-consult-form-title">Get Expert Cloud Management Now!</h3>
                     <p class="cms-consult__lede">
                         Our certified cloud professionals deliver personalized solutions for performance, security, and cost-efficiency. Fill out the form and let us help you scale smarter.

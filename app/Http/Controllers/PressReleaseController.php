@@ -62,8 +62,8 @@ class PressReleaseController extends Controller
         $this->setPathPaginatedSeo(
             $pressReleases,
             $resolved,
-            'Press Releases',
-            'Company news, announcements, launches, and official statements from the team.'
+            'Press & Media',
+            'Check out IBN Technologies top news and press releases to remain up to date with the operations of the leading outsourcing firm.'
         );
 
         return response()->view('press-releases.index', compact('pressReleases'));

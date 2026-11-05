@@ -63,7 +63,7 @@ class ArticleController extends Controller
             $articles,
             $resolved,
             'Articles',
-            'Browse expert articles, practical explainers, and editorial insights from the team.'
+            'Explore insights on bookkeeping, payroll, tax, and automation from IBN Technologies. Stay informed with expert articles on finance outsourcing.'
         );
 
         return response()->view('articles.index', compact('articles'));

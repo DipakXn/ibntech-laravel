@@ -298,7 +298,7 @@ html {
     margin: 0;
     color: #fff;
     font-size: clamp(2.6rem, 5vw, 3.6rem);
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1;
 }

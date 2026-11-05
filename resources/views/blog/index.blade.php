@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="blog-hero">
-        <div class="site-shell blog-hero__inner">
-            <h1>Blog</h1>
+    <section class="inner-hero inner-hero--listing">
+        <div class="site-shell inner-hero__inner">
+            <h1 class="inner-hero__eyebrow">Blog</h1>
+            <h2>Insights on cyber security, cloud, finance and accounting, civil engineering, and back office services.</h2>
+            <p class="inner-hero__lede">
+                Practical guidance, updates, and expert perspectives from IBN Tech across the domains that power secure, scalable operations.
+            </p>
         </div>
     </section>
 

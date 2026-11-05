@@ -199,9 +199,9 @@
 .aparsvc-hero {
     position: relative;
     overflow: hidden;
-    background-color: #141b4d;
+    background-color: #090c1c;
     background-image:
-        linear-gradient(105deg, #101646eb 0%, #142460b8 42%, #18346e59 68%, #18346e2e 100%),
+    linear-gradient(43deg, #0c1031 0%, #142460b8 100% 92%, #18346e59 18%, #18346e2e),
         var(
             --aparsvc-hero-image,
             url('/images/accounts-payable-and-accounts-receivable-services/expert-ap-ar-hero.webp')

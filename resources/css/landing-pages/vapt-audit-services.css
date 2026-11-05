@@ -283,7 +283,7 @@ body:has(.lvas-page) {
     background: #fff !important;
     color: #172033 !important;
     /* padding: 0.48rem 0.7rem !important; */
-    font-size: 0.86rem !important;
+    /* font-size: 0.86rem !important; */
     min-height: 0;
     line-height: 1.35;
 }

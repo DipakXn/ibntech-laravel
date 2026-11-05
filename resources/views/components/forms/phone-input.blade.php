@@ -5,6 +5,7 @@
     'value' => '',
     'placeholder' => 'Contact Number',
     'initialCountry' => null,
+    'ariaLabel' => null,
 ])
 
 @php
@@ -19,6 +20,7 @@
         value="{{ $value }}"
         placeholder="{{ $placeholder }}"
         autocomplete="tel"
+        @if($ariaLabel) aria-label="{{ $ariaLabel }}" @endif
         data-phone-input
         data-phone-hidden="#{{ $hiddenId }}"
         @if($initialCountry) data-initial-country="{{ $initialCountry }}" @endif

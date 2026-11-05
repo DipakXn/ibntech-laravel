@@ -45,6 +45,10 @@ class PressReleaseListingRouteTest extends TestCase
 
         $listing = $this->get('/pressrelease');
         $listing->assertOk();
+        $listing->assertSee('<h1 class="inner-hero__eyebrow">Press Releases</h1>', false);
+        $listing->assertSee('<h2>Official company announcements, launches, and updates.</h2>', false);
+        $listing->assertDontSee('<h1>Official company announcements, launches, and updates.</h1>', false);
+        $this->assertSame(1, substr_count($listing->getContent(), '<h1'));
         $listing->assertSee('Pilot One');
         $listing->assertSee('Pilot Two');
         $listing->assertSee('Manual Four');

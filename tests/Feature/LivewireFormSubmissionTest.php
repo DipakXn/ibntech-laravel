@@ -9,7 +9,9 @@ use App\Livewire\Forms\ConstructionConsultationForm;
 use App\Livewire\Forms\ContactForm;
 use App\Livewire\Forms\LandingInquiryForm;
 use App\Livewire\Forms\NewsletterInquiryForm;
+use App\Livewire\Forms\LeadForm;
 use App\Models\Lead;
+use App\Support\LeadSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
@@ -92,7 +94,71 @@ class LivewireFormSubmissionTest extends TestCase
             'page_url' => 'https://example.com/contact',
         ]);
 
+        $lead = Lead::query()->where('email', 'jane@example.com')->first();
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($lead?->payload, 'lead_source'));
+
         Queue::assertPushed(SendLeadSubmissionNotification::class, 1);
+    }
+
+    public function test_contact_form_stores_organic_lead_source_when_hidden_value_is_tampered(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ContactForm::class)
+            ->set('name', 'Jane Doe')
+            ->set('email', 'tamper@example.com')
+            ->set('message', 'Testing lead source tamper resistance.')
+            ->set('acceptedTerms', true)
+            ->set('pageUrl', 'https://example.com/contact')
+            ->call('submit')
+            ->assertHasNoErrors();
+
+        $lead = Lead::query()->where('email', 'tamper@example.com')->first();
+
+        $this->assertNotNull($lead);
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($lead->payload, 'lead_source'));
+    }
+
+    public function test_lead_form_stores_organic_lead_source(): void
+    {
+        Queue::fake();
+
+        Livewire::test(LeadForm::class)
+            ->set('name', 'CTA Lead')
+            ->set('email', 'cta@example.com')
+            ->set('company', 'Acme Inc')
+            ->set('pageUrl', 'https://example.com/services')
+            ->call('submit')
+            ->assertSet('submitted', true)
+            ->assertHasNoErrors();
+
+        $lead = Lead::query()->where('email', 'cta@example.com')->first();
+
+        $this->assertNotNull($lead);
+        $this->assertSame('lead', $lead->form_name);
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($lead->payload, 'lead_source'));
+    }
+
+    public function test_newsletter_inquiry_form_stores_organic_lead_source(): void
+    {
+        Queue::fake();
+
+        Livewire::test(NewsletterInquiryForm::class)
+            ->set('name', 'Newsletter Lead')
+            ->set('email', 'newsletter@example.com')
+            ->set('industry', 'Healthcare')
+            ->set('message', 'Interested in your latest newsletter insights.')
+            ->set('acceptedTerms', true)
+            ->set('pageUrl', 'https://example.com/newsletter/sample')
+            ->call('submit')
+            ->assertSet('submitted', true)
+            ->assertHasNoErrors();
+
+        $lead = Lead::query()->where('email', 'newsletter@example.com')->first();
+
+        $this->assertNotNull($lead);
+        $this->assertSame('newsletter_inquiry', $lead->form_name);
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($lead->payload, 'lead_source'));
     }
 
     public function test_homepage_contact_form_stores_service_in_payload(): void
@@ -174,6 +240,24 @@ class LivewireFormSubmissionTest extends TestCase
             ->assertSet('service', 'CBA US (Basic)')
             ->assertSee('Overwhelmed By Your Books ?')
             ->assertSee('Catch up Now at the Lowest Rates Guaranteed !');
+    }
+
+    public function test_contact_modal_accepts_custom_heading_and_subtitle(): void
+    {
+        Livewire::test(ContactModal::class)
+            ->dispatch(
+                'open-contact-modal',
+                title: 'Questions about SOC 2 compliance?',
+                subtitle: 'Speak with our compliance team about what your organization actually needs.',
+            )
+            ->assertSet('isOpen', true)
+            ->assertSet('variant', 'default')
+            ->assertSet('customTitle', 'Questions about SOC 2 compliance?')
+            ->assertSee('Questions about SOC 2 compliance?')
+            ->assertSee('Speak with our compliance team about what your organization actually needs.')
+            ->call('close')
+            ->assertSet('customTitle', null)
+            ->assertSet('customSubtitle', null);
     }
 
     public function test_pricing_enquire_form_stores_selected_plan_in_payload(): void

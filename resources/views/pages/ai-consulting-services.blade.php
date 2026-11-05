@@ -221,7 +221,7 @@
                         @endforeach
                     </ul>
                     <div class="aic-hero__actions">
-                        <a href="#aic-consult" class="aic-btn aic-btn--light" data-contact-modal-trigger>
+                        <a href="javascript:void(0)" class="aic-btn aic-btn--light" data-scroll-target="aic-form">
                             Start Your AI Journey
                             <i class="fa-solid fa-circle-right" aria-hidden="true"></i>
                         </a>
@@ -230,7 +230,7 @@
                 <div class="aic-hero__media" aria-hidden="true">
                     <img
                         src="{{ $img('hero-visual.webp') }}"
-                        alt=""
+                        alt="AI consulting services for business transformation"
                         width="880"
                         height="480"
                         fetchpriority="high"
@@ -333,7 +333,7 @@
                 <figure class="aic-figure">
                     <img
                         src="{{ $img('High-Impact-AI-Use-Case-Discovery.webp') }}"
-                        alt="High-Impact AI Use Case Discovery: five-step discovery process from business process analysis through prioritized use-case backlog"
+                        alt="Five-step AI use case discovery from business analysis to a prioritized backlog"
                         width="1640"
                         height="780"
                         loading="lazy"
@@ -359,7 +359,7 @@
             <div class="site-shell aic-cta-band__inner">
                 <h2 id="aic-cta-title">Start your AI journey with the right model</h2>
                 <p>Let’s discuss how AI can drive measurable business value for your organization. Our team is ready to help you leverage AI to achieve measurable business value.</p>
-                <a href="#aic-consult" class="aic-btn aic-btn--light" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="aic-btn aic-btn--light" data-scroll-target="aic-form">
                     Talk to Us
                     <i class="fa-solid fa-circle-right" aria-hidden="true"></i>
                 </a>
@@ -485,11 +485,11 @@
                     <div class="aic-consult__note">
                         <h3>Take the First Step Toward Smarter, AI-Driven Performance</h3>
                         <p>Reliable AI consulting that improves efficiency, intelligence and business outcomes.</p>
-                        <a href="#aic-consult-form">Let’s discuss your AI goals</a>
+                        <a href="javascript:void(0)" data-scroll-target="aic-form">Let’s discuss your AI goals</a>
                     </div>
                 </div>
 
-                <aside class="aic-consult__card" id="aic-consult-form" aria-labelledby="aic-form-title">
+                <aside class="aic-consult__card" id="aic-consult-form" aria-labelledby="aic-form-title" data-scroll-anchor="aic-form">
                     <h3 id="aic-form-title">Talk to Our AI Experts</h3>
                     <livewire:forms.contact-form
                         form-name="ai-consulting-services"

@@ -179,7 +179,7 @@
                     </ul>
 
                     <div class="aais-hero__actions">
-                        <a href="#aais-consult" class="aais-btn aais-btn--light">
+                        <a href="javascript:void(0)" class="aais-btn aais-btn--light" data-scroll-target="aais-form">
                             Start Your AI Journey
                             <i class="fa-solid fa-circle-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -330,7 +330,7 @@
             <div class="site-shell aais-cta-banner__inner">
                 <h2 id="aais-cta-deploy-title">Ready to Deploy Autonomous Agents?</h2>
                 <p>Start your AI transformation with enterprise-grade agentic AI solutions</p>
-                <a href="#" class="aais-btn aais-btn--light" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="aais-btn aais-btn--light" data-scroll-target="aais-form">
                     Schedule a Consultation
                     <i class="fa-solid fa-circle-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -440,11 +440,11 @@
                     <div class="aais-highlight">
                         <h3>Design AI That Works Like a Digital Workforce</h3>
                         <p>Empower your organization with autonomous intelligence built for scale, security, and speed.</p>
-                        <a href="#aais-consult-form">Get started now</a>
+                        <a href="javascript:void(0)" data-scroll-target="aais-form">Get started now</a>
                     </div>
                 </div>
 
-                <aside class="aais-consult__card" id="aais-consult-form" aria-labelledby="aais-consult-form-title">
+                <aside class="aais-consult__card" id="aais-consult-form" aria-labelledby="aais-consult-form-title" data-scroll-anchor="aais-form">
                     <h3 id="aais-consult-form-title">Talk to Our AI Experts</h3>
 
                     <livewire:forms.contact-form

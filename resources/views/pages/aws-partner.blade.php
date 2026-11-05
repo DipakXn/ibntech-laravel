@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="awsp-hero__actions">
-                        <a href="#awsp-consult" class="awsp-btn awsp-btn--green">
+                        <a href="javascript:void(0)" class="awsp-btn awsp-btn--green" data-scroll-target="awsp-form">
                             Speak with an AWS Cloud Expert
                             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                         </a>
@@ -339,7 +339,7 @@
             <div class="site-shell awsp-cta-banner__inner">
                 <h2 id="awsp-cta-title">Let's Build Your AWS Success Story</h2>
                 <p>Partner with IBN Tech to design a cloud strategy that delivers performance, security, and cost-efficiency.</p>
-                <a href="#awsp-consult" class="awsp-btn awsp-btn--light">
+                <a href="javascript:void(0)" class="awsp-btn awsp-btn--light" data-scroll-target="awsp-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Schedule a Free Strategy Session Today
                 </a>
@@ -456,7 +456,7 @@
                                 <footer>
                                     <img
                                         src="{{ $img('user-icon.webp') }}"
-                                        alt=""
+                                        alt="Testimonial from {{ $item['cite'] }}"
                                         width="48"
                                         height="48"
                                         loading="lazy"
@@ -476,8 +476,10 @@
                         @foreach ($testimonials as $i => $item)
                             <button
                                 type="button"
+                                role="tab"
                                 class="awsp-testimonials__dot"
                                 :class="{ 'is-active': index === {{ $i }} }"
+                                :aria-selected="index === {{ $i }}"
                                 @click="go({{ $i }})"
                                 aria-label="Show testimonial {{ $i + 1 }}"
                             ></button>
@@ -510,7 +512,7 @@
                     </ul>
                 </div>
 
-                <aside class="awsp-consult__card" aria-labelledby="awsp-form-title">
+                <aside class="awsp-consult__card" aria-labelledby="awsp-form-title" data-scroll-anchor="awsp-form">
                     <h3 id="awsp-form-title">Looking to partner for AWS cloud success?</h3>
                     <p>Share your AWS requirements and let our certified experts craft a tailored strategy that aligns with your business goals.</p>
 

@@ -31,7 +31,7 @@
                 <div class="btm-hero__visual">
                     <img
                         src="{{ $img('bookkeeping-it-businesses.png') }}"
-                        alt=""
+                        alt="BPO transition methodology for IT and finance teams"
                         width="500"
                         height="560"
                         fetchpriority="high"

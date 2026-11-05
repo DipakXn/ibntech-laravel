@@ -19,10 +19,12 @@ use App\Models\WhitePaper;
 use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
 use App\Services\Analytics\PageViewTracker;
+use App\Services\CookieConsent\CookieConsentRepository;
 use App\Services\EmailLogService;
 use App\Services\SeoService;
 use App\Services\SmtpSettingService;
 use App\Services\WebsiteSettingService;
+use App\Support\AdminToolbar\AdminToolbar;
 use App\Support\Cloudflare\CloudflareProxies;
 use App\Support\Mail\SmtpExceptionSanitizer;
 use Illuminate\Http\Middleware\TrustProxies;
@@ -100,6 +102,14 @@ class AppServiceProvider extends ServiceProvider
         // produce Livewire paths deeper than the default payload.max_nesting_depth.
         config(['livewire.payload.max_nesting_depth' => 50]);
 
+        WebsiteSetting::saved(function (): void {
+            try {
+                app(CookieConsentRepository::class)->forget();
+            } catch (\Throwable) {
+                // Cookie tables may not exist during early setup.
+            }
+        });
+
         View::composer(['layouts.app', 'layouts.landing', 'layouts.header', 'layouts.footer', 'newsletters.partials.footer'], function ($view): void {
             try {
                 $websiteSettings = app(WebsiteSettingService::class)->get();
@@ -113,6 +123,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['layouts.app', 'layouts.landing'], function ($view): void {
             $view->with('seo', app(SeoService::class)->current());
             $view->with('cmsPreview', (bool) request()->attributes->get('cmsPreview', false));
+            $view->with('adminToolbar', AdminToolbar::forView($view->getData()));
         });
 
         $this->registerSitemapCacheObservers();

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasPublishedAt;
+use App\Models\Concerns\SoftDeletesContent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -13,6 +14,7 @@ class Industry extends Model implements HasMedia
 {
     use HasPublishedAt;
     use InteractsWithMedia;
+    use SoftDeletesContent;
 
     protected $fillable = [
         'title',

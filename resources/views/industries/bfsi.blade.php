@@ -195,7 +195,7 @@
                     <p class="bfsi-hero__lede">
                         Secure cloud migration, robust cybersecurity, and intelligent automation tailored for banking and financial services.
                     </p>
-                    <a href="#bfsi-assessment" class="bfsi-btn bfsi-btn--green">
+                    <a href="javascript:void(0)" class="bfsi-btn bfsi-btn--green" data-scroll-target="bfsi-form">
                         Schedule Consultation
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </a>
@@ -217,7 +217,7 @@
         <section class="bfsi-section bfsi-section--soft" aria-labelledby="bfsi-certs-title">
             <div class="site-shell">
                 <div class="bfsi-heading">
-                    <h2 id="bfsi-certs-title">Certifications &amp; <span>Compliance</span></h2>
+                    <h2 id="bfsi-certs-title">BFSI Regulatory Compliance &amp; <span>Audits</span></h2>
                     <p>Industry-leading certifications ensuring your trust and data security</p>
                 </div>
                 <div class="bfsi-certs" role="list">
@@ -265,7 +265,7 @@
                                 @endforeach
                             </ul>
 
-                            <a href="#bfsi-assessment" class="bfsi-btn bfsi-btn--card">Request a Consultation</a>
+                            <a href="javascript:void(0)" class="bfsi-btn bfsi-btn--card" data-scroll-target="bfsi-form">Request a Consultation</a>
                         </article>
                     @endforeach
                 </div>
@@ -277,7 +277,7 @@
             <div class="site-shell bfsi-cta__inner">
                 <h2 id="bfsi-cta-title">Ready to Transform Your BFSI Operations?</h2>
                 <p>Get a free assessment of your current infrastructure and discover how IBN Technology can drive digital transformation.</p>
-                <a href="#bfsi-assessment" class="bfsi-btn bfsi-btn--white">Schedule Free Consultation</a>
+                <a href="javascript:void(0)" class="bfsi-btn bfsi-btn--white" data-scroll-target="bfsi-form">Schedule Free Consultation</a>
             </div>
         </section>
 
@@ -342,7 +342,7 @@
                     </ul>
                 </div>
 
-                <aside class="bfsi-assess__card" aria-labelledby="bfsi-form-title">
+                <aside class="bfsi-assess__card" aria-labelledby="bfsi-form-title" data-scroll-anchor="bfsi-form">
                     <h3 id="bfsi-form-title">Take the First Step Toward Smarter BFSI Performance</h3>
                     <p>Reliable BFSI solutions that improve speed, security, and service excellence.</p>
                     <livewire:forms.contact-form

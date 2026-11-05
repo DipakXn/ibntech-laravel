@@ -1,6 +1,7 @@
 <form wire:submit="submit" class="contact-form case-study-download-form">
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
+    <x-forms.lead-source-hidden />
     <input type="hidden" wire:model="caseStudySlug">
     <input type="hidden" wire:model="caseStudyTitle">
 
@@ -17,7 +18,7 @@
 
     @if(! $compact)
         <div class="case-study-download-form__intro">
-            <h3>Download This Case Study</h3>
+            <h2>Download This Case Study</h2>
             <p>Share your work details and get the full PDF for {{ $caseStudyTitle }}.</p>
         </div>
     @endif

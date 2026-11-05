@@ -288,7 +288,7 @@
             <img
                 class="scmm-hero__bg"
                 src="{{ $img('supply-chain-management-manufacturing.webp') }}"
-                alt=""
+                alt="Supply chain management for manufacturing"
                 aria-hidden="true"
                 width="1400"
                 height="700"

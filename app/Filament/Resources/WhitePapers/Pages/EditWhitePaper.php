@@ -4,7 +4,7 @@ namespace App\Filament\Resources\WhitePapers\Pages;
 
 use App\Filament\Actions\PreviewAction;
 use App\Filament\Resources\WhitePapers\WhitePaperResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditWhitePaper extends EditRecord
@@ -15,7 +15,7 @@ class EditWhitePaper extends EditRecord
     {
         return [
             PreviewAction::make(),
-            DeleteAction::make(),
+            MoveToTrashAction::make(),
         ];
     }
 }

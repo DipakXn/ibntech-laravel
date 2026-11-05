@@ -1,6 +1,7 @@
 <form wire:submit="submit" class="contact-form case-study-download-form">
     <input type="hidden" wire:model="formName">
     <input type="hidden" wire:model="pageUrl">
+    <x-forms.lead-source-hidden />
 
     @if($ebookSlug !== '')
         <input type="hidden" wire:model="ebookSlug">

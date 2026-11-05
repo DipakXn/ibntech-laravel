@@ -427,8 +427,9 @@
                     @foreach ($erpLogos as $i => $logo)
                         <button
                             type="button"
+                            role="tab"
                             :class="{ 'is-active': index === {{ $i }} }"
-                            :aria-current="index === {{ $i }} ? 'true' : 'false'"
+                            :aria-selected="index === {{ $i }}"
                             @click="index = Math.min({{ $i }}, Math.max(0, total - perView))"
                             aria-label="Show logo {{ $i + 1 }}"
                         ></button>
@@ -476,7 +477,7 @@
                             >
                                 <img
                                     src="{{ $img($industry['file']) }}"
-                                    alt=""
+                                    alt="{{ $industry['title'] }}"
                                     width="75"
                                     height="75"
                                     loading="lazy"

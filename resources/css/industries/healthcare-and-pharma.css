@@ -345,7 +345,7 @@
 
 .hcp-btn--card {
     align-self: flex-start;
-    margin-top: auto;
+    margin-top: 1.15rem;
     background: var(--hcp-accent);
     color: #fff;
     border-radius: 999px;

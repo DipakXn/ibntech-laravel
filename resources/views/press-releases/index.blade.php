@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="inner-hero">
+    <section class="inner-hero inner-hero--listing">
         <div class="site-shell inner-hero__inner">
-            <p class="inner-hero__eyebrow">Press Releases</p>
-            <h1>Official company announcements, launches, and updates.</h1>
+            <h1 class="inner-hero__eyebrow">Press Releases</h1>
+            <h2>Official company announcements, launches, and updates.</h2>
             <p class="inner-hero__lede">
                 Product news, partnership updates, operational milestones, and public statements from the team.
             </p>
@@ -18,7 +18,7 @@
                     <article class="card-panel case-study-card">
                         @if($pressRelease->featuredImageUrl())
                             <a href="{{ route('pressrelease.show', $pressRelease->slug) }}" class="case-study-card__image">
-                                <img src="{{ $pressRelease->featuredImageUrl() }}" alt="{{ $pressRelease->title }}">
+                                <x-featured-image :model="$pressRelease" />
                             </a>
                         @endif
                         <p class="meta-chip">Press Release</p>

@@ -52,6 +52,8 @@
                 <a href="{{ route('page.show', ['slug' => 'privacy-policy']) }}">Privacy Policy</a>
                 <span class="lp-footer__divider" aria-hidden="true">|</span>
                 <a href="{{ route('page.show', ['slug' => 'terms-of-use']) }}">Terms and Conditions</a>
+                <span class="lp-footer__divider" aria-hidden="true">|</span>
+                <button type="button" data-cookie-settings>Manage Cookies</button>
             </nav>
         </div>
     </div>

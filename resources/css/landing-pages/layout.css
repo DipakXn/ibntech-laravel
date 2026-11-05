@@ -191,9 +191,20 @@
 }
 
 .lp-footer__policies a:hover,
-.lp-footer__policies a:focus-visible {
+.lp-footer__policies a:focus-visible,
+.lp-footer__policies button:hover,
+.lp-footer__policies button:focus-visible {
     text-decoration: underline;
     text-underline-offset: 0.16em;
+}
+
+.lp-footer__policies button {
+    padding: 0;
+    color: #fff;
+    font: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
 }
 
 .lp-footer__divider {

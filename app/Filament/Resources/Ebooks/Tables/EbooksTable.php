@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\Ebooks\Tables;
 
-use App\Filament\Actions\PreviewAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
+use App\Filament\Tables\ContentBulkActions;
+use App\Filament\Tables\ContentRecordActions;
+use App\Filament\Tables\ContentTableColumns;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -14,7 +13,7 @@ class EbooksTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table
             ->columns([
                 TextColumn::make('title')
                     ->searchable()
@@ -31,6 +30,7 @@ class EbooksTable
                     ->dateTime()
                     ->sortable()
                     ->placeholder('—'),
+                ContentTableColumns::trashedAt(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -49,14 +49,10 @@ class EbooksTable
             ->emptyStateHeading('No eBooks yet')
             ->emptyStateDescription('Create your first downloadable asset to start capturing leads.')
             ->striped()
-            ->recordActions([
-                PreviewAction::make(),
-                EditAction::make(),
-            ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                ContentBulkActions::group(),
             ]);
+
+        return ContentRecordActions::apply($table);
     }
 }

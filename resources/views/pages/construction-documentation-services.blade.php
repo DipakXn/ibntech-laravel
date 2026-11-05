@@ -157,7 +157,7 @@
                         @endforeach
                     </ul>
 
-                    <a href="#contact-us" class="cds-btn cds-btn--green cds-btn--lg">
+                    <a href="javascript:void(0)" class="cds-btn cds-btn--green cds-btn--lg" data-scroll-target="cds-form">
                         Request a Consultation
                     </a>
                 </div>
@@ -234,7 +234,7 @@
                 <p>
                     Streamline your project documentation from RFI initiation through final closeout with our professional RFI management services. Our experienced team will implement proven systems that reduce delays, improve compliance, and simplify your closeout process.
                 </p>
-                <a href="#contact-us" class="cds-btn cds-btn--white cds-btn--lg">
+                <a href="javascript:void(0)" class="cds-btn cds-btn--white cds-btn--lg" data-scroll-target="cds-form">
                     Request a Consultation
                 </a>
             </div>
@@ -289,7 +289,7 @@
         {{-- Contact form --}}
         <section class="cds-section cds-consult" id="contact-us" aria-labelledby="cds-consult-title">
             <div class="site-shell cds-consult__inner">
-                <aside class="cds-consult__card">
+                <aside class="cds-consult__card" data-scroll-anchor="cds-form">
                     <h2 id="cds-consult-title">Simplify Project Clarifications</h2>
                     <p>Our RFI management process helps you resolve queries faster, maintain clear communication, and avoid costly delays.</p>
 

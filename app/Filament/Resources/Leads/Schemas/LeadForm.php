@@ -32,6 +32,10 @@ class LeadForm
                             ->maxLength(50),
                         TextInput::make('company')
                             ->maxLength(255),
+                        Placeholder::make('lead_source_display')
+                            ->label('Lead Source')
+                            ->content(fn (?Lead $record): string => $record?->lead_source ?? '')
+                            ->visible(fn (?Lead $record): bool => filled($record?->lead_source)),
                         Placeholder::make('service_display')
                             ->label('Service / Plan')
                             ->content(fn (?Lead $record): string => $record?->service ?: '—'),

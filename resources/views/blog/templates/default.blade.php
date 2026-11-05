@@ -2,7 +2,15 @@
 
 @section('content')
     <x-content-additional-assets :model="$blog" />
-    <article class="blog-detail">
+    @php($blogContactModalCampaign = \App\Support\BlogContactModalCampaign::forBlog($blog))
+    <article
+        class="blog-detail"
+        @if($blogContactModalCampaign)
+            data-blog-contact-modal-auto
+            data-contact-modal-title="{{ $blogContactModalCampaign['title'] }}"
+            data-contact-modal-subtitle="{{ $blogContactModalCampaign['subtitle'] }}"
+        @endif
+    >
         <div class="site-shell blog-detail__layout">
             <div class="blog-detail__main">
                 @php($displayCategory = $blog->category?->root())

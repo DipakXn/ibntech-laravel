@@ -176,7 +176,7 @@
                     </ul>
 
                     <div class="ccms-hero__actions">
-                        <a href="#ccms-consult" class="ccms-btn ccms-btn--green">
+                        <a href="javascript:void(0)" class="ccms-btn ccms-btn--green" data-scroll-target="ccms-form">
                             Schedule Your Free Cloud Assessment
                         </a>
                     </div>
@@ -326,7 +326,7 @@
             <div class="site-shell ccms-cta-banner__inner">
                 <h2 id="ccms-cta-start-title">Ready to Start Your Cloud Journey?</h2>
                 <p>Our cloud migration experts can help you develop a customized approach that aligns with your business goals while minimizing risks and maximizing ROI.</p>
-                <a href="#ccms-consult" class="ccms-btn ccms-btn--green">
+                <a href="javascript:void(0)" class="ccms-btn ccms-btn--green" data-scroll-target="ccms-form">
                     Schedule Your Free Cloud Assessment
                 </a>
             </div>
@@ -407,7 +407,7 @@
             <div class="site-shell ccms-cta-strip__inner">
                 <h2 id="ccms-cta-begin-title">Ready to Begin Your Cloud Journey?</h2>
                 <p>Our cloud migration consulting services will craft a customized strategy that aligns with your business goals while minimizing risks and maximizing ROI.</p>
-                <a href="#ccms-consult" class="ccms-btn ccms-btn--green">
+                <a href="javascript:void(0)" class="ccms-btn ccms-btn--green" data-scroll-target="ccms-form">
                     Schedule Your Free Cloud Assessment
                 </a>
             </div>
@@ -482,7 +482,7 @@
                     </div>
                 </div>
 
-                <aside class="ccms-consult__card" id="ccms-consult-form" aria-labelledby="ccms-consult-form-title">
+                <aside class="ccms-consult__card" id="ccms-consult-form" aria-labelledby="ccms-consult-form-title" data-scroll-anchor="ccms-form">
                     <h3 id="ccms-consult-form-title">Start Your Cloud Migration Today!</h3>
                     <p class="ccms-consult__lede">
                         Let’s move your business to the cloud—fast, secure, and tailored to your needs. Fill out the form now and take the first step toward your digital transformation.

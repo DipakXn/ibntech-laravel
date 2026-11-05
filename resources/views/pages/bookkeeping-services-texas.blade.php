@@ -535,14 +535,7 @@
                             <article class="card-panel case-study-card bktx-article-card" role="listitem">
                                 @if ($article->featuredImageUrl())
                                     <a href="{{ route('articles.show', $article->slug) }}" class="case-study-card__image">
-                                        <img
-                                            src="{{ $article->featuredImageUrl() }}"
-                                            alt="{{ $article->title }}"
-                                            width="640"
-                                            height="400"
-                                            loading="lazy"
-                                            decoding="async"
-                                        >
+                                        <x-featured-image :model="$article" />
                                     </a>
                                 @endif
                                 <p class="meta-chip">Article</p>

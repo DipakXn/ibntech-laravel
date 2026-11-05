@@ -250,6 +250,7 @@ fi
 # paths unless --delete-excluded is added. Do not add --delete-excluded:
 # that would remove .env, .htaccess, storage/, uploads, and public/hot.
 # Never point --delete at public_html.
+# /vendor/ exclude is repo-root Composer only; public/vendor/ (Font Awesome) must sync.
 rsync -a --delete \
   --exclude '.env' \
   --exclude '.env.*' \
@@ -262,7 +263,7 @@ rsync -a --delete \
   --exclude 'storage/' \
   --exclude 'bootstrap/cache/*.php' \
   --exclude 'node_modules/' \
-  --exclude 'vendor/' \
+  --exclude '/vendor/' \
   --exclude 'deploy-config.sh' \
   --exclude '.idea/' \
   --exclude '.vscode/' \
@@ -282,7 +283,7 @@ mkdir -p "$APP_DIR/public/build" "$PUBLIC_DIR/build"
 rsync -a --delete "$SOURCE_DIR/public/build/" "$APP_DIR/public/build/"
 rsync -a --delete "$SOURCE_DIR/public/build/" "$PUBLIC_DIR/build/"
 
-for dir in css js fonts images favicon_io; do
+for dir in css js fonts images favicon_io vendor; do
   if [ -d "$SOURCE_DIR/public/$dir" ]; then
     mkdir -p "$APP_DIR/public/$dir" "$PUBLIC_DIR/$dir"
     rsync -a "$SOURCE_DIR/public/$dir/" "$APP_DIR/public/$dir/"
@@ -320,7 +321,7 @@ echo "Web assets published to $APP_DIR/public and $PUBLIC_DIR."
 
 publish_static_public() {
   local dir
-  for dir in css js fonts images favicon_io; do
+  for dir in css js fonts images favicon_io vendor; do
     if [ -d "$APP_DIR/public/$dir" ]; then
       mkdir -p "$PUBLIC_DIR/$dir"
       rsync -a "$APP_DIR/public/$dir/" "$PUBLIC_DIR/$dir/"

@@ -179,7 +179,7 @@
                         <article class="mca-benefit-card">
                             <img
                                 src="{{ $img($benefit['icon']) }}"
-                                alt=""
+                                alt="{{ $benefit['title'] }}"
                                 width="75"
                                 height="75"
                                 loading="lazy"
@@ -293,8 +293,9 @@
                     @foreach ($audiences as $i => $audience)
                         <button
                             type="button"
+                            role="tab"
                             :class="{ 'is-active': index === {{ $i }} }"
-                            :aria-current="index === {{ $i }} ? 'true' : 'false'"
+                            :aria-selected="index === {{ $i }}"
                             @click="index = {{ $i }}"
                             aria-label="Show {{ $audience['title'] }}"
                         ></button>

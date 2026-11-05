@@ -97,7 +97,7 @@
         <img
             class="lcys-hero__bg"
             src="{{ $lpImg('Cyber-Security-Banner-01-left.webp') }}"
-            alt=""
+            alt="Comprehensive cybersecurity solutions"
             aria-hidden="true"
             width="1920"
             height="700"
@@ -154,7 +154,7 @@
                 @foreach ($services as $service)
                     <article>
                         <span class="lcys-services__icon">
-                            <img src="{{ $lpImg($service['icon']) }}" alt="" width="70" height="70">
+                            <img src="{{ $lpImg($service['icon']) }}" alt="{{ $service['title'] }}" width="70" height="70">
                         </span>
                         <h3>{{ $service['title'] }}</h3>
                         <p>{{ $service['text'] }}</p>
@@ -171,7 +171,7 @@
                 <article>
                     <img
                         src="{{ $lpImg('Cybersecurity-Image-1.webp') }}"
-                        alt=""
+                        alt="Security specialists reviewing infrastructure protection measures"
                         width="391"
                         height="626"
                     >
@@ -184,7 +184,7 @@
                 <article>
                     <img
                         src="{{ $lpImg('Cybersecurity-Image-2.webp') }}"
-                        alt=""
+                        alt="Cybersecurity team monitoring threats and compliance controls"
                         width="443"
                         height="492"
                     >

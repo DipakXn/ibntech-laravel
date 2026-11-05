@@ -7,7 +7,7 @@
 @endphp
 
 @if($imageUrl)
-    <img class="{{ $class }}" src="{{ $imageUrl }}" alt="{{ $post->title }}" loading="lazy">
+    <x-featured-image :model="$post" :conversion="$conversion" :class="$class" />
 @else
     <div class="{{ $class }} blog-image-placeholder" aria-hidden="true">
         <span>{{ $post->category?->name ?? 'IBN' }}</span>

@@ -20,7 +20,7 @@
     ];
 @endphp
 
-<section class="home-section home-section--mint" aria-labelledby="home-finance-title" data-scroll-anchor="finance-section">
+<section id="finance-section" class="home-section home-section--mint" aria-labelledby="home-finance-title" data-scroll-anchor="finance-section">
     <div class="home-shell">
         <div class="flex items-center gap-3">
             <span class="inline-grid h-11 w-11 place-items-center rounded-xl bg-[#1f6b36] text-white">

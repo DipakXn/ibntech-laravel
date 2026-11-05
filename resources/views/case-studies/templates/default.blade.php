@@ -16,7 +16,7 @@
                     </div>
                     @if($caseStudy->featuredImageUrl())
                         <div class="case-study-detail__hero">
-                            <img src="{{ $caseStudy->featuredImageUrl() }}" alt="{{ $caseStudy->title }}">
+                            <x-featured-image :model="$caseStudy" />
                         </div>
                     @endif
                 </section>

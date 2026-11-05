@@ -14,7 +14,7 @@
             <div class="tm-hero__media" aria-hidden="true">
                 <img
                     src="{{ $img('banner-3.webp') }}"
-                    alt=""
+                    alt="Client testimonials for IBN Technologies"
                     width="1400"
                     height="700"
                     fetchpriority="high"
@@ -30,6 +30,6 @@
             </div>
         </section>
 
-        <x-home.testimonials />
+        <x-home.testimonials autoplay />
     </div>
 @endsection

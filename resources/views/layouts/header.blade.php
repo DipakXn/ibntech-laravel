@@ -1,5 +1,5 @@
 {{-- Fully custom IBNTech header (static menu; page URLs to be wired later). --}}
-<header class="site-ibn-header">
+<header class="site-ibn-header" id="site-header">
     <div class="site-ibn-topbar">
         <div class="site-ibn-topbar__inner">
             <div class="site-ibn-topbar__badge">SINCE 1999 | ISO 9001:2015 | 20000-1:2018 | 27001:2022</div>
@@ -27,4 +27,6 @@
     <div class="site-ibn-navbar">
         @include('partials.site-navbar')
     </div>
+
+    <button type="button" class="site-ibn-nav-backdrop" hidden aria-label="Close menu"></button>
 </header>

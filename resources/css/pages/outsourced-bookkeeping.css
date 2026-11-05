@@ -299,7 +299,7 @@
 
 .osbk-stats__card strong {
     font-size: clamp(1.8rem, 3vw, 2.35rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
 }
 
@@ -405,7 +405,7 @@
     margin: 0.7rem 0 0;
     color: var(--osbk-navy);
     font-size: clamp(2.1rem, 3vw, 2.55rem);
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.1;
 }

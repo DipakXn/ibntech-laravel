@@ -431,7 +431,7 @@
                         Transform your financial operations with our cutting-edge business book keeping services in the USA and UK.
                     </p>
                     <div class="bkpsvc-hero__actions">
-                        <a href="#bkpsvc-consult" class="bkpsvc-btn bkpsvc-btn--navy">
+                        <a href="javascript:void(0)" class="bkpsvc-btn bkpsvc-btn--navy" data-scroll-target="bkpsvc-form">
                             Get Started with 20-Hour Free Trial
                             <i class="fa-solid fa-circle-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -552,7 +552,7 @@
             <div class="site-shell bkpsvc-cta__inner">
                 <h2 id="bkpsvc-cta-success-title">Want to become our next success story?</h2>
                 <p>Join hundreds of businesses that have transformed their financial operations with our outsourced bookkeeping services.</p>
-                <a href="#" class="bkpsvc-btn bkpsvc-btn--light" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="bkpsvc-btn bkpsvc-btn--light" data-scroll-target="bkpsvc-form">
                     <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                     Schedule Your Free Consultation
                 </a>
@@ -598,7 +598,7 @@
                                 @if (! empty($service['image']))
                                     <img
                                         src="{{ $img($service['image']) }}"
-                                        alt=""
+                                        alt="{{ $service['title'] }}"
                                         width="65"
                                         height="65"
                                         loading="lazy"
@@ -651,7 +651,7 @@
                         <header class="bkpsvc-region__head">
                             <img
                                 src="{{ $img('united-states-flag-icon.webp') }}"
-                                alt=""
+                                alt="United States"
                                 width="48"
                                 height="48"
                                 loading="lazy"
@@ -681,7 +681,7 @@
                         <header class="bkpsvc-region__head">
                             <img
                                 src="{{ $img('united-kingdom-flag-icon.webp') }}"
-                                alt=""
+                                alt="United Kingdom"
                                 width="48"
                                 height="48"
                                 loading="lazy"
@@ -823,7 +823,7 @@
             <div class="site-shell bkpsvc-cta__inner">
                 <h2 id="bkpsvc-cta-books-title">Books a mess? Let’s fix them today!</h2>
                 <p>Get your records cleaned up, reconciled, and ready for tax season and business decision.</p>
-                <a href="#" class="bkpsvc-btn bkpsvc-btn--light" data-contact-modal-trigger>
+                <a href="javascript:void(0)" class="bkpsvc-btn bkpsvc-btn--light" data-scroll-target="bkpsvc-form">
                     Start with a free consultation
                 </a>
             </div>
@@ -891,7 +891,7 @@
                                     @if (! empty($service['image']))
                                         <img
                                             src="{{ $img($service['image']) }}"
-                                            alt=""
+                                            alt="{{ $service['title'] }}"
                                             width="52"
                                             height="52"
                                             loading="lazy"
@@ -935,7 +935,7 @@
                     </div>
                 </div>
 
-                <aside class="bkpsvc-consult__card" aria-labelledby="bkpsvc-consult-title">
+                <aside class="bkpsvc-consult__card" aria-labelledby="bkpsvc-consult-title" data-scroll-anchor="bkpsvc-form">
                     <h3 id="bkpsvc-consult-title">Simplify Your Finances with Bookkeeping</h3>
                     <p>Fill out the form, and we'll handle the rest.</p>
 

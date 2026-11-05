@@ -3,12 +3,14 @@
 namespace App\Filament\Resources\Articles\Pages;
 
 use App\Filament\Resources\Articles\ArticleResource;
+use App\Filament\Concerns\HasContentTrashTabs;
 use App\Filament\Resources\Concerns\ShowsPeriodOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListArticles extends ListRecords
 {
+    use HasContentTrashTabs;
     use ShowsPeriodOverview;
 
     protected static string $resource = ArticleResource::class;

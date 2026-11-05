@@ -194,7 +194,7 @@ html:has(.lcsi-page) {
     border-radius: 0.35rem !important;
     background: #fff !important;
     color: #172033 !important;
-    font-size: 0.86rem !important;
+    /* font-size: 0.86rem !important; */
     min-height: 0;
     line-height: 1.35;
 }

@@ -73,7 +73,7 @@
         padding: 0.55rem 0.95rem;
         color: #2e2e80;
         font-size: 0.82rem;
-        font-weight: 800;
+        font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
     }
@@ -129,7 +129,7 @@
         padding: 1rem 1.6rem;
         color: #fff;
         text-decoration: none;
-        font-weight: 800;
+        font-weight: 700;
         box-shadow: 0 16px 32px rgba(76, 175, 80, 0.28);
         transition:
             transform 0.25s ease,

@@ -19,6 +19,7 @@
             'title' => $item->title,
             'text' => $item->excerpt ?: \App\Support\BlockContent::summary($item->content, 120),
             'image' => $item->featuredImageUrl(),
+            'dimensions' => method_exists($item, 'featuredImageDimensions') ? $item->featuredImageDimensions() : null,
             'icon' => $icon,
             'cta' => $cta,
             'route' => route($routeName, $item->slug),
@@ -94,13 +95,16 @@
 
                     @if ($row['latest'])
                         <article class="home-card home-featured-card">
-                            <a href="{{ $row['latest']['route'] }}" class="home-featured-card__media" aria-label="{{ $row['latest']['title'] }}">
+                            <a href="{{ $row['latest']['route'] }}" class="home-featured-card__media">
+                                <span class="sr-only">{{ $row['latest']['title'] }}</span>
                                 @if (! empty($row['latest']['image']))
                                     <img
                                         src="{{ $row['latest']['image'] }}"
                                         alt="{{ $row['latest']['title'] }}"
-                                        width="280"
-                                        height="180"
+                                        @if (! empty($row['latest']['dimensions']))
+                                            width="{{ $row['latest']['dimensions']['width'] }}"
+                                            height="{{ $row['latest']['dimensions']['height'] }}"
+                                        @endif
                                         loading="lazy"
                                         decoding="async"
                                     >

@@ -129,7 +129,7 @@
         <img
             class="lmss-hero__bg"
             src="{{ $lpImg('Microsoft-Security-Services-1.webp') }}"
-            alt=""
+            alt="Managed SOC as a service"
             aria-hidden="true"
             width="1920"
             height="700"
@@ -165,7 +165,7 @@
         <div class="lmss-shell">
             <img
                 src="{{ $lpImg('Microsoft-Solutions-Partner.webp') }}"
-                alt="Microsoft Solutions Partner badges for Digital &amp; App Innovation, Modern Work, Security, and Azure"
+                alt="Microsoft Solutions Partner badges for Digital, Modern Work, Security, and Azure"
                 width="1400"
                 height="150"
             >

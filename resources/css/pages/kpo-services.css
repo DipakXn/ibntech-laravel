@@ -170,7 +170,7 @@
 .kpo-stats__item strong {
     display: block;
     font-size: clamp(1.75rem, 3vw, 2.35rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
     color: var(--kpo-stat);
 }

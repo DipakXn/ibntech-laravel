@@ -11,7 +11,7 @@
             <img
                 class="asi-hero__bg"
                 src="{{ asset('images/accounting-system-and-integration/accounting-system-and-integration.webp') }}"
-                alt=""
+                alt="Accounting system and integration services"
                 aria-hidden="true"
                 width="1400"
                 height="700"

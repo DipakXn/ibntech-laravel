@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Ebooks\Pages;
 
+use App\Filament\Concerns\HasContentTrashTabs;
 use App\Filament\Resources\Concerns\ShowsPeriodOverview;
 use App\Filament\Resources\Ebooks\EbookResource;
 use Filament\Actions\CreateAction;
@@ -9,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListEbooks extends ListRecords
 {
+    use HasContentTrashTabs;
     use ShowsPeriodOverview;
 
     protected static string $resource = EbookResource::class;

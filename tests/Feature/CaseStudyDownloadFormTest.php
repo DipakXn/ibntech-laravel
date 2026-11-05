@@ -8,6 +8,7 @@ use App\Livewire\Forms\CaseStudyDownloadForm;
 use App\Mail\CaseStudyThankYouMail;
 use App\Models\CaseStudy;
 use App\Models\Lead;
+use App\Support\LeadSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
@@ -52,6 +53,7 @@ class CaseStudyDownloadFormTest extends TestCase
 
         $this->assertNotNull($lead);
         $this->assertSame('Cloud Migration', data_get($lead->payload, 'asset_title'));
+        $this->assertSame(LeadSource::ORGANIC_SEO, data_get($lead->payload, 'lead_source'));
 
         Queue::assertPushed(SendLeadSubmissionNotification::class, 1);
         Queue::assertPushed(

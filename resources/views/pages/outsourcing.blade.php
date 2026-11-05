@@ -385,7 +385,7 @@
             <div class="site-shell out-ribbon__inner">
                 <img
                     src="{{ $img('outsourcing1.webp') }}"
-                    alt=""
+                    alt="Global outsourcing partnership"
                     width="120"
                     height="80"
                     loading="lazy"

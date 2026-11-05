@@ -15,7 +15,8 @@
     wire:target="submit"
 >
     <input type="hidden" wire:model="formName">
-    <input type="hidden" wire:model="pageUrl">
+    <x-forms.submission-page-url-hidden />
+    <x-forms.lead-source-hidden />
     @if($formName === 'pricing-enquire')
         <input type="hidden" wire:model="service" name="package_selected" aria-hidden="true">
     @endif
@@ -47,7 +48,7 @@
         <div class="contact-form__row">
             <div class="contact-form__field">
                 <label class="sr-only" for="{{ $fieldId('phone') }}">Contact Number</label>
-                <x-forms.phone-input :id="$fieldId('phone')" model="phone" name="phone" placeholder="Contact Number" />
+                <x-forms.phone-input :id="$fieldId('phone')" model="phone" name="phone" placeholder="Contact Number" aria-label="Contact Number" />
                 @error('phone') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
             </div>
             <div class="contact-form__field">
@@ -65,7 +66,7 @@
         <div class="contact-form__row">
             <div class="contact-form__field">
                 <label class="sr-only" for="{{ $fieldId('phone') }}">Contact Number</label>
-                <x-forms.phone-input :id="$fieldId('phone')" model="phone" name="phone" placeholder="{{ $isTrialLayout ? 'Contact No' : 'Contact Number' }}" />
+                <x-forms.phone-input :id="$fieldId('phone')" model="phone" name="phone" placeholder="{{ $isTrialLayout ? 'Contact No' : 'Contact Number' }}" :aria-label="$isTrialLayout ? 'Contact No' : 'Contact Number'" />
                 @error('phone') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
             </div>
             <div class="contact-form__field">
@@ -95,6 +96,7 @@
                 model="phone"
                 name="phone"
                 :placeholder="$isModalLayout ? 'Phone Number' : 'Contact Number'"
+                :aria-label="$isModalLayout ? 'Phone Number' : 'Contact Number'"
             />
             @error('phone') <p class="mt-1 text-xs text-red-600" role="alert">{{ $message }}</p> @enderror
         </div>

@@ -217,7 +217,7 @@
                     </ul>
                 </div>
 
-                <aside class="mss-hero__form" id="mss-quote" aria-labelledby="mss-form-title">
+                <aside class="mss-hero__form" id="mss-quote" aria-labelledby="mss-form-title" data-scroll-anchor="mss-form">
                     <h2 id="mss-form-title">Get Your SOC and SIEM Consultation</h2>
                     <livewire:forms.contact-form
                         form-name="managed-siem-soc-services"
@@ -387,7 +387,7 @@
             <div class="site-shell mss-cta__inner">
                 <h2 id="mss-cta-title">Get Expert Security Protection Now</h2>
                 <p>Using a combined SIEM and SOC service is a powerful protection against today's advanced threats. Schedule a consultation to see how we can help.</p>
-                <a href="#mss-quote" class="button-primary">Schedule Security Consultation</a>
+                <a href="javascript:void(0)" class="button-primary" data-scroll-target="mss-form">Schedule Security Consultation</a>
             </div>
         </section>
 
@@ -450,7 +450,7 @@
             <div class="site-shell mss-cta__inner">
                 <h2 id="mss-cta2-title">Ready to Strengthen Your Security Posture?</h2>
                 <p>Using a combined SIEM and SOC service is a powerful protection against today's advanced threats. Schedule a consultation to see how we can help.</p>
-                <a href="#mss-quote" class="button-primary">Schedule Security Consultation</a>
+                <a href="javascript:void(0)" class="button-primary" data-scroll-target="mss-form">Schedule Security Consultation</a>
             </div>
         </section>
 

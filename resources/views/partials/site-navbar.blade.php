@@ -18,8 +18,8 @@
 
     <div class="d-block d-sm-none">
       <div class="calls-sec">
-        <a class="Bookmeeting1" href="#" data-contact-modal-trigger>
-          <span>Book a Meeting</span>
+        <a class="Bookmeeting1" href="javascript:void(0)" data-contact-modal-trigger>
+          <span>Get In Touch</span>
         </a>
       </div>
     </div>
@@ -1135,9 +1135,9 @@
 
     <div class="d-none d-sm-block">
       <div class="calls-sec">
-        <a class="Bookmeeting" href="#" data-contact-modal-trigger>
-          <i class="fa-solid fa-paper-plane Bookmeeting__icon" aria-hidden="true"></i>
+        <a class="Bookmeeting" href="javascript:void(0)" data-contact-modal-trigger>
           <span>Get In Touch</span>
+          <i class="fa-solid fa-paper-plane Bookmeeting__icon" aria-hidden="true"></i>
         </a>
       </div>
     </div>

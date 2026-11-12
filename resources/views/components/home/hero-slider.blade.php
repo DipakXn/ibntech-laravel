@@ -35,9 +35,14 @@
                 </p>
                 <p class="home-hero__description">24/7 Managed Cybersecurity: Anytime, Anywhere Protection for Your Digital Assets-Uniting Performance, Protection, and Leadership</p>
                 <div class="home-hero__actions">
-                    <a href="javascript:void(0)" class="home-btn home-btn--green" data-scroll-target="home-form">
-                        Contact Our Expert
-                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    <a href="javascript:void(0)" class="home-btn home-btn--green home-btn--hero-expert" data-scroll-target="home-form">
+                        <span class="home-btn__hero-lead">
+                            <span class="home-btn__hero-icon" aria-hidden="true">
+                                <i class="fa-solid fa-headset"></i>
+                            </span>
+                        </span>
+                        <span class="home-btn__hero-label">Contact Our Expert</span>
+                        <i class="fa-solid fa-angle-right home-btn__hero-chevron" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>

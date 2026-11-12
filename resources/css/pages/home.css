@@ -283,7 +283,54 @@
     box-shadow: 0 12px 24px rgba(76, 175, 80, 0.28);
 }
 
-.home-hero__actions .home-btn i {
+.home-hero__actions .home-btn--hero-expert {
+    gap: 0.75rem;
+    padding: 7px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    background: linear-gradient(90deg, #1e3a8a 0%, #84cc16 100%);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.35);
+}
+
+.home-hero__actions .home-btn--hero-expert:hover {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.42);
+}
+
+.home-hero__actions .home-btn--hero-expert:focus-visible {
+    outline-color: #fff;
+}
+
+.home-hero__actions .home-btn__hero-lead {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    padding-right: 0.85rem;
+    margin-right: 0.1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.38);
+}
+
+.home-hero__actions .home-btn__hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    font-size: 0.95rem;
+}
+
+.home-hero__actions .home-btn__hero-label {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.home-hero__actions .home-btn__hero-chevron {
+    flex: 0 0 auto;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.home-hero__actions .home-btn:not(.home-btn--hero-expert) i {
     font-size: 0.72rem;
 }
 

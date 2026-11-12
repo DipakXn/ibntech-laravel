@@ -1136,6 +1136,7 @@
     <div class="d-none d-sm-block">
       <div class="calls-sec">
         <a class="Bookmeeting" href="#" data-contact-modal-trigger>
+          <i class="fa-solid fa-paper-plane Bookmeeting__icon" aria-hidden="true"></i>
           <span>Get In Touch</span>
         </a>
       </div>

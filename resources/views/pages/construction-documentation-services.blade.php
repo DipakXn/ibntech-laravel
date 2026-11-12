@@ -138,7 +138,11 @@
 @section('content')
     <div class="cds-page">
         {{-- Hero --}}
-        <section class="cds-hero" aria-labelledby="cds-hero-title">
+        <section
+            class="cds-hero"
+            aria-labelledby="cds-hero-title"
+            style="--cds-hero-image: url('{{ $img('RFI-hero-background.webp') }}')"
+        >
             <div class="site-shell cds-hero__inner">
                 <div class="cds-hero__copy">
                     <h1 id="cds-hero-title">

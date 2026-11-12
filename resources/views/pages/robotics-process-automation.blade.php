@@ -432,7 +432,7 @@
                         :show-service="false"
                         message-placeholder="Project Description"
                         submit-label="Submit"
-                        layout="default"
+                        layout="vapt"
                         :message-rows="2"
                     />
                 </aside>

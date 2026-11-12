@@ -537,6 +537,7 @@
     color: var(--ecr-ink);
     font-size: 0.96rem;
     line-height: 1.5;
+    padding: 0 1.5rem;
 }
 
 .ecr-choose__list i {

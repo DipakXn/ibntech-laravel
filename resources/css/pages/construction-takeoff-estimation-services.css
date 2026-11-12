@@ -106,13 +106,15 @@
     position: relative;
     overflow: hidden;
     background-color: var(--ctes-hero);
-    background-image:
-        radial-gradient(rgba(29, 33, 99, 0.045) 0.9px, transparent 1px),
-        linear-gradient(180deg, #f7f7f7 0%, #efefef 100%);
-    background-size: 3px 3px, 100% 100%;
+    background-image: var(--ctes-hero-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .ctes-hero__inner {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.82fr);
     gap: 2.75rem 3.25rem;
@@ -195,7 +197,8 @@
 }
 
 .ctes-hero__form .contact-form__row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
 }
 
 .ctes-hero__form .contact-form__field input,
@@ -647,6 +650,10 @@
     .ctes-software img {
         max-width: 7.5rem;
         max-height: 2.35rem;
+    }
+
+    .ctes-hero__form .contact-form__row {
+        grid-template-columns: 1fr;
     }
 
     .ctes-hero__form .consent-tooltip__content {

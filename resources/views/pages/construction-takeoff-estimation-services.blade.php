@@ -140,7 +140,11 @@
 @section('content')
     <div class="ctes-page">
         {{-- Hero --}}
-        <section class="ctes-hero" aria-labelledby="ctes-hero-title">
+        <section
+            class="ctes-hero"
+            aria-labelledby="ctes-hero-title"
+            style="--ctes-hero-image: url('{{ $img('construction-takeoff-and-estimation-services-background.webp') }}')"
+        >
             <div class="site-shell ctes-hero__inner">
                 <div class="ctes-hero__copy">
                     <h1 id="ctes-hero-title">

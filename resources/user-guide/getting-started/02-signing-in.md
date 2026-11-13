@@ -18,7 +18,9 @@ There is no public registration page. An administrator creates accounts under **
 
 ## Profile and password
 
-Use the user menu in the top bar to open your profile. You can change your name, email, and password there. Changing your role is done by another administrator on the Users screen, not from the profile page.
+Use the user menu in the top bar to open your profile. You can change your name, email, and password there. A new password needs at least 12 characters, with uppercase and lowercase letters, a number, and a symbol. Changing your role is done by another administrator on the Users screen, not from the profile page.
+
+If you forget the password, open `/admin/password-reset/request` and use the email on your account. An administrator can also send that reset link from the user record. Two-factor authentication is not enabled.
 
 ## Appearance
 
@@ -32,4 +34,5 @@ Sessions use the database driver. The default lifetime is 120 minutes (`SESSION_
 
 - Confirm the account exists and the email is spelled the same way as in Users.
 - Authors can sign in, but they will not see this guide or other administrator screens.
-- A user whose email is `admin@example.com` is always treated as an administrator, even when the role field says Author. Do not reuse that address for an author account.
+- An inactive account cannot sign in, even when the email and password are correct.
+- Production administrator access follows the role stored on the user. Do not reuse `admin@example.com` for an author account in local development, because that mailbox stays an administrator there unless `CMS_LEGACY_SUPER_ADMIN_EMAILS` is set.

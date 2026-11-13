@@ -38,7 +38,7 @@ The public-site toolbar follows the same rules. An author does not get administr
 
 ## Special case
 
-`User::isAdministrator()` is true when the role is `administrator` **or** the email is `admin@example.com`. Treat that mailbox as an administrator account only.
+Administrator access is the `administrator` role on an active account. `CMS_LEGACY_SUPER_ADMIN_EMAILS` can list extra mailboxes that stay administrators even when the role says Author. That list is empty unless the environment sets it. Local development, when the variable is omitted, still treats `admin@example.com` as an administrator so the seeded local account keeps its previous access. Do not rely on that mailbox in production.
 
 ## Changing access
 

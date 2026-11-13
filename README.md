@@ -651,8 +651,9 @@ Two roles are defined in `User.php`:
 | `ROLE_AUTHOR` | `author` | Admin panel access, limited to content management |
 
 ### Access Control
-- `canAccessPanel(Panel $panel)` grants access to users with `administrator` or `author` roles
-- The `isAdministrator()` check also includes a hardcoded fallback for `admin@example.com`
+- `canAccessPanel(Panel $panel)` grants access to active users with `administrator` or `author` roles
+- `isAdministrator()` is the `administrator` role, plus any emails listed in `CMS_LEGACY_SUPER_ADMIN_EMAILS`. When that variable is omitted, local development still treats `admin@example.com` as an administrator
+- Inactive accounts cannot open the panel
 - The **Queue Monitor** page is restricted to `isAdministrator()` users only
 
 ### Session
@@ -667,7 +668,7 @@ Two roles are defined in `User.php`:
 - **URL:** `/admin`
 - **Default credentials (after seeding):**
   - Email: `admin@example.com`
-  - Password: `password`
+  - Password: `password` on a new local database only. Seeding does not reset an existing user's password. Outside local, set `SEED_ADMIN_PASSWORD` before creating the first seeded accounts.
 
 ### Panel Configuration
 - Brand name: **IBNTECH Control**

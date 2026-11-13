@@ -3,12 +3,14 @@
 namespace App\Providers\Filament;
 
 use App\CmsPreview\CmsPreviewType;
+use App\Filament\Auth\EditProfile;
 use App\Filament\Auth\Login;
 use App\Filament\Clusters\SmtpSettings\Pages\SmtpConfiguration;
 use App\Filament\Clusters\SmtpSettings\Pages\TestSmtp;
 use App\Filament\Clusters\SmtpSettings\Resources\EmailLogs\EmailLogResource;
 use App\Filament\Pages\AdminDashboard;
 use App\Filament\Resources\OldSubmissions\OldSubmissionResource;
+use App\Http\Controllers\Admin\ExportUsersController;
 use App\Http\Controllers\AdminToolbarCacheController;
 use App\Http\Controllers\CmsPreviewController;
 use Filament\Enums\ThemeMode;
@@ -49,7 +51,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->loginRouteSlug(Login::ROUTE_PATH)
-            ->profile()
+            ->passwordReset()
+            ->profile(EditProfile::class)
             ->brandName('IBNTECH Control')
             ->brandLogo(new HtmlString('
                 <div class="ibn-brand-lockup">
@@ -102,6 +105,8 @@ class AdminPanelProvider extends PanelProvider
                     ->name('content-preview');
                 Route::post('/clear-cache', [AdminToolbarCacheController::class, 'store'])
                     ->name('clear-cache');
+                Route::get('/users/export', ExportUsersController::class)
+                    ->name('users.export');
             })
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->middleware([

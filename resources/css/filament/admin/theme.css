@@ -2592,6 +2592,28 @@ body.fi-body.ibn-login-screen,
     background: rgba(148, 163, 184, 0.08);
 }
 
+.ibn-user-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: #2e2e80;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+    .ibn-user-avatar {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.7rem;
+    }
+}
+
 @media (max-width: 960px) {
     .ibn-user-guide {
         grid-template-columns: 1fr;

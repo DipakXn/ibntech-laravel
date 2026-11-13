@@ -27,6 +27,7 @@ use App\Services\WebsiteSettingService;
 use App\Support\AdminToolbar\AdminToolbar;
 use App\Support\Cloudflare\CloudflareProxies;
 use App\Support\Mail\SmtpExceptionSanitizer;
+use App\Support\Users\PasswordPolicy;
 use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobFailed;
@@ -74,6 +75,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        PasswordPolicy::register();
+
         $this->trustCloudflareProxies();
 
         $this->app->terminating(function (): void {

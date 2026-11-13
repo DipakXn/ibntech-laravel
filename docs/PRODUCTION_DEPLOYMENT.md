@@ -533,7 +533,9 @@ php artisan db:seed --force
 > | Administrator | `admin@example.com` | `password` |
 > | Author | `author@example.com` | `password` |
 >
-> **Change these passwords immediately** after first login at `/admin`. Prefer creating production users with real emails before go-live and disabling or deleting demo accounts.
+> **Change these passwords immediately** after first login at `/ibn-tech-cms-login`. Prefer creating production users with real emails before go-live and deactivating or deleting demo accounts.
+>
+> Seeding does not overwrite an existing user's password or role. On a new production database, set `SEED_ADMIN_PASSWORD` before `db:seed`. Leave `CMS_LEGACY_SUPER_ADMIN_EMAILS` empty so administrator access comes only from the role column. The local default password `password` is not used outside the local environment.
 
 > [!TIP]
 > On an existing production database that already has content, run **only** `php artisan migrate --force`. Do **not** re-seed `CmsDemoSeeder` unless you intentionally want demo content.

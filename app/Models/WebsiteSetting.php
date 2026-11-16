@@ -54,6 +54,7 @@ class WebsiteSetting extends Model implements HasMedia
         'bing_site_verification',
         'custom_head_code',
         'custom_body_end_code',
+        'maintenance_enabled',
     ];
 
     protected function casts(): array
@@ -69,6 +70,7 @@ class WebsiteSetting extends Model implements HasMedia
             'sitemap_cache_ttl' => 'integer',
             'sitemap_types' => 'array',
             'sitemap_custom_urls' => 'array',
+            'maintenance_enabled' => 'boolean',
         ];
     }
 

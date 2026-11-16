@@ -79,7 +79,7 @@ class WebsiteSettings extends Page
     {
         $data = $this->form->getState();
         $overrides = $data['form_notification_overrides'] ?? [];
-        unset($data['form_notification_overrides']);
+        unset($data['form_notification_overrides'], $data['maintenance_enabled']);
 
         if (isset($this->data['sitemap_types']) && is_array($this->data['sitemap_types'])) {
             $data['sitemap_types'] = $this->data['sitemap_types'];

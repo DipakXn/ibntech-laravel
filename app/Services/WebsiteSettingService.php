@@ -125,6 +125,7 @@ class WebsiteSettingService
             'bing_site_verification' => null,
             'custom_head_code' => null,
             'custom_body_end_code' => null,
+            'maintenance_enabled' => false,
         ];
     }
 

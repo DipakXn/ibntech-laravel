@@ -6,6 +6,7 @@ use App\CmsPreview\CmsPreviewType;
 use App\Filament\Clusters\SmtpSettings\Pages\SmtpConfiguration;
 use App\Filament\Pages\CloudflareCache;
 use App\Filament\Pages\LogViewer;
+use App\Filament\Pages\MaintenanceMode;
 use App\Filament\Pages\QueueMonitor;
 use App\Filament\Pages\SystemMaintenance;
 use App\Filament\Pages\VisitorAnalytics;
@@ -218,6 +219,7 @@ class AdminToolbar
             [QueueMonitor::class, 'canAccess', 'Queue monitor'],
             [LogViewer::class, 'canAccess', 'Application logs'],
             [CloudflareCache::class, 'canAccess', 'Cloudflare cache'],
+            [MaintenanceMode::class, 'canAccess', 'Maintenance Mode'],
             [SystemMaintenance::class, 'canAccess', 'Cache Management'],
         ];
 

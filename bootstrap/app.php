@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\EnsureTrailingSlash;
 use App\Http\Middleware\PreventAuthenticatedPublicCache;
+use App\Http\Middleware\PreventPublicAccessDuringMaintenance;
 use App\Http\Middleware\TrackPublicPageView;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
@@ -35,6 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->append(EnsureTrailingSlash::class);
         $middleware->web(append: [
+            PreventPublicAccessDuringMaintenance::class,
             TrackPublicPageView::class,
             PreventAuthenticatedPublicCache::class,
         ]);

@@ -98,12 +98,14 @@ class SystemMaintenanceTest extends TestCase
         ]);
 
         $this->assertSame('Administration', SystemMaintenance::getNavigationGroup());
-        $this->assertSame('System Maintenance', SystemMaintenance::getNavigationLabel());
+        $this->assertSame('Cache Management', SystemMaintenance::getNavigationLabel());
+        $this->assertSame('system-maintenance', SystemMaintenance::getSlug());
 
         $this->actingAs($admin)
             ->get('/admin/system-maintenance')
             ->assertOk()
-            ->assertSee('System Maintenance')
+            ->assertSee('Cache Management')
+            ->assertSee('Monitor and manage application, framework, and sitemap caches.')
             ->assertSee('ibn-maintenance-status', false)
             ->assertSee('ibn-maintenance-card--all', false)
             ->assertSee('Cache status')

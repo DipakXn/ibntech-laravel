@@ -3,7 +3,7 @@ title: Queues, logs, and maintenance
 group: Administration
 summary: Inspect failed jobs, read application logs, and clear cache without touching content.
 sort: 20
-keywords: queue, failed job, log viewer, cache, compiled views, QUEUE_MONITOR_MAX
+keywords: queue, failed job, log viewer, cache, cache management, compiled views, QUEUE_MONITOR_MAX
 ---
 
 These screens are administrator-only. None of them deletes CMS content.
@@ -34,9 +34,9 @@ Open **Administration → Application logs**.
 
 Use this after a failed queue retry or a public error. Telescope, when enabled, is a separate developer tool and is also limited to administrators.
 
-## System maintenance
+## Cache Management
 
-Open **Administration → System Maintenance**. Each action asks you to confirm.
+Open **Administration → Cache Management**. Monitor and manage application, framework, and sitemap caches. Each action asks you to confirm.
 
 The page also shows the cache store name and whether a route or configuration cache file exists. That status is read-only.
 

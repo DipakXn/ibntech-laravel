@@ -23,7 +23,7 @@ The public site is Blade-rendered. Editors do not write page templates in the pa
 | Workspace | The control-center dashboard: content coverage, recent activity, and, for administrators, submission and visitor snapshots. |
 | Content | Pages, industries, landing pages, newsletters, blogs, articles, case studies, eBooks, white papers, press releases, and their categories. |
 | Sales | Form submissions, plus the archived Old Submissions import. Both are administrator-only. |
-| Administration | Users, this guide, website settings, SMTP, Cloudflare, visitor analytics, maintenance, the queue monitor, application logs, and excluded analytics IPs. |
+| Administration | Users, this guide, website settings, SMTP, Cloudflare, visitor analytics, Cache Management, the queue monitor, application logs, and excluded analytics IPs. |
 
 Authors see a shorter sidebar. Pages, industries, landing pages, newsletters, Sales, and Administration items are not registered for them. See [Roles and access](topic:roles-and-access).
 

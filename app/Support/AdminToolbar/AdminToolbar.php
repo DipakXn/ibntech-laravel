@@ -218,7 +218,7 @@ class AdminToolbar
             [QueueMonitor::class, 'canAccess', 'Queue monitor'],
             [LogViewer::class, 'canAccess', 'Application logs'],
             [CloudflareCache::class, 'canAccess', 'Cloudflare cache'],
-            [SystemMaintenance::class, 'canAccess', 'System maintenance'],
+            [SystemMaintenance::class, 'canAccess', 'Cache Management'],
         ];
 
         $links = [];

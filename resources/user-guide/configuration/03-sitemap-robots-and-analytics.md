@@ -21,7 +21,7 @@ Configure them in **Website Settings**:
 
 A record is omitted when **Include in sitemap** is off, the robots value is `noindex`, a redirect URL is set, or the canonical URL does not match. Child sitemaps split at 50,000 URLs.
 
-Saving website settings clears the sitemap cache. You can also clear only that cache from **System Maintenance → Clear Sitemap Cache**.
+Saving website settings clears the sitemap cache. You can also clear only that cache from **Cache Management → Clear Sitemap Cache**.
 
 ## Robots
 

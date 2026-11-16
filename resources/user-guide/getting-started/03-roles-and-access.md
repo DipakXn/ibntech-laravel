@@ -19,7 +19,7 @@ Authors can list, create, edit, and move to trash:
 - White papers and white paper categories
 - Press releases and press release categories
 
-Authors do not see Pages, Industries, Landing Pages, Newsletters, Sales, Users, Website Settings, SMTP, analytics, Cloudflare, maintenance, queues, logs, excluded IPs, or this User Guide.
+Authors do not see Pages, Industries, Landing Pages, Newsletters, Sales, Users, Website Settings, SMTP, analytics, Cloudflare, Cache Management, queues, logs, excluded IPs, or this User Guide.
 
 ## Administrator
 
@@ -32,7 +32,7 @@ Administrators can do everything authors can, and also:
 | Accounts | Administration → Users |
 | This handbook | Administration → User Guide |
 | Site configuration | Website Settings, SMTP Settings |
-| Operations | Cloudflare Cache, Visitor analytics, Excluded IPs, System Maintenance, Queue monitor, Application logs |
+| Operations | Cloudflare Cache, Visitor analytics, Excluded IPs, Cache Management, Queue monitor, Application logs |
 
 The public-site toolbar follows the same rules. An author does not get administrator shortcuts, and **Clear cache** returns forbidden for anyone who is not an administrator.
 

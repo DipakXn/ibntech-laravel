@@ -25,19 +25,19 @@ class SystemMaintenance extends Page
 {
     public const APPLICATION_CACHE_CONFIRMATION = 'This removes every entry in the configured cache store, including sitemap XML, cached website settings, the cookie-consent snapshot, and rate-limit counters. Sessions, queue jobs, database content, cache locks, compiled views, and the route and configuration cache files stay in place.';
 
-    protected static ?string $title = 'System Maintenance';
+    protected static ?string $title = 'Cache Management';
 
     protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
 
     protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
-    protected static ?string $navigationLabel = 'System Maintenance';
+    protected static ?string $navigationLabel = 'Cache Management';
 
     protected static ?string $slug = 'system-maintenance';
 
     protected static ?int $navigationSort = 9;
 
-    protected ?string $subheading = 'Clear sitemap, application, view, route, and configuration caches. Nothing is rebuilt from this screen.';
+    protected ?string $subheading = 'Monitor and manage application, framework, and sitemap caches.';
 
     protected Width|string|null $maxContentWidth = 'full';
 

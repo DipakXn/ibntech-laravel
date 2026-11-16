@@ -68,9 +68,10 @@ class SystemMaintenance extends Page
                 Section::make('Cache status')
                     ->description('Read-only. Shows the cache store and whether route and configuration cache files exist.')
                     ->icon(Heroicon::OutlinedInformationCircle)
+                    ->extraAttributes(['class' => 'ibn-maintenance-status'])
                     ->columns([
                         'default' => 1,
-                        'md' => 3,
+                        'sm' => 3,
                     ])
                     ->schema([
                         Placeholder::make('cache_store')
@@ -85,8 +86,11 @@ class SystemMaintenance extends Page
                     ]),
                 Grid::make([
                     'default' => 1,
-                    'lg' => 3,
-                ])->schema([
+                    'md' => 2,
+                    'xl' => 3,
+                ])
+                    ->extraAttributes(['class' => 'ibn-maintenance-actions'])
+                    ->schema([
                     $this->maintenanceSection(
                         heading: 'Clear Sitemap Cache',
                         description: 'Removes cached XML sitemaps so they are regenerated on the next request.',
@@ -122,6 +126,7 @@ class SystemMaintenance extends Page
                         description: 'Clears the configuration cache, route cache, compiled views, and application cache, in that order.',
                         icon: Heroicon::OutlinedCircleStack,
                         action: $this->clearAllApplicationCacheAction(),
+                        extraClass: 'ibn-maintenance-card--all',
                     ),
                 ]),
             ]);
@@ -265,11 +270,14 @@ class SystemMaintenance extends Page
             });
     }
 
-    private function maintenanceSection(string $heading, string $description, Heroicon $icon, Action $action): Section
+    private function maintenanceSection(string $heading, string $description, Heroicon $icon, Action $action, string $extraClass = ''): Section
     {
         return Section::make($heading)
             ->description($description)
             ->icon($icon)
+            ->extraAttributes([
+                'class' => trim('ibn-maintenance-card '.$extraClass),
+            ])
             ->footerActions([$action]);
     }
 

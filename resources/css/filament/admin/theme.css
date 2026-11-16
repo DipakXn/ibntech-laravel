@@ -2624,3 +2624,206 @@ body.fi-body.ibn-login-screen,
         max-height: none;
     }
 }
+
+.ibn-maintenance-status > .fi-section {
+    background:
+        linear-gradient(180deg, rgba(46, 46, 128, 0.05), rgba(255, 255, 255, 0.92));
+}
+
+.dark .ibn-maintenance-status > .fi-section {
+    background:
+        linear-gradient(180deg, rgba(46, 46, 128, 0.28), rgba(15, 23, 42, 0.92));
+}
+
+.ibn-maintenance-status .fi-section-header {
+    align-items: flex-start;
+    padding-bottom: 0.35rem;
+}
+
+.ibn-maintenance-status .fi-section-header-description {
+    max-width: 46rem;
+    line-height: 1.55;
+}
+
+.ibn-maintenance-status .fi-section-content-ctn {
+    padding-top: 0.35rem;
+}
+
+.ibn-maintenance-status .fi-in-entry {
+    height: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: var(--ibn-radius-lg);
+    background: var(--ibn-surface-strong);
+}
+
+.ibn-maintenance-status .fi-in-entry-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-maintenance-status .fi-in-text {
+    margin-top: 0.35rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ibn-text);
+}
+
+.fi-grid-col:has(> .fi-sc-component > .ibn-maintenance-actions),
+.fi-sc-component:has(> .ibn-maintenance-actions),
+.ibn-maintenance-actions,
+.ibn-maintenance-actions > .fi-sc,
+.ibn-maintenance-actions .fi-grid-col,
+.ibn-maintenance-actions .fi-sc-component,
+.ibn-maintenance-card,
+.ibn-maintenance-card > .fi-section,
+.ibn-maintenance-card .fi-section-header,
+.ibn-maintenance-card .fi-section-header-content,
+.ibn-maintenance-card .fi-section-header-text-ctn,
+.ibn-maintenance-card .fi-section-content-ctn,
+.ibn-maintenance-card .fi-section-footer,
+.ibn-maintenance-card .fi-section-footer .fi-sc,
+.ibn-maintenance-card .fi-section-footer .fi-sc-action,
+.ibn-maintenance-card .fi-section-footer .fi-btn {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0 !important;
+    min-inline-size: 0 !important;
+}
+
+.ibn-maintenance-actions > .fi-sc {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    overflow: hidden;
+}
+
+@media (min-width: 48rem) {
+    .ibn-maintenance-actions > .fi-sc {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 80rem) {
+    .ibn-maintenance-actions > .fi-sc {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.ibn-maintenance-actions .fi-grid-col {
+    width: auto;
+    max-width: none;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+.ibn-maintenance-actions .fi-grid-col,
+.ibn-maintenance-actions .fi-sc-component {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ibn-maintenance-card .fi-section-header-content,
+.ibn-maintenance-card .fi-section-header-text-ctn {
+    flex: 1 1 auto;
+}
+
+.ibn-maintenance-card,
+.ibn-maintenance-card > .fi-section {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ibn-maintenance-card > .fi-section {
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.ibn-maintenance-card .fi-section-header {
+    align-items: flex-start;
+    gap: 0.85rem;
+}
+
+.ibn-maintenance-card .fi-section-header-heading,
+.ibn-maintenance-card .fi-section-header-description {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.ibn-maintenance-card .fi-section-header-heading {
+    text-wrap: balance;
+}
+
+.ibn-maintenance-card .fi-section-header-description {
+    margin-top: 0.45rem;
+    font-size: 0.925rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.ibn-maintenance-card .fi-section-content-ctn {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.ibn-maintenance-card .fi-section-footer .fi-sc.fi-inline {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ibn-maintenance-card .fi-section-footer .fi-sc-action {
+    display: block;
+    flex: 1 1 100%;
+}
+
+.ibn-maintenance-card .fi-section-footer .fi-btn {
+    display: flex !important;
+    height: auto;
+    justify-content: center;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.ibn-maintenance-card--all > .fi-section {
+    border-color: rgba(46, 46, 128, 0.34);
+    background:
+        linear-gradient(180deg, rgba(46, 46, 128, 0.07), rgba(255, 255, 255, 0.94));
+    box-shadow: 0 16px 36px rgba(46, 46, 128, 0.12);
+}
+
+.ibn-maintenance-card--all .fi-section-header-heading {
+    color: var(--ibn-secondary);
+}
+
+.dark .ibn-maintenance-card--all > .fi-section {
+    border-color: rgba(196, 206, 229, 0.32);
+    background:
+        linear-gradient(180deg, rgba(46, 46, 128, 0.34), rgba(15, 23, 42, 0.94));
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+.dark .ibn-maintenance-card--all .fi-section-header-heading {
+    color: #e7ebff;
+}
+
+@media (max-width: 639px) {
+    .ibn-maintenance-status .fi-in-entry {
+        padding: 0.8rem 0.9rem;
+    }
+
+    .ibn-maintenance-card .fi-section-header-description {
+        font-size: 0.9rem;
+    }
+}

@@ -104,6 +104,8 @@ class SystemMaintenanceTest extends TestCase
             ->get('/admin/system-maintenance')
             ->assertOk()
             ->assertSee('System Maintenance')
+            ->assertSee('ibn-maintenance-status', false)
+            ->assertSee('ibn-maintenance-card--all', false)
             ->assertSee('Cache status')
             ->assertSee('Cache store')
             ->assertSee('Configuration cache')

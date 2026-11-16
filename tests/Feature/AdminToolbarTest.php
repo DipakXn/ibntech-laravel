@@ -21,11 +21,13 @@ use App\Models\LandingPage;
 use App\Models\Lead;
 use App\Models\Page;
 use App\Models\User;
+use App\Services\ApplicationCacheService;
 use App\Support\AdminToolbar\AdminToolbar;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class AdminToolbarTest extends TestCase
@@ -106,6 +108,10 @@ class AdminToolbarTest extends TestCase
         $response->assertSee('Edit Page', false);
         $response->assertSee(PageResource::getUrl('edit', ['record' => $page]), false);
         $response->assertSee('Clear Cache', false);
+        $response->assertSee('cookie-consent snapshot', false);
+        $response->assertSee('onsubmit="return confirm(', false);
+        $response->assertDontSee('Clear Route Cache', false);
+        $response->assertDontSee('Clear All Application Cache', false);
         $response->assertSee('action="'.route('filament.admin.clear-cache').'"', false);
         $response->assertSee('class="admin-toolbar__clear-cache"', false);
         $response->assertSee('class="admin-toolbar__badge">2<', false);
@@ -179,6 +185,63 @@ class AdminToolbarTest extends TestCase
             ->assertRedirect('http://localhost/about/');
 
         $this->assertFalse(Cache::has('toolbar-cache-probe'));
+    }
+
+    public function test_toolbar_clear_cache_logs_the_administrator_and_hides_failures(): void
+    {
+        $admin = $this->administrator();
+        $this->page('About', 'about', 'about');
+        Cache::put('toolbar-cache-probe', 'kept', 60);
+
+        Log::spy();
+
+        $this->actingAs($admin)
+            ->post(route('filament.admin.clear-cache'), [
+                'return' => 'http://localhost/about/',
+            ])
+            ->assertRedirect('http://localhost/about/')
+            ->assertSessionHas('adminToolbarNotice', 'Cache cleared.');
+
+        Log::shouldHaveReceived('info')
+            ->once()
+            ->withArgs(function (string $message, array $context) use ($admin): bool {
+                return $message === 'System maintenance action succeeded.'
+                    && ($context['action'] ?? null) === 'clear_application_cache'
+                    && ($context['user_id'] ?? null) === $admin->id
+                    && ($context['user_email'] ?? null) === $admin->email;
+            });
+
+        $this->assertFalse(Cache::has('toolbar-cache-probe'));
+
+        Cache::put('toolbar-cache-probe', 'kept', 60);
+
+        Log::shouldReceive('error')
+            ->once()
+            ->withArgs(function (string $message, array $context) use ($admin): bool {
+                return $message === 'Failed to clear application cache.'
+                    && ($context['user_id'] ?? null) === $admin->id
+                    && isset($context['exception']);
+            });
+
+        $this->mock(ApplicationCacheService::class, function ($mock): void {
+            $mock->shouldReceive('clear')
+                ->once()
+                ->andThrow(new \RuntimeException('toolbar secret-host'));
+        });
+
+        $this->actingAs($admin)
+            ->post(route('filament.admin.clear-cache'), [
+                'return' => 'http://localhost/about/',
+            ])
+            ->assertRedirect('http://localhost/about/')
+            ->assertSessionHas('adminToolbarNotice', 'Could not clear the application cache. Please try again or check the application logs.');
+
+        $this->assertTrue(Cache::has('toolbar-cache-probe'));
+
+        $this->actingAs($admin)
+            ->get('/about/')
+            ->assertSee('Could not clear the application cache. Please try again or check the application logs.', false)
+            ->assertDontSee('toolbar secret-host', false);
     }
 
     public function test_clear_cache_rejects_an_off_site_return_and_authors(): void

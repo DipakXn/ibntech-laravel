@@ -574,8 +574,9 @@
 .home-clients .home-logo-chip {
     min-width: 0;
     width: auto;
-    height: 5.75rem;
-    padding: 0.5rem 0.75rem;
+    height: auto;
+    /* padding: 0.85rem 0.9rem; */
+    align-content: center;
 }
 
 .home-logo-chip img {
@@ -585,10 +586,13 @@
 }
 
 .home-clients .home-logo-chip img {
+    display: block;
     width: auto;
-    max-width: 7.5rem;
-    max-height: 8.5rem;
+    max-width: 8.75rem;
+    max-height: 8.75rem;
     height: auto;
+    object-fit: contain;
+    object-position: center;
 }
 
 @keyframes home-marquee {

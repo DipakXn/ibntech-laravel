@@ -45,7 +45,7 @@
         @endif
 
         @if ($toolbar['clearCacheUrl'])
-            <form class="admin-toolbar__clear-cache" method="POST" action="{{ $toolbar['clearCacheUrl'] }}">
+            <form class="admin-toolbar__clear-cache" method="POST" action="{{ $toolbar['clearCacheUrl'] }}" onsubmit="return confirm({{ \Illuminate\Support\Js::from('Clear the application cache? '.\App\Filament\Pages\SystemMaintenance::APPLICATION_CACHE_CONFIRMATION) }})">
                 @csrf
                 <input type="hidden" name="return" value="{{ url()->current() }}">
                 <button type="submit" class="admin-toolbar__link">

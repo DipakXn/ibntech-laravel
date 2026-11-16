@@ -10,7 +10,8 @@ use RuntimeException;
  *
  * The command deletes files in the configured compiled-view directory
  * (`storage/framework/views` by default). It does not flush the application
- * cache store, sessions, queue jobs, or database content.
+ * cache store, route cache, configuration cache, sessions, queue jobs, or
+ * database content, and it does not rebuild views.
  */
 class CompiledViewService
 {

@@ -38,12 +38,17 @@ Use this after a failed queue retry or a public error. Telescope, when enabled, 
 
 Open **Administration → System Maintenance**. Each action asks you to confirm.
 
+The page also shows the cache store name and whether a route or configuration cache file exists. That status is read-only.
+
 | Action | Effect |
 |---|---|
 | Clear Sitemap Cache | Drops cached XML. The next sitemap request builds it again. |
-| Clear Cache | Clears the application cache store. |
-| Clear Compiled Views | Deletes compiled Blade templates so the next request compiles them again. |
+| Clear Application Cache | Empties the application cache store, including sitemap XML, cached settings, the cookie-consent snapshot, and rate-limit counters. Sessions, jobs, content, and cache locks stay. |
+| Clear View Cache | Deletes compiled Blade templates so the next request compiles them again. |
+| Clear Route Cache | Deletes the cached route file. Routes are not rebuilt. |
+| Clear Configuration Cache | Deletes the cached configuration file. Configuration is not rebuilt. |
+| Clear All Application Cache | Clears configuration, routes, compiled views, and the application cache, in that order. If one step fails, it stops and names that step. |
 
-The public-site toolbar **Clear cache** button runs only the application-cache clear, and only for administrators.
+The public-site toolbar **Clear cache** button asks for confirmation, then runs only the application-cache clear, and only for administrators.
 
-Run these after a deploy or after a settings change that still looks stale. They do not move content to trash and they do not purge Cloudflare. Cloudflare is a separate screen.
+Run these after a deploy or after a settings change that still looks stale. They do not rebuild configuration, routes, or views, they do not move content to trash, and they do not purge Cloudflare. Cloudflare is a separate screen.

@@ -22,29 +22,32 @@
 
     <div class="home-hero__layout">
         <div class="home-shell">
-            <div class="home-hero__copy">
-                <div class="home-hero__badge">
-                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                    Unparalleled Digital Solutions for a Connected World
-                </div>
-                <h1 id="home-hero-title">Setting the Standard for <span>Cybersecurity Excellence</span></h1>
-                <p class="home-hero__tags">
-                    @foreach (['Risk Assessment', 'Threat Detection', 'Compliance', 'Zero Trust', 'SOC'] as $tag)
-                        <span>{{ $tag }}</span>
-                    @endforeach
-                </p>
-                <p class="home-hero__description">24/7 Managed Cybersecurity: Anytime, Anywhere Protection for Your Digital Assets-Uniting Performance, Protection, and Leadership</p>
-                <div class="home-hero__actions">
-                    <a href="javascript:void(0)" class="home-btn home-btn--green home-btn--hero-expert" data-scroll-target="home-form">
-                        <span class="home-btn__hero-lead">
-                            <span class="home-btn__hero-icon" aria-hidden="true">
-                                <i class="fa-solid fa-headset"></i>
+            <div class="home-hero__top">
+                <div class="home-hero__copy">
+                    <div class="home-hero__badge">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                        Unparalleled Digital Solutions for a Connected World
+                    </div>
+                    <h1 id="home-hero-title">Setting the Standard for <span>Cybersecurity Excellence</span></h1>
+                    <p class="home-hero__tags">
+                        @foreach (['Risk Assessment', 'Threat Detection', 'Compliance', 'Zero Trust', 'SOC'] as $tag)
+                            <span>{{ $tag }}</span>
+                        @endforeach
+                    </p>
+                    <p class="home-hero__description">24/7 Managed Cybersecurity: Anytime, Anywhere Protection for Your Digital Assets-Uniting Performance, Protection, and Leadership</p>
+                    <div class="home-hero__actions">
+                        <a href="javascript:void(0)" class="home-btn home-btn--green home-btn--hero-expert" data-scroll-target="home-form">
+                            <span class="home-btn__hero-lead">
+                                <span class="home-btn__hero-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-headset"></i>
+                                </span>
                             </span>
-                        </span>
-                        <span class="home-btn__hero-label">Contact Our Expert</span>
-                        <i class="fa-solid fa-angle-right home-btn__hero-chevron" aria-hidden="true"></i>
-                    </a>
+                            <span class="home-btn__hero-label">Contact Our Expert</span>
+                            <i class="fa-solid fa-angle-right home-btn__hero-chevron" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
+                <x-home.hero-graphic />
             </div>
         </div>
 

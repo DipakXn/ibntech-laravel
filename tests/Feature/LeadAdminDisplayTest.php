@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Filament\Resources\Leads\Pages\EditLead;
 use App\Filament\Resources\Leads\Pages\ListLeads;
+use App\Filament\Resources\Leads\Pages\ViewLead;
 use App\Models\Lead;
 use App\Models\User;
 use App\Support\LeadSource;
@@ -41,8 +42,9 @@ class LeadAdminDisplayTest extends TestCase
 
         $this->actingAs($user);
 
-        Livewire::test(EditLead::class, ['record' => $lead->getRouteKey()])
+        Livewire::test(ViewLead::class, ['record' => $lead->getRouteKey()])
             ->assertOk()
+            ->assertSee($lead->page_url)
             ->assertSee('Construction Engineering & Back Office Support')
             ->assertSee('Which service do you need?')
             ->assertSee('Drafting / Drawing Service')
@@ -77,7 +79,7 @@ class LeadAdminDisplayTest extends TestCase
 
         $this->actingAs($user);
 
-        Livewire::test(EditLead::class, ['record' => $lead->getRouteKey()])
+        Livewire::test(ViewLead::class, ['record' => $lead->getRouteKey()])
             ->assertOk()
             ->assertSee('Cybersecurity')
             ->assertSee('Job Title')
@@ -115,12 +117,12 @@ class LeadAdminDisplayTest extends TestCase
 
         $this->actingAs($user);
 
-        Livewire::test(EditLead::class, ['record' => $withSource->getRouteKey()])
+        Livewire::test(ViewLead::class, ['record' => $withSource->getRouteKey()])
             ->assertOk()
             ->assertSee('Lead Source')
             ->assertSee(LeadSource::ORGANIC_SEO);
 
-        Livewire::test(EditLead::class, ['record' => $withoutSource->getRouteKey()])
+        Livewire::test(ViewLead::class, ['record' => $withoutSource->getRouteKey()])
             ->assertOk()
             ->assertDontSee('Lead Source');
     }

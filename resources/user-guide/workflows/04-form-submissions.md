@@ -11,9 +11,11 @@ Public forms are Livewire forms. A successful submit writes a row in `form_submi
 ## Review a submission
 
 1. Open **Sales → Submissions**.
-2. Search or filter by the form name.
-3. Open the row to read the name, email, phone, company, message, page URL, and payload.
-4. Use the list widgets for recent volume. The dashboard also summarizes submissions from the last seven days for administrators.
+2. Search by name, email, company, message, form, or page URL. Filter by **status** (inbox hides spam by default), **form**, or **submitted** date range.
+3. Open a row to view the submission detail: contact fields, form answers, **page URL**, and **submitted** date.
+4. Mark junk as **spam** from the row actions, detail page, or bulk actions. Restore spam back to the inbox when needed.
+5. **Export CSV** from the list header. The file respects the active search and table filters (status, form, and date).
+6. Use the list widgets for recent volume. The dashboard also summarizes submissions from the last seven days for administrators.
 
 **Sales → Old Submissions** is a separate read-only archive of imported historical rows. New website forms do not land there.
 

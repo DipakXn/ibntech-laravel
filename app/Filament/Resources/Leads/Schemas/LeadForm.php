@@ -71,6 +71,13 @@ class LeadForm
                             ->label('Form')
                             ->options(Lead::formOptions())
                             ->required(),
+                        Select::make('status')
+                            ->label('Status')
+                            ->options([
+                                Lead::STATUS_NEW => 'New',
+                                Lead::STATUS_SPAM => 'Spam',
+                            ])
+                            ->required(),
                         Textarea::make('message')
                             ->rows(4)
                             ->columnSpanFull(),

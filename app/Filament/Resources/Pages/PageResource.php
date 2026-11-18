@@ -8,6 +8,7 @@ use App\Filament\Resources\Pages\Pages\ListPages;
 use App\Filament\Resources\Pages\Schemas\PageForm;
 use App\Filament\Resources\Pages\Tables\PagesTable;
 use App\Models\Page;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,6 +29,11 @@ class PageResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     protected static ?int $navigationSort = 0;
+
+    public static function templateKind(): ContentTemplateKind
+    {
+        return ContentTemplateKind::Page;
+    }
 
     public static function form(Schema $schema): Schema
     {

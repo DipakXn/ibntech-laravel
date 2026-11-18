@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\Newsletters\Schemas;
 
+use App\Filament\Schemas\ContentTemplateForm;
 use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
-use App\Helpers\TemplateHelper;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -26,13 +27,9 @@ class NewsletterForm
                         TextInput::make('title')
                             ->required()
                             ->maxLength(255),
-                        TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                        Select::make('template')
-                            ->options(TemplateHelper::newsletterTemplateOptions())
-                            ->required(),
+                        ContentTemplateForm::slug(ContentTemplateKind::Newsletter),
+                        ContentTemplateForm::template(),
+                        ...ContentTemplateForm::assetPlaceholders(ContentTemplateKind::Newsletter),
                     ])
                     ->columns(2)
                     ->columnSpan([
@@ -47,7 +44,10 @@ class NewsletterForm
                                 'published' => 'Published',
                             ])
                             ->default('draft')
-                            ->required(),
+                            ->required()
+                            ->rules([
+                                ContentTemplateForm::publishRule(ContentTemplateKind::Newsletter),
+                            ]),
                         DateTimePicker::make('published_at')
                             ->label('Published Date')
                             ->seconds(false)
@@ -60,7 +60,7 @@ class NewsletterForm
                             ->imageEditor()
                             ->imagePreviewHeight('180')
                             ->maxSize(4096)
-                            ->helperText('Used for newsletter archive cards and share previews. Replacing this image removes the previous one.'),
+                            ->helperText(ContentTemplateForm::FEATURED_IMAGE_HELP.' Archive cards use it as well.'),
                     ])
                     ->columnSpan(1),
                 SeoMetaSchema::make(),

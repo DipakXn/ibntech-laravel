@@ -8,6 +8,7 @@ use App\Filament\Resources\Newsletters\Pages\ListNewsletters;
 use App\Filament\Resources\Newsletters\Schemas\NewsletterForm;
 use App\Filament\Resources\Newsletters\Tables\NewslettersTable;
 use App\Models\Newsletter;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,6 +29,11 @@ class NewsletterResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     protected static ?int $navigationSort = 3;
+
+    public static function templateKind(): ContentTemplateKind
+    {
+        return ContentTemplateKind::Newsletter;
+    }
 
     public static function form(Schema $schema): Schema
     {

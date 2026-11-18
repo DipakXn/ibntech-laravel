@@ -16,6 +16,7 @@ use App\Models\PressRelease;
 use App\Models\SeoMeta;
 use App\Models\WebsiteSetting;
 use App\Models\WhitePaper;
+use App\Observers\ContentSlugRedirectObserver;
 use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
 use App\Services\Analytics\PageViewTracker;
@@ -78,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         PasswordPolicy::register();
 
         $this->trustCloudflareProxies();
+        $this->registerContentSlugRedirectObservers();
 
         $this->app->terminating(function (): void {
             $this->app->make(PageViewTracker::class)->flush();
@@ -150,6 +152,13 @@ class AppServiceProvider extends ServiceProvider
                 'threshold' => (int) env('QUEUE_MONITOR_MAX', 100),
             ]);
         });
+    }
+
+    private function registerContentSlugRedirectObservers(): void
+    {
+        foreach ([Page::class, Industry::class, LandingPage::class, Newsletter::class] as $model) {
+            $model::observe(ContentSlugRedirectObserver::class);
+        }
     }
 
     private function registerSitemapCacheObservers(): void

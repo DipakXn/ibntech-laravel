@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\LandingPages\Schemas;
 
+use App\Filament\Schemas\ContentTemplateForm;
 use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
-use App\Helpers\TemplateHelper;
 use App\Models\LandingPage;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -27,24 +28,14 @@ class LandingPageForm
                         TextInput::make('title')
                             ->required()
                             ->maxLength(255),
-                        TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                        Select::make('template')
-                            ->options(TemplateHelper::landingPageTemplateOptions())
-                            ->required(),
+                        ContentTemplateForm::slug(ContentTemplateKind::LandingPage),
+                        ContentTemplateForm::template(),
+                        ...ContentTemplateForm::assetPlaceholders(ContentTemplateKind::LandingPage),
                         Select::make('thank_you_slug')
                             ->label('Thank You Page')
                             ->placeholder('No redirect (on-page success)')
-                            ->helperText('Successful form submissions redirect to this landing page. Leave empty when the campaign has no thank you page.')
-                            ->options(fn (): array => LandingPage::query()
-                                ->orderBy('title')
-                                ->get()
-                                ->mapWithKeys(fn (LandingPage $page): array => [
-                                    $page->slug => $page->title.' (/lp/'.$page->slug.'/)',
-                                ])
-                                ->all())
+                            ->helperText('Successful form submissions redirect to this published landing page. Thank-you pages and the page you are editing are not listed.')
+                            ->options(fn (?LandingPage $record): array => LandingPage::thankYouSelectOptions($record?->getKey()))
                             ->searchable()
                             ->columnSpanFull(),
                     ])
@@ -61,7 +52,10 @@ class LandingPageForm
                                 'published' => 'Published',
                             ])
                             ->default('draft')
-                            ->required(),
+                            ->required()
+                            ->rules([
+                                ContentTemplateForm::publishRule(ContentTemplateKind::LandingPage),
+                            ]),
                         DateTimePicker::make('published_at')
                             ->label('Published Date')
                             ->seconds(false)
@@ -74,7 +68,7 @@ class LandingPageForm
                             ->imageEditor()
                             ->imagePreviewHeight('180')
                             ->maxSize(4096)
-                            ->helperText('Optional landing page image used for sharing previews and any visual listing blocks.'),
+                            ->helperText(ContentTemplateForm::FEATURED_IMAGE_HELP),
                     ])
                     ->columnSpan(1),
                 SeoMetaSchema::make(),

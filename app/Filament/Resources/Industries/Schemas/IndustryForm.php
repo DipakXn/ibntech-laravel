@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\Industries\Schemas;
 
+use App\Filament\Schemas\ContentTemplateForm;
 use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
-use App\Helpers\TemplateHelper;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -26,13 +27,9 @@ class IndustryForm
                         TextInput::make('title')
                             ->required()
                             ->maxLength(255),
-                        TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                        Select::make('template')
-                            ->options(TemplateHelper::industryTemplateOptions())
-                            ->required(),
+                        ContentTemplateForm::slug(ContentTemplateKind::Industry),
+                        ContentTemplateForm::template(),
+                        ...ContentTemplateForm::assetPlaceholders(ContentTemplateKind::Industry),
                     ])
                     ->columns(2)
                     ->columnSpan([
@@ -47,7 +44,10 @@ class IndustryForm
                                 'published' => 'Published',
                             ])
                             ->default('draft')
-                            ->required(),
+                            ->required()
+                            ->rules([
+                                ContentTemplateForm::publishRule(ContentTemplateKind::Industry),
+                            ]),
                         DateTimePicker::make('published_at')
                             ->label('Published Date')
                             ->seconds(false)
@@ -60,7 +60,7 @@ class IndustryForm
                             ->imageEditor()
                             ->imagePreviewHeight('180')
                             ->maxSize(4096)
-                            ->helperText('Optional industry image used for sharing previews and any visual landing-page sections.'),
+                            ->helperText(ContentTemplateForm::FEATURED_IMAGE_HELP),
                     ])
                     ->columnSpan(1),
                 SeoMetaSchema::make(),

@@ -101,6 +101,23 @@ class LandingPage extends Model implements HasMedia
         return url('/lp/'.$this->slug.'/');
     }
 
+    /**
+     * @return array<string, string>
+     */
+    public static function thankYouSelectOptions(?int $exceptId = null): array
+    {
+        return static::query()
+            ->published()
+            ->excludingThankYouPages()
+            ->when($exceptId !== null, fn (Builder $query) => $query->whereKeyNot($exceptId))
+            ->orderBy('title')
+            ->get()
+            ->mapWithKeys(fn (self $page): array => [
+                $page->slug => $page->title.' (/lp/'.$page->slug.'/)',
+            ])
+            ->all();
+    }
+
     public function publishedThankYouUrl(): ?string
     {
         if (! is_string($this->thank_you_slug) || $this->thank_you_slug === '') {

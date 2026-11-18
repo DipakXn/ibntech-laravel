@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Filament\Schemas\ContentTemplateForm;
 use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
-use App\Helpers\TemplateHelper;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -26,20 +27,9 @@ class PageForm
                         TextInput::make('title')
                             ->required()
                             ->maxLength(255),
-                        TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                        Select::make('template')
-                            ->options(TemplateHelper::pageTemplateOptions())
-                            ->required(),
-                        Select::make('status')
-                            ->options([
-                                'draft' => 'Draft',
-                                'published' => 'Published',
-                            ])
-                            ->default('draft')
-                            ->required(),
+                        ContentTemplateForm::slug(ContentTemplateKind::Page),
+                        ContentTemplateForm::template(),
+                        ...ContentTemplateForm::assetPlaceholders(ContentTemplateKind::Page),
                     ])
                     ->columns(2)
                     ->columnSpan([
@@ -54,7 +44,10 @@ class PageForm
                                 'published' => 'Published',
                             ])
                             ->default('draft')
-                            ->required(),
+                            ->required()
+                            ->rules([
+                                ContentTemplateForm::publishRule(ContentTemplateKind::Page),
+                            ]),
                         DateTimePicker::make('published_at')
                             ->label('Published Date')
                             ->seconds(false)
@@ -67,7 +60,7 @@ class PageForm
                             ->imageEditor()
                             ->imagePreviewHeight('180')
                             ->maxSize(4096)
-                            ->helperText('Optional page image used for social sharing and any page sections that surface the record visually.'),
+                            ->helperText(ContentTemplateForm::FEATURED_IMAGE_HELP),
                     ])
                     ->columnSpan(1),
                 SeoMetaSchema::make(pageSitemapOverrides: true),

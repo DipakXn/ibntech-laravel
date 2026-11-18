@@ -8,6 +8,7 @@ use App\Filament\Resources\Industries\Pages\ListIndustries;
 use App\Filament\Resources\Industries\Schemas\IndustryForm;
 use App\Filament\Resources\Industries\Tables\IndustriesTable;
 use App\Models\Industry;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,6 +29,11 @@ class IndustryResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     protected static ?int $navigationSort = 1;
+
+    public static function templateKind(): ContentTemplateKind
+    {
+        return ContentTemplateKind::Industry;
+    }
 
     public static function form(Schema $schema): Schema
     {

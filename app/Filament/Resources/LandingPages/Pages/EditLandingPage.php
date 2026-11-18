@@ -3,12 +3,15 @@
 namespace App\Filament\Resources\LandingPages\Pages;
 
 use App\Filament\Actions\PreviewAction;
+use App\Filament\Concerns\GuardsPublishedContentTemplate;
 use App\Filament\Resources\LandingPages\LandingPageResource;
 use App\Filament\Actions\MoveToTrashAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditLandingPage extends EditRecord
 {
+    use GuardsPublishedContentTemplate;
+
     protected static string $resource = LandingPageResource::class;
 
     protected function getHeaderActions(): array

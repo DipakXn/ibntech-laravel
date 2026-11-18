@@ -5,6 +5,7 @@ namespace App\Filament\Resources\LandingPages\Tables;
 use App\Filament\Tables\ContentBulkActions;
 use App\Filament\Tables\ContentRecordActions;
 use App\Filament\Tables\ContentTableColumns;
+use App\Filament\Tables\ContentTemplateColumns;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -23,6 +24,7 @@ class LandingPagesTable
                     ->toggleable(),
                 TextColumn::make('template')
                     ->sortable(),
+                ...ContentTemplateColumns::availability(),
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('published_at')

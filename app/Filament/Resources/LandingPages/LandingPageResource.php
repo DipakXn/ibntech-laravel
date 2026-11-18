@@ -8,6 +8,7 @@ use App\Filament\Resources\LandingPages\Pages\ListLandingPages;
 use App\Filament\Resources\LandingPages\Schemas\LandingPageForm;
 use App\Filament\Resources\LandingPages\Tables\LandingPagesTable;
 use App\Models\LandingPage;
+use App\Support\ContentTemplates\ContentTemplateKind;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,6 +29,11 @@ class LandingPageResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     protected static ?int $navigationSort = 2;
+
+    public static function templateKind(): ContentTemplateKind
+    {
+        return ContentTemplateKind::LandingPage;
+    }
 
     public static function form(Schema $schema): Schema
     {

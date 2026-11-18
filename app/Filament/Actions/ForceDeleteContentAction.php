@@ -2,6 +2,7 @@
 
 namespace App\Filament\Actions;
 
+use App\Filament\Support\ContentTemplateDeleteCopy;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Support\Icons\Heroicon;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class ForceDeleteContentAction extends Action
 {
     use CanCustomizeProcess;
+
     public static function getDefaultName(): ?string
     {
         return 'forceDelete';
@@ -29,7 +31,7 @@ class ForceDeleteContentAction extends Action
 
         $this->modalHeading(fn (): string => 'Delete permanently');
 
-        $this->modalDescription(fn (): string => 'This action cannot be undone. The item and its related cleanup rules will be applied permanently.');
+        $this->modalDescription(fn (?Model $record): string => ContentTemplateDeleteCopy::forceDeleteDescription($record));
 
         $this->modalSubmitActionLabel('Delete permanently');
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Actions;
 
+use App\Filament\Support\ContentTemplateDeleteCopy;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Support\Icons\Heroicon;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class RestoreContentAction extends Action
 {
     use CanCustomizeProcess;
+
     public static function getDefaultName(): ?string
     {
         return 'restore';
@@ -29,7 +31,7 @@ class RestoreContentAction extends Action
 
         $this->modalHeading(fn (): string => 'Restore item');
 
-        $this->modalDescription(fn (): string => 'This item will be restored and appear in the All listing again.');
+        $this->modalDescription(fn (?Model $record): string => ContentTemplateDeleteCopy::restoreDescription($record));
 
         $this->modalSubmitActionLabel('Restore');
 

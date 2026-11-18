@@ -41,6 +41,10 @@ The template name is the file basename. It is set once, from the slug, when the 
 
 The slug is the public URL. Changing it later does not rename the Blade or CSS file. The original filenames stay in place.
 
+## Trash and delete
+
+Moving a record to trash, deleting it permanently, or restoring it from trash affects only the CMS database record. The Blade and CSS files stay on disk. The confirmation dialog states this before you move to trash or delete permanently. Restore brings the record back; it does not remove or recreate files.
+
 Reserved slugs are rejected. Pages cannot use slugs that already belong to other routes, including `blog`, `contact`, and `newsletter`. Landing pages cannot use `index`. Newsletters cannot use `index` or `footer`.
 
 ## Publish and redirects

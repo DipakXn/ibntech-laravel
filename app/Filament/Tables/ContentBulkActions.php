@@ -3,6 +3,7 @@
 namespace App\Filament\Tables;
 
 use App\Filament\Concerns\HasContentTrashTabs;
+use App\Filament\Support\ContentTemplateDeleteCopy;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -29,7 +30,9 @@ class ContentBulkActions
         return DeleteBulkAction::make('trash')
             ->label('Move to Trash')
             ->modalHeading(fn (DeleteBulkAction $action): string => 'Move selected '.$action->getTitleCasePluralModelLabel().' to trash')
-            ->modalDescription('Selected items will be moved to trash. You can restore them later from the Trash tab.')
+            ->modalDescription(fn (DeleteBulkAction $action, HasTable $livewire): string => ContentTemplateDeleteCopy::trashDescription(
+                forTemplateModule: ContentTemplateDeleteCopy::livewireManagesTemplateFiles($livewire),
+            ))
             ->modalSubmitActionLabel('Move to Trash')
             ->successNotificationTitle('Moved to trash')
             ->failureNotificationTitle('Could not move to trash')
@@ -46,13 +49,15 @@ class ContentBulkActions
             ->color('success')
             ->requiresConfirmation()
             ->modalHeading('Restore selected items')
-            ->modalDescription('Selected items will be restored and appear in the All listing again.')
+            ->modalDescription(fn (HasTable $livewire): string => ContentTemplateDeleteCopy::restoreDescription(
+                forTemplateModule: ContentTemplateDeleteCopy::livewireManagesTemplateFiles($livewire),
+            ))
             ->modalSubmitActionLabel('Restore')
             ->successNotificationTitle('Restored')
             ->failureNotificationTitle('Could not restore items')
             ->deselectRecordsAfterCompletion()
             ->visible(fn (HasTable $livewire): bool => static::isTrashTab($livewire))
-            ->action(function (BulkAction $action, EloquentCollection | Collection | LazyCollection $records): void {
+            ->action(function (BulkAction $action, EloquentCollection|Collection|LazyCollection $records): void {
                 $records->each(function ($record) use ($action): void {
                     if (! method_exists($record, 'restore') || ! $record->restore()) {
                         $action->reportBulkProcessingFailure();
@@ -69,14 +74,16 @@ class ContentBulkActions
             ->color('danger')
             ->requiresConfirmation()
             ->modalHeading('Delete selected items permanently')
-            ->modalDescription('This action cannot be undone. Selected items and their related cleanup rules will be applied permanently.')
+            ->modalDescription(fn (HasTable $livewire): string => ContentTemplateDeleteCopy::forceDeleteDescription(
+                forTemplateModule: ContentTemplateDeleteCopy::livewireManagesTemplateFiles($livewire),
+            ))
             ->modalSubmitActionLabel('Delete permanently')
             ->successNotificationTitle('Deleted permanently')
             ->failureNotificationTitle('Could not delete permanently')
             ->modalIcon(Heroicon::OutlinedTrash)
             ->deselectRecordsAfterCompletion()
             ->visible(fn (HasTable $livewire): bool => static::isTrashTab($livewire))
-            ->action(function (BulkAction $action, EloquentCollection | Collection | LazyCollection $records): void {
+            ->action(function (BulkAction $action, EloquentCollection|Collection|LazyCollection $records): void {
                 $records->each(function ($record) use ($action): void {
                     if (! method_exists($record, 'forceDelete') || ! $record->forceDelete()) {
                         $action->reportBulkProcessingFailure();

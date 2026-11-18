@@ -2,8 +2,10 @@
 
 namespace App\Filament\Actions;
 
+use App\Filament\Support\ContentTemplateDeleteCopy;
 use Filament\Actions\DeleteAction;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 
 class MoveToTrashAction extends DeleteAction
 {
@@ -20,7 +22,7 @@ class MoveToTrashAction extends DeleteAction
 
         $this->modalHeading(fn (): string => 'Move to Trash');
 
-        $this->modalDescription(fn (): string => 'The item will be moved to trash. You can restore it later from the Trash tab.');
+        $this->modalDescription(fn (?Model $record): string => ContentTemplateDeleteCopy::trashDescription($record));
 
         $this->modalSubmitActionLabel('Move to Trash');
 

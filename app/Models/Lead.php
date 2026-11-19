@@ -61,6 +61,7 @@ class Lead extends Model
         'status',
         'message',
         'page_url',
+        'visitor_id',
         'user_agent',
         'ip_address',
         'payload',

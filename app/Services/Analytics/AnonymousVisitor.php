@@ -10,13 +10,18 @@ final class AnonymousVisitor
 {
     public function id(Request $request): string
     {
+        return $this->existingId($request) ?? (string) Str::uuid();
+    }
+
+    public function existingId(Request $request): ?string
+    {
         $existing = $request->cookies->get($this->cookieName());
 
         if (is_string($existing) && Str::isUuid($existing)) {
             return $existing;
         }
 
-        return (string) Str::uuid();
+        return null;
     }
 
     public function cookie(Request $request, string $visitorId): Cookie

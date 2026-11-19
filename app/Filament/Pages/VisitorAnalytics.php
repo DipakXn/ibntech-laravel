@@ -25,7 +25,7 @@ class VisitorAnalytics extends Page
 
     protected string $view = 'filament.pages.visitor-analytics';
 
-    protected ?string $subheading = 'Unique visitors and page views from the public site. Visitors are distinct visitor IDs. Page views are tracked records.';
+    protected ?string $subheading = 'Unique visitors, page views, enquiries, and gated downloads from the public site. A conversion rate is shown only when the page has tracked visitors.';
 
     protected Width|string|null $maxContentWidth = 'full';
 
@@ -78,7 +78,7 @@ class VisitorAnalytics extends Page
 
     public function sortContent(string $column): void
     {
-        if (! in_array($column, ['page_views', 'unique_visitors', 'last_viewed'], true)) {
+        if (! in_array($column, ['page_views', 'unique_visitors', 'last_viewed', 'enquiries', 'downloads', 'conversions', 'conversion_rate'], true)) {
             return;
         }
 
@@ -114,7 +114,9 @@ class VisitorAnalytics extends Page
                 VisitorAnalyticsRange::CUSTOM => 'Custom Date Range',
             ],
             'kpis' => $service->kpis($range),
+            'pageTypes' => $service->pageTypes($range),
             'topContent' => $service->topContent($range),
+            'topConversions' => $service->topConversions($range),
             'content' => $service->contentPerformance(
                 $range,
                 $this->contentType,

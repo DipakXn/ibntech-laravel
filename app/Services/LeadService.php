@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SendLeadSubmissionNotification;
 use App\Models\Lead;
 use App\Repositories\LeadRepository;
+use App\Services\Analytics\SubmissionVisitor;
 use App\Support\FormSubmissionPageUrl;
 use App\Support\LeadSource;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class LeadService
     public function __construct(
         protected LeadRepository $leads,
         protected Request $request,
+        protected SubmissionVisitor $submissionVisitors,
     ) {}
 
     /**
@@ -38,6 +40,7 @@ class LeadService
             'page_url' => FormSubmissionPageUrl::resolve(
                 is_string($payload['page_url'] ?? null) ? $payload['page_url'] : null
             ),
+            'visitor_id' => $this->submissionVisitors->id($this->request),
             'user_agent' => $this->request->userAgent(),
             'ip_address' => $this->request->ip(),
             'payload' => $payload,

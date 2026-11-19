@@ -29,12 +29,18 @@ Saving website settings clears the sitemap cache. You can also clear only that c
 
 ## Visitor analytics
 
-**Administration → Visitor analytics** shows unique visitors and page views for the public site.
+**Administration → Visitor analytics** shows unique visitors, page views, enquiries, and gated downloads for the public site.
 
 - Visitors are distinct visitor IDs.
 - Page views are tracked records.
-- Use the preset ranges or a custom from/to date.
-- Filter and sort the content table by type.
+- An enquiry is a form submission other than a gated download. Ebook and case study forms count as gated downloads. Each submission counts once, and spam is omitted.
+- The source page is the URL stored on the submission. When that URL matches a public page, the submission is counted on that page.
+- Submissions with no usable source page are reported as Source unavailable. They are not assigned to a page and are not included in the conversion rate.
+- The conversion rate is attributed enquiries plus gated downloads, divided by unique visitors. It is shown only when that page or type has at least one tracked visitor in the selected range.
+- Page type totals count a visitor once for the type, even when that visitor opened more than one page of that type.
+- Use the preset ranges or a custom from/to date. The same range applies to page views and submissions.
+- Filter and sort the content table by type, visitors, enquiries, downloads, and conversions.
+- A new submission stores the existing visitor cookie only when analytics consent is allowed and the address is not excluded. Older submissions keep a blank visitor id. The screen does not show visitor ids.
 
 The dashboard shows a short visitor preview for administrators. Authors do not get this screen.
 
@@ -45,5 +51,7 @@ The dashboard shows a short visitor preview for administrators. Authors do not g
 1. Create an excluded IP or range.
 2. Save.
 3. Later visits from that address are not counted.
+
+Submissions from an excluded address stay in Submissions. Visitor analytics omits them from enquiry, download, and conversion totals.
 
 Existing rows already stored are not rewritten by adding an exclusion. Add the exclusion before you rely on a date range.

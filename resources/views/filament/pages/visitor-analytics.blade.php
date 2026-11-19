@@ -69,7 +69,32 @@
                 <strong>{{ number_format($kpis['page_views']) }}</strong>
                 <p>Selected range</p>
             </article>
+            <article class="ibn-metric-card">
+                <span>Enquiries</span>
+                <strong>{{ number_format($kpis['enquiries']) }}</strong>
+                <p>Selected range</p>
+            </article>
+            <article class="ibn-metric-card">
+                <span>Gated Downloads</span>
+                <strong>{{ number_format($kpis['gated_downloads']) }}</strong>
+                <p>Selected range</p>
+            </article>
+            <article class="ibn-metric-card">
+                <span>Conversion Rate</span>
+                <strong>{{ $kpis['conversion_rate'] === null ? '—' : number_format($kpis['conversion_rate'], 1).'%' }}</strong>
+                <p>Attributed conversions per visitor</p>
+            </article>
+            <article class="ibn-metric-card">
+                <span>Source Unavailable</span>
+                <strong>{{ number_format($kpis['unattributed']) }}</strong>
+                <p>No usable source page</p>
+            </article>
         </div>
+
+        <p class="ibn-empty-inline">
+            Source unavailable: {{ number_format($kpis['unattributed']) }}.
+            Submissions without a usable source page are not assigned to a page and are not included in the conversion rate.
+        </p>
 
         @livewire(\App\Filament\Widgets\VisitorTrendChart::class, [
             'preset' => $preset,
@@ -81,32 +106,38 @@
             <div class="ibn-widget-card__header">
                 <div>
                     <p class="ibn-widget-card__eyebrow">Selected range</p>
-                    <h3>Top content</h3>
+                    <h3>Page types</h3>
                 </div>
             </div>
 
-            @if ($topContent === [])
-                <p class="ibn-empty-inline">No tracked content in this date range.</p>
+            <p class="ibn-empty-inline">Unique visitors are counted once for each type. They are not added up from the pages in that type.</p>
+
+            @if ($pageTypes === [])
+                <p class="ibn-empty-inline">No page type activity in this date range.</p>
             @else
                 <div class="ibn-visitor-analytics__table-wrap">
                     <table class="ibn-analytics-table">
                         <thead>
                             <tr>
-                                <th>Rank</th>
-                                <th>Content Type</th>
-                                <th>Title</th>
-                                <th>Page Views</th>
+                                <th>Page Type</th>
                                 <th>Unique Visitors</th>
+                                <th>Page Views</th>
+                                <th>Enquiries</th>
+                                <th>Gated Downloads</th>
+                                <th>Conversions</th>
+                                <th>Conversion Rate</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($topContent as $row)
-                                <tr wire:key="top-{{ $row['content_type'] }}-{{ $row['rank'] }}-{{ $row['title'] }}">
-                                    <td>{{ $row['rank'] }}</td>
+                            @foreach ($pageTypes as $row)
+                                <tr wire:key="type-{{ $row['content_type'] }}">
                                     <td>{{ $row['content_label'] }}</td>
-                                    <td>{{ $row['title'] }}</td>
-                                    <td>{{ number_format($row['page_views']) }}</td>
                                     <td>{{ number_format($row['unique_visitors']) }}</td>
+                                    <td>{{ number_format($row['page_views']) }}</td>
+                                    <td>{{ number_format($row['enquiries']) }}</td>
+                                    <td>{{ number_format($row['downloads']) }}</td>
+                                    <td>{{ number_format($row['conversions']) }}</td>
+                                    <td>{{ $row['conversion_rate'] === null ? '—' : number_format($row['conversion_rate'], 1).'%' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -114,6 +145,102 @@
                 </div>
             @endif
         </section>
+
+        <div class="ibn-visitor-analytics__split">
+            <section class="ibn-widget-card">
+                <div class="ibn-widget-card__header">
+                    <div>
+                        <p class="ibn-widget-card__eyebrow">Selected range</p>
+                        <h3>Top content</h3>
+                    </div>
+                </div>
+
+                @if ($topContent === [])
+                    <p class="ibn-empty-inline">No tracked content in this date range.</p>
+                @else
+                    <div class="ibn-visitor-analytics__table-wrap">
+                        <table class="ibn-analytics-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Type</th>
+                                    <th>Title</th>
+                                    <th>Page Views</th>
+                                    <th>Visitors</th>
+                                    <th>Enquiries</th>
+                                    <th>Downloads</th>
+                                    <th>Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($topContent as $row)
+                                    <tr wire:key="top-{{ $row['key'] }}-{{ $row['rank'] }}">
+                                        <td>{{ $row['rank'] }}</td>
+                                        <td>{{ $row['content_label'] }}</td>
+                                        <td>
+                                            {{ $row['title'] }}
+                                            @if ($row['path'] && $row['path'] !== $row['title'])
+                                                <div class="ibn-visitor-analytics__path">{{ $row['path'] }}</div>
+                                            @endif
+                                        </td>
+                                        <td>{{ number_format($row['page_views']) }}</td>
+                                        <td>{{ number_format($row['unique_visitors']) }}</td>
+                                        <td>{{ number_format($row['enquiries']) }}</td>
+                                        <td>{{ number_format($row['downloads']) }}</td>
+                                        <td>{{ $row['conversion_rate'] === null ? '—' : number_format($row['conversion_rate'], 1).'%' }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </section>
+
+            <section class="ibn-widget-card">
+                <div class="ibn-widget-card__header">
+                    <div>
+                        <p class="ibn-widget-card__eyebrow">Selected range</p>
+                        <h3>Top converting pages</h3>
+                    </div>
+                </div>
+
+                @if ($topConversions === [])
+                    <p class="ibn-empty-inline">No conversions in this date range.</p>
+                @else
+                    <div class="ibn-visitor-analytics__table-wrap">
+                        <table class="ibn-analytics-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Type</th>
+                                    <th>Title</th>
+                                    <th>Visitors</th>
+                                    <th>Conversions</th>
+                                    <th>Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($topConversions as $row)
+                                    <tr wire:key="converting-{{ $row['key'] }}-{{ $row['rank'] }}">
+                                        <td>{{ $row['rank'] }}</td>
+                                        <td>{{ $row['content_label'] }}</td>
+                                        <td>
+                                            {{ $row['title'] }}
+                                            @if ($row['path'] && $row['path'] !== $row['title'])
+                                                <div class="ibn-visitor-analytics__path">{{ $row['path'] }}</div>
+                                            @endif
+                                        </td>
+                                        <td>{{ number_format($row['unique_visitors']) }}</td>
+                                        <td>{{ number_format($row['conversions']) }}</td>
+                                        <td>{{ $row['conversion_rate'] === null ? '—' : number_format($row['conversion_rate'], 1).'%' }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </section>
+        </div>
 
         <section class="ibn-widget-card">
             <div class="ibn-widget-card__header">
@@ -159,16 +286,45 @@
                                         Last Viewed{{ $contentSort === 'last_viewed' ? ($contentDirection === 'asc' ? ' ↑' : ' ↓') : '' }}
                                     </button>
                                 </th>
+                                <th>
+                                    <button type="button" wire:click="sortContent('enquiries')">
+                                        Enquiries{{ $contentSort === 'enquiries' ? ($contentDirection === 'asc' ? ' ↑' : ' ↓') : '' }}
+                                    </button>
+                                </th>
+                                <th>
+                                    <button type="button" wire:click="sortContent('downloads')">
+                                        Gated Downloads{{ $contentSort === 'downloads' ? ($contentDirection === 'asc' ? ' ↑' : ' ↓') : '' }}
+                                    </button>
+                                </th>
+                                <th>
+                                    <button type="button" wire:click="sortContent('conversions')">
+                                        Conversions{{ $contentSort === 'conversions' ? ($contentDirection === 'asc' ? ' ↑' : ' ↓') : '' }}
+                                    </button>
+                                </th>
+                                <th>
+                                    <button type="button" wire:click="sortContent('conversion_rate')">
+                                        Conversion Rate{{ $contentSort === 'conversion_rate' ? ($contentDirection === 'asc' ? ' ↑' : ' ↓') : '' }}
+                                    </button>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($content['rows'] as $row)
-                                <tr wire:key="content-{{ $row['content_type'] }}-{{ $row['title'] }}-{{ $content['page'] }}">
+                                <tr wire:key="content-{{ $row['key'] }}-{{ $content['page'] }}">
                                     <td>{{ $row['content_label'] }}</td>
-                                    <td>{{ $row['title'] }}</td>
+                                    <td>
+                                        {{ $row['title'] }}
+                                        @if ($row['path'] && $row['path'] !== $row['title'])
+                                            <div class="ibn-visitor-analytics__path">{{ $row['path'] }}</div>
+                                        @endif
+                                    </td>
                                     <td>{{ number_format($row['page_views']) }}</td>
                                     <td>{{ number_format($row['unique_visitors']) }}</td>
                                     <td>{{ $row['last_viewed']?->timezone(config('app.timezone'))->format('M j, Y H:i') }}</td>
+                                    <td>{{ number_format($row['enquiries']) }}</td>
+                                    <td>{{ number_format($row['downloads']) }}</td>
+                                    <td>{{ number_format($row['conversions']) }}</td>
+                                    <td>{{ $row['conversion_rate'] === null ? '—' : number_format($row['conversion_rate'], 1).'%' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -472,6 +628,12 @@
         .ibn-visitor-analytics .ibn-empty-inline {
             margin-top: 0.9rem;
             color: var(--ibn-text-muted);
+        }
+
+        .ibn-visitor-analytics__path {
+            margin-top: 0.15rem;
+            color: var(--ibn-text-muted);
+            font-size: 0.8rem;
         }
 
         @media (max-width: 1100px) {

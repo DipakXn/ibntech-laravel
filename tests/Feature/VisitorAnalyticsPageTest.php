@@ -6,6 +6,7 @@ use App\Filament\Auth\Login;
 use App\Filament\Pages\VisitorAnalytics;
 use App\Filament\Widgets\VisitorTrendChart;
 use App\Models\Blog;
+use App\Models\Lead;
 use App\Models\Page;
 use App\Models\PageView;
 use App\Models\User;
@@ -71,6 +72,22 @@ class VisitorAnalyticsPageTest extends TestCase
             'browser' => 'Chrome',
             'operating_system' => 'Windows',
         ]);
+        Lead::query()->create([
+            'name' => 'Ada Lovelace',
+            'email' => 'ada@example.com',
+            'form_name' => 'contact',
+            'status' => Lead::STATUS_NEW,
+            'page_url' => 'https://example.com/about-us/?utm=1',
+        ]);
+        Lead::query()->create([
+            'name' => 'No Source',
+            'email' => 'none@example.com',
+            'form_name' => 'ebook_download',
+            'status' => Lead::STATUS_NEW,
+            'page_url' => null,
+            'visitor_id' => $visitorId,
+        ]);
+
         PageView::query()->create([
             'visitor_id' => (string) Str::uuid(),
             'visited_at' => now(),
@@ -107,6 +124,13 @@ class VisitorAnalyticsPageTest extends TestCase
         $response->assertDontSee($visitorId);
         $response->assertDontSee('Mozilla/');
         $response->assertSee('Visitors and page views');
+        $response->assertSee('Enquiries');
+        $response->assertSee('Gated Downloads');
+        $response->assertSee('Page types');
+        $response->assertSee('Top converting pages');
+        $response->assertSee('Source unavailable: 1');
+        $response->assertSee('Submissions without a usable source page are not assigned to a page');
+        $response->assertDontSee($visitorId);
 
         Livewire::actingAs($admin)
             ->test(VisitorTrendChart::class)
@@ -120,5 +144,14 @@ class VisitorAnalyticsPageTest extends TestCase
         $content = (fn () => $this->getViewData()['content']['rows'])->call($filtered);
 
         $this->assertSame(['Launch post'], array_column($content, 'title'));
+
+        $viewData = (fn () => $this->getViewData())->call($filtered);
+        $this->assertSame(1, $viewData['kpis']['enquiries']);
+        $this->assertSame(1, $viewData['kpis']['gated_downloads']);
+        $this->assertSame(1, $viewData['kpis']['unattributed']);
+        $this->assertSame(50.0, $viewData['kpis']['conversion_rate']);
+        $this->assertSame('About us', $viewData['topConversions'][0]['title']);
+        $this->assertSame(1, $viewData['topConversions'][0]['enquiries']);
+        $this->assertSame(0, $viewData['topConversions'][0]['downloads']);
     }
 }

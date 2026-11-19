@@ -9,7 +9,6 @@ use App\Filament\Actions\PreviewAction;
 use App\Filament\Actions\RestoreContentAction;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
-use Filament\Support\Enums\Size;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +26,7 @@ class ContentRecordActions
 
     public static function make(): ActionGroup
     {
-        return ActionGroup::make([
+        return GroupedRecordActions::group([
             PreviewAction::make()
                 ->visible(fn (?Model $record): bool => static::isActive($record)),
             EditAction::make()
@@ -40,16 +39,7 @@ class ContentRecordActions
                 ->visible(fn (?Model $record): bool => static::isTrashed($record) && static::allows($record, 'delete')),
             ForceDeleteContentAction::make()
                 ->visible(fn (?Model $record): bool => static::isTrashed($record) && static::allows($record, 'delete')),
-        ])
-            ->label('Actions')
-            ->icon(Heroicon::EllipsisVertical)
-            ->color('gray')
-            ->button()
-            ->outlined()
-            ->size(Size::Small)
-            ->extraAttributes([
-                'class' => 'ibn-content-actions',
-            ]);
+        ]);
     }
 
     protected static function isActive(?Model $record): bool

@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\AnalyticsExcludedIps\Tables;
 
+use App\Filament\Tables\GroupedRecordActions;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -12,7 +14,7 @@ class AnalyticsExcludedIpsTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table = $table
             ->columns([
                 TextColumn::make('ip_address')
                     ->label('IP address or range')
@@ -36,10 +38,13 @@ class AnalyticsExcludedIpsTable
             ->emptyStateIcon('heroicon-o-no-symbol')
             ->emptyStateHeading('No excluded IPs')
             ->emptyStateDescription('Add an office, localhost, or network range to keep internal traffic out of visitor analytics.')
-            ->striped()
-            ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
-            ]);
+            ->striped();
+
+        return GroupedRecordActions::apply($table, [
+            EditAction::make()
+                ->color('gray')
+                ->icon(Heroicon::OutlinedPencil),
+            DeleteAction::make(),
+        ]);
     }
 }

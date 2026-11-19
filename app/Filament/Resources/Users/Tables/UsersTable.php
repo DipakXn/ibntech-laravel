@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\Users\Tables;
 
 use App\Filament\Resources\Users\UserResource;
+use App\Filament\Tables\GroupedRecordActions;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -19,7 +21,7 @@ class UsersTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table = $table
             ->modifyQueryUsing(fn (Builder $query): Builder => $query->withLastSessionActivity())
             ->columns([
                 TextColumn::make('avatar')
@@ -92,11 +94,14 @@ class UsersTable
             ->emptyStateIcon('heroicon-o-users')
             ->emptyStateHeading('No users found')
             ->emptyStateDescription('Invite a teammate when you are ready to expand admin access.')
-            ->striped()
-            ->recordActions([
-                EditAction::make(),
-                self::deleteAction(),
-            ]);
+            ->striped();
+
+        return GroupedRecordActions::apply($table, [
+            EditAction::make()
+                ->color('gray')
+                ->icon(Heroicon::OutlinedPencil),
+            self::deleteAction(),
+        ]);
     }
 
     public static function deleteAction(): DeleteAction

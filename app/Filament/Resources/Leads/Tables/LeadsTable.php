@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Leads\Tables;
 
 use App\Filament\Resources\Leads\LeadResource;
+use App\Filament\Tables\GroupedRecordActions;
 use App\Models\Lead;
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
@@ -13,6 +14,7 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
@@ -24,7 +26,7 @@ class LeadsTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        $table = $table
             ->columns([
                 TextColumn::make('name')
                     ->searchable(query: fn (Builder $query, string $search): Builder => self::applySearch($query, $search))
@@ -122,69 +124,71 @@ class LeadsTable
             ->emptyStateHeading('No submissions captured')
             ->emptyStateDescription('When visitors submit forms or download assets, they will appear here.')
             ->striped()
-            ->recordUrl(fn (Lead $record): string => LeadResource::getUrl('view', ['record' => $record]))
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                Action::make('markSpam')
-                    ->label('Spam')
+            ->recordUrl(fn (Lead $record): string => LeadResource::getUrl('view', ['record' => $record]));
+
+        return GroupedRecordActions::apply($table, [
+            ViewAction::make(),
+            EditAction::make()
+                ->color('gray')
+                ->icon(Heroicon::OutlinedPencil),
+            Action::make('markSpam')
+                ->label('Spam')
+                ->icon(Heroicon::OutlinedNoSymbol)
+                ->color('danger')
+                ->visible(fn (Lead $record): bool => ! $record->isSpam())
+                ->requiresConfirmation()
+                ->action(function (Lead $record): void {
+                    $record->update(['status' => Lead::STATUS_SPAM]);
+
+                    Notification::make()
+                        ->title('Submission marked as spam')
+                        ->success()
+                        ->send();
+                }),
+            Action::make('markInbox')
+                ->label('Restore')
+                ->icon(Heroicon::OutlinedInbox)
+                ->visible(fn (Lead $record): bool => $record->isSpam())
+                ->action(function (Lead $record): void {
+                    $record->update(['status' => Lead::STATUS_NEW]);
+
+                    Notification::make()
+                        ->title('Submission restored to inbox')
+                        ->success()
+                        ->send();
+                }),
+        ])->toolbarActions([
+            BulkActionGroup::make([
+                BulkAction::make('markAsSpam')
+                    ->label('Mark as spam')
                     ->icon('heroicon-o-no-symbol')
                     ->color('danger')
-                    ->visible(fn (Lead $record): bool => ! $record->isSpam())
                     ->requiresConfirmation()
-                    ->action(function (Lead $record): void {
-                        $record->update(['status' => Lead::STATUS_SPAM]);
+                    ->deselectRecordsAfterCompletion()
+                    ->action(function (Collection $records): void {
+                        $records->each(fn (Lead $record) => $record->update(['status' => Lead::STATUS_SPAM]));
 
                         Notification::make()
-                            ->title('Submission marked as spam')
+                            ->title('Submissions marked as spam')
                             ->success()
                             ->send();
                     }),
-                Action::make('markInbox')
-                    ->label('Restore')
+                BulkAction::make('restoreToInbox')
+                    ->label('Restore to inbox')
                     ->icon('heroicon-o-inbox')
-                    ->visible(fn (Lead $record): bool => $record->isSpam())
-                    ->action(function (Lead $record): void {
-                        $record->update(['status' => Lead::STATUS_NEW]);
+                    ->requiresConfirmation()
+                    ->deselectRecordsAfterCompletion()
+                    ->action(function (Collection $records): void {
+                        $records->each(fn (Lead $record) => $record->update(['status' => Lead::STATUS_NEW]));
 
                         Notification::make()
-                            ->title('Submission restored to inbox')
+                            ->title('Submissions restored to inbox')
                             ->success()
                             ->send();
                     }),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    BulkAction::make('markAsSpam')
-                        ->label('Mark as spam')
-                        ->icon('heroicon-o-no-symbol')
-                        ->color('danger')
-                        ->requiresConfirmation()
-                        ->deselectRecordsAfterCompletion()
-                        ->action(function (Collection $records): void {
-                            $records->each(fn (Lead $record) => $record->update(['status' => Lead::STATUS_SPAM]));
-
-                            Notification::make()
-                                ->title('Submissions marked as spam')
-                                ->success()
-                                ->send();
-                        }),
-                    BulkAction::make('restoreToInbox')
-                        ->label('Restore to inbox')
-                        ->icon('heroicon-o-inbox')
-                        ->requiresConfirmation()
-                        ->deselectRecordsAfterCompletion()
-                        ->action(function (Collection $records): void {
-                            $records->each(fn (Lead $record) => $record->update(['status' => Lead::STATUS_NEW]));
-
-                            Notification::make()
-                                ->title('Submissions restored to inbox')
-                                ->success()
-                                ->send();
-                        }),
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+                DeleteBulkAction::make(),
+            ]),
+        ]);
     }
 
     public static function applySearch(Builder $query, string $search): Builder

@@ -3,14 +3,13 @@
 namespace App\Filament\Resources\Redirects\Tables;
 
 use App\Filament\Resources\Redirects\Pages\ListRedirects;
+use App\Filament\Tables\GroupedRecordActions;
 use App\Models\ContentRedirect;
 use App\Support\PathPageUrl;
 use Filament\Actions\Action;
-use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
-use Filament\Support\Enums\Size;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -76,7 +75,7 @@ class RedirectsTable
             ->striped()
             ->recordActionsColumnLabel('Actions')
             ->recordActions([
-                ActionGroup::make([
+                GroupedRecordActions::group([
                     Action::make('toggle')
                         ->label(fn (ContentRedirect $record): string => $record->is_active ? 'Deactivate' : 'Activate')
                         ->icon(Heroicon::OutlinedPower)
@@ -108,16 +107,7 @@ class RedirectsTable
                         ->requiresConfirmation()
                         ->visible(fn (ContentRedirect $record): bool => $record->trashed())
                         ->action(fn (ContentRedirect $record) => $record->forceDelete()),
-                ])
-                    ->label('Actions')
-                    ->icon(Heroicon::EllipsisVertical)
-                    ->color('gray')
-                    ->button()
-                    ->outlined()
-                    ->size(Size::Small)
-                    ->extraAttributes([
-                        'class' => 'ibn-content-actions',
-                    ]),
+                ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -7,10 +7,12 @@ use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Helpers\TemplateHelper;
 use App\Models\Category;
+use App\Support\EditorialPublication;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
@@ -59,17 +61,16 @@ class BlogForm
                                 'module' => Category::MODULE_BLOG,
                             ])->getKey()),
                         Select::make('status')
-                            ->options([
-                                'draft' => 'Draft',
-                                'published' => 'Published',
-                            ])
-                            ->default('published')
+                            ->options(EditorialPublication::options())
+                            ->default(EditorialPublication::PUBLISHED)
                             ->required(),
                         DateTimePicker::make('published_at')
                             ->label('Publish date')
                             ->seconds(false)
+                            ->timezone(config('app.timezone'))
                             ->default(now())
-                            ->helperText('Public display and listing date. WordPress imports store the original publish date here. Laravel created_at is not changed.'),
+                            ->required(fn (Get $get): bool => $get('status') === EditorialPublication::SCHEDULED)
+                            ->helperText(EditorialPublication::BLOG_PUBLISH_DATE_HELP),
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')

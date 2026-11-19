@@ -4,6 +4,7 @@ namespace App\Support\Sitemap;
 
 use App\Models\LandingPage;
 use App\Models\SeoMeta;
+use App\Support\EditorialPublication;
 use Illuminate\Database\Eloquent\Model;
 
 class SitemapEligibility
@@ -13,6 +14,10 @@ class SitemapEligibility
         $status = $model->getAttribute('status');
 
         if ($status !== null && $status !== 'published') {
+            return false;
+        }
+
+        if (EditorialPublication::appliesTo($model) && ! EditorialPublication::isDue($model->getAttribute('published_at'))) {
             return false;
         }
 

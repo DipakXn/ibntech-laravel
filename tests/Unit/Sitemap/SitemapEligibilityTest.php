@@ -2,14 +2,37 @@
 
 namespace Tests\Unit\Sitemap;
 
+use App\Models\Blog;
 use App\Models\LandingPage;
 use App\Models\Page;
 use App\Models\SeoMeta;
 use App\Support\Sitemap\SitemapEligibility;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class SitemapEligibilityTest extends TestCase
 {
+    public function test_future_editorial_publish_date_is_excluded_and_a_future_page_is_not(): void
+    {
+        Carbon::setTestNow(Carbon::parse('2026-06-15 12:00:00', 'UTC'));
+
+        $blog = new Blog([
+            'status' => 'published',
+            'slug' => 'forced-future',
+            'published_at' => Carbon::parse('2026-06-15 12:05:00', 'UTC'),
+        ]);
+        $page = new Page([
+            'status' => 'published',
+            'slug' => 'future-page',
+            'published_at' => Carbon::parse('2026-06-15 12:05:00', 'UTC'),
+        ]);
+
+        $this->assertFalse(SitemapEligibility::allows($blog, 'http://localhost/blog/forced-future/'));
+        $this->assertTrue(SitemapEligibility::allows($page, 'http://localhost/future-page/'));
+
+        Carbon::setTestNow();
+    }
+
     public function test_draft_content_is_excluded(): void
     {
         $page = new Page(['status' => 'draft', 'slug' => 'draft-page']);

@@ -7,11 +7,13 @@ use App\Filament\Schemas\SeoMetaSchema;
 use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Helpers\TemplateHelper;
 use App\Models\Category;
+use App\Support\EditorialPublication;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
@@ -63,16 +65,15 @@ class PressReleaseForm
                                 'module' => Category::MODULE_PRESS_RELEASE,
                             ])->getKey()),
                         Select::make('status')
-                            ->options([
-                                'draft' => 'Draft',
-                                'published' => 'Published',
-                            ])
-                            ->default('draft')
+                            ->options(EditorialPublication::options())
+                            ->default(EditorialPublication::DRAFT)
                             ->required(),
                         DateTimePicker::make('published_at')
                             ->label('Published Date')
                             ->seconds(false)
-                            ->helperText('Public display and listing date. Leave empty for drafts. Laravel created_at is not changed.'),
+                            ->timezone(config('app.timezone'))
+                            ->required(fn (Get $get): bool => $get('status') === EditorialPublication::SCHEDULED)
+                            ->helperText(EditorialPublication::PUBLISH_DATE_HELP),
                         SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->collection('featured_image')

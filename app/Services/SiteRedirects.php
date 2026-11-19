@@ -2,17 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Article;
-use App\Models\Blog;
-use App\Models\CaseStudy;
 use App\Models\ContentRedirect;
-use App\Models\Ebook;
 use App\Models\Industry;
 use App\Models\LandingPage;
 use App\Models\Newsletter;
 use App\Models\Page;
-use App\Models\PressRelease;
-use App\Models\WhitePaper;
+use App\Support\EditorialPublication;
 use App\Support\PathPageUrl;
 use App\Support\Redirects\LegacyRouteRedirects;
 use Illuminate\Database\Eloquent\Model;
@@ -509,13 +504,16 @@ class SiteRedirects
 
         [$prefix, $slug] = $segments;
 
+        $editorial = EditorialPublication::modelForPrefix($prefix);
+
+        if ($editorial !== null) {
+            return $editorial::query()
+                ->where('slug', $slug)
+                ->whereIn('status', EditorialPublication::reservedStatuses())
+                ->exists();
+        }
+
         $model = match ($prefix) {
-            'blog' => Blog::class,
-            'article' => Article::class,
-            'case-study' => CaseStudy::class,
-            'ebook' => Ebook::class,
-            'pressrelease' => PressRelease::class,
-            'whitepapers' => WhitePaper::class,
             'industry' => Industry::class,
             'lp' => LandingPage::class,
             'newsletter' => Newsletter::class,

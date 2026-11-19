@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Blogs\Tables;
 use App\Filament\Tables\ContentBulkActions;
 use App\Filament\Tables\ContentRecordActions;
 use App\Filament\Tables\ContentTableColumns;
+use App\Support\EditorialPublication;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -34,7 +35,8 @@ class BlogsTable
                     ->label('Category')
                     ->sortable(),
                 TextColumn::make('status')
-                    ->badge(),
+                    ->badge()
+                    ->color(fn (string $state): string => EditorialPublication::badgeColor($state)),
                 TextColumn::make('published_at')
                     ->label('Published')
                     ->dateTime()
@@ -48,10 +50,7 @@ class BlogsTable
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                    ]),
+                    ->options(EditorialPublication::options()),
             ])
             ->defaultSort('published_at', 'desc')
             ->searchPlaceholder('Search blog titles, slugs, and categories')

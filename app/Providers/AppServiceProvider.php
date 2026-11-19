@@ -17,6 +17,7 @@ use App\Models\SeoMeta;
 use App\Models\WebsiteSetting;
 use App\Models\WhitePaper;
 use App\Observers\ContentSlugRedirectObserver;
+use App\Observers\EditorialPublicationObserver;
 use App\Observers\SitemapCacheObserver;
 use App\Routing\UrlGenerator;
 use App\Services\Analytics\PageViewTracker;
@@ -27,6 +28,7 @@ use App\Services\SmtpSettingService;
 use App\Services\WebsiteSettingService;
 use App\Support\AdminToolbar\AdminToolbar;
 use App\Support\Cloudflare\CloudflareProxies;
+use App\Support\EditorialPublication;
 use App\Support\Mail\SmtpExceptionSanitizer;
 use App\Support\Users\PasswordPolicy;
 use Illuminate\Http\Middleware\TrustProxies;
@@ -132,6 +134,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->registerSitemapCacheObservers();
+        $this->registerEditorialPublicationObserver();
 
         Event::listen(JobFailed::class, function (JobFailed $event): void {
             Log::error('Queue job failed.', [
@@ -158,6 +161,13 @@ class AppServiceProvider extends ServiceProvider
     {
         foreach ([Page::class, Industry::class, LandingPage::class, Newsletter::class] as $model) {
             $model::observe(ContentSlugRedirectObserver::class);
+        }
+    }
+
+    private function registerEditorialPublicationObserver(): void
+    {
+        foreach (EditorialPublication::models() as $model) {
+            $model::observe(EditorialPublicationObserver::class);
         }
     }
 

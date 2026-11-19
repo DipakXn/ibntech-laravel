@@ -3,7 +3,7 @@ title: Blogs and articles
 group: Content modules
 summary: How to create posts and articles, including categories, dates, and templates.
 sort: 20
-keywords: blog, article, category, template, featured image, published_at
+keywords: blog, article, category, template, featured image, published_at, scheduled
 ---
 
 Blogs and articles are available to administrators and authors.
@@ -14,8 +14,8 @@ Blogs and articles are available to administrators and authors.
 2. Set **Title**. The slug should stay unique. It becomes `/blog/{slug}/`.
 3. Choose a **Template**. Options come from the blog Blade templates discovered for that module. `default` is the usual choice.
 4. Under **Publishing**, pick a blog category. The category list only includes categories whose module is Blogs. You can create a category inline; it is stored as a blog category.
-5. Set **Status** to Draft or Published. New blog posts default to Published, so switch to Draft if the post is not ready.
-6. Set **Publish date**. The public site uses this date for display and ordering. It does not change the record's created timestamp.
+5. Set **Status** to Draft, Scheduled, or Published. New blog posts default to Published, so switch to Draft if the post is not ready. Choosing Published with a future date stores the record as Scheduled.
+6. Set **Publish date**. A future date keeps the public URL offline until that time. The scheduler then marks the record Published. A draft is never auto-published. The date does not change the record's created timestamp.
 7. Upload a **Featured image** (max 4 MB). It is the banner and the thumbnail. Replacing it removes the previous featured image.
 8. Add body blocks in the Content Builder.
 9. Complete SEO if the post should be indexed. See [SEO metadata](topic:seo-metadata).
@@ -33,4 +33,4 @@ Article categories are managed under **Content → Articles → Categories** and
 
 ## Listing behavior
 
-Only **Published** records appear on the public index and detail URLs. The list orders by publish date, falling back to the created time when publish date is empty.
+Only **Published** records whose publish date is empty or already due appear on the public index and detail URLs. A **Scheduled** record stays offline until that time. The list orders by publish date, falling back to the created time when publish date is empty.

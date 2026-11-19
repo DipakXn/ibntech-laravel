@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasAdditionalAssets;
-use App\Models\Concerns\HasFeaturedImageDimensions;
 use App\Models\Concerns\HasBlockContent;
+use App\Models\Concerns\HasFeaturedImageDimensions;
 use App\Models\Concerns\HasPublishedAt;
+use App\Models\Concerns\PublishesOnSchedule;
 use App\Models\Concerns\SoftDeletesContent;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -25,6 +25,7 @@ class PressRelease extends Model implements HasMedia
     use HasFeaturedImageDimensions;
     use HasPublishedAt;
     use InteractsWithMedia;
+    use PublishesOnSchedule;
     use SoftDeletesContent;
 
     protected $fillable = [
@@ -70,11 +71,6 @@ class PressRelease extends Model implements HasMedia
         }
 
         return $this->wordpressImport()->exists();
-    }
-
-    public function scopePublished(Builder $query): Builder
-    {
-        return $query->where('status', 'published');
     }
 
     public function registerMediaCollections(): void

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\WhitePapers\Tables;
 use App\Filament\Tables\ContentBulkActions;
 use App\Filament\Tables\ContentRecordActions;
 use App\Filament\Tables\ContentTableColumns;
+use App\Support\EditorialPublication;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -24,7 +25,8 @@ class WhitePapersTable
                 TextColumn::make('template')
                     ->sortable(),
                 TextColumn::make('status')
-                    ->badge(),
+                    ->badge()
+                    ->color(fn (string $state): string => EditorialPublication::badgeColor($state)),
                 TextColumn::make('published_at')
                     ->label('Published')
                     ->dateTime()
@@ -38,10 +40,7 @@ class WhitePapersTable
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                    ]),
+                    ->options(EditorialPublication::options()),
             ])
             ->defaultSort(fn ($query) => $query->latest())
             ->searchPlaceholder('Search white papers and status')

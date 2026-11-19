@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withSchedule(function (Schedule $schedule): void {
+        $schedule->command('content:publish-scheduled')->everyMinute()->withoutOverlapping();
+
         if (env('QUEUE_CONNECTION', 'database') === 'database') {
             $schedule
                 ->command(sprintf(

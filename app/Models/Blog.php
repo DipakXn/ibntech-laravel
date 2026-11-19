@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasAdditionalAssets;
-use App\Models\Concerns\HasFeaturedImageDimensions;
 use App\Models\Concerns\HasBlockContent;
+use App\Models\Concerns\HasFeaturedImageDimensions;
+use App\Models\Concerns\PublishesOnSchedule;
 use App\Models\Concerns\SoftDeletesContent;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,6 +28,7 @@ class Blog extends Model implements HasMedia
     }
     use HasFeaturedImageDimensions;
     use InteractsWithMedia;
+    use PublishesOnSchedule;
     use SoftDeletesContent;
 
     protected $fillable = [
@@ -174,11 +176,6 @@ class Blog extends Model implements HasMedia
         }
 
         return "{$media->getKey()}/{$media->file_name}";
-    }
-
-    public function scopePublished(Builder $query): Builder
-    {
-        return $query->where('status', 'published');
     }
 
     public function scopeLatest(Builder $query): Builder

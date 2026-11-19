@@ -167,6 +167,41 @@ class ContentTemplateScaffoldTest extends TestCase
         $this->assertSame('/redirect-source', ContentRedirect::query()->where('source_path', '/redirect-final')->value('target_path'));
     }
 
+    public function test_deleted_and_recreated_slug_does_not_keep_stale_redirects(): void
+    {
+        config([
+            'cms.scaffold.views' => resource_path('views'),
+            'cms.scaffold.css' => resource_path('css'),
+        ]);
+
+        $first = Newsletter::query()->create([
+            'title' => 'Test Newsletter',
+            'slug' => 'test-newsletter',
+            'template' => 'vciso-as-a-service',
+            'status' => 'published',
+        ]);
+        $first->update(['slug' => 'test-newsletter-02']);
+        $first->forceDelete();
+
+        $this->assertSame(
+            0,
+            ContentRedirect::query()->where('source_path', '/newsletter/test-newsletter')->count(),
+        );
+
+        Newsletter::query()->create([
+            'title' => 'Test Newsletter Again',
+            'slug' => 'test-newsletter',
+            'template' => 'vciso-as-a-service',
+            'status' => 'published',
+        ]);
+
+        $this->get('/newsletter/test-newsletter/')->assertOk();
+        $this->assertSame(
+            0,
+            ContentRedirect::query()->where('source_path', '/newsletter/test-newsletter')->count(),
+        );
+    }
+
     public function test_draft_slug_changes_do_not_redirect_and_newsletters_do(): void
     {
         config([

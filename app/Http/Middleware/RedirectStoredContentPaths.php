@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\ContentSlugRedirector;
-use App\Support\PathPageUrl;
+use App\Services\SiteRedirects;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RedirectStoredContentPaths
 {
     public function __construct(
-        private readonly ContentSlugRedirector $redirects,
+        private readonly SiteRedirects $redirects,
     ) {}
 
     public function handle(Request $request, Closure $next): Response
@@ -20,29 +19,36 @@ class RedirectStoredContentPaths
             return $next($request);
         }
 
-        $path = $this->redirects->normalize($request->getPathInfo());
+        $path = $this->redirects->normalizeSource($request->getPathInfo());
 
         if ($path === null || $this->isIgnored($path)) {
             return $next($request);
         }
 
-        $target = $this->redirects->targetFor($path);
+        $match = $this->redirects->resolve($path);
 
-        if ($target === null || $target === $path) {
+        if ($match === null) {
             return $next($request);
         }
 
-        $location = $target === '/'
-            ? url('/')
-            : PathPageUrl::withTrailingSlash(url($target));
+        $this->redirects->recordHit($match['id']);
 
-        $query = $request->getQueryString();
-
-        if ($query !== null && $query !== '') {
-            $location .= '?'.$query;
+        if (in_array($match['status'], [410, 451], true)) {
+            abort($match['status']);
         }
 
-        return redirect()->to($location, 301);
+        if (! in_array($match['status'], [301, 302, 307], true)) {
+            return $next($request);
+        }
+
+        if ($match['target'] === null || $match['target'] === $path) {
+            return $next($request);
+        }
+
+        return redirect()->to(
+            $this->redirects->location($match['target'], $request->getQueryString()),
+            $match['status'],
+        );
     }
 
     private function isIgnored(string $path): bool

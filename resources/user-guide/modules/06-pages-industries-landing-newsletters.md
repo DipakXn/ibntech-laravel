@@ -49,7 +49,9 @@ Reserved slugs are rejected. Pages cannot use slugs that already belong to other
 
 ## Publish and redirects
 
-Only **Published** records are public. A published record whose slug changes keeps a 301 from the old public URL to the new one. Drafts do not create that redirect. The redirect is stored for these records only. There is no separate redirect screen.
+Only **Published** records are public. A published record whose slug changes keeps a 301 from the old public URL to the new one. Drafts do not create that redirection. It is listed under **Administration → Redirections**, where it can be deactivated or trashed. The former WordPress 301s and 410s are in that same list and are applied from the database.
+
+Trashing or deleting a record clears redirects that used its URL as a source or target. Creating a new record with the same slug clears a leftover redirect to an older path so the live URL works again.
 
 Newsletters have their own public URL, `/newsletter/{slug}/`, so a published newsletter slug change redirects too.
 

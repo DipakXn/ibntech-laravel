@@ -5,10 +5,55 @@ namespace App\Services;
 use App\Models\ContentRedirect;
 use App\Support\ContentTemplates\ContentTemplateKind;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
 
 class ContentSlugRedirector
 {
+    /**
+     * A new record owns these public paths. Drop stale redirects that still point away from them.
+     */
+    public function claimPaths(Model $record): void
+    {
+        $paths = $this->pathsFor($record);
+
+        if ($paths === []) {
+            return;
+        }
+
+        ContentRedirect::withTrashed()->whereIn('source_path', $paths)->get()->each->forceDelete();
+
+        foreach ($paths as $path) {
+            $this->forget($path);
+        }
+    }
+
+    /**
+     * Remove redirects tied to this record's URLs when the record is trashed or deleted.
+     */
+    public function releasePaths(Model $record): void
+    {
+        $paths = $this->pathsFor($record);
+
+        if ($paths === []) {
+            return;
+        }
+
+        ContentRedirect::withTrashed()
+            ->where(function ($query) use ($paths): void {
+                $query
+                    ->whereIn('source_path', $paths)
+                    ->orWhereIn('target_path', $paths);
+            })
+            ->get()
+            ->each(function (ContentRedirect $redirect): void {
+                $this->forget($redirect->source_path);
+                $redirect->forceDelete();
+            });
+
+        foreach ($paths as $path) {
+            $this->forget($path);
+        }
+    }
+
     public function record(Model $record, string $fromSlug, string $toSlug): void
     {
         $kind = ContentTemplateKind::tryFromModel($record);
@@ -35,6 +80,9 @@ class ContentSlugRedirector
                     $redirect->delete();
                 } else {
                     $redirect->target_path = $target;
+                    $redirect->status_code = 301;
+                    $redirect->is_active = true;
+                    $redirect->origin = ContentRedirect::ORIGIN_SLUG;
                     $redirect->save();
                 }
 
@@ -49,10 +97,28 @@ class ContentSlugRedirector
                 continue;
             }
 
-            ContentRedirect::query()->updateOrCreate(
-                ['source_path' => $source],
-                ['target_path' => $target],
-            );
+            $existing = ContentRedirect::withTrashed()->where('source_path', $source)->first();
+
+            if ($existing instanceof ContentRedirect) {
+                if ($existing->trashed()) {
+                    $existing->restore();
+                }
+
+                $existing->fill([
+                    'target_path' => $target,
+                    'status_code' => 301,
+                    'is_active' => true,
+                    'origin' => ContentRedirect::ORIGIN_SLUG,
+                ])->save();
+            } else {
+                ContentRedirect::query()->create([
+                    'source_path' => $source,
+                    'target_path' => $target,
+                    'status_code' => 301,
+                    'is_active' => true,
+                    'origin' => ContentRedirect::ORIGIN_SLUG,
+                ]);
+            }
             $this->forget($source);
         }
 
@@ -67,45 +133,36 @@ class ContentSlugRedirector
 
     public function targetFor(string $path): ?string
     {
-        $source = $this->normalize($path);
-
-        if ($source === null) {
-            return null;
-        }
-
-        $target = Cache::remember($this->cacheKey($source), 3600, function () use ($source): string|false {
-            return ContentRedirect::query()->where('source_path', $source)->value('target_path') ?? false;
-        });
-
-        if (! is_string($target) || $target === '' || $target === $source || $this->normalize($target) === null) {
-            return null;
-        }
-
-        return $target;
+        return app(SiteRedirects::class)->targetFor($path);
     }
 
     public function normalize(string $path): ?string
     {
-        $path = '/'.trim(str_replace('\\', '/', $path), '/');
-
-        if ($path === '/') {
-            return '/';
-        }
-
-        if (str_contains($path, '..') || str_contains($path, '//') || preg_match('/^[a-z]+:/i', ltrim($path, '/'))) {
-            return null;
-        }
-
-        return $path;
+        return app(SiteRedirects::class)->normalizeSource($path);
     }
 
     private function forget(string $path): void
     {
-        Cache::forget($this->cacheKey($path));
+        app(SiteRedirects::class)->forget($path);
     }
 
-    private function cacheKey(string $path): string
+    /**
+     * @return list<string>
+     */
+    private function pathsFor(Model $record): array
     {
-        return 'content-redirect:'.$path;
+        $kind = ContentTemplateKind::tryFromModel($record);
+
+        if ($kind === null) {
+            return [];
+        }
+
+        $slug = (string) $record->getAttribute('slug');
+
+        if ($slug === '') {
+            return [];
+        }
+
+        return $kind->lookupPaths($slug);
     }
 }

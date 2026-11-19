@@ -47,4 +47,24 @@ class ContentSlugRedirectObserver
 
         app(ContentSlugRedirector::class)->record($model, $from, (string) $model->getAttribute('slug'));
     }
+
+    public function created(Model $model): void
+    {
+        app(ContentSlugRedirector::class)->claimPaths($model);
+    }
+
+    public function deleted(Model $model): void
+    {
+        app(ContentSlugRedirector::class)->releasePaths($model);
+    }
+
+    public function forceDeleted(Model $model): void
+    {
+        app(ContentSlugRedirector::class)->releasePaths($model);
+    }
+
+    public function restored(Model $model): void
+    {
+        app(ContentSlugRedirector::class)->claimPaths($model);
+    }
 }

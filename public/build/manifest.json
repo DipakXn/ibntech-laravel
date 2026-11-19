@@ -400,6 +400,15 @@
       "securing-enterprise-ai-data-protection-prompt-integrity-and-governance-at-scale.css"
     ]
   },
+  "resources/css/newsletters/test-newsletter.css": {
+    "file": "assets/test-newsletter-JGzEHpSq.css",
+    "src": "resources/css/newsletters/test-newsletter.css",
+    "isEntry": true,
+    "name": "test-newsletter",
+    "names": [
+      "test-newsletter.css"
+    ]
+  },
   "resources/css/newsletters/vciso-as-a-service.css": {
     "file": "assets/vciso-as-a-service-C75Z8wmo.css",
     "src": "resources/css/newsletters/vciso-as-a-service.css",

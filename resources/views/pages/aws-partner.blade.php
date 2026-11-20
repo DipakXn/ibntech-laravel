@@ -110,24 +110,7 @@
         ['file' => 'Travel.webp', 'label' => 'Travel'],
     ];
 
-    $testimonials = [
-        [
-            'quote' => 'IBN Technologies made our transition to AWS absolutely seamless. Their team carefully assessed our infrastructure and executed a smooth migration with zero downtime. We’ve seen a remarkable boost in performance and cost optimization since moving to AWS with IBN’s support.',
-            'cite' => 'CTO, FinTech Company, Mumbai',
-        ],
-        [
-            'quote' => 'The IBN Technologies AWS team is exceptional in managing our cloud environment. Their proactive monitoring, automation, and quick response times ensure our systems run efficiently around the clock. We finally have peace of mind knowing our AWS infrastructure is in expert hands.',
-            'cite' => 'Head of IT, E-commerce Firm, Pune',
-        ],
-        [
-            'quote' => 'What sets IBN Technologies apart is their commitment to customer success. Their AWS-certified engineers are always available and take ownership of every challenge. We consider them a true extension of our IT team.',
-            'cite' => 'VP Operations, Manufacturing Firm, Delhi',
-        ],
-        [
-            'quote' => 'IBN Technologies helped us design a scalable and secure AWS architecture that supports our rapid growth. Their cloud experts provided clear guidance, excellent implementation, and ongoing support. We couldn’t have asked for a better partner.',
-            'cite' => 'Founder & CEO, SaaS Startup, Pune',
-        ],
-    ];
+    $testimonials = \App\Support\Testimonials\Testimonials::cites('aws-partner');
 
     $apartItems = [
         ['title' => '27+ Years of Experience:', 'text' => 'Proven IT and cloud transformation success'],
@@ -436,8 +419,8 @@
                     x-data="{
                         index: 0,
                         total: {{ count($testimonials) }},
-                        prev() { this.index = (this.index - 1 + this.total) % this.total; },
-                        next() { this.index = (this.index + 1) % this.total; },
+                        prev() { this.index = (this.total > 0 ? (this.index - 1 + this.total) % this.total : 0); },
+                        next() { this.index = (this.total > 0 ? (this.index + 1) % this.total : 0); },
                         go(i) { this.index = i; }
                     }"
                 >

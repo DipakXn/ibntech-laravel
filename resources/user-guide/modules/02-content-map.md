@@ -3,7 +3,7 @@ title: Content map
 group: Content modules
 summary: Every content module, who can edit it, and the public URL it serves.
 sort: 10
-keywords: routes, blog, article, case study, ebook, white paper, press release, landing page, newsletter, industry
+keywords: routes, blog, article, case study, ebook, white paper, press release, landing page, newsletter, industry, testimonial
 ---
 
 Published records appear on the public site. Drafts stay off the public URL until you publish them. Use **Preview** to review a draft. See [Publish, preview, and trash](topic:publish-preview-and-trash).
@@ -24,6 +24,7 @@ Public HTML URLs redirect to a trailing slash (`/blog/`, `/article/my-post/`). A
 | Industries | Administrator | `/industry/{slug}/` |
 | Landing pages | Administrator | `/lp/{slug}/` |
 | Newsletters | Administrator | `/newsletter/`, `/newsletter/{slug}/` |
+| Testimonials | Administrator | No URL of their own. Published, active quotes appear in the Blade section they are assigned to, including the homepage carousel. |
 
 The paths above are the ones registered in `routes/web.php`. Older notes that say `/articles/`, `/case-studies/`, `/ebooks/`, `/white-papers/`, or `/press-releases/` do not match this application.
 

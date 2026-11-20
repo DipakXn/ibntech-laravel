@@ -371,9 +371,17 @@
     width: 2.7rem;
     height: 2.7rem;
     flex: 0 0 auto;
+    overflow: hidden;
     border-radius: 999px;
     background: var(--cu-green);
     color: #fff;
+}
+
+.cu-page .home-testimonial__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
 }
 
 .cu-page .home-testimonial__meta {

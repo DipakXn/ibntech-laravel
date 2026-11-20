@@ -103,63 +103,7 @@
         'MobSF.webp', 'Nikto.webp', 'Cobalt-Strike.webp', 'Manage-Engine.webp', 'amazon-inspector.webp', 'kali-logo.webp',
     ];
 
-    $vaptTestimonials = [
-        [
-            'name' => 'Raj Soni',
-            'role' => 'Senior Compliance Officer, IMRIEL',
-            'quote' => 'As one of our valued vendors, we would like to take this opportunity to thank you for your efforts and collaboration with us over the past year. We have conducted a thorough evaluation of your performance and are pleased to inform you that based on our assessment, your overall performance has been good. We have assigned a rating of Grade A to your company. We value our partnership with you, and we believe that by working together, we can continue to achieve mutually beneficial results. We appreciate your attention to this matter and look forward to your continued support. Thank you for your cooperation.',
-        ],
-        [
-            'name' => 'Syed Muhammad Umair',
-            'role' => 'Senior Technical Manager, Ephlux',
-            'quote' => 'I wanted to take a moment to express my gratitude for the outstanding support and completion of the VAPT process by you and your team. Your dedication and hard work are truly appreciated. I am looking forward to a smooth closure and continuing our successful collaboration. Thanks for the prompt VA/PT testing, and in the call today we witnessed some good findings. We really appreciate the efforts made by the Cloud IBN team. Keep the pace up guys!',
-        ],
-        [
-            'name' => 'Vishal Tompe',
-            'role' => 'Senior IT Associate, Digitalzone',
-            'quote' => "You're very welcome and thank you for completing the VAPT project! I'm glad to hear that the project went smoothly and that the team worked together effectively. It's important to acknowledge all team members' hard work and dedication, and I'm sure your leadership played a significant role in the project's success.",
-        ],
-        [
-            'name' => 'Meera',
-            'role' => 'Technologist, Metamorphtech',
-            'quote' => 'Appreciate the efforts taken by you and your team for completing the VAPT of our applications. Based on your reports, we have applied fixes and submitted the applications for VAPT at the customer end.',
-        ],
-        [
-            'name' => 'Kailas Kadam',
-            'role' => 'Project Manager, Asset Analytix',
-            'quote' => 'Thank you for the service. I wanted to extend my heartfelt appreciation to help me complete the test and provide me with the VAPT test report and update it when needed. I also definitely would like to extend my gratitude the all the other people involved in this project. I\'ll be sure to reach out to you if I require any assistance soon. Thank you once again.',
-        ],
-        [
-            'name' => 'Arun Seby',
-            'role' => 'CSA, Aurionpro Solutions Ltd.',
-            'quote' => 'Thank you for confirming the completion of the VAPT project. I appreciate the effort your team put into this engagement. It was great working with you; all the communication was smooth, and the findings were clear and helpful. Please pass on my thanks to your security team for their hard work and support throughout the process. Looking forward to working with you again in the future.',
-        ],
-        [
-            'name' => 'Ardhendu Rout',
-            'role' => 'Lead DBA - IT, Innofin Solutions Pvt Ltd.',
-            'quote' => 'We at Lendenclub sincerely appreciate your team\'s outstanding efforts and dedication in successfully completing the Vulnerability Assessment and Penetration Testing (VAPT) project. The results of the VAPT process have provided us with invaluable insights and actionable recommendations that will significantly strengthen our overall security posture. The smooth and timely completion of this crucial task would not have been possible without your diligence and expertise. Once again, thank you for your exceptional efforts. We look forward to continuing to work with you and the team on future projects with the same level of enthusiasm and excellence. Wishing you continued success.',
-        ],
-        [
-            'name' => 'Syam Srinivas',
-            'role' => 'Co-Founder & CTO, MicroGrid Technologies Pvt Ltd.',
-            'quote' => 'Dear IBN Team, On behalf of our team, I would like to extend our sincere gratitude and appreciation for the exceptional support and collaboration you provided throughout the VAPT and Source Code Review for CTA Harbour Project. Your team’s dedication to identifying vulnerabilities, thoroughly reviewing the source code, and providing valuable insights has been immensely helpful. We truly value the professionalism and expertise you brought to the table. A special thank you for going above and beyond, especially in assisting us to close this engagement outside of the initially agreed timeline. Your flexibility and extended support were critical in ensuring we could address all necessary areas and complete the project successfully. We look forward to continuing our partnership on future projects and are grateful for your ongoing commitment to excellence. Once again, thank you for your hard work and support.',
-        ],
-        [
-            'name' => 'Varun Joneja',
-            'role' => 'Senior Custom Software Development, ISC IT Services Pvt Ltd.',
-            'quote' => 'Thank you for the prompt responses yesterday for the final report and certificate, they both are in order. Appreciate it. Thank you very much for your support during this process. You and your team conducted the testing successfully and promptly. Thanks to Piyush for his assistance in setting this up.',
-        ],
-        [
-            'name' => 'Sambhav Jain',
-            'role' => 'Cybersecurity Analyst, SparxIT Solutions Pvt Ltd.',
-            'quote' => 'I wanted to take a moment to share our feedback regarding the recent work delivered by your team. We are pleased with the outcome; the deliverables met all expectations. Your team demonstrated strong professionalism, clear communication, and timely execution throughout the engagement. We especially appreciate the prompt responses and the smooth coordination during the process. Thank you for the great work, support and being a reliable partner. We look forward to continuing this collaboration.',
-        ],
-        [
-            'name' => 'Laveena Khushalani',
-            'role' => 'Founder\'s Office, Enbraun Technologies Pvt Ltd.',
-            'quote' => 'Thank you for your cooperation and for all the support your team has provided throughout this process.',
-        ],
-    ];
+    $vaptTestimonials = \App\Support\Testimonials\Testimonials::cards('vapt-services');
 
     $indiaLocations = [
         ['title' => 'VAPT Services in Bangalore', 'text' => "India's Silicon Valley - Helping Bangalore's SaaS and technology innovators stay secure with expert-led VAPT assessments"],

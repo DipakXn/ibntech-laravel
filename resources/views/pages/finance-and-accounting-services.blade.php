@@ -93,48 +93,7 @@
         ['value' => 26, 'suffix' => '+', 'label' => 'Years of Industry Experience'],
     ];
 
-    $testimonials = [
-        [
-            'name' => 'Naoma STaley',
-            'role' => 'CEO, Red river Chamber of Commerce',
-            'quote' => 'I always felt like IBN Technologies LLC was here to support me. Thanks to IBN Technologies LLC\'s work, the client approved their P&L and balance sheets at their monthly meetings and reconciled their monthly books. The team was communicative, responsive, and timely throughout the engagement. IBN Technologies LLC\'s kind and respectful approach was unique.',
-        ],
-        [
-            'name' => 'Anonymous',
-            'role' => 'Director of Financial Operations, Insurance Brokerage Firm',
-            'quote' => 'They were willing to learn and wanted to ensure their work was done correctly and to our standards. IBN Technologies LLC helped the client make timely payments of all vendor obligations. The team responded to all queries, provided progress updates, and requested help with prioritization when multiple tasks had similar due dates. Their willingness to learn impressed the client.',
-        ],
-        [
-            'name' => 'Delanea Davis',
-            'role' => 'Managing Partner & Co-Founder, Experience Design International',
-            'quote' => 'We saved thousands of dollars by working with them. Thanks to IBN Technologies LLC’s efforts, the client was able to optimize their savings and budget. The team was highly communicative, and internal stakeholders praised the service provider\'s quality expertise and professionalism.',
-        ],
-        [
-            'name' => 'Miroslav Bogdantsaliev',
-            'role' => 'Director, Pro Construction London Ltd',
-            'quote' => 'If an issue occurs, it gets sorted without any delays. IBN Technologies LLC has been helping the client ensure accurate accounts and balance sheets at the end of each financial period. The team consistently delivers on time, responds promptly to the client, and communicates well via email and online meetings. They\'re also professional and responsible.',
-        ],
-        [
-            'name' => 'Miroslav Bogdantsaliev',
-            'role' => 'HR/Insurance Specialist, Infinity Contracting Services/K2VC',
-            'quote' => 'The management has been impressive in acting and responding to our needs. IBN Technologies LLC\'s resources have completed work correctly and on time, following the client\'s leadership. The team is timely and offers efficient responses. Moreover, their management is impressive, catering to the client\'s needs without the client expending extra time on training on their end.',
-        ],
-        [
-            'name' => 'Shobha Parsabathina',
-            'role' => 'Financial Controller, Opensignal Limited',
-            'quote' => 'IBN Technologies LLC is very helpful, courteous, and professional - always ready to help! IBN Technologies LLC has enhanced the client\'s number of invoices coded and banks reconciled. The team remains helpful and courteous, consistently meets deadlines, and listens to the client\'s feedback, demonstrating professionalism. They maintain honest communication via various virtual channels.',
-        ],
-        [
-            'name' => 'Pamela Cooney',
-            'role' => 'President, World Computer Exchange',
-            'quote' => 'They\'re very cost-effective and have good customer service. IBN Technologies LLC has successfully reconciled the client\'s accounts and crafted clear financial reports. The team works very professionally, delivering high-quality services in a timely manner. Their cost-efficiency and excellent customer service have stood out.',
-        ],
-        [
-            'name' => 'Elijah Comerchero',
-            'role' => 'Controller, Montague Street Capital',
-            'quote' => 'They work hard, and we do not have to worry about action items slipping through. IBN Technologies LLC reviews daily transactions of more than 15 end clients. The team answers questions quickly and clarifies issues regarding complex accounting tasks, and the client is impressed with their consistent, high-quality work. Moreover, they are flexible when it comes to urgent requests.',
-        ],
-    ];
+    $testimonials = \App\Support\Testimonials\Testimonials::cards('finance-and-accounting-services');
 
     $testimonialPages = array_chunk($testimonials, 2);
 @endphp
@@ -318,8 +277,8 @@
                 index: 0,
                 total: {{ count($testimonialPages) }},
                 go(i) { this.index = i; },
-                next() { this.index = (this.index + 1) % this.total; },
-                prev() { this.index = (this.index - 1 + this.total) % this.total; }
+                next() { this.index = (this.total > 0 ? (this.index + 1) % this.total : 0); },
+                prev() { this.index = (this.total > 0 ? (this.index - 1 + this.total) % this.total : 0); }
             }"
         >
             <div class="site-shell">

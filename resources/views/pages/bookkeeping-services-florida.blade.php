@@ -186,32 +186,7 @@
         ],
     ];
 
-    $testimonials = [
-        [
-            'quote' => 'We have been with IBN for just a short of year now, and we are extremely happy with the service. They provide support and back-office accounts for us. The response time is often less than an hour and they have become instrumental in our daily running and have been able to tackle big projects without any problems. They are very professional, efficient and reliable and provide the results that we need, often on short notice. IBN are by far the best accountants I have worked with, and I would highly recommend IBN for anyone looking for an account’s solution.',
-            'cite' => 'Janikin Rooke Contracts',
-        ],
-        [
-            'quote' => 'We have been utilizing IBN now for about 6months, initially we were reluctant to allow access to our sensitive information, but we soon overcame these challenges. We have been working closely with Aniket the entire time, he is our dedicated reprehensive and we really enjoy his service. He started by doing standard banking reconciling for all our accounts. This has graduated to Invoicing, Banking, A/R Reporting, Imports & Exports, weekly P&L & journal entries. Not only has this really helped us streamline our process, but our overall Local accounting cost have been cut in half.',
-            'cite' => 'RLCS Inc',
-        ],
-        [
-            'quote' => 'We’ve had the opportunity to work with IBN Tech for over a year now and really enjoy the services they provide. The team is incredibly responsive, and the quality of work is wonderful – they are just an overall pleasure to work with.',
-            'cite' => 'Mandi Loayza, Carnahan Group',
-        ],
-        [
-            'quote' => 'I first searched for an outsourcing company based in India via google. There were 100’s of choices and not being based in India or heard of any of the companies, I really did not know who to use so I clicked on IBN and arranged for a call. Although the cost was to my liking, it was the total professionalism of the people I spoke to initially and then to the people who were going to take care of me on a daily/weekly basis that impressed me the most. Once the work got started and I saw their spreadsheets and work patterns, and their total understanding of my work, I realized how good they are. IBN has made my life easier to take more clients on and then to be cheeky enough to help with the workload so that I can offer the client other services. There might be 100 similar companies out there, but this is the one for me!',
-            'cite' => 'AKS Accountants',
-        ],
-        [
-            'quote' => 'The IBN team is great to work with and communicates efficiently and timely. They provided substantial assistance with our company needs and helped us push through projects.',
-            'cite' => 'Sampson Business Solutions LLC',
-        ],
-        [
-            'quote' => 'IBN has been providing excellent accounting services to our company for many years. Their staff is highly knowledgeable in GAAP standards. They perform very detailed analyses of all aspects of accounts and provide very professional reports. I would highly recommend them.',
-            'cite' => 'Graviton Consulting Services',
-        ],
-    ];
+    $testimonials = \App\Support\Testimonials\Testimonials::cites('bookkeeping-services-florida');
 @endphp
 
 @extends('layouts.app')
@@ -533,8 +508,8 @@
                     x-data="{
                         index: 0,
                         total: {{ count($testimonials) }},
-                        prev() { this.index = (this.index - 1 + this.total) % this.total; },
-                        next() { this.index = (this.index + 1) % this.total; }
+                        prev() { this.index = (this.total > 0 ? (this.index - 1 + this.total) % this.total : 0); },
+                        next() { this.index = (this.total > 0 ? (this.index + 1) % this.total : 0); }
                     }"
                 >
                     <button

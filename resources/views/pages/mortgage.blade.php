@@ -147,20 +147,7 @@
         ['value' => '99.99 %', 'label' => 'Accuracy Achieved', 'tone' => 'navy'],
     ];
 
-    $testimonials = [
-        [
-            'quote' => 'We are now entering the fourth year of our relationship with IBN. This has been a hugely rewarding and valuable transaction for us with IBN as they are now responsible for',
-            'cite' => 'David Barber',
-        ],
-        [
-            'quote' => 'IBN financial support is a top-class accounting services outsourcer. They act with speed in getting work done, and mobilizing additional resources as needed. Their greatest strength is pro-active communication with clients. I consider IBN a strong partner.',
-            'cite' => 'Salman Ghani',
-        ],
-        [
-            'quote' => 'After approaching IBN with a complex and bespoke requirement, I’ve been impressed with the professionalism and knowledge of my technical contact and other',
-            'cite' => 'DANIEL SCOTT',
-        ],
-    ];
+    $testimonials = \App\Support\Testimonials\Testimonials::cites('mortgage');
 
     $faqs = [
         [
@@ -365,8 +352,8 @@
                     x-data="{
                         index: 0,
                         total: {{ count($testimonials) }},
-                        prev() { this.index = (this.index - 1 + this.total) % this.total; },
-                        next() { this.index = (this.index + 1) % this.total; }
+                        prev() { this.index = (this.total > 0 ? (this.index - 1 + this.total) % this.total : 0); },
+                        next() { this.index = (this.total > 0 ? (this.index + 1) % this.total : 0); }
                     }"
                 >
                     <button

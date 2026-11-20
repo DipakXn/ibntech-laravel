@@ -78,16 +78,7 @@
         'Transparent Reporting',
     ];
 
-    $testimonials = [
-        [
-            'quote' => 'After months of researching 100’s of companies, visiting their offices, and extensive reference checks, we are extremely happy with our decision to select IBN. They have exceeded our expectations with consistent levels of specialized knowledge, quality, speed, and professionalism',
-            'cite' => 'Client is engaged in advising Fund Of Hedge Funds and providing technology facilitating the management of investment portfolios. Fund of Funds, ~$2B AUM, New York',
-        ],
-        [
-            'quote' => 'We are now entering the fourth year of our relationship with IBN. This has been a hugely rewarding and valuable transaction for us with IBN as they are now responsible for the maintenance of data covering over 70% of the funds within our proprietary Hedge Fund database. The most compelling aspects of IBN’s service are their professionalism and commitment to provide the highest standards of service possible. Each month we randomly samples over 300 funds to monitor the data maintained by IBN and I cannot recall IBN’s accuracy ever falling below 99.5% throughout our entire relationship – infact IBN usually achieves 100% accuracy. The clearest indication of my satisfaction with the service provided is that I am currently considering further activities that can be outsourced to IBN',
-            'cite' => 'Client is a leading Hedge Fund of Funds with AUM of USD 9.5 billion globally. David Barber, Director',
-        ],
-    ];
+    $testimonials = \App\Support\Testimonials\Testimonials::cites('hedge-fund-accounting');
 @endphp
 
 @extends('layouts.app')
@@ -389,8 +380,8 @@
                     x-data="{
                         index: 0,
                         total: {{ count($testimonials) }},
-                        prev() { this.index = (this.index - 1 + this.total) % this.total; },
-                        next() { this.index = (this.index + 1) % this.total; }
+                        prev() { this.index = (this.total > 0 ? (this.index - 1 + this.total) % this.total : 0); },
+                        next() { this.index = (this.total > 0 ? (this.index + 1) % this.total : 0); }
                     }"
                 >
                     <button

@@ -52,3 +52,15 @@ The Content Builder also has a collapsed **Additional CSS & JavaScript** section
 Uploads use the `media` disk. Locally that is `public/uploads`, served at `/uploads`. On staging and production the disk root must be the account's `public_html/uploads` path (`MEDIA_ROOT`). A relative root inside the Laravel project is not the directory Apache serves on cPanel.
 
 Files are stored in purpose-based folders, for example featured images under a folder for that content type. You do not need a `storage:link` symlink for this disk.
+
+## Media Library
+
+**Content → Media Library** lists files already uploaded through the CMS, including featured images, content-block images, PDFs, logos, and SEO images. It shows the record that owns each file and a link to that record's edit page when you can edit it.
+
+Images placed in a Blade template, including page and newsletter pictures under `public/images`, are not part of this library. The library does not scan templates and does not move or rename files that are already on disk.
+
+**Upload** adds a new file under `uploads/media/library/{year}/{month}/`. JPG, PNG, GIF, and WebP files can be up to 4 MB. PDFs can be up to 10 MB. The file contents must match the extension. If the folder already has that file name, the new file is saved with a `-01` suffix and the existing file is left as it is.
+
+**Choose from library** on an image or PDF field copies the selected file into that record's own folder. The library original stays where it is. A featured image still lands in the featured-image folder for that content type, and a content-block image still lands in the blocks folder with that block's id. Save the record before using **Choose from library**.
+
+**Delete** is available only for a file uploaded into the Media Library when no content record uses it. A file owned by a blog, page, or other record is removed from that record, not from the library. A library file that has been copied onto content, or whose path is still written in a content block, cannot be deleted until those uses are gone.

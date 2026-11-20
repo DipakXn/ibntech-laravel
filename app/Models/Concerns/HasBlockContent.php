@@ -21,6 +21,8 @@ trait HasBlockContent
                 ->filter()
                 ->all();
 
+            $model->unsetRelation('media');
+
             $model
                 ->getMedia('content_blocks')
                 ->filter(fn ($media): bool => ! in_array(data_get($media, 'custom_properties.block_id'), $activeBlockIds, true))

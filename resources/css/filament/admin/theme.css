@@ -2967,3 +2967,362 @@ body.fi-body.ibn-login-screen,
         grid-row: auto;
     }
 }
+
+.ibn-media-library .fi-ta-content-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, 168px) !important;
+    justify-content: start;
+    gap: 0.85rem !important;
+}
+
+.ibn-media-library .fi-pagination {
+    display: none !important;
+}
+
+.ibn-media-layout .fi-grid {
+    align-items: start;
+}
+
+.ibn-media-library .fi-ta-record {
+    position: relative;
+    width: 168px;
+    min-width: 0;
+    padding: 0.4rem 0.4rem 0.5rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.7rem;
+    background: var(--ibn-surface-strong);
+    box-shadow: none;
+}
+
+.ibn-media-library .fi-ta-record.ibn-media-selected {
+    border-color: var(--ibn-primary);
+    box-shadow: 0 0 0 1px var(--ibn-primary);
+}
+
+.ibn-media-library .fi-ta-record-content-ctn {
+    min-width: 0;
+}
+
+.ibn-media-library .fi-ta-actions {
+    display: none;
+}
+
+.ibn-media-library .ibn-media-card,
+.ibn-media-library .ibn-media-picker-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.ibn-media-library .ibn-media-card {
+    position: relative;
+}
+
+.ibn-media-library .ibn-media-card-hit {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    cursor: pointer;
+}
+
+.ibn-media-library .ibn-media-thumb {
+    position: relative;
+    display: grid;
+    aspect-ratio: 4 / 3;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 0.4rem;
+    background: var(--ibn-surface);
+}
+
+.ibn-media-pager {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.9rem;
+}
+
+.ibn-media-pager-count {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-media-pager-per-page {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    justify-self: center;
+    color: var(--ibn-text-muted);
+    font-size: 0.8125rem;
+}
+
+.ibn-media-pager-per-page select {
+    min-width: 4.25rem;
+    padding: 0.3rem 1.6rem 0.3rem 0.55rem;
+    border: 1px solid var(--ibn-border-strong);
+    border-radius: 0.45rem;
+    background: var(--ibn-surface-strong);
+    color: var(--ibn-text);
+    font-size: 0.8125rem;
+}
+
+.ibn-media-pager-pages {
+    display: inline-flex;
+    justify-self: end;
+    overflow: hidden;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.5rem;
+    background: var(--ibn-surface-strong);
+}
+
+.ibn-media-pager-pages button {
+    min-width: 2rem;
+    padding: 0.35rem 0.55rem;
+    border: 0;
+    border-right: 1px solid var(--ibn-border);
+    background: transparent;
+    color: var(--ibn-text-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ibn-media-pager-pages button:last-child {
+    border-right: 0;
+}
+
+.ibn-media-pager-pages button.is-active {
+    background: #fff;
+    color: var(--ibn-primary-strong);
+}
+
+.ibn-media-pager-pages button:hover {
+    background: var(--ibn-surface);
+}
+
+@media (max-width: 767px) {
+    .ibn-media-pager {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .ibn-media-pager-per-page,
+    .ibn-media-pager-pages {
+        justify-self: start;
+    }
+}
+
+.ibn-media-library .fi-ta-record.ibn-media-selected .ibn-media-thumb::after,
+.ibn-media-library .ibn-media-picker-card.is-selected .ibn-media-thumb::after {
+    content: "";
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 999px;
+    background-color: var(--ibn-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M16.7 5.3a1 1 0 0 1 0 1.4l-7.2 7.2a1 1 0 0 1-1.4 0L3.3 9.1a1 1 0 1 1 1.4-1.4l4.1 4.1 6.5-6.5a1 1 0 0 1 1.4 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.8rem;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.ibn-media-library .ibn-media-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ibn-media-library .ibn-media-type-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-media-library .ibn-media-name {
+    overflow: hidden;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--ibn-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ibn-media-library .ibn-media-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-media-panel {
+    position: sticky;
+    top: 5.5rem;
+    padding: 0.9rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.75rem;
+    background: var(--ibn-surface-strong);
+}
+
+.ibn-media-panel-title {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ibn-text);
+}
+
+.ibn-media-panel-empty {
+    margin: 0;
+    color: var(--ibn-text-muted);
+    font-size: 0.8125rem;
+}
+
+.ibn-media-panel-preview {
+    display: grid;
+    aspect-ratio: 16 / 10;
+    place-items: center;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--ibn-surface);
+}
+
+.ibn-media-panel-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ibn-media-panel-name {
+    margin: 0 0 0.75rem;
+    overflow: hidden;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ibn-text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ibn-media-panel-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0 0 0.85rem;
+}
+
+.ibn-media-panel-facts dt,
+.ibn-media-panel-label {
+    margin-bottom: 0.2rem;
+    font-size: 0.75rem;
+    color: var(--ibn-text-muted);
+}
+
+.ibn-media-panel-facts dd,
+.ibn-media-panel-value {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ibn-text);
+    overflow-wrap: anywhere;
+}
+
+.ibn-media-panel-pill {
+    display: inline-flex;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    background: var(--ibn-surface);
+    font-size: 0.75rem;
+}
+
+.ibn-media-panel-block + .ibn-media-panel-block {
+    margin-top: 0.75rem;
+}
+
+.ibn-media-panel-usage a {
+    color: var(--ibn-secondary);
+    text-decoration: underline;
+}
+
+.ibn-media-panel-delete {
+    display: inline-flex;
+    margin-top: 1rem;
+    padding: 0.4rem 0.8rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #dc2626;
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.ibn-media-panel-delete:hover {
+    background: #b91c1c;
+}
+
+.ibn-media-library .ibn-media-search {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--ibn-border-strong);
+    border-radius: 0.5rem;
+    background: var(--ibn-surface-strong);
+    color: var(--ibn-text);
+    font-size: 0.875rem;
+}
+
+.ibn-media-library .ibn-media-search:focus {
+    outline: 2px solid var(--ibn-primary);
+    outline-offset: 1px;
+}
+
+.ibn-media-library .ibn-media-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-height: 28rem;
+    overflow: auto;
+}
+
+.ibn-media-library .ibn-media-picker-card {
+    padding: 0.5rem;
+    border: 1px solid var(--ibn-border);
+    border-radius: 0.75rem;
+    background: var(--ibn-surface-strong);
+    text-align: left;
+    cursor: pointer;
+}
+
+.ibn-media-library .ibn-media-picker-card.is-selected,
+.ibn-media-library .ibn-media-picker-card:focus-visible {
+    outline: 2px solid var(--ibn-primary);
+    outline-offset: 1px;
+}
+
+.ibn-media-library .ibn-media-picker-empty {
+    margin: 0;
+    color: var(--ibn-text-muted);
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .ibn-media-library .ibn-media-picker-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .ibn-media-library .ibn-media-picker-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}

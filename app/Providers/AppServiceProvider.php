@@ -30,6 +30,7 @@ use App\Support\AdminToolbar\AdminToolbar;
 use App\Support\Cloudflare\CloudflareProxies;
 use App\Support\EditorialPublication;
 use App\Support\Mail\SmtpExceptionSanitizer;
+use App\Support\MediaLibrary\LegacyMediaColumns;
 use App\Support\Users\PasswordPolicy;
 use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Http\Request;
@@ -79,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         PasswordPolicy::register();
+        LegacyMediaColumns::register();
 
         $this->trustCloudflareProxies();
         $this->registerContentSlugRedirectObservers();

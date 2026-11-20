@@ -2,7 +2,9 @@
 
 namespace App\Forms\Components;
 
+use App\Filament\Actions\ChooseFromLibraryAction;
 use App\Support\MediaLibrary\MediaPathResolver;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload as BaseSpatieMediaLibraryFileUpload;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +28,20 @@ class SpatieMediaLibraryFileUpload extends BaseSpatieMediaLibraryFileUpload
         $this->getUploadedFileNameForStorageUsing(
             fn (TemporaryUploadedFile $file): string => $this->resolveStoredFileName($file),
         );
+
+        if (Filament::getCurrentPanel() !== null) {
+            $this->hintAction(ChooseFromLibraryAction::make());
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function resolvedCustomProperties(): array
+    {
+        $properties = $this->evaluate($this->customProperties);
+
+        return is_array($properties) ? $properties : [];
     }
 
     protected function resolveStoredFileName(TemporaryUploadedFile $file): string

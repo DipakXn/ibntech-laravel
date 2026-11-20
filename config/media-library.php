@@ -6,6 +6,7 @@ use App\Models\CaseStudy;
 use App\Models\Ebook;
 use App\Models\Industry;
 use App\Models\LandingPage;
+use App\Models\MediaLibrary;
 use App\Models\Newsletter;
 use App\Models\Page;
 use App\Models\PressRelease;
@@ -116,6 +117,9 @@ return [
         WhitePaper::class => [
             'featured_image' => 'white-papers/featured/{YYYY}/{MM}',
             'content_blocks' => 'white-papers/blocks/{YYYY}/{MM}',
+        ],
+        MediaLibrary::class => [
+            'library' => 'media/library/{YYYY}/{MM}',
         ],
     ],
 

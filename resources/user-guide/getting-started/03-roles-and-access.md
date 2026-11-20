@@ -18,6 +18,7 @@ Authors can list, create, edit, and move to trash:
 - eBooks and eBook categories
 - White papers and white paper categories
 - Press releases and press release categories
+- The Media Library: view every CMS upload, add a library file, and delete a library file that is not used by content
 
 Authors do not see Pages, Industries, Landing Pages, Newsletters, Sales, Users, Website Settings, SMTP, analytics, Cloudflare, Cache Management, queues, logs, excluded IPs, or this User Guide.
 

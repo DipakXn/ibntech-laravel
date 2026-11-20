@@ -2970,9 +2970,10 @@ body.fi-body.ibn-login-screen,
 
 .ibn-media-library .fi-ta-content-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, 168px) !important;
-    justify-content: start;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)) !important;
+    align-items: start;
     gap: 0.85rem !important;
+    padding: 1rem 1.5rem 0.85rem !important;
 }
 
 .ibn-media-library .fi-pagination {
@@ -2983,28 +2984,38 @@ body.fi-body.ibn-login-screen,
     align-items: start;
 }
 
-.ibn-media-library .fi-ta-record {
+.ibn-media-library .fi-ta-content-grid .fi-ta-record {
     position: relative;
-    width: 168px;
+    display: block;
+    width: auto;
+    height: auto;
     min-width: 0;
-    padding: 0.4rem 0.4rem 0.5rem;
+    padding: 0.7rem 0.7rem 0.8rem;
     border: 1px solid var(--ibn-border);
     border-radius: 0.7rem;
     background: var(--ibn-surface-strong);
     box-shadow: none;
+    --tw-ring-shadow: 0 0 #0000;
 }
 
-.ibn-media-library .fi-ta-record.ibn-media-selected {
+.ibn-media-library .fi-ta-content-grid .fi-ta-record.ibn-media-selected {
     border-color: var(--ibn-primary);
     box-shadow: 0 0 0 1px var(--ibn-primary);
 }
 
-.ibn-media-library .fi-ta-record-content-ctn {
+.ibn-media-library .fi-ta-record-content-ctn,
+.ibn-media-library .fi-ta-record-content,
+.ibn-media-library .fi-ta-stack,
+.ibn-media-library .fi-ta-col {
+    width: 100%;
     min-width: 0;
+    height: auto;
+    padding: 0;
+    gap: 0;
 }
 
 .ibn-media-library .fi-ta-actions {
-    display: none;
+    display: none !important;
 }
 
 .ibn-media-library .ibn-media-card,
@@ -3044,7 +3055,8 @@ body.fi-body.ibn-login-screen,
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 0.75rem;
-    margin-top: 0.9rem;
+    margin-top: 0.35rem;
+    padding: 0.35rem 1.5rem 1.35rem;
 }
 
 .ibn-media-pager-count {

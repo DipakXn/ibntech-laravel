@@ -24,6 +24,7 @@ use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
@@ -51,9 +52,11 @@ class MediaLibraryTable
                     : null;
             })
             ->columns([
-                ViewColumn::make('card')
-                    ->label('')
-                    ->view('filament.media-library.card'),
+                Stack::make([
+                    ViewColumn::make('card')
+                        ->label('')
+                        ->view('filament.media-library.card'),
+                ]),
             ])
             ->searchable(['file_name'])
             ->filters([

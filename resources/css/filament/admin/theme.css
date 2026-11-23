@@ -3298,6 +3298,36 @@ body.fi-body.ibn-login-screen,
     outline-offset: 1px;
 }
 
+.ibn-media-picker-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 0.85rem;
+}
+
+.ibn-media-picker-filters label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--ibn-text-muted);
+    font-size: 0.8125rem;
+}
+
+.ibn-media-picker-filters select {
+    min-width: 8.5rem;
+    padding: 0.4rem 1.6rem 0.4rem 0.6rem;
+    border: 1px solid var(--ibn-border-strong);
+    border-radius: 0.5rem;
+    background: var(--ibn-surface-strong);
+    color: var(--ibn-text);
+    font-size: 0.8125rem;
+}
+
+.ibn-media-picker .ibn-media-pager {
+    margin-top: 0.85rem;
+    padding: 0;
+}
+
 .ibn-media-library .ibn-media-picker-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

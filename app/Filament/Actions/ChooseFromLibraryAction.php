@@ -34,15 +34,35 @@ class ChooseFromLibraryAction
                         ->validationAttribute('file')
                         ->view('filament.media-library.picker', function (Get $get) use ($acceptedFileTypes): array {
                             $query = $get('query');
+                            $kind = $get('kind');
+                            $owner = $get('owner');
+                            $page = (int) ($get('page') ?: 1);
+                            $perPage = (int) ($get('per_page') ?: 10);
+                            $paginator = MediaLibraryCatalog::browse(
+                                $acceptedFileTypes,
+                                is_string($query) ? $query : null,
+                                is_string($kind) ? $kind : null,
+                                is_string($owner) ? $owner : null,
+                                $page,
+                                $perPage,
+                            );
 
                             return [
-                                'cards' => MediaLibraryCatalog::cards($acceptedFileTypes, is_string($query) ? $query : null),
+                                'paginator' => $paginator,
+                                'cards' => array_values($paginator->items()),
                                 'query' => is_string($query) ? $query : '',
+                                'kind' => is_string($kind) ? $kind : '',
+                                'owner' => is_string($owner) ? $owner : '',
+                                'perPage' => in_array($perPage, MediaLibraryCatalog::PER_PAGE_OPTIONS, true) ? $perPage : 10,
+                                'kindOptions' => MediaLibraryCatalog::kindOptions($acceptedFileTypes),
+                                'ownerOptions' => MediaLibraryCatalog::ownerOptions(),
                             ];
                         }),
-                    Hidden::make('query')
-                        ->dehydrated(false)
-                        ->default(''),
+                    Hidden::make('query')->dehydrated(false)->default(''),
+                    Hidden::make('kind')->dehydrated(false)->default(''),
+                    Hidden::make('owner')->dehydrated(false)->default(''),
+                    Hidden::make('page')->dehydrated(false)->default(1),
+                    Hidden::make('per_page')->dehydrated(false)->default(10),
                 ];
             })
             ->action(function (SpatieMediaLibraryFileUpload $component, array $data, MediaLibraryPicker $picker): void {

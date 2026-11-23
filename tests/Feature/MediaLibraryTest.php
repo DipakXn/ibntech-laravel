@@ -9,6 +9,7 @@ use App\Models\Blog;
 use App\Models\MediaLibrary;
 use App\Models\Page;
 use App\Models\User;
+use App\Support\MediaLibrary\MediaLibraryCatalog;
 use App\Support\MediaLibrary\MediaLibraryCopier;
 use App\Support\MediaLibrary\MediaLibraryFileValidator;
 use App\Support\MediaLibrary\MediaLibraryUploader;
@@ -308,6 +309,10 @@ class MediaLibraryTest extends TestCase
             )
             ->assertMountedActionModalSee('picker-choice.jpg')
             ->assertMountedActionModalSee('Search file names')
+            ->assertMountedActionModalSee('Type')
+            ->assertMountedActionModalSee('Owner')
+            ->assertMountedActionModalSee('Per page')
+            ->assertMountedActionModalSee('Showing 1 to 1 of 1 results')
             ->set('mountedActions.0.data.media_id', $source->getKey())
             ->callMountedAction();
 
@@ -317,6 +322,59 @@ class MediaLibraryTest extends TestCase
         $this->assertSame($source->getKey(), $copy->getCustomProperty(MediaLibraryUsage::COPIED_FROM));
         $this->assertSame($source->getPathRelativeToRoot(), $source->fresh()->getPathRelativeToRoot());
         $this->assertTrue(Storage::disk('media')->exists($source->getPathRelativeToRoot()));
+    }
+
+    public function test_the_library_picker_paginates_and_filters_by_owner_and_type(): void
+    {
+        $this->actingAs($this->administrator());
+        $uploader = app(MediaLibraryUploader::class);
+        $uploader->store(UploadedFile::fake()->image('older-library-file.jpg'));
+
+        foreach (range(2, 11) as $index) {
+            $uploader->store(UploadedFile::fake()->image(sprintf('newer-library-file-%02d.jpg', $index)));
+        }
+
+        $this->blog()
+            ->addMedia(UploadedFile::fake()->image('blog-owned-photo.jpg'))
+            ->toMediaCollection('featured_image');
+
+        $pdf = $uploader->store(UploadedFile::fake()->create('kind-doc.pdf', 40, 'application/pdf'));
+        $pdf->forceFill(['mime_type' => 'application/pdf'])->save();
+
+        $page = Page::query()->create([
+            'title' => 'Filtered picker page',
+            'slug' => 'filtered-picker-page',
+            'template' => 'default',
+            'status' => 'draft',
+        ]);
+
+        Livewire::test(EditPage::class, ['record' => $page->getKey()])
+            ->mountAction(TestAction::make('chooseFromLibrary')->schemaComponent('featured_image'))
+            ->assertMountedActionModalDontSee('older-library-file.jpg')
+            ->assertMountedActionModalSee('Showing 1 to 10 of 12 results')
+            ->set('mountedActions.0.data.page', 2)
+            ->assertMountedActionModalSee('older-library-file.jpg')
+            ->assertMountedActionModalSee('Showing 11 to 12 of 12 results')
+            ->set('mountedActions.0.data.owner', Blog::class)
+            ->set('mountedActions.0.data.page', 1)
+            ->assertMountedActionModalSee('blog-owned-photo.jpg')
+            ->assertMountedActionModalDontSee('older-library-file.jpg')
+            ->set('mountedActions.0.data.owner', '')
+            ->set('mountedActions.0.data.kind', 'png')
+            ->assertMountedActionModalSee('No matching files')
+            ->assertMountedActionModalDontSee('older-library-file.jpg');
+
+        $images = array_column(
+            MediaLibraryCatalog::browse(['image/*', 'application/pdf'], search: 'kind-doc', kind: 'image')->items(),
+            'name',
+        );
+        $pdfs = array_column(
+            MediaLibraryCatalog::browse(['image/*', 'application/pdf'], search: 'kind-doc', kind: 'pdf')->items(),
+            'name',
+        );
+
+        $this->assertNotContains('kind-doc.pdf', $images);
+        $this->assertContains('kind-doc.pdf', $pdfs);
     }
 
     private function administrator(): User

@@ -4,20 +4,7 @@ namespace App\Filament\Resources\MediaLibrary\Tables;
 
 use App\Filament\Resources\MediaLibrary\Pages\ListMediaLibrary;
 use App\Filament\Tables\GroupedRecordActions;
-use App\Models\Article;
-use App\Models\Blog;
-use App\Models\CaseStudy;
-use App\Models\Ebook;
-use App\Models\Industry;
-use App\Models\LandingPage;
-use App\Models\MediaLibrary;
-use App\Models\Newsletter;
-use App\Models\Page;
-use App\Models\PressRelease;
-use App\Models\SeoMeta;
-use App\Models\Testimonial;
-use App\Models\WebsiteSetting;
-use App\Models\WhitePaper;
+use App\Support\MediaLibrary\MediaLibraryCatalog;
 use App\Support\MediaLibrary\MediaLibraryUsage;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
@@ -87,22 +74,7 @@ class MediaLibraryTable
                     ->schema([
                         Select::make('value')
                             ->label('Owner')
-                            ->options([
-                                MediaLibrary::class => 'Media Library',
-                                Blog::class => 'Blogs',
-                                Article::class => 'Articles',
-                                Page::class => 'Pages',
-                                Industry::class => 'Industries',
-                                LandingPage::class => 'Landing pages',
-                                Newsletter::class => 'Newsletters',
-                                CaseStudy::class => 'Case studies',
-                                Ebook::class => 'eBooks',
-                                PressRelease::class => 'Press releases',
-                                WhitePaper::class => 'White papers',
-                                Testimonial::class => 'Testimonials',
-                                SeoMeta::class => 'SEO images',
-                                WebsiteSetting::class => 'Website settings',
-                            ]),
+                            ->options(MediaLibraryCatalog::ownerOptions()),
                     ])
                     ->query(fn (Builder $query, array $data): Builder => filled($data['value'] ?? null)
                         ? $query->where('model_type', $data['value'])

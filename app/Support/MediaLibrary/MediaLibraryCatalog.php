@@ -2,12 +2,41 @@
 
 namespace App\Support\MediaLibrary;
 
+use App\Models\Article;
+use App\Models\Blog;
+use App\Models\CaseStudy;
+use App\Models\Ebook;
+use App\Models\Industry;
+use App\Models\LandingPage;
 use App\Models\MediaLibrary;
+use App\Models\Newsletter;
+use App\Models\Page;
+use App\Models\PressRelease;
+use App\Models\SeoMeta;
+use App\Models\Testimonial;
+use App\Models\WebsiteSetting;
+use App\Models\WhitePaper;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaLibraryCatalog
 {
+    /**
+     * @var list<int>
+     */
+    public const PER_PAGE_OPTIONS = [10, 25, 50];
+
+    /**
+     * @var array<string, string>
+     */
+    private const IMAGE_FORMATS = [
+        'jpg' => 'image/jpeg',
+        'png' => 'image/png',
+        'gif' => 'image/gif',
+        'webp' => 'image/webp',
+    ];
+
     /**
      * @param  array<int, string>|null  $acceptedFileTypes
      * @return array<int|string, string>
@@ -24,17 +53,81 @@ class MediaLibraryCatalog
     }
 
     /**
-     * @param  array<int, string>|null  $acceptedFileTypes
-     * @return list<array{id: int, name: string, extension: string, size: string, preview_url: string|null}>
+     * @return array<class-string, string>
      */
-    public static function cards(?array $acceptedFileTypes, ?string $search = null): array
+    public static function ownerOptions(): array
     {
-        return self::query($acceptedFileTypes, $search)
-            ->limit(60)
-            ->get()
-            ->map(fn (Media $media): array => self::present($media))
-            ->values()
-            ->all();
+        return [
+            MediaLibrary::class => 'Media Library',
+            Blog::class => 'Blogs',
+            Article::class => 'Articles',
+            Page::class => 'Pages',
+            Industry::class => 'Industries',
+            LandingPage::class => 'Landing pages',
+            Newsletter::class => 'Newsletters',
+            CaseStudy::class => 'Case studies',
+            Ebook::class => 'eBooks',
+            PressRelease::class => 'Press releases',
+            WhitePaper::class => 'White papers',
+            Testimonial::class => 'Testimonials',
+            SeoMeta::class => 'SEO images',
+            WebsiteSetting::class => 'Website settings',
+        ];
+    }
+
+    /**
+     * Image fields filter by format. Fields that accept both images and PDFs filter by those kinds.
+     *
+     * @param  array<int, string>|null  $acceptedFileTypes
+     * @return array<string, string>
+     */
+    public static function kindOptions(?array $acceptedFileTypes): array
+    {
+        $images = self::wantsImages($acceptedFileTypes);
+        $pdfs = self::wantsPdfs($acceptedFileTypes);
+
+        if ($images && $pdfs) {
+            return [
+                'image' => 'Images',
+                'pdf' => 'PDFs',
+            ];
+        }
+
+        if ($images) {
+            return [
+                'jpg' => 'JPG',
+                'png' => 'PNG',
+                'gif' => 'GIF',
+                'webp' => 'WebP',
+            ];
+        }
+
+        return [];
+    }
+
+    /**
+     * @param  array<int, string>|null  $acceptedFileTypes
+     * @return LengthAwarePaginator<int, array{id: int, name: string, extension: string, size: string, preview_url: string|null}>
+     */
+    public static function browse(
+        ?array $acceptedFileTypes,
+        ?string $search = null,
+        ?string $kind = null,
+        ?string $owner = null,
+        int $page = 1,
+        int $perPage = 10,
+    ): LengthAwarePaginator {
+        $perPage = in_array($perPage, self::PER_PAGE_OPTIONS, true) ? $perPage : 10;
+        $kind = array_key_exists((string) $kind, self::kindOptions($acceptedFileTypes)) ? $kind : null;
+        $owner = array_key_exists((string) $owner, self::ownerOptions()) ? $owner : null;
+        $query = self::query($acceptedFileTypes, $search, $kind, $owner);
+        $total = (clone $query)->count();
+        $lastPage = max(1, (int) ceil($total / $perPage));
+        $page = min(max(1, $page), $total === 0 ? 1 : $lastPage);
+
+        return $query
+            ->paginate(perPage: $perPage, pageName: 'libraryPickerPage', page: $page)
+            ->through(fn (Media $media): array => self::present($media));
     }
 
     /**
@@ -55,7 +148,7 @@ class MediaLibraryCatalog
      * @param  array<int, string>|null  $acceptedFileTypes
      * @return Builder<Media>
      */
-    private static function query(?array $acceptedFileTypes, ?string $search): Builder
+    private static function query(?array $acceptedFileTypes, ?string $search, ?string $kind = null, ?string $owner = null): Builder
     {
         $query = Media::query()->with('model')->latest('id');
         $wantsImages = self::wantsImages($acceptedFileTypes);
@@ -70,6 +163,20 @@ class MediaLibraryCatalog
                 $query->orWhereIn('mime_type', ['application/pdf', 'application/x-pdf']);
             }
         });
+
+        $format = self::IMAGE_FORMATS[$kind ?? ''] ?? null;
+
+        if ($kind === 'image') {
+            $query->where('mime_type', 'like', 'image/%');
+        } elseif ($kind === 'pdf') {
+            $query->whereIn('mime_type', ['application/pdf', 'application/x-pdf']);
+        } elseif ($format !== null) {
+            $query->where('mime_type', $format);
+        }
+
+        if ($owner !== null && array_key_exists($owner, self::ownerOptions())) {
+            $query->where('model_type', $owner);
+        }
 
         $search = trim((string) $search);
 

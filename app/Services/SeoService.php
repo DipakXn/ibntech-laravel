@@ -13,6 +13,39 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class SeoService
 {
+    /**
+     * CMS pages that are company, legal, index, consultation, or thank-you URLs.
+     *
+     * @var list<string>
+     */
+    private const NON_SERVICE_PAGE_SLUGS = [
+        'home',
+        'about-ibn',
+        'our-vision',
+        'ibn-team',
+        'contact-us',
+        'current-job-opening',
+        'faq',
+        'testimonials',
+        'cookies-policy',
+        'privacy-policy',
+        'terms-of-use',
+        'pricing',
+        'services',
+        'business-partner',
+        'microsoft-certified-partners',
+        'aws-partner',
+        'pressrelease',
+        'article',
+        'ebook',
+        'whitepapers',
+        'white-paper-2',
+        'white-paper-3',
+        'free-trial',
+        'boost-your-business-with-accounting-offers',
+        'bpotransition-methodology',
+    ];
+
     protected array $current = [];
 
     public function setCurrentForModel(Model $model): void
@@ -250,29 +283,31 @@ class SeoService
                 // Keep fallback organization name.
             }
 
-            $data = [
-                '@context' => 'https://schema.org',
-                '@type' => 'BlogPosting',
-                'headline' => $seoMeta->meta_title ?? ($model->title ?? ($siteDefaults['meta_title'] ?? config('app.name'))),
-                'description' => $seoMeta->meta_description ?? ($siteDefaults['meta_description'] ?? null),
-                'url' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
-                'mainEntityOfPage' => [
-                    '@type' => 'WebPage',
-                    '@id' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
-                ],
-                'datePublished' => $seoMeta->published_at?->toIso8601String()
-                    ?? $this->modelPublishedAt($model)
-                    ?? ($model->created_at?->toIso8601String() ?? null),
-                'dateModified' => $seoMeta->modified_at?->toIso8601String() ?? ($model->updated_at?->toIso8601String() ?? null),
-                'author' => [
-                    '@type' => 'Person',
-                    'name' => $seoMeta->article_author ?? null,
-                ],
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => $organizationName,
-                ],
-            ];
+            $data = $model instanceof Page
+                ? $this->pageJsonLd($model, $seoMeta, $siteDefaults, $organizationName)
+                : [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BlogPosting',
+                    'headline' => $seoMeta->meta_title ?? ($model->title ?? ($siteDefaults['meta_title'] ?? config('app.name'))),
+                    'description' => $seoMeta->meta_description ?? ($siteDefaults['meta_description'] ?? null),
+                    'url' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
+                    'mainEntityOfPage' => [
+                        '@type' => 'WebPage',
+                        '@id' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
+                    ],
+                    'datePublished' => $seoMeta->published_at?->toIso8601String()
+                        ?? $this->modelPublishedAt($model)
+                        ?? ($model->created_at?->toIso8601String() ?? null),
+                    'dateModified' => $seoMeta->modified_at?->toIso8601String() ?? ($model->updated_at?->toIso8601String() ?? null),
+                    'author' => [
+                        '@type' => 'Person',
+                        'name' => $seoMeta->article_author ?? null,
+                    ],
+                    'publisher' => [
+                        '@type' => 'Organization',
+                        'name' => $organizationName,
+                    ],
+                ];
 
             $ogImage = $this->environmentAssetUrl(is_string($ogImage) ? $ogImage : null);
 
@@ -287,6 +322,49 @@ class SeoService
         } catch (\Throwable $e) {
             return null;
         }
+    }
+
+    /**
+     * @param  array<string, mixed>  $siteDefaults
+     * @return array<string, mixed>
+     */
+    protected function pageJsonLd(Page $page, object $seoMeta, array $siteDefaults, string $organizationName): array
+    {
+        $document = [
+            '@context' => 'https://schema.org',
+            '@type' => $this->isServicePage($page) ? 'Service' : 'WebPage',
+            'name' => $seoMeta->meta_title ?? ($page->title ?? ($siteDefaults['meta_title'] ?? config('app.name'))),
+            'description' => $seoMeta->meta_description ?? ($siteDefaults['meta_description'] ?? null),
+            'url' => ApplicationUrl::canonical($seoMeta->canonical_url ?? null),
+        ];
+
+        if ($document['@type'] === 'Service') {
+            $document['provider'] = [
+                '@type' => 'Organization',
+                'name' => $organizationName,
+            ];
+
+            return $document;
+        }
+
+        $document['publisher'] = [
+            '@type' => 'Organization',
+            'name' => $organizationName,
+        ];
+
+        return $document;
+    }
+
+    protected function isServicePage(Page $page): bool
+    {
+        $slug = $this->nonEmptyString($page->slug);
+
+        if ($slug === null || in_array($slug, self::NON_SERVICE_PAGE_SLUGS, true)) {
+            return false;
+        }
+
+        return ! str_starts_with($slug, 'thank-you')
+            && ! str_starts_with($slug, 'free-consultation');
     }
 
     /**

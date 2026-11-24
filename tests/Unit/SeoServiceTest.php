@@ -259,4 +259,91 @@ class SeoServiceTest extends TestCase
         $this->assertSame('image/jpeg', $meta['og_image_type']);
         $this->assertSame('https://cdn.example.com/vapt-og.jpg', $meta['og_image_secure_url']);
     }
+
+    public function test_it_keeps_blog_posting_schema_for_blog_posts(): void
+    {
+        $blog = new Blog(['title' => 'Schema Blog']);
+        $blog->setRelation('seoMeta', new SeoMeta([
+            'meta_title' => 'Schema Blog Headline',
+            'article_author' => 'Ada Lovelace',
+        ]));
+
+        $service = new SeoService;
+        $service->setCurrentForModel($blog);
+        $data = json_decode($service->current()['json_ld'], true);
+
+        $this->assertSame('BlogPosting', $data['@type']);
+        $this->assertSame('Schema Blog Headline', $data['headline']);
+        $this->assertSame('Person', $data['author']['@type']);
+        $this->assertSame('Ada Lovelace', $data['author']['name']);
+    }
+
+    public function test_it_uses_service_schema_for_service_pages(): void
+    {
+        $page = new Page([
+            'title' => 'VAPT Services',
+            'slug' => 'vapt-services',
+            'template' => 'vapt-services',
+        ]);
+        $page->setRelation('seoMeta', new SeoMeta([
+            'meta_title' => 'VAPT Services',
+            'meta_description' => 'Vulnerability assessment and penetration testing.',
+        ]));
+
+        $service = new SeoService;
+        $service->setCurrentForModel($page);
+        $seo = $service->current();
+        $data = json_decode($seo['json_ld'], true);
+
+        $this->assertStringNotContainsString('BlogPosting', $seo['json_ld']);
+        $this->assertSame('Service', $data['@type']);
+        $this->assertSame('VAPT Services', $data['name']);
+        $this->assertSame('Vulnerability assessment and penetration testing.', $data['description']);
+        $this->assertSame('Organization', $data['provider']['@type']);
+        $this->assertNotSame('', $data['provider']['name']);
+        $this->assertArrayNotHasKey('headline', $data);
+        $this->assertArrayNotHasKey('author', $data);
+        $this->assertArrayNotHasKey('mainEntityOfPage', $data);
+    }
+
+    public function test_it_uses_web_page_schema_for_non_service_pages(): void
+    {
+        $page = new Page([
+            'title' => 'Privacy Policy',
+            'slug' => 'privacy-policy',
+            'template' => 'privacy-policy',
+        ]);
+        $page->setRelation('seoMeta', new SeoMeta([
+            'meta_title' => 'Privacy Policy',
+        ]));
+
+        $service = new SeoService;
+        $service->setCurrentForModel($page);
+        $data = json_decode($service->current()['json_ld'], true);
+
+        $this->assertSame('WebPage', $data['@type']);
+        $this->assertSame('Privacy Policy', $data['name']);
+        $this->assertSame('Organization', $data['publisher']['@type']);
+        $this->assertArrayNotHasKey('provider', $data);
+        $this->assertArrayNotHasKey('headline', $data);
+    }
+
+    public function test_it_keeps_a_stored_json_ld_override_on_pages(): void
+    {
+        $stored = '{"@context":"https://schema.org","@type":"FAQPage"}';
+        $page = new Page([
+            'title' => 'VAPT Services',
+            'slug' => 'vapt-services',
+            'template' => 'vapt-services',
+        ]);
+        $page->setRelation('seoMeta', new SeoMeta([
+            'meta_title' => 'VAPT Services',
+            'json_ld' => $stored,
+        ]));
+
+        $service = new SeoService;
+        $service->setCurrentForModel($page);
+
+        $this->assertSame($stored, $service->current()['json_ld']);
+    }
 }

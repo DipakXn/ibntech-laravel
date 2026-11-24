@@ -502,7 +502,7 @@
                             message-placeholder="How can we help you?"
                             submit-label="Submit Now"
                             layout="home"
-                            thank-you-url="/thanks-you-for-cloud/"
+                            thank-you-url="/thank-you-for-cloud/"
                         />
                     </div>
                 </aside>

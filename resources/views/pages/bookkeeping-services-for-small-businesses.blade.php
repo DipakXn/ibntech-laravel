@@ -312,7 +312,7 @@
                             message-placeholder="Message"
                             submit-label="Submit"
                             layout="home"
-                            thank-you-url="/thanks-you-for-bookkeeping/"
+                            thank-you-url="/thank-you-for-bookkeeping/"
                         />
                     </div>
                 </aside>

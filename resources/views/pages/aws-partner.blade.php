@@ -507,7 +507,7 @@
                         message-placeholder="Tell us about your AWS needs and let’s explore a strategic partnership"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
-                        thank-you-url="/thanks-you-for-cloud/"
+                        thank-you-url="/thank-you-for-cloud/"
                     />
                 </aside>
             </div>

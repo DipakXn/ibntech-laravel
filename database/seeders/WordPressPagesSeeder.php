@@ -846,31 +846,31 @@ class WordPressPagesSeeder extends Seeder
             ],
             138 => [
                 'title' => 'Thanks You For Bookkeeping',
-                'slug' => 'thanks-you-for-bookkeeping',
+                'slug' => 'thank-you-for-bookkeeping',
                 'template' => 'thanks-you-for-bookkeeping',
                 'status' => 'published',
             ],
             139 => [
                 'title' => 'Thanks You for payroll service',
-                'slug' => 'thanks-you-for-payroll-service',
+                'slug' => 'thank-you-for-payroll-service',
                 'template' => 'thanks-you-for-payroll-service',
                 'status' => 'published',
             ],
             140 => [
                 'title' => 'Thanks You  For AP AR Management',
-                'slug' => 'thanks-you-for-ap-ar-management',
+                'slug' => 'thank-you-for-ap-ar-management',
                 'template' => 'thanks-you-for-ap-ar-management',
                 'status' => 'published',
             ],
             141 => [
                 'title' => 'Thanks You For Tax Preparation',
-                'slug' => 'thanks-you-for-tax-preparation',
+                'slug' => 'thank-you-for-tax-preparation',
                 'template' => 'thanks-you-for-tax-preparation',
                 'status' => 'published',
             ],
             142 => [
                 'title' => 'Thanks You  For IPA',
-                'slug' => 'thanks-you-for-ipa',
+                'slug' => 'thank-you-for-ipa',
                 'template' => 'thanks-you-for-ipa',
                 'status' => 'published',
             ],
@@ -882,7 +882,7 @@ class WordPressPagesSeeder extends Seeder
             ],
             144 => [
                 'title' => 'Thanks You  For Free Trail',
-                'slug' => 'thanks-you-for-free-trail',
+                'slug' => 'thank-you-for-free-trail',
                 'template' => 'thanks-you-for-free-trail',
                 'status' => 'published',
             ],
@@ -1026,13 +1026,13 @@ class WordPressPagesSeeder extends Seeder
             ],
             168 => [
                 'title' => 'Thanks You For Cybersecurity',
-                'slug' => 'thanks-you-for-cybersecurity',
+                'slug' => 'thank-you-for-cybersecurity',
                 'template' => 'thanks-you-for-cybersecurity',
                 'status' => 'published',
             ],
             169 => [
                 'title' => 'Thanks You For Cloud',
-                'slug' => 'thanks-you-for-cloud',
+                'slug' => 'thank-you-for-cloud',
                 'template' => 'thanks-you-for-cloud',
                 'status' => 'published',
             ],
@@ -1748,7 +1748,7 @@ class WordPressPagesSeeder extends Seeder
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-ap-ar-management' => [
+            'thank-you-for-ap-ar-management' => [
                 'meta_title' => 'Thanks You For AP AR Management - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
                 'robots_index' => 'noindex',
@@ -1762,49 +1762,49 @@ class WordPressPagesSeeder extends Seeder
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-free-trail' => [
+            'thank-you-for-free-trail' => [
                 'meta_title' => 'Thanks You For Free Trail - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-ipa' => [
+            'thank-you-for-ipa' => [
                 'meta_title' => 'Thanks You For IPA - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-bookkeeping' => [
+            'thank-you-for-bookkeeping' => [
                 'meta_title' => 'Thanks You For Bookkeeping - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-cloud' => [
+            'thank-you-for-cloud' => [
                 'meta_title' => 'Thanks You For Cloud - IBN Technologies',
                 'meta_description' => 'Thank You for Choosing IBN Technologies for Your Cloud Transformation! Empower your business with flexible, cost-effective cloud solutions for seamless growth.',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-cybersecurity' => [
+            'thank-you-for-cybersecurity' => [
                 'meta_title' => 'Thanks You For Cybersecurity - IBN Technologies',
                 'meta_description' => 'Thank You for Trusting IBN Technologies with Your Cybersecurity Needs! Secure your business with trusted cybersecurity solutions for resilience and peace of mind.',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-payroll-service' => [
+            'thank-you-for-payroll-service' => [
                 'meta_title' => 'Thanks You for payroll service - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
                 'robots_index' => 'noindex',
                 'robots_follow' => 'nofollow',
                 'sitemap_include' => false,
             ],
-            'thanks-you-for-tax-preparation' => [
+            'thank-you-for-tax-preparation' => [
                 'meta_title' => 'Thanks You For Tax Preparation - IBN Technologies',
                 'meta_description' => 'Thank you for filling out the contact form! IBN Technologies offers expert finance, accounting, payroll, and IT outsourcing solutions to empower your business.',
                 'robots_index' => 'noindex',

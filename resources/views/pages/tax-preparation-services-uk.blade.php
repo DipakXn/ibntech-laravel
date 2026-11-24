@@ -373,7 +373,7 @@
                             submit-label="BOOK FREE CONSULTATION"
                             layout="modal"
                             :message-rows="2"
-                            thank-you-url="/thanks-you-for-tax-preparation/"
+                            thank-you-url="/thank-you-for-tax-preparation/"
                         />
                     </div>
                 </aside>

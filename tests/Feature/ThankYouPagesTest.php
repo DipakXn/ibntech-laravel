@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Page;
 use App\Models\SeoMeta;
+use App\Support\ApplicationUrl;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
@@ -59,13 +60,13 @@ class ThankYouPagesTest extends TestCase
                 'robots' => 'noindex, nofollow',
             ]],
             'ap-ar' => [[
-                'slug' => 'thanks-you-for-ap-ar-management',
+                'slug' => 'thank-you-for-ap-ar-management',
                 'template' => 'thanks-you-for-ap-ar-management',
                 'title' => 'Thanks You  For AP AR Management',
                 'heading' => 'Thank You for Choosing IBN Technologies!',
                 'unique' => 'Optimize your cash flow with our expert AP/AR management',
                 'seoTitle' => 'Thanks You For AP AR Management - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-ap-ar-management/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-ap-ar-management/',
                 'robots' => 'noindex, nofollow',
             ]],
             'construction' => [[
@@ -79,73 +80,73 @@ class ThankYouPagesTest extends TestCase
                 'robots' => 'noindex, nofollow',
             ]],
             'free-trail' => [[
-                'slug' => 'thanks-you-for-free-trail',
+                'slug' => 'thank-you-for-free-trail',
                 'template' => 'thanks-you-for-free-trail',
                 'title' => 'Thanks You  For Free Trail',
                 'heading' => 'Thank You for Joining Us!',
                 'unique' => 'Our expert will contact you shortly to streamline your books with accuracy',
                 'seoTitle' => 'Thanks You For Free Trail - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-free-trail/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-free-trail/',
                 'robots' => 'noindex, nofollow',
             ]],
             'ipa' => [[
-                'slug' => 'thanks-you-for-ipa',
+                'slug' => 'thank-you-for-ipa',
                 'template' => 'thanks-you-for-ipa',
                 'title' => 'Thanks You  For IPA',
                 'heading' => 'Thank You for Choosing IBN Technologies!',
                 'unique' => 'Transform your AP/AR with our IPA-driven automation',
                 'seoTitle' => 'Thanks You For IPA - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-ipa/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-ipa/',
                 'robots' => 'noindex, nofollow',
             ]],
             'bookkeeping' => [[
-                'slug' => 'thanks-you-for-bookkeeping',
+                'slug' => 'thank-you-for-bookkeeping',
                 'template' => 'thanks-you-for-bookkeeping',
                 'title' => 'Thanks You For Bookkeeping',
                 'heading' => 'Thank You for Choosing IBN Technologies!',
                 'unique' => 'Saving up to 70% Operational Cost',
                 'seoTitle' => 'Thanks You For Bookkeeping - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-bookkeeping/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-bookkeeping/',
                 'robots' => 'noindex, nofollow',
             ]],
             'cloud' => [[
-                'slug' => 'thanks-you-for-cloud',
+                'slug' => 'thank-you-for-cloud',
                 'template' => 'thanks-you-for-cloud',
                 'title' => 'Thanks You For Cloud',
                 'heading' => 'Thank You for Choosing IBN Technologies for Your Cloud Transformation!',
                 'unique' => 'Empower your business with flexible, cost-effective cloud solutions',
                 'seoTitle' => 'Thanks You For Cloud - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-cloud/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-cloud/',
                 'robots' => 'noindex, nofollow',
             ]],
             'cybersecurity' => [[
-                'slug' => 'thanks-you-for-cybersecurity',
+                'slug' => 'thank-you-for-cybersecurity',
                 'template' => 'thanks-you-for-cybersecurity',
                 'title' => 'Thanks You For Cybersecurity',
                 'heading' => 'Thank You for Trusting IBN Technologies with Your Cybersecurity Needs!',
                 'unique' => 'Secure your business with trusted cybersecurity solutions',
                 'seoTitle' => 'Thanks You For Cybersecurity - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-cybersecurity/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-cybersecurity/',
                 'robots' => 'noindex, nofollow',
             ]],
             'payroll' => [[
-                'slug' => 'thanks-you-for-payroll-service',
+                'slug' => 'thank-you-for-payroll-service',
                 'template' => 'thanks-you-for-payroll-service',
                 'title' => 'Thanks You for payroll service',
                 'heading' => 'Thank You for Choosing IBN Technologies!',
                 'unique' => 'Your payroll processing is in expert hands',
                 'seoTitle' => 'Thanks You for payroll service - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-payroll-service/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-payroll-service/',
                 'robots' => 'noindex, nofollow',
             ]],
             'tax' => [[
-                'slug' => 'thanks-you-for-tax-preparation',
+                'slug' => 'thank-you-for-tax-preparation',
                 'template' => 'thanks-you-for-tax-preparation',
                 'title' => 'Thanks You For Tax Preparation',
                 'heading' => 'Thank You for Choosing IBN Technologies!',
                 'unique' => 'Simplify tax season with our expert tax return preparation',
                 'seoTitle' => 'Thanks You For Tax Preparation - IBN Technologies',
-                'canonical' => 'https://www.ibntech.com/thanks-you-for-tax-preparation/',
+                'canonical' => 'https://www.ibntech.com/thank-you-for-tax-preparation/',
                 'robots' => 'noindex, nofollow',
             ]],
         ];
@@ -185,7 +186,7 @@ class ThankYouPagesTest extends TestCase
         $response->assertSee($pageData['heading'], false);
         $response->assertSee($pageData['unique'], false);
         $response->assertSee($pageData['seoTitle'], false);
-        $response->assertSee($pageData['canonical'], false);
+        $response->assertSee(ApplicationUrl::canonical($pageData['canonical']), false);
         $response->assertSee('noindex', false);
         $response->assertSee('nofollow', false);
         if (str_contains($pageData['robots'], 'nosnippet')) {

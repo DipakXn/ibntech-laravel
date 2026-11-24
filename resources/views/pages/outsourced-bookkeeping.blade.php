@@ -152,7 +152,7 @@
                         message-placeholder="Describe your current bookkeeping needs and the support you're looking for."
                         submit-label="Submit"
                         :message-rows="4"
-                        thank-you-url="/thanks-you-for-bookkeeping/"
+                        thank-you-url="/thank-you-for-bookkeeping/"
                     />
                 </aside>
             </div>

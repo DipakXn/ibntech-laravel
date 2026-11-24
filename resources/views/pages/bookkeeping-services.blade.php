@@ -947,7 +947,7 @@
                         message-placeholder="Tell Us About Your Specific Bookkeeping Needs"
                         submit-label="BOOK FREE CONSULTATION"
                         layout="home"
-                        thank-you-url="/thanks-you-for-bookkeeping/"
+                        thank-you-url="/thank-you-for-bookkeeping/"
                     />
                 </aside>
             </div>

@@ -364,7 +364,7 @@
                         :message-rows="2"
                         submit-label="BOOK A CONSULTATION"
                         layout="vapt"
-                        thank-you-url="/thanks-you-for-cybersecurity/"
+                        thank-you-url="/thank-you-for-cybersecurity/"
                     />
                 </aside>
             </div>

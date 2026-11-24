@@ -520,7 +520,7 @@
                         message-placeholder="Tell Us About Your Specific Bookkeeping Needs"
                         submit-label="BOOK CONSULTATION"
                         layout="default"
-                        thank-you-url="/thanks-you-for-ap-ar-management/"
+                        thank-you-url="/thank-you-for-ap-ar-management/"
                     />
                 </aside>
             </div>

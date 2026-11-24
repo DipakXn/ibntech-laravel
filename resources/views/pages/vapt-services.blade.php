@@ -255,7 +255,7 @@
                         message-placeholder="Describe your security testing requirements"
                         submit-label="BOOK A CONSULTATION"
                         layout="vapt"
-                        thank-you-url="/thanks-you-for-cybersecurity/"
+                        thank-you-url="/thank-you-for-cybersecurity/"
                     />
                 </div>
             </div>

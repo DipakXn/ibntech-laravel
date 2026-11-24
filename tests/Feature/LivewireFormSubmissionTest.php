@@ -100,6 +100,28 @@ class LivewireFormSubmissionTest extends TestCase
         Queue::assertPushed(SendLeadSubmissionNotification::class, 1);
     }
 
+    public function test_bookkeeping_contact_form_stores_the_lead_and_redirects_to_the_thank_you_page(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ContactForm::class, [
+            'formName' => 'bookkeeping-services',
+            'thankYouUrl' => '/thank-you-for-bookkeeping/',
+        ])
+            ->set('name', 'Jane Doe')
+            ->set('email', 'bookkeeping@example.com')
+            ->set('message', 'Need help with outsourced bookkeeping services.')
+            ->set('acceptedTerms', true)
+            ->set('pageUrl', 'http://localhost/bookkeeping-services/')
+            ->call('submit')
+            ->assertRedirect('http://localhost/thank-you-for-bookkeeping/');
+
+        $this->assertDatabaseHas('form_submissions', [
+            'email' => 'bookkeeping@example.com',
+            'form_name' => 'bookkeeping-services',
+        ]);
+    }
+
     public function test_contact_form_stores_organic_lead_source_when_hidden_value_is_tampered(): void
     {
         Queue::fake();

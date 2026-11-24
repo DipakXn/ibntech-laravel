@@ -225,7 +225,7 @@
                         message-placeholder="Message"
                         submit-label="Get Started Now"
                         layout="home"
-                        thank-you-url="/thanks-you-for-bookkeeping/"
+                        thank-you-url="/thank-you-for-bookkeeping/"
                     />
                 </aside>
             </div>

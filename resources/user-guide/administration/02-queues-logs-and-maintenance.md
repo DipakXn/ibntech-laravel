@@ -3,7 +3,7 @@ title: Queues, logs, and maintenance
 group: Administration
 summary: Inspect failed jobs, read application logs, and clear cache without touching content.
 sort: 20
-keywords: queue, failed job, log viewer, cache, cache management, compiled views, QUEUE_MONITOR_MAX
+keywords: queue, failed job, log viewer, cache, cache management, compiled views, QUEUE_MONITOR_MAX, website health, scheduler, ssl
 ---
 
 These screens are administrator-only. None of them deletes CMS content.
@@ -52,3 +52,25 @@ The page also shows the cache store name and whether a route or configuration ca
 The public-site toolbar **Clear cache** button asks for confirmation, then runs only the application-cache clear, and only for administrators.
 
 Run these after a deploy or after a settings change that still looks stale. They do not rebuild configuration, routes, or views, they do not move content to trash, and they do not purge Cloudflare. Cloudflare is a separate screen.
+
+## Website health
+
+Open **Administration → Website health**.
+
+The page reports whether the public site responded, whether the database responded, whether storage is writable, how much disk space is free, whether the scheduler and queue worker have checked in, certificate expiry for an HTTPS application URL, the application environment, and recent error lines from the application log. It also keeps the last checks so you can see a failure and a recovery.
+
+**Run check** records one new snapshot. It does not clear cache, change maintenance mode, retry jobs, delete files, or restart anything. The button waits while that request is running, and a second request is ignored until the first one finishes. A check also cannot be started again for 30 seconds.
+
+Status meanings:
+
+| Status | Meaning |
+|---|---|
+| Healthy | The check passed. |
+| Warning | Something needs attention, such as a full disk trend, a failed job, a certificate inside 14 days, or maintenance mode answering the public site. |
+| Critical | The check failed. A missing scheduler signal, a site that did not respond, or a certificate that failed verification is critical. |
+| Not applicable | The check does not apply here. Local HTTP has no SSL check. The sync queue driver does not use a worker. |
+| Unknown | The check could not be measured. |
+
+The scheduler row stays critical until the server runs `php artisan schedule:run` every minute. The queue worker row stays a warning until a worker processes the single signal job. Those are server processes. This screen does not start them. Clearing the application cache does not reset those signals.
+
+The certificate check verifies the certificate presented for the application hostname. On a site behind Cloudflare, that is usually the edge certificate. A failed verification is reported as critical. The check does not turn verification off to inspect an untrusted certificate.

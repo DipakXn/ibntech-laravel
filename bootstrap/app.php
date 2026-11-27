@@ -29,6 +29,9 @@ return Application::configure(basePath: dirname(__DIR__))
                 ))
                 ->everyMinute();
         }
+
+        $schedule->command('health:signal-scheduler')->everyMinute()->withoutOverlapping();
+        $schedule->command('health:snapshot')->everyFiveMinutes()->withoutOverlapping();
     })
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->encryptCookies(except: [

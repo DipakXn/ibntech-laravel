@@ -3368,3 +3368,102 @@ body.fi-body.ibn-login-screen,
         grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 }
+
+.ibn-health-monitor {
+    display: grid;
+    gap: 1rem;
+}
+
+.ibn-health-monitor__status-header,
+.ibn-health-monitor__check-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.ibn-health-monitor__status-meta {
+    display: grid;
+    justify-items: end;
+    gap: 0.35rem;
+}
+
+.ibn-health-monitor__status-meta p,
+.ibn-health-monitor__meta {
+    color: var(--ibn-text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.ibn-health-monitor__check p,
+.ibn-health-monitor__notice {
+    margin-top: 0.75rem;
+    color: var(--ibn-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.ibn-health-monitor__notice--warning,
+.ibn-health-monitor__check--warning {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.16), rgba(185, 28, 28, 0.08));
+}
+
+.ibn-health-monitor__check--critical {
+    background: linear-gradient(135deg, rgba(185, 28, 28, 0.16), rgba(127, 29, 29, 0.08));
+}
+
+.ibn-health-monitor__checks {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.ibn-health-monitor__check h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.ibn-health-monitor__errors {
+    margin-top: 0.75rem;
+    padding-left: 1.1rem;
+    color: var(--ibn-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+.ibn-health-monitor__link {
+    display: inline-block;
+    margin-top: 0.85rem;
+    color: var(--ibn-secondary);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.ibn-status-pill--warning {
+    background: rgba(217, 119, 6, 0.16);
+    color: #b45309;
+}
+
+.ibn-status-pill--critical {
+    background: rgba(185, 28, 28, 0.16);
+    color: #b91c1c;
+}
+
+.ibn-status-pill--unknown,
+.ibn-status-pill--not-applicable {
+    background: rgba(100, 116, 139, 0.14);
+    color: #475569;
+}
+
+.dark .ibn-status-pill--warning {
+    color: #fdba74;
+}
+
+.dark .ibn-status-pill--critical {
+    color: #fca5a5;
+}
+
+.dark .ibn-status-pill--unknown,
+.dark .ibn-status-pill--not-applicable {
+    color: #cbd5e1;
+}

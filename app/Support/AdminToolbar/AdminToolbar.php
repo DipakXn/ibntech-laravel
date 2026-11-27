@@ -10,6 +10,7 @@ use App\Filament\Pages\MaintenanceMode;
 use App\Filament\Pages\QueueMonitor;
 use App\Filament\Pages\SystemMaintenance;
 use App\Filament\Pages\VisitorAnalytics;
+use App\Filament\Pages\WebsiteHealth;
 use App\Filament\Pages\WebsiteSettings;
 use App\Filament\Resources\Articles\ArticleCategoryResource;
 use App\Filament\Resources\Articles\ArticleResource;
@@ -216,6 +217,7 @@ class AdminToolbar
             [VisitorAnalytics::class, 'canAccess', 'Visitor analytics'],
             [UserResource::class, 'canViewAny', 'Users'],
             [SmtpConfiguration::class, 'canAccess', 'SMTP configuration'],
+            [WebsiteHealth::class, 'canAccess', 'Website health'],
             [QueueMonitor::class, 'canAccess', 'Queue monitor'],
             [LogViewer::class, 'canAccess', 'Application logs'],
             [CloudflareCache::class, 'canAccess', 'Cloudflare cache'],

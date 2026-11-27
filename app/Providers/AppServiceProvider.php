@@ -29,6 +29,12 @@ use App\Services\WebsiteSettingService;
 use App\Support\AdminToolbar\AdminToolbar;
 use App\Support\Cloudflare\CloudflareProxies;
 use App\Support\EditorialPublication;
+use App\Support\Health\ApplicationHttpProbe;
+use App\Support\Health\DatabaseConnectivityProbe;
+use App\Support\Health\LaravelApplicationHttpProbe;
+use App\Support\Health\LaravelDatabaseConnectivityProbe;
+use App\Support\Health\StreamTlsCertificateProbe;
+use App\Support\Health\TlsCertificateProbe;
 use App\Support\Mail\SmtpExceptionSanitizer;
 use App\Support\MediaLibrary\LegacyMediaColumns;
 use App\Support\Users\PasswordPolicy;
@@ -72,6 +78,9 @@ class AppServiceProvider extends ServiceProvider
         // The trailing-slash middleware duplicates the request before routing,
         // so handle() and the later terminating callback must share this instance.
         $this->app->singleton(PageViewTracker::class);
+        $this->app->bind(ApplicationHttpProbe::class, LaravelApplicationHttpProbe::class);
+        $this->app->bind(TlsCertificateProbe::class, StreamTlsCertificateProbe::class);
+        $this->app->bind(DatabaseConnectivityProbe::class, LaravelDatabaseConnectivityProbe::class);
     }
 
     /**
